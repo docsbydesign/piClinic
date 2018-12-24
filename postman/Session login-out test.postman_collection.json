@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "ef14fcaf-ab85-4895-b4c5-91fa78b73a8f",
+		"name": "Session login/out test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get SystemAdmin token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed713fa2-ae3d-46f3-aa9c-38838bd026ba",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"token\", jsonData.data.Token);\r",
+							"\r",
+							"pm.test(\"Login was successful\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?username={{SystemAdmin}}&password={{SystemAdminPW}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{SystemAdmin}}"
+						},
+						{
+							"key": "password",
+							"value": "{{SystemAdminPW}}"
+						}
+					]
+				},
+				"description": "Logs in as SystemAdmin"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Session Access",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+						"exec": [
+							"pm.test(\"Access check was successful\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?token={{token}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Close current session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+						"exec": [
+							"pm.test(\"Logout was successful\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?token={{token}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Session Access after logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9746528d-2e17-4c7d-b744-3e720334bcb6",
+						"exec": [
+							"postman.setEnvironmentVariable(\"token\", null);",
+							"",
+							"pm.test(\"Access failed\", function() {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?token={{token}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e390db36-b21a-4463-965e-06c1ce8062da",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b6cf1454-7506-494f-8eb9-1900bf4f9037",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

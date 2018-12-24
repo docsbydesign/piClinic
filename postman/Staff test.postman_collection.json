@@ -1,0 +1,514 @@
+{
+	"info": {
+		"_postman_id": "6378199e-aed9-4dff-8eca-d06648a34e3c",
+		"name": "Staff test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get SystemAdmin token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed713fa2-ae3d-46f3-aa9c-38838bd026ba",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"token\", jsonData.data.Token);\r",
+							"\r",
+							"pm.test(\"Login was successful\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?username={{SystemAdmin}}&password={{SystemAdminPW}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{SystemAdmin}}"
+						},
+						{
+							"key": "password",
+							"value": "{{SystemAdminPW}}"
+						}
+					]
+				},
+				"description": "Logs in as SystemAdmin"
+			},
+			"response": []
+		},
+		{
+			"name": "Create new Staff member",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8dc1b9d4-2bad-4163-8228-4ee3e03674aa",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"// save new username to use in subsequent calls\r",
+							"pm.variables.set(\"newUser\", jsonData.data.Username);\r",
+							"\r",
+							"pm.test(\"New user was created.\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "text"
+						},
+						{
+							"key": "Username",
+							"value": "testUser{{$timestamp}}",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "{{TestPassword}}",
+							"type": "text"
+						},
+						{
+							"key": "NameLast",
+							"value": "TestUser{{$randomInt}}",
+							"type": "text"
+						},
+						{
+							"key": "NameFirst",
+							"value": "FirstName",
+							"type": "text"
+						},
+						{
+							"key": "AccessGranted",
+							"value": "ClinicStaff",
+							"type": "text"
+						},
+						{
+							"key": "MemberID",
+							"value": "Member{{$timestamp}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/staff.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staff.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get recently created user ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "284f1c2c-099c-4131-b059-7ce9ec4438c5",
+						"exec": [
+							"pm.test(\"Reading new user was successful\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/staff.php?token={{token}}&Username={{newUser}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staff.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "Username",
+							"value": "{{newUser}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update last name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "56959611-4bec-4307-bb81-35c05eeea052",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Login was successful\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Last name was changed successfully\", function() {\r",
+							"    pm.expect(jsonData.data.NameLast === \"NewLastName\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/staff.php?token={{token}}&Username=testUser1545670928&NameLast=NewLastName",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staff.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "Username",
+							"value": "testUser1545670928"
+						},
+						{
+							"key": "NameLast",
+							"value": "NewLastName"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify updated last name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "284f1c2c-099c-4131-b059-7ce9ec4438c5",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Reading new user was successful\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Last name was changed successfully\", function() {\r",
+							"    pm.expect(jsonData.data.NameLast === \"NewLastName\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/staff.php?token={{token}}&Username={{newUser}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staff.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "Username",
+							"value": "{{newUser}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate new user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "284f1c2c-099c-4131-b059-7ce9ec4438c5",
+						"exec": [
+							"pm.test(\"Deactivating new user was successful\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/staff.php?token={{token}}&Username={{newUser}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staff.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "Username",
+							"value": "{{newUser}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify deactivated user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "284f1c2c-099c-4131-b059-7ce9ec4438c5",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"New user record found\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Only one user matched query\", function() {\r",
+							"    pm.expect(jsonData.count ===1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"New user deactivated successfully\", function() {\r",
+							"    pm.expect(jsonData.data.Active === 0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/staff.php?token={{token}}&Username={{newUser}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staff.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "Username",
+							"value": "{{newUser}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Close current session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+						"exec": [
+							"pm.test(\"Logout was successful\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?token={{token}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Session Access after logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9746528d-2e17-4c7d-b744-3e720334bcb6",
+						"exec": [
+							"postman.setEnvironmentVariable(\"token\", null);",
+							"",
+							"pm.test(\"Access failed\", function() {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?token={{token}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "12a20eb1-8231-4cfd-b313-170b1c650b55",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "134c64df-f268-43e0-b469-c510a33b56f0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "86ae73f8-7113-48d9-a351-1490d8cbd048",
+			"key": "newUser",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

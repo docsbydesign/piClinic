@@ -1,0 +1,175 @@
+<?php
+/*
+ *	Copyright (c) 2018, Robert B. Watson
+ *
+ *	This file is part of the piClinic Console.
+ *
+ *  piClinic Console is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  piClinic Console is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with piClinic Console software at https://github.com/MercerU-TCO/CTS/blob/master/LICENSE. 
+ *	If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+/*******************
+ *
+ * DELETE: deletes the specified session
+ *		Query paramters:
+ *			'token' - the session token
+ *		  looks up and checks these $_SERVER values match those of the session
+ *			REMOTE_ADDR - the IP of the client making the request
+ *			HTTP_USER_AGENT (if present) - the USER AGENT string of the client making the reaquest
+ *
+ *		Returns:
+ *			200: No data
+ *			400: required field is missing or $_SERVER values did not match
+ *			404: no session with that token found
+ *			500: server error information
+ *
+ *********************/
+require_once 'api_common.php';
+exitIfCalledFromBrowser(__FILE__);
+/*
+ *  Closes a user session
+ */
+function _session_delete ($dbLink, $requestArgs) {
+    /*
+     *      Initialize profiling if enabled in piClinicConfig.php
+     */
+	$profileData = array();
+	profileLogStart ($profileData);
+
+	// format the return values and debugging info
+	$returnValue = array();
+	$dbInfo = array();
+	$dbInfo ['requestArgs'] = $requestArgs;
+
+	// Initalize the log entry for this call
+    //  more fields will be added later in the routine
+	$logData = createLogEntry ('API',
+        __FILE__,
+        $requestArgs['token'],
+        'session',
+        $_SERVER['REQUEST_METHOD'],
+        $_SERVER['QUERY_STRING'],
+        null,
+        null,
+        null,
+        null);
+
+	// Check for the only required field: token
+    if (empty($requestArgs['token'])) {
+        $returnValue['contentType'] = CONTENT_TYPE_JSON;
+        $returnValue['httpResponse'] = 400;
+        $returnValue['httpReason']	= "Unable to delete user session. Required field: token is missing.";
+        $logData['LogStatusCode'] = $returnValue['httpResponse'];
+        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+        return $returnValue;
+    } else if (!validTokenString($requestArgs['token'])) {
+        $returnValue['contentType'] = CONTENT_TYPE_JSON;
+        $returnValue['httpResponse'] = 400;
+        $returnValue['httpReason']	= "Unable to delete user session. Invalid token.";
+        $logData['LogStatusCode'] = $returnValue['httpResponse'];
+        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+        return $returnValue;
+    }
+
+	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
+
+	// Make sure the record is currently active
+	//  and create query string to look up the token
+	$getQueryString = 'SELECT * FROM `'.DB_TABLE_SESSION.'` WHERE `Token` = \''. $requestArgs['token'].'\';';
+    $dbInfo['queryString'] = $getQueryString;
+
+	// Token is a unique key in the DB so no more than one record should come back.
+	$testReturnValue = getDbRecords($dbLink, $getQueryString);
+	
+	if ($testReturnValue['httpResponse'] !=  200) {
+        $dbInfo['returnData'] = $testReturnValue;
+		// can't find the record to delete. It could already be deleted or it could not exist.
+		$returnValue['contentType'] = CONTENT_TYPE_JSON;
+		if (API_DEBUG_MODE) {
+			$returnValue['error'] = $dbInfo;
+		}
+		$returnValue['httpResponse'] = 404;
+		$returnValue['httpReason']	= "User session to delete not found.";
+        $logData['LogStatusCode'] = $returnValue['httpResponse'];
+        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+        return $returnValue;
+	} else {
+		$logData['LogBeforeData'] = json_encode($testReturnValue['data']);
+	}
+
+	// if this session is already closed, exit without changing anything
+	if (!$testReturnValue['data']['LoggedIn']) {
+		$returnValue['contentType'] = CONTENT_TYPE_JSON;
+		// return not found because no valid session was found
+		$returnValue['httpResponse'] = 404;
+		$returnValue['httpReason']	= "User session was deleted in an earlier call.";
+        $logData['LogStatusCode'] = $returnValue['httpResponse'];
+        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+        return $returnValue;
+	}
+	
+	// valid and open session record found so delete it
+	//  delete means only to clear the logged in flag
+	// 		and set the logged out time
+	$now = new DateTime();
+	$testReturnValue['data']['LoggedOutDate'] = $now->format('Y-m-d H:i:s');
+	$testReturnValue['data']['LoggedIn'] = 0;
+	
+	profileLogCheckpoint($profileData,'UPDATE_READY');
+	$deleteQueryString = 'UPDATE '.DB_TABLE_SESSION.' SET `LoggedIn` = 0, '.
+		'`LoggedOutDate` = \'' . $testReturnValue['data']['LoggedOutDate'] . '\' '.
+		'WHERE `Token` = \''.$requestArgs['token'].'\';';
+    $dbInfo['deleteQueryString'] = $deleteQueryString;
+
+	// try to update the record in the database 
+	$qResult = @mysqli_query($dbLink, $deleteQueryString);
+	if (!$qResult) {
+		// SQL ERROR
+		// format response
+		$returnValue['contentType'] = CONTENT_TYPE_JSON;
+		if (API_DEBUG_MODE) {
+			$dbInfo['deleteQueryString'] = $deleteQueryString;
+			$dbInfo['sqlError'] = @mysqli_error($dbLink);
+			$returnValue['debug'] = $dbInfo;
+		}
+		$returnValue['httpResponse'] = 500;
+		$returnValue['httpReason']	= "Unable to delete user session. SQL DELETE query error.";
+	} else {
+		profileLogCheckpoint($profileData,'UPDATE_RETURNED');
+		// successfully deleted
+		$returnValue['contentType'] = CONTENT_TYPE_JSON;
+		if (API_DEBUG_MODE) {
+			$dbInfo['sqlError'] = @mysqli_error($dbLink);
+			$returnValue['debug'] = $dbInfo;
+		}
+		$returnValue['httpResponse'] = 200;
+		$returnValue['httpReason']	= "User session deleted.";
+		@mysqli_free_result($qResult);
+	}
+    $logData['LogStatusCode'] = $returnValue['httpResponse'];
+    $logData['LogStatusMessage'] = $returnValue['httpReason'];
+    writeEntryToLog ($dbLink, $logData);
+
+	$returnValue['contentType'] = CONTENT_TYPE_JSON;
+	if (API_DEBUG_MODE) {
+		$returnValue['debug'] = $dbInfo;
+	}
+	profileLogClose($profileData, __FILE__, $requestArgs);
+	return $returnValue;
+}
+//EOF

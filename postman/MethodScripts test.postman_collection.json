@@ -1,0 +1,442 @@
+{
+	"info": {
+		"_postman_id": "2bc29d47-e42f-44d4-8a47-e902e94bd0ba",
+		"name": "MethodScripts test",
+		"description": "Tests access to modules that should not be called directly through the web-server interface.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "logger_common script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/logger_common.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/logger_common.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"logger_common.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logger_get script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/logger_get.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/logger_get.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"logger_get.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logger_post script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/logger_post.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/logger_post.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"logger_post.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "session_common script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/session_common .php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session_common .php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session_common .php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "session_post script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/session_post.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session_post.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session_post.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "session_get script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/session_get.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session_get.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session_get.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "session_delete script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/session_delete.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session_delete.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session_delete.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "staff_common script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/staff_common.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/staff_common.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staff_common.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "staff_delete script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/staff_delete.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/staff_delete.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staff_delete.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "staff_get script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/staff_get.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/staff_get.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staff_get.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "staff_patch script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/staff_patch.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/staff_patch.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staff_patch.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "staff_post script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/staff_post.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/staff_post.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"staff_post.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

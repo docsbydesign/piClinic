@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "12696acb-88c0-45a0-8791-da305559a2ec",
+		"name": "Logger test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get SystemAdmin token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed713fa2-ae3d-46f3-aa9c-38838bd026ba",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"token\", jsonData.data.Token);\r",
+							"\r",
+							"pm.test(\"Login was successful\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?username={{SystemAdmin}}&password={{SystemAdminPW}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{SystemAdmin}}"
+						},
+						{
+							"key": "password",
+							"value": "{{SystemAdminPW}}"
+						}
+					]
+				},
+				"description": "Logs in as SystemAdmin"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Session Access",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+						"exec": [
+							"pm.test(\"Access check was successful\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?token={{token}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoggerTest-BasicFields",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4c658880-e599-455f-84b1-9dac32436384",
+						"exec": [
+							"pm.test(\"Writing basic fields was successful\", function() {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "text"
+						},
+						{
+							"key": "usertoken",
+							"value": "{{token}}",
+							"type": "text"
+						},
+						{
+							"key": "module",
+							"value": "_TEST_",
+							"type": "text"
+						},
+						{
+							"key": "class",
+							"value": "AUTOTEST",
+							"type": "text"
+						},
+						{
+							"key": "table",
+							"value": "_TEST_",
+							"type": "text"
+						},
+						{
+							"key": "action",
+							"value": "POST",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "{{testMessage}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/logger.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"logger.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logger Test-ReadBasicFields",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b579dd39-b1c7-444b-a3e7-84d1244b184b",
+						"exec": [
+							"pm.test(\"Basic Fields read  was successful\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Basic Fields read data was correct\", function() {\r",
+							"    var jsonData = JSON.parse(responseBody);\r",
+							"    pm.expect(jsonData.data.LogStatusMessage === pm.testMessage);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/logger.php?token={{token}}&usertoken={{token}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"logger.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "usertoken",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Close current session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+						"exec": [
+							"pm.test(\"Logout was successful\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?token={{token}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Session Access after logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9746528d-2e17-4c7d-b744-3e720334bcb6",
+						"exec": [
+							"postman.setEnvironmentVariable(\"token\", null);",
+							"",
+							"pm.test(\"Access failed\", function() {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?token={{token}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e390db36-b21a-4463-965e-06c1ce8062da",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b6cf1454-7506-494f-8eb9-1900bf4f9037",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
