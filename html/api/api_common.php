@@ -24,7 +24,7 @@
  *	Functions used by all API scripts
  *
  *********************/
-require_once('../shared/piClinicConfig.php');
+require_once '../shared/piClinicConfig.php';
 
 function exitIfCalledFromBrowser($scriptFile) {
     if (basename($scriptFile) == basename($_SERVER['SCRIPT_NAME'])) {

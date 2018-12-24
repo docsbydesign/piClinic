@@ -437,6 +437,114 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "comment_common script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/comment_common.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/comment_common.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"comment_common.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "comment_get script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/comment_get.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/comment_get.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"comment_get.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "comment_post script access test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+						"exec": [
+							"pm.test(\"api/comment_post.php access denial check was successful\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/comment_post.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"comment_post.php"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

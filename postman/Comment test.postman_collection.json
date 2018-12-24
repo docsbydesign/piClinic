@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "98a93932-bbea-474a-8abf-11bddc7478e8",
+		"name": "Comment test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get SystemAdmin token Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed713fa2-ae3d-46f3-aa9c-38838bd026ba",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"token\", jsonData.data.Token);\r",
+							"\r",
+							"pm.test(\"Login was successful\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?username={{SystemAdmin}}&password={{SystemAdminPW}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{SystemAdmin}}"
+						},
+						{
+							"key": "password",
+							"value": "{{SystemAdminPW}}"
+						}
+					]
+				},
+				"description": "Logs in as SystemAdmin"
+			},
+			"response": []
+		},
+		{
+			"name": "Post a new comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9e1746f1-fc85-4b15-8f2f-1a2115c98de0",
+						"exec": [
+							"pm.test(\"A new comment was posted\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "text"
+						},
+						{
+							"key": "Username",
+							"value": "AUTO_TEST",
+							"type": "text"
+						},
+						{
+							"key": "ReferringUrl",
+							"value": "TestPlatform",
+							"type": "text"
+						},
+						{
+							"key": "CommentText",
+							"value": "This is some text from Postman. Test text:  {{$guid}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/comment.php",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"comment.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read comments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6ed5651f-494a-4627-bd34-770400c1a377",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Comments were read successfully\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Multiple comments returned\", function() {\r",
+							"    pm.expect(jsonData.data.count > 1);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/comment.php?token={{token}}&=",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"comment.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Close current session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+						"exec": [
+							"pm.test(\"Logout was successful\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?token={{token}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Session Access after logout Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9746528d-2e17-4c7d-b744-3e720334bcb6",
+						"exec": [
+							"postman.setEnvironmentVariable(\"token\", null);",
+							"",
+							"pm.test(\"Access failed\", function() {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/session.php?token={{token}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"session.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
