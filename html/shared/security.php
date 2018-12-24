@@ -33,12 +33,12 @@ if (basename(__FILE__) == basename($_SERVER['SCRIPT_NAME'])) {
 	exit;	
 }
 
-require_once('piClinicConfig.php');
-require_once('dbUtils.php');
-require_once('../api/api_common.php');
-require_once('../api/session_common.php');
-require_once('../api/session_get.php');
-require_once('profile.php');
+require_once 'piClinicConfig.php';
+require_once 'dbUtils.php';
+require_once '../api/api_common.php';
+require_once '../api/session_common.php';
+require_once '../api/session_get.php';
+require_once 'profile.php';
 
 define('PAGE_ACCESS_ADMIN', 32, false); 	// SystemAdmin
 define('PAGE_ACCESS_CLINIC', 16, false); 	// ClinicAdmin
@@ -133,4 +133,4 @@ function checkUiSessionAccess($dbLink, $sessionToken, $pageAccess) {
 	profileLogClose($profileData, __FILE__);
 	return ($dbAccessGranted);
 }
-?>
+//EOF

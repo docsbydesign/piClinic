@@ -21,4 +21,4 @@
  */
 // DB_PASS is the only definition that should be edited during installation and configuration
 define('DB_PASS', 'YOURPASSWORD', false);
-?>
+//EOF

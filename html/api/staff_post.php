@@ -144,7 +144,7 @@ function _staff_post ($dbLink, $requestArgs) {
 		$returnValue = getDbRecords($dbLink, $getQueryString);
 		if ($returnValue['httpResponse'] == 200) {
 			// found the new record
-			$logData['after'] = json_encode($returnValue['data']);
+			$logData['LogAfterData'] = json_encode($returnValue['data']);
 			// adjust return value to reflect POST operation				
 			$returnValue['httpResponse'] = 201;
 			$returnValue['httpReason']	= 'Success';
@@ -160,4 +160,4 @@ function _staff_post ($dbLink, $requestArgs) {
 	profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;
 }
-?>
+//EOF

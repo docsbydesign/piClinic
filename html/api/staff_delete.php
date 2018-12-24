@@ -178,7 +178,7 @@ function _staff_delete ($dbLink, $requestArgs) {
 				DB_VIEW_STAFF_GET. "` WHERE `".$updateKey."` = '".
 				$requestArgs[$updateKey]."';";
 			$returnValue = getDbRecords($dbLink, $getQueryString);
-			$logData['after'] = json_encode($returnValue['data']);
+			$logData['LogAfterData'] = json_encode($returnValue['data']);
 			writeEntryToLog ($dbLink, $logData);
 			@mysqli_free_result($qResult);
 		}			

@@ -213,7 +213,7 @@ if (!defined('DB_UTILS')) {
 	}
 
 	function openDbForUi ($requestData, $pageLanguage, &$dbStatus) {
-		require_once('uiErrorMessageText.php');
+		require_once 'uiErrorMessageText.php';
 		$dbInfo = array();
 		$dbLink = _openDB();
 		$dbOpenError = mysqli_connect_errno();
@@ -233,4 +233,4 @@ if (!defined('DB_UTILS')) {
 		return $dbLink;
 	}
 }
-?>
+//EOF

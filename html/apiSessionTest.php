@@ -144,4 +144,4 @@ if (isset($sessionToken) || isset($sessionUser)) {
 	// need to define this variable, even if it's empty
 	$sessionDiv = '<div id="sessionDiv" style="display:none; ">&nbsp;</div>';	
 }
-?>
+//EOF

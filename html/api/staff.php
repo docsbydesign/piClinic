@@ -85,17 +85,17 @@
  *			500: server error information
  *
  *********************/
-require_once('../shared/piClinicConfig.php');
-require_once('../shared/dbUtils.php');
-require_once('api_common.php');
+require_once '../shared/piClinicConfig.php';
+require_once '../shared/dbUtils.php';
+require_once 'api_common.php';
 require_once '../shared/security.php';
 require_once '../shared/profile.php';
 require_once '../shared/logUtils.php';
-require_once('staff_common.php');
-require_once('staff_post.php');
-require_once('staff_get.php');
-require_once('staff_patch.php');
-require_once('staff_delete.php');
+require_once 'staff_common.php';
+require_once 'staff_post.php';
+require_once 'staff_get.php';
+require_once 'staff_patch.php';
+require_once 'staff_delete.php';
 /*
  *  Initialize profiling when enabled in piClinicConfig.php
  */
@@ -122,7 +122,7 @@ if ( $dbOpenError  != 0  ) {
         'staff',
         $retVal['httpReason']);
 	outputResults( $retVal);
-	return;
+    exit; // this is the end of the line if there's no DB access
 }
 
 profileLogCheckpoint($profileData,'DB_OPEN');
@@ -206,4 +206,4 @@ if ($profileTime !== false) {
     $retVal['debug']['profile'] = $profileTime;
 }
 outputResults ($retVal);
-?>
+//EOF

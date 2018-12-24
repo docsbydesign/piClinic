@@ -37,9 +37,8 @@ define ("STAFF_DB_REQ_PATCH", 5, false);    // whether the field must appear in 
 define ("STAFF_DB_CLEANFIRST", 6, false);  // whether to clean the string before using
 
 /*
- * Returns an array that defines the query paramters and DB field names used by the logger
+ * Returns an array that defines the query parameters and DB field names used by the logger
  */
-
 function getStaffFieldInfo() {
     $returnValue = [
         // STAFF_REQ_ARG,   STAFF_DB_ARG,   STAFF_DB_REQ_GET,

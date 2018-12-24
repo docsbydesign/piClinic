@@ -73,15 +73,15 @@
  *			500: server error information
  *
  *********************/
-require_once('../shared/piClinicConfig.php');
-require_once('../shared/dbUtils.php');
-require_once('../shared/logUtils.php');
-require_once('../shared/profile.php');
-require_once('api_common.php');
-require_once('session_common.php');
-require_once('session_post.php');
-require_once('session_get.php');
-require_once('session_delete.php');
+require_once '../shared/piClinicConfig.php';
+require_once '../shared/dbUtils.php';
+require_once '../shared/logUtils.php';
+require_once '../shared/profile.php';
+require_once 'api_common.php';
+require_once 'session_common.php';
+require_once 'session_post.php';
+require_once 'session_get.php';
+require_once 'session_delete.php';
 $profileData = [];
 profileLogStart ($profileData);
 
@@ -105,7 +105,7 @@ if ( $dbOpenError  != 0  ) {
         'session',
         $retVal['httpReason']);
     outputResults( $retVal);
-	exit;
+    exit; // this is the end of the line if there's no DB access
 }
 profileLogCheckpoint($profileData,'DB_OPEN');
 

@@ -27,7 +27,7 @@ if (basename(__FILE__) == basename($_SERVER['SCRIPT_NAME'])) {
 	header(CONTENT_TYPE_HEADER_HTML);
 	exit;	
 }
-require_once('piClinicConfig.php');
+require_once 'piClinicConfig.php';
 /*
 * 	Profile logger
 *	
@@ -96,4 +96,4 @@ function profileLogClose(&$profileInfo, $script, $inputParamList = null) {
 		return false;
 	}
 }
-?>
+//EOF

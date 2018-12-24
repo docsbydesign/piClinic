@@ -25,8 +25,8 @@ include 'exitIfCalledFromBrowser.php';
  *	Functions used by all API scripts
  *
  *********************/
-require_once('../shared/piClinicConfig.php');
-require_once('../shared/dbUtils.php');
+require_once '../shared/piClinicConfig.php';
+require_once '../shared/dbUtils.php';
 /*
 * 	Profile logger
 *	
@@ -183,4 +183,4 @@ function writeEntryToLog ($dbLink, $logData) {
     }
     return $returnValue;
 }
-?>
+//EOF

@@ -90,11 +90,11 @@ function _staff_get ($dbLink, $requestArgs) {
     $dbInfo['getQueryString'] = $getQueryString;
 	$returnValue = getDbRecords($dbLink, $getQueryString);
 
+    profileLogClose($profileData, __FILE__, $requestArgs);
+
     if (API_DEBUG_MODE) {
         $returnValue['debug'] = $dbInfo;
     }
-
-	profileLogClose($profileData, __FILE__, $requestArgs);		
 	return $returnValue;
 }
-?>
+//EOF
