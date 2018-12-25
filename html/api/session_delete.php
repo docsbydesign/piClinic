@@ -65,25 +65,6 @@ function _session_delete ($dbLink, $requestArgs) {
         null,
         null);
 
-	// Check for the only required field: token
-    if (empty($requestArgs['token'])) {
-        $returnValue['contentType'] = CONTENT_TYPE_JSON;
-        $returnValue['httpResponse'] = 400;
-        $returnValue['httpReason']	= "Unable to delete user session. Required field: token is missing.";
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
-        writeEntryToLog ($dbLink, $logData);
-        return $returnValue;
-    } else if (!validTokenString($requestArgs['token'])) {
-        $returnValue['contentType'] = CONTENT_TYPE_JSON;
-        $returnValue['httpResponse'] = 400;
-        $returnValue['httpReason']	= "Unable to delete user session. Invalid token.";
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
-        writeEntryToLog ($dbLink, $logData);
-        return $returnValue;
-    }
-
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
 
 	// Make sure the record is currently active

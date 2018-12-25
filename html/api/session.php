@@ -82,7 +82,12 @@ require_once 'session_common.php';
 require_once 'session_post.php';
 require_once 'session_get.php';
 require_once 'session_delete.php';
-$profileData = [];
+require_once 'session_patch.php';
+
+/*
+ *      Initialize profiling if enabled in piClinicConfig.php
+ */
+$profileData = array();
 profileLogStart ($profileData);
 
 // Get the query paramater data from the request
@@ -107,6 +112,7 @@ if ( $dbOpenError  != 0  ) {
     outputResults( $retVal);
     exit; // this is the end of the line if there's no DB access
 }
+
 profileLogCheckpoint($profileData,'DB_OPEN');
 
 // None of these methods require an access check
@@ -118,11 +124,42 @@ switch ($_SERVER['REQUEST_METHOD']) {
 	case 'GET':
 		$retVal = _session_get($dbLink, $requestData);
 		break;
-		
-	case 'DELETE':
-		$retVal = _session_delete($dbLink, $requestData);
-		break;
-			
+
+    case 'PATCH':
+    case 'DELETE':
+        // these methods require a valid token
+        if (empty($requestData['token'])){
+            // caller does not have a valid security token
+            $retVal['httpResponse'] = 400;
+            $retVal['debug']['requestData'] = $requestData;
+            $retVal['debug']['reqHeaders'] =  getallheaders ();
+            $retVal['httpReason']	= "Unable to access session resources. Missing token.";
+            $logData['LogStatusCode'] = $retVal['httpResponse'];
+            $logData['LogStatusMessage'] = $retVal['httpReason'];
+            writeEntryToLog($dbLink, $logData);
+        } else {
+            if (!validTokenString($requestData['token'])) {
+                $retVal['contentType'] = CONTENT_TYPE_JSON;
+                $retVal['httpResponse'] = 400;
+                $retVal['httpReason'] = "Unable to access session resources. Invalid token.";
+                $logData['LogStatusCode'] = $retVal['httpResponse'];
+                $logData['LogStatusMessage'] = $retVal['httpReason'];
+                writeEntryToLog($dbLink, $logData);
+            } else {
+                switch ($_SERVER['REQUEST_METHOD']) {
+                    case 'PATCH':
+                        // any user with a valid token can access this method
+                        $retVal = _session_patch($dbLink, $requestData);
+                        break;
+                    case 'DELETE':
+                        // any user with a valid token can access this method
+                        $retVal = _session_delete($dbLink, $requestData);
+                        break;
+                }
+            }
+        }
+        break;
+
 	default:
 		$retVal['contentType'] = CONTENT_TYPE_JSON;
 		if (API_DEBUG_MODE) {

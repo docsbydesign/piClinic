@@ -51,10 +51,21 @@ if (!defined('REST_CONSTANTS')) {
     define('CONTENT_TYPE_HEADER_HTML','Content-Type: text/html; charset=utf-8;', false);
 
 	// languages
-	define('UI_DEFAULT_LANGUAGE','en', false); 
-	define('UITEST_LANGUAGE','ui',false);
-	define('UI_ENGLISH_LANGUAGE','en', false);
-	define('UI_SPANISH_LANGUAGE','es', false);
+	define('UI_DEFAULT_LANGUAGE','en', false);
+    define('UITEST_LANGUAGE','ui',false);
+    define('UI_ENGLISH_LANGUAGE','en', false);
+    define('UI_SPANISH_LANGUAGE','es', false);
+
+    function isSupportedLanguage ($langToCheck) {
+        switch ($langToCheck) {
+            case UI_ENGLISH_LANGUAGE:
+            case UI_SPANISH_LANGUAGE:
+                return true;
+
+            default:
+                return false;
+        }
+    }
 	
 	// database interfaces
 	define('DB_SERVER','localhost', false);
@@ -62,32 +73,33 @@ if (!defined('REST_CONSTANTS')) {
 	define('DB_DATABASE_NAME','piclinic', false);
 	
 	// database tables
+    define('DB_TABLE_CLINIC','clinic',false);
+    define('DB_TABLE_COMMENT','comment', false);
+    define('DB_TABLE_ICD10','icd10', false);
+    define('DB_TABLE_IMAGE','image', false);
+    define('DB_TABLE_LOGGER','logger', false);
 	define('DB_TABLE_PATIENT', 'patient', false);
-	define('DB_TABLE_IMAGE','image', false);
+    define('DB_TABLE_SESSION','session', false);
+    define('DB_TABLE_STAFF','staff', false);
 	define('DB_TABLE_VISIT','visit', false);
-	define('DB_TABLE_SESSION','session', false);
-	define('DB_TABLE_STAFF','staff', false);
-	define('DB_TABLE_COMMENT','comment', false);
-	define('DB_TABLE_ICD10','icd10', false);
-	define('DB_TABLE_LOGGER','logger', false);
-	
+
 	// database views
-	define('DB_VIEW_VISIT_GET_WITH_AGEGROUP','visitGetWithAgeGroup',false);
-	define('DB_VIEW_CLINIC_PATIENT_SUMMARY_1','ClinicPatientSummary1', false);
-	define('DB_VIEW_PATIENT_GET','patientGet', false);
-	define('DB_VIEW_IMAGE_GET','imageGet', false);
-	define('DB_VIEW_STAFF_GET','staffGetByUser',false);
-	define('DB_VIEW_STAFF_GET_BY_NAME','staffGetByName',false);
-	define('DB_VIEW_VISIT_CHECK','visitCheck', false);
-	define('DB_VIEW_VISIT_EDIT_GET','visitEditGet', false);
-	define('DB_VIEW_VISIT_GET','visitGet', false);
-	define('DB_VIEW_VISIT_START','visitStart', false);
-	define('DB_VIEW_VISIT_OPEN','visitOpen', false);
-	define('DB_VIEW_VISIT_TODAY','visitToday', false);
-	define('DB_VIEW_VISIT_PATIENT_EDIT_GET','visitPatientEditGet', false);
-	define('DB_VIEW_VISIT_PATIENT_GET','visitPatientGet', false);
-	define('DB_VIEW_VISIT_OPEN_SUMMARY','visitOpenSummary', false);
-	define('DB_VIEW_COMMENT_GET','commentGet', false);
-	define('DB_VIEW_ICD10_GET','icd10Get',false);
+    define('DB_VIEW_COMMENT_GET','commentGet', false);
+    define('DB_VIEW_ICD10_GET','icd10Get',false);
+    define('DB_VIEW_VISIT_EDIT_GET','visitEditGet', false);
+    define('DB_VIEW_VISIT_GET','visitGet', false);
+    define('DB_VIEW_VISIT_OPEN','visitOpen', false);
+    define('DB_VIEW_VISIT_OPEN_SUMMARY','visitOpenSummary', false);
+    define('DB_VIEW_VISIT_PATIENT_EDIT_GET','visitPatientEditGet', false);
+    define('DB_VIEW_VISIT_PATIENT_GET','visitPatientGet', false);
+    define('DB_VIEW_VISIT_START','visitStart', false);
+    define('DB_VIEW_VISIT_TODAY','visitToday', false);
+    define('DB_VIEW_CLINIC_PATIENT_SUMMARY_1','ClinicPatientSummary1', false);
+    define('DB_VIEW_IMAGE_GET','imageGet', false);
+    define('DB_VIEW_PATIENT_GET','patientGet', false);
+    define('DB_VIEW_STAFF_GET','staffGetByUser',false);
+    define('DB_VIEW_STAFF_GET_BY_NAME','staffGetByName',false);
+    define('DB_VIEW_VISIT_CHECK','visitCheck', false);
+    define('DB_VIEW_VISIT_GET_WITH_AGEGROUP','visitGetWithAgeGroup',false);
 }
 //EOF

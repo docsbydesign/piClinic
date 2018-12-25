@@ -24,13 +24,14 @@
  *	Creates/Returns session resources from the database 
  * 		or an HTML error message
  *
- *	POST: Adds a new user session to the database
+ *	PATCH: Modify an existing session
  * 		input data:
- *			'username' - The username of the user opening a session
- *			'password' - The password of the user opening a session
- *		  looks up and saves these $_SERVER values
- *			REMOTE_ADDR - the IP of the client making the request
- *			HTTP_USER_AGENT (if present) - the USER AGENT string of the client making the reaquest
+ *          'token' - current token of session to modify
+ *			'lang' - the new session language (PrefLang)
+ *			'clinic' - the new default clinic (PrefClinicPublicID)
+ *
+ *      note that this method can only change these values (PrefLang, PrefClinicPublicID)
+ *          of the session identified by token
  *
  *		Response: 
  *			Session data object
@@ -49,7 +50,7 @@ exitIfCalledFromBrowser(__FILE__);
  *  Checks the username and password and, if they are valid,
  *    creates a new user session.
  */
-function _session_post ($dbLink, $requestArgs) {
+function _session_patch ($dbLink, $requestArgs) {
     /*
      *      Initialize profiling if enabled in piClinicConfig.php
      */
@@ -65,7 +66,7 @@ function _session_post ($dbLink, $requestArgs) {
     //  more fields will be added later in the routine
     $logData = createLogEntry ('API',
         __FILE__,
-        $requestArgs['username'],
+        $requestArgs['token'],
         'session',
         $_SERVER['REQUEST_METHOD'],
         null,
@@ -75,11 +76,13 @@ function _session_post ($dbLink, $requestArgs) {
         null);
 
 	// check for required parameters
+    // must have at least one, and can have both.
 	$requiredPatientColumns = [
-		"username"
-		,"password"
+		"lang"
+		,"clinic"
 		];
 
+	$paramCount = 0;
 	$missingColumnList = "";
 	foreach ($requiredPatientColumns as $column) {
 		if (empty($requestArgs[$column])) {
@@ -87,17 +90,19 @@ function _session_post ($dbLink, $requestArgs) {
 				$missingColumnList .= ", ";
 			}
 			$missingColumnList .= $column;
-		}		
+		} else {
+		    $paramCount += 1;
+        }
 	}
 	
-	if (!empty($missingColumnList)) {
+	if ($paramCount == 0) {
 		// some required fields are missing so exit
 		$returnValue['contentType'] = CONTENT_TYPE_JSON;
 		if (API_DEBUG_MODE) {
 			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 400;
-		$returnValue['httpReason']	= "Unable to create new session. Required field(s): ". $missingColumnList. " are missing.";
+		$returnValue['httpReason']	= "Unable to update session session. None of the required field(s): ". $missingColumnList. " were found.";
         $logData['LogStatusCode'] = $returnValue['httpResponse'];
         $logData['LogStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
@@ -106,14 +111,15 @@ function _session_post ($dbLink, $requestArgs) {
 
 	// Don't save the whole query string because it has the password in plain text and the log isn't encrypted
     //  but at this point we know the username is present so we can save that in the log.
-    $logData['LogQueryString'] = 'username='. $requestArgs['username'];
+    $logData['LogQueryString'] = $_SERVER['QUERY_STRING'];
     $dbInfo = array();
+    $dbInfo['requestArgs'] = $requestArgs;
 
-    // Make sure that the Username returns a valid user record
+    // Make sure that the token returns a valid session record
 	$userInfo = null;
 	$getQueryString = "SELECT * FROM `".
-		DB_TABLE_STAFF. "` WHERE `Username` = '".
-		$requestArgs['username']."';";
+		DB_TABLE_SESSION. "` WHERE `Token` = '".
+		$requestArgs['token']."';";
 	$dbInfo['$getQueryString'] = $getQueryString;
 
 	$returnValue = getDbRecords($dbLink, $getQueryString);
@@ -126,7 +132,7 @@ function _session_post ($dbLink, $requestArgs) {
 			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 404;
-		$returnValue['httpReason']	= "The username is not in the system. Check the username and try again.";
+		$returnValue['httpReason']	= "The token did not locate a valid session. Check the token and try again.";
         $logData['LogStatusCode'] = $returnValue['httpResponse'];
         $logData['LogStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
@@ -140,127 +146,111 @@ function _session_post ($dbLink, $requestArgs) {
                 $returnValue['debug'] = $dbInfo;
 			}
 			$returnValue['httpResponse'] = 500;
-			$returnValue['httpReason']	= "Multiple usernames were found in the system. Check the username and try again or contact the administrator.";
+			$returnValue['httpReason']	= "Multiple sessions were found with that token. Check the token and try again.";
             $logData['LogStatusCode'] = $returnValue['httpResponse'];
             $logData['LogStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
 			return $returnValue;
 		}
-	}		
-	
-	if (!$userInfo['Active']) {
-		// account has been disabled
-		$returnValue['httpResponse'] = 403;
-		$returnValue['httpReason']	= 'Account is disabled.';
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
-        writeEntryToLog ($dbLink, $logData);
-		return $returnValue;
-	}
-	
-	// At this point we have a valid user and request, which have passed
-    // all the validation tests, so check the password
-	
-	if (!password_verify($requestArgs['password'], $userInfo['Password'])) {
-        $dbInfo['passArg'] = $requestArgs['password'];
-        $dbInfo['passHash'] = password_hash($requestArgs['password']);
-        $dbInfo['passSaved'] = $userInfo['Password'];
-		// password does not match
-		if (API_DEBUG_MODE) {
-			$returnValue['debug'] = $dbInfo;
-		}
-		$returnValue['httpResponse'] = 403;
-		$returnValue['httpReason']	= 'Password does not match the password saved for this user.';
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
-        writeEntryToLog ($dbLink, $logData);
-		return $returnValue;
 	}
 
-	// here we have a valid username and password so create a session
+    $dbArgs = array();
+    if (!empty($requestArgs['lang'])) {
+        if (isSupportedLanguage($requestArgs['lang'])) {
+            $dbArgs['SessionLang'] = $requestArgs['lang'];
+        }
+    }
+
+    // test the clinic ID
+    if (!empty($requestArgs['clinic'])) {
+        // check if the clinic ID is valid
+        $clinicQueryString = 'SELECT `PublicID` FROM '. DB_TABLE_CLINIC . ' WHERE TRUE;';
+        $dbInfo['clinicQueryString'] = $clinicQueryString;
+        $clinicResult = getDbRecords($dbLink, $clinicQueryString);
+        if ($clinicResult['count'] >= 1) {
+            // scan the list for a match
+            foreach ($clinicResult['data'] as $idToCheck) {
+                if ($requestArgs['clinic'] == $idToCheck['PublicID']) {
+                    $dbArgs['SessionClinicPublicID'] = $idToCheck['PublicID'];
+                    break;
+                }
+            }
+        }
+    }
+
+    if (count($dbArgs) == 0) {
+        // no valid parameters were passed.
+        $returnValue['httpResponse'] = 400;
+        $returnValue['httpReason']	= "No valid parameter values were provided. Check the parameter values and try again..";
+        $returnValue['debug'] = $dbInfo;
+        $logData['LogStatusCode'] = $returnValue['httpResponse'];
+        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+        return $returnValue;
+    }
+
+    // add the token value
+    $dbArgs['Token'] = $requestArgs['token'];
+
+    // here we have a valid username and password so create a session
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
-
-	// Build the DB request
-	$dbArgs = array();
-	$dbArgs['Token'] = tokenString ();
-	$dbArgs['SessionIP'] = (!empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null);
-	$dbArgs['SessionUA'] = (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null);
-	$dbArgs['Username'] = $userInfo['Username'];
-	$dbArgs['LoggedIn'] = 1;
-	$dbArgs['AccessGranted'] = $userInfo['AccessGranted'];
-	$dbArgs['SessionLang'] = $userInfo['PrefLang'];
-    $dbArgs['SessionClinicPublicID'] = (!empty($userInfo['PrefClinicPublicID']) ? $userInfo['PrefClinicPublicID'] : null);
-	$now = new DateTime();
-	$dbArgs['createdDate'] = $now->format('Y-m-d H:i:s');
-	// create expiration date as tomorrow for now.
-	$later = $now;
-	$later->modify('+1 day');
-	$dbArgs['ExpiresOnDate'] = $later->format('Y-m-d H:i:s');
 
 	// save a copy for the debugging output
 	$dbInfo['dbArgs'] = $dbArgs;
+    $updateColumns = 0;
+    $insertQueryString = format_object_for_SQL_update (DB_TABLE_SESSION, $dbArgs, 'Token', $updateColumns);
+	$dbInfo['insertQueryString'] = $insertQueryString;
 
-	// make insert query string to add new object to DB table
-	profileLogCheckpoint($profileData,'POST_READY');
-	$insertQueryString = format_object_for_SQL_insert (DB_TABLE_SESSION, $dbArgs);
-	if (API_DEBUG_MODE) {
-		$dbInfo['insertQueryString'] = $insertQueryString;
-	}
-	// try to add the record to the database
+	// try to update the session in the database
 	
 	$qResult = @mysqli_query($dbLink, $insertQueryString);
 	if (!$qResult) {
 		// SQL ERROR
-		$dbInfo['insertQueryString'] = $insertQueryString;
 		$dbInfo['sqlError'] = @mysqli_error($dbLink);
 		// format response
 		$returnValue['contentType'] = CONTENT_TYPE_JSON;
 		if (API_DEBUG_MODE) {
 			$returnValue['debug'] = $dbInfo;
 		}
-		if (substr($dbInfo['sqlError'], 0, 9) == "Duplicate") {
-			// a "duplicate record" error was returned, so update the responee
-			$returnValue['httpResponse'] = 409;
-			$returnValue['httpReason']	= "Duplicate entry. The session already exists in the database. ".$dbInfo['sqlError'];
-		} else if (!empty($dbInfo['sqlError'])) {
+		if (!empty($dbInfo['sqlError'])) {
 			// some other error was returned, so update the response
 			$returnValue['httpResponse'] = 500;
-			$returnValue['httpReason']	= "Unable to create a new session. ".$dbInfo['sqlError'];
+			$returnValue['httpReason']	= "Unable to update the session. ".$dbInfo['sqlError'];
 		} else {
 			$returnValue['httpResponse'] = 500;
-			$returnValue['httpReason']	= "Unable to create a new session. DB error.";
+			$returnValue['httpReason']	= "Unable to update the session. DB error.";
 		}
 	} else {
 	    // successful creation
-		profileLogCheckpoint($profileData,'POST_RETURNED');
-		$returnValue['data'] = $dbArgs;
-		$returnValue['count'] = 1;
-		$returnValue['httpResponse'] = 201;
-		$returnValue['httpReason']	= "New session created.";
-		
-		// update the user record to show the new login.
-		$updateQueryString = "UPDATE `". DB_TABLE_STAFF. "` ".
-    		"SET `LastLogin`='".$now->format('Y-m-d H:i:s')."' ".
-	    	"WHERE `staffID` = '".$userInfo['staffID']."';";
-        $dbInfo['updateQueryString'] = $updateQueryString;
+		profileLogCheckpoint($profileData,'UPDATE_RETURNED');
 
-		// try to update the record to the database
-		$qResult = @mysqli_query($dbLink, $updateQueryString);
-		if (!$qResult) {
-			// SQL ERROR
-			$dbInfo['sqlError'] = @mysqli_error($dbLink);
-			// format response
-			$returnValue['contentType'] = CONTENT_TYPE_JSON;
-			if (API_DEBUG_MODE) {
-				$returnValue['debug'] = $dbInfo;
-			}
-			if (!empty($dbInfo['sqlError'])) {
-				$returnValue['httpReason']	.= " Unable to update user last login time. ".$dbInfo['sqlError'];
-			} else {
-				$returnValue['httpReason']	.= " Unable to update user last login time.";
-			}
-		}
-		
+		// get the new session data to return
+        // create query string for get operation
+        $getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `Token` = \''. $requestArgs['token'] . '\';';
+        $dbInfo ['queryString'] = $getQueryString;
+        // get the session record that matches--there should be only one
+        $getReturnValue = getDbRecords($dbLink, $getQueryString);
+        if (!empty($returnValue['data'])) {
+            unset ($returnValue['data']);
+            $returnValue['data'] = array();
+        }
+        if ($getReturnValue['count'] == 1) {
+            $returnValue['data']['Token'] = $getReturnValue['data']['Token'];
+            $returnValue['data']['Username'] = $getReturnValue['data']['Username'];
+            $returnValue['data']['AccessGranted'] = $getReturnValue['data']['AccessGranted'];
+            $returnValue['data']['SessionLang'] = $getReturnValue['data']['SessionLang'];
+            $returnValue['data']['SessionClinicPublicID'] = $getReturnValue['data']['SessionClinicPublicID'];
+            $returnValue['httpResponse'] = 200;
+            $returnValue['httpReason'] = 'Success';
+        } else {
+            $returnValue['data']['Token'] = '';
+            $returnValue['data']['Username'] = '';
+            $returnValue['data']['AccessGranted'] = 0;
+            $returnValue['data']['SessionLang'] = '';
+            $returnValue['data']['SessionClinicPublicID'] = '';
+            $returnValue['httpResponse'] = 500;
+            $returnValue['httpReason'] = 'Unable to read updated session. Session might have been updated, but the new session data could not be read.';
+        }
 		@mysqli_free_result($qResult);
 	}
 
