@@ -52,6 +52,8 @@ CREATE TABLE IF NOT EXISTS `staff` (
   `NameFirst` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) staff member''s first name',
   `Position` enum('Nurse','NursesAid','NursingStudent','DoctorGeneral','DoctorSpecialist','MedicalStudent','ClinicStaff','Other') COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Staff position type (e.g. Doctor, Nurse, etc.)',
   `Password` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Staff''s password  (encrypted as hash. Do not enter plaintext)',
+  `PrefLang` varchar(8) COLLATE utf8_unicode_ci DEFAULT 'en' COMMENT '(optional) preferred session language',
+  `PrefClinicPublicID` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Clinic ID/code of this persons preferred clinic.',
   `ContactInfo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) contact info such as phone or email',
   `AltContactInfo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) additional contact info such as phone or email',
   `Active` tinyint(1) NOT NULL DEFAULT '1' COMMENT '(Required) status of staff member (only Active = True can log in)',
@@ -88,7 +90,8 @@ CREATE TABLE IF NOT EXISTS `session` (
   `SessionIP` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(required) Session IP address of client ',
   `SessionUA` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Client user agent, if available',
   `SessionLang` varchar(8) COLLATE  utf8_unicode_ci DEFAULT 'en' COMMENT '(optional) Preferred UI language of this session',
-  `LoggedOutDate` datetime DEFAULT NULL COMMENT '(Autofill) Set to current time on log out',
+  `SessionClinicPublicID` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Current clinic ID/code of this sessions preferred clinic.',
+ `LoggedOutDate` datetime DEFAULT NULL COMMENT '(Autofill) Set to current time on log out',
   `ExpiresOnDate` datetime NOT NULL COMMENT '(Autofill) The date and time the session expires.',
   `createdDate` datetime NOT NULL COMMENT '(Autofill) The date and time this session was created.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table that lists sessions that currently have access to the system.';
@@ -186,6 +189,7 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `NameMI` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) Patient''s middle initial, if known',
   `Sex` enum('M','F','X') CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s sex',
   `BirthDate` datetime DEFAULT NULL COMMENT '(Not Required) Patient''s date of birth',
+  `NextVaccinationDate` datetime DEFAULT NULL COMMENT '(Not Required) Date patients next vaccination is due',
   `HomeAddress1` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s home address',
   `HomeAddress2` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) additional home address info (e.g. apt, room, etc.)',
   `HomeNeighborhood` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s home neighborhood.',
