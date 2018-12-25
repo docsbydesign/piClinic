@@ -105,9 +105,39 @@ function _staff_patch ($dbLink, $requestArgs) {
 	$patchArgs = cleanStaffStringFields ($requestArgs);
 
     // if a password string is present, hash the plain text before updating
-    if (!empty($postArgs['Password'])) {
-        $postArgs['Password'] = password_hash($postArgs['Password'], PASSWORD_DEFAULT);
+    if (!empty($patchArgs['Password'])) {
+        $patchArgs['Password'] = password_hash($patchArgs['Password'], PASSWORD_DEFAULT);
     }
+
+    // if the language string is present, make sure it's a supported language
+    if (!empty($patchArgs['PrefLang'])) {
+        if (!isSupportedLanguage($patchArgs['PrefLang'])) {
+            unset ($patchArgs['PrefLang']);
+        }
+    }
+
+    // test the clinic ID
+    if (!empty($patchArgs['PrefClinicPublicID'])) {
+        // check if the clinic ID is valid
+        $clinicQueryString = 'SELECT `PublicID` FROM '. DB_TABLE_CLINIC . ' WHERE TRUE;';
+        $dbInfo['clinicQueryString'] = $clinicQueryString;
+        $clinicResult = getDbRecords($dbLink, $clinicQueryString);
+        $clinicIdFound = false;
+        if ($clinicResult['count'] >= 1) {
+            // scan the list for a match
+            foreach ($clinicResult['data'] as $idToCheck) {
+                if ($patchArgs['PrefClinicPublicID'] == $idToCheck['PublicID']) {
+                    $clinicIdFound = true;
+                    break;
+                }
+            }
+        }
+        if (!$clinicIdFound) {
+            // the parameter doesn't match a known clinic so remove it
+            unset($patchArgs['SessionClinicPublicID']);
+        }
+    }
+
 
     // make sure the record is currently active
 	// create query string for get operation
@@ -135,7 +165,31 @@ function _staff_patch ($dbLink, $requestArgs) {
 	if (!empty($patchArgs['Password'])) {
 		$patchArgs['Password'] = password_hash($patchArgs['Password'], PASSWORD_DEFAULT);
 	}
-	
+
+    if (!empty($patchArgs['lang'])) {
+        if (isSupportedLanguage($patchArgs['lang'])) {
+            $patchArgs['SessionLang'] = $requestArgs['lang'];
+        }
+    }
+
+    // test the clinic ID
+    if (!empty($requestArgs['clinic'])) {
+        // check if the clinic ID is valid
+        $clinicQueryString = 'SELECT `PublicID` FROM '. DB_TABLE_CLINIC . ' WHERE TRUE;';
+        $dbInfo['clinicQueryString'] = $clinicQueryString;
+        $clinicResult = getDbRecords($dbLink, $clinicQueryString);
+        if ($clinicResult['count'] >= 1) {
+            // scan the list for a match
+            foreach ($clinicResult['data'] as $idToCheck) {
+                if ($requestArgs['clinic'] == $idToCheck['PublicID']) {
+                    $dbArgs['SessionClinicPublicID'] = $idToCheck['PublicID'];
+                    break;
+                }
+            }
+        }
+    }
+
+
 	$updateKey = '';
 	// get lookup key field
 	if (isset($keyFields['staffID'])) {

@@ -41,23 +41,25 @@ define ("STAFF_DB_CLEANFIRST", 6, false);  // whether to clean the string before
  */
 function getStaffFieldInfo() {
     $returnValue = [
-        // STAFF_REQ_ARG,   STAFF_DB_ARG,   STAFF_DB_REQ_GET,
-        //                                          STAFF_DB_QS_GET,
-        //                                                  STAFF_DB_REQ_POST,
-        //                                                           STAFF_DB_REQ_PATCH,
-        //                                                                    STAFF_DB_CLEANFIRST
-        ["staffID",        "staffID",       false,  true,   false,   true,    false],
-        ["MemberID",       "MemberID",      false,  true,   true,    false,   true],
-        ["Username",       "Username",      false,  true,   true,    true,    true],
-        ["Password",       "Password",      false,  true,   false,   false,   false],
-        ["NameLast",       "NameLast",      false,  true,   true,    false,   true],
-        ["NameFirst",      "NameFirst",     false,  true,   true,    false,   true],
-        ["Position",       "Position",      false,  true,   false,   false,   true],
-        ["ContactInfo",    "ContactInfo",   false,  true,   false,   false,   true],
-        ["AltContactInfo", "AltContactInfo",false,  true,   false,   false,   true],
-        ["Active",         "Active",        false,  true,   false,   false,   false],
-        ["LastLogin",      "LastLogin",     false,  true,   false,   false,   false],
-        ["AccessGranted",  "AccessGranted", false,  true,   false,   false,   false]
+        // STAFF_REQ_ARG,   STAFF_DB_ARG,               STAFF_DB_REQ_GET,
+        //                                                      STAFF_DB_QS_GET,
+        //                                                              STAFF_DB_REQ_POST,
+        //                                                                      STAFF_DB_REQ_PATCH,
+        //                                                                               STAFF_DB_CLEANFIRST
+        ["staffID",        "staffID",                   false,  true,   false,  true,    false],
+        ["MemberID",       "MemberID",                  false,  true,   true,   false,   true],
+        ["Username",       "Username",                  false,  true,   true,   true,    true],
+        ["Password",       "Password",                  false,  true,   false,  false,   false],
+        ["NameLast",       "NameLast",                  false,  true,   true,   false,   true],
+        ["NameFirst",      "NameFirst",                 false,  true,   true,   false,   true],
+        ["Position",       "Position",                  false,  true,   false,  false,   true],
+        ["ContactInfo",    "ContactInfo",               false,  true,   false,  false,   true],
+        ["AltContactInfo", "AltContactInfo",            false,  true,   false,  false,   true],
+        ["Active",         "Active",                    false,  true,   false,  false,   false],
+        ["PrefLang",       "PrefLang",                  false,  true,   false,  false,   true],
+        ["PrefClinicPublicID", "PrefClinicPublicID",    false,  true,   false,  false,   false],
+        ["LastLogin",      "LastLogin",                 false,  true,   false,  false,   false],
+        ["AccessGranted",  "AccessGranted",             false,  true,   false,  false,   false]
     ];
     return $returnValue;
 }

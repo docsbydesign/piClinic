@@ -1433,6 +1433,118 @@
 					"response": []
 				},
 				{
+					"name": "Update preferred lang",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "56959611-4bec-4307-bb81-35c05eeea052",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"\r",
+									"pm.test(\"Preferred language change was successful\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Preferred language was changed correctly\", function() {\r",
+									"    pm.expect(jsonData.data.PrefLang === \"es\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/staff.php?token={{token}}&Username=testUser1545670928&PrefLang=es",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"staff.php"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "Username",
+									"value": "testUser1545670928"
+								},
+								{
+									"key": "PrefLang",
+									"value": "es"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update preferred clinic",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "56959611-4bec-4307-bb81-35c05eeea052",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"\r",
+									"pm.test(\"Clinic change was successful\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Clinic was changed correctly\", function() {\r",
+									"    pm.expect(jsonData.data.PrefClinicPublicID === \"710\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/staff.php?token={{token}}&Username=testUser1545670928&PrefClinicPublicID=710",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"staff.php"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "Username",
+									"value": "testUser1545670928"
+								},
+								{
+									"key": "PrefClinicPublicID",
+									"value": "710"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Verify updated last name",
 					"event": [
 						{
