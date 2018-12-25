@@ -141,6 +141,8 @@ function _session_get ($dbLink, $requestArgs) {
 			$sessionInfo['data']['Token'] = $returnValue['data']['Token'];
 			$sessionInfo['data']['Username'] = $returnValue['data']['Username'];
 			$sessionInfo['data']['AccessGranted'] = $returnValue['data']['AccessGranted'];
+			$sessionInfo['data']['SessionLang'] = $returnValue['data']['SessionLang'];
+            $sessionInfo['data']['SessionClinicPublicID'] = $returnValue['data']['SessionClinicPublicID'];
             $sessionInfo['httpResponse'] = 200;
             $sessionInfo['httpReason'] = 'Success';
 		} else {
@@ -148,6 +150,8 @@ function _session_get ($dbLink, $requestArgs) {
 			$sessionInfo['data']['Token'] = 0;
 			$sessionInfo['data']['Username'] = '';
 			$sessionInfo['data']['AccessGranted'] = 0;
+            $sessionInfo['data']['SessionLang'] = '';
+            $sessionInfo['data']['SessionClinicPublicID'] = '';
             $sessionInfo['httpResponse'] = 404;
             $sessionInfo['httpReason'] = 'Session not found.';
 		}
