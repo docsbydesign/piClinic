@@ -76,26 +76,7 @@ profileLogStart ($profileData);
 
 // get the query paramater data from the request 
 $requestData = readRequestData();
-$dbLink = _openDB();
-$dbOpenError = mysqli_connect_errno();
-if ( $dbOpenError  != 0  ) {
-	$retVal = array();
-	// database not opened.
-	$retVal['contentType'] = 'Content-Type: application/json; charset=utf-8';
-	$dbInfo['sqlError'] = 'Error: '. $dbOpenError .', '.
-			mysqli_connect_error();
-	$retVal['error'] = $dbInfo;
-	$retVal['httpResponse'] = 500;
-	$retVal['httpReason']   = 'Server Error - Database not opened.';
-    logApiError($requestData,
-        $retVal['httpResponse'],
-        __FILE__ ,
-        (!empty($requestData['token']) ? $requestData['token'] : "NotSpecified"),
-        'staff',
-        $retVal['httpReason']);
-	outputResults( $retVal);
-    exit; // this is the end of the line if there's no DB access
-}
+$dbLink = _openDBforAPI($requestData);
 
 profileLogCheckpoint($profileData,'DB_OPEN');
 
@@ -104,14 +85,28 @@ if (empty($requestData['token'])){
     $retVal['httpResponse'] = 400;
     $retVal['httpReason']	= "Unable to access comment resources. Missing token.";
 } else {
+    // Initalize the log entry for this call
+    //  more fields will be added later in the routine
+    $logData = createLogEntry ('API',
+        __FILE__,
+        'comment',
+        $_SERVER['REQUEST_METHOD'],
+        null,
+        $_SERVER['QUERY_STRING'],
+        null,
+        null,
+        null,
+        null);
+
     if (!validTokenString($requestData['token'])) {
         $retVal['contentType'] = CONTENT_TYPE_JSON;
         $retVal['httpResponse'] = 400;
         $retVal['httpReason'] = "Unable to access comment resources. Invalid token.";
-        $logData['LogStatusCode'] = $retVal['httpResponse'];
-        $logData['LogStatusMessage'] = $retVal['httpReason'];
+        $logData['logStatusCode'] = $retVal['httpResponse'];
+        $logData['logStatusMessage'] = $retVal['httpReason'];
         writeEntryToLog($dbLink, $logData);
     } else {
+        $logData['userToken'] = $requestData['token'];
         if (checkUiSessionAccess($dbLink, $requestData['token'], PAGE_ACCESS_READONLY)) {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST':

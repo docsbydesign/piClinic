@@ -92,9 +92,9 @@ function logApiError($inputParamList,
 */
 function createLogEntry ($logClass,
                          $sourceModule,
-                         $userToken,
                          $logTable,
                          $logAction,
+                         $userToken = null,
                          $logQueryString = null,
                          $logBeforeObject = null,
                          $logAfterObject = null,
@@ -106,7 +106,7 @@ function createLogEntry ($logClass,
     $logEntryObject['logClass'] = $logClass;
     if (empty($sourceModule)) return false; //required field
     $logEntryObject['sourceModule'] = $sourceModule;
-    if (empty($sessionID)) return false; //required field
+    if (empty($userToken)) return false; //required field
     $logEntryObject['userToken'] = $userToken;
     if (empty($logTable)) return false; //required field
     $logEntryObject['logTable'] = $logTable;
@@ -117,6 +117,7 @@ function createLogEntry ($logClass,
     } else {
         $logEntryObject['logQueryString'] = $logQueryString;
     }
+    $logEntryObject['userToken'] = $userToken;
     $logEntryObject['logBeforeData'] = json_encode($logBeforeObject);
     $logEntryObject['logAfterData'] = json_encode($logAfterObject);
     $logEntryObject['logStatusCode'] = $logStatus;

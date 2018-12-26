@@ -55,16 +55,7 @@ function _comment_post ($dbLink, $requestArgs) {
 	$dbInfo ['requestArgs'] = $requestArgs;
 
     // token parameter was verified before this function was called.
-    $logData = createLogEntry ('API',
-        __FILE__,
-        $requestArgs['token'],
-        'comment',
-        $_SERVER['REQUEST_METHOD'],
-        null,
-        null,
-        null,
-        null,
-        null);
+    $logData = createLogEntry ('API', __FILE__, 'comment', $_SERVER['REQUEST_METHOD'], $requestArgs['token'], null, null, null, null, null);
 	if (empty($requestArgs['username'])) {
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {

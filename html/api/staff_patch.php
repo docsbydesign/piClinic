@@ -60,16 +60,7 @@ function _staff_patch ($dbLink, $requestArgs) {
 	$dbInfo ['requestArgs'] = $requestArgs;
 
     // token parameter was verified before this function was called.
-    $logData = createLogEntry ('API',
-        __FILE__,
-        $requestArgs['token'],
-        'session',
-        $_SERVER['REQUEST_METHOD'],
-        null,
-        null,
-        null,
-        null,
-        null);
+    $logData = createLogEntry ('API', __FILE__, 'session', $_SERVER['REQUEST_METHOD'], $requestArgs['token'], null, null, null, null, null);
 
     // check for other required columns
     $staffDbFields = getStaffFieldInfo();

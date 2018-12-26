@@ -1874,7 +1874,7 @@
 									"type": "text"
 								},
 								{
-									"key": "Username",
+									"key": "username",
 									"value": "AUTO_TEST",
 									"type": "text"
 								},
@@ -1884,7 +1884,7 @@
 									"type": "text"
 								},
 								{
-									"key": "CommentText",
+									"key": "commentText",
 									"value": "This is some text from Postman. Test text:  {{$guid}}",
 									"type": "text"
 								}

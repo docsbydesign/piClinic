@@ -39,6 +39,32 @@ if (!defined('DB_UTILS')) {
 		}
 		return $link;
 	}
+
+    function _openDBforAPI($requestData) {
+        $dbLink = _openDB();
+        $dbOpenError = mysqli_connect_errno();
+        $retVal = array();
+        $dbInfo = array();
+        if ($dbOpenError  != 0) {
+            // database not opened. Log and return an error
+            $retVal['contentType'] = CONTENT_TYPE_JSON;
+            $dbInfo['sqlError'] = 'Error: '. $dbOpenError .', '.
+                mysqli_connect_error();
+            $retVal['error'] = $dbInfo;
+            $retVal['httpResponse'] = 500;
+            $retVal['httpReason']   = "Server Error - Database not opened.";
+            logApiError($requestData,
+                $retVal['httpResponse'],
+                __FILE__ ,
+                (!empty($requestData['token']) ? $requestData['token'] : "NotSpecified"),
+                'logger',
+                $retVal['httpReason']);
+            outputResults( $retVal);
+            exit; // this is the end of the line if there's no DB access
+        } else {
+            return $dbLink;
+        }
+	}
 		
 	function format_object_for_SQL_insert ($tableName, $object) {
 		// set the dateCreated field

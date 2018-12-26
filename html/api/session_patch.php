@@ -64,16 +64,7 @@ function _session_patch ($dbLink, $requestArgs) {
 
     // Initalize the log entry for this call
     //  more fields will be added later in the routine
-    $logData = createLogEntry ('API',
-        __FILE__,
-        $requestArgs['token'],
-        'session',
-        $_SERVER['REQUEST_METHOD'],
-        null,
-        null,
-        null,
-        null,
-        null);
+    $logData = createLogEntry ('API', __FILE__, 'session', $_SERVER['REQUEST_METHOD'], $requestArgs['token'], null, null, null, null, null);
 
 	// check for required parameters
     // must have at least one, and can have both.

@@ -51,25 +51,7 @@ $retVal = array();
 $requestData = readRequestData();
 
 // Open the database. All subordinate functions assume access to the DB
-$dbLink = _openDB();
-$dbOpenError = mysqli_connect_errno();
-if ($dbOpenError  != 0) {
-    // database not opened. Log and return an error
-    $retVal['contentType'] = CONTENT_TYPE_JSON;
-    $dbInfo['sqlError'] = 'Error: '. $dbOpenError .', '.
-        mysqli_connect_error();
-    $retVal['error'] = $dbInfo;
-    $retVal['httpResponse'] = 500;
-    $retVal['httpReason']   = "Server Error - Database not opened.";
-    logApiError($requestData,
-                $retVal['httpResponse'],
-                __FILE__ ,
-                (!empty($requestData['token']) ? $requestData['token'] : "NotSpecified"),
-                'logger',
-                $retVal['httpReason']);
-    outputResults( $retVal);
-    exit; // this is the end of the line if there's no DB access
-}
+$dbLink = _openDBforAPI($requestData);
 
 profileLogCheckpoint($profileData,'DB_OPEN');
 
@@ -82,6 +64,19 @@ if (empty($requestData['token'])){
     $retVal['httpResponse'] = 400;
     $retVal['httpReason']	= "Unable to access logger resources. Missing token.";
 } else {
+    // Initalize the log entry for this call
+    //  more fields will be added later in the routine
+    $logData = createLogEntry ('API',
+        __FILE__,
+        'logger',
+        $_SERVER['REQUEST_METHOD'],
+        null,
+        $_SERVER['QUERY_STRING'],
+        null,
+        null,
+        null,
+        null);
+
     if (!validTokenString($requestData['token'])) {
         $retVal['contentType'] = CONTENT_TYPE_JSON;
         $retVal['httpResponse'] = 400;
@@ -91,6 +86,7 @@ if (empty($requestData['token'])){
         writeEntryToLog ($dbLink, $logData);
     } else {
         // token is OK so we can continue
+        $logData['userToken'] = $requestData['token'];
         // Caller has a valid token, but check access before processing the request
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'POST':
