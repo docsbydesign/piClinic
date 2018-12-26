@@ -148,7 +148,7 @@ function _session_get ($dbLink, $apiUserToken, $requestArgs) {
 		$sessionInfo['count'] = 1;
 		if ($validSession) {
 			$sessionInfo['data']['token'] = $returnValue['data']['token'];
-			$sessionInfo['data']['uername'] = $returnValue['data']['username'];
+			$sessionInfo['data']['username'] = $returnValue['data']['username'];
 			$sessionInfo['data']['accessGranted'] = $returnValue['data']['accessGranted'];
 			$sessionInfo['data']['sessionLanguage'] = $returnValue['data']['sessionLanguage'];
             $sessionInfo['data']['sessionClinicPublicID'] = $returnValue['data']['sessionClinicPublicID'];

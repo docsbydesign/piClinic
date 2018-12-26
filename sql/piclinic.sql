@@ -72,7 +72,7 @@ ALTER TABLE `staff`
 
 -- Create default ADMIN account
 
-INSERT INTO `staff` (`memberID`, `uername`, `lastName`, `firstName`, `position`, `password`, `contactInfo`, `active`, `accessGranted`, `lastLogin`, `modifiedDate`, `createdDate`)
+INSERT INTO `staff` (`memberID`, `username`, `lastName`, `firstName`, `position`, `password`, `contactInfo`, `active`, `accessGranted`, `lastLogin`, `modifiedDate`, `createdDate`)
   VALUES ('Default user', 'SystemAdmin', 'Admin', 'System', 'ClinicStaff', '$2y$12$XgB7Mo4j7TqLd3sKLpva1OP/pXljsa58U3rIRtuLPOrcxmKOiyDsG', NULL, 1, 'SystemAdmin', NULL, NOW(), NOW());
 
 -- ------------------------------------------------------

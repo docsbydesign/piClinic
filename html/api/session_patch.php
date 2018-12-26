@@ -226,7 +226,7 @@ function _session_patch ($dbLink, $apiUserToken, $requestArgs) {
         }
         if ($getReturnValue['count'] == 1) {
             $sessionInfo['data']['token'] = $getReturnValue['data']['token'];
-            $sessionInfo['data']['uername'] = $getReturnValue['data']['username'];
+            $sessionInfo['data']['username'] = $getReturnValue['data']['username'];
             $sessionInfo['data']['accessGranted'] = $getReturnValue['data']['accessGranted'];
             $sessionInfo['data']['sessionLanguage'] = $getReturnValue['data']['sessionLanguage'];
             $sessionInfo['data']['sessionClinicPublicID'] = $getReturnValue['data']['sessionClinicPublicID'];
