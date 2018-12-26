@@ -109,10 +109,8 @@ $dbLink = _openDBforAPI($requestData);
 profileLogCheckpoint($profileData,'DB_OPEN');
 
 if (empty($requestData['token'])){
-    // caller does not have a valid security token
-    $retVal['httpResponse'] = 400;
-    $retVal['debug']['requestData'] = $requestData;
-    $retVal['httpReason']	= "Unable to access staff resources. Missing token.";
+    // caller did not pass a security token
+    $retVal = formatMissingTokenError ($retVal, 'staff');
 } else {
     $logData = createLogEntry ('API',
         __FILE__,

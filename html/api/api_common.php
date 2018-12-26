@@ -40,6 +40,15 @@ function logInvalidTokenError ($dbLink, $returnValue, $token, $actionName, $logD
     return $returnValue;
 }
 
+function formatMissingTokenError ($returnValue, $actionName) {
+    if (!is_array($returnValue)) {
+        $returnValue = array();
+    }
+    $returnValue['contentType'] = CONTENT_TYPE_JSON;
+    $returnValue['httpResponse'] = 400;
+    $returnValue['httpReason']	= "Unable to access " . $actionName . " resources. Missing token.";
+    return $returnValue;
+}
 
 function exitIfCalledFromBrowser($scriptFile) {
     if (basename($scriptFile) == basename($_SERVER['SCRIPT_NAME'])) {

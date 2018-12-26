@@ -125,8 +125,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $retVal['debug']['reqHeaders'] =  getallheaders ();
         if (empty($requestData['token'])){
             // caller does not have a valid security token
-            $retVal['httpResponse'] = 400;
-            $retVal['httpReason']	= "Unable to access session resources. Missing token.";
+            // caller did not pass a security token
+            $retVal = formatMissingTokenError ($retVal, 'session');
             $logData['logStatusCode'] = $retVal['httpResponse'];
             $logData['logStatusMessage'] = $retVal['httpReason'];
             writeEntryToLog($dbLink, $logData);

@@ -80,10 +80,10 @@ $dbLink = _openDBforAPI($requestData);
 
 profileLogCheckpoint($profileData,'DB_OPEN');
 
+$retVal = array();
+
 if (empty($requestData['token'])){
-    // caller does not have a valid security token
-    $retVal['httpResponse'] = 400;
-    $retVal['httpReason']	= "Unable to access comment resources. Missing token.";
+    $retVal = formatMissingTokenError ($retVal, 'comment');
 } else {
     // Initalize the log entry for this call
     //  more fields will be added later in the routine

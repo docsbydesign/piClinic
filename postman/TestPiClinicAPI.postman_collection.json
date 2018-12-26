@@ -867,6 +867,42 @@
 					"name": "Error Tests",
 					"item": [
 						{
+							"name": "Patch Session Access  Missing Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Patch Session Access Invalid Token Format",
 							"event": [
 								{
@@ -1276,6 +1312,42 @@
 					"name": "Error Tests",
 					"item": [
 						{
+							"name": "Get Logger Access  Missing Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/logger.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logger.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Get logger access Invalid Token Format Copy",
 							"event": [
 								{
@@ -1350,6 +1422,42 @@
 				{
 					"name": "Error Tests",
 					"item": [
+						{
+							"name": "Get Staff Access  Missing Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/staff.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"staff.php"
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "Get staff access Invalid Token Format",
 							"event": [
@@ -1996,6 +2104,42 @@
 				{
 					"name": "Error Tests",
 					"item": [
+						{
+							"name": "Get Comment Access  Missing Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/comment.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"comment.php"
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "Get comment access Invalid Token Format",
 							"event": [
