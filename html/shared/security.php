@@ -54,91 +54,102 @@ function getTokenFromHeaders() {
     }
 }
 
+function getSessionInfo ($dbLink, $sessionToken) {
+    $httpReason = '';
+    $dbOpenedHere = false;
+    $sessionInfo = array();
+    $dbAccessGranted = true;
+
+    if (empty($dbLink)){
+        // open DB to check for access
+        $dbLink = _openDB();
+        $dbOpenError = mysqli_connect_errno();
+        if ( $dbOpenError  != 0  ) {
+            // access denied due to DB access error
+            $dbAccessGranted = false;
+            if (API_DEBUG_MODE) {
+                $httpReason = 'Database error';
+            }
+        } else {
+            $dbOpenedHere = true;
+        }
+    }
+
+    if ($dbAccessGranted) {
+        $requestParams = array();
+        $requestParams['token'] = $sessionToken;
+        $sessionData = _session_get($dbLink, $sessionToken, $requestParams);
+        if ($sessionData['httpResponse'] == 200) {
+            // successful call, now check the response\
+            $sessionInfo = $sessionData['data'];
+        } else {
+            $dbAccessGranted = false;
+            if (API_DEBUG_MODE) {
+                $httpReason = 'Invalid session.';
+            }
+        }
+    }
+    if (!empty($httpReason)) {
+        // set the header only if access is not granted.
+        header ('httpReason: '. $httpReason);
+    }
+    if ($dbOpenedHere) {
+        // close the db if we opened it for this check
+        @mysqli_close($dbLink);
+    }
+    return $sessionInfo;
+}
+
 function checkUiSessionAccess($dbLink, $sessionToken, $pageAccess) {
 	$profileData = [];
 	profileLogStart ($profileData);
-	// assume access is granted until a test fails
-	$dbAccessGranted = true;
-	$httpReason = '';
-	$dbOpenedHere = false;
-	if (empty($dbLink)){
-		// open DB to check for access
-		$dbLink = _openDB();
-		$dbOpenError = mysqli_connect_errno();
-		if ( $dbOpenError  != 0  ) {
-			// access denied due to DB access error
-			$dbAccessGranted = false;
-			if (API_DEBUG_MODE) {
-				$httpReason = 'Database error';				
-			}
-		} else {
-			$dbOpenedHere = true;
-		}
-	}
-	
-	if ($dbAccessGranted) {
-		$requestParams = array();
-		$requestParams['token'] = $sessionToken;
-		$sessionData = _session_get($dbLink, $sessionToken, $requestParams);
-		if ($sessionData['httpResponse'] == 200) {
-			// successful call, now check the response\
-			$sessionInfo = $sessionData['data'];
-			// 0 means session is not valid
-			if ($sessionInfo['token'] != '0') {
-				// valid session so check page access
-				$sessionAccess = 0;
-				switch ($sessionInfo['accessGranted']) {
-					case 'ClinicStaff':
-						$sessionAccess = PAGE_ACCESS_STAFF;
-						break;
+    // assume access is granted until a test fails
+    $dbAccessGranted = true;
 
-					case 'ClinicAdmin':
-						$sessionAccess = PAGE_ACCESS_CLINIC;
-						break;
+    $sessionInfo = getSessionInfo ($dbLink, $sessionToken);
 
-					case 'SystemAdmin':
-						$sessionAccess = PAGE_ACCESS_ADMIN;
-						break;
+    // 0 means session is not valid
+    if ($sessionInfo['token'] != '0') {
+        // valid session so check page access
+        $sessionAccess = 0;
+        switch ($sessionInfo['accessGranted']) {
+            case 'ClinicStaff':
+                $sessionAccess = PAGE_ACCESS_STAFF;
+                break;
 
-					case 'ClinicReadOnly':
-						$sessionAccess = PAGE_ACCESS_READONLY;
-						break;
-						
-					default:
-						// unrecognized
-						$sessionAccess = PAGE_ACCESS_NONE;
-						break;
-				}
-				if ($sessionAccess < $pageAccess) {
-					$dbAccessGranted = false;
-					if (API_DEBUG_MODE) {
-						header('Debug_SECURITY_AccessDenied: '.strval($sessionAccess).'<'.strval($pageAccess));
-						$httpReason = 'Page access denied.';				
-					}
-				}
-			} else {
-				$dbAccessGranted = false;
-				if (API_DEBUG_MODE) {
-					header('Debug_SECURITY_Token: (cookie != DB  )'.$sessionToken. ' != '.$sessionInfo['token']);
-					$httpReason = 'Invalid token.';				
-				}
-			}
-		} else {
-			$dbAccessGranted = false;
-			if (API_DEBUG_MODE) {
-				$httpReason = 'Invalid session.';				
-			}
-		}
-	}
-	if (!empty($httpReason)) {
-		// set the header only if access is not granted.
-		header ('httpReason: '. $httpReason);
-	}
-	if ($dbOpenedHere) {
-		// close the db if we opened it for this check
-		@mysqli_close($dbLink);
-	}
-	profileLogClose($profileData, __FILE__);
+            case 'ClinicAdmin':
+                $sessionAccess = PAGE_ACCESS_CLINIC;
+                break;
+
+            case 'SystemAdmin':
+                $sessionAccess = PAGE_ACCESS_ADMIN;
+                break;
+
+            case 'ClinicReadOnly':
+                $sessionAccess = PAGE_ACCESS_READONLY;
+                break;
+
+            default:
+                // unrecognized
+                $sessionAccess = PAGE_ACCESS_NONE;
+                break;
+        }
+        if ($sessionAccess < $pageAccess) {
+            $dbAccessGranted = false;
+            if (API_DEBUG_MODE) {
+                header('Debug_SECURITY_AccessDenied: '.strval($sessionAccess).'<'.strval($pageAccess));
+                $httpReason = 'Page access denied.';
+            }
+        }
+    } else {
+        $dbAccessGranted = false;
+        if (API_DEBUG_MODE) {
+            header('Debug_SECURITY_Token: (cookie != DB  )'.$sessionToken. ' != '.$sessionInfo['token']);
+            $httpReason = 'Invalid token.';
+        }
+    }
+
+    profileLogClose($profileData, __FILE__);
 	return ($dbAccessGranted);
 }
 //EOF
