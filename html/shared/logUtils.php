@@ -96,8 +96,8 @@ function createLogEntry ($logClass,
                          $logAction,
                          $userToken = null,
                          $logQueryString = null,
-                         $logBeforeObject = null,
-                         $logAfterObject = null,
+                         $logBeforeData = null,
+                         $logAfterData = null,
                          $logStatusCode = null,
                          $logStatusMessage = null)
 {
@@ -120,13 +120,13 @@ function createLogEntry ($logClass,
         $logEntryObject['logQueryString'] = $logQueryString;
     }
     $logEntryObject['userToken'] = $userToken;
-    if (!empty($logBeforeObject)) {
-        $logEntryObject['logBeforeData'] = json_encode($logBeforeObject);
+    if (!empty($logBeforeData)) {
+        $logEntryObject['logBeforeData'] = json_encode($logBeforeData);
     } else {
         $logEntryObject['logBeforeData'] = null;
     }
-    if (!empty($logAfterObject)) {
-        $logEntryObject['logAfterData'] = json_encode($logAfterObject);
+    if (!empty($logAfterData)) {
+        $logEntryObject['logAfterData'] = json_encode($logAfterData);
     } else {
         $logEntryObject['logAfterData'] = null;
     }

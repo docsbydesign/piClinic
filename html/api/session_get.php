@@ -55,14 +55,14 @@ function _session_get ($dbLink, $apiUserToken, $requestArgs) {
 	$profileData = array();
 	profileLogStart ($profileData);
 
-	// format return value
-	$returnValue = array();
-	$returnValue['contentType'] = CONTENT_TYPE_HTML;
-	$returnValue['data'] = NULL;
-	$returnValue['httpResponse'] = 404;
-	$returnValue['httpReason']	= "Resource not found.";
-	$returnValue['format'] = 'json';
-	$returnValue['count'] = 0;
+	// format not found return value
+	$notFoundReturnValue = array();
+	$notFoundReturnValue['contentType'] = CONTENT_TYPE_HTML;
+	$notFoundReturnValue['data'] = NULL;
+	$notFoundReturnValue['httpResponse'] = 404;
+	$notFoundReturnValue['httpReason']	= "Resource not found.";
+	$notFoundReturnValue['format'] = 'json';
+	$notFoundReturnValue['count'] = 0;
 	
 	$dbInfo = array();
 	$dbInfo ['requestArgs'] = $requestArgs;
@@ -78,92 +78,130 @@ function _session_get ($dbLink, $apiUserToken, $requestArgs) {
         null,
         null);
 
-
-    // Make sure the token is present and properly formatted.
-	if (empty( $apiUserToken)) {
-		$returnValue['contentType'] = CONTENT_TYPE_JSON;
-		$returnValue['debug'] = $dbInfo;
-		$returnValue['httpResponse'] = 400;
-		$returnValue['httpReason'] = 'Required parameter is missing.';
-		return $returnValue;
-    } else if (!validTokenString( $apiUserToken)) {
-        $returnValue = logInvalidTokenError ($dbLink, $returnValue,  $apiUserToken, 'session', $logData);
-        writeEntryToLog ($dbLink, $logData);
-        return $returnValue;
-	}
-
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
 
+	// if no token parameter, get the caller's session as identified by the access token
+    // if a token parameter is present and is not the caller's, make sure the caller has SystemAdmin access
+    $queryToken = $apiUserToken;
+    if (!empty($requestArgs['token'])) {
+        $queryToken = $requestArgs['token'];
+    }
+
 	// create query string for get operation
-	$getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''.  $apiUserToken . '\';';
+	$getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''.  $queryToken . '\';';
     $dbInfo ['queryString'] = $getQueryString;
 
 	// get the session record that matches--there should be only one
-	$returnValue = getDbRecords($dbLink, $getQueryString);
+	$qtReturnValue = getDbRecords($dbLink, $getQueryString);
 	
-	if ($returnValue['count'] == 0) {
+	if ($qtReturnValue['count'] == 0) {
 		//return 404
 		// add debug info to the list
 		if (API_DEBUG_MODE) {
-			$returnValue['debug'] = $dbInfo;
+			$notFoundReturnValue['debug'] = $dbInfo;
 		}
-		return $returnValue;
+		return $notFoundReturnValue;
 	}
 	
-	if ($returnValue['count'] == 1) {
+	if ($qtReturnValue['count'] == 1) {
 		// Get the session info and return it
 		$sessionInfo = array();
 		$validSession = true;
 		
 		// confirm that the session is still valid and hasn't expired
-		if (!$returnValue['data']['loggedIn']) {
+		if (!$qtReturnValue['data']['loggedIn']) {
 			// user is logged out
 			$validSession = false;
 		}
-		
-		$sessionExpirationTime = strtotime($returnValue['data']['expiresOnDate']);
-		$timeNow = time();
-		if ($timeNow > $sessionExpirationTime) {
-			// session expired
-			$validSession = false;
-		}
-			
-		// confirm that this request is from the IP that created the token
-		if ($_SERVER['REMOTE_ADDR'] != $returnValue['data']['sessionIP']) {
-			// token is being used from another IP
-			$validSession = false;			
-		}
-				
-		// confirm that this request has the same User Agent string as the browser that created the token
-		$sessionUA = (!empty($returnValue['data']['sessionUA']) ? $returnValue['data']['sessionUA'] : '');
-	    $localUA = (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '');
-        if ($localUA != $sessionUA) {
-            // token could be used from another browser
-            $dbInfo['thisUserAgent'] = $localUA ;
-            $dbInfo['sessionData'] = $returnValue['data'];
-            $validSession = false;
+
+		// confirm that the caller has permission to access the session
+        if (!empty($requestArgs['token'])) {
+            // create query string for get operation
+            $getApiQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''.  $apiUserToken . '\';';
+            $dbInfo ['apiQueryString'] = $getApiQueryString;
+
+            // get the session record that matches--there should be only one
+            $apiReturnValue = getDbRecords($dbLink, $getApiQueryString);
+
+            if ($apiReturnValue['count'] == 0) {
+                // can't validate permission so not a valid session
+                // return an empty session info record
+                $sessionInfo['data']['token'] = 0;
+                $sessionInfo['data']['username'] = '';
+                $sessionInfo['data']['accessGranted'] = 0;
+                $sessionInfo['data']['sessionLanguage'] = '';
+                $sessionInfo['data']['sessionClinicPublicID'] = '';
+                $sessionInfo['httpResponse'] = 403;
+                $sessionInfo['httpReason'] = 'Not authorized.';
+            } else if ($apiReturnValue['count'] == 1) {
+                $apiSessionInfo = $apiReturnValue['data'];
+                // do they have access?
+                if ($apiSessionInfo['accessGranted'] == 'SystemAdmin') {
+                    // return a complete session record
+                    $sessionInfo['data'] = $qtReturnValue['data'];
+                    $sessionInfo['httpResponse'] = 200;
+                    $sessionInfo['httpReason'] = 'Success';
+                } else {
+                    // return an empty session info record
+                    $sessionInfo['data']['token'] = 0;
+                    $sessionInfo['data']['username'] = '';
+                    $sessionInfo['data']['accessGranted'] = 0;
+                    $sessionInfo['data']['sessionLanguage'] = '';
+                    $sessionInfo['data']['sessionClinicPublicID'] = '';
+                    $sessionInfo['httpResponse'] = 403;
+                    $sessionInfo['httpReason'] = 'Not authorized.';
+                }
+            }
+            $dbInfo['apiSessionInfo'] = $apiSessionInfo;
+            $sessionInfo['contentType'] = CONTENT_TYPE_JSON;
+            $sessionInfo['count'] = 1;
+        } else {
+            // getting their own session
+            $sessionExpirationTime = strtotime($qtReturnValue['data']['expiresOnDate']);
+            $timeNow = time();
+            if ($timeNow > $sessionExpirationTime) {
+                // session expired
+                $validSession = false;
+            }
+
+            // confirm that this request is from the IP that created the token
+            if ($_SERVER['REMOTE_ADDR'] != $qtReturnValue['data']['sessionIP']) {
+                // token is being used from another IP
+                $validSession = false;
+            }
+
+            // confirm that this request has the same User Agent string as the browser that created the token
+            $sessionUA = (!empty($qtReturnValue['data']['sessionUA']) ? $qtReturnValue['data']['sessionUA'] : '');
+            $localUA = (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '');
+            if ($localUA != $sessionUA) {
+                // token could be used from another browser
+                $dbInfo['thisUserAgent'] = $localUA ;
+                $dbInfo['sessionData'] = $qtReturnValue['data'];
+                $validSession = false;
+            }
+
+            $sessionInfo['contentType'] = CONTENT_TYPE_JSON;
+            $sessionInfo['count'] = 1;
+            if ($validSession) {
+                $sessionInfo['data']['token'] = $qtReturnValue['data']['token'];
+                $sessionInfo['data']['username'] = $qtReturnValue['data']['username'];
+                $sessionInfo['data']['accessGranted'] = $qtReturnValue['data']['accessGranted'];
+                $sessionInfo['data']['sessionLanguage'] = $qtReturnValue['data']['sessionLanguage'];
+                $sessionInfo['data']['sessionClinicPublicID'] = $qtReturnValue['data']['sessionClinicPublicID'];
+                $sessionInfo['httpResponse'] = 200;
+                $sessionInfo['httpReason'] = 'Success';
+            } else {
+                // this is a stale token so no access anymore
+                $sessionInfo['data']['token'] = 0;
+                $sessionInfo['data']['username'] = '';
+                $sessionInfo['data']['accessGranted'] = 0;
+                $sessionInfo['data']['sessionLanguage'] = '';
+                $sessionInfo['data']['sessionClinicPublicID'] = '';
+                $sessionInfo['httpResponse'] = 404;
+                $sessionInfo['httpReason'] = 'Session not found.';
+            }
         }
 
-		$sessionInfo['contentType'] = CONTENT_TYPE_JSON;
-		$sessionInfo['count'] = 1;
-		if ($validSession) {
-			$sessionInfo['data']['token'] = $returnValue['data']['token'];
-			$sessionInfo['data']['username'] = $returnValue['data']['username'];
-			$sessionInfo['data']['accessGranted'] = $returnValue['data']['accessGranted'];
-			$sessionInfo['data']['sessionLanguage'] = $returnValue['data']['sessionLanguage'];
-            $sessionInfo['data']['sessionClinicPublicID'] = $returnValue['data']['sessionClinicPublicID'];
-            $sessionInfo['httpResponse'] = 200;
-            $sessionInfo['httpReason'] = 'Success';
-		} else {
-			// this is a stale token so no access anymore
-			$sessionInfo['data']['token'] = 0;
-			$sessionInfo['data']['username'] = '';
-			$sessionInfo['data']['accessGranted'] = 0;
-            $sessionInfo['data']['sessionLanguage'] = '';
-            $sessionInfo['data']['sessionClinicPublicID'] = '';
-            $sessionInfo['httpResponse'] = 404;
-            $sessionInfo['httpReason'] = 'Session not found.';
-		}
 		// and return here
 		profileLogClose($profileData, __FILE__, $requestArgs);
 
@@ -175,9 +213,9 @@ function _session_get ($dbLink, $apiUserToken, $requestArgs) {
 	}
 	
 	if (API_DEBUG_MODE) {
-		$returnValue['debug'] = $dbInfo;
+		$notFoundReturnValue['debug'] = $dbInfo;
 	}
-		
-	return $returnValue;
+	// if here, no session was found so return the not found info
+	return $notFoundReturnValue;
 }
 //EOF

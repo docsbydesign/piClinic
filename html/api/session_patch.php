@@ -192,6 +192,7 @@ function _session_patch ($dbLink, $apiUserToken, $requestArgs) {
 	$dbInfo['insertQueryString'] = $insertQueryString;
 
 	// try to update the session in the database
+    $sessionInfo = array();
 	
 	$qResult = @mysqli_query($dbLink, $insertQueryString);
 	if (!$qResult) {
@@ -220,10 +221,7 @@ function _session_patch ($dbLink, $apiUserToken, $requestArgs) {
         $dbInfo ['queryString'] = $getQueryString;
         // get the session record that matches--there should be only one
         $getReturnValue = getDbRecords($dbLink, $getQueryString);
-        if (!empty($returnValue['data'])) {
-            unset ($returnValue['data']);
-            $returnValue['data'] = array();
-        }
+
         if ($getReturnValue['count'] == 1) {
             $sessionInfo['data']['token'] = $getReturnValue['data']['token'];
             $sessionInfo['data']['username'] = $getReturnValue['data']['username'];
@@ -249,7 +247,7 @@ function _session_patch ($dbLink, $apiUserToken, $requestArgs) {
 	if (API_DEBUG_MODE) {
 		$returnValue['debug'] = $dbInfo;
 	}
-	$logData['logAfterData'] = json_encode($returnValue['data']);
+	$logData['logAfterData'] = json_encode($sessionInfo['data']);
     $logData['logStatusCode'] = $returnValue['httpResponse'];
     $logData['logStatusMessage'] = $returnValue['httpReason'];
     writeEntryToLog ($dbLink, $logData);

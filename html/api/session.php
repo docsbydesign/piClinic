@@ -94,6 +94,8 @@ profileLogStart ($profileData);
 // Get the query paramater data from the request
 $requestData = readRequestData();
 $apiUserToken = getTokenFromHeaders();
+$retVal = array();
+
 $dbLink = _openDBforAPI($requestData);
 
 profileLogCheckpoint($profileData,'DB_OPEN');
@@ -113,25 +115,32 @@ $logData = createLogEntry ('API',
 // None of these methods require an access check
 switch ($_SERVER['REQUEST_METHOD']) {
 	case 'POST':
+	    // No Authorization is required to create a session.
+        //  The user's credentials are checked during session creation.
 		$retVal = _session_post($dbLink, $apiUserToken, $requestData);
 		break;
 	
 	case 'GET':
-		$retVal = _session_get($dbLink, $apiUserToken, $requestData);
+        // Make sure the token is present and properly formatted.
+        if (empty( $apiUserToken)) {
+            $retVal = formatMissingTokenError($retVal, 'session');
+        } else if (!validTokenString( $apiUserToken)) {
+            $retVal = logInvalidTokenError($dbLink, $retVal, $apiUserToken, 'session', $logData);
+            writeEntryToLog($dbLink, $logData);
+        } else {
+            // only a valid token is required to GET session info
+            $retVal = _session_get($dbLink, $apiUserToken, $requestData);
+        }
 		break;
 
     case 'PATCH':
     case 'DELETE':
         // these methods require a valid token
         $retVal['debug']['requestData'] = $requestData;
-        $retVal['debug']['reqHeaders'] =  getallheaders ();
         if (empty($apiUserToken)){
             // caller does not have a valid security token
             // caller did not pass a security token
             $retVal = formatMissingTokenError ($retVal, 'session');
-            $logData['logStatusCode'] = $retVal['httpResponse'];
-            $logData['logStatusMessage'] = $retVal['httpReason'];
-            writeEntryToLog($dbLink, $logData);
         } else {
             // token is OK so we can continue
             if (!validTokenString($apiUserToken)) {
