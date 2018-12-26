@@ -148,7 +148,7 @@ function _session_post ($dbLink, $requestArgs) {
 		}
 	}		
 	
-	if (!$userInfo['Active']) {
+	if (!$userInfo['active']) {
 		// account has been disabled
 		$returnValue['httpResponse'] = 403;
 		$returnValue['httpReason']	= 'Account is disabled.';
@@ -161,10 +161,10 @@ function _session_post ($dbLink, $requestArgs) {
 	// At this point we have a valid user and request, which have passed
     // all the validation tests, so check the password
 	
-	if (!password_verify($requestArgs['password'], $userInfo['Password'])) {
+	if (!password_verify($requestArgs['password'], $userInfo['password'])) {
         $dbInfo['passArg'] = $requestArgs['password'];
         $dbInfo['passHash'] = password_hash($requestArgs['password']);
-        $dbInfo['passSaved'] = $userInfo['Password'];
+        $dbInfo['passSaved'] = $userInfo['password'];
 		// password does not match
 		if (API_DEBUG_MODE) {
 			$returnValue['debug'] = $dbInfo;
@@ -182,20 +182,20 @@ function _session_post ($dbLink, $requestArgs) {
 
 	// Build the DB request
 	$dbArgs = array();
-	$dbArgs['Token'] = tokenString ();
-	$dbArgs['SessionIP'] = (!empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null);
-	$dbArgs['SessionUA'] = (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null);
-	$dbArgs['Username'] = $userInfo['Username'];
-	$dbArgs['LoggedIn'] = 1;
-	$dbArgs['AccessGranted'] = $userInfo['AccessGranted'];
-	$dbArgs['SessionLang'] = $userInfo['PrefLang'];
-    $dbArgs['SessionClinicPublicID'] = (!empty($userInfo['PrefClinicPublicID']) ? $userInfo['PrefClinicPublicID'] : null);
+	$dbArgs['token'] = tokenString ();
+	$dbArgs['sessionIP'] = (!empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null);
+	$dbArgs['sessionUA'] = (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null);
+	$dbArgs['username'] = $userInfo['username'];
+	$dbArgs['loggedIn'] = 1;
+	$dbArgs['accessGranted'] = $userInfo['accessGranted'];
+	$dbArgs['sessionLanguage'] = $userInfo['preferredLanguage'];
+    $dbArgs['sessionClinicPublicID'] = (!empty($userInfo['preferredClinicPublicID']) ? $userInfo['preferredClinicPublicID'] : null);
 	$now = new DateTime();
 	$dbArgs['createdDate'] = $now->format('Y-m-d H:i:s');
 	// create expiration date as tomorrow for now.
 	$later = $now;
 	$later->modify('+1 day');
-	$dbArgs['ExpiresOnDate'] = $later->format('Y-m-d H:i:s');
+	$dbArgs['expiresOnDate'] = $later->format('Y-m-d H:i:s');
 
 	// save a copy for the debugging output
 	$dbInfo['dbArgs'] = $dbArgs;

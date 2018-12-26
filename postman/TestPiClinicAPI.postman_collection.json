@@ -586,7 +586,7 @@
 								"id": "ed713fa2-ae3d-46f3-aa9c-38838bd026ba",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
-									"postman.setEnvironmentVariable(\"token\", jsonData.data.Token);\r",
+									"postman.setEnvironmentVariable(\"token\", jsonData.data.token);\r",
 									"\r",
 									"pm.test(\"Login was successful\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
@@ -683,7 +683,7 @@
 									"\r",
 									"pm.test(\"Language is now Spanish\", function() {\r",
 									"    var jsonData = JSON.parse(responseBody);\r",
-									"    pm.expect(jsonData.data.SessionLang === 'es');\r",
+									"    pm.expect(jsonData.data.sessionLanguage === 'es');\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -698,7 +698,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/session.php?token={{token}}&lang=es",
+							"raw": "{{host}}/api/session.php?token={{token}}&sessionLanguage=es",
 							"host": [
 								"{{host}}"
 							],
@@ -712,7 +712,7 @@
 									"value": "{{token}}"
 								},
 								{
-									"key": "lang",
+									"key": "sessionLanguage",
 									"value": "es"
 								}
 							]
@@ -734,7 +734,7 @@
 									"\r",
 									"pm.test(\"Clinic has been updated\", function() {\r",
 									"    var jsonData = JSON.parse(responseBody);\r",
-									"    pm.expect(jsonData.data.SessionClinicPublicID === \"710\");\r",
+									"    pm.expect(jsonData.data.sessionClinicPublicID === \"710\");\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -749,7 +749,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/session.php?token={{token}}&clinic=710",
+							"raw": "{{host}}/api/session.php?token={{token}}&sessionClinicPublicID=710",
 							"host": [
 								"{{host}}"
 							],
@@ -763,7 +763,7 @@
 									"value": "{{token}}"
 								},
 								{
-									"key": "clinic",
+									"key": "sessionClinicPublicID",
 									"value": "710"
 								}
 							]
@@ -871,7 +871,7 @@
 								"id": "ed713fa2-ae3d-46f3-aa9c-38838bd026ba",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
-									"postman.setEnvironmentVariable(\"token\", jsonData.data.Token);\r",
+									"postman.setEnvironmentVariable(\"token\", jsonData.data.token);\r",
 									"\r",
 									"pm.test(\"Login was successful\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
@@ -1206,7 +1206,7 @@
 								"id": "ed713fa2-ae3d-46f3-aa9c-38838bd026ba",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
-									"postman.setEnvironmentVariable(\"token\", jsonData.data.Token);\r",
+									"postman.setEnvironmentVariable(\"token\", jsonData.data.token);\r",
 									"\r",
 									"pm.test(\"Login was successful\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
@@ -1257,7 +1257,7 @@
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
 									"// save new username to use in subsequent calls\r",
-									"pm.variables.set(\"newUser\", jsonData.data.Username);\r",
+									"pm.variables.set(\"newUser\", jsonData.data.username);\r",
 									"\r",
 									"pm.test(\"New user was created.\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
@@ -1286,32 +1286,32 @@
 									"type": "text"
 								},
 								{
-									"key": "Username",
+									"key": "username",
 									"value": "testUser{{$timestamp}}",
 									"type": "text"
 								},
 								{
-									"key": "Password",
+									"key": "password",
 									"value": "{{TestPassword}}",
 									"type": "text"
 								},
 								{
-									"key": "NameLast",
+									"key": "lastName",
 									"value": "TestUser{{$randomInt}}",
 									"type": "text"
 								},
 								{
-									"key": "NameFirst",
+									"key": "firstName",
 									"value": "FirstName",
 									"type": "text"
 								},
 								{
-									"key": "AccessGranted",
+									"key": "accessGranted",
 									"value": "ClinicStaff",
 									"type": "text"
 								},
 								{
-									"key": "MemberID",
+									"key": "memberID",
 									"value": "Member{{$timestamp}}",
 									"type": "text"
 								}
@@ -1354,7 +1354,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/staff.php?token={{token}}&Username={{newUser}}",
+							"raw": "{{host}}/api/staff.php?token={{token}}&username={{newUser}}",
 							"host": [
 								"{{host}}"
 							],
@@ -1368,7 +1368,7 @@
 									"value": "{{token}}"
 								},
 								{
-									"key": "Username",
+									"key": "username",
 									"value": "{{newUser}}"
 								}
 							]
@@ -1406,7 +1406,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/staff.php?token={{token}}&Username=testUser1545670928&NameLast=NewLastName",
+							"raw": "{{host}}/api/staff.php?token={{token}}&username=testUser1545670928&lastName=NewLastName",
 							"host": [
 								"{{host}}"
 							],
@@ -1420,11 +1420,11 @@
 									"value": "{{token}}"
 								},
 								{
-									"key": "Username",
+									"key": "username",
 									"value": "testUser1545670928"
 								},
 								{
-									"key": "NameLast",
+									"key": "lastName",
 									"value": "NewLastName"
 								}
 							]
@@ -1462,7 +1462,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/staff.php?token={{token}}&Username=testUser1545670928&PrefLang=es",
+							"raw": "{{host}}/api/staff.php?token={{token}}&username=testUser1545670928&preferredLanguage=es",
 							"host": [
 								"{{host}}"
 							],
@@ -1476,11 +1476,11 @@
 									"value": "{{token}}"
 								},
 								{
-									"key": "Username",
+									"key": "username",
 									"value": "testUser1545670928"
 								},
 								{
-									"key": "PrefLang",
+									"key": "preferredLanguage",
 									"value": "es"
 								}
 							]
@@ -1518,7 +1518,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/staff.php?token={{token}}&Username=testUser1545670928&PrefClinicPublicID=710",
+							"raw": "{{host}}/api/staff.php?token={{token}}&username=testUser1545670928&preferredClinicPublicID=710",
 							"host": [
 								"{{host}}"
 							],
@@ -1532,11 +1532,11 @@
 									"value": "{{token}}"
 								},
 								{
-									"key": "Username",
+									"key": "username",
 									"value": "testUser1545670928"
 								},
 								{
-									"key": "PrefClinicPublicID",
+									"key": "preferredClinicPublicID",
 									"value": "710"
 								}
 							]
@@ -1620,7 +1620,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/staff.php?token={{token}}&Username={{newUser}}",
+							"raw": "{{host}}/api/staff.php?token={{token}}&username={{newUser}}",
 							"host": [
 								"{{host}}"
 							],
@@ -1634,7 +1634,7 @@
 									"value": "{{token}}"
 								},
 								{
-									"key": "Username",
+									"key": "username",
 									"value": "{{newUser}}"
 								}
 							]
@@ -1798,7 +1798,7 @@
 								"id": "ed713fa2-ae3d-46f3-aa9c-38838bd026ba",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
-									"postman.setEnvironmentVariable(\"token\", jsonData.data.Token);\r",
+									"postman.setEnvironmentVariable(\"token\", jsonData.data.token);\r",
 									"\r",
 									"pm.test(\"Login was successful\", function () {\r",
 									"    pm.response.to.have.status(201);\r",

@@ -76,10 +76,10 @@ function checkUiSessionAccess($dbLink, $sessionToken, $pageAccess) {
 			// successful call, now check the response\
 			$sessionInfo = $sessionData['data'];
 			// 0 means session is not valid
-			if ($sessionInfo['Token'] != '0') {
+			if ($sessionInfo['token'] != '0') {
 				// valid session so check page access
 				$sessionAccess = 0;
-				switch ($sessionInfo['AccessGranted']) {
+				switch ($sessionInfo['accessGranted']) {
 					case 'ClinicStaff':
 						$sessionAccess = PAGE_ACCESS_STAFF;
 						break;
@@ -111,7 +111,7 @@ function checkUiSessionAccess($dbLink, $sessionToken, $pageAccess) {
 			} else {
 				$dbAccessGranted = false;
 				if (API_DEBUG_MODE) {
-					header('Debug_SECURITY_Token: (cookie != DB  )'.$sessionToken. ' != '.$sessionInfo['Token']);
+					header('Debug_SECURITY_Token: (cookie != DB  )'.$sessionToken. ' != '.$sessionInfo['token']);
 					$httpReason = 'Invalid token.';				
 				}
 			}

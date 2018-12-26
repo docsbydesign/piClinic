@@ -27,10 +27,10 @@
  *	PATCH: Modify an existing session
  * 		input data:
  *          'token' - current token of session to modify
- *			'lang' - the new session language (PrefLang)
- *			'clinic' - the new default clinic (PrefClinicPublicID)
+ *			'sessionLangauge' - the new session language (sessionLangauge)
+ *			'sessionClinicPublicID' - the new default clinic (sessionClinicPublicID)
  *
- *      note that this method can only change these values (PrefLang, PrefClinicPublicID)
+ *      note that this method can only change these values (sessionLangauge, sessionClinicPublicID)
  *          of the session identified by token
  *
  *		Response: 
@@ -78,8 +78,8 @@ function _session_patch ($dbLink, $requestArgs) {
 	// check for required parameters
     // must have at least one, and can have both.
 	$requiredPatientColumns = [
-		"lang"
-		,"clinic"
+		"sessionLanguage"
+		,"sessionClinicPublicID"
 		];
 
 	$paramCount = 0;
@@ -155,14 +155,14 @@ function _session_patch ($dbLink, $requestArgs) {
 	}
 
     $dbArgs = array();
-    if (!empty($requestArgs['lang'])) {
-        if (isSupportedLanguage($requestArgs['lang'])) {
-            $dbArgs['SessionLang'] = $requestArgs['lang'];
+    if (!empty($requestArgs['sessionLanguage'])) {
+        if (isSupportedLanguage($requestArgs['sessionLanguage'])) {
+            $dbArgs['sessionLanguage'] = $requestArgs['sessionLanguage'];
         }
     }
 
     // test the clinic ID
-    if (!empty($requestArgs['clinic'])) {
+    if (!empty($requestArgs['sessionClinicPublicID'])) {
         // check if the clinic ID is valid
         $clinicQueryString = 'SELECT `PublicID` FROM '. DB_TABLE_CLINIC . ' WHERE TRUE;';
         $dbInfo['clinicQueryString'] = $clinicQueryString;
@@ -170,8 +170,8 @@ function _session_patch ($dbLink, $requestArgs) {
         if ($clinicResult['count'] >= 1) {
             // scan the list for a match
             foreach ($clinicResult['data'] as $idToCheck) {
-                if ($requestArgs['clinic'] == $idToCheck['PublicID']) {
-                    $dbArgs['SessionClinicPublicID'] = $idToCheck['PublicID'];
+                if ($requestArgs['sessionClinicPublicID'] == $idToCheck['PublicID']) {
+                    $dbArgs['sessionClinicPublicID'] = $idToCheck['PublicID'];
                     break;
                 }
             }
@@ -190,7 +190,7 @@ function _session_patch ($dbLink, $requestArgs) {
     }
 
     // add the token value
-    $dbArgs['Token'] = $requestArgs['token'];
+    $dbArgs['token'] = $requestArgs['token'];
 
     // here we have a valid username and password so create a session
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
@@ -198,7 +198,7 @@ function _session_patch ($dbLink, $requestArgs) {
 	// save a copy for the debugging output
 	$dbInfo['dbArgs'] = $dbArgs;
     $updateColumns = 0;
-    $insertQueryString = format_object_for_SQL_update (DB_TABLE_SESSION, $dbArgs, 'Token', $updateColumns);
+    $insertQueryString = format_object_for_SQL_update (DB_TABLE_SESSION, $dbArgs, 'token', $updateColumns);
 	$dbInfo['insertQueryString'] = $insertQueryString;
 
 	// try to update the session in the database
@@ -226,7 +226,7 @@ function _session_patch ($dbLink, $requestArgs) {
 
 		// get the new session data to return
         // create query string for get operation
-        $getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `Token` = \''. $requestArgs['token'] . '\';';
+        $getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''. $requestArgs['token'] . '\';';
         $dbInfo ['queryString'] = $getQueryString;
         // get the session record that matches--there should be only one
         $getReturnValue = getDbRecords($dbLink, $getQueryString);
@@ -235,23 +235,24 @@ function _session_patch ($dbLink, $requestArgs) {
             $returnValue['data'] = array();
         }
         if ($getReturnValue['count'] == 1) {
-            $returnValue['data']['Token'] = $getReturnValue['data']['Token'];
-            $returnValue['data']['Username'] = $getReturnValue['data']['Username'];
-            $returnValue['data']['AccessGranted'] = $getReturnValue['data']['AccessGranted'];
-            $returnValue['data']['SessionLang'] = $getReturnValue['data']['SessionLang'];
-            $returnValue['data']['SessionClinicPublicID'] = $getReturnValue['data']['SessionClinicPublicID'];
-            $returnValue['httpResponse'] = 200;
-            $returnValue['httpReason'] = 'Success';
+            $sessionInfo['data']['token'] = $getReturnValue['data']['token'];
+            $sessionInfo['data']['uername'] = $getReturnValue['data']['username'];
+            $sessionInfo['data']['accessGranted'] = $getReturnValue['data']['accessGranted'];
+            $sessionInfo['data']['sessionLanguage'] = $getReturnValue['data']['sessionLanguage'];
+            $sessionInfo['data']['sessionClinicPublicID'] = $getReturnValue['data']['sessionClinicPublicID'];
+            $sessionInfo['httpResponse'] = 200;
+            $sessionInfo['httpReason'] = 'Success';
         } else {
-            $returnValue['data']['Token'] = '';
-            $returnValue['data']['Username'] = '';
-            $returnValue['data']['AccessGranted'] = 0;
-            $returnValue['data']['SessionLang'] = '';
-            $returnValue['data']['SessionClinicPublicID'] = '';
-            $returnValue['httpResponse'] = 500;
-            $returnValue['httpReason'] = 'Unable to read updated session. Session might have been updated, but the new session data could not be read.';
+            // this is a stale token so no access anymore
+            $sessionInfo['data']['token'] = 0;
+            $sessionInfo['data']['username'] = '';
+            $sessionInfo['data']['accessGranted'] = 0;
+            $sessionInfo['data']['sessionLanguage'] = '';
+            $sessionInfo['data']['sessionClinicPublicID'] = '';
+            $sessionInfo['httpResponse'] = 404;
+            $sessionInfo['httpReason'] = 'Session not found.';
         }
-		@mysqli_free_result($qResult);
+        @mysqli_free_result($qResult);
 	}
 
 	$returnValue['contentType'] = CONTENT_TYPE_JSON;

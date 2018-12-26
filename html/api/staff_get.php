@@ -78,7 +78,7 @@ function _staff_get ($dbLink, $requestArgs) {
 	
 	$dbView = DB_VIEW_STAFF_GET;	// the default is to order by Username
 	if(isset($requestArgs['sort'])){
-		if ($requestArgs['sort'] == 'NameLast') {
+		if ($requestArgs['sort'] == 'lastName') {
 			$dbView = DB_VIEW_STAFF_GET_BY_NAME;
 		}
 	}

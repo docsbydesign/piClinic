@@ -123,9 +123,9 @@ function _staff_delete ($dbLink, $requestArgs) {
 	if (isset($keyFields['staffID'])) {
 		$updateKey = 'staffID';
         $patchArgs['staffID'] = $keyFields['staffID'];
-	} else if (isset($keyFields['Username'])) {
-		$updateKey = 'Username';
-        $patchArgs['Username'] = $keyFields['Username'];
+	} else if (isset($keyFields['username'])) {
+		$updateKey = 'username';
+        $patchArgs['username'] = $keyFields['username'];
 	} else {
 		// something got lost.
 		$returnValue['contentType'] = CONTENT_TYPE_JSON;

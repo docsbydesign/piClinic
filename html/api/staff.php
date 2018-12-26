@@ -131,9 +131,6 @@ if (empty($requestData['token'])){
     // caller does not have a valid security token
     $retVal['httpResponse'] = 400;
     $retVal['debug']['requestData'] = $requestData;
-    $retVal['debug']['_GET'] = $_GET;
-    $retVal['debug']['_POST'] = $_POST;
-    $retVal['debug']['reqHeaders'] =  getallheaders ();
     $retVal['httpReason']	= "Unable to access staff resources. Missing token.";
 } else {
     if (!validTokenString($requestData['token'])) {

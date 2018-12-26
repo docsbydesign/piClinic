@@ -70,11 +70,13 @@ function _session_get ($dbLink, $requestArgs) {
 	// Make sure the token is present and properly formatted.
 	if (empty($requestArgs['token'])) {
 		$returnValue['contentType'] = CONTENT_TYPE_JSON;
+		$returnValue['debug'] = $dbInfo;
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason'] = 'Required parameter is missing.';
 		return $returnValue;
     } else if (!validTokenString($requestArgs['token'])) {
         $returnValue['contentType'] = CONTENT_TYPE_JSON;
+        $returnValue['debug'] = $dbInfo;
         $returnValue['httpResponse'] = 400;
         $returnValue['httpReason']	= "Unable to access user session. Invalid token.";
         $logData['LogStatusCode'] = $returnValue['httpResponse'];
@@ -86,7 +88,7 @@ function _session_get ($dbLink, $requestArgs) {
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
 
 	// create query string for get operation
-	$getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `Token` = \''. $requestArgs['token'] . '\';';
+	$getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''. $requestArgs['token'] . '\';';
     $dbInfo ['queryString'] = $getQueryString;
 
 	// get the session record that matches--there should be only one
@@ -107,12 +109,12 @@ function _session_get ($dbLink, $requestArgs) {
 		$validSession = true;
 		
 		// confirm that the session is still valid and hasn't expired
-		if (!$returnValue['data']['LoggedIn']) {
+		if (!$returnValue['data']['loggedIn']) {
 			// user is logged out
 			$validSession = false;
 		}
 		
-		$sessionExpirationTime = strtotime($returnValue['data']['ExpiresOnDate']);
+		$sessionExpirationTime = strtotime($returnValue['data']['expiresOnDate']);
 		$timeNow = time();
 		if ($timeNow > $sessionExpirationTime) {
 			// session expired
@@ -120,13 +122,13 @@ function _session_get ($dbLink, $requestArgs) {
 		}
 			
 		// confirm that this request is from the IP that created the token
-		if ($_SERVER['REMOTE_ADDR'] != $returnValue['data']['SessionIP']) {
+		if ($_SERVER['REMOTE_ADDR'] != $returnValue['data']['sessionIP']) {
 			// token is being used from another IP
 			$validSession = false;			
 		}
 				
 		// confirm that this request has the same User Agent string as the browser that created the token
-		$sessionUA = (!empty($returnValue['data']['SessionUA']) ? $returnValue['data']['SessionUA'] : '');
+		$sessionUA = (!empty($returnValue['data']['sessionUA']) ? $returnValue['data']['sessionUA'] : '');
 	    $localUA = (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '');
         if ($localUA != $sessionUA) {
             // token could be used from another browser
@@ -138,20 +140,20 @@ function _session_get ($dbLink, $requestArgs) {
 		$sessionInfo['contentType'] = CONTENT_TYPE_JSON;
 		$sessionInfo['count'] = 1;
 		if ($validSession) {
-			$sessionInfo['data']['Token'] = $returnValue['data']['Token'];
-			$sessionInfo['data']['Username'] = $returnValue['data']['Username'];
-			$sessionInfo['data']['AccessGranted'] = $returnValue['data']['AccessGranted'];
-			$sessionInfo['data']['SessionLang'] = $returnValue['data']['SessionLang'];
-            $sessionInfo['data']['SessionClinicPublicID'] = $returnValue['data']['SessionClinicPublicID'];
+			$sessionInfo['data']['token'] = $returnValue['data']['token'];
+			$sessionInfo['data']['uername'] = $returnValue['data']['username'];
+			$sessionInfo['data']['accessGranted'] = $returnValue['data']['accessGranted'];
+			$sessionInfo['data']['sessionLanguage'] = $returnValue['data']['sessionLanguage'];
+            $sessionInfo['data']['sessionClinicPublicID'] = $returnValue['data']['sessionClinicPublicID'];
             $sessionInfo['httpResponse'] = 200;
             $sessionInfo['httpReason'] = 'Success';
 		} else {
 			// this is a stale token so no access anymore
-			$sessionInfo['data']['Token'] = 0;
-			$sessionInfo['data']['Username'] = '';
-			$sessionInfo['data']['AccessGranted'] = 0;
-            $sessionInfo['data']['SessionLang'] = '';
-            $sessionInfo['data']['SessionClinicPublicID'] = '';
+			$sessionInfo['data']['token'] = 0;
+			$sessionInfo['data']['username'] = '';
+			$sessionInfo['data']['accessGranted'] = 0;
+            $sessionInfo['data']['sessionLanguage'] = '';
+            $sessionInfo['data']['sessionClinicPublicID'] = '';
             $sessionInfo['httpResponse'] = 404;
             $sessionInfo['httpReason'] = 'Session not found.';
 		}

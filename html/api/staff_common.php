@@ -47,19 +47,19 @@ function getStaffFieldInfo() {
         //                                                                      STAFF_DB_REQ_PATCH,
         //                                                                               STAFF_DB_CLEANFIRST
         ["staffID",        "staffID",                   false,  true,   false,  true,    false],
-        ["MemberID",       "MemberID",                  false,  true,   true,   false,   true],
-        ["Username",       "Username",                  false,  true,   true,   true,    true],
-        ["Password",       "Password",                  false,  true,   false,  false,   false],
-        ["NameLast",       "NameLast",                  false,  true,   true,   false,   true],
-        ["NameFirst",      "NameFirst",                 false,  true,   true,   false,   true],
-        ["Position",       "Position",                  false,  true,   false,  false,   true],
-        ["ContactInfo",    "ContactInfo",               false,  true,   false,  false,   true],
-        ["AltContactInfo", "AltContactInfo",            false,  true,   false,  false,   true],
-        ["Active",         "Active",                    false,  true,   false,  false,   false],
-        ["PrefLang",       "PrefLang",                  false,  true,   false,  false,   true],
-        ["PrefClinicPublicID", "PrefClinicPublicID",    false,  true,   false,  false,   false],
-        ["LastLogin",      "LastLogin",                 false,  true,   false,  false,   false],
-        ["AccessGranted",  "AccessGranted",             false,  true,   false,  false,   false]
+        ["memberID",       "memberID",                  false,  true,   true,   false,   true],
+        ["username",       "username",                  false,  true,   true,   true,    true],
+        ["password",       "password",                  false,  true,   false,  false,   false],
+        ["lastName",       "lastName",                  false,  true,   true,   false,   true],
+        ["firstName",      "firstName",                 false,  true,   true,   false,   true],
+        ["position",       "position",                  false,  true,   false,  false,   true],
+        ["contactInfo",    "contactInfo",               false,  true,   false,  false,   true],
+        ["altContactInfo", "altContactInfo",            false,  true,   false,  false,   true],
+        ["active",         "active",                    false,  true,   false,  false,   false],
+        ["preferredLanguage",       "preferredLanguage",                  false,  true,   false,  false,   true],
+        ["preferredClinicPublicID", "preferredClinicPublicID",    false,  true,   false,  false,   false],
+        ["lastLogin",      "lastLogin",                 false,  true,   false,  false,   false],
+        ["accessGranted",  "accessGranted",             false,  true,   false,  false,   false]
     ];
     return $returnValue;
 }
@@ -92,7 +92,7 @@ function makeStaffQueryStringFromRequestParameters ($requestParameters, $dbView 
 	}
 
     // if no paremeters, then select all from the first 100 staff
-    $queryString .= "TRUE ORDER BY `Username` ASC";
+    $queryString .= "TRUE ORDER BY `username` ASC";
     $queryString .= ' '.DB_QUERY_LIMIT.';';
 	return $queryString;
  }

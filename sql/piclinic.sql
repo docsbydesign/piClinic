@@ -46,33 +46,33 @@ USE `piclinic`;
 DROP TABLE IF EXISTS `staff`;
 CREATE TABLE IF NOT EXISTS `staff` (
   `staffID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique record ID for staff records',
-  `MemberID` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) staff ID used by staff member',
-  `Username` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(required) user name ',
-  `NameLast` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) staff member''s last name',
-  `NameFirst` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) staff member''s first name',
-  `Position` enum('Nurse','NursesAid','NursingStudent','DoctorGeneral','DoctorSpecialist','MedicalStudent','ClinicStaff','Other') COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Staff position type (e.g. Doctor, Nurse, etc.)',
-  `Password` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Staff''s password  (encrypted as hash. Do not enter plaintext)',
-  `PrefLang` varchar(8) COLLATE utf8_unicode_ci DEFAULT 'en' COMMENT '(optional) preferred session language',
-  `PrefClinicPublicID` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Clinic ID/code of this persons preferred clinic.',
-  `ContactInfo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) contact info such as phone or email',
-  `AltContactInfo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) additional contact info such as phone or email',
-  `Active` tinyint(1) NOT NULL DEFAULT '1' COMMENT '(Required) status of staff member (only Active = True can log in)',
-  `AccessGranted` enum('SystemAdmin','ClinicAdmin','ClinicStaff','ClinicReadOnly') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ClinicReadOnly' COMMENT '(Required) Describes the member''s access to data and features.',
-  `LastLogin` datetime DEFAULT NULL COMMENT '(Log Info) the date and time of the most recent login by this staff member. ',
+  `memberID` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) staff ID used by staff member',
+  `username` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(required) user name ',
+  `lastName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) staff member''s last name',
+  `firstName` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) staff member''s first name',
+  `position` enum('Nurse','NursesAid','NursingStudent','DoctorGeneral','DoctorSpecialist','MedicalStudent','ClinicStaff','Other') COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Staff position type (e.g. Doctor, Nurse, etc.)',
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Staff''s password  (encrypted as hash. Do not enter plaintext)',
+  `preferredLanguage` enum('en','es','ui') COLLATE utf8_unicode_ci DEFAULT 'en' COMMENT '(optional) preferred session language',
+  `preferredClinicPublicID` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Clinic ID/code of this persons preferred clinic.',
+  `contactInfo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) contact info such as phone or email',
+  `altContactInfo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) additional contact info such as phone or email',
+  `active` tinyint(1) NOT NULL DEFAULT '1' COMMENT '(Required) status of staff member (only Active = True can log in)',
+  `accessGranted` enum('SystemAdmin','ClinicAdmin','ClinicStaff','ClinicReadOnly') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ClinicReadOnly' COMMENT '(Required) Describes the member''s access to data and features.',
+  `lastLogin` datetime DEFAULT NULL COMMENT '(Log Info) the date and time of the most recent login by this staff member. ',
   `modifiedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '(Log Info) The last time data fields of this record were modified.',
   `createdDate` datetime NOT NULL COMMENT '(Log Info) The date and time this member was added to the system.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table that lists the people who can access the system';
 
 --
 ALTER TABLE `staff`
- ADD UNIQUE KEY `Username` (`Username`);
+ ADD UNIQUE KEY `username` (`username`);
 
 --
 -- ------------------------------------------------------
 
 -- Create default ADMIN account
 
-INSERT INTO `staff` (`MemberID`, `Username`, `NameLast`, `NameFirst`, `Position`, `Password`, `ContactInfo`, `Active`, `AccessGranted`, `LastLogin`, `modifiedDate`, `createdDate`)
+INSERT INTO `staff` (`memberID`, `uername`, `lastName`, `firstName`, `position`, `password`, `contactInfo`, `active`, `accessGranted`, `lastLogin`, `modifiedDate`, `createdDate`)
   VALUES ('Default user', 'SystemAdmin', 'Admin', 'System', 'ClinicStaff', '$2y$12$XgB7Mo4j7TqLd3sKLpva1OP/pXljsa58U3rIRtuLPOrcxmKOiyDsG', NULL, 1, 'SystemAdmin', NULL, NOW(), NOW());
 
 -- ------------------------------------------------------
@@ -83,22 +83,22 @@ INSERT INTO `staff` (`MemberID`, `Username`, `NameLast`, `NameFirst`, `Position`
 DROP TABLE IF EXISTS `session`;
 CREATE TABLE IF NOT EXISTS `session` (
   `sessionID` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique session ID for staff records',
-  `Username` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Autofill) Username creating this session.',
-  `Token` char(40) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Token ID',
-  `LoggedIn` tinyint(1) NOT NULL DEFAULT '0' COMMENT '(Autofill) Set to TRUE while the session is valid',
-  `AccessGranted` enum('SystemAdmin','ClinicAdmin','ClinicStaff','ClinicReadOnly') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ClinicReadOnly' COMMENT '(Required) Describes the member''s access to data and features.',
-  `SessionIP` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(required) Session IP address of client ',
-  `SessionUA` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Client user agent, if available',
-  `SessionLang` varchar(8) COLLATE  utf8_unicode_ci DEFAULT 'en' COMMENT '(optional) Preferred UI language of this session',
-  `SessionClinicPublicID` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Current clinic ID/code of this sessions preferred clinic.',
- `LoggedOutDate` datetime DEFAULT NULL COMMENT '(Autofill) Set to current time on log out',
-  `ExpiresOnDate` datetime NOT NULL COMMENT '(Autofill) The date and time the session expires.',
+  `username` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Autofill) Username creating this session.',
+  `token` char(40) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Token ID',
+  `loggedIn` tinyint(1) NOT NULL DEFAULT '0' COMMENT '(Autofill) Set to TRUE while the session is valid',
+  `accessGranted` enum('SystemAdmin','ClinicAdmin','ClinicStaff','ClinicReadOnly') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ClinicReadOnly' COMMENT '(Required) Describes the member''s access to data and features.',
+  `sessionIP` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(required) Session IP address of client ',
+  `sessionUA` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Client user agent, if available',
+  `sessionLanguage` enum('en','es','ui') COLLATE  utf8_unicode_ci DEFAULT 'en' COMMENT '(optional) Preferred UI language of this session',
+  `sessionClinicPublicID` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Current clinic ID/code of this sessions preferred clinic.',
+  `loggedOutDate` datetime DEFAULT NULL COMMENT '(Autofill) Set to current time on log out',
+  `expiresOnDate` datetime NOT NULL COMMENT '(Autofill) The date and time the session expires.',
   `createdDate` datetime NOT NULL COMMENT '(Autofill) The date and time this session was created.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table that lists sessions that currently have access to the system.';
 
 --
 ALTER TABLE `session`
- ADD UNIQUE KEY `Token` (`Token`);
+ ADD UNIQUE KEY `token` (`token`);
 --
 
 -- ------------------------------------------------------
@@ -484,47 +484,47 @@ CREATE VIEW `imagePatientPhotoList` AS
 DROP VIEW IF EXISTS `staffGetByUser`;
 CREATE VIEW `staffGetByUser` AS 
 	SELECT  
-		`MemberID`, 
-		`Username`, 
-		`NameLast`, 
-		`NameFirst`, 
-		`Position`,
-		CASE WHEN (`Position` = 'ClinicStaff') OR (`Position` = 'Other') THEN 0 ELSE 1 END AS `MedicalStaff`,
-		`PrefLang`,
-		`PrefClinicPublicID`,
-		`ContactInfo`, 
-		`AltContactInfo`, 
-		`Active`, 
-		`AccessGranted`, 
-		`LastLogin`, 
+		`memberID`, 
+		`username`, 
+		`lastName`, 
+		`firstName`, 
+		`position`,
+		CASE WHEN (`position` = 'ClinicStaff') OR (`position` = 'Other') THEN 0 ELSE 1 END AS `medicalStaff`,
+		`preferredLanguage`,
+		`preferredClinicPublicID`,
+		`contactInfo`, 
+		`altContactInfo`, 
+		`active`, 
+		`accessGranted`, 
+		`lastLogin`, 
 		`modifiedDate`, 
 		`createdDate` 
 	FROM `staff`
 	ORDER BY 
-		`Username` ASC;
+		`username` ASC;
 
 DROP VIEW IF EXISTS `staffGetByName`;
 CREATE VIEW `staffGetByName` AS 
 	SELECT  
-		`MemberID`, 
-		`Username`, 
-		`NameLast`, 
-		`NameFirst`, 
-		`Position`, 
-		CASE WHEN (`Position` = 'ClinicStaff') OR (`Position` = 'Other') THEN 0 ELSE 1 END AS `MedicalStaff`,
-		`PrefLang`,
-		`PrefClinicPublicID`,
-		`ContactInfo`, 
-		`AltContactInfo`, 		
-		`Active`, 
-		`AccessGranted`, 
-		`LastLogin`, 
+		`memberID`, 
+		`username`, 
+		`lastName`, 
+		`firstName`, 
+		`position`,
+		CASE WHEN (`position` = 'ClinicStaff') OR (`position` = 'Other') THEN 0 ELSE 1 END AS `medicalStaff`,
+		`preferredLanguage`,
+		`preferredClinicPublicID`,
+		`contactInfo`, 
+		`altContactInfo`, 
+		`active`, 
+		`accessGranted`, 
+		`lastLogin`, 
 		`modifiedDate`, 
 		`createdDate` 
 	FROM `staff`
 	ORDER BY 
-		`NameLast` ASC,
-		`NameFirst` ASC;
+		`lastName` ASC,
+		`firstName` ASC;
 		
 
 DROP VIEW IF EXISTS `commentGet`;

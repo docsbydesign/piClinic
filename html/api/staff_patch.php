@@ -102,22 +102,57 @@ function _staff_patch ($dbLink, $requestArgs) {
 		return $returnValue;
 	}
 
-	$patchArgs = cleanStaffStringFields ($requestArgs);
+	// make sure the query parameters map to a valid DB field
+    $badParamList = '';
+    foreach ($requestArgs as $qp => $qv) {
+        /*
+         *  system paramaters start with an underscore, so ignore them
+         *      the 'token' is also passed and not user in this routine (it was checked earlier)
+         *      test all the others
+         */
+        if ((mb_substr($qp, 0, 1, 'utf-8') != '_') &&
+            ($qp != 'token'))  {
+            $qpFound = false;
+            foreach ($staffDbFields as $field) {
+                if ($field[STAFF_REQ_ARG] == $qp) {
+                    $qpFound = true;
+                }
+            }
+            if (!$qpFound) {
+                if ($badParamList != '') {
+                    $badParamList .= ', ';
+                }
+                $badParamList .= $qp;
+            }
+        }
+    }
+    if ($badParamList != '') {
+        // some query parameters do not match a known field
+        $returnValue['contentType'] = CONTENT_TYPE_JSON;
+        if (API_DEBUG_MODE) {
+            $returnValue['debug'] = $dbInfo;
+        }
+        $returnValue['httpResponse'] = 400;
+        $returnValue['httpReason']	= 'Unable to update staff account data. These field(s) were not recognized: '. $badParamList. '.';
+        return $returnValue;
+    }
+
+    $patchArgs = cleanStaffStringFields ($requestArgs);
 
     // if a password string is present, hash the plain text before updating
-    if (!empty($patchArgs['Password'])) {
-        $patchArgs['Password'] = password_hash($patchArgs['Password'], PASSWORD_DEFAULT);
+    if (!empty($patchArgs['password'])) {
+        $patchArgs['password'] = password_hash($patchArgs['password'], PASSWORD_DEFAULT);
     }
 
     // if the language string is present, make sure it's a supported language
-    if (!empty($patchArgs['PrefLang'])) {
-        if (!isSupportedLanguage($patchArgs['PrefLang'])) {
-            unset ($patchArgs['PrefLang']);
+    if (!empty($patchArgs['preferredLanguage'])) {
+        if (!isSupportedLanguage($patchArgs['preferredLanguage'])) {
+            unset ($patchArgs['preferredLanguage']);
         }
     }
 
     // test the clinic ID
-    if (!empty($patchArgs['PrefClinicPublicID'])) {
+    if (!empty($patchArgs['preferredClinicPublicID'])) {
         // check if the clinic ID is valid
         $clinicQueryString = 'SELECT `PublicID` FROM '. DB_TABLE_CLINIC . ' WHERE TRUE;';
         $dbInfo['clinicQueryString'] = $clinicQueryString;
@@ -126,7 +161,7 @@ function _staff_patch ($dbLink, $requestArgs) {
         if ($clinicResult['count'] >= 1) {
             // scan the list for a match
             foreach ($clinicResult['data'] as $idToCheck) {
-                if ($patchArgs['PrefClinicPublicID'] == $idToCheck['PublicID']) {
+                if ($patchArgs['preferredClinicPublicID'] == $idToCheck['PublicID']) {
                     $clinicIdFound = true;
                     break;
                 }
@@ -134,7 +169,7 @@ function _staff_patch ($dbLink, $requestArgs) {
         }
         if (!$clinicIdFound) {
             // the parameter doesn't match a known clinic so remove it
-            unset($patchArgs['SessionClinicPublicID']);
+            unset($patchArgs['preferredClinicPublicID']);
         }
     }
 
@@ -162,18 +197,18 @@ function _staff_patch ($dbLink, $requestArgs) {
 	$patchArgs = cleanStaffStringFields ($requestArgs);
 	
 	// if a password string is present, hash the plain text before updating
-	if (!empty($patchArgs['Password'])) {
-		$patchArgs['Password'] = password_hash($patchArgs['Password'], PASSWORD_DEFAULT);
+	if (!empty($patchArgs['password'])) {
+		$patchArgs['password'] = password_hash($patchArgs['password'], PASSWORD_DEFAULT);
 	}
 
-    if (!empty($patchArgs['lang'])) {
-        if (isSupportedLanguage($patchArgs['lang'])) {
-            $patchArgs['SessionLang'] = $requestArgs['lang'];
+    if (!empty($patchArgs['preferredLanguage'])) {
+        if (isSupportedLanguage($patchArgs['preferredLanguage'])) {
+            $patchArgs['preferredLanguage'] = $requestArgs['preferredLanguage'];
         }
     }
 
     // test the clinic ID
-    if (!empty($requestArgs['clinic'])) {
+    if (!empty($requestArgs['preferredClinicPublicID'])) {
         // check if the clinic ID is valid
         $clinicQueryString = 'SELECT `PublicID` FROM '. DB_TABLE_CLINIC . ' WHERE TRUE;';
         $dbInfo['clinicQueryString'] = $clinicQueryString;
@@ -181,8 +216,8 @@ function _staff_patch ($dbLink, $requestArgs) {
         if ($clinicResult['count'] >= 1) {
             // scan the list for a match
             foreach ($clinicResult['data'] as $idToCheck) {
-                if ($requestArgs['clinic'] == $idToCheck['PublicID']) {
-                    $dbArgs['SessionClinicPublicID'] = $idToCheck['PublicID'];
+                if ($requestArgs['preferredClinicPublicID'] == $idToCheck['PublicID']) {
+                    $dbArgs['preferredClinicPublicID'] = $idToCheck['PublicID'];
                     break;
                 }
             }
@@ -194,8 +229,8 @@ function _staff_patch ($dbLink, $requestArgs) {
 	// get lookup key field
 	if (isset($keyFields['staffID'])) {
 		$updateKey = 'staffID';
-	} else if (isset($keyFields['Username'])) {
-		$updateKey = 'Username';
+	} else if (isset($keyFields['username'])) {
+		$updateKey = 'username';
 	} else {
 		// something got lost.
 		$returnValue['contentType'] = CONTENT_TYPE_JSON;
@@ -259,7 +294,7 @@ function _staff_patch ($dbLink, $requestArgs) {
 			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 400;
-		$returnValue['httpReason']	= 'Unable to update record. The staff ID is missing.';
+		$returnValue['httpReason']	= 'Unable to update record. No valid fields found in request.';
 	}
 	profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;

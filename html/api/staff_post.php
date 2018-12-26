@@ -100,8 +100,8 @@ function _staff_post ($dbLink, $requestArgs) {
 	$postArgs = cleanStaffStringFields ($requestArgs);
 
     // if a password string is present, hash the plain text before updating
-    if (!empty($postArgs['Password'])) {
-        $postArgs['Password'] = password_hash($postArgs['Password'], PASSWORD_DEFAULT);
+    if (!empty($postArgs['password'])) {
+        $postArgs['password'] = password_hash($postArgs['password'], PASSWORD_DEFAULT);
     }
 
     profileLogCheckpoint($profileData,'PARAMETERS_VALID');
@@ -138,7 +138,7 @@ function _staff_post ($dbLink, $requestArgs) {
 	    //the post was successful so get the new record from the DB and return it.
 		$getQueryString = "SELECT * FROM `".
 			DB_VIEW_STAFF_GET. "` WHERE `Username` = '".
-			$postArgs['Username']."';";
+			$postArgs['username']."';";
         $dbInfo['getQueryString'] = $getQueryString;
 
 		$returnValue = getDbRecords($dbLink, $getQueryString);

@@ -69,7 +69,7 @@ function _session_delete ($dbLink, $requestArgs) {
 
 	// Make sure the record is currently active
 	//  and create query string to look up the token
-	$getQueryString = 'SELECT * FROM `'.DB_TABLE_SESSION.'` WHERE `Token` = \''. $requestArgs['token'].'\';';
+	$getQueryString = 'SELECT * FROM `'.DB_TABLE_SESSION.'` WHERE `token` = \''. $requestArgs['token'].'\';';
     $dbInfo['queryString'] = $getQueryString;
 
 	// Token is a unique key in the DB so no more than one record should come back.
@@ -93,7 +93,7 @@ function _session_delete ($dbLink, $requestArgs) {
 	}
 
 	// if this session is already closed, exit without changing anything
-	if (!$testReturnValue['data']['LoggedIn']) {
+	if (!$testReturnValue['data']['loggedIn']) {
 		$returnValue['contentType'] = CONTENT_TYPE_JSON;
 		// return not found because no valid session was found
 		$returnValue['httpResponse'] = 404;
@@ -107,14 +107,22 @@ function _session_delete ($dbLink, $requestArgs) {
 	// valid and open session record found so delete it
 	//  delete means only to clear the logged in flag
 	// 		and set the logged out time
+    $sessionUpdate = array();
 	$now = new DateTime();
-	$testReturnValue['data']['LoggedOutDate'] = $now->format('Y-m-d H:i:s');
-	$testReturnValue['data']['LoggedIn'] = 0;
-	
+    $sessionUpdate['token'] = $requestArgs['token'];
+    $sessionUpdate['loggedOutDate'] = $now->format('Y-m-d H:i:s');
+    $sessionUpdate['loggedIn'] = 0;
+    $dbInfo['sessionUpdate'] = $sessionUpdate;
+
+    $columnsUpdated = 0;
 	profileLogCheckpoint($profileData,'UPDATE_READY');
-	$deleteQueryString = 'UPDATE '.DB_TABLE_SESSION.' SET `LoggedIn` = 0, '.
-		'`LoggedOutDate` = \'' . $testReturnValue['data']['LoggedOutDate'] . '\' '.
-		'WHERE `Token` = \''.$requestArgs['token'].'\';';
+
+    /*
+	$deleteQueryString = 'UPDATE '.DB_TABLE_SESSION.' SET `loggedIn` = 0, '.
+		'`loggedOutDate` = \'' . $testReturnValue['data']['loggedOutDate'] . '\' '.
+		'WHERE `token` = \''.$requestArgs['token'].'\';';
+    */
+    $deleteQueryString = format_object_for_SQL_update (DB_TABLE_SESSION, $sessionUpdate, 'token', $columnsUpdated);
     $dbInfo['deleteQueryString'] = $deleteQueryString;
 
 	// try to update the record in the database 
