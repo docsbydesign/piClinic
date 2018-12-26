@@ -131,12 +131,12 @@ CREATE TABLE IF NOT EXISTS `logger` (
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
   `commentID` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique comment ID for comment records',
-  `CommentDate` datetime DEFAULT NULL COMMENT '(Optional) date comment was started',
-  `Username` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) Username creating this session.',
-  `ReferringUrl` varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) URL of Page from which comment page was called.',
-  `ReferringPage` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Page element of URL from which comment page was called.',
-  `ReturnUrl` varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Page to which user was sent after making the comment.',
-  `CommentText`  varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) User comment text.',
+  `commentDate` datetime DEFAULT NULL COMMENT '(Optional) date comment was started',
+  `username` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) Username creating this session.',
+  `referringUrl` varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) URL of Page from which comment page was called.',
+  `referringPage` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Page element of URL from which comment page was called.',
+  `returnUrl` varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Page to which user was sent after making the comment.',
+  `commentText`  varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) User comment text.',
   `createdDate` datetime NOT NULL COMMENT '(Autofill) The date and time this commant was saved.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table that records comments from users.';
 

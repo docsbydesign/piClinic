@@ -45,12 +45,12 @@ function getCommentFieldInfo() {
         //                                                  COMMENT_DB_REQ_POST,
         //                                                           COMMENT_DB_CLEANFIRST
         ["commentID",       "commentID",    false,  true,   false,   false],
-        ["CommentDate",     "CommentDate",  false,  false,  false,   false],
-        ["Username",        "Username",     false,  true,   true,    true],
-        ["ReferringUrl",    "ReferringUrl", false,  true,   false,   true],
-        ["ReferringPage",   "ReferringPage",false,  true,   false,   true],
-        ["ReturnUrl",       "ReturnUrl",    false,  false,  false,   true],
-        ["CommentText",     "CommentText",  false,  false,  false,   true]
+        ["commentDate",     "commentDate",  false,  false,  false,   false],
+        ["username",        "username",     false,  true,   true,    true],
+        ["referringUrl",    "referringUrl", false,  true,   false,   true],
+        ["referringPage",   "referringPage",false,  true,   false,   true],
+        ["returnUrl",       "returnUrl",    false,  false,  false,   true],
+        ["commentText",     "commentText",  false,  false,  false,   true]
     ];
     return $returnValue;
 }
@@ -72,7 +72,7 @@ function makeCommentQueryStringFromRequestParameters ($requestParameters, $dbVie
         }
     }
 
-	$queryString .= "TRUE  ORDER BY `CommentDate` DESC".DB_QUERY_LIMIT.";";
+	$queryString .= "TRUE  ORDER BY `commentDate` DESC".DB_QUERY_LIMIT.";";
 	return $queryString;
  }
  /*

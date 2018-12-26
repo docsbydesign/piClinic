@@ -65,7 +65,7 @@ function _comment_post ($dbLink, $requestArgs) {
         null,
         null,
         null);
-	if (empty($requestArgs['Username'])) {
+	if (empty($requestArgs['username'])) {
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
 			$returnValue['error'] = $dbInfo;
@@ -82,9 +82,9 @@ function _comment_post ($dbLink, $requestArgs) {
         unset($postArgs['token']);
     }
     // the the comment data is empty, use the current time
-    if (empty($postArgs['CommentDate'])){
+    if (empty($postArgs['commentDate'])){
         $now = new DateTime();
-        $postArgs['CommentDate'] = $now->format('Y-m-d H:i:s');
+        $postArgs['commentDate'] = $now->format('Y-m-d H:i:s');
     }
 	
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
@@ -113,15 +113,15 @@ function _comment_post ($dbLink, $requestArgs) {
 	} else {
 		// create query string for get operation
 		profileLogCheckpoint($profileData,'POST_RETURNED');
-		// if successful, build the return object from the input parameters
+		// if successful, build the return object from the cleaned input parameters
 		$newComment = [];
-		$newComment['CommentDate'] = isset($postArgs['CommentDate']) ? $postArgs['CommentDate'] : '';
-		$newComment['Username'] =  isset($postArgs['Username']) ? $postArgs['Username'] : '';
-		$newComment['ReferringUrl'] =  isset($postArgs['ReferringUrl']) ? $postArgs['ReferringUrl'] : '';
-		$newComment['ReferringPage'] =  isset($postArgs['ReferringPage']) ? $postArgs['ReferringPage'] : '';
-		$newComment['ReturnUrl'] =  isset($postArgs['ReturnUrl']) ? $postArgs['ReturnUrl'] : '';
-		$newComment['CommentText'] =  isset($postArgs['CommentText']) ? $postArgs['CommentText'] : '';
-		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
+		$newComment['commentDate'] = isset($postArgs['commentDate']) ? $postArgs['commentDate'] : '';
+		$newComment['username'] =  isset($postArgs['username']) ? $postArgs['username'] : '';
+		$newComment['referringUrl'] =  isset($postArgs['referringUrl']) ? $postArgs['referringUrl'] : '';
+		$newComment['referringPage'] =  isset($postArgs['referringPage']) ? $postArgs['referringPage'] : '';
+		$newComment['returnUrl'] =  isset($postArgs['returnUrl']) ? $postArgs['returnUrl'] : '';
+		$newComment['commentText'] =  isset($postArgs['commentText']) ? $postArgs['commentText'] : '';
+		$returnValue['contentType'] = CONTENT_TYPE_JSON;
 		$returnValue['httpResponse'] = 201;
 		$returnValue['httpReason']	= 'Success';
 		$returnValue['count'] = 1;
