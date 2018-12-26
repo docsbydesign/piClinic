@@ -48,7 +48,7 @@ exitIfCalledFromBrowser(__FILE__);
 /*
  *  Queries a token and returns its access if it's valid
  */
-function _session_get ($dbLink, $requestArgs) {
+function _session_get ($dbLink, $apiUserToken, $requestArgs) {
     /*
      *      Initialize profiling if enabled in piClinicConfig.php
      */
@@ -80,14 +80,14 @@ function _session_get ($dbLink, $requestArgs) {
 
 
     // Make sure the token is present and properly formatted.
-	if (empty($requestArgs['token'])) {
+	if (empty( $apiUserToken)) {
 		$returnValue['contentType'] = CONTENT_TYPE_JSON;
 		$returnValue['debug'] = $dbInfo;
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason'] = 'Required parameter is missing.';
 		return $returnValue;
-    } else if (!validTokenString($requestArgs['token'])) {
-        $returnValue = logInvalidTokenError ($dbLink, $returnValue, $requestArgs['token'], 'session', $logData);
+    } else if (!validTokenString( $apiUserToken)) {
+        $returnValue = logInvalidTokenError ($dbLink, $returnValue,  $apiUserToken, 'session', $logData);
         writeEntryToLog ($dbLink, $logData);
         return $returnValue;
 	}
@@ -95,7 +95,7 @@ function _session_get ($dbLink, $requestArgs) {
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
 
 	// create query string for get operation
-	$getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''. $requestArgs['token'] . '\';';
+	$getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''.  $apiUserToken . '\';';
     $dbInfo ['queryString'] = $getQueryString;
 
 	// get the session record that matches--there should be only one

@@ -42,7 +42,7 @@ exitIfCalledFromBrowser(__FILE__);
 /*
  *
  */
-function _comment_post ($dbLink, $requestArgs) {
+function _comment_post ($dbLink, $apiUserToken, $requestArgs) {
     /*
  *  Initialize profiling when enabled in piClinicConfig.php
  */
@@ -55,7 +55,7 @@ function _comment_post ($dbLink, $requestArgs) {
 	$dbInfo ['requestArgs'] = $requestArgs;
 
     // token parameter was verified before this function was called.
-    $logData = createLogEntry ('API', __FILE__, 'comment', $_SERVER['REQUEST_METHOD'], $requestArgs['token'], null, null, null, null, null);
+    $logData = createLogEntry ('API', __FILE__, 'comment', $_SERVER['REQUEST_METHOD'], $apiUserToken, null, null, null, null, null);
 	if (empty($requestArgs['username'])) {
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
@@ -68,10 +68,7 @@ function _comment_post ($dbLink, $requestArgs) {
 	
 	// clean leading and trailing spaces from string fields
 	$postArgs = cleanCommentStringFields ($requestArgs);
-	// remove the token for the DB call
-    if (!empty($postArgs['token'])){
-        unset($postArgs['token']);
-    }
+
     // the the comment data is empty, use the current time
     if (empty($postArgs['commentDate'])){
         $now = new DateTime();

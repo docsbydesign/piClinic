@@ -44,7 +44,15 @@ define('PAGE_ACCESS_ADMIN', 32, false); 	// SystemAdmin
 define('PAGE_ACCESS_CLINIC', 16, false); 	// ClinicAdmin
 define('PAGE_ACCESS_STAFF', 8, false); 		// ClinicStaff
 define('PAGE_ACCESS_READONLY', 4, false); 	// ClinicReadOnly (Any authorized user)
-define('PAGE_ACCESS_NONE', 0, false);		// no access 
+define('PAGE_ACCESS_NONE', 0, false);		// no access
+
+function getTokenFromHeaders() {
+    if (!empty($_SERVER['HTTP_X_PICLINIC_TOKEN'])) {
+        return $_SERVER['HTTP_X_PICLINIC_TOKEN'];
+    } else {
+        return null;
+    }
+}
 
 function checkUiSessionAccess($dbLink, $sessionToken, $pageAccess) {
 	$profileData = [];
@@ -71,7 +79,7 @@ function checkUiSessionAccess($dbLink, $sessionToken, $pageAccess) {
 	if ($dbAccessGranted) {
 		$requestParams = array();
 		$requestParams['token'] = $sessionToken;
-		$sessionData = _session_get($dbLink, $requestParams);
+		$sessionData = _session_get($dbLink, $sessionToken, $requestParams);
 		if ($sessionData['httpResponse'] == 200) {
 			// successful call, now check the response\
 			$sessionInfo = $sessionData['data'];

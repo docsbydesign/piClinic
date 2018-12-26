@@ -43,7 +43,7 @@ exitIfCalledFromBrowser(__FILE__);
 /*
  *  Process the GET method request
  */
-function _logger_get($dbLink, $requestArgs) {
+function _logger_get($dbLink, $apiUserToken, $requestArgs) {
     /*
      *  Initialize profiling when enabled in piClinicConfig.php
      */

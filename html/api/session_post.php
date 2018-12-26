@@ -49,7 +49,7 @@ exitIfCalledFromBrowser(__FILE__);
  *  Checks the username and password and, if they are valid,
  *    creates a new user session.
  */
-function _session_post ($dbLink, $requestArgs) {
+function _session_post ($dbLink, $apiUserToken, $requestArgs) {
     /*
      *      Initialize profiling if enabled in piClinicConfig.php
      */

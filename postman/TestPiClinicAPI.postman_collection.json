@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8863017a-20f9-48ed-8c89-d051993f341b",
+		"_postman_id": "b0fca425-7a09-451d-962f-bc98bfa45427",
 		"name": "TestPiClinicAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -607,7 +607,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?username={{SystemAdmin}}&password={{SystemAdminPW}}",
+									"raw": "{{host}}/api/session.php?username={{testUser}}&password={{testUserPW}}",
 									"host": [
 										"{{host}}"
 									],
@@ -618,11 +618,11 @@
 									"query": [
 										{
 											"key": "username",
-											"value": "{{SystemAdmin}}"
+											"value": "{{testUser}}"
 										},
 										{
 											"key": "password",
-											"value": "{{SystemAdminPW}}"
+											"value": "{{testUserPW}}"
 										}
 									]
 								},
@@ -648,25 +648,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -686,7 +686,7 @@
 									"script": {
 										"id": "d75c8f84-745b-424a-b957-bd74130a6234",
 										"exec": [
-											"pm.test(\"Language change was sucessful\", function () {\r",
+											"pm.test(\"Language change was successful\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
 											"\r",
@@ -701,13 +701,19 @@
 							],
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}&sessionLanguage=es",
+									"raw": "{{host}}/api/session.php?sessionLanguage=es",
 									"host": [
 										"{{host}}"
 									],
@@ -716,10 +722,6 @@
 										"session.php"
 									],
 									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										},
 										{
 											"key": "sessionLanguage",
 											"value": "es"
@@ -752,13 +754,19 @@
 							],
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}&sessionClinicPublicID=710",
+									"raw": "{{host}}/api/session.php?sessionClinicPublicID=710",
 									"host": [
 										"{{host}}"
 									],
@@ -767,10 +775,6 @@
 										"session.php"
 									],
 									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										},
 										{
 											"key": "sessionClinicPublicID",
 											"value": "710"
@@ -787,7 +791,7 @@
 					"name": "Error Tests",
 					"item": [
 						{
-							"name": "Patch Session Access  Missing Token",
+							"name": "Patch Session Access Missing Token",
 							"event": [
 								{
 									"listen": "test",
@@ -853,25 +857,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"raw": "{{host}}/api/logger.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"logger.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -895,25 +899,25 @@
 							],
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{InvalidToken_Format}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{InvalidToken_Format}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{InvalidToken_Format}}"
-										}
 									]
 								}
 							},
@@ -950,25 +954,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"raw": "{{host}}/api/logger.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"logger.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -992,25 +996,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{InvalidToken_Format}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{InvalidToken_Format}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{InvalidToken_Format}}"
-										}
 									]
 								}
 							},
@@ -1047,25 +1051,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"raw": "{{host}}/api/logger.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"logger.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -1095,25 +1099,25 @@
 							],
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -1139,25 +1143,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -1201,7 +1205,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?username={{SystemAdmin}}&password={{SystemAdminPW}}",
+									"raw": "{{host}}/api/session.php?username={{testUser}}&password={{testUserPW}}",
 									"host": [
 										"{{host}}"
 									],
@@ -1212,11 +1216,11 @@
 									"query": [
 										{
 											"key": "username",
-											"value": "{{SystemAdmin}}"
+											"value": "{{testUser}}"
 										},
 										{
 											"key": "password",
-											"value": "{{SystemAdminPW}}"
+											"value": "{{testUserPW}}"
 										}
 									]
 								},
@@ -1242,25 +1246,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -1273,7 +1277,7 @@
 					"name": "Success Tests",
 					"item": [
 						{
-							"name": "LoggerTest-BasicFields",
+							"name": "LoggerTest-BasicFields (SystemAdmin only)",
 							"event": [
 								{
 									"listen": "test",
@@ -1281,7 +1285,12 @@
 										"id": "4c658880-e599-455f-84b1-9dac32436384",
 										"exec": [
 											"pm.test(\"Writing basic fields was successful\", function() {\r",
-											"    pm.response.to.have.status(201);\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if (userAcct == 'SystemAdmin') {\r",
+											"        pm.response.to.have.status(201);\r",
+											"    } else {\r",
+											"        pm.response.to.have.status(403);\r",
+											"    }\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1295,6 +1304,11 @@
 										"key": "Content-Type",
 										"name": "Content-Type",
 										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									},
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
 										"type": "text"
 									}
 								],
@@ -1374,13 +1388,19 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php?token={{token}}&usertoken={{token}}",
+									"raw": "{{host}}/api/logger.php?usertoken={{token}}",
 									"host": [
 										"{{host}}"
 									],
@@ -1389,10 +1409,6 @@
 										"logger.php"
 									],
 									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										},
 										{
 											"key": "usertoken",
 											"value": "{{token}}"
@@ -1475,25 +1491,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"raw": "{{host}}/api/logger.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"logger.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -1517,25 +1533,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{InvalidToken_Format}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php?token={{InvalidToken_Format}}",
+									"raw": "{{host}}/api/logger.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"logger.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{InvalidToken_Format}}"
-										}
 									]
 								}
 							},
@@ -1572,25 +1588,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"raw": "{{host}}/api/logger.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"logger.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -1620,25 +1636,25 @@
 							],
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -1664,25 +1680,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -1748,7 +1764,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?username={{SystemAdmin}}&password={{SystemAdminPW}}",
+									"raw": "{{host}}/api/session.php?username={{testUser}}&password={{testUserPW}}",
 									"host": [
 										"{{host}}"
 									],
@@ -1759,11 +1775,11 @@
 									"query": [
 										{
 											"key": "username",
-											"value": "{{SystemAdmin}}"
+											"value": "{{testUser}}"
 										},
 										{
 											"key": "password",
-											"value": "{{SystemAdminPW}}"
+											"value": "{{testUserPW}}"
 										}
 									]
 								},
@@ -1789,25 +1805,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -1828,12 +1844,20 @@
 										"id": "8dc1b9d4-2bad-4163-8228-4ee3e03674aa",
 										"exec": [
 											"var jsonData = JSON.parse(responseBody);\r",
-											"// save new username to use in subsequent calls\r",
-											"pm.variables.set(\"newUser\", jsonData.data.username);\r",
 											"\r",
-											"pm.test(\"New user was created.\", function () {\r",
-											"    pm.response.to.have.status(201);\r",
-											"});"
+											"pm.test(\"New user creation successful\", function() {\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'SystemAdmin') || (userAcct == 'Verduzco')) {\r",
+											"        // save new username to use in subsequent calls\r",
+											"        pm.variables.set(\"newUser\", jsonData.data.username);\r",
+											"        // this shoult be successful\r",
+											"        pm.response.to.have.status(201);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(403);\r",
+											"    }\r",
+											"});\r",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -1847,16 +1871,16 @@
 										"name": "Content-Type",
 										"value": "application/x-www-form-urlencoded",
 										"type": "text"
+									},
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "urlencoded",
 									"urlencoded": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "text"
-										},
 										{
 											"key": "username",
 											"value": "testUser{{$timestamp}}",
@@ -1920,13 +1944,19 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/staff.php?token={{token}}&username={{newUser}}",
+									"raw": "{{host}}/api/staff.php?username={{newUser}}",
 									"host": [
 										"{{host}}"
 									],
@@ -1935,10 +1965,6 @@
 										"staff.php"
 									],
 									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										},
 										{
 											"key": "username",
 											"value": "{{newUser}}"
@@ -1972,13 +1998,19 @@
 							],
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/staff.php?token={{token}}&username=testUser1545670928&lastName=NewLastName",
+									"raw": "{{host}}/api/staff.php?username={{newUser}}&lastName=NewLastName",
 									"host": [
 										"{{host}}"
 									],
@@ -1988,12 +2020,8 @@
 									],
 									"query": [
 										{
-											"key": "token",
-											"value": "{{token}}"
-										},
-										{
 											"key": "username",
-											"value": "testUser1545670928"
+											"value": "{{newUser}}"
 										},
 										{
 											"key": "lastName",
@@ -2028,13 +2056,19 @@
 							],
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/staff.php?token={{token}}&username=testUser1545670928&preferredLanguage=es",
+									"raw": "{{host}}/api/staff.php?username={{newUser}}&preferredLanguage=es",
 									"host": [
 										"{{host}}"
 									],
@@ -2044,12 +2078,8 @@
 									],
 									"query": [
 										{
-											"key": "token",
-											"value": "{{token}}"
-										},
-										{
 											"key": "username",
-											"value": "testUser1545670928"
+											"value": "{{newUser}}"
 										},
 										{
 											"key": "preferredLanguage",
@@ -2084,13 +2114,19 @@
 							],
 							"request": {
 								"method": "PATCH",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/staff.php?token={{token}}&username=testUser1545670928&preferredClinicPublicID=710",
+									"raw": "{{host}}/api/staff.php?username={{newUser}}&preferredClinicPublicID=710",
 									"host": [
 										"{{host}}"
 									],
@@ -2100,12 +2136,8 @@
 									],
 									"query": [
 										{
-											"key": "token",
-											"value": "{{token}}"
-										},
-										{
 											"key": "username",
-											"value": "testUser1545670928"
+											"value": "{{newUser}}"
 										},
 										{
 											"key": "preferredClinicPublicID",
@@ -2140,13 +2172,19 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/staff.php?token={{token}}&Username={{newUser}}",
+									"raw": "{{host}}/api/staff.php?Username={{newUser}}",
 									"host": [
 										"{{host}}"
 									],
@@ -2155,10 +2193,6 @@
 										"staff.php"
 									],
 									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										},
 										{
 											"key": "Username",
 											"value": "{{newUser}}"
@@ -2186,13 +2220,19 @@
 							],
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/staff.php?token={{token}}&username={{newUser}}",
+									"raw": "{{host}}/api/staff.php?username={{newUser}}",
 									"host": [
 										"{{host}}"
 									],
@@ -2201,10 +2241,6 @@
 										"staff.php"
 									],
 									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										},
 										{
 											"key": "username",
 											"value": "{{newUser}}"
@@ -2242,13 +2278,19 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/staff.php?token={{token}}&Username={{newUser}}",
+									"raw": "{{host}}/api/staff.php?Username={{newUser}}",
 									"host": [
 										"{{host}}"
 									],
@@ -2257,10 +2299,6 @@
 										"staff.php"
 									],
 									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										},
 										{
 											"key": "Username",
 											"value": "{{newUser}}"
@@ -2343,25 +2381,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"raw": "{{host}}/api/logger.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"logger.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -2385,25 +2423,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{InvalidToken_Format}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/staff.php?token={{InvalidToken_Format}}",
+									"raw": "{{host}}/api/staff.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"staff.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{InvalidToken_Format}}"
-										}
 									]
 								}
 							},
@@ -2440,25 +2478,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"raw": "{{host}}/api/logger.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"logger.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -2488,25 +2526,25 @@
 							],
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -2532,25 +2570,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -2594,7 +2632,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?username={{SystemAdmin}}&password={{SystemAdminPW}}",
+									"raw": "{{host}}/api/session.php?username={{testUser}}&password={{testUserPW}}",
 									"host": [
 										"{{host}}"
 									],
@@ -2605,11 +2643,11 @@
 									"query": [
 										{
 											"key": "username",
-											"value": "{{SystemAdmin}}"
+											"value": "{{testUser}}"
 										},
 										{
 											"key": "password",
-											"value": "{{SystemAdminPW}}"
+											"value": "{{testUserPW}}"
 										}
 									]
 								},
@@ -2635,25 +2673,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -2689,16 +2727,16 @@
 										"name": "Content-Type",
 										"value": "application/x-www-form-urlencoded",
 										"type": "text"
+									},
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "urlencoded",
 									"urlencoded": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "text"
-										},
 										{
 											"key": "username",
 											"value": "AUTO_TEST",
@@ -2753,29 +2791,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/comment.php?token={{token}}&=",
+									"raw": "{{host}}/api/comment.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"comment.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										},
-										{
-											"key": "",
-											"value": ""
-										}
 									]
 								}
 							},
@@ -2854,25 +2888,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"raw": "{{host}}/api/logger.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"logger.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -2896,25 +2930,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{InvalidToken_Format}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/comment.php?token={{InvalidToken_Format}}",
+									"raw": "{{host}}/api/comment.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"comment.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{InvalidToken_Format}}"
-										}
 									]
 								}
 							},
@@ -2951,25 +2985,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"raw": "{{host}}/api/logger.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"logger.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -2999,25 +3033,25 @@
 							],
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},
@@ -3043,25 +3077,25 @@
 							],
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?token={{token}}",
+									"raw": "{{host}}/api/session.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
 										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{token}}"
-										}
 									]
 								}
 							},

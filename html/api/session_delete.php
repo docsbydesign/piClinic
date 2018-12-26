@@ -40,7 +40,7 @@ exitIfCalledFromBrowser(__FILE__);
 /*
  *  Closes a user session
  */
-function _session_delete ($dbLink, $requestArgs) {
+function _session_delete ($dbLink, $apiUserToken, $requestArgs) {
     /*
      *      Initialize profiling if enabled in piClinicConfig.php
      */
@@ -54,13 +54,13 @@ function _session_delete ($dbLink, $requestArgs) {
 
 	// Initalize the log entry for this call
     //  more fields will be added later in the routine
-	$logData = createLogEntry ('API', __FILE__, 'session', $_SERVER['REQUEST_METHOD'], $requestArgs['token'], $_SERVER['QUERY_STRING'], null, null, null, null);
+	$logData = createLogEntry ('API', __FILE__, 'session', $_SERVER['REQUEST_METHOD'],  $apiUserToken, $_SERVER['QUERY_STRING'], null, null, null, null);
 
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
 
 	// Make sure the record is currently active
 	//  and create query string to look up the token
-	$getQueryString = 'SELECT * FROM `'.DB_TABLE_SESSION.'` WHERE `token` = \''. $requestArgs['token'].'\';';
+	$getQueryString = 'SELECT * FROM `'.DB_TABLE_SESSION.'` WHERE `token` = \''.  $apiUserToken .'\';';
     $dbInfo['queryString'] = $getQueryString;
 
 	// Token is a unique key in the DB so no more than one record should come back.
@@ -100,7 +100,7 @@ function _session_delete ($dbLink, $requestArgs) {
 	// 		and set the logged out time
     $sessionUpdate = array();
 	$now = new DateTime();
-    $sessionUpdate['token'] = $requestArgs['token'];
+    $sessionUpdate['token'] =  $apiUserToken;
     $sessionUpdate['loggedOutDate'] = $now->format('Y-m-d H:i:s');
     $sessionUpdate['loggedIn'] = 0;
     $dbInfo['sessionUpdate'] = $sessionUpdate;
@@ -108,11 +108,6 @@ function _session_delete ($dbLink, $requestArgs) {
     $columnsUpdated = 0;
 	profileLogCheckpoint($profileData,'UPDATE_READY');
 
-    /*
-	$deleteQueryString = 'UPDATE '.DB_TABLE_SESSION.' SET `loggedIn` = 0, '.
-		'`loggedOutDate` = \'' . $testReturnValue['data']['loggedOutDate'] . '\' '.
-		'WHERE `token` = \''.$requestArgs['token'].'\';';
-    */
     $deleteQueryString = format_object_for_SQL_update (DB_TABLE_SESSION, $sessionUpdate, 'token', $columnsUpdated);
     $dbInfo['deleteQueryString'] = $deleteQueryString;
 

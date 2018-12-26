@@ -76,13 +76,15 @@ profileLogStart ($profileData);
 
 // get the query paramater data from the request 
 $requestData = readRequestData();
+$apiUserToken = getTokenFromHeaders();
+
 $dbLink = _openDBforAPI($requestData);
 
 profileLogCheckpoint($profileData,'DB_OPEN');
 
 $retVal = array();
 
-if (empty($requestData['token'])){
+if (empty($apiUserToken)){
     $retVal = formatMissingTokenError ($retVal, 'comment');
 } else {
     // Initalize the log entry for this call
@@ -98,18 +100,18 @@ if (empty($requestData['token'])){
         null,
         null);
 
-    if (!validTokenString($requestData['token'])) {
-        $retVal = logInvalidTokenError ($dbLink, $retVal, $requestData['token'], 'comment', $logData);
+    if (!validTokenString($apiUserToken)) {
+        $retVal = logInvalidTokenError ($dbLink, $retVal, $apiUserToken, 'comment', $logData);
     } else {
-        $logData['userToken'] = $requestData['token'];
-        if (checkUiSessionAccess($dbLink, $requestData['token'], PAGE_ACCESS_READONLY)) {
+        $logData['userToken'] = $apiUserToken;
+        if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_READONLY)) {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST':
-                    $retVal = _comment_post($dbLink, $requestData);
+                    $retVal = _comment_post($dbLink, $apiUserToken, $requestData);
                     break;
 
                 case 'GET':
-                    $retVal = _comment_get($dbLink, $requestData);
+                    $retVal = _comment_get($dbLink, $apiUserToken, $requestData);
                     break;
 
                 default:

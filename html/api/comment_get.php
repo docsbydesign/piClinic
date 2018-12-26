@@ -52,7 +52,7 @@ exitIfCalledFromBrowser(__FILE__);
 /*
  *
  */
-function _comment_get ($dbLink, $requestArgs) {
+function _comment_get ($dbLink, $apiUserToken, $requestArgs) {
     /*
      *  Initialize profiling when enabled in piClinicConfig.php
      */

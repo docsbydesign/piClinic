@@ -104,11 +104,14 @@ profileLogStart ($profileData);
 
 // get the query paramater data from the request 
 $requestData = readRequestData();
+$apiUserToken = getTokenFromHeaders();
+
+$retVal = array();
 $dbLink = _openDBforAPI($requestData);
 
 profileLogCheckpoint($profileData,'DB_OPEN');
 
-if (empty($requestData['token'])){
+if (empty($apiUserToken)){
     // caller did not pass a security token
     $retVal = formatMissingTokenError ($retVal, 'staff');
 } else {
@@ -116,20 +119,20 @@ if (empty($requestData['token'])){
         __FILE__,
         'session',
         $_SERVER['REQUEST_METHOD'],
-        $requestData['token'],
+        $apiUserToken,
         $_SERVER['QUERY_STRING'],
         json_encode(getallheaders ()),
         null,
         null,
         null);
 
-    if (!validTokenString($requestData['token'])) {
-        $retVal = logInvalidTokenError ($dbLink, $retVal, $requestData['token'], 'staff', $logData);
+    if (!validTokenString($apiUserToken)) {
+        $retVal = logInvalidTokenError ($dbLink, $retVal, $apiUserToken, 'staff', $logData);
     } else {
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'POST':
-                if (checkUiSessionAccess($dbLink, $requestData['token'], PAGE_ACCESS_ADMIN)) {
-                    $retVal = _staff_post($dbLink, $requestData);
+                if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_CLINIC)) {
+                    $retVal = _staff_post($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
                     $retVal['httpResponse'] = 403;
@@ -141,8 +144,8 @@ if (empty($requestData['token'])){
                 break;
 
             case 'GET':
-                if (checkUiSessionAccess($dbLink, $requestData['token'], PAGE_ACCESS_CLINIC)) {
-                    $retVal = _staff_get($dbLink, $requestData);
+                if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_STAFF)) {
+                    $retVal = _staff_get($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
                     $retVal['httpResponse'] = 403;
@@ -154,8 +157,8 @@ if (empty($requestData['token'])){
                 break;
 
             case 'PATCH':
-                if (checkUiSessionAccess($dbLink, $requestData['token'], PAGE_ACCESS_CLINIC)) {
-                    $retVal = _staff_patch($dbLink, $requestData);
+                if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_CLINIC)) {
+                    $retVal = _staff_patch($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
                     $retVal['httpResponse'] = 403;
@@ -167,8 +170,8 @@ if (empty($requestData['token'])){
                 break;
 
             case 'DELETE':
-                if (checkUiSessionAccess($dbLink, $requestData['token'], PAGE_ACCESS_CLINIC)) {
-                    $retVal = _staff_delete($dbLink, $requestData);
+                if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_CLINIC)) {
+                    $retVal = _staff_delete($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
                     $retVal['httpResponse'] = 403;

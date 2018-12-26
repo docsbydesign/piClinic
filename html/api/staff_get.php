@@ -58,7 +58,7 @@
 require_once 'api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
-function _staff_get ($dbLink, $requestArgs) {
+function _staff_get ($dbLink,  $apiUserToken, $requestArgs) {
     /*
      *  Initialize profiling when enabled in piClinicConfig.php
      */

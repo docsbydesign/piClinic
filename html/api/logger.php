@@ -44,11 +44,12 @@ require_once 'logger_get.php';
 $profileData = [];
 profileLogStart($profileData);
 
-//  Initilaize return value object
-$retVal = array();
-
 // Get the query paramater data from the request
 $requestData = readRequestData();
+$apiUserToken = getTokenFromHeaders();
+
+//  Initilaize return value object
+$retVal = array();
 
 // Open the database. All subordinate functions assume access to the DB
 $dbLink = _openDBforAPI($requestData);
@@ -59,7 +60,7 @@ profileLogCheckpoint($profileData,'DB_OPEN');
 $retVal = array();
 $retVal['contentType'] = 'application/json; charset=utf-8';
 
-if (empty($requestData['token'])){
+if (empty($apiUserToken)){
     $retVal = formatMissingTokenError ($retVal, 'logger');
 } else {
     // Initalize the log entry for this call
@@ -75,16 +76,16 @@ if (empty($requestData['token'])){
         null,
         null);
 
-    if (!validTokenString($requestData['token'])) {
-        $retVal = logInvalidTokenError ($dbLink, $retVal, $requestData['token'], 'logger', $logData);
+    if (!validTokenString($apiUserToken)) {
+        $retVal = logInvalidTokenError ($dbLink, $retVal, $apiUserToken, 'logger', $logData);
     } else {
         // token is OK so we can continue
-        $logData['userToken'] = $requestData['token'];
+        $logData['userToken'] = $apiUserToken;
         // Caller has a valid token, but check access before processing the request
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'POST':
-                if (checkUiSessionAccess($dbLink, $requestData['token'], PAGE_ACCESS_ADMIN)) {
-                    $retVal = _logger_post($dbLink, $requestData);
+                if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_ADMIN)) {
+                    $retVal = _logger_post($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
                     $retVal['httpResponse'] = 403;
@@ -93,8 +94,8 @@ if (empty($requestData['token'])){
                 break;
 
             case 'GET':
-                if (checkUiSessionAccess($dbLink, $requestData['token'], PAGE_ACCESS_STAFF)) {
-                    $retVal = _logger_get($dbLink, $requestData);
+                if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_STAFF)) {
+                    $retVal = _logger_get($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
                     $retVal['httpResponse'] = 403;

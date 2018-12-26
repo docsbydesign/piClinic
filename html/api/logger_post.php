@@ -23,7 +23,7 @@
 require_once 'api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
-function _logger_post($dbLink, $requestArgs) {
+function _logger_post($dbLink, $apiUserToken, $requestArgs) {
     /*
      * Initialize profile data if configured in piClinicConfig.php
      */

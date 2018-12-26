@@ -50,7 +50,7 @@ exitIfCalledFromBrowser(__FILE__);
  *  Checks the username and password and, if they are valid,
  *    creates a new user session.
  */
-function _session_patch ($dbLink, $requestArgs) {
+function _session_patch ($dbLink, $apiUserToken, $requestArgs) {
     /*
      *      Initialize profiling if enabled in piClinicConfig.php
      */
@@ -64,7 +64,7 @@ function _session_patch ($dbLink, $requestArgs) {
 
     // Initalize the log entry for this call
     //  more fields will be added later in the routine
-    $logData = createLogEntry ('API', __FILE__, 'session', $_SERVER['REQUEST_METHOD'], $requestArgs['token'], null, null, null, null, null);
+    $logData = createLogEntry ('API', __FILE__, 'session', $_SERVER['REQUEST_METHOD'],  $apiUserToken, null, null, null, null, null);
 
 	// check for required parameters
     // must have at least one, and can have both.
@@ -109,8 +109,7 @@ function _session_patch ($dbLink, $requestArgs) {
     // Make sure that the token returns a valid session record
 	$userInfo = null;
 	$getQueryString = "SELECT * FROM `".
-		DB_TABLE_SESSION. "` WHERE `Token` = '".
-		$requestArgs['token']."';";
+		DB_TABLE_SESSION. "` WHERE `Token` = '" . $apiUserToken. "';";
 	$dbInfo['$getQueryString'] = $getQueryString;
 
 	$returnValue = getDbRecords($dbLink, $getQueryString);
@@ -181,7 +180,7 @@ function _session_patch ($dbLink, $requestArgs) {
     }
 
     // add the token value
-    $dbArgs['token'] = $requestArgs['token'];
+    $dbArgs['token'] =  $apiUserToken;
 
     // here we have a valid username and password so create a session
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
@@ -217,7 +216,7 @@ function _session_patch ($dbLink, $requestArgs) {
 
 		// get the new session data to return
         // create query string for get operation
-        $getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''. $requestArgs['token'] . '\';';
+        $getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''. $apiUserToken . '\';';
         $dbInfo ['queryString'] = $getQueryString;
         // get the session record that matches--there should be only one
         $getReturnValue = getDbRecords($dbLink, $getQueryString);

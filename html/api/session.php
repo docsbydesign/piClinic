@@ -77,6 +77,7 @@ require_once '../shared/piClinicConfig.php';
 require_once '../shared/dbUtils.php';
 require_once '../shared/logUtils.php';
 require_once '../shared/profile.php';
+require_once '../shared/security.php';
 require_once 'api_common.php';
 require_once 'session_common.php';
 require_once 'session_post.php';
@@ -92,6 +93,7 @@ profileLogStart ($profileData);
 
 // Get the query paramater data from the request
 $requestData = readRequestData();
+$apiUserToken = getTokenFromHeaders();
 $dbLink = _openDBforAPI($requestData);
 
 profileLogCheckpoint($profileData,'DB_OPEN');
@@ -111,11 +113,11 @@ $logData = createLogEntry ('API',
 // None of these methods require an access check
 switch ($_SERVER['REQUEST_METHOD']) {
 	case 'POST':
-		$retVal = _session_post($dbLink, $requestData);
+		$retVal = _session_post($dbLink, $apiUserToken, $requestData);
 		break;
 	
 	case 'GET':
-		$retVal = _session_get($dbLink, $requestData);
+		$retVal = _session_get($dbLink, $apiUserToken, $requestData);
 		break;
 
     case 'PATCH':
@@ -123,7 +125,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         // these methods require a valid token
         $retVal['debug']['requestData'] = $requestData;
         $retVal['debug']['reqHeaders'] =  getallheaders ();
-        if (empty($requestData['token'])){
+        if (empty($apiUserToken)){
             // caller does not have a valid security token
             // caller did not pass a security token
             $retVal = formatMissingTokenError ($retVal, 'session');
@@ -132,17 +134,17 @@ switch ($_SERVER['REQUEST_METHOD']) {
             writeEntryToLog($dbLink, $logData);
         } else {
             // token is OK so we can continue
-            if (!validTokenString($requestData['token'])) {
-                $retVal = logInvalidTokenError ($dbLink, $retVal, $requestData['token'], 'session', $logData);
+            if (!validTokenString($apiUserToken)) {
+                $retVal = logInvalidTokenError ($dbLink, $retVal, $apiUserToken, 'session', $logData);
             } else {
                 switch ($_SERVER['REQUEST_METHOD']) {
                     case 'PATCH':
                         // any user with a valid token can access this method
-                        $retVal = _session_patch($dbLink, $requestData);
+                        $retVal = _session_patch($dbLink, $apiUserToken,  $requestData);
                         break;
                     case 'DELETE':
                         // any user with a valid token can access this method
-                        $retVal = _session_delete($dbLink, $requestData);
+                        $retVal = _session_delete($dbLink, $apiUserToken, $requestData);
                         break;
                 }
             }
