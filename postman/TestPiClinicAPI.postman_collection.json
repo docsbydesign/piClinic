@@ -578,7 +578,7 @@
 			"name": "Session login/out",
 			"item": [
 				{
-					"name": "Success Tests",
+					"name": "Session Open",
 					"item": [
 						{
 							"name": "Get SystemAdmin token API",
@@ -671,7 +671,13 @@
 								}
 							},
 							"response": []
-						},
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Success Tests",
+					"item": [
 						{
 							"name": "Change session language",
 							"event": [
@@ -773,7 +779,304 @@
 								}
 							},
 							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Error Tests",
+					"item": [
+						{
+							"name": "Patch Session Access  Missing Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
 						},
+						{
+							"name": "Test Missing Token Error Message",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
+										"exec": [
+											"pm.test(\"Log retrieved successfully\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"var lastMessage = null;\r",
+											"\r",
+											"if (jsonData.count > 1) {\r",
+											"    lastMessage = jsonData.data[0];\r",
+											"} else {\r",
+											"    lastMessage = jsonData.data;    \r",
+											"}\r",
+											"\r",
+											"pm.test(\"Log message correct.\", function() {\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Missing token') > 0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logger.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Patch Session Access Invalid Token Format",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?token={{InvalidToken_Format}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{InvalidToken_Format}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test Invalid Token Error Message",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
+										"exec": [
+											"pm.test(\"Log retrieved successfully\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"var lastMessage = null;\r",
+											"\r",
+											"if (jsonData.count > 1) {\r",
+											"    lastMessage = jsonData.data[0];\r",
+											"} else {\r",
+											"    lastMessage = jsonData.data;    \r",
+											"}\r",
+											"\r",
+											"pm.test(\"Log message correct.\", function() {\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token') > 0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logger.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Session Access Invalid Token Format",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?token={{InvalidToken_Format}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{InvalidToken_Format}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test Invalid Token Error Message",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
+										"exec": [
+											"pm.test(\"Log retrieved successfully\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"var lastMessage = null;\r",
+											"\r",
+											"if (jsonData.count > 1) {\r",
+											"    lastMessage = jsonData.data[0];\r",
+											"} else {\r",
+											"    lastMessage = jsonData.data;    \r",
+											"}\r",
+											"\r",
+											"pm.test(\"Log message correct.\", function() {\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token') > 0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logger.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Session Close",
+					"item": [
 						{
 							"name": "Close current session API",
 							"event": [
@@ -862,132 +1165,6 @@
 						}
 					],
 					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Error Tests",
-					"item": [
-						{
-							"name": "Patch Session Access  Missing Token",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
-										"exec": [
-											"pm.test(\"Invalid token was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/session.php",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"session.php"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Patch Session Access Invalid Token Format",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
-										"exec": [
-											"pm.test(\"Invalid token was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/session.php?token={{InvalidToken_Format}}",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{InvalidToken_Format}}"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Session Access Invalid Token Format",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
-										"exec": [
-											"pm.test(\"Invalid token was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/session.php?token={{InvalidToken_Format}}",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"session.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{InvalidToken_Format}}"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"_postman_isSubFolder": true
 				}
 			]
 		},
@@ -995,7 +1172,7 @@
 			"name": "Logger API Test",
 			"item": [
 				{
-					"name": "Success Tests",
+					"name": "Session Open",
 					"item": [
 						{
 							"name": "Get SystemAdmin token",
@@ -1088,7 +1265,13 @@
 								}
 							},
 							"response": []
-						},
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Success Tests",
+					"item": [
 						{
 							"name": "LoggerTest-BasicFields",
 							"event": [
@@ -1218,7 +1401,207 @@
 								}
 							},
 							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Error Tests",
+					"item": [
+						{
+							"name": "Get Logger Access  Missing Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/logger.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logger.php"
+									]
+								}
+							},
+							"response": []
 						},
+						{
+							"name": "Test Missing Token Error Message",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
+										"exec": [
+											"pm.test(\"Log retrieved successfully\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"var lastMessage = null;\r",
+											"\r",
+											"if (jsonData.count > 1) {\r",
+											"    lastMessage = jsonData.data[0];\r",
+											"} else {\r",
+											"    lastMessage = jsonData.data;    \r",
+											"}\r",
+											"\r",
+											"pm.test(\"Log message correct.\", function() {\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Missing token') > 0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logger.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get logger access Invalid Token Format",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/logger.php?token={{InvalidToken_Format}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logger.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{InvalidToken_Format}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test Invalid Token Error Message",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
+										"exec": [
+											"pm.test(\"Log retrieved successfully\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"var lastMessage = null;\r",
+											"\r",
+											"if (jsonData.count > 1) {\r",
+											"    lastMessage = jsonData.data[0];\r",
+											"} else {\r",
+											"    lastMessage = jsonData.data;    \r",
+											"}\r",
+											"\r",
+											"pm.test(\"Log message correct.\", function() {\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token') > 0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logger.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Session Close",
+					"item": [
 						{
 							"name": "Close current session",
 							"event": [
@@ -1307,90 +1690,6 @@
 						}
 					],
 					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Error Tests",
-					"item": [
-						{
-							"name": "Get Logger Access  Missing Token",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
-										"exec": [
-											"pm.test(\"Invalid token was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/logger.php",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"logger.php"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get logger access Invalid Token Format Copy",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
-										"exec": [
-											"pm.test(\"Invalid token was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/logger.php?token={{InvalidToken_Format}}",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"logger.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{InvalidToken_Format}}"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"_postman_isSubFolder": true
 				}
 			],
 			"event": [
@@ -1420,91 +1719,7 @@
 			"name": "Staff API Test",
 			"item": [
 				{
-					"name": "Error Tests",
-					"item": [
-						{
-							"name": "Get Staff Access  Missing Token",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
-										"exec": [
-											"pm.test(\"Invalid token was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/staff.php",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"staff.php"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get staff access Invalid Token Format",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
-										"exec": [
-											"pm.test(\"Invalid token was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/staff.php?token={{InvalidToken_Format}}",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"staff.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{InvalidToken_Format}}"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Success Tests",
+					"name": "Session Open",
 					"item": [
 						{
 							"name": "Get SystemAdmin token",
@@ -1556,6 +1771,54 @@
 							},
 							"response": []
 						},
+						{
+							"name": "Get Session Access",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Access check was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?token={{token}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Success Tests",
+					"item": [
 						{
 							"name": "Create new Staff member",
 							"event": [
@@ -2006,7 +2269,207 @@
 								}
 							},
 							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Error Tests",
+					"item": [
+						{
+							"name": "Get Staff Access  Missing Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/staff.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"staff.php"
+									]
+								}
+							},
+							"response": []
 						},
+						{
+							"name": "Test Missing Token Error Message",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
+										"exec": [
+											"pm.test(\"Log retrieved successfully\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"var lastMessage = null;\r",
+											"\r",
+											"if (jsonData.count > 1) {\r",
+											"    lastMessage = jsonData.data[0];\r",
+											"} else {\r",
+											"    lastMessage = jsonData.data;    \r",
+											"}\r",
+											"\r",
+											"pm.test(\"Log message correct.\", function() {\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Missing token') > 0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logger.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get staff access Invalid Token Format",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/staff.php?token={{InvalidToken_Format}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"staff.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{InvalidToken_Format}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test Invalid Token Error Message",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
+										"exec": [
+											"pm.test(\"Log retrieved successfully\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"var lastMessage = null;\r",
+											"\r",
+											"if (jsonData.count > 1) {\r",
+											"    lastMessage = jsonData.data[0];\r",
+											"} else {\r",
+											"    lastMessage = jsonData.data;    \r",
+											"}\r",
+											"\r",
+											"pm.test(\"Log message correct.\", function() {\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token') > 0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logger.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Session Close",
+					"item": [
 						{
 							"name": "Close current session",
 							"event": [
@@ -2102,94 +2565,10 @@
 			"name": "Comment API Test",
 			"item": [
 				{
-					"name": "Error Tests",
+					"name": "Session Open",
 					"item": [
 						{
-							"name": "Get Comment Access  Missing Token",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
-										"exec": [
-											"pm.test(\"Invalid token was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/comment.php",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"comment.php"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get comment access Invalid Token Format",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
-										"exec": [
-											"pm.test(\"Invalid token check was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/comment.php?token={{InvalidToken_Format}}",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"comment.php"
-									],
-									"query": [
-										{
-											"key": "token",
-											"value": "{{InvalidToken_Format}}"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Success Tests",
-					"item": [
-						{
-							"name": "Get SystemAdmin token Copy",
+							"name": "Get SystemAdmin token",
 							"event": [
 								{
 									"listen": "test",
@@ -2238,6 +2617,54 @@
 							},
 							"response": []
 						},
+						{
+							"name": "Get Session Access",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Access check was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?token={{token}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Success Tests",
+					"item": [
 						{
 							"name": "Post a new comment",
 							"event": [
@@ -2353,7 +2780,207 @@
 								}
 							},
 							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Error Tests",
+					"item": [
+						{
+							"name": "Get Comment Access  Missing Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/comment.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"comment.php"
+									]
+								}
+							},
+							"response": []
 						},
+						{
+							"name": "Test Missing Token Error Message",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
+										"exec": [
+											"pm.test(\"Log retrieved successfully\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"var lastMessage = null;\r",
+											"\r",
+											"if (jsonData.count > 1) {\r",
+											"    lastMessage = jsonData.data[0];\r",
+											"} else {\r",
+											"    lastMessage = jsonData.data;    \r",
+											"}\r",
+											"\r",
+											"pm.test(\"Log message correct.\", function() {\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Missing token') > 0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logger.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get comment access Invalid Token Format",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token check was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/comment.php?token={{InvalidToken_Format}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"comment.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{InvalidToken_Format}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test Invalid Token Error Message",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
+										"exec": [
+											"pm.test(\"Log retrieved successfully\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"var lastMessage = null;\r",
+											"\r",
+											"if (jsonData.count > 1) {\r",
+											"    lastMessage = jsonData.data[0];\r",
+											"} else {\r",
+											"    lastMessage = jsonData.data;    \r",
+											"}\r",
+											"\r",
+											"pm.test(\"Log message correct.\", function() {\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token') > 0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/logger.php?token={{token}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logger.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Session Close",
+					"item": [
 						{
 							"name": "Close current session",
 							"event": [
