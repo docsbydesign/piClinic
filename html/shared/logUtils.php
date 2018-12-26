@@ -98,30 +98,40 @@ function createLogEntry ($logClass,
                          $logQueryString = null,
                          $logBeforeObject = null,
                          $logAfterObject = null,
-                         $logStatus = null,
-                         $logMessage = null)
+                         $logStatusCode = null,
+                         $logStatusMessage = null)
 {
     $logEntryObject = [];
     if (empty($logClass)) return false; //required field
     $logEntryObject['logClass'] = $logClass;
+
     if (empty($sourceModule)) return false; //required field
     $logEntryObject['sourceModule'] = $sourceModule;
-    if (empty($userToken)) return false; //required field
-    $logEntryObject['userToken'] = $userToken;
+
     if (empty($logTable)) return false; //required field
     $logEntryObject['logTable'] = $logTable;
+
     if (empty($logAction)) return false; //required field
     $logEntryObject['logAction'] = $logAction;
+
     if (!empty($logData['logQueryString']) && is_array($logData['logQueryString'])) {
         $logData['logQueryString'] = "*" . json_encode($logData['logQueryString']);
     } else {
         $logEntryObject['logQueryString'] = $logQueryString;
     }
     $logEntryObject['userToken'] = $userToken;
-    $logEntryObject['logBeforeData'] = json_encode($logBeforeObject);
-    $logEntryObject['logAfterData'] = json_encode($logAfterObject);
-    $logEntryObject['logStatusCode'] = $logStatus;
-    $logEntryObject['logStatusMessage'] = $logMessage;
+    if (!empty($logBeforeObject)) {
+        $logEntryObject['logBeforeData'] = json_encode($logBeforeObject);
+    } else {
+        $logEntryObject['logBeforeData'] = null;
+    }
+    if (!empty($logAfterObject)) {
+        $logEntryObject['logAfterData'] = json_encode($logAfterObject);
+    } else {
+        $logEntryObject['logAfterData'] = null;
+    }
+    $logEntryObject['logStatusCode'] = $logStatusCode;
+    $logEntryObject['logStatusMessage'] = $logStatusMessage;
     $now = new DateTime();
     $logEntryObject['createdDate'] = $now->format('Y-m-d H:i:s');
     return $logEntryObject;

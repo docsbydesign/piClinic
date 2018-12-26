@@ -93,18 +93,13 @@ if (empty($requestData['token'])){
         $_SERVER['REQUEST_METHOD'],
         null,
         $_SERVER['QUERY_STRING'],
-        null,
+        json_encode(getallheaders ()),
         null,
         null,
         null);
 
     if (!validTokenString($requestData['token'])) {
-        $retVal['contentType'] = CONTENT_TYPE_JSON;
-        $retVal['httpResponse'] = 400;
-        $retVal['httpReason'] = "Unable to access comment resources. Invalid token.";
-        $logData['logStatusCode'] = $retVal['httpResponse'];
-        $logData['logStatusMessage'] = $retVal['httpReason'];
-        writeEntryToLog($dbLink, $logData);
+        $retVal = logInvalidTokenError ($dbLink, $retVal, $requestData['token'], 'comment', $logData);
     } else {
         $logData['userToken'] = $requestData['token'];
         if (checkUiSessionAccess($dbLink, $requestData['token'], PAGE_ACCESS_READONLY)) {

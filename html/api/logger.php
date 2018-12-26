@@ -72,18 +72,13 @@ if (empty($requestData['token'])){
         $_SERVER['REQUEST_METHOD'],
         null,
         $_SERVER['QUERY_STRING'],
-        null,
+        json_encode(getallheaders ()),
         null,
         null,
         null);
 
     if (!validTokenString($requestData['token'])) {
-        $retVal['contentType'] = CONTENT_TYPE_JSON;
-        $retVal['httpResponse'] = 400;
-        $retVal['httpReason']	= "Unable to access logger resources. Invalid token.";
-        $logData['LogStatusCode'] = $retVal['httpResponse'];
-        $logData['LogStatusMessage'] = $retVal['httpReason'];
-        writeEntryToLog ($dbLink, $logData);
+        $retVal = logInvalidTokenError ($dbLink, $retVal, $requestData['token'], 'logger', $logData);
     } else {
         // token is OK so we can continue
         $logData['userToken'] = $requestData['token'];

@@ -26,6 +26,21 @@
  *********************/
 require_once '../shared/piClinicConfig.php';
 
+function logInvalidTokenError ($dbLink, $returnValue, $token, $actionName, $logData) {
+    if (!is_array($returnValue)) {
+        $returnValue = array();
+    }
+    $returnValue['contentType'] = CONTENT_TYPE_JSON;
+    $returnValue['httpResponse'] = 400;
+    $returnValue['httpReason']	= "Unable to access " . $actionName . " resources. Invalid token.";
+    $logData['userToken'] = $token;
+    $logData['logStatusCode'] = $returnValue['httpResponse'];
+    $logData['logStatusMessage'] = $returnValue['httpReason'];
+    writeEntryToLog ($dbLink, $logData);
+    return $returnValue;
+}
+
+
 function exitIfCalledFromBrowser($scriptFile) {
     if (basename($scriptFile) == basename($_SERVER['SCRIPT_NAME'])) {
         // the file was not included so return an error

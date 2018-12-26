@@ -67,7 +67,19 @@ function _session_get ($dbLink, $requestArgs) {
 	$dbInfo = array();
 	$dbInfo ['requestArgs'] = $requestArgs;
 
-	// Make sure the token is present and properly formatted.
+    $logData = createLogEntry ('API',
+        __FILE__,
+        'session',
+        $_SERVER['REQUEST_METHOD'],
+        null,
+        $_SERVER['QUERY_STRING'],
+        json_encode(getallheaders ()),
+        null,
+        null,
+        null);
+
+
+    // Make sure the token is present and properly formatted.
 	if (empty($requestArgs['token'])) {
 		$returnValue['contentType'] = CONTENT_TYPE_JSON;
 		$returnValue['debug'] = $dbInfo;
@@ -75,12 +87,7 @@ function _session_get ($dbLink, $requestArgs) {
 		$returnValue['httpReason'] = 'Required parameter is missing.';
 		return $returnValue;
     } else if (!validTokenString($requestArgs['token'])) {
-        $returnValue['contentType'] = CONTENT_TYPE_JSON;
-        $returnValue['debug'] = $dbInfo;
-        $returnValue['httpResponse'] = 400;
-        $returnValue['httpReason']	= "Unable to access user session. Invalid token.";
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        $returnValue = logInvalidTokenError ($dbLink, $returnValue, $requestArgs['token'], 'session', $logData);
         writeEntryToLog ($dbLink, $logData);
         return $returnValue;
 	}

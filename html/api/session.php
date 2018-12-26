@@ -102,11 +102,11 @@ $logData = createLogEntry ('API',
     $_SERVER['REQUEST_METHOD'],
     null,
     $_SERVER['QUERY_STRING'],
+    json_encode(getallheaders ()),
     null,
     null,
-    null,
-    null);
-
+    null
+    );
 
 // None of these methods require an access check
 switch ($_SERVER['REQUEST_METHOD']) {
@@ -121,25 +121,19 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'PATCH':
     case 'DELETE':
         // these methods require a valid token
+        $retVal['debug']['requestData'] = $requestData;
+        $retVal['debug']['reqHeaders'] =  getallheaders ();
         if (empty($requestData['token'])){
             // caller does not have a valid security token
             $retVal['httpResponse'] = 400;
-            $retVal['debug']['requestData'] = $requestData;
-            $retVal['debug']['reqHeaders'] =  getallheaders ();
             $retVal['httpReason']	= "Unable to access session resources. Missing token.";
             $logData['logStatusCode'] = $retVal['httpResponse'];
             $logData['logStatusMessage'] = $retVal['httpReason'];
             writeEntryToLog($dbLink, $logData);
         } else {
             // token is OK so we can continue
-            $logData['userToken'] = $requestData['token'];
             if (!validTokenString($requestData['token'])) {
-                $retVal['contentType'] = CONTENT_TYPE_JSON;
-                $retVal['httpResponse'] = 400;
-                $retVal['httpReason'] = "Unable to access session resources. Invalid token.";
-                $logData['logStatusCode'] = $retVal['httpResponse'];
-                $logData['logStatusMessage'] = $retVal['httpReason'];
-                writeEntryToLog($dbLink, $logData);
+                $retVal = logInvalidTokenError ($dbLink, $retVal, $requestData['token'], 'session', $logData);
             } else {
                 switch ($_SERVER['REQUEST_METHOD']) {
                     case 'PATCH':
