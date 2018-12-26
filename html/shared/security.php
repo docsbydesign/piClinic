@@ -58,41 +58,26 @@ function getSessionInfo ($dbLink, $sessionToken) {
     $httpReason = '';
     $dbOpenedHere = false;
     $sessionInfo = array();
-    $dbAccessGranted = true;
 
     if (empty($dbLink)){
         // open DB to check for access
         $dbLink = _openDB();
         $dbOpenError = mysqli_connect_errno();
-        if ( $dbOpenError  != 0  ) {
-            // access denied due to DB access error
-            $dbAccessGranted = false;
-            if (API_DEBUG_MODE) {
-                $httpReason = 'Database error';
-            }
-        } else {
+        if ( $dbOpenError  == 0  ) {
             $dbOpenedHere = true;
         }
     }
 
-    if ($dbAccessGranted) {
+    if ($dbLink) {
         $requestParams = array();
         $requestParams['token'] = $sessionToken;
         $sessionData = _session_get($dbLink, $sessionToken, $requestParams);
         if ($sessionData['httpResponse'] == 200) {
             // successful call, now check the response\
             $sessionInfo = $sessionData['data'];
-        } else {
-            $dbAccessGranted = false;
-            if (API_DEBUG_MODE) {
-                $httpReason = 'Invalid session.';
-            }
         }
     }
-    if (!empty($httpReason)) {
-        // set the header only if access is not granted.
-        header ('httpReason: '. $httpReason);
-    }
+
     if ($dbOpenedHere) {
         // close the db if we opened it for this check
         @mysqli_close($dbLink);
@@ -111,7 +96,6 @@ function checkUiSessionAccess($dbLink, $sessionToken, $pageAccess) {
     // 0 means session is not valid
     if ($sessionInfo['token'] != '0') {
         // valid session so check page access
-        $sessionAccess = 0;
         switch ($sessionInfo['accessGranted']) {
             case 'ClinicStaff':
                 $sessionAccess = PAGE_ACCESS_STAFF;
@@ -138,14 +122,12 @@ function checkUiSessionAccess($dbLink, $sessionToken, $pageAccess) {
             $dbAccessGranted = false;
             if (API_DEBUG_MODE) {
                 header('Debug_SECURITY_AccessDenied: '.strval($sessionAccess).'<'.strval($pageAccess));
-                $httpReason = 'Page access denied.';
             }
         }
     } else {
         $dbAccessGranted = false;
         if (API_DEBUG_MODE) {
-            header('Debug_SECURITY_Token: (cookie != DB  )'.$sessionToken. ' != '.$sessionInfo['token']);
-            $httpReason = 'Invalid token.';
+            header('Debug_SECURITY_Token: (cookie != DB  )'. $sessionToken. ' != '.$sessionInfo['token']);
         }
     }
 
