@@ -98,15 +98,15 @@ function _session_post ($dbLink, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to create new session. Required field(s): ". $missingColumnList. " are missing.";
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
 		return $returnValue;
 	}
 
 	// Don't save the whole query string because it has the password in plain text and the log isn't encrypted
     //  but at this point we know the username is present so we can save that in the log.
-    $logData['LogQueryString'] = 'username='. $requestArgs['username'];
+    $logData['logQueryString'] = 'username='. $requestArgs['username'];
     $dbInfo = array();
 
     // Make sure that the Username returns a valid user record
@@ -127,8 +127,8 @@ function _session_post ($dbLink, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 404;
 		$returnValue['httpReason']	= "The username is not in the system. Check the username and try again.";
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
 		return $returnValue;
 	} else {
@@ -141,8 +141,8 @@ function _session_post ($dbLink, $requestArgs) {
 			}
 			$returnValue['httpResponse'] = 500;
 			$returnValue['httpReason']	= "Multiple usernames were found in the system. Check the username and try again or contact the administrator.";
-            $logData['LogStatusCode'] = $returnValue['httpResponse'];
-            $logData['LogStatusMessage'] = $returnValue['httpReason'];
+            $logData['logStatusCode'] = $returnValue['httpResponse'];
+            $logData['logStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
 			return $returnValue;
 		}
@@ -152,8 +152,8 @@ function _session_post ($dbLink, $requestArgs) {
 		// account has been disabled
 		$returnValue['httpResponse'] = 403;
 		$returnValue['httpReason']	= 'Account is disabled.';
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
 		return $returnValue;
 	}
@@ -171,8 +171,8 @@ function _session_post ($dbLink, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 403;
 		$returnValue['httpReason']	= 'Password does not match the password saved for this user.';
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
 		return $returnValue;
 	}
@@ -268,9 +268,9 @@ function _session_post ($dbLink, $requestArgs) {
 	if (API_DEBUG_MODE) {
 		$returnValue['debug'] = $dbInfo;
 	}
-	$logData['LogAfterData'] = json_encode($returnValue['data']);
-    $logData['LogStatusCode'] = $returnValue['httpResponse'];
-    $logData['LogStatusMessage'] = $returnValue['httpReason'];
+	$logData['logAfterData'] = json_encode($returnValue['data']);
+    $logData['logStatusCode'] = $returnValue['httpResponse'];
+    $logData['logStatusMessage'] = $returnValue['httpReason'];
     writeEntryToLog ($dbLink, $logData);
 	profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;

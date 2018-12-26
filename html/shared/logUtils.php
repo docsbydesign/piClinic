@@ -42,10 +42,10 @@ function profileLog () {
 */
 function logApiError($inputParamList,
                      $error='',
-                     $scriptFile='NotSpecified',
-                     $username='NotSpecified',
-                     $table='NotSpecified',
-                     $message=null) {
+                     $scriptFile = 'NotSpecified',
+                     $username = 'NotSpecified',
+                     $table = 'NotSpecified',
+                     $message = null) {
     /*
      *   This is for errors that cannot be logged to the DB (for example, because
      *      the DB could not be opened.
@@ -93,34 +93,34 @@ function logApiError($inputParamList,
 function createLogEntry ($logClass,
                          $sourceModule,
                          $userToken,
-                         $table,
-                         $action,
-                         $queryString=null,
-                         $beforeObject=null,
-                         $afterObject=null,
-                         $status=null,
-                         $message=null)
+                         $logTable,
+                         $logAction,
+                         $logQueryString = null,
+                         $logBeforeObject = null,
+                         $logAfterObject = null,
+                         $logStatus = null,
+                         $logMessage = null)
 {
     $logEntryObject = [];
     if (empty($logClass)) return false; //required field
-    $logEntryObject['LogClass'] = $logClass;
+    $logEntryObject['logClass'] = $logClass;
     if (empty($sourceModule)) return false; //required field
-    $logEntryObject['SourceModule'] = $sourceModule;
+    $logEntryObject['sourceModule'] = $sourceModule;
     if (empty($sessionID)) return false; //required field
-    $logEntryObject['UserToken'] = $userToken;
-    if (empty($table)) return false; //required field
-    $logEntryObject['LogTable'] = $table;
-    if (empty($action)) return false; //required field
-    $logEntryObject['LogAction'] = $action;
-    if (!empty($logData['LogQueryString']) && is_array($logData['LogQueryString'])) {
-        $logData['LogQueryString'] = "*" . json_encode($logData['LogQueryString']);
+    $logEntryObject['userToken'] = $userToken;
+    if (empty($logTable)) return false; //required field
+    $logEntryObject['logTable'] = $logTable;
+    if (empty($logAction)) return false; //required field
+    $logEntryObject['logAction'] = $logAction;
+    if (!empty($logData['logQueryString']) && is_array($logData['logQueryString'])) {
+        $logData['logQueryString'] = "*" . json_encode($logData['logQueryString']);
     } else {
-        $logEntryObject['LogQueryString'] = $queryString;
+        $logEntryObject['logQueryString'] = $logQueryString;
     }
-    $logEntryObject['LogBeforeData'] = json_encode($beforeObject);
-    $logEntryObject['LogAfterData'] = json_encode($afterObject);
-    $logEntryObject['LogStatusCode'] = $status;
-    $logEntryObject['LogStatusMessage'] = $message;
+    $logEntryObject['logBeforeData'] = json_encode($logBeforeObject);
+    $logEntryObject['logAfterData'] = json_encode($logAfterObject);
+    $logEntryObject['logStatusCode'] = $logStatus;
+    $logEntryObject['logStatusMessage'] = $logMessage;
     $now = new DateTime();
     $logEntryObject['createdDate'] = $now->format('Y-m-d H:i:s');
     return $logEntryObject;
@@ -133,20 +133,20 @@ function writeEntryToLog ($dbLink, $logData) {
     if ($dbLink === false) return false;
     //---------------
     // clean fields for writing to the DB
-    if (!empty($logData['LogQueryString']) && is_array($logData['LogQueryString'])) {
-        $logData['LogQueryString'] = "*" . json_encode($logData['LogQueryString']);
+    if (!empty($logData['logQueryString']) && is_array($logData['logQueryString'])) {
+        $logData['logQueryString'] = "*" . json_encode($logData['logQueryString']);
     }
-    if (!empty($logData['LogBeforeData']) && is_array($logData['LogBeforeData'])) {
-        $logData['LogBeforeData'] = "*" . json_encode($logData['LogBeforeData']);
+    if (!empty($logData['logBeforeData']) && is_array($logData['logBeforeData'])) {
+        $logData['logBeforeData'] = "*" . json_encode($logData['logBeforeData']);
     }
-    if (!empty($logData['LogAfterData']) && is_array($logData['LogAfterData'])) {
-        $logData['LogAfterData'] = "*" . json_encode($logData['LogAfterData']);
+    if (!empty($logData['logAfterData']) && is_array($logData['logAfterData'])) {
+        $logData['logAfterData'] = "*" . json_encode($logData['logAfterData']);
     }
-    if (!empty($logData['LogStatusCode']) && is_array($logData['LogStatusCode'])) {
-        $logData['LogStatusCode'] = "*" . json_encode($logData['LogStatusCode']);
+    if (!empty($logData['logStatusCode']) && is_array($logData['logStatusCode'])) {
+        $logData['logStatusCode'] = "*" . json_encode($logData['logStatusCode']);
     }
-    if (!empty($logData['LogStatusMessage']) && is_array($logData['LogStatusMessage'])) {
-        $logData['LogStatusMessage'] = "*" . json_encode($logData['LogStatusMessage']);
+    if (!empty($logData['logStatusMessage']) && is_array($logData['logStatusMessage'])) {
+        $logData['logStatusMessage'] = "*" . json_encode($logData['logStatusMessage']);
     }
     $dbInfo = [];
     $returnValue = [];

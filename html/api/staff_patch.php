@@ -190,7 +190,7 @@ function _staff_patch ($dbLink, $requestArgs) {
 		return $returnValue;
 	} else {
 		// record found so save the before version
-		$logData['before'] = json_encode($testReturnValue['data']);
+		$logData['logBeforeData'] = json_encode($testReturnValue['data']);
 	}
 	
 	// clean leading and trailing spaces from string fields
@@ -283,7 +283,7 @@ function _staff_patch ($dbLink, $requestArgs) {
 				DB_VIEW_STAFF_GET. "` WHERE `".$updateKey."` = '".
 				$requestArgs[$updateKey]."';";
 			$returnValue = getDbRecords($dbLink, $getQueryString);
-			$logData['LogAfterData'] = json_encode($returnValue['data']);
+			$logData['logAfterData'] = json_encode($returnValue['data']);
 			writeEntryToLog ($dbLink, $logData);
 			@mysqli_free_result($qResult);
 		}			

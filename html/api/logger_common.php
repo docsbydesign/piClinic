@@ -45,16 +45,16 @@ define ("LOGGER_DB_REQ_POST", 4, false);    // whether the field must appear in 
  */
 function getLoggerFieldInfo() {
     $returnValue = [
-        ["usertoken",   "UserToken",        false,  true,   true],
-        ["module",      "sourceModule",     false,  true,   true],
-        ["class",       "LogClass",         false,  true,   true],
-        ["table",       "LogTable",         false,  true,   true],
-        ["action",      "LogAction",        false,  true,   true],
-        ["query",       "LogQueryString",   false,  false,  false],
-        ["before",      "LogBeforeData",    false,  false,  false],
-        ["after",       "LogAfterData",     false,  false,  false],
-        ["status",      "LogStatusCode",    false,  true,   false],
-        ["message",     "logStatusMessage", false,  false,  false]
+        ["userToken",           "userToken",        false,  true,   true],
+        ["sourceModule",        "sourceModule",     false,  true,   true],
+        ["logClass",            "logClass",         false,  true,   true],
+        ["logTable",            "logTable",         false,  true,   true],
+        ["logAction",           "logAction",        false,  true,   true],
+        ["logQueryString",      "logQueryString",   false,  false,  false],
+        ["logBeforeData",       "logBeforeData",    false,  false,  false],
+        ["logAfterData",        "logAfterData",     false,  false,  false],
+        ["logStatusCode",       "logStatusCode",    false,  true,   false],
+        ["logStatusMessage",    "logStatusMessage", false,  false,  false]
     ];
     return $returnValue;
 }

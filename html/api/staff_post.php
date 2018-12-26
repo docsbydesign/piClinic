@@ -144,7 +144,7 @@ function _staff_post ($dbLink, $requestArgs) {
 		$returnValue = getDbRecords($dbLink, $getQueryString);
 		if ($returnValue['httpResponse'] == 200) {
 			// found the new record
-			$logData['LogAfterData'] = json_encode($returnValue['data']);
+			$logData['logAfterData'] = json_encode($returnValue['data']);
 			// adjust return value to reflect POST operation				
 			$returnValue['httpResponse'] = 201;
 			$returnValue['httpReason']	= 'Success';

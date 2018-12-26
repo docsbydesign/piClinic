@@ -989,32 +989,32 @@
 									"type": "text"
 								},
 								{
-									"key": "usertoken",
+									"key": "userToken",
 									"value": "{{token}}",
 									"type": "text"
 								},
 								{
-									"key": "module",
+									"key": "sourceModule",
 									"value": "_TEST_",
 									"type": "text"
 								},
 								{
-									"key": "class",
+									"key": "logClass",
 									"value": "AUTOTEST",
 									"type": "text"
 								},
 								{
-									"key": "table",
+									"key": "logTable",
 									"value": "_TEST_",
 									"type": "text"
 								},
 								{
-									"key": "action",
+									"key": "logAction",
 									"value": "POST",
 									"type": "text"
 								},
 								{
-									"key": "message",
+									"key": "logStatusMessage",
 									"value": "{{testMessage}}",
 									"type": "text"
 								}
@@ -1047,7 +1047,7 @@
 									"\r",
 									"pm.test(\"Basic Fields read data was correct\", function() {\r",
 									"    var jsonData = JSON.parse(responseBody);\r",
-									"    pm.expect(jsonData.data.LogStatusMessage === pm.testMessage);\r",
+									"    pm.expect(jsonData.data.logStatusMessage === pm.testMessage);\r",
 									"});"
 								],
 								"type": "text/javascript"

@@ -84,12 +84,12 @@ function _session_delete ($dbLink, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 404;
 		$returnValue['httpReason']	= "User session to delete not found.";
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
         return $returnValue;
 	} else {
-		$logData['LogBeforeData'] = json_encode($testReturnValue['data']);
+		$logData['logBeforeData'] = json_encode($testReturnValue['data']);
 	}
 
 	// if this session is already closed, exit without changing anything
@@ -98,8 +98,8 @@ function _session_delete ($dbLink, $requestArgs) {
 		// return not found because no valid session was found
 		$returnValue['httpResponse'] = 404;
 		$returnValue['httpReason']	= "User session was deleted in an earlier call.";
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
         return $returnValue;
 	}
@@ -150,8 +150,8 @@ function _session_delete ($dbLink, $requestArgs) {
 		$returnValue['httpReason']	= "User session deleted.";
 		@mysqli_free_result($qResult);
 	}
-    $logData['LogStatusCode'] = $returnValue['httpResponse'];
-    $logData['LogStatusMessage'] = $returnValue['httpReason'];
+    $logData['logStatusCode'] = $returnValue['httpResponse'];
+    $logData['logStatusMessage'] = $returnValue['httpReason'];
     writeEntryToLog ($dbLink, $logData);
 
 	$returnValue['contentType'] = CONTENT_TYPE_JSON;

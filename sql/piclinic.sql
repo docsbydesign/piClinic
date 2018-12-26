@@ -109,16 +109,16 @@ ALTER TABLE `session`
 DROP TABLE IF EXISTS `logger`;
 CREATE TABLE IF NOT EXISTS `logger` (
   `loggerId` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique record ID for logger records',
-  `SourceModule` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Module creating the log entry.',
-  `UserToken` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) sessionID of user.',
-  `LogClass` varchar(16) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) type of log entry.',
-  `LogTable` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB Table being accessed.',
-  `LogAction` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB action being attempted.',
-  `LogQueryString` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Query string that initiated the action',
-  `LogBeforeData` varchar(4096) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB Record before change.',
-  `LogAfterData` varchar(4096) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB Record after change.',
-  `LogStatusCode` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Status code of action.',
-  `LogStatusMessage` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Optional) Text status message resulting from action.',
+  `sourceModule` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Module creating the log entry.',
+  `userToken` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) sessionID of user.',
+  `logClass` varchar(16) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) type of log entry.',
+  `logTable` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB Table being accessed.',
+  `logAction` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB action being attempted.',
+  `logQueryString` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Query string that initiated the action',
+  `logBeforeData` varchar(4096) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB Record before change.',
+  `logAfterData` varchar(4096) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB Record after change.',
+  `logStatusCode` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Status code of action.',
+  `logStatusMessage` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Optional) Text status message resulting from action.',
   `createdDate` datetime NOT NULL COMMENT '(Autofill) The date and time this entry was created.'	
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table that logs data and error events.';
 

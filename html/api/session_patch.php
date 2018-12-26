@@ -103,15 +103,15 @@ function _session_patch ($dbLink, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to update session session. None of the required field(s): ". $missingColumnList. " were found.";
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
 		return $returnValue;
 	}
 
 	// Don't save the whole query string because it has the password in plain text and the log isn't encrypted
     //  but at this point we know the username is present so we can save that in the log.
-    $logData['LogQueryString'] = $_SERVER['QUERY_STRING'];
+    $logData['logQueryString'] = $_SERVER['QUERY_STRING'];
     $dbInfo = array();
     $dbInfo['requestArgs'] = $requestArgs;
 
@@ -133,8 +133,8 @@ function _session_patch ($dbLink, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 404;
 		$returnValue['httpReason']	= "The token did not locate a valid session. Check the token and try again.";
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
 		return $returnValue;
 	} else {
@@ -147,8 +147,8 @@ function _session_patch ($dbLink, $requestArgs) {
 			}
 			$returnValue['httpResponse'] = 500;
 			$returnValue['httpReason']	= "Multiple sessions were found with that token. Check the token and try again.";
-            $logData['LogStatusCode'] = $returnValue['httpResponse'];
-            $logData['LogStatusMessage'] = $returnValue['httpReason'];
+            $logData['logStatusCode'] = $returnValue['httpResponse'];
+            $logData['logStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
 			return $returnValue;
 		}
@@ -183,8 +183,8 @@ function _session_patch ($dbLink, $requestArgs) {
         $returnValue['httpResponse'] = 400;
         $returnValue['httpReason']	= "No valid parameter values were provided. Check the parameter values and try again..";
         $returnValue['debug'] = $dbInfo;
-        $logData['LogStatusCode'] = $returnValue['httpResponse'];
-        $logData['LogStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
         return $returnValue;
     }
@@ -259,9 +259,9 @@ function _session_patch ($dbLink, $requestArgs) {
 	if (API_DEBUG_MODE) {
 		$returnValue['debug'] = $dbInfo;
 	}
-	$logData['LogAfterData'] = json_encode($returnValue['data']);
-    $logData['LogStatusCode'] = $returnValue['httpResponse'];
-    $logData['LogStatusMessage'] = $returnValue['httpReason'];
+	$logData['logAfterData'] = json_encode($returnValue['data']);
+    $logData['logStatusCode'] = $returnValue['httpResponse'];
+    $logData['logStatusMessage'] = $returnValue['httpReason'];
     writeEntryToLog ($dbLink, $logData);
 	profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;

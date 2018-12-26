@@ -8,15 +8,15 @@
 /*
  * Request Args
  *      usertoken   [UserToken]     user session ID
- *      module  [SourceModule]      the file from which the log entry is made
- *      class   [LogClass]          log type enum
- *      table   [LogTable]          DB Table Name
- *      action  [LogAction]         API method
- *      query   [LogQueryString]    Query string (decoded)
- *      before  [LogBeforeData]     DB record as json string
- *      after   [LogAfterData]      DB record as json string
- *      status  [LogStatusCode]     HTTP Error value
- *      message [LogStatusMessage]  string (decoded)
+ *      [sourceModule]      the file from which the log entry is made
+ *      [logClass]          log type enum
+ *      [logTable]          DB Table Name
+ *      [logAction]         API method
+ *      [logQueryString]    Query string (decoded)
+ *      [logBeforeData]     DB record as json string
+ *      [logAfterData]      DB record as json string
+ *      [logStatusCode]     HTTP Error value
+ *      [logStatusMessage]  string (decoded)
  *
  * Returns the data passed in to Post (A complete record is NOT returned)
  */

@@ -126,7 +126,7 @@ function _comment_post ($dbLink, $requestArgs) {
 		$returnValue['httpReason']	= 'Success';
 		$returnValue['count'] = 1;
 		$returnValue['data'] = $newComment;
-		$logData['LogAfterData'] = $returnValue['data'];
+		$logData['logAfterData'] = json_encode($returnValue['data']);
 		writeEntryToLog ($logData);
 		@mysqli_free_result($qResult);
 	}
