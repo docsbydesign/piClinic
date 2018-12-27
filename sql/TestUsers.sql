@@ -26,7 +26,8 @@ VALUES
 ,('Test DoctorSpecialist', 'Valadez', 'Valadez', 'Test', 'DoctorSpecialist', '$2y$12$XgB7Mo4j7TqLd3sKLpva1OP/pXljsa58U3rIRtuLPOrcxmKOiyDsG', NULL, 1, 'ClinicStaff', NULL, NOW(), NOW())
 ,('Test MedicalStudent', 'MedicalStudent', 'MedicalStudent', 'Test', 'MedicalStudent', '$2y$12$XgB7Mo4j7TqLd3sKLpva1OP/pXljsa58U3rIRtuLPOrcxmKOiyDsG', NULL, 1, 'ClinicStaff', NULL, NOW(), NOW())
 ,('Test NursingStudent', 'NursingStudent', 'NursingStudent', 'Test', 'NursingStudent', '$2y$12$XgB7Mo4j7TqLd3sKLpva1OP/pXljsa58U3rIRtuLPOrcxmKOiyDsG', NULL, 1, 'ClinicStaff', NULL, NOW(), NOW())
-,('Test ClinicStaff', 'ClinicStaff', 'ClinicStaff', 'Test', 'ClinicStaff', '$2y$12$XgB7Mo4j7TqLd3sKLpva1OP/pXljsa58U3rIRtuLPOrcxmKOiyDsG', NULL, 1, 'ClinicStaff', NULL, NOW(), NOW())
-,('Test Other', 'Other', 'Other', 'Test', 'Other', '$2y$12$XgB7Mo4j7TqLd3sKLpva1OP/pXljsa58U3rIRtuLPOrcxmKOiyDsG', NULL, 1, 'ClinicAdmin', NULL, NOW(), NOW())
-,('Test RO', 'TestRO', 'Read', 'Test', 'Other', '$2y$12$XgB7Mo4j7TqLd3sKLpva1OP/pXljsa58U3rIRtuLPOrcxmKOiyDsG', NULL, 1, 'ClinicReadOnly', NULL, NOW(), NOW())
+,('Test SystemAdmin', 'TestSA', 'Test', 'SystemAdmin', 'ClinicStaff', '$2y$12$XgB7Mo4j7TqLd3sKLpva1OP/pXljsa58U3rIRtuLPOrcxmKOiyDsG', NULL, 1, 'SystemAdmin', NULL, NOW(), NOW())
+,('Test ClinicAdmin', 'TestCA', 'Test', 'ClinicAdmin', 'ClinicStaff', '$2y$12$XgB7Mo4j7TqLd3sKLpva1OP/pXljsa58U3rIRtuLPOrcxmKOiyDsG', NULL, 1, 'ClinicAdmin', NULL, NOW(), NOW())
+,('Test ClinicStaff', 'TestCS', 'Test', 'ClinicStaff', 'ClinicStaff', '$2y$12$XgB7Mo4j7TqLd3sKLpva1OP/pXljsa58U3rIRtuLPOrcxmKOiyDsG', NULL, 1, 'ClinicStaff', NULL, NOW(), NOW())
+,('Test ReadOnly', 'TestRO', 'Test', 'ReadOnly', 'Other', '$2y$12$XgB7Mo4j7TqLd3sKLpva1OP/pXljsa58U3rIRtuLPOrcxmKOiyDsG', NULL, 1, 'ClinicReadOnly', NULL, NOW(), NOW())
 ;

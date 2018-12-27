@@ -26,7 +26,7 @@
  *
  */
 /*
- *  API endpoint for logger resource requests
+ *  API endpoint for log resource requests
  */
 require_once '../shared/piClinicConfig.php';
 require_once '../shared/dbUtils.php';
@@ -34,9 +34,9 @@ require_once 'api_common.php';
 require_once '../shared/security.php';
 require_once '../shared/profile.php';
 require_once '../shared/logUtils.php';
-require_once 'logger_common.php';
-require_once 'logger_post.php';
-require_once 'logger_get.php';
+require_once 'log_common.php';
+require_once 'log_post.php';
+require_once 'log_get.php';
 
 /*
  *  Initialize profiling when enabled in piClinicConfig.php
@@ -61,13 +61,13 @@ $retVal = array();
 $retVal['contentType'] = 'application/json; charset=utf-8';
 
 if (empty($apiUserToken)){
-    $retVal = formatMissingTokenError ($retVal, 'logger');
+    $retVal = formatMissingTokenError ($retVal, 'log');
 } else {
     // Initalize the log entry for this call
     //  more fields will be added later in the routine
     $logData = createLogEntry ('API',
         __FILE__,
-        'logger',
+        'log',
         $_SERVER['REQUEST_METHOD'],
         null,
         $_SERVER['QUERY_STRING'],
@@ -77,7 +77,7 @@ if (empty($apiUserToken)){
         null);
 
     if (!validTokenString($apiUserToken)) {
-        $retVal = logInvalidTokenError ($dbLink, $retVal, $apiUserToken, 'logger', $logData);
+        $retVal = logInvalidTokenError ($dbLink, $retVal, $apiUserToken, 'log', $logData);
     } else {
         // token is OK so we can continue
         $logData['userToken'] = $apiUserToken;
@@ -85,7 +85,7 @@ if (empty($apiUserToken)){
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'POST':
                 if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_ADMIN)) {
-                    $retVal = _logger_post($dbLink, $apiUserToken, $requestData);
+                    $retVal = _log_post($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
                     $retVal['httpResponse'] = 403;
@@ -95,7 +95,7 @@ if (empty($apiUserToken)){
 
             case 'GET':
                 if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_STAFF)) {
-                    $retVal = _logger_get($dbLink, $apiUserToken, $requestData);
+                    $retVal = _log_get($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
                     $retVal['httpResponse'] = 403;

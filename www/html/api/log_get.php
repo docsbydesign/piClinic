@@ -43,7 +43,7 @@ exitIfCalledFromBrowser(__FILE__);
 /*
  *  Process the GET method request
  */
-function _logger_get($dbLink, $apiUserToken, $requestArgs) {
+function _log_get($dbLink, $apiUserToken, $requestArgs) {
     /*
      *  Initialize profiling when enabled in piClinicConfig.php
      */
@@ -56,14 +56,14 @@ function _logger_get($dbLink, $apiUserToken, $requestArgs) {
 
     // Create a list of missing required columns
     $missingColumnList = '';
-    $loggerDbFields = getLoggerFieldInfo();
-    foreach ($loggerDbFields as $reqField) {
-        if ($reqField[LOGGER_DB_REQ_GET]) {
-            if (empty($requestArgs[$reqField[LOGGER_REQ_ARG]])) {
+    $logDbFields = getLogFieldInfo();
+    foreach ($logDbFields as $reqField) {
+        if ($reqField[LOG_DB_REQ_GET]) {
+            if (empty($requestArgs[$reqField[LOG_REQ_ARG]])) {
                 if (!empty($missingColumnList)) {
                     $missingColumnList .= ", ";
                 }
-                $missingColumnList .= $reqField[LOGGER_REQ_ARG];
+                $missingColumnList .= $reqField[LOG_REQ_ARG];
             }
         }
     }
@@ -76,7 +76,7 @@ function _logger_get($dbLink, $apiUserToken, $requestArgs) {
             $returnValue['debug'] = $dbInfo;
         }
         $returnValue['httpResponse'] = 400;
-        $returnValue['httpReason']	= "Unable to create get logger data. Required field(s): ". $missingColumnList. " are missing.";
+        $returnValue['httpReason']	= "Unable to create get log data. Required field(s): ". $missingColumnList. " are missing.";
         return $returnValue;
     }
 
@@ -92,7 +92,7 @@ function _logger_get($dbLink, $apiUserToken, $requestArgs) {
 	$returnValue['format'] = 'json';
 
     // Create query string for get operation
-	$getQueryString = makeLoggerQueryStringFromRequestParameters ($requestArgs);
+	$getQueryString = makeLogQueryStringFromRequestParameters ($requestArgs);
     $dbInfo ['queryString'] = $getQueryString;
 	// get the log records that match
 	$returnValue = getDbRecords($dbLink, $getQueryString);

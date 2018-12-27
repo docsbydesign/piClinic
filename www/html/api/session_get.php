@@ -66,6 +66,7 @@ function _session_get ($dbLink, $apiUserToken, $requestArgs) {
 	
 	$dbInfo = array();
 	$dbInfo ['requestArgs'] = $requestArgs;
+	$dbInfo ['apiUserToken'] = $apiUserToken;
 
     $logData = createLogEntry ('API',
         __FILE__,
@@ -82,85 +83,79 @@ function _session_get ($dbLink, $apiUserToken, $requestArgs) {
 
 	// if no token parameter, get the caller's session as identified by the access token
     // if a token parameter is present and is not the caller's, make sure the caller has SystemAdmin access
-    $queryToken = $apiUserToken;
-    if (!empty($requestArgs['token'])) {
-        $queryToken = $requestArgs['token'];
-    }
 
-	// create query string for get operation
-	$getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''.  $queryToken . '\';';
-    $dbInfo ['queryString'] = $getQueryString;
+    $callerAccess = 0;
+    $apiReturnValue = array();
+    $qtReturnValue = array();
 
-	// get the session record that matches--there should be only one
-	$qtReturnValue = getDbRecords($dbLink, $getQueryString);
-	
-	if ($qtReturnValue['count'] == 0) {
-		//return 404
-		// add debug info to the list
-		if (API_DEBUG_MODE) {
-			$notFoundReturnValue['debug'] = $dbInfo;
-		}
-		return $notFoundReturnValue;
-	}
-	
-	if ($qtReturnValue['count'] == 1) {
-		// Get the session info and return it
-		$sessionInfo = array();
-		$validSession = true;
-		
-		// confirm that the session is still valid and hasn't expired
-		if (!$qtReturnValue['data']['loggedIn']) {
-			// user is logged out
-			$validSession = false;
-		}
+    // confirm that the caller has permission to access the session they are querying
+    //  they need admin access if the session they are querying is not their own.
+    // create query string for get operation
+    $getApiQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''.  $apiUserToken . '\';';
+    $dbInfo ['apiQueryString'] = $getApiQueryString;
 
-		// confirm that the caller has permission to access the session
-        if (!empty($requestArgs['token'])) {
-            // create query string for get operation
-            $getApiQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''.  $apiUserToken . '\';';
-            $dbInfo ['apiQueryString'] = $getApiQueryString;
-
-            // get the session record that matches--there should be only one
-            $apiReturnValue = getDbRecords($dbLink, $getApiQueryString);
-
-            if ($apiReturnValue['count'] == 0) {
-                // can't validate permission so not a valid session
-                // return an empty session info record
-                $sessionInfo['data']['token'] = 0;
-                $sessionInfo['data']['username'] = '';
-                $sessionInfo['data']['accessGranted'] = 0;
-                $sessionInfo['data']['sessionLanguage'] = '';
-                $sessionInfo['data']['sessionClinicPublicID'] = '';
-                $sessionInfo['httpResponse'] = 403;
-                $sessionInfo['httpReason'] = 'Not authorized.';
-            } else if ($apiReturnValue['count'] == 1) {
-                $apiSessionInfo = $apiReturnValue['data'];
-                // do they have access?
-                if ($apiSessionInfo['accessGranted'] == 'SystemAdmin') {
-                    // return a complete session record
-                    $sessionInfo['data'] = $qtReturnValue['data'];
-                    $sessionInfo['httpResponse'] = 200;
-                    $sessionInfo['httpReason'] = 'Success';
-                } else {
-                    // return an empty session info record
-                    $sessionInfo['data']['token'] = 0;
-                    $sessionInfo['data']['username'] = '';
-                    $sessionInfo['data']['accessGranted'] = 0;
-                    $sessionInfo['data']['sessionLanguage'] = '';
-                    $sessionInfo['data']['sessionClinicPublicID'] = '';
-                    $sessionInfo['httpResponse'] = 403;
-                    $sessionInfo['httpReason'] = 'Not authorized.';
-                }
-            }
-            $dbInfo['apiSessionInfo'] = $apiSessionInfo;
-            $sessionInfo['contentType'] = CONTENT_TYPE_JSON;
-            $sessionInfo['count'] = 1;
+    // get the session record that matches--there should be only one
+    $apiReturnValue = getDbRecords($dbLink, $getApiQueryString);
+    $dbInfo ['apiReturnValue'] = $apiReturnValue;
+    if ($apiReturnValue['count'] == 1) {
+        if ($apiReturnValue['data']['accessGranted'] == 'SystemAdmin') {
+            $callerAccess = 2;
         } else {
+            // if not an admin, they can only see their own token
+            if (empty($requestArgs['token']) || ($apiUserToken == $requestArgs['token'])) {
+                $callerAccess = 1;
+            }
+        }
+    } // else not found so no access
+
+    if ($callerAccess > 0) {
+        if (empty($requestArgs['token'])) {
+            // the call is looking up their own session so return the one collected above
+            $qtReturnValue = $apiReturnValue;
+            $callerAccess = 1;
+        } else {
+            if ($apiUserToken == $requestArgs['token']) {
+                // the call is looking up their own session so return the one collected above
+                $qtReturnValue = $apiReturnValue;
+            } else {
+                // look up the session being queried
+                // create query string for get operation
+                $qtQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''.  $requestArgs['token'] . '\';';
+                $dbInfo ['qtQueryString'] = $qtQueryString;
+
+                // get the session record that matches--there should be only one
+                $qtReturnValue = getDbRecords($dbLink, $qtQueryString);
+                $dbInfo['qtReturnValue'] = $qtReturnValue;
+
+                if ($qtReturnValue['count'] != 1) {
+                    //return 404
+                    // add debug info to the list
+                    if (API_DEBUG_MODE) {
+                        $notFoundReturnValue['debug'] = $dbInfo;
+                    }
+                    // target not found so return here with a 404
+                    return $notFoundReturnValue;
+                } // else format qtReturnValue
+            }
+        }
+
+        if ($callerAccess == 2) {
+            // show full session
+            $sessionInfo['data'] = $qtReturnValue['data'];
+            $sessionInfo['httpResponse'] = 200;
+            $sessionInfo['httpReason'] = 'Success';
+        } else if ($callerAccess == 1) {
+            $validSession = 1;
+            // validate and show partial access
             // getting their own session
             $sessionExpirationTime = strtotime($qtReturnValue['data']['expiresOnDate']);
             $timeNow = time();
             if ($timeNow > $sessionExpirationTime) {
                 // session expired
+                $validSession = false;
+            }
+
+            if ($qtReturnValue['data']['loggedIn'] == 0) {
                 $validSession = false;
             }
 
@@ -176,7 +171,6 @@ function _session_get ($dbLink, $apiUserToken, $requestArgs) {
             if ($localUA != $sessionUA) {
                 // token could be used from another browser
                 $dbInfo['thisUserAgent'] = $localUA ;
-                $dbInfo['sessionData'] = $qtReturnValue['data'];
                 $validSession = false;
             }
 
@@ -200,22 +194,26 @@ function _session_get ($dbLink, $apiUserToken, $requestArgs) {
                 $sessionInfo['httpResponse'] = 404;
                 $sessionInfo['httpReason'] = 'Session not found.';
             }
-        }
+        } // else ???
+    } else {
+        // no access
+        // can't validate permission so not a valid session
+        // return an empty session info record
+        $sessionInfo['data']['token'] = 0;
+        $sessionInfo['data']['username'] = '';
+        $sessionInfo['data']['accessGranted'] = 0;
+        $sessionInfo['data']['sessionLanguage'] = '';
+        $sessionInfo['data']['sessionClinicPublicID'] = '';
+        $sessionInfo['httpResponse'] = 403;
+        $sessionInfo['httpReason'] = 'Not authorized.';
+    }
+    // and return here
+    profileLogClose($profileData, __FILE__, $requestArgs);
+    if (API_DEBUG_MODE  /*&&  $callerAccess == 2 */) {
+        // only send this back to SystemAdmin queries
+        $sessionInfo['debug'] = $dbInfo;
+    }
 
-		// and return here
-		profileLogClose($profileData, __FILE__, $requestArgs);
-
-        if (API_DEBUG_MODE) {
-            $sessionInfo['debug'] = $dbInfo;
-        }
-
-        return $sessionInfo;
-	}
-	
-	if (API_DEBUG_MODE) {
-		$notFoundReturnValue['debug'] = $dbInfo;
-	}
-	// if here, no session was found so return the not found info
-	return $notFoundReturnValue;
+    return $sessionInfo;
 }
 //EOF

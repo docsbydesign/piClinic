@@ -27,23 +27,23 @@
  */
 /*******************
  *
- *	Utility functions used by logger resource
+ *	Utility functions used by log resource
  *
  *********************/
 require_once 'api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
-// Deifine the elements in the LoggerFieldInfo
-define ("LOGGER_REQ_ARG", 0, false);        // request param name is index 0
-define ("LOGGER_DB_ARG", 1, false);         // db field name is index 1
-define ("LOGGER_DB_REQ_GET", 2, false);     // whether the field must appear in a GET request
-define ("LOGGER_DB_QS_GET",3, false);       // variable can be used to filter GFET query
-define ("LOGGER_DB_REQ_POST", 4, false);    // whether the field must appear in a POST request
+// Deifine the elements in the LogFieldInfo
+define ("LOG_REQ_ARG", 0, false);        // request param name is index 0
+define ("LOG_DB_ARG", 1, false);         // db field name is index 1
+define ("LOG_DB_REQ_GET", 2, false);     // whether the field must appear in a GET request
+define ("LOG_DB_QS_GET",3, false);       // variable can be used to filter GFET query
+define ("LOG_DB_REQ_POST", 4, false);    // whether the field must appear in a POST request
 
 /*
- * Returns an array that defines the query paramters and DB field names used by the logger
+ * Returns an array that defines the query paramters and DB field names used by the log
  */
-function getLoggerFieldInfo() {
+function getLogFieldInfo() {
     $returnValue = [
         ["userToken",           "userToken",        false,  true,   true],
         ["sourceModule",        "sourceModule",     false,  true,   true],
@@ -60,24 +60,24 @@ function getLoggerFieldInfo() {
 }
 
 /*
- *  Creates a MySQL query string to retrieve logger reoords as filtered by
+ *  Creates a MySQL query string to retrieve log reoords as filtered by
  *      the fields passed in the $requestParamters argument.
  *
  *      $requestParameters: the query string of an API call interpreted into an associative array
  *
  *      Returns a MySQL query string.
  */
-function makeLoggerQueryStringFromRequestParameters ($requestParameters) {
+function makeLogQueryStringFromRequestParameters ($requestParameters) {
     // create query string for get operation
-    $queryString = "SELECT * FROM `". DB_TABLE_LOGGER . "` WHERE ";
+    $queryString = "SELECT * FROM `". DB_TABLE_LOG . "` WHERE ";
     $paramCount = 0;
 
-    $loggerDbFields = getLoggerFieldInfo();
+    $logDbFields = getLogFieldInfo();
 
-    foreach ($loggerDbFields as $reqField) {
-        if ($reqField[LOGGER_DB_QS_GET]) {
-            if (!empty($requestParameters[$reqField[LOGGER_REQ_ARG]])) {
-                $queryString .= "`". $reqField[LOGGER_DB_ARG] ."` LIKE '".$requestParameters[$reqField[LOGGER_REQ_ARG]]."' AND ";
+    foreach ($logDbFields as $reqField) {
+        if ($reqField[LOG_DB_QS_GET]) {
+            if (!empty($requestParameters[$reqField[LOG_REQ_ARG]])) {
+                $queryString .= "`". $reqField[LOG_DB_ARG] ."` LIKE '".$requestParameters[$reqField[LOG_REQ_ARG]]."' AND ";
                 $paramCount += 1;
             }
         }

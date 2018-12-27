@@ -103,12 +103,12 @@ ALTER TABLE `session`
 
 -- ------------------------------------------------------
 --
--- Table structure for table `logger`
+-- Table structure for table `log`
 --
 
-DROP TABLE IF EXISTS `logger`;
-CREATE TABLE IF NOT EXISTS `logger` (
-  `loggerId` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique record ID for logger records',
+DROP TABLE IF EXISTS `log`;
+CREATE TABLE IF NOT EXISTS `log` (
+  `logId` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique record ID for log records',
   `sourceModule` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Module creating the log entry.',
   `userToken` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) sessionID of user.',
   `logClass` varchar(16) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) type of log entry.',

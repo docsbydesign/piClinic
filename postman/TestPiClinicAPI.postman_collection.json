@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b0fca425-7a09-451d-962f-bc98bfa45427",
+		"_postman_id": "0e7fae59-5eba-479e-a556-664d9cb2f3a8",
 		"name": "TestPiClinicAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,17 +9,17 @@
 			"name": "Method File Access Test",
 			"item": [
 				{
-					"name": "Logger",
+					"name": "log",
 					"item": [
 						{
-							"name": "logger_common script access test Copy",
+							"name": "log_common script access test Copy",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
 										"exec": [
-											"pm.test(\"api/logger_common.php access denial check was successful\", function() {\r",
+											"pm.test(\"api/log_common.php access denial check was successful\", function() {\r",
 											"    pm.response.to.have.status(404);\r",
 											"});"
 										],
@@ -35,27 +35,27 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger_common.php",
+									"raw": "{{host}}/api/log_common.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger_common.php"
+										"log_common.php"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "logger_get script access test Copy",
+							"name": "log_get script access test Copy",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
 										"exec": [
-											"pm.test(\"api/logger_get.php access denial check was successful\", function() {\r",
+											"pm.test(\"api/log_get.php access denial check was successful\", function() {\r",
 											"    pm.response.to.have.status(404);\r",
 											"});"
 										],
@@ -71,27 +71,27 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger_get.php",
+									"raw": "{{host}}/api/log_get.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger_get.php"
+										"log_get.php"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "logger_post script access test Copy",
+							"name": "log_post script access test Copy",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
 										"exec": [
-											"pm.test(\"api/logger_post.php access denial check was successful\", function() {\r",
+											"pm.test(\"api/log_post.php access denial check was successful\", function() {\r",
 											"    pm.response.to.have.status(404);\r",
 											"});"
 										],
@@ -107,13 +107,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger_post.php",
+									"raw": "{{host}}/api/log_post.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger_post.php"
+										"log_post.php"
 									]
 								}
 							},
@@ -581,7 +581,7 @@
 					"name": "Session Open",
 					"item": [
 						{
-							"name": "Get SystemAdmin token API",
+							"name": "Get testUser token API",
 							"event": [
 								{
 									"listen": "test",
@@ -626,7 +626,7 @@
 										}
 									]
 								},
-								"description": "Logs in as SystemAdmin"
+								"description": "Logs in as test user"
 							},
 							"response": []
 						},
@@ -636,7 +636,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"id": "d621b809-21f4-4468-84e3-8b683b1b899d",
 										"exec": [
 											"pm.test(\"Access check was successful\", function() {\r",
 											"    pm.response.to.have.status(200);\r",
@@ -667,6 +667,55 @@
 									"path": [
 										"api",
 										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get SystemAdmin token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.variables.set(\"SAtoken\", jsonData.data.token);\r",
+											"\r",
+											"pm.test(\"System Admin login was successful\", function() {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?username={{systemAdminUser}}&password={{systemAdminPW}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{systemAdminUser}}"
+										},
+										{
+											"key": "password",
+											"value": "{{systemAdminPW}}"
+										}
 									]
 								}
 							},
@@ -860,7 +909,7 @@
 								"header": [
 									{
 										"key": "X-piClinic-token",
-										"value": "{{token}}",
+										"value": "{{SAtoken}}",
 										"type": "text"
 									}
 								],
@@ -869,13 +918,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php",
+									"raw": "{{host}}/api/log.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									]
 								}
 							},
@@ -957,7 +1006,7 @@
 								"header": [
 									{
 										"key": "X-piClinic-token",
-										"value": "{{token}}",
+										"value": "{{SAtoken}}",
 										"type": "text"
 									}
 								],
@@ -966,13 +1015,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php",
+									"raw": "{{host}}/api/log.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									]
 								}
 							},
@@ -1054,7 +1103,7 @@
 								"header": [
 									{
 										"key": "X-piClinic-token",
-										"value": "{{token}}",
+										"value": "{{SAtoken}}",
 										"type": "text"
 									}
 								],
@@ -1063,13 +1112,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php",
+									"raw": "{{host}}/api/log.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									]
 								}
 							},
@@ -1166,6 +1215,48 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Close System Admin session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+										"exec": [
+											"pm.test(\"SystemAdmin Logout was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{SAtoken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
@@ -1219,7 +1310,7 @@
 										}
 									]
 								},
-								"description": "Logs in as SystemAdmin"
+								"description": "Logs in as Test User"
 							},
 							"response": []
 						},
@@ -1250,7 +1341,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/session.php?username=ClinicStaff&password={{testUserPW}}",
+									"raw": "{{host}}/api/session.php?username=TestCS&password={{testUserPW}}",
 									"host": [
 										"{{host}}"
 									],
@@ -1261,7 +1352,7 @@
 									"query": [
 										{
 											"key": "username",
-											"value": "ClinicStaff"
+											"value": "TestCS"
 										},
 										{
 											"key": "password",
@@ -1269,7 +1360,7 @@
 										}
 									]
 								},
-								"description": "Logs in as SystemAdmin"
+								"description": "Logs in as TestUser"
 							},
 							"response": []
 						},
@@ -1285,7 +1376,7 @@
 											"\r",
 											"pm.test(\"Session query was successful\", function() {\r",
 											"    var userAcct = pm.environment.get('testUser');\r",
-											"    if (userAcct == 'SystemAdmin') {\r",
+											"    if (userAcct == 'TestSA') {\r",
 											"        pm.response.to.have.status(200);\r",
 											"    } else {\r",
 											"        pm.response.to.have.status(403);\r",
@@ -1294,7 +1385,7 @@
 											"\r",
 											"pm.test(\"Session data was correct\", function() {\r",
 											"    var userAcct = pm.environment.get('testUser');\r",
-											"    if (userAcct == 'SystemAdmin') {\r",
+											"    if (userAcct == 'TestSA') {\r",
 											"        pm.expect(jsonData.data.sessionID !== undefined);\r",
 											"    } else {\r",
 											"        pm.expect(jsonData.data.sessionID === undefined);\r",
@@ -1571,13 +1662,13 @@
 			]
 		},
 		{
-			"name": "Logger API Test",
+			"name": "Log API Test",
 			"item": [
 				{
 					"name": "Session Open",
 					"item": [
 						{
-							"name": "Get SystemAdmin token",
+							"name": "Get Test User token",
 							"event": [
 								{
 									"listen": "test",
@@ -1622,7 +1713,7 @@
 										}
 									]
 								},
-								"description": "Logs in as SystemAdmin"
+								"description": "Logs in as Test User"
 							},
 							"response": []
 						},
@@ -1667,6 +1758,55 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get SystemAdmin token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.variables.set(\"SAtoken\", jsonData.data.token);\r",
+											"\r",
+											"pm.test(\"System Admin login was successful\", function() {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?username={{systemAdminUser}}&password={{systemAdminPW}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{systemAdminUser}}"
+										},
+										{
+											"key": "password",
+											"value": "{{systemAdminPW}}"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
@@ -1675,7 +1815,7 @@
 					"name": "Success Tests",
 					"item": [
 						{
-							"name": "LoggerTest-BasicFields (SystemAdmin only)",
+							"name": "LogTest-BasicFields (SystemAdmin only)",
 							"event": [
 								{
 									"listen": "test",
@@ -1684,7 +1824,7 @@
 										"exec": [
 											"pm.test(\"Writing basic fields was successful\", function() {\r",
 											"    var userAcct = pm.environment.get('testUser');\r",
-											"    if (userAcct == 'SystemAdmin') {\r",
+											"    if (userAcct == 'TestSA') {\r",
 											"        pm.response.to.have.status(201);\r",
 											"    } else {\r",
 											"        pm.response.to.have.status(403);\r",
@@ -1751,33 +1891,44 @@
 									]
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php",
+									"raw": "{{host}}/api/log.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Logger Test-ReadBasicFields",
+							"name": "Log Test-ReadBasicFields",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"id": "b579dd39-b1c7-444b-a3e7-84d1244b184b",
 										"exec": [
-											"pm.test(\"Basic Fields read  was successful\", function() {\r",
-											"    pm.response.to.have.status(200);\r",
+											"pm.test(\"Basic Fields read was successful\", function() {\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') ||  (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+											"        // staff cam read, but can't create so the user is not found\r",
+											"        pm.response.to.have.status(200);\r",
+											"    } else {\r",
+											"        pm.response.to.have.status(403);\r",
+											"    }\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Basic Fields read data was correct\", function() {\r",
 											"    var jsonData = JSON.parse(responseBody);\r",
-											"    pm.expect(jsonData.data.logStatusMessage === pm.testMessage);\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if (userAcct == 'TestSA') {\r",
+											"        pm.expect(jsonData.data.logStatusMessage === pm.testMessage);\r",
+											"    } else {\r",
+											"        pm.expect(1); // don't test the value if not authorized\r",
+											"    }    \r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1798,18 +1949,18 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php?usertoken={{token}}",
+									"raw": "{{host}}/api/log.php?usertoken={{SAtoken}}",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									],
 									"query": [
 										{
 											"key": "usertoken",
-											"value": "{{token}}"
+											"value": "{{SAtoken}}"
 										}
 									]
 								}
@@ -1823,7 +1974,7 @@
 					"name": "Error Tests",
 					"item": [
 						{
-							"name": "Get Logger Access  Missing Token",
+							"name": "Get Log Access  Missing Token",
 							"event": [
 								{
 									"listen": "test",
@@ -1846,13 +1997,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php",
+									"raw": "{{host}}/api/log.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									]
 								}
 							},
@@ -1892,7 +2043,7 @@
 								"header": [
 									{
 										"key": "X-piClinic-token",
-										"value": "{{token}}",
+										"value": "{{SAtoken}}",
 										"type": "text"
 									}
 								],
@@ -1901,20 +2052,20 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php",
+									"raw": "{{host}}/api/log.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Get logger access Invalid Token Format",
+							"name": "Get log access Invalid Token Format",
 							"event": [
 								{
 									"listen": "test",
@@ -1943,13 +2094,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php",
+									"raw": "{{host}}/api/log.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									]
 								}
 							},
@@ -1989,7 +2140,7 @@
 								"header": [
 									{
 										"key": "X-piClinic-token",
-										"value": "{{token}}",
+										"value": "{{SAtoken}}",
 										"type": "text"
 									}
 								],
@@ -1998,13 +2149,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php",
+									"raw": "{{host}}/api/log.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									]
 								}
 							},
@@ -2101,6 +2252,48 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Close System Admin session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+										"exec": [
+											"pm.test(\"SystemAdmin Logout was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{SAtoken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
@@ -2136,7 +2329,7 @@
 					"name": "Session Open",
 					"item": [
 						{
-							"name": "Get SystemAdmin token",
+							"name": "Get Test User token",
 							"event": [
 								{
 									"listen": "test",
@@ -2181,7 +2374,7 @@
 										}
 									]
 								},
-								"description": "Logs in as SystemAdmin"
+								"description": "Logs in as Test User"
 							},
 							"response": []
 						},
@@ -2226,6 +2419,55 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get SystemAdmin token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.variables.set(\"SAtoken\", jsonData.data.token);\r",
+											"\r",
+											"pm.test(\"System Admin login was successful\", function() {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?username={{systemAdminUser}}&password={{systemAdminPW}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{systemAdminUser}}"
+										},
+										{
+											"key": "password",
+											"value": "{{systemAdminPW}}"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
@@ -2241,12 +2483,11 @@
 									"script": {
 										"id": "8dc1b9d4-2bad-4163-8228-4ee3e03674aa",
 										"exec": [
-											"var jsonData = JSON.parse(responseBody);\r",
-											"\r",
 											"pm.test(\"New user creation successful\", function() {\r",
 											"    var userAcct = pm.environment.get('testUser');\r",
-											"    if ((userAcct == 'SystemAdmin') || (userAcct == 'Verduzco')) {\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 											"        // save new username to use in subsequent calls\r",
+											"        var jsonData = JSON.parse(responseBody);\r",
 											"        pm.variables.set(\"newUser\", jsonData.data.username);\r",
 											"        // this shoult be successful\r",
 											"        pm.response.to.have.status(201);\r",
@@ -2332,9 +2573,20 @@
 									"script": {
 										"id": "284f1c2c-099c-4131-b059-7ce9ec4438c5",
 										"exec": [
-											"pm.test(\"Reading new user was successful\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});"
+											"pm.test(\"New user creation successful\", function() {\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.response.to.have.status(200);\r",
+											"    } else if  (userAcct == 'TestCS') {\r",
+											"        // staff cam read, but can't create so the user is not found\r",
+											"        pm.response.to.have.status(404);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(403);\r",
+											"    }\r",
+											"});\r",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -2380,15 +2632,31 @@
 									"script": {
 										"id": "56959611-4bec-4307-bb81-35c05eeea052",
 										"exec": [
-											"var jsonData = JSON.parse(responseBody);\r",
 											"\r",
-											"pm.test(\"Login was successful\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
+											"\r",
+											"pm.test(\"Name change  was successful\", function () {\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.response.to.have.status(200);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(403);\r",
+											"    }\r",
 											"});\r",
 											"\r",
-											"pm.test(\"Last name was changed successfully\", function() {\r",
-											"    pm.expect(jsonData.data.NameLast === \"NewLastName\");\r",
-											"})"
+											"pm.test(\"New user creation successful\", function() {\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        var jsonData = JSON.parse(responseBody);\r",
+											"        pm.expect(jsonData.data.NameLast === \"NewLastName\");\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"       pm.expect(1);\r",
+											"    }\r",
+											"});\r",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -2441,12 +2709,30 @@
 											"var jsonData = JSON.parse(responseBody);\r",
 											"\r",
 											"pm.test(\"Preferred language change was successful\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.response.to.have.status(200);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(403);\r",
+											"    }\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Preferred language was changed correctly\", function() {\r",
-											"    pm.expect(jsonData.data.PrefLang === \"es\");\r",
-											"})"
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.expect(jsonData.data.PrefLang === \"es\");\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.expect(1);\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -2498,13 +2784,31 @@
 										"exec": [
 											"var jsonData = JSON.parse(responseBody);\r",
 											"\r",
-											"pm.test(\"Clinic change was successful\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
+											"pm.test(\"Clinic change change was successful\", function () {\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.response.to.have.status(200);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(403);\r",
+											"    }\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Clinic was changed correctly\", function() {\r",
-											"    pm.expect(jsonData.data.PrefClinicPublicID === \"710\");\r",
-											"})"
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.expect(jsonData.data.PrefClinicPublicID === \"710\");\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.expect(1);\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -2557,12 +2861,30 @@
 											"var jsonData = JSON.parse(responseBody);\r",
 											"\r",
 											"pm.test(\"Reading new user was successful\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.response.to.have.status(200);\r",
+											"    } else if  (userAcct == 'TestCS') {\r",
+											"        // staff cam read, but can't create so the user is not found\r",
+											"        pm.response.to.have.status(404);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(403);\r",
+											"    }\r",
 											"});\r",
 											"\r",
-											"pm.test(\"Last name was changed successfully\", function() {\r",
-											"    pm.expect(jsonData.data.NameLast === \"NewLastName\");\r",
-											"})"
+											"pm.test(\"NewUser was changed correctly\", function() {\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.expect(jsonData.data.NameLast === \"NewLastName\");\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.expect(1);\r",
+											"    }\r",
+											"});\r",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -2608,8 +2930,15 @@
 									"script": {
 										"id": "284f1c2c-099c-4131-b059-7ce9ec4438c5",
 										"exec": [
-											"pm.test(\"Deactivating new user was successful\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
+											"pm.test(\"Clinic change change was successful\", function () {\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.response.to.have.status(200);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(403);\r",
+											"    }\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -2659,16 +2988,43 @@
 											"var jsonData = JSON.parse(responseBody);\r",
 											"\r",
 											"pm.test(\"New user record found\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.response.to.have.status(200);\r",
+											"    } else if  (userAcct == 'TestCS') {\r",
+											"        // staff cam read, but can't create so the user is not found\r",
+											"        pm.response.to.have.status(404);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(403);\r",
+											"    }\r",
 											"});\r",
 											"\r",
+											"\r",
 											"pm.test(\"Only one user matched query\", function() {\r",
-											"    pm.expect(jsonData.count ===1);\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.expect(jsonData.count ===1);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.expect(1);\r",
+											"    }\r",
 											"});\r",
 											"\r",
 											"pm.test(\"New user deactivated successfully\", function() {\r",
-											"    pm.expect(jsonData.data.Active === 0);\r",
-											"});"
+											"        pm.expect(jsonData.data.Active === 0);\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.expect(jsonData.data.Active === 0);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.expect(1);\r",
+											"    }\r",
+											"});\r",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -2688,7 +3044,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/staff.php?Username={{newUser}}",
+									"raw": "{{host}}/api/staff.php?username={{newUser}}",
 									"host": [
 										"{{host}}"
 									],
@@ -2698,7 +3054,7 @@
 									],
 									"query": [
 										{
-											"key": "Username",
+											"key": "username",
 											"value": "{{newUser}}"
 										}
 									]
@@ -2782,7 +3138,7 @@
 								"header": [
 									{
 										"key": "X-piClinic-token",
-										"value": "{{token}}",
+										"value": "{{SAtoken}}",
 										"type": "text"
 									}
 								],
@@ -2791,13 +3147,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php",
+									"raw": "{{host}}/api/log.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									]
 								}
 							},
@@ -2879,7 +3235,7 @@
 								"header": [
 									{
 										"key": "X-piClinic-token",
-										"value": "{{token}}",
+										"value": "{{SAtoken}}",
 										"type": "text"
 									}
 								],
@@ -2888,13 +3244,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php",
+									"raw": "{{host}}/api/log.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									]
 								}
 							},
@@ -2991,6 +3347,48 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Close System Admin session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+										"exec": [
+											"pm.test(\"SystemAdmin Logout was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{SAtoken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
@@ -3004,7 +3402,7 @@
 					"name": "Session Open",
 					"item": [
 						{
-							"name": "Get SystemAdmin token",
+							"name": "Get Test User token",
 							"event": [
 								{
 									"listen": "test",
@@ -3049,7 +3447,7 @@
 										}
 									]
 								},
-								"description": "Logs in as SystemAdmin"
+								"description": "Logs in as Test User"
 							},
 							"response": []
 						},
@@ -3090,6 +3488,55 @@
 									"path": [
 										"api",
 										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get SystemAdmin token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.variables.set(\"SAtoken\", jsonData.data.token);\r",
+											"\r",
+											"pm.test(\"System Admin login was successful\", function() {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?username={{systemAdminUser}}&password={{systemAdminPW}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{systemAdminUser}}"
+										},
+										{
+											"key": "password",
+											"value": "{{systemAdminPW}}"
+										}
 									]
 								}
 							},
@@ -3289,7 +3736,7 @@
 								"header": [
 									{
 										"key": "X-piClinic-token",
-										"value": "{{token}}",
+										"value": "{{SAtoken}}",
 										"type": "text"
 									}
 								],
@@ -3298,13 +3745,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php",
+									"raw": "{{host}}/api/log.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									]
 								}
 							},
@@ -3386,7 +3833,7 @@
 								"header": [
 									{
 										"key": "X-piClinic-token",
-										"value": "{{token}}",
+										"value": "{{SAtoken}}",
 										"type": "text"
 									}
 								],
@@ -3395,13 +3842,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/api/logger.php",
+									"raw": "{{host}}/api/log.php",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"api",
-										"logger.php"
+										"log.php"
 									]
 								}
 							},
@@ -3480,6 +3927,48 @@
 										"key": "X-piClinic-token",
 										"value": "{{token}}",
 										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Close System Admin session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+										"exec": [
+											"pm.test(\"SystemAdmin Logout was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{SAtoken}}"
 									}
 								],
 								"body": {

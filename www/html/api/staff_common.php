@@ -27,7 +27,7 @@
 require_once 'api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
-// Deifine the elements in the LoggerFieldInfo
+// Deifine the elements in the LogFieldInfo
 define ("STAFF_REQ_ARG", 0, false);        // request param name is index 0
 define ("STAFF_DB_ARG", 1, false);         // db field name is index 1
 define ("STAFF_DB_REQ_GET", 2, false);     // whether the field must appear in a GET request
@@ -37,7 +37,7 @@ define ("STAFF_DB_REQ_PATCH", 5, false);    // whether the field must appear in 
 define ("STAFF_DB_CLEANFIRST", 6, false);  // whether to clean the string before using
 
 /*
- * Returns an array that defines the query parameters and DB field names used by the logger
+ * Returns an array that defines the query parameters and DB field names used by the log
  */
 function getStaffFieldInfo() {
     $returnValue = [

@@ -23,7 +23,7 @@
 require_once 'api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
-function _logger_post($dbLink, $apiUserToken, $requestArgs) {
+function _log_post($dbLink, $apiUserToken, $requestArgs) {
     /*
      * Initialize profile data if configured in piClinicConfig.php
      */
@@ -37,14 +37,14 @@ function _logger_post($dbLink, $apiUserToken, $requestArgs) {
 
     // Create a list of missing required fields
     $missingColumnList = "";
-    $loggerDbFields = getLoggerFieldInfo();
-    foreach ($loggerDbFields as $reqField) {
-        if ($reqField[LOGGER_DB_REQ_POST]) {
-            if (empty($requestArgs[$reqField[LOGGER_REQ_ARG]])) {
+    $logDbFields = getLogFieldInfo();
+    foreach ($logDbFields as $reqField) {
+        if ($reqField[LOG_DB_REQ_POST]) {
+            if (empty($requestArgs[$reqField[LOG_REQ_ARG]])) {
                 if (!empty($missingColumnList)) {
                     $missingColumnList .= ", ";
                 }
-                $missingColumnList .= $reqField[LOGGER_REQ_ARG];
+                $missingColumnList .= $reqField[LOG_REQ_ARG];
             }
         }
     }
@@ -67,9 +67,9 @@ function _logger_post($dbLink, $apiUserToken, $requestArgs) {
     //Initialize DB fields to use to create query string
     $dbArgs = array();
 
-    foreach ($loggerDbFields as $dbField) {
-        if (!empty($requestArgs[$dbField[LOGGER_REQ_ARG]])) {
-            $dbArgs[$dbField[LOGGER_DB_ARG]] = $requestArgs[$dbField[LOGGER_REQ_ARG]];
+    foreach ($logDbFields as $dbField) {
+        if (!empty($requestArgs[$dbField[LOG_REQ_ARG]])) {
+            $dbArgs[$dbField[LOG_DB_ARG]] = $requestArgs[$dbField[LOG_REQ_ARG]];
         }
     }
     $now = new DateTime();
@@ -80,7 +80,7 @@ function _logger_post($dbLink, $apiUserToken, $requestArgs) {
 
     // make insert query string to add new object to DB table
     profileLogCheckpoint($profileData,'POST_READY');
-    // the logger utility module actually writes the record.
+    // the log utility module actually writes the record.
 
     $returnValue = writeEntryToLog ($dbLink, $dbArgs);
     $returnValue['contentType'] = CONTENT_TYPE_JSON;

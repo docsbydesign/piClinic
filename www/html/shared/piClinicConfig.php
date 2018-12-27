@@ -25,7 +25,20 @@ if (basename(__FILE__) == basename($_SERVER['SCRIPT_NAME'])) {
 	// the file was not included so return an error
 	http_response_code(404);
 	header(CONTENT_TYPE_HEADER_HTML);
-	exit;	
+    header("HTTP/1.1 404 Not Found");
+    echo <<<MESSAGE
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+MESSAGE;
+    echo "\n<p>The requested URL " . $_SERVER['PHP_SELF'] ." was not found on this server.</p>\n";
+    echo "<hr>\n";
+    echo '<address>'. apache_get_version() . ' Server at ' . $_SERVER['SERVER_ADDR'] . ' Port '. $_SERVER['SERVER_PORT'] . "</address>\n";
+    echo "</body></html>\n";
+    exit(0);
+
 }
 
 if (!defined('REST_CONSTANTS')) {
@@ -77,7 +90,7 @@ if (!defined('REST_CONSTANTS')) {
     define('DB_TABLE_COMMENT','comment', false);
     define('DB_TABLE_ICD10','icd10', false);
     define('DB_TABLE_IMAGE','image', false);
-    define('DB_TABLE_LOGGER','logger', false);
+    define('DB_TABLE_LOG','log', false);
 	define('DB_TABLE_PATIENT', 'patient', false);
     define('DB_TABLE_SESSION','session', false);
     define('DB_TABLE_STAFF','staff', false);
