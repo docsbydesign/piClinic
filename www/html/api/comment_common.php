@@ -27,7 +27,7 @@
 require_once 'api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
-// Deifine the elements in the LoggerFieldInfo
+// Deifine the elements in the CommentFieldInfo
 define ("COMMENT_REQ_ARG", 0, false);        // request param name is index 0
 define ("COMMENT_DB_ARG", 1, false);         // db field name is index 1
 define ("COMMENT_DB_REQ_GET", 2, false);     // whether the field must appear in a GET request
@@ -36,7 +36,7 @@ define ("COMMENT_DB_REQ_POST", 4, false);    // whether the field must appear in
 define ("COMMENT_DB_CLEANFIRST", 5, false);  // whether to clean the string before using
 
 /*
- * Returns an array that defines the query parameters and DB field names used by the logger
+ * Returns an array that defines the query parameters and DB field names used by the comment table
  */
 function getCommentFieldInfo() {
     $returnValue = [
