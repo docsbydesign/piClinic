@@ -29,7 +29,7 @@
 if (basename(__FILE__) == basename($_SERVER['SCRIPT_NAME'])) {
 	// the file was not included so return an error
 	http_response_code(404);
-	header(CONTENT_TYPE_HEADER_HTML);
+	header('Content-Type: application/json; charset=utf-8;');
     header("HTTP/1.1 404 Not Found");
     echo <<<MESSAGE
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">

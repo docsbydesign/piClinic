@@ -571,6 +571,192 @@
 						}
 					],
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Shared",
+					"item": [
+						{
+							"name": "shared dbUtils script access test API",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+										"exec": [
+											"pm.test(\"api/comment_common.php access denial check was successful\", function() {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/shared/dbUtils.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"shared",
+										"dbUtils.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "shared logUtils script access test API",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+										"exec": [
+											"pm.test(\"api/comment_common.php access denial check was successful\", function() {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/shared/logUtils.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"shared",
+										"logUtils.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "shared piClinicConfig script access test API",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+										"exec": [
+											"pm.test(\"api/comment_common.php access denial check was successful\", function() {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/shared/piClinicConfig.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"shared",
+										"piClinicConfig.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "shared profile script access test API",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+										"exec": [
+											"pm.test(\"api/comment_common.php access denial check was successful\", function() {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/shared/profile.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"shared",
+										"profile.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "shared security script access test API Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+										"exec": [
+											"pm.test(\"api/comment_common.php access denial check was successful\", function() {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/shared/security.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"shared",
+										"security.php"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
 				}
 			]
 		},
