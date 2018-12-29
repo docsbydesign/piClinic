@@ -15,4 +15,4 @@ include: ['pages']
 author:
   name: Mercer University TCO
   url: https://engineering.mercer.edu/academics/undergraduate/technical-communication/
-theme: jekyll-theme-tactile
+theme: jekyll-theme-slate
