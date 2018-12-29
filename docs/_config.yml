@@ -4,8 +4,8 @@ email: watson_rb@mercer.edu
 description: > # this means to ignore newlines until "baseurl:"
   Affordable patient-record automation for limited-resource clinics.<br>
   A Mercer University School of Engineering project in the Department of Technical Communication.
-baseurl: "/piClinic" # the subpath of your site
-url: "https://docsbydesign.github.io" # the base hostname & protocol for where the content is h
+baseurl: "" # the subpath of your site
+url: "https://piclinic.org" # the base hostname & protocol for where the content is h
 twitter_username: bobwatsonphd
 google_analytics: UA-58134115-3
 github_username:  rbwatson
