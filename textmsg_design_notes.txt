@@ -1,0 +1,49 @@
+Text message service notes
+
+App:
+Schedule or reschedule new reminder
+	apptDate = "2019-08-20 12:30"
+	Reminder schedule = [-1,-2,-7] # schedule for apptDate-1, apptDate-2, and apptDate-7
+	GET textmsg?patientID={{thisPatientID}}&sent=false
+	if msg.count > 0 
+		# delete the unsent messages to this patient
+		DELETE textmsg
+			{
+				"patientID": "{{patientID}}"
+			}
+	foreach offset in schedule:
+		sendDate = apptDate + offset
+		POST textmsg
+			{
+				"messageText": "Don't forget your next appointment is {{apptDate}}",
+				"patientID": "{{patientID}}",
+				"destNumber": "+50455551212",
+				"sendDateTime": {{sendDate}},
+				"sendService": "LocalMobile",
+				"maxSendAttempts": 5,
+			}
+
+Show patient status
+	GET textmsg?patientID={{thisPatientID}}
+	display messages & status (sent-successful, sent-error, scheduled)
+	
+	
+Service (CRON):
+	GET textmsg?due=true	# return messages with sendDateTime < now
+	foreach message in Getresult:
+		IF DEBUG:
+			POST log
+		{send message using designated service}
+		POST log
+		if (GET.lastSendAttempt < GET.maxSendAttempts) and not successful:
+				newNextSendDateTime = GET.nextSendDateTime + GET.retryInterval
+		else:
+				newNextSendDateTime = null	
+		PATCH textmsg
+			{
+				"textmsgID": {{textmsgID}},
+				"nextSendDateTime": null,
+				"lastSendAttempt" = GET.lastSendAttempt + 1,
+				"lastSendAttemptTime": NOW(),
+				"lastSendStatus": "(status from service)"
+			}
