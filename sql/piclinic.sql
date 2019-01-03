@@ -173,6 +173,34 @@ ALTER TABLE `clinic`
 
 -- --------------------------------------------------------
 --
+-- Table structure for table `textmsg`
+--
+
+DROP TABLE IF EXISTS `textmsg`;
+CREATE TABLE IF NOT EXISTS `textmsg` (
+  `textmsgID` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique record ID for text messages',
+  `messageText` varchar(1023) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Text of message to send',
+  `destNumber` varchar(1023) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Destination number or address of message recipient',
+  `sendDateTime` datetime DEFAULT NULL COMMENT 'Date/time of first message send attempt',
+  `sendService`  enum('LocalMobile') COLLATE utf8_unicode_ci NOT NULL COMMENT 'message service to use for sending message',
+  `maxSendAttempts` int(11) NOT NULL DEFAULT 1 COMMENT 'Number of times to try and send the message',
+  `retryInterval` int(11) NOT NULL DEFAULT 60 COMMENT 'Number of seconds between send attempts',
+  `nextSendDateTime` datetime DEFAULT NULL COMMENT 'Date/time of next message send attempt',
+  `lastSendAttempt` int(11) NOT NULL DEFAULT 0 COMMENT 'Last send attempt index (1 = first attempt)',
+  `lastSendAttemptTime` datetime DEFAULT NULL COMMENT 'The time the last message was sent',
+  `lastSendStatus` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'The status of the last message attempt'   
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Information about text messages';
+
+--
+-- Indexes for table `patient`
+--
+ALTER TABLE `textmsg`
+ ADD INDEX `destNumber` (`destNumber`);
+ALTER TABLE `textmsg`
+ ADD INDEX `nextSendDateTime` (`nextSendDateTime`);
+ 
+-- --------------------------------------------------------
+--
 -- Table structure for table `patient`
 --
 
