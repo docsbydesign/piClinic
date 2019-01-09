@@ -21,24 +21,24 @@
  */
 /*******************
  *
- *	Retrieves a user session
+ *	Retrieves info about a queued textmsg
  * 		or an HTML error message
  *
- *	GET: Returns session information
+ *	GET: Returns textmsg information
  *
  *		Query paramters:
- *			'token' - the session token
- *		  looks up and checks these $_SERVER values match those of the session
- *			REMOTE_ADDR - the IP of the client making the request
- *			HTTP_USER_AGENT (if present) - the USER AGENT string of the client making the reaquest
+ *			'Token' - the session token with permission to read messages
+ *          patientID={{thisPatientID}}     returns text messages queued for this patient
+ *          filter={next, ready, sent}      default = all, next = queued and ready, ready = only ready, sent = only sent
+ *          count= max objects to return    default & max = 100, must be > 0
  *
  *		Response:
- *			Session data object
- *			
+ *			textmsg data object
+ *
  *		Returns:
- *			200: the session object matching the token
+ *			200: the textmsg object matching the token
  *			400: required field is missing or $_SERVER values did not match
- *			404: no session object with that token found
+ *			404: no matching textmsg found
  *			500: server error information
  *
  *********************/
@@ -48,7 +48,7 @@ exitIfCalledFromBrowser(__FILE__);
 /*
  *  Queries a token and returns its access if it's valid
  */
-function _session_get ($dbLink, $apiUserToken, $requestArgs) {
+function _textmsg_get ($dbLink, $apiUserToken, $requestArgs) {
     /*
      *      Initialize profiling if enabled in piClinicConfig.php
      */

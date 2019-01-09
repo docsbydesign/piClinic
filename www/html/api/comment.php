@@ -125,7 +125,7 @@ if (empty($apiUserToken)){
             }
         } else {
             // caller does not have a valid security token
-            $retVal['httpResponse'] = 403;
+            $retVal['httpResponse'] = 401;
             $retVal['httpReason'] = "User account is not authorized to create this resource.";
         }
     }

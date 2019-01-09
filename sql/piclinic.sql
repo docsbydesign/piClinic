@@ -179,7 +179,8 @@ ALTER TABLE `clinic`
 DROP TABLE IF EXISTS `textmsg`;
 CREATE TABLE IF NOT EXISTS `textmsg` (
   `textmsgID` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique record ID for text messages',
-  `patientID int(11) DEFAULT NULL  COMMENT '(optional) patientID of patient receiving the message',
+  `textmsgGUID` char(36) COLLATE utf8_unicode_ci NOT NULL COMMENT '(required) locally assigned message ID',
+  `patientID` int(11) DEFAULT NULL  COMMENT '(optional) patientID of patient receiving the message',
   `messageText` varchar(1023) COLLATE utf8_unicode_ci NOT NULL COMMENT '(required) Text of message to send',
   `destNumber` varchar(1023) COLLATE utf8_unicode_ci NOT NULL COMMENT '(required) Destination number or address of message recipient',
   `sendDateTime` datetime NOT NULL COMMENT '(required) Date/time of first message send attempt',
@@ -189,7 +190,9 @@ CREATE TABLE IF NOT EXISTS `textmsg` (
   `nextSendDateTime` datetime DEFAULT NULL COMMENT '(internal) Date/time of next message send attempt',
   `lastSendAttempt` int(11) NOT NULL DEFAULT 0 COMMENT '(internal) Last send attempt index (1 = first attempt)',
   `lastSendAttemptTime` datetime DEFAULT NULL COMMENT '(internal) The time the last message was sent',
-  `lastSendStatus` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(internal) The status of the last message attempt'   
+  `lastSendStatus` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(internal) The status of the last message attempt',
+  `modifiedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '(Auto fill) The date/time of the most recent update',
+  `createdDate` datetime NOT NULL COMMENT '(Auto Fill) The time the record was created'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Information about text messages';
 
 --
@@ -199,6 +202,8 @@ ALTER TABLE `textmsg`
  ADD INDEX `destNumber` (`destNumber`);
 ALTER TABLE `textmsg`
  ADD INDEX `nextSendDateTime` (`nextSendDateTime`);
+ALTER TABLE `textmsg`
+ ADD UNIQUE KEY `textmsgGUID` (`textmsgGUID`);
  
 -- --------------------------------------------------------
 --

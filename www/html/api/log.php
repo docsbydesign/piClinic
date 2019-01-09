@@ -88,7 +88,7 @@ if (empty($apiUserToken)){
                     $retVal = _log_post($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
-                    $retVal['httpResponse'] = 403;
+                    $retVal['httpResponse'] = 401;
                     $retVal['httpReason'] = "User account is not authorized to create this resource.";
                 }
                 break;
@@ -98,7 +98,7 @@ if (empty($apiUserToken)){
                     $retVal = _log_get($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
-                    $retVal['httpResponse'] = 403;
+                    $retVal['httpResponse'] = 401;
                     $retVal['httpReason'] = "User account is not authorized to read this resource.";
                 }
                 break;

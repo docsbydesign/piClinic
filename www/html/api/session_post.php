@@ -141,7 +141,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
 	
 	if (!$userInfo['active']) {
 		// account has been disabled
-		$returnValue['httpResponse'] = 403;
+		$returnValue['httpResponse'] = 401;
 		$returnValue['httpReason']	= 'Account is disabled.';
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
@@ -160,7 +160,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
 		if (API_DEBUG_MODE) {
 			$returnValue['debug'] = $dbInfo;
 		}
-		$returnValue['httpResponse'] = 403;
+		$returnValue['httpResponse'] = 401;
 		$returnValue['httpReason']	= 'Password does not match the password saved for this user.';
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
@@ -173,7 +173,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
 
 	// Build the DB request
 	$dbArgs = array();
-	$dbArgs['token'] = tokenString ();
+	$dbArgs['token'] = guidString ('_');
 	$dbArgs['sessionIP'] = (!empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null);
 	$dbArgs['sessionUA'] = (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null);
 	$dbArgs['username'] = $userInfo['username'];

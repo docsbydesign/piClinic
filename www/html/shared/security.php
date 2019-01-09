@@ -98,13 +98,15 @@ function getSessionInfo ($dbLink, $sessionToken) {
     return $sessionInfo;
 }
 
-function checkUiSessionAccess($dbLink, $sessionToken, $pageAccess) {
+function checkUiSessionAccess($dbLink, $sessionToken, $pageAccess, $sessionInfo=null) {
 	$profileData = [];
 	profileLogStart ($profileData);
     // assume access is granted until a test fails
     $dbAccessGranted = true;
 
-    $sessionInfo = getSessionInfo ($dbLink, $sessionToken);
+    if (empty($sessionInfo)){
+        $sessionInfo = getSessionInfo ($dbLink, $sessionToken);
+    }
 
     // 0 means session is not valid
     if (!empty($sessionInfo['token']) && ($sessionInfo['token'] != '0')) {

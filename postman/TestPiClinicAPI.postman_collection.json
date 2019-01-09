@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0e7fae59-5eba-479e-a556-664d9cb2f3a8",
+		"_postman_id": "a135a88d-5c0b-4167-a717-55d3c21593f3",
 		"name": "TestPiClinicAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1565,7 +1565,7 @@
 											"    if (userAcct == 'TestSA') {\r",
 											"        pm.response.to.have.status(200);\r",
 											"    } else {\r",
-											"        pm.response.to.have.status(403);\r",
+											"        pm.response.to.have.status(401);\r",
 											"    }\r",
 											"});\r",
 											"\r",
@@ -1626,7 +1626,7 @@
 											"var jsonData = JSON.parse(responseBody);\r",
 											"\r",
 											"pm.test(\"Session query was prevented\", function() {\r",
-											"    pm.response.to.have.status(403);\r",
+											"    pm.response.to.have.status(401);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Session data was correct\", function() {\r",
@@ -2013,7 +2013,7 @@
 											"    if (userAcct == 'TestSA') {\r",
 											"        pm.response.to.have.status(201);\r",
 											"    } else {\r",
-											"        pm.response.to.have.status(403);\r",
+											"        pm.response.to.have.status(401);\r",
 											"    }\r",
 											"});"
 										],
@@ -2103,7 +2103,7 @@
 											"        // staff cam read, but can't create so the user is not found\r",
 											"        pm.response.to.have.status(200);\r",
 											"    } else {\r",
-											"        pm.response.to.have.status(403);\r",
+											"        pm.response.to.have.status(401);\r",
 											"    }\r",
 											"});\r",
 											"\r",
@@ -2679,7 +2679,7 @@
 											"        pm.response.to.have.status(201);\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(403);\r",
+											"        pm.response.to.have.status(401);\r",
 											"    }\r",
 											"});\r",
 											""
@@ -2769,7 +2769,7 @@
 											"        pm.response.to.have.status(404);\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(403);\r",
+											"        pm.response.to.have.status(401);\r",
 											"    }\r",
 											"});\r",
 											""
@@ -2827,7 +2827,7 @@
 											"        pm.response.to.have.status(200);\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(403);\r",
+											"        pm.response.to.have.status(401);\r",
 											"    }\r",
 											"});\r",
 											"\r",
@@ -2901,7 +2901,7 @@
 											"        pm.response.to.have.status(200);\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(403);\r",
+											"        pm.response.to.have.status(401);\r",
 											"    }\r",
 											"});\r",
 											"\r",
@@ -2977,7 +2977,7 @@
 											"        pm.response.to.have.status(200);\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(403);\r",
+											"        pm.response.to.have.status(401);\r",
 											"    }\r",
 											"});\r",
 											"\r",
@@ -3056,7 +3056,7 @@
 											"        pm.response.to.have.status(404);\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(403);\r",
+											"        pm.response.to.have.status(401);\r",
 											"    }\r",
 											"});\r",
 											"\r",
@@ -3123,7 +3123,7 @@
 											"        pm.response.to.have.status(200);\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(403);\r",
+											"        pm.response.to.have.status(401);\r",
 											"    }\r",
 											"});"
 										],
@@ -3183,7 +3183,7 @@
 											"        pm.response.to.have.status(404);\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(403);\r",
+											"        pm.response.to.have.status(401);\r",
 											"    }\r",
 											"});\r",
 											"\r",
@@ -4090,6 +4090,406 @@
 						},
 						{
 							"name": "Get Session Access after logout Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "9746528d-2e17-4c7d-b744-3e720334bcb6",
+										"exec": [
+											"postman.setEnvironmentVariable(\"token\", null);",
+											"",
+											"pm.test(\"Access failed\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Close System Admin session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+										"exec": [
+											"pm.test(\"SystemAdmin Logout was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{SAtoken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "TextMsg API Test",
+			"item": [
+				{
+					"name": "Session Open",
+					"item": [
+						{
+							"name": "Get Test User token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ed713fa2-ae3d-46f3-aa9c-38838bd026ba",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", jsonData.data.token);\r",
+											"\r",
+											"pm.test(\"Login was successful\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?username={{testUser}}&password={{testUserPW}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{testUser}}"
+										},
+										{
+											"key": "password",
+											"value": "{{testUserPW}}"
+										}
+									]
+								},
+								"description": "Logs in as Test User"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Session Access",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Access check was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get SystemAdmin token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.variables.set(\"SAtoken\", jsonData.data.token);\r",
+											"\r",
+											"pm.test(\"System Admin login was successful\", function() {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?username={{systemAdminUser}}&password={{systemAdminPW}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{systemAdminUser}}"
+										},
+										{
+											"key": "password",
+											"value": "{{systemAdminPW}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Success Tests",
+					"item": [
+						{
+							"name": "Queue a new text message",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1969d74f-5bfd-43eb-b953-80a5d45227a5",
+										"exec": [
+											"var userAcct = pm.environment.get('testUser');\r",
+											"\r",
+											"pm.test(\"New text message was successful\", function () {\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+											"         // this should be successful\r",
+											"        pm.response.to.have.status(201);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(401);\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"pm.test(\"New message phone number is correct.\", function() {\r",
+											"    var newDest = pm.environment.get('testTextMsgDest');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+											"        // this should be successful\r",
+											"        var jsonData = JSON.parse(responseBody);\r",
+											"        pm.expect(jsonData.data.destNumber === newDest);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"       pm.expect(1);\r",
+											"    }\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "messageText",
+											"value": "Hi there, this is your reminder message! {{$guid}}",
+											"type": "text"
+										},
+										{
+											"key": "patientID",
+											"value": "nu",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "destNumber",
+											"value": "{{testTextMsgDest}}",
+											"type": "text"
+										},
+										{
+											"key": "sendDateTime",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "sendService",
+											"value": "LocalMobile",
+											"type": "text"
+										},
+										{
+											"key": "maxSendAttempts",
+											"value": "5",
+											"description": "`",
+											"type": "text"
+										},
+										{
+											"key": "retryInterval",
+											"value": "10",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/api/textmsg.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"textmsg.php"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Session Close",
+					"item": [
+						{
+							"name": "Close current session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+										"exec": [
+											"pm.test(\"Logout was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Session Access after logout",
 							"event": [
 								{
 									"listen": "test",

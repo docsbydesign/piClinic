@@ -58,6 +58,11 @@ if (!defined('REST_CONSTANTS')) {
 	define('API_MAX_FILESIZE', 2*1024*1024, false); // this must be less than or equal to the upload_max_filesize value in the PHP.INI
 	define('DB_QUERY_LIMIT', ' LIMIT 100', false);	// added to queries to limit response size
 
+    define('MAX_TEXT_MESSAGE_LENGTH', 1023, false); // the size of textmsg.messageText field
+    define('DEFAULT_SEND_SERVICE', 'LocalMobile', false); // the default text message service
+    define('DEFAULT_TEXTMSG_MAX_SEND_ATTEMPTS', 5, false); // how many times to try sending a text message
+    define('DEFAULT_RETRY_INTERVAL', 300, false); // how long (seconds) to wait between message attempts
+
 	define('CONTENT_TYPE_JSON','application/json; charset=utf-8;', false);
     define('CONTENT_TYPE_HEADER_JSON','Content-Type: application/json; charset=utf-8;', false);
     define('CONTENT_TYPE_HTML','text/html; charset=utf-8;', false);
@@ -94,7 +99,8 @@ if (!defined('REST_CONSTANTS')) {
 	define('DB_TABLE_PATIENT', 'patient', false);
     define('DB_TABLE_SESSION','session', false);
     define('DB_TABLE_STAFF','staff', false);
-	define('DB_TABLE_VISIT','visit', false);
+    define('DB_TABLE_VISIT','visit', false);
+    define('DB_TABLE_TEXTMSG','textmsg', false);
 
 	// database views
     define('DB_VIEW_COMMENT_GET','commentGet', false);

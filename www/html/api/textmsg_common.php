@@ -21,7 +21,7 @@
  */
 /*******************
  *
- *	Utility functions used by session resource
+ *	Utility functions used by textmsg resource
  *
  *********************/
 require_once 'api_common.php';

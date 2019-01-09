@@ -104,7 +104,7 @@ if (!checkUiSessionAccess (null, $sessionToken, $pageAccessRequired)) {
 	$retVal = [];
 	// database not opened.
 	$retVal['contentType'] = CONTENT_TYPE_JSON;
-	$retVal['httpResponse'] = 403;
+	$retVal['httpResponse'] = 401;
 	$retVal['httpReason']   = "Access not granted to this page.";
 	if (isset($dbInfo)) {
 		$retVal['error'] = $dbInfo;

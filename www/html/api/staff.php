@@ -135,7 +135,7 @@ if (empty($apiUserToken)){
                     $retVal = _staff_post($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
-                    $retVal['httpResponse'] = 403;
+                    $retVal['httpResponse'] = 401;
                     $retVal['httpReason'] = "User account is not authorized to create this resource.";
                     $logData['logStatusCode'] = $retVal['httpResponse'];
                     $logData['logStatusMessage'] = $retVal['httpReason'];
@@ -148,7 +148,7 @@ if (empty($apiUserToken)){
                     $retVal = _staff_get($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
-                    $retVal['httpResponse'] = 403;
+                    $retVal['httpResponse'] = 401;
                     $retVal['httpReason'] = "User account is not authorized to read this resource.";
                     $logData['logStatusCode'] = $retVal['httpResponse'];
                     $logData['logStatusMessage'] = $retVal['httpReason'];
@@ -161,7 +161,7 @@ if (empty($apiUserToken)){
                     $retVal = _staff_patch($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
-                    $retVal['httpResponse'] = 403;
+                    $retVal['httpResponse'] = 401;
                     $retVal['httpReason'] = "User account is not authorized to update this resource.";
                     $logData['logStatusCode'] = $retVal['httpResponse'];
                     $logData['logStatusMessage'] = $retVal['httpReason'];
@@ -174,7 +174,7 @@ if (empty($apiUserToken)){
                     $retVal = _staff_delete($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
-                    $retVal['httpResponse'] = 403;
+                    $retVal['httpResponse'] = 401;
                     $retVal['httpReason'] = "User account is not authorized to disable this resource.";
                     $logData['logStatusCode'] = $retVal['httpResponse'];
                     $logData['logStatusMessage'] = $retVal['httpReason'];
