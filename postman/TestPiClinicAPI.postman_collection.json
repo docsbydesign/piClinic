@@ -573,6 +573,192 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "Textmsg",
+					"item": [
+						{
+							"name": "textmsg_common script access test API",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+										"exec": [
+											"pm.test(\"api/staff_common.php access denial check was successful\", function() {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/textmsg_common.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"textmsg_common.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "textmsg_delete script access test API",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+										"exec": [
+											"pm.test(\"api/staff_delete.php access denial check was successful\", function() {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/textmsg_delete.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"textmsg_delete.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "textmsg_get script access test API",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+										"exec": [
+											"pm.test(\"api/staff_get.php access denial check was successful\", function() {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/textmsg_get.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"textmsg_get.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "textmsg_patch script access test API",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+										"exec": [
+											"pm.test(\"api/staff_patch.php access denial check was successful\", function() {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/textmsg_patch.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"textmsg_patch.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "textmsg_post script access test API",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "50621ed2-48a2-4475-9060-ad6e9a80747a",
+										"exec": [
+											"pm.test(\"api/staff_post.php access denial check was successful\", function() {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/staff_post.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"staff_post.php"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "Shared",
 					"item": [
 						{
