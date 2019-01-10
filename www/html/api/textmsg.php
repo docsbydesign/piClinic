@@ -69,9 +69,8 @@
  *	GET: Returns textmsg information
  *
  *		Query paramters:
- *			'Token' - the session token with permission to read messages
  *          patientID={{thisPatientID}}     returns text messages queued for this patient
- *          filter={next, ready, sent}      default = all, next = queued and ready, ready = only ready, sent = only sent
+ *          status={unsent, ready, sent, inactive}      default = all, unsent = queued and ready, ready = only ready, inactive = only sent
  *          count= max objects to return    default & max = 100, must be > 0
  *
  *		Response:
@@ -162,13 +161,7 @@ if (empty( $apiUserToken)) {
             case 'GET':
                 if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_READONLY, $session)) {
                     // only a valid token is required to GET session info
-                   // $retVal = _textmsg_get($dbLink, $apiUserToken, $requestData);
-                    $retVal['contentType'] = CONTENT_TYPE_JSON;
-                    if (API_DEBUG_MODE) {
-                        $retVal['error'] = $requestData;
-                    }
-                    $retVal['httpResponse'] = 405;
-                    $retVal['httpReason'] = $_SERVER['REQUEST_METHOD'] . ' method is not supported.';
+                    $retVal = _textmsg_get($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
                     $retVal['httpResponse'] = 401;
@@ -180,7 +173,7 @@ if (empty( $apiUserToken)) {
                 break;
 
             case 'PATCH':
-                if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_STAFF, $session)) {
+                if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_ADMIN, $session)) {
                    // $retVal = _textmsg_patch($dbLink, $apiUserToken, $requestData);
                     $retVal['contentType'] = CONTENT_TYPE_JSON;
                     if (API_DEBUG_MODE) {

@@ -54,7 +54,7 @@ function _textmsg_delete ($dbLink, $apiUserToken, $requestArgs) {
 
 	// Initalize the log entry for this call
     //  more fields will be added later in the routine
-	$logData = createLogEntry ('API', __FILE__, 'session', $_SERVER['REQUEST_METHOD'],  $apiUserToken, $_SERVER['QUERY_STRING'], null, null, null, null);
+	$logData = createLogEntry ('API', __FILE__, 'textmsg', $_SERVER['REQUEST_METHOD'],  $apiUserToken, $_SERVER['QUERY_STRING'], null, null, null, null);
 
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
 

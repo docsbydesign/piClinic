@@ -56,6 +56,7 @@ if (!defined('REST_CONSTANTS')) {
 	define('API_IMAGE_FILEPATH', '/var/local/piclinic/images/', false); // the system folder where image resources are stored
 	define('API_DELETED_FILEPATH', '/var/local/piclinic/deleted/', false); // the system folder where image resources are stored
 	define('API_MAX_FILESIZE', 2*1024*1024, false); // this must be less than or equal to the upload_max_filesize value in the PHP.INI
+    define('DB_QUERY_LIMIT_COUNT', 100, false); // this MUST match the value in DB_QUERY_LIMIT
 	define('DB_QUERY_LIMIT', ' LIMIT 100', false);	// added to queries to limit response size
 
     define('MAX_TEXT_MESSAGE_LENGTH', 1023, false); // the size of textmsg.messageText field

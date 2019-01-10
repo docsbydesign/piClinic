@@ -27,9 +27,12 @@
  *	GET: Returns textmsg information
  *
  *		Query paramters:
- *			'Token' - the session token with permission to read messages
  *          patientID={{thisPatientID}}     returns text messages queued for this patient
- *          filter={next, ready, sent}      default = all, next = queued and ready, ready = only ready, sent = only sent
+ *          status={unsent, ready, sent, inactive}      default = all,
+ *                                                          unsent = queued and ready,
+ *                                                          ready = only ready,
+ *                                                          sent = sent and success
+ *                                                          inactive = sent and error
  *          count= max objects to return    default & max = 100, must be > 0
  *
  *		Response:
@@ -70,7 +73,7 @@ function _textmsg_get ($dbLink, $apiUserToken, $requestArgs) {
 
     $logData = createLogEntry ('API',
         __FILE__,
-        'session',
+        'textmsg',
         $_SERVER['REQUEST_METHOD'],
         null,
         $_SERVER['QUERY_STRING'],
@@ -79,134 +82,87 @@ function _textmsg_get ($dbLink, $apiUserToken, $requestArgs) {
         null,
         null);
 
+    // check query parameters and build query
+
+    $dbSortOrder = ' ORDER BY `sendDateTime` DESC';
+    $dbFilter = array();
+    // patientID is optional to select messages queued for a specific patient
+    // default is to return all up to query limit
+    if (!empty($requestArgs['patientID'])) {
+       array_push($dbFilter, ' `PatientID` = '.$requestArgs['patientID']);
+    }
+
+    if (!empty($requestArgs['textmsgGUID'])) {
+        array_push($dbFilter, ' `textmsgGUID` = \''.$requestArgs['textmsgGUID']. '\'');
+    }
+
+    //  status={unsent, ready, sent, inactive}
+    if (!empty($requestArgs['status'])) {
+        switch ($requestArgs['status']) {
+            case 'error':
+                $statusFilter = " `nextSendDateTime` = NULL AND `lastSendStatus` != 'Success'";
+                break;
+
+            case 'inactive':
+                $statusFilter = " `nextSendDateTime` = NULL";
+                break;
+
+            case 'ready':
+                $statusFilter = " `nextSendDateTime` < NOW()";
+                break;
+
+            case 'sent':
+                $statusFilter = " `nextSendDateTime` = NULL AND `lastSendStatus` = 'Success'";
+                break;
+
+            case 'unsent':
+                $statusFilter = " `nextSendDateTime` IS NOT NULL";
+                break;
+        }
+        if (!empty($statusFilter)) {
+            array_push($dbFilter, $statusFilter);
+        }
+    }
+
+    // count= max objects to return    default & max = 100, must be > 0
+    $countFilter = DB_QUERY_LIMIT_COUNT;
+    if (!empty($requestArgs['count'])) {
+        if (is_numeric($requestArgs['count'])) {
+            $countFilter = abs(intval($requestArgs['count']));
+        }
+        if ($countFilter > DB_QUERY_LIMIT_COUNT) {
+            $countFilter = DB_QUERY_LIMIT_COUNT;
+        }
+        if ($countFilter < 1) {
+            $countFilter = 1;
+        }
+    }
+    // format the value for the DB Query
+    $countFilter = ' LIMIT '. strval($countFilter);
+
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
 
-	// if no token parameter, get the caller's session as identified by the access token
-    // if a token parameter is present and is not the caller's, make sure the caller has SystemAdmin access
-
-    $callerAccess = 0;
-    $apiReturnValue = array();
-    $qtReturnValue = array();
-
-    // confirm that the caller has permission to access the session they are querying
-    //  they need admin access if the session they are querying is not their own.
-    // create query string for get operation
-    $getApiQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''.  $apiUserToken . '\';';
+    $getApiQueryString = 'SELECT * FROM `'. DB_TABLE_TEXTMSG . '` WHERE ';
+    $filterString = '';
+    if (empty($dbFilter)) {
+        $filterString = ' 1';
+    } else {
+        foreach ($dbFilter as $filter) {
+            if (!empty($filterString)) {
+                $filterString .= ' AND';
+            }
+            $filterString .= $filter;
+        }
+    }
+    $getApiQueryString .= $filterString;
+    $getApiQueryString .= $dbSortOrder;
+    $getApiQueryString .= strval($countFilter). ';';
     $dbInfo ['apiQueryString'] = $getApiQueryString;
 
     // get the session record that matches--there should be only one
-    $apiReturnValue = getDbRecords($dbLink, $getApiQueryString);
-    $dbInfo ['apiReturnValue'] = $apiReturnValue;
-    if ($apiReturnValue['count'] == 1) {
-        if ($apiReturnValue['data']['accessGranted'] == 'SystemAdmin') {
-            $callerAccess = 2;
-        } else {
-            // if not an admin, they can only see their own token
-            if (empty($requestArgs['token']) || ($apiUserToken == $requestArgs['token'])) {
-                $callerAccess = 1;
-            }
-        }
-    } // else not found so no access
+    $sessionInfo = getDbRecords($dbLink, $getApiQueryString);
+    $dbInfo ['apiReturnValue'] = $sessionInfo;
 
-    if ($callerAccess > 0) {
-        if (empty($requestArgs['token'])) {
-            // the call is looking up their own session so return the one collected above
-            $qtReturnValue = $apiReturnValue;
-            $callerAccess = 1;
-        } else {
-            if ($apiUserToken == $requestArgs['token']) {
-                // the call is looking up their own session so return the one collected above
-                $qtReturnValue = $apiReturnValue;
-            } else {
-                // look up the session being queried
-                // create query string for get operation
-                $qtQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''.  $requestArgs['token'] . '\';';
-                $dbInfo ['qtQueryString'] = $qtQueryString;
-
-                // get the session record that matches--there should be only one
-                $qtReturnValue = getDbRecords($dbLink, $qtQueryString);
-                $dbInfo['qtReturnValue'] = $qtReturnValue;
-
-                if ($qtReturnValue['count'] != 1) {
-                    //return 404
-                    // add debug info to the list
-                    if (API_DEBUG_MODE) {
-                        $notFoundReturnValue['debug'] = $dbInfo;
-                    }
-                    // target not found so return here with a 404
-                    return $notFoundReturnValue;
-                } // else format qtReturnValue
-            }
-        }
-
-        if ($callerAccess == 2) {
-            // show full session
-            $sessionInfo['data'] = $qtReturnValue['data'];
-            $sessionInfo['httpResponse'] = 200;
-            $sessionInfo['httpReason'] = 'Success';
-        } else if ($callerAccess == 1) {
-            $validSession = 1;
-            // validate and show partial access
-            // getting their own session
-            $sessionExpirationTime = strtotime($qtReturnValue['data']['expiresOnDate']);
-            $timeNow = time();
-            if ($timeNow > $sessionExpirationTime) {
-                // session expired
-                $validSession = false;
-            }
-
-            if ($qtReturnValue['data']['loggedIn'] == 0) {
-                $validSession = false;
-            }
-
-            // confirm that this request is from the IP that created the token
-            if ($_SERVER['REMOTE_ADDR'] != $qtReturnValue['data']['sessionIP']) {
-                // token is being used from another IP
-                $validSession = false;
-            }
-
-            // confirm that this request has the same User Agent string as the browser that created the token
-            $sessionUA = (!empty($qtReturnValue['data']['sessionUA']) ? $qtReturnValue['data']['sessionUA'] : '');
-            $localUA = (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '');
-            if ($localUA != $sessionUA) {
-                // token could be used from another browser
-                $dbInfo['thisUserAgent'] = $localUA ;
-                $validSession = false;
-            }
-
-            $sessionInfo['contentType'] = CONTENT_TYPE_JSON;
-            $sessionInfo['count'] = 1;
-            if ($validSession) {
-                $sessionInfo['data']['token'] = $qtReturnValue['data']['token'];
-                $sessionInfo['data']['username'] = $qtReturnValue['data']['username'];
-                $sessionInfo['data']['accessGranted'] = $qtReturnValue['data']['accessGranted'];
-                $sessionInfo['data']['sessionLanguage'] = $qtReturnValue['data']['sessionLanguage'];
-                $sessionInfo['data']['sessionClinicPublicID'] = $qtReturnValue['data']['sessionClinicPublicID'];
-                $sessionInfo['httpResponse'] = 200;
-                $sessionInfo['httpReason'] = 'Success';
-            } else {
-                // this is a stale token so no access anymore
-                $sessionInfo['data']['token'] = 0;
-                $sessionInfo['data']['username'] = '';
-                $sessionInfo['data']['accessGranted'] = 0;
-                $sessionInfo['data']['sessionLanguage'] = '';
-                $sessionInfo['data']['sessionClinicPublicID'] = '';
-                $sessionInfo['httpResponse'] = 404;
-                $sessionInfo['httpReason'] = 'Session not found.';
-            }
-        } // else ???
-    } else {
-        // no access
-        // can't validate permission so not a valid session
-        // return an empty session info record
-        $sessionInfo['data']['token'] = 0;
-        $sessionInfo['data']['username'] = '';
-        $sessionInfo['data']['accessGranted'] = 0;
-        $sessionInfo['data']['sessionLanguage'] = '';
-        $sessionInfo['data']['sessionClinicPublicID'] = '';
-        $sessionInfo['httpResponse'] = 401;
-        $sessionInfo['httpReason'] = 'Not authorized.';
-    }
     // and return here
     profileLogClose($profileData, __FILE__, $requestArgs);
     if (API_DEBUG_MODE  /*&&  $callerAccess == 2 */) {

@@ -4,7 +4,7 @@ App:
 Schedule or reschedule new reminder
 	apptDate = "2019-08-20 12:30"
 	Reminder schedule = [-1,-2,-7] # schedule for apptDate-1, apptDate-2, and apptDate-7
-	GET textmsg?patientID={{thisPatientID}}&sent=false
+	GET textmsg?patientID={{thisPatientID}}&filter=unsent
 	if msg.count > 0 
 		# delete the unsent messages to this patient
 		DELETE textmsg
