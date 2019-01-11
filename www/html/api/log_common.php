@@ -84,7 +84,7 @@ function makeLogQueryStringFromRequestParameters ($requestParameters) {
     }
 
     // if no paremeters, then select all from the most recent 100 log entries
-    $queryString .= "TRUE ORDER BY `createdDate` DESC, `loggerID` DESC";
+    $queryString .= "TRUE ORDER BY `createdDate` DESC, `logID` DESC";
     $queryString .= ' '.DB_QUERY_LIMIT.';';
 
     return $queryString;
