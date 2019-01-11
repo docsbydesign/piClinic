@@ -27,13 +27,10 @@
  *	PATCH: Updates an unsent textmsg in the database
  * 		input data:
  *
- *          testmsgID={messageID}}          updates this specific message (if not sent)
- *          "sendDateTime":                 Time to send the first message
- *          "nextSendDateTime":             when to try/retry sending the message
- *          "lastSendAttempt"               Last send attempt count
- *          "lastSendAttemptTime"           Last send attempt time
- * `        "lastSendStatus":               Status from last send attempt
- *
+ *          textmsgGUID={messageGUID}}      updates this specific message (if not sent)
+ * `        "status":                       Status from last send attempt:
+ *                                              "Success" (marks message as sent)
+ *                                              (anything else)  an unsuccessful attempt so retry is scheduled if any remain.*
  *		Response:
  *			success/error in full data object
  *
@@ -48,8 +45,7 @@
 require_once 'api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 /*
- *  Checks the username and password and, if they are valid,
- *    creates a new user session.
+ *  updates the test message entry
  */
 function _textmsg_patch ($dbLink, $apiUserToken, $requestArgs) {
     /*
@@ -63,18 +59,21 @@ function _textmsg_patch ($dbLink, $apiUserToken, $requestArgs) {
 	$dbInfo = array();
 	$dbInfo ['requestArgs'] = $requestArgs;
 
+	$dbArgs = array();
+	$dbKey = '';
+
     // Initalize the log entry for this call
     //  more fields will be added later in the routine
     $logData = createLogEntry ('API', __FILE__, 'textmsg', $_SERVER['REQUEST_METHOD'],  $apiUserToken, null, null, null, null, null);
 
 	// check for required parameters
-    // must have at least one, and can have both.
+    // must have only one of these.
 	$requiredPatientColumns = [
-		"sessionLanguage"
-		,"sessionClinicPublicID"
-		];
+		'textmsgGUID'
+		, 'textmsgID'
+        ];
 
-	$paramCount = 0;
+	$reqParamCount = 0;
 	$missingColumnList = "";
 	foreach ($requiredPatientColumns as $column) {
 		if (empty($requestArgs[$column])) {
@@ -83,118 +82,112 @@ function _textmsg_patch ($dbLink, $apiUserToken, $requestArgs) {
 			}
 			$missingColumnList .= $column;
 		} else {
-		    $paramCount += 1;
+		    $reqParamCount += 1;
+		    // save the parameter(s) found
+            // they'll only be used if one is found
+            $dbArgs[$column] = $requestArgs[$column];
+            $dbKey = $column;
         }
 	}
 	
-	if ($paramCount == 0) {
-		// some required fields are missing so exit
+	if ($reqParamCount != 1) {
+		// the required fields are not correct
 		$returnValue['contentType'] = CONTENT_TYPE_JSON;
 		if (API_DEBUG_MODE) {
 			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 400;
-		$returnValue['httpReason']	= "Unable to update session session. None of the required field(s): ". $missingColumnList. " were found.";
+		$returnValue['httpReason']	= "Unable to update textmsg. Must have one and only one of the required field(s): ". $missingColumnList;
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
 		return $returnValue;
 	}
 
-	// Don't save the whole query string because it has the password in plain text and the log isn't encrypted
-    //  but at this point we know the username is present so we can save that in the log.
-    $logData['logQueryString'] = $_SERVER['QUERY_STRING'];
-    $dbInfo = array();
-    $dbInfo['requestArgs'] = $requestArgs;
-
-    // Make sure that the token returns a valid session record
-	$userInfo = null;
-	$getQueryString = "SELECT * FROM `".
-		DB_TABLE_SESSION. "` WHERE `Token` = '" . $apiUserToken. "';";
-	$dbInfo['$getQueryString'] = $getQueryString;
-
-	$returnValue = getDbRecords($dbLink, $getQueryString);
-    $dbInfo['$data'] = $returnValue['data'];
-
-	if ($returnValue['httpResponse'] != 200) {
-        // the specified user does not exist in the database
-		//  return an error
-		if (API_DEBUG_MODE) {
-			$returnValue['debug'] = $dbInfo;
-		}
-		$returnValue['httpResponse'] = 404;
-		$returnValue['httpReason']	= "The token did not locate a valid session. Check the token and try again.";
-        $logData['logStatusCode'] = $returnValue['httpResponse'];
-        $logData['logStatusMessage'] = $returnValue['httpReason'];
-        writeEntryToLog ($dbLink, $logData);
-		return $returnValue;
-	} else {
-		if ($returnValue['count'] == 1) {
-			$userInfo = $returnValue['data'];
-		} else {
-			// more than one record is a server error because Username is a unique key
-			if (API_DEBUG_MODE) {
-                $returnValue['debug'] = $dbInfo;
-			}
-			$returnValue['httpResponse'] = 500;
-			$returnValue['httpReason']	= "Multiple sessions were found with that token. Check the token and try again.";
-            $logData['logStatusCode'] = $returnValue['httpResponse'];
-            $logData['logStatusMessage'] = $returnValue['httpReason'];
-            writeEntryToLog ($dbLink, $logData);
-			return $returnValue;
-		}
-	}
-
-    $dbArgs = array();
-    if (!empty($requestArgs['sessionLanguage'])) {
-        if (isSupportedLanguage($requestArgs['sessionLanguage'])) {
-            $dbArgs['sessionLanguage'] = $requestArgs['sessionLanguage'];
+	// check status
+    if (empty($requestArgs['status'])) {
+        // nothing to do
+        $returnValue['contentType'] = CONTENT_TYPE_JSON;
+        if (API_DEBUG_MODE) {
+            $returnValue['debug'] = $dbInfo;
         }
-    }
-
-    // test the clinic ID
-    if (!empty($requestArgs['sessionClinicPublicID'])) {
-        // check if the clinic ID is valid
-        $clinicQueryString = 'SELECT `PublicID` FROM '. DB_TABLE_CLINIC . ' WHERE TRUE;';
-        $dbInfo['clinicQueryString'] = $clinicQueryString;
-        $clinicResult = getDbRecords($dbLink, $clinicQueryString);
-        if ($clinicResult['count'] >= 1) {
-            // scan the list for a match
-            foreach ($clinicResult['data'] as $idToCheck) {
-                if ($requestArgs['sessionClinicPublicID'] == $idToCheck['PublicID']) {
-                    $dbArgs['sessionClinicPublicID'] = $idToCheck['PublicID'];
-                    break;
-                }
-            }
-        }
-    }
-
-    if (count($dbArgs) == 0) {
-        // no valid parameters were passed.
         $returnValue['httpResponse'] = 400;
-        $returnValue['httpReason']	= "No valid parameter values were provided. Check the parameter values and try again..";
-        $returnValue['debug'] = $dbInfo;
+        $returnValue['httpReason']	= "No status value provided. Nothing to do.";
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
         return $returnValue;
     }
 
-    // add the token value
-    $dbArgs['token'] =  $apiUserToken;
+    $logData['logQueryString'] = $_SERVER['QUERY_STRING'];
 
-    // here we have a valid username and password so create a session
+   // here we have a valid parameters
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
 
+    // get the current record
+    // create query string for get operation
+    $currentQueryString = 'SELECT * FROM `'. DB_TABLE_TEXTMSG . '` WHERE `'.$dbKey.'` = \''. $dbArgs[$dbKey] . '\';';
+    $dbInfo ['queryString'] = $currentQueryString;
+    // get the textmsg record that matches--there should be only one
+    $currentReturnValue = getDbRecords($dbLink, $currentQueryString);
+
+    $messageFound = false;
+    $currentMessage = array();
+    if ($currentReturnValue['count'] == 1) {
+        $currentMessage = $currentReturnValue['data'];
+        // make sure the message is still active
+        if (!empty($currentMessage['nextSendDateTime'])) {
+            $messageFound = true;
+            $dbInfo ['currentMessage'] = $currentMessage;
+        }
+    }
+
+    if (!$messageFound) {
+        // message entry not found
+        $returnValue['contentType'] = CONTENT_TYPE_JSON;
+        if (API_DEBUG_MODE) {
+            $returnValue['debug'] = $dbInfo;
+        }
+        $returnValue['httpResponse'] = 404;
+        $returnValue['httpReason']	= "textmsg not found.";
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+        return $returnValue;
+    }
+
+    $currentTime = new DateTime();
+    $dbArgs[$dbKey] = $currentMessage[$dbKey]; // get ID field
+    $dbArgs['lastSendAttempt'] = $currentMessage['lastSendAttempt'] + 1;
+    $dbArgs['lastSendAttemptTime'] = $currentTime->format('Y-m-d H:i:s');
+    $dbArgs['lastSendStatus'] = $requestArgs['status'];
+    switch ($requestArgs['status']) {
+        case 'Success':
+            // message sent.
+            $dbArgs['nextSendDateTime'] = null; // no more resending
+            break;
+
+        default:
+            if ($dbArgs['lastSendAttempt'] >= $currentMessage['maxSendAttempts']) {
+                // no more retries so clear the next time
+                $dbArgs['nextSendDateTime'] = null; // no more resending
+            } else {
+                // try again
+                $intervalString = 'PT'. $currentMessage['retryInterval'] .'S';
+                $nextSendTime = $currentTime->add(new DateInterval($intervalString));
+                $dbArgs['nextSendDateTime'] = $nextSendTime->format('Y-m-d H:i:s'); // next time to try again
+            }
+            break;
+    }
 	// save a copy for the debugging output
 	$dbInfo['dbArgs'] = $dbArgs;
     $updateColumns = 0;
-    $insertQueryString = format_object_for_SQL_update (DB_TABLE_SESSION, $dbArgs, 'token', $updateColumns);
+    $insertQueryString = format_object_for_SQL_update (DB_TABLE_TEXTMSG, $dbArgs, $dbKey, $updateColumns);
 	$dbInfo['insertQueryString'] = $insertQueryString;
 
-	// try to update the session in the database
-    $sessionInfo = array();
-	
+	// try to update the message record in the database
+    $textmsgInfo = array();
+
 	$qResult = @mysqli_query($dbLink, $insertQueryString);
 	if (!$qResult) {
 		// SQL ERROR
@@ -207,39 +200,30 @@ function _textmsg_patch ($dbLink, $apiUserToken, $requestArgs) {
 		if (!empty($dbInfo['sqlError'])) {
 			// some other error was returned, so update the response
 			$returnValue['httpResponse'] = 500;
-			$returnValue['httpReason']	= "Unable to update the session. ".$dbInfo['sqlError'];
+			$returnValue['httpReason']	= "Unable to update the textmsg. ".$dbInfo['sqlError'];
 		} else {
 			$returnValue['httpResponse'] = 500;
-			$returnValue['httpReason']	= "Unable to update the session. DB error.";
+			$returnValue['httpReason']	= "Unable to update the textmsg. DB error.";
 		}
 	} else {
 	    // successful creation
 		profileLogCheckpoint($profileData,'UPDATE_RETURNED');
 
-		// get the new session data to return
+		// get the updated record to return
         // create query string for get operation
-        $getQueryString = 'SELECT * FROM `'. DB_TABLE_SESSION . '` WHERE `token` = \''. $apiUserToken . '\';';
+        $getQueryString = 'SELECT * FROM `'. DB_TABLE_TEXTMSG . '` WHERE `'.$dbKey.'` = \''. $dbArgs[$dbKey] . '\';';
         $dbInfo ['queryString'] = $getQueryString;
-        // get the session record that matches--there should be only one
+        // get the textmsg record that matches--there should be only one
         $getReturnValue = getDbRecords($dbLink, $getQueryString);
 
         if ($getReturnValue['count'] == 1) {
-            $sessionInfo['data']['token'] = $getReturnValue['data']['token'];
-            $sessionInfo['data']['username'] = $getReturnValue['data']['username'];
-            $sessionInfo['data']['accessGranted'] = $getReturnValue['data']['accessGranted'];
-            $sessionInfo['data']['sessionLanguage'] = $getReturnValue['data']['sessionLanguage'];
-            $sessionInfo['data']['sessionClinicPublicID'] = $getReturnValue['data']['sessionClinicPublicID'];
-            $sessionInfo['httpResponse'] = 200;
-            $sessionInfo['httpReason'] = 'Success';
+            $returnValue = $getReturnValue;
         } else {
             // this is a stale token so no access anymore
-            $sessionInfo['data']['token'] = 0;
-            $sessionInfo['data']['username'] = '';
-            $sessionInfo['data']['accessGranted'] = 0;
-            $sessionInfo['data']['sessionLanguage'] = '';
-            $sessionInfo['data']['sessionClinicPublicID'] = '';
-            $sessionInfo['httpResponse'] = 404;
-            $sessionInfo['httpReason'] = 'Session not found.';
+            $returnValue['data'] = '';
+            $returnValue['count'] = 0;
+            $returnValue['httpResponse'] = 500;
+            $returnValue['httpReason'] = 'Unable to read updated record from database.';
         }
         @mysqli_free_result($qResult);
 	}
@@ -248,7 +232,7 @@ function _textmsg_patch ($dbLink, $apiUserToken, $requestArgs) {
 	if (API_DEBUG_MODE) {
 		$returnValue['debug'] = $dbInfo;
 	}
-	$logData['logAfterData'] = json_encode($sessionInfo['data']);
+	$logData['logAfterData'] = json_encode($returnValue['data']);
     $logData['logStatusCode'] = $returnValue['httpResponse'];
     $logData['logStatusMessage'] = $returnValue['httpReason'];
     writeEntryToLog ($dbLink, $logData);

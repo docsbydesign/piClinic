@@ -48,7 +48,7 @@
  *	PATCH: Updates an unsent textmsg in the database
  * 		input data:
  *
- *          testmsgGUID={messageID}}        updates this specific message (if not sent)
+ *          textmsgGUID={messageID}}        updates this specific message (if not sent)
  *          "sendDateTime":                 Time to send the first message
  *          "nextSendDateTime":             when to try/retry sending the message
  *          "lastSendAttempt"               Last send attempt count
@@ -69,7 +69,8 @@
  *	GET: Returns textmsg information
  *
  *		Query paramters:
- *          patientID={{thisPatientID}}     returns text messages queued for this patient
+ *          patientID={{thisPatientID}}         returns text messages for this patient\
+ *          textmsgGUID={{GUID}}                returns the specified message
  *          status={unsent, ready, sent, inactive}      default = all, unsent = queued and ready, ready = only ready, inactive = only sent
  *          count= max objects to return    default & max = 100, must be > 0
  *
@@ -86,7 +87,7 @@
  *		Query paramters:
  *			'Token' - the session token with permission to read messages
  *          patientID={{thisPatientID}}     deletes unsent text messages queued for this patient
- *          testmsgGUID={messageID}}        deletes this specific message (if not sent)
+ *          textmsgGUID={messageID}}        deletes this specific message (if not sent)
  *
  *		Returns:
  *			200: No data
@@ -137,10 +138,10 @@ $logData = createLogEntry ('API',
 
 // all methods need a token
 if (empty( $apiUserToken)) {
-    $retVal = formatMissingTokenError($retVal, 'session');
+    $retVal = formatMissingTokenError($retVal, 'textmsg');
 } else {
     if (!validTokenString($apiUserToken)) {
-        $retVal = logInvalidTokenError($dbLink, $retVal, $apiUserToken, 'session', $logData);
+        $retVal = logInvalidTokenError($dbLink, $retVal, $apiUserToken, 'textmsg', $logData);
         writeEntryToLog($dbLink, $logData);
     } else {
         $session = getSessionInfo($dbLink, $apiUserToken);
@@ -174,13 +175,7 @@ if (empty( $apiUserToken)) {
 
             case 'PATCH':
                 if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_ADMIN, $session)) {
-                   // $retVal = _textmsg_patch($dbLink, $apiUserToken, $requestData);
-                    $retVal['contentType'] = CONTENT_TYPE_JSON;
-                    if (API_DEBUG_MODE) {
-                        $retVal['error'] = $requestData;
-                    }
-                    $retVal['httpResponse'] = 405;
-                    $retVal['httpReason'] = $_SERVER['REQUEST_METHOD'] . ' method is not supported.';
+                    $retVal = _textmsg_patch($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
                     $retVal['httpResponse'] = 401;

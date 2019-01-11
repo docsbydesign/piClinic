@@ -4519,177 +4519,939 @@
 					"name": "Success Tests",
 					"item": [
 						{
-							"name": "Add message to queue",
-							"event": [
+							"name": "Exhaust Retries",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"id": "1969d74f-5bfd-43eb-b953-80a5d45227a5",
-										"exec": [
-											"var userAcct = pm.environment.get('testUser');\r",
-											"var jsonData = JSON.parse(responseBody);\r",
-											"\r",
-											"pm.test(\"New text message was successful\", function () {\r",
-											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
-											"         // this should be successful\r",
-											"        pm.response.to.have.status(201);\r",
-											"    } else {\r",
-											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(401);\r",
-											"    }\r",
-											"});\r",
-											"\r",
-											"pm.test(\"New message phone number is correct.\", function() {\r",
-											"    var newDest = pm.environment.get('testTextMsgDest');\r",
-											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
-											"        // this should be successful\r",
-											"        pm.expect(jsonData.data.destNumber === newDest);\r",
-											"    } else {\r",
-											"        // the user doesn't have permission to do this.\r",
-											"       pm.expect(1);\r",
-											"    }\r",
-											"});\r",
-											"\r",
-											"pm.test(\"Reading message GUID\", function(){\r",
-											"    pm.expect(jsonData.data.messageGUID !== undefined);\r",
-											"    pm.variables.set(\"currentMessageGUID\", jsonData.data.textmsgGUID);\r",
-											"});\r",
-											"\r",
-											"pm.test(\"Check saved message GUID\", function(){\r",
-											"    pm.expect(pm.variables.get(\"currentMessageGUID\") !== undefined);\r",
-											"});\r",
-											""
+									"name": "Add message to queue",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "1969d74f-5bfd-43eb-b953-80a5d45227a5",
+												"exec": [
+													"var userAcct = pm.environment.get('testUser');\r",
+													"var jsonData = JSON.parse(responseBody);\r",
+													"\r",
+													"pm.test(\"New text message was successful\", function () {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"         // this should be successful\r",
+													"        pm.response.to.have.status(201);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(401);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"New message phone number is correct.\", function() {\r",
+													"    var newDest = pm.environment.get('testTextMsgDest');\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.expect(jsonData.data.destNumber).to.not.equal(undefined);\r",
+													"        pm.expect(jsonData.data.destNumber).to.equal(newDest);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1).to.equal(1);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"New message maxSendAttempts is correct.\", function() {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        console.log('jsonData.data.maxSendAttempts = ' + jsonData.data.maxSendAttempts);\r",
+													"        pm.expect(jsonData.data.maxSendAttempts).to.not.equal(undefined);\r",
+													"        pm.expect(jsonData.data.maxSendAttempts).to.equal('2');\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1).to.equal(1);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"New message retryInterval is correct.\", function() {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.expect(jsonData.data.retryInterval).to.not.equal(undefined);\r",
+													"        pm.expect(jsonData.data.retryInterval).to.equal('10');\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1).to.equal(1);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Reading message GUID\", function(){\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.expect(jsonData.data.messageGUID !== undefined);\r",
+													"        pm.variables.set(\"currentMessageGUID\", jsonData.data.textmsgGUID);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1).to.equal(1);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check saved message GUID\", function(){\r",
+													"\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.expect(pm.variables.get(\"currentMessageGUID\")).to.not.equal(undefined);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1).to.equal(1);\r",
+													"    }\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											},
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/x-www-form-urlencoded"
+											}
 										],
-										"type": "text/javascript"
-									}
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "messageText",
+													"value": "Hi there, this is your reminder message! {{$guid}}",
+													"type": "text"
+												},
+												{
+													"key": "patientID",
+													"value": "nu",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "destNumber",
+													"value": "{{testTextMsgDest}}",
+													"type": "text"
+												},
+												{
+													"key": "sendService",
+													"value": "LocalMobile",
+													"type": "text"
+												},
+												{
+													"key": "maxSendAttempts",
+													"value": "2",
+													"description": "`",
+													"type": "text"
+												},
+												{
+													"key": "retryInterval",
+													"value": "10",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{host}}/api/textmsg.php",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"textmsg.php"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get recently queued message",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "1969d74f-5bfd-43eb-b953-80a5d45227a5",
+												"exec": [
+													"var userAcct = pm.environment.get('testUser');\r",
+													"var jsonData = JSON.parse(responseBody);\r",
+													"\r",
+													"pm.test(\"New text message was successful\", function () {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(404);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"New message is correct.\", function() {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.expect(jsonData.count).to.equal(1);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.expect(jsonData.count).to.equal(0);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"textmsg.php"
+											],
+											"query": [
+												{
+													"key": "textmsgGUID",
+													"value": "{{currentMessageGUID}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update TextMsg: Error, resend",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "2ae68d45-1c1e-4d50-af79-1c5f3c9b0796",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "714eb47f-fee6-412b-b5f8-f78e56307a34",
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);\r",
+													"var userAcct = pm.environment.get('testUser');\r",
+													"\r",
+													"pm.test(\"Textmsg update call was successful\", function () {\r",
+													"    if (userAcct == 'TestSA') {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(401);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Textmsg next update time is later than now\", function () {\r",
+													"    if (userAcct == 'TestSA') {\r",
+													"        // this should be successful\r",
+													"        var nextTime = Date(jsonData.data.nextSendDateTime);\r",
+													"        pm.expect(nextTime > Date.now());\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1).to.equal(1);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/x-www-form-urlencoded",
+												"type": "text"
+											},
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}&status=Error: TESTFAIL",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"textmsg.php"
+											],
+											"query": [
+												{
+													"key": "textmsgGUID",
+													"value": "{{currentMessageGUID}}"
+												},
+												{
+													"key": "status",
+													"value": "Error: TESTFAIL"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update TextMsg: Error, resend again",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "2ae68d45-1c1e-4d50-af79-1c5f3c9b0796",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "714eb47f-fee6-412b-b5f8-f78e56307a34",
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);\r",
+													"var userAcct = pm.environment.get('testUser');\r",
+													"\r",
+													"pm.test(\"Textmsg update call was successful\", function () {\r",
+													"    if (userAcct == 'TestSA') {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(401);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Textmsg next update time is later than now\", function () {\r",
+													"    if (userAcct == 'TestSA') {\r",
+													"        // this should be successful\r",
+													"        var nextTime = Date(jsonData.data.nextSendDateTime);\r",
+													"        pm.expect(nextTime > Date.now());\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1).to.equal(1);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}&status=Error: TESTFAIL",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"textmsg.php"
+											],
+											"query": [
+												{
+													"key": "textmsgGUID",
+													"value": "{{currentMessageGUID}}"
+												},
+												{
+													"key": "status",
+													"value": "Error: TESTFAIL"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get recently queued message after retries",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "1969d74f-5bfd-43eb-b953-80a5d45227a5",
+												"exec": [
+													"var userAcct = pm.environment.get('testUser');\r",
+													"var jsonData = JSON.parse(responseBody);\r",
+													"\r",
+													"pm.test(\"New text message was successful\", function () {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(404);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"New message is correct.\", function() {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.expect(jsonData.count).to.equal(1);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.expect(jsonData.count).to.equal(0);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"textmsg.php"
+											],
+											"query": [
+												{
+													"key": "textmsgGUID",
+													"value": "{{currentMessageGUID}}"
+												}
+											]
+										}
+									},
+									"response": []
 								}
 							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "X-piClinic-token",
-										"type": "text",
-										"value": "{{token}}"
-									},
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/x-www-form-urlencoded"
-									}
-								],
-								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "messageText",
-											"value": "Hi there, this is your reminder message! {{$guid}}",
-											"type": "text"
-										},
-										{
-											"key": "patientID",
-											"value": "nu",
-											"type": "text",
-											"disabled": true
-										},
-										{
-											"key": "destNumber",
-											"value": "{{testTextMsgDest}}",
-											"type": "text"
-										},
-										{
-											"key": "sendDateTime",
-											"value": "",
-											"type": "text",
-											"disabled": true
-										},
-										{
-											"key": "sendService",
-											"value": "LocalMobile",
-											"type": "text"
-										},
-										{
-											"key": "maxSendAttempts",
-											"value": "5",
-											"description": "`",
-											"type": "text"
-										},
-										{
-											"key": "retryInterval",
-											"value": "10",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{host}}/api/textmsg.php",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"textmsg.php"
-									]
-								}
-							},
-							"response": []
+							"_postman_isSubFolder": true
 						},
 						{
-							"name": "Get recently queued message",
-							"event": [
+							"name": "Queue and send successfully",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"id": "1969d74f-5bfd-43eb-b953-80a5d45227a5",
-										"exec": [
-											"var userAcct = pm.environment.get('testUser');\r",
-											"var jsonData = JSON.parse(responseBody);\r",
-											"\r",
-											"pm.test(\"New text message was successful\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"\r",
-											"pm.test(\"New message is correct.\", function() {\r",
-											"    pm.expect(pm.variables.get(\"currentMessageGUID\") == jsonData.data.textmsgGUID);\r",
-											"});\r",
-											""
+									"name": "Add message to queue",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "1969d74f-5bfd-43eb-b953-80a5d45227a5",
+												"exec": [
+													"var userAcct = pm.environment.get('testUser');\r",
+													"var jsonData = JSON.parse(responseBody);\r",
+													"\r",
+													"pm.test(\"New text message was successful\", function () {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"         // this should be successful\r",
+													"        pm.response.to.have.status(201);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(401);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"New message phone number is correct.\", function() {\r",
+													"    var newDest = pm.environment.get('testTextMsgDest');\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.expect(jsonData.data.destNumber).to.not.equal(undefined);\r",
+													"        pm.expect(jsonData.data.destNumber).to.equal(newDest);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1).to.equal(1);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"New message maxSendAttempts is correct.\", function() {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        console.log('jsonData.data.maxSendAttempts = ' + jsonData.data.maxSendAttempts);\r",
+													"        pm.expect(jsonData.data.maxSendAttempts).to.not.equal(undefined);\r",
+													"        pm.expect(jsonData.data.maxSendAttempts).to.equal('5');\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"New message retryInterval is correct.\", function() {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.expect(jsonData.data.retryInterval).to.not.equal(undefined);\r",
+													"        pm.expect(jsonData.data.retryInterval).to.equal('10');\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Reading message GUID\", function(){\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.expect(jsonData.data.messageGUID !== undefined);\r",
+													"        pm.variables.set(\"currentMessageGUID\", jsonData.data.textmsgGUID);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1).to.equal(1);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check saved message GUID\", function(){\r",
+													"\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.expect(pm.variables.get(\"currentMessageGUID\")).to.not.equal(undefined);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1).to.equal(1);\r",
+													"    }\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											},
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/x-www-form-urlencoded"
+											}
 										],
-										"type": "text/javascript"
-									}
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "messageText",
+													"value": "Hi there, this is your reminder message! {{$guid}}",
+													"type": "text"
+												},
+												{
+													"key": "patientID",
+													"value": "nu",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "destNumber",
+													"value": "{{testTextMsgDest}}",
+													"type": "text"
+												},
+												{
+													"key": "sendService",
+													"value": "LocalMobile",
+													"type": "text"
+												},
+												{
+													"key": "maxSendAttempts",
+													"value": "5",
+													"description": "`",
+													"type": "text"
+												},
+												{
+													"key": "retryInterval",
+													"value": "10",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{host}}/api/textmsg.php",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"textmsg.php"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get recently queued message",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "1969d74f-5bfd-43eb-b953-80a5d45227a5",
+												"exec": [
+													"var userAcct = pm.environment.get('testUser');\r",
+													"var jsonData = JSON.parse(responseBody);\r",
+													"\r",
+													"pm.test(\"New text message was successful\", function () {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(404);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"New message is correct.\", function() {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.expect(jsonData.count).to.equal(1);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.expect(jsonData.count).to.equal(0);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"textmsg.php"
+											],
+											"query": [
+												{
+													"key": "textmsgGUID",
+													"value": "{{currentMessageGUID}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update TextMsg: Error, resend",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "2ae68d45-1c1e-4d50-af79-1c5f3c9b0796",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "714eb47f-fee6-412b-b5f8-f78e56307a34",
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);\r",
+													"var userAcct = pm.environment.get('testUser');\r",
+													"\r",
+													"pm.test(\"Textmsg update call was successful\", function () {\r",
+													"    if (userAcct == 'TestSA') {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(401);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Textmsg next update time is later than now\", function () {\r",
+													"    if (userAcct == 'TestSA') {\r",
+													"        // this should be successful\r",
+													"        var nextTime = Date(jsonData.data.nextSendDateTime);\r",
+													"        pm.expect(nextTime > Date.now());\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1).to.equal(1);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/x-www-form-urlencoded",
+												"type": "text"
+											},
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}&status=Error: TESTFAIL",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"textmsg.php"
+											],
+											"query": [
+												{
+													"key": "textmsgGUID",
+													"value": "{{currentMessageGUID}}"
+												},
+												{
+													"key": "status",
+													"value": "Error: TESTFAIL"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update TextMsg: Success",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "2ae68d45-1c1e-4d50-af79-1c5f3c9b0796",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "714eb47f-fee6-412b-b5f8-f78e56307a34",
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);\r",
+													"var userAcct = pm.environment.get('testUser');\r",
+													"\r",
+													"pm.test(\"Textmsg update call was successful\", function () {\r",
+													"    if (userAcct == 'TestSA') {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(401);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Textmsg next update time is now undefined\", function () {\r",
+													"    if (userAcct == 'TestSA') {\r",
+													"        // this should be successful\r",
+													"        pm.expect(jsonData.data.nextSendDateTime).to.equal(null);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"       pm.expect(1).to.equal(1);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/x-www-form-urlencoded"
+											},
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}&status=Success",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"textmsg.php"
+											],
+											"query": [
+												{
+													"key": "textmsgGUID",
+													"value": "{{currentMessageGUID}}"
+												},
+												{
+													"key": "status",
+													"value": "Success"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get recently queued message after success",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "1969d74f-5bfd-43eb-b953-80a5d45227a5",
+												"exec": [
+													"var userAcct = pm.environment.get('testUser');\r",
+													"var jsonData = JSON.parse(responseBody);\r",
+													"\r",
+													"pm.test(\"New text message was successful\", function () {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(404);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"pm.test(\"New message is correct.\", function() {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.expect(jsonData.count).to.equal(1);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.expect(jsonData.count).to.equal(0);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"textmsg.php"
+											],
+											"query": [
+												{
+													"key": "textmsgGUID",
+													"value": "{{currentMessageGUID}}"
+												}
+											]
+										}
+									},
+									"response": []
 								}
 							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "X-piClinic-token",
-										"type": "text",
-										"value": "{{token}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"textmsg.php"
-									],
-									"query": [
-										{
-											"key": "textmsgGUID",
-											"value": "{{currentMessageGUID}}"
-										}
-									]
-								}
-							},
-							"response": []
+							"_postman_isSubFolder": true
 						}
 					],
 					"_postman_isSubFolder": true

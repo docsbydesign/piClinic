@@ -159,17 +159,17 @@ function _textmsg_get ($dbLink, $apiUserToken, $requestArgs) {
     $getApiQueryString .= strval($countFilter). ';';
     $dbInfo ['apiQueryString'] = $getApiQueryString;
 
-    // get the session record that matches--there should be only one
-    $sessionInfo = getDbRecords($dbLink, $getApiQueryString);
-    $dbInfo ['apiReturnValue'] = $sessionInfo;
+    // get the textmsg record that matches--there should be only one
+    $textmsgInfo = getDbRecords($dbLink, $getApiQueryString);
+    $dbInfo ['apiReturnValue'] = $textmsgInfo;
 
     // and return here
     profileLogClose($profileData, __FILE__, $requestArgs);
     if (API_DEBUG_MODE  /*&&  $callerAccess == 2 */) {
         // only send this back to SystemAdmin queries
-        $sessionInfo['debug'] = $dbInfo;
+        $textmsgInfo['debug'] = $dbInfo;
     }
 
-    return $sessionInfo;
+    return $textmsgInfo;
 }
 //EOF

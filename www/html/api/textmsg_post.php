@@ -49,8 +49,7 @@
 require_once 'api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 /*
- *  Checks the username and password and, if they are valid,
- *    creates a new user session.
+ *  add a new text message request to the message queue
  */
 function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
     /*
@@ -91,15 +90,14 @@ function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
 			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 400;
-		$returnValue['httpReason']	= "Unable to create new session. Required field(s): ". $missingColumnList. " are missing.";
+		$returnValue['httpReason']	= "Unable to create new textmsg. Required field(s): ". $missingColumnList. " are missing.";
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
 		return $returnValue;
 	}
 
-    $logData['logQueryString'] = $requestArgs;
-    $dbInfo = array();
+    $logData['requestArgs'] = json_encode($requestArgs);
 
     // Build the DB request
     $dbArgs = array();
@@ -187,15 +185,22 @@ function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
     // set the send service
     if (empty($requestArgs['sendService'])) {
         $dbArgs['sendService'] = DEFAULT_SEND_SERVICE;
+    } else {
+        $dbArgs['sendService'] = $requestArgs['sendService'];
     }
 
     if (empty($requestArgs['maxSendAttempts'])) {
         $dbArgs['maxSendAttempts'] = DEFAULT_TEXTMSG_MAX_SEND_ATTEMPTS;
+    } else {
+        $dbArgs['maxSendAttempts'] = $requestArgs['maxSendAttempts'];
     }
 
     if (empty($requestArgs['retryInterval'])) {
         $dbArgs['retryInterval'] = DEFAULT_RETRY_INTERVAL;
+    } else {
+        $dbArgs['retryInterval'] = $requestArgs['retryInterval'];
     }
+
 
     $now = new DateTime();
     $dbArgs['createdDate'] = $now->format('Y-m-d H:i:s');
