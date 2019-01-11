@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a135a88d-5c0b-4167-a717-55d3c21593f3",
+		"_postman_id": "19d7e6c2-2f5a-4ff3-984c-7751448ca891",
 		"name": "TestPiClinicAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1113,7 +1113,7 @@
 											"\r",
 											"pm.test(\"Language is now Spanish\", function() {\r",
 											"    var jsonData = JSON.parse(responseBody);\r",
-											"    pm.expect(jsonData.data.sessionLanguage === 'es');\r",
+											"    pm.expect(jsonData.data.sessionLanguage).to.eql('es');\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1166,7 +1166,7 @@
 											"\r",
 											"pm.test(\"Clinic has been updated\", function() {\r",
 											"    var jsonData = JSON.parse(responseBody);\r",
-											"    pm.expect(jsonData.data.sessionClinicPublicID === \"710\");\r",
+											"    pm.expect(jsonData.data.sessionClinicPublicID).to.eql('710');\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1248,61 +1248,6 @@
 							"response": []
 						},
 						{
-							"name": "Test Missing Token Error Message",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
-										"exec": [
-											"pm.test(\"Log retrieved successfully\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"\r",
-											"var jsonData = JSON.parse(responseBody);\r",
-											"var lastMessage = null;\r",
-											"\r",
-											"if (jsonData.count > 1) {\r",
-											"    lastMessage = jsonData.data[0];\r",
-											"} else {\r",
-											"    lastMessage = jsonData.data;    \r",
-											"}\r",
-											"\r",
-											"pm.test(\"Log message correct.\", function() {\r",
-											"     pm.expect(lastMessage.logStatusMessage.indexOf('Missing token') > 0);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "X-piClinic-token",
-										"value": "{{SAtoken}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/log.php",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"log.php"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Patch Session Access Invalid Token Format",
 							"event": [
 								{
@@ -1356,6 +1301,11 @@
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
 											"\r",
+											"pm.test(\"SA account is ready to read log.\", function() {\r",
+											"    var saToken = pm.variables.get(\"SAtoken\");\r",
+											"    pm.expect(pm.variables.get(\"SAtoken\")).to.not.eql(undefined);    \r",
+											"});\r",
+											"\r",
 											"var jsonData = JSON.parse(responseBody);\r",
 											"var lastMessage = null;\r",
 											"\r",
@@ -1366,8 +1316,19 @@
 											"}\r",
 											"\r",
 											"pm.test(\"Log message correct.\", function() {\r",
-											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token') > 0);\r",
+											"    pm.expect(lastMessage.logStatusMessage).to.not.eql(undefined);\r",
+											"    pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token')).to.be.above(0);\r",
 											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "daa25259-bd11-4d7a-95ec-60dd82f6deb6",
+										"exec": [
+											"setTimeout(function(){}, 1000);"
 										],
 										"type": "text/javascript"
 									}
@@ -1463,7 +1424,7 @@
 											"}\r",
 											"\r",
 											"pm.test(\"Log message correct.\", function() {\r",
-											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token') > 0);\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token')).to.be.above(0);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1758,9 +1719,9 @@
 											"pm.test(\"Session data was correct\", function() {\r",
 											"    var userAcct = pm.environment.get('testUser');\r",
 											"    if (userAcct == 'TestSA') {\r",
-											"        pm.expect(jsonData.data.sessionID !== undefined);\r",
+											"        pm.expect(jsonData.data.sessionID).to.not.eql(undefined);\r",
 											"    } else {\r",
-											"        pm.expect(jsonData.data.sessionID === undefined);\r",
+											"        pm.expect(jsonData.data.sessionID).to.eql(undefined);\r",
 											"    }\r",
 											"});\r",
 											""
@@ -1816,7 +1777,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Session data was correct\", function() {\r",
-											"    pm.expect(jsonData.data.token === 0);\r",
+											"    pm.expect(jsonData.data.token).to.eql(0);\r",
 											"});\r",
 											""
 										],
@@ -2297,9 +2258,9 @@
 											"    var jsonData = JSON.parse(responseBody);\r",
 											"    var userAcct = pm.environment.get('testUser');\r",
 											"    if (userAcct == 'TestSA') {\r",
-											"        pm.expect(jsonData.data.logStatusMessage === pm.testMessage);\r",
+											"        pm.expect(jsonData.data.logStatusMessage).to.eql(pm.testMessage);\r",
 											"    } else {\r",
-											"        pm.expect(1); // don't test the value if not authorized\r",
+											"        pm.expect(1).to.eql(1); // don't test the value if not authorized\r",
 											"    }    \r",
 											"});"
 										],
@@ -2382,61 +2343,6 @@
 							"response": []
 						},
 						{
-							"name": "Test Missing Token Error Message",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
-										"exec": [
-											"pm.test(\"Log retrieved successfully\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"\r",
-											"var jsonData = JSON.parse(responseBody);\r",
-											"var lastMessage = null;\r",
-											"\r",
-											"if (jsonData.count > 1) {\r",
-											"    lastMessage = jsonData.data[0];\r",
-											"} else {\r",
-											"    lastMessage = jsonData.data;    \r",
-											"}\r",
-											"\r",
-											"pm.test(\"Log message correct.\", function() {\r",
-											"     pm.expect(lastMessage.logStatusMessage.indexOf('Missing token') > 0);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "X-piClinic-token",
-										"value": "{{SAtoken}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/log.php",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"log.php"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Get log access Invalid Token Format",
 							"event": [
 								{
@@ -2500,7 +2406,7 @@
 											"}\r",
 											"\r",
 											"pm.test(\"Log message correct.\", function() {\r",
-											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token') > 0);\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token')).to.be.above(0);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -3004,8 +2910,6 @@
 									"script": {
 										"id": "56959611-4bec-4307-bb81-35c05eeea052",
 										"exec": [
-											"\r",
-											"\r",
 											"pm.test(\"Name change  was successful\", function () {\r",
 											"    var userAcct = pm.environment.get('testUser');\r",
 											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
@@ -3017,15 +2921,16 @@
 											"    }\r",
 											"});\r",
 											"\r",
-											"pm.test(\"New user creation successful\", function() {\r",
+											"pm.test(\"Name change value correct\", function() {\r",
 											"    var userAcct = pm.environment.get('testUser');\r",
 											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 											"        // this should be successful\r",
 											"        var jsonData = JSON.parse(responseBody);\r",
-											"        pm.expect(jsonData.data.NameLast === \"NewLastName\");\r",
+											"        pm.expect(jsonData.count).to.eql(1);\r",
+											"        pm.expect(jsonData.data.lastName).to.eql(\"NewLastName\");\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"       pm.expect(1);\r",
+											"       pm.expect(1).to.eql(1);\r",
 											"    }\r",
 											"});\r",
 											""
@@ -3095,10 +3000,10 @@
 											"    var userAcct = pm.environment.get('testUser');\r",
 											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 											"        // this should be successful\r",
-											"        pm.expect(jsonData.data.PrefLang === \"es\");\r",
+											"        pm.expect(jsonData.data.preferredLanguage).to.eql(\"es\");\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.expect(1);\r",
+											"        pm.expect(1).to.eql(1);\r",
 											"    }\r",
 											"});\r",
 											"\r",
@@ -3171,10 +3076,10 @@
 											"    var userAcct = pm.environment.get('testUser');\r",
 											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 											"        // this should be successful\r",
-											"        pm.expect(jsonData.data.PrefClinicPublicID === \"710\");\r",
+											"        pm.expect(jsonData.data.preferredClinicPublicID).to.eql(\"710\");\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.expect(1);\r",
+											"        pm.expect(1).to.eql(1);\r",
 											"    }\r",
 											"});\r",
 											"\r",
@@ -3250,10 +3155,10 @@
 											"    var userAcct = pm.environment.get('testUser');\r",
 											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 											"        // this should be successful\r",
-											"        pm.expect(jsonData.data.NameLast === \"NewLastName\");\r",
+											"        pm.expect(jsonData.data.lastName).to.eql(\"NewLastName\");\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.expect(1);\r",
+											"        pm.expect(1).to.eql(1);\r",
 											"    }\r",
 											"});\r",
 											""
@@ -3358,9 +3263,9 @@
 										"id": "284f1c2c-099c-4131-b059-7ce9ec4438c5",
 										"exec": [
 											"var jsonData = JSON.parse(responseBody);\r",
+											"var userAcct = pm.environment.get('testUser');\r",
 											"\r",
 											"pm.test(\"New user record found\", function () {\r",
-											"    var userAcct = pm.environment.get('testUser');\r",
 											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 											"        // this should be successful\r",
 											"        pm.response.to.have.status(200);\r",
@@ -3375,25 +3280,23 @@
 											"\r",
 											"\r",
 											"pm.test(\"Only one user matched query\", function() {\r",
-											"    var userAcct = pm.environment.get('testUser');\r",
 											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 											"        // this should be successful\r",
-											"        pm.expect(jsonData.count ===1);\r",
+											"        pm.expect(jsonData.count).to.eql(1);\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.expect(1);\r",
+											"        pm.expect(1).to.eql(1);\r",
 											"    }\r",
 											"});\r",
 											"\r",
 											"pm.test(\"New user deactivated successfully\", function() {\r",
-											"        pm.expect(jsonData.data.Active === 0);\r",
-											"    var userAcct = pm.environment.get('testUser');\r",
 											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 											"        // this should be successful\r",
-											"        pm.expect(jsonData.data.Active === 0);\r",
+											"        pm.expect(jsonData.data.active).to.not.eql(undefined);\r",
+											"        pm.expect(jsonData.data.active).to.eql('0');\r",
 											"    } else {\r",
 											"        // the user doesn't have permission to do this.\r",
-											"        pm.expect(1);\r",
+											"        pm.expect(1).to.eql(1);\r",
 											"    }\r",
 											"});\r",
 											""
@@ -3477,61 +3380,6 @@
 							"response": []
 						},
 						{
-							"name": "Test Missing Token Error Message",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
-										"exec": [
-											"pm.test(\"Log retrieved successfully\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"\r",
-											"var jsonData = JSON.parse(responseBody);\r",
-											"var lastMessage = null;\r",
-											"\r",
-											"if (jsonData.count > 1) {\r",
-											"    lastMessage = jsonData.data[0];\r",
-											"} else {\r",
-											"    lastMessage = jsonData.data;    \r",
-											"}\r",
-											"\r",
-											"pm.test(\"Log message correct.\", function() {\r",
-											"     pm.expect(lastMessage.logStatusMessage.indexOf('Missing token') > 0);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "X-piClinic-token",
-										"value": "{{SAtoken}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/log.php",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"log.php"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Get staff access Invalid Token Format",
 							"event": [
 								{
@@ -3595,7 +3443,7 @@
 											"}\r",
 											"\r",
 											"pm.test(\"Log message correct.\", function() {\r",
-											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token') > 0);\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token')).to.be.above(0);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -3999,7 +3847,7 @@
 											"});\r",
 											"\r",
 											"pm.test(\"Multiple comments returned\", function() {\r",
-											"    pm.expect(jsonData.data.count > 1);\r",
+											"    pm.expect(jsonData.count).to.be.above(1);\r",
 											"})"
 										],
 										"type": "text/javascript"
@@ -4075,61 +3923,6 @@
 							"response": []
 						},
 						{
-							"name": "Test Missing Token Error Message",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "2314ddae-dad4-4e7f-bc8f-2c55e54243f2",
-										"exec": [
-											"pm.test(\"Log retrieved successfully\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"\r",
-											"var jsonData = JSON.parse(responseBody);\r",
-											"var lastMessage = null;\r",
-											"\r",
-											"if (jsonData.count > 1) {\r",
-											"    lastMessage = jsonData.data[0];\r",
-											"} else {\r",
-											"    lastMessage = jsonData.data;    \r",
-											"}\r",
-											"\r",
-											"pm.test(\"Log message correct.\", function() {\r",
-											"     pm.expect(lastMessage.logStatusMessage.indexOf('Missing token') > 0);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "X-piClinic-token",
-										"value": "{{SAtoken}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/log.php",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"log.php"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Get comment access Invalid Token Format",
 							"event": [
 								{
@@ -4193,7 +3986,7 @@
 											"}\r",
 											"\r",
 											"pm.test(\"Log message correct.\", function() {\r",
-											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token') > 0);\r",
+											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token')).to.be.above(0);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -4546,11 +4339,11 @@
 													"    var newDest = pm.environment.get('testTextMsgDest');\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
-													"        pm.expect(jsonData.data.destNumber).to.not.equal(undefined);\r",
-													"        pm.expect(jsonData.data.destNumber).to.equal(newDest);\r",
+													"        pm.expect(jsonData.data.destNumber).to.not.eql(undefined);\r",
+													"        pm.expect(jsonData.data.destNumber).to.eql(newDest);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1).to.equal(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													"\r",
@@ -4558,33 +4351,33 @@
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
 													"        console.log('jsonData.data.maxSendAttempts = ' + jsonData.data.maxSendAttempts);\r",
-													"        pm.expect(jsonData.data.maxSendAttempts).to.not.equal(undefined);\r",
-													"        pm.expect(jsonData.data.maxSendAttempts).to.equal('2');\r",
+													"        pm.expect(jsonData.data.maxSendAttempts).to.not.eql(undefined);\r",
+													"        pm.expect(jsonData.data.maxSendAttempts).to.eql('2');\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1).to.equal(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													"\r",
 													"pm.test(\"New message retryInterval is correct.\", function() {\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
-													"        pm.expect(jsonData.data.retryInterval).to.not.equal(undefined);\r",
-													"        pm.expect(jsonData.data.retryInterval).to.equal('10');\r",
+													"        pm.expect(jsonData.data.retryInterval).to.not.eql(undefined);\r",
+													"        pm.expect(jsonData.data.retryInterval).to.eql('10');\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1).to.equal(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Reading message GUID\", function(){\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
-													"        pm.expect(jsonData.data.messageGUID !== undefined);\r",
+													"        pm.expect(jsonData.data.textmsgGUID).to.not.eql(undefined);\r",
 													"        pm.variables.set(\"currentMessageGUID\", jsonData.data.textmsgGUID);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1).to.equal(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													"\r",
@@ -4592,10 +4385,10 @@
 													"\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
-													"        pm.expect(pm.variables.get(\"currentMessageGUID\")).to.not.equal(undefined);\r",
+													"        pm.expect(pm.variables.get(\"currentMessageGUID\")).to.not.eql(undefined);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1).to.equal(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													""
@@ -4693,10 +4486,10 @@
 													"pm.test(\"New message is correct.\", function() {\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
-													"        pm.expect(jsonData.count).to.equal(1);\r",
+													"        pm.expect(jsonData.count).to.eql(1);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"        pm.expect(jsonData.count).to.equal(0);\r",
+													"        pm.expect(jsonData.count).to.eql(0);\r",
 													"    }\r",
 													"});"
 												],
@@ -4770,11 +4563,12 @@
 													"pm.test(\"Textmsg next update time is later than now\", function () {\r",
 													"    if (userAcct == 'TestSA') {\r",
 													"        // this should be successful\r",
-													"        var nextTime = Date(jsonData.data.nextSendDateTime);\r",
-													"        pm.expect(nextTime > Date.now());\r",
+													"        var now = new Date();\r",
+													"        var nextTime = new Date(jsonData.data.nextSendDateTime);\r",
+													"        pm.expect(nextTime.getTime()).to.be.above(now.getTime());\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1).to.equal(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													"\r",
@@ -4857,14 +4651,14 @@
 													"    }\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Textmsg next update time is later than now\", function () {\r",
+													"pm.test(\"Textmsg next update time should be zero\", function () {\r",
 													"    if (userAcct == 'TestSA') {\r",
 													"        // this should be successful\r",
-													"        var nextTime = Date(jsonData.data.nextSendDateTime);\r",
-													"        pm.expect(nextTime > Date.now());\r",
+													"        var nextTime = new Date(jsonData.data.nextSendDateTime);\r",
+													"        pm.expect(nextTime.getTime()).to.eql(0);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1).to.equal(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													"\r",
@@ -4940,10 +4734,10 @@
 													"pm.test(\"New message is correct.\", function() {\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
-													"        pm.expect(jsonData.count).to.equal(1);\r",
+													"        pm.expect(jsonData.count).to.eql(1);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"        pm.expect(jsonData.count).to.equal(0);\r",
+													"        pm.expect(jsonData.count).to.eql(0);\r",
 													"    }\r",
 													"});"
 												],
@@ -5014,11 +4808,11 @@
 													"    var newDest = pm.environment.get('testTextMsgDest');\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
-													"        pm.expect(jsonData.data.destNumber).to.not.equal(undefined);\r",
-													"        pm.expect(jsonData.data.destNumber).to.equal(newDest);\r",
+													"        pm.expect(jsonData.data.destNumber).to.not.eql(undefined);\r",
+													"        pm.expect(jsonData.data.destNumber).to.eql(newDest);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1).to.equal(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													"\r",
@@ -5026,33 +4820,33 @@
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
 													"        console.log('jsonData.data.maxSendAttempts = ' + jsonData.data.maxSendAttempts);\r",
-													"        pm.expect(jsonData.data.maxSendAttempts).to.not.equal(undefined);\r",
-													"        pm.expect(jsonData.data.maxSendAttempts).to.equal('5');\r",
+													"        pm.expect(jsonData.data.maxSendAttempts).to.not.eql(undefined);\r",
+													"        pm.expect(jsonData.data.maxSendAttempts).to.eql('5');\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													"\r",
 													"pm.test(\"New message retryInterval is correct.\", function() {\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
-													"        pm.expect(jsonData.data.retryInterval).to.not.equal(undefined);\r",
-													"        pm.expect(jsonData.data.retryInterval).to.equal('10');\r",
+													"        pm.expect(jsonData.data.retryInterval).to.not.eql(undefined);\r",
+													"        pm.expect(jsonData.data.retryInterval).to.eql('10');\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Reading message GUID\", function(){\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
-													"        pm.expect(jsonData.data.messageGUID !== undefined);\r",
+													"        pm.expect(jsonData.data.textmsgGUID).to.not.eql(undefined);\r",
 													"        pm.variables.set(\"currentMessageGUID\", jsonData.data.textmsgGUID);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1).to.equal(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													"\r",
@@ -5060,10 +4854,10 @@
 													"\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
-													"        pm.expect(pm.variables.get(\"currentMessageGUID\")).to.not.equal(undefined);\r",
+													"        pm.expect(pm.variables.get(\"currentMessageGUID\")).to.not.eql(undefined);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1).to.equal(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													""
@@ -5161,10 +4955,10 @@
 													"pm.test(\"New message is correct.\", function() {\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
-													"        pm.expect(jsonData.count).to.equal(1);\r",
+													"        pm.expect(jsonData.count).to.eql(1);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"        pm.expect(jsonData.count).to.equal(0);\r",
+													"        pm.expect(jsonData.count).to.eql(0);\r",
 													"    }\r",
 													"});"
 												],
@@ -5238,11 +5032,12 @@
 													"pm.test(\"Textmsg next update time is later than now\", function () {\r",
 													"    if (userAcct == 'TestSA') {\r",
 													"        // this should be successful\r",
-													"        var nextTime = Date(jsonData.data.nextSendDateTime);\r",
-													"        pm.expect(nextTime > Date.now());\r",
+													"        var now = new Date();\r",
+													"        var nextTime = new Date(jsonData.data.nextSendDateTime);\r",
+													"        pm.expect(nextTime.getTime()).to.be.above(now.getTime());\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1).to.equal(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													"\r",
@@ -5328,10 +5123,10 @@
 													"pm.test(\"Textmsg next update time is now undefined\", function () {\r",
 													"    if (userAcct == 'TestSA') {\r",
 													"        // this should be successful\r",
-													"        pm.expect(jsonData.data.nextSendDateTime).to.equal(null);\r",
+													"        pm.expect(jsonData.data.nextSendDateTime).to.eql(null);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"       pm.expect(1).to.equal(1);\r",
+													"       pm.expect(1).to.eql(1);\r",
 													"    }\r",
 													"});\r",
 													"\r",
@@ -5407,10 +5202,10 @@
 													"pm.test(\"New message is correct.\", function() {\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
 													"        // this should be successful\r",
-													"        pm.expect(jsonData.count).to.equal(1);\r",
+													"        pm.expect(jsonData.count).to.eql(1);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
-													"        pm.expect(jsonData.count).to.equal(0);\r",
+													"        pm.expect(jsonData.count).to.eql(0);\r",
 													"    }\r",
 													"});"
 												],
