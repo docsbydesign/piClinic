@@ -63,6 +63,7 @@ function _comment_post ($dbLink, $apiUserToken, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= 'Unable to add comment record. The Username is missing.';
+        profileLogClose($profileData, __FILE__, $requestArgs);
 		return $returnValue;
 	}
 	

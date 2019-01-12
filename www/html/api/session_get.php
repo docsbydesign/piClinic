@@ -134,6 +134,7 @@ function _session_get ($dbLink, $apiUserToken, $requestArgs) {
                         $notFoundReturnValue['debug'] = $dbInfo;
                     }
                     // target not found so return here with a 404
+                    profileLogClose($profileData, __FILE__, $requestArgs);
                     return $notFoundReturnValue;
                 } // else format qtReturnValue
             }

@@ -58,6 +58,7 @@ function _log_post($dbLink, $apiUserToken, $requestArgs) {
         }
         $returnValue['httpResponse'] = 400;
         $returnValue['httpReason']	= "Unable to create create a new log entry. Required field(s): ". $missingColumnList. " are missing.";
+        profileLogClose($profileData, __FILE__, $requestData);
         return $returnValue;
     }
 

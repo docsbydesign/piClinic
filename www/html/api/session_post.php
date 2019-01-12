@@ -92,6 +92,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs);
 		return $returnValue;
 	}
 
@@ -121,6 +122,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs);
 		return $returnValue;
 	} else {
 		if ($returnValue['count'] == 1) {
@@ -135,6 +137,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
             $logData['logStatusCode'] = $returnValue['httpResponse'];
             $logData['logStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
+            profileLogClose($profileData, __FILE__, $requestArgs);
 			return $returnValue;
 		}
 	}		
@@ -146,6 +149,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs);
 		return $returnValue;
 	}
 	
@@ -165,6 +169,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs);
 		return $returnValue;
 	}
 
