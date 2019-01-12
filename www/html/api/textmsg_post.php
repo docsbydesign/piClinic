@@ -94,6 +94,7 @@ function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs);
 		return $returnValue;
 	}
 
@@ -132,6 +133,7 @@ function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
             $logData['logStatusCode'] = $returnValue['httpResponse'];
             $logData['logStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
+            profileLogClose($profileData, __FILE__, $requestArgs);
             return $returnValue;
         } else {
             if ($returnValue['count'] == 1) {
@@ -146,6 +148,7 @@ function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
                 $logData['logStatusCode'] = $returnValue['httpResponse'];
                 $logData['logStatusMessage'] = $returnValue['httpReason'];
                 writeEntryToLog ($dbLink, $logData);
+                profileLogClose($profileData, __FILE__, $requestArgs);
                 return $returnValue;
             }
         }
@@ -173,6 +176,7 @@ function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
             $logData['logStatusCode'] = $returnValue['httpResponse'];
             $logData['logStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
+            profileLogClose($profileData, __FILE__, $requestArgs);
             return $returnValue;
         } else {
             $dbArgs['sendDateTime'] = $now->format('Y-m-d H:i:s');
@@ -240,33 +244,27 @@ function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
 	} else {
 	    // successful creation
 		profileLogCheckpoint($profileData,'POST_RETURNED');
-		$returnValue['data'] = $dbArgs;
-		$returnValue['count'] = 1;
-		$returnValue['httpResponse'] = 201;
-		$returnValue['httpReason']	= "New text message created.";
-		
-		// update the user record to show the new login.
-		$recallQueryString = "SELECT * FROM `". DB_TABLE_TEXTMSG. "` ".
+
+		// Get the newly added textmsg record
+        $recallQueryString = "SELECT * FROM `". DB_TABLE_TEXTMSG. "` ".
     		"WHERE `textmsgGUID` = '".$dbArgs['textmsgGUID']."';";
         $dbInfo['recallQueryString'] = $recallQueryString;
 
-		// try to update the record to the database
-		$qResult = @mysqli_query($dbLink, $recallQueryString);
-		if (!$qResult) {
-			// SQL ERROR
-			$dbInfo['sqlError'] = @mysqli_error($dbLink);
-			// format response
-			$returnValue['contentType'] = CONTENT_TYPE_JSON;
-			if (API_DEBUG_MODE) {
-				$returnValue['debug'] = $dbInfo;
-			}
-			if (!empty($dbInfo['sqlError'])) {
-				$returnValue['httpReason']	.= " Unable to retrieve created textmsg entry. ".$dbInfo['sqlError'];
-			} else {
-				$returnValue['httpReason']	.= " Unable to retrieve created textmsg entry.";
-			}
-		}
-		
+        $getReturnValue = getDbRecords($dbLink, $recallQueryString);
+
+        if ($getReturnValue['count'] >= 1) {
+            $returnValue = $getReturnValue;
+            // set status to reflect a successful addition
+            $returnValue['httpResponse'] = 201;
+            $returnValue['httpReason']	= "New text message created.";
+        } else {
+            // Could not recall the new record so this is broken
+            $returnValue['data'] = '';
+            $returnValue['count'] = 0;
+            $returnValue['httpResponse'] = 500;
+            $returnValue['httpReason'] = 'Unable to read updated record from database.';
+        }
+
 		@mysqli_free_result($qResult);
 	}
 

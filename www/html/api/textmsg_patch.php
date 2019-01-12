@@ -101,6 +101,7 @@ function _textmsg_patch ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs);
 		return $returnValue;
 	}
 
@@ -116,6 +117,7 @@ function _textmsg_patch ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs);
         return $returnValue;
     }
 
@@ -132,7 +134,7 @@ function _textmsg_patch ($dbLink, $apiUserToken, $requestArgs) {
     $currentReturnValue = getDbRecords($dbLink, $currentQueryString);
 
     $messageFound = false;
-    $currentMessage = array();
+    $currentMessage = null;
     if ($currentReturnValue['count'] == 1) {
         $currentMessage = $currentReturnValue['data'];
         // make sure the message is still active
@@ -153,6 +155,7 @@ function _textmsg_patch ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs);
         return $returnValue;
     }
 
@@ -171,6 +174,7 @@ function _textmsg_patch ($dbLink, $apiUserToken, $requestArgs) {
             if ($dbArgs['lastSendAttempt'] >= $currentMessage['maxSendAttempts']) {
                 // no more retries so clear the next time
                 $dbArgs['nextSendDateTime'] = null; // no more resending
+                $dbArgs['lastSendStatus'] = 'Error: Retries exhausted'; // override status
             } else {
                 // try again
                 $intervalString = 'PT'. $currentMessage['retryInterval'] .'S';

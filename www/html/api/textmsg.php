@@ -189,13 +189,7 @@ if (empty( $apiUserToken)) {
 
             case 'DELETE':
                 if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_STAFF, $session)) {
-                  //  $retVal = _textmsg_delete($dbLink, $apiUserToken, $requestData);
-                    $retVal['contentType'] = CONTENT_TYPE_JSON;
-                    if (API_DEBUG_MODE) {
-                        $retVal['error'] = $requestData;
-                    }
-                    $retVal['httpResponse'] = 405;
-                    $retVal['httpReason'] = $_SERVER['REQUEST_METHOD'] . ' method is not supported.';
+                    $retVal = _textmsg_delete($dbLink, $apiUserToken, $requestData);
                 } else {
                     // caller does not have a valid security token
                     $retVal['httpResponse'] = 401;

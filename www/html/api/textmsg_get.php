@@ -27,7 +27,10 @@
  *	GET: Returns textmsg information
  *
  *		Query paramters:
- *          patientID={{thisPatientID}}     returns text messages queued for this patient
+ *          zero or one of these ID field:
+ *              'textmsgGUID'
+ *              'patientID'
+ *              'textmsgID'
  *          status={unsent, ready, sent, inactive}      default = all,
  *                                                          unsent = queued and ready,
  *                                                          ready = only ready,
@@ -85,17 +88,53 @@ function _textmsg_get ($dbLink, $apiUserToken, $requestArgs) {
     // check query parameters and build query
 
     $dbSortOrder = ' ORDER BY `sendDateTime` DESC';
+
+    // check for ID parameters
+    // can have any of these, but if any are present, only one can be used
+    $requiredPatientColumns = [
+        'textmsgGUID'
+        , 'patientID'
+        , 'textmsgID'
+    ];
+
+    $reqParamCount = 0;
+    $missingColumnList = "";
+    foreach ($requiredPatientColumns as $column) {
+        if (empty($requestArgs[$column])) {
+            if (!empty($missingColumnList)) {
+                $missingColumnList .= ", ";
+            }
+            $missingColumnList .= $column;
+        } else {
+            $reqParamCount += 1;
+            // save the parameter(s) found
+            // they'll only be used if one is found
+            $dbArgs[$column] = $requestArgs[$column];
+            $dbKey = $column;
+        }
+    }
+
+    if ($reqParamCount != 1) {
+        // the required fields are not correct
+        $returnValue['contentType'] = CONTENT_TYPE_JSON;
+        if (API_DEBUG_MODE) {
+            $returnValue['debug'] = $dbInfo;
+        }
+        $returnValue['httpResponse'] = 400;
+        $returnValue['httpReason']	= "Unable to get textmsg. Can have only one of these ID field(s): ". $missingColumnList;
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs);
+        return $returnValue;
+    }
+
     $dbFilter = array();
-    // patientID is optional to select messages queued for a specific patient
-    // default is to return all up to query limit
-    if (!empty($requestArgs['patientID'])) {
-       array_push($dbFilter, ' `PatientID` = '.$requestArgs['patientID']);
-    }
 
-    if (!empty($requestArgs['textmsgGUID'])) {
-        array_push($dbFilter, ' `textmsgGUID` = \''.$requestArgs['textmsgGUID']. '\'');
+    if ($reqParamCount == 1) {
+        // add the ID field to the query
+       array_push($dbFilter, ' `'.$dbKey.'` = \''.$dbArgs[$dbKey] . '\'');
     }
-
     //  status={unsent, ready, sent, inactive}
     if (!empty($requestArgs['status'])) {
         switch ($requestArgs['status']) {

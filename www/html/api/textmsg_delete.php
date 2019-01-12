@@ -22,10 +22,15 @@
 /*******************
  *
  * DELETE: deletes the specified textmsg
+ *          Deletion is actually just removing an unsent message from the active message list
+ *          Deletion consists of:
+ *              Removing the nextSendDateTime ( ==> null)
+ *              setting the status to "Deleted"
  *		Query paramters:
  *			'Token' - the session token with permission to read messages
  *          patientID={{thisPatientID}}     deletes unsent text messages queued for this patient
- *          testmsgID={messageID}}          deletes this specific message (if not sent)
+ *          textmsgID={messageID}}          deletes this specific message (if not already sent)
+ *          textmsgGUID={messageID}}        deletes this specific message (if not already sent)
  *
  *		Returns:
  *			200: No data
@@ -44,71 +49,116 @@ function _textmsg_delete ($dbLink, $apiUserToken, $requestArgs) {
     /*
      *      Initialize profiling if enabled in piClinicConfig.php
      */
-	$profileData = array();
-	profileLogStart ($profileData);
+    $profileData = array();
+    profileLogStart ($profileData);
+    // Format return value and dbInfo array
+    $returnValue = array();
 
-	// format the return values and debugging info
-	$returnValue = array();
-	$dbInfo = array();
-	$dbInfo ['requestArgs'] = $requestArgs;
+    $dbInfo = array();
+    $dbInfo ['requestArgs'] = $requestArgs;
 
-	// Initalize the log entry for this call
+    $dbArgs = array();
+    $dbKey = '';
+
+    // Initalize the log entry for this call
     //  more fields will be added later in the routine
-	$logData = createLogEntry ('API', __FILE__, 'textmsg', $_SERVER['REQUEST_METHOD'],  $apiUserToken, $_SERVER['QUERY_STRING'], null, null, null, null);
+    $logData = createLogEntry ('API', __FILE__, 'textmsg', $_SERVER['REQUEST_METHOD'],  $apiUserToken, null, null, null, null, null);
 
-	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
+    // check for required parameters
+    // must have only one of these.
+    $requiredPatientColumns = [
+        'textmsgGUID'
+        , 'patientID'
+        , 'textmsgID'
+    ];
 
-	// Make sure the record is currently active
-	//  and create query string to look up the token
-	$getQueryString = 'SELECT * FROM `'.DB_TABLE_SESSION.'` WHERE `token` = \''.  $apiUserToken .'\';';
-    $dbInfo['queryString'] = $getQueryString;
+    $reqParamCount = 0;
+    $missingColumnList = "";
+    foreach ($requiredPatientColumns as $column) {
+        if (empty($requestArgs[$column])) {
+            if (!empty($missingColumnList)) {
+                $missingColumnList .= ", ";
+            }
+            $missingColumnList .= $column;
+        } else {
+            $reqParamCount += 1;
+            // save the parameter(s) found
+            // they'll only be used if one is found
+            $dbArgs[$column] = $requestArgs[$column];
+            $dbKey = $column;
+        }
+    }
 
-	// Token is a unique key in the DB so no more than one record should come back.
-	$testReturnValue = getDbRecords($dbLink, $getQueryString);
-	
-	if ($testReturnValue['httpResponse'] !=  200) {
-        $dbInfo['returnData'] = $testReturnValue;
-		// can't find the record to delete. It could already be deleted or it could not exist.
-		$returnValue['contentType'] = CONTENT_TYPE_JSON;
-		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
-		}
-		$returnValue['httpResponse'] = 404;
-		$returnValue['httpReason']	= "User session to delete not found.";
+    if ($reqParamCount != 1) {
+        // the required fields are not correct
+        $returnValue['contentType'] = CONTENT_TYPE_JSON;
+        if (API_DEBUG_MODE) {
+            $returnValue['debug'] = $dbInfo;
+        }
+        $returnValue['httpResponse'] = 400;
+        $returnValue['httpReason']	= "Unable to delete textmsg. Must have one and only one of the required field(s): ". $missingColumnList;
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs);
         return $returnValue;
-	} else {
-		$logData['logBeforeData'] = json_encode($testReturnValue['data']);
-	}
+    }
 
-	// if this session is already closed, exit without changing anything
-	if (!$testReturnValue['data']['loggedIn']) {
-		$returnValue['contentType'] = CONTENT_TYPE_JSON;
-		// return not found because no valid session was found
-		$returnValue['httpResponse'] = 404;
-		$returnValue['httpReason']	= "User session was deleted in an earlier call.";
+    $logData['logQueryString'] = $_SERVER['QUERY_STRING'];
+
+    profileLogCheckpoint($profileData,'PARAMETERS_VALID');
+
+    // get the current record(s)
+    // create query string for get operation
+    $currentQueryString = 'SELECT * FROM `'. DB_TABLE_TEXTMSG . '` WHERE `'.$dbKey.'` = \''. $dbArgs[$dbKey] . '\';';
+    $dbInfo['currentQueryString'] = $currentQueryString;
+    // get the textmsg record that matches--there should be only one
+    $currentReturnValue = getDbRecords($dbLink, $currentQueryString);
+
+    $messageFound = false;
+    $currentTextmsg = array();
+    if ($currentReturnValue['count'] == 1) {
+        $currentTextmsg[0] = $currentReturnValue['data'];
+        $messageFound = true;
+    } else if ($currentReturnValue['count'] > 1) {
+        $currentTextmsg = $currentReturnValue['data'];
+        $messageFound = true;
+    } // else no textmsg found
+    $dbInfo['currentTextmsg'] = $currentTextmsg;
+
+    if (!$messageFound) {
+        // message entry not found
+        $returnValue['contentType'] = CONTENT_TYPE_JSON;
+        if (API_DEBUG_MODE) {
+            $returnValue['debug'] = $dbInfo;
+        }
+        $returnValue['httpResponse'] = 404;
+        $returnValue['httpReason']	= "textmsg not found.";
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs);
         return $returnValue;
-	}
-	
-	// valid and open session record found so delete it
-	//  delete means only to clear the logged in flag
-	// 		and set the logged out time
-    $sessionUpdate = array();
-	$now = new DateTime();
-    $sessionUpdate['token'] =  $apiUserToken;
-    $sessionUpdate['loggedOutDate'] = $now->format('Y-m-d H:i:s');
-    $sessionUpdate['loggedIn'] = 0;
-    $dbInfo['sessionUpdate'] = $sessionUpdate;
+    }
+
+    $currentTime = new DateTime();
+    $dbArgs['modifiedDate'] = $currentTime->format('Y-m-d H:i:s');
+    $dbArgs['nextSendDateTime'] = '';
+    $dbArgs['lastSendStatus'] = 'Deleted';
+
+    // check current textmsg entry and see if it can be deleted.
 
     $columnsUpdated = 0;
 	profileLogCheckpoint($profileData,'UPDATE_READY');
 
-    $deleteQueryString = format_object_for_SQL_update (DB_TABLE_SESSION, $sessionUpdate, 'token', $columnsUpdated);
+    $deleteQueryString = format_object_for_SQL_update (DB_TABLE_TEXTMSG, $dbArgs, $dbKey, $columnsUpdated);
+
+    if ($columnsUpdated > 0) {
+        // append WHERE condition to only update active records
+        $activeRecordCondition = ' AND `nextSendDateTime` IS NOT NULL;';
+        str_replace (';', $activeRecordCondition, $deleteQueryString );
+    }
+
     $dbInfo['deleteQueryString'] = $deleteQueryString;
 
 	// try to update the record in the database 
@@ -126,15 +176,24 @@ function _textmsg_delete ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['httpReason']	= "Unable to delete user session. SQL DELETE query error.";
 	} else {
 		profileLogCheckpoint($profileData,'UPDATE_RETURNED');
-		// successfully deleted
-		$returnValue['contentType'] = CONTENT_TYPE_JSON;
-		if (API_DEBUG_MODE) {
-			$dbInfo['sqlError'] = @mysqli_error($dbLink);
-			$returnValue['debug'] = $dbInfo;
-		}
-		$returnValue['httpResponse'] = 200;
-		$returnValue['httpReason']	= "User session deleted.";
-		@mysqli_free_result($qResult);
+        // get the updated record to return
+        // create query string for get operation
+        $getQueryString = 'SELECT * FROM `'. DB_TABLE_TEXTMSG . '` WHERE `'.
+            $dbKey.'` = \''. $dbArgs[$dbKey] . '\' AND `modifiedDate` = \''.$currentTime->format('Y-m-d H:i:s') . '\';';
+        $dbInfo['getQueryString'] = $getQueryString;
+        // get the textmsg record that matches--there should be only one
+        $getReturnValue = getDbRecords($dbLink, $getQueryString);
+
+        if ($getReturnValue['count'] >= 1) {
+            $returnValue = $getReturnValue;
+        } else {
+            // this is a stale token so no access anymore
+            $returnValue['data'] = '';
+            $returnValue['count'] = 0;
+            $returnValue['httpResponse'] = 500;
+            $returnValue['httpReason'] = 'Unable to read updated record from database.';
+        }
+        @mysqli_free_result($qResult);
 	}
     $logData['logStatusCode'] = $returnValue['httpResponse'];
     $logData['logStatusMessage'] = $returnValue['httpReason'];
