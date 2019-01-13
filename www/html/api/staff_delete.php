@@ -81,7 +81,7 @@ function _staff_delete ($dbLink, $apiUserToken, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= 'Unable to deactivate staff account data. At least one of the required field(s): '. $missingColumnList. ' is missing.';
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs,PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
 
@@ -99,7 +99,7 @@ function _staff_delete ($dbLink, $apiUserToken, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 404;
 		$returnValue['httpReason']	= 'Staff record to deactivate  not found.';
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_NOTFOUND);
 		return $returnValue;
 	} else {
 		// record found so save the before version
@@ -129,7 +129,7 @@ function _staff_delete ($dbLink, $apiUserToken, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 500;
 		$returnValue['httpReason']	= 'Staff update key was lost.';
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_KEY);
 		return $returnValue;
 	}
 
@@ -149,7 +149,7 @@ function _staff_delete ($dbLink, $apiUserToken, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= 'Unable to deactivate the staff record.';
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_UPDATE);
 		return $returnValue;
 	}
 

@@ -41,6 +41,15 @@ MESSAGE;
 
 }
 require_once 'piClinicConfig.php';
+
+define('PROFILE_END','End',false);
+define('PROFILE_ERROR_TOKEN','Error_token',false);
+define('PROFILE_ERROR_PARAMS','Error_params',false);
+define('PROFILE_ERROR_KEY','Error_key',false);
+define('PROFILE_ERROR_UPDATE','Error_update',false);
+define('PROFILE_ERROR_NOTFOUND','Error_notfound',false);
+define('PROFILE_ERROR_DELETED','Error_deleted',false);
+
 /*
 * 	Profile log
 *	
@@ -55,8 +64,8 @@ function profileLogCheckpoint(&$profileInfo, $cpName) {
 	$profileInfo[$cpName] = microtime(true);
 }
 
-function profileLogClose(&$profileInfo, $script, $inputParamList = null) {
-	$profileInfo['end'] = microtime(true);
+function profileLogClose(&$profileInfo, $script, $inputParamList = null, $profileEnd = PROFILE_END) {
+	$profileInfo[$profileEnd] = microtime(true);
 	if (!API_PROFILE) {
 		// if no logging is desired, return now
 		return;

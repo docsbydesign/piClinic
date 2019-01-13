@@ -125,7 +125,7 @@ function _textmsg_get ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
         return $returnValue;
     }
 

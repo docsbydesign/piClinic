@@ -94,7 +94,7 @@ function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
 
@@ -133,7 +133,7 @@ function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
             $logData['logStatusCode'] = $returnValue['httpResponse'];
             $logData['logStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
-            profileLogClose($profileData, __FILE__, $requestArgs);
+            profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_NOTFOUND);
             return $returnValue;
         } else {
             if ($returnValue['count'] == 1) {
@@ -148,7 +148,7 @@ function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
                 $logData['logStatusCode'] = $returnValue['httpResponse'];
                 $logData['logStatusMessage'] = $returnValue['httpReason'];
                 writeEntryToLog ($dbLink, $logData);
-                profileLogClose($profileData, __FILE__, $requestArgs);
+                profileLogClose($profileData, __FILE__, $requestArgs,PROFILE_ERROR_NOTFOUND);
                 return $returnValue;
             }
         }
@@ -176,7 +176,7 @@ function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
             $logData['logStatusCode'] = $returnValue['httpResponse'];
             $logData['logStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
-            profileLogClose($profileData, __FILE__, $requestArgs);
+            profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
             return $returnValue;
         } else {
             $dbArgs['sendDateTime'] = $now->format('Y-m-d H:i:s');

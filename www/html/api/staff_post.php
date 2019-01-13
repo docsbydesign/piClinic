@@ -84,7 +84,7 @@ function _staff_post ($dbLink, $apiUserToken, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= 'Unable to add staff record. Required staff record field(s): '. $missingColumnList. ' are missing.';
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
 

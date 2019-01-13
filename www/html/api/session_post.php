@@ -92,7 +92,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
 
@@ -122,7 +122,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_NOTFOUND);
 		return $returnValue;
 	} else {
 		if ($returnValue['count'] == 1) {
@@ -137,7 +137,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
             $logData['logStatusCode'] = $returnValue['httpResponse'];
             $logData['logStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
-            profileLogClose($profileData, __FILE__, $requestArgs);
+            profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_KEY);
 			return $returnValue;
 		}
 	}		
@@ -149,7 +149,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_DELETED);
 		return $returnValue;
 	}
 	
@@ -169,7 +169,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs,PROFILE_ERROR_TOKEN);
 		return $returnValue;
 	}
 

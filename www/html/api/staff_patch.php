@@ -90,7 +90,7 @@ function _staff_patch ($dbLink, $apiUserToken,  $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= 'Unable to update staff account data. At least one of the required field(s): '. $missingColumnList. ' is missing.';
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
 
@@ -126,7 +126,7 @@ function _staff_patch ($dbLink, $apiUserToken,  $requestArgs) {
         }
         $returnValue['httpResponse'] = 400;
         $returnValue['httpReason']	= 'Unable to update staff account data. These field(s) were not recognized: '. $badParamList. '.';
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
         return $returnValue;
     }
 
@@ -180,7 +180,7 @@ function _staff_patch ($dbLink, $apiUserToken,  $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 404;
 		$returnValue['httpReason']	= 'Staff record to update not found.';
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_NOTFOUND);
 		return $returnValue;
 	} else {
 		// record found so save the before version
@@ -235,7 +235,7 @@ function _staff_patch ($dbLink, $apiUserToken,  $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 500;
 		$returnValue['httpReason']	= 'Staff update key was lost.';
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs,PROFILE_ERROR_KEY);
 		return $returnValue;
 	}
 
@@ -255,7 +255,7 @@ function _staff_patch ($dbLink, $apiUserToken,  $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= 'Unable to update the staff record. No data fields to update were included in the request.';
-        profileLogClose($profileData, __FILE__, $requestArgs);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_UPDATE);
 		return $returnValue;
 	}
 

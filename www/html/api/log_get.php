@@ -77,7 +77,7 @@ function _log_get($dbLink, $apiUserToken, $requestArgs) {
         }
         $returnValue['httpResponse'] = 400;
         $returnValue['httpReason']	= "Unable to create get log data. Required field(s): ". $missingColumnList. " are missing.";
-        profileLogClose($profileData, __FILE__, $requestData);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
         return $returnValue;
     }
 
