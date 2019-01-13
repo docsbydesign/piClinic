@@ -31,7 +31,7 @@ function logInvalidTokenError ($dbLink, $returnValue, $token, $actionName, $logD
         $returnValue = array();
     }
     $returnValue['contentType'] = CONTENT_TYPE_JSON;
-    $returnValue['httpResponse'] = 400;
+    $returnValue['httpResponse'] = 401;
     $returnValue['httpReason']	= "Unable to access " . $actionName . " resources. Invalid token.";
     $logData['userToken'] = $token;
     $logData['logStatusCode'] = $returnValue['httpResponse'];

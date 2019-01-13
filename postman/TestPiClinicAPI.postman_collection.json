@@ -1256,7 +1256,7 @@
 										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
 										"exec": [
 											"pm.test(\"Invalid token was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
+											"    pm.response.to.have.status(401);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1315,10 +1315,18 @@
 											"    lastMessage = jsonData.data;    \r",
 											"}\r",
 											"\r",
+											"/*\r",
+											"* Commented out for now. \r",
+											"* This assumes the most recent log entry will be the desired one and so it\r",
+											"*  fails in concurrent testing due to log-file latency,\r",
+											"*\r",
+											"\r",
 											"pm.test(\"Log message correct.\", function() {\r",
 											"    pm.expect(lastMessage.logStatusMessage).to.not.eql(undefined);\r",
 											"    pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token')).to.be.above(0);\r",
-											"});"
+											"});\r",
+											"\r",
+											"*/"
 										],
 										"type": "text/javascript"
 									}
@@ -1369,7 +1377,7 @@
 										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
 										"exec": [
 											"pm.test(\"Invalid token was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
+											"    pm.response.to.have.status(401);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -1423,9 +1431,16 @@
 											"    lastMessage = jsonData.data;    \r",
 											"}\r",
 											"\r",
+											"/*\r",
+											"* Commented out for now. \r",
+											"* This assumes the most recent log entry will be the desired one and so it\r",
+											"*  fails in concurrent testing due to log-file latency,\r",
+											"*\r",
+											"\r",
 											"pm.test(\"Log message correct.\", function() {\r",
 											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token')).to.be.above(0);\r",
-											"});"
+											"});\r",
+											"*/"
 										],
 										"type": "text/javascript"
 									}
@@ -2351,7 +2366,7 @@
 										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
 										"exec": [
 											"pm.test(\"Invalid token was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
+											"    pm.response.to.have.status(401);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -2405,9 +2420,16 @@
 											"    lastMessage = jsonData.data;    \r",
 											"}\r",
 											"\r",
+											"/*\r",
+											"* Commented out for now. \r",
+											"* This assumes the most recent log entry will be the desired one and so it\r",
+											"*  fails in concurrent testing due to log-file latency,\r",
+											"*\r",
+											"\r",
 											"pm.test(\"Log message correct.\", function() {\r",
 											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token')).to.be.above(0);\r",
-											"});"
+											"});\r",
+											"*/"
 										],
 										"type": "text/javascript"
 									}
@@ -2800,7 +2822,7 @@
 									"urlencoded": [
 										{
 											"key": "username",
-											"value": "testUser{{$timestamp}}",
+											"value": "testUser-{{$guid}}",
 											"type": "text"
 										},
 										{
@@ -3388,7 +3410,7 @@
 										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
 										"exec": [
 											"pm.test(\"Invalid token was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
+											"    pm.response.to.have.status(401);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -3442,9 +3464,17 @@
 											"    lastMessage = jsonData.data;    \r",
 											"}\r",
 											"\r",
+											"/*\r",
+											"* Commented out for now. \r",
+											"* This assumes the most recent log entry will be the desired one and so it\r",
+											"*  fails in concurrent testing due to log-file latency,\r",
+											"*\r",
+											"\r",
 											"pm.test(\"Log message correct.\", function() {\r",
 											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token')).to.be.above(0);\r",
-											"});"
+											"});\r",
+											"\r",
+											"*/"
 										],
 										"type": "text/javascript"
 									}
@@ -3931,7 +3961,7 @@
 										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
 										"exec": [
 											"pm.test(\"Invalid token check was successful\", function() {\r",
-											"    pm.response.to.have.status(400);\r",
+											"    pm.response.to.have.status(401);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -3985,9 +4015,17 @@
 											"    lastMessage = jsonData.data;    \r",
 											"}\r",
 											"\r",
+											"/*\r",
+											"* Commented out for now. \r",
+											"* This assumes the most recent log entry will be the desired one and so it\r",
+											"*  fails in concurrent testing due to log-file latency,\r",
+											"*\r",
+											"\r",
 											"pm.test(\"Log message correct.\", function() {\r",
 											"     pm.expect(lastMessage.logStatusMessage.indexOf('Invalid token')).to.be.above(0);\r",
-											"});"
+											"});\r",
+											"\r",
+											"*/"
 										],
 										"type": "text/javascript"
 									}
@@ -6031,6 +6069,1121 @@
 								}
 							],
 							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Error Tests",
+					"item": [
+						{
+							"name": "Get textmsg Access  Missing Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/textmsg.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"textmsg.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get textmsg access Invalid Token Format",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token check was successful\", function() {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{InvalidToken_Format}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/textmsg.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"textmsg.php"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Session Close",
+					"item": [
+						{
+							"name": "Close current session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+										"exec": [
+											"pm.test(\"Logout was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Session Access after logout",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "9746528d-2e17-4c7d-b744-3e720334bcb6",
+										"exec": [
+											"postman.setEnvironmentVariable(\"token\", null);",
+											"",
+											"pm.test(\"Access failed\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Close System Admin session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+										"exec": [
+											"pm.test(\"SystemAdmin Logout was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{SAtoken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "ICD API test",
+			"item": [
+				{
+					"name": "Session Open",
+					"item": [
+						{
+							"name": "Get Test User token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ed713fa2-ae3d-46f3-aa9c-38838bd026ba",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", jsonData.data.token);\r",
+											"\r",
+											"pm.test(\"Login was successful\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?username={{testUser}}&password={{testUserPW}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{testUser}}"
+										},
+										{
+											"key": "password",
+											"value": "{{testUserPW}}"
+										}
+									]
+								},
+								"description": "Logs in as Test User"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Session Access",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Access check was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get SystemAdmin token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.variables.set(\"SAtoken\", jsonData.data.token);\r",
+											"\r",
+											"pm.test(\"System Admin login was successful\", function() {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?username={{systemAdminUser}}&password={{systemAdminPW}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{systemAdminUser}}"
+										},
+										{
+											"key": "password",
+											"value": "{{systemAdminPW}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Success Tests",
+					"item": [
+						{
+							"name": "Get icd code by code and language",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0faf650e-1091-40d0-9f6d-06951bcefeef",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Code search succesful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData.count).to.eql(1);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct code returned\", function() {\r",
+											"    pm.expect(jsonData.data.icd10code).to.not.eql(undefined);\r",
+											"    pm.expect(jsonData.data.icd10code).to.not.eql(null);\r",
+											"    pm.expect(jsonData.data.icd10code).to.eql('R51');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/icd.php?c=R51&language=en",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"icd.php"
+									],
+									"query": [
+										{
+											"key": "c",
+											"value": "R51"
+										},
+										{
+											"key": "language",
+											"value": "en"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get icd code by code match",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0faf650e-1091-40d0-9f6d-06951bcefeef",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Code search succesful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData.count).to.eql(2);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct codes returned\", function() {\r",
+											"    pm.expect(jsonData.data[0].icd10code).to.not.eql(undefined);\r",
+											"    pm.expect(jsonData.data[0].icd10code).to.not.eql(null);\r",
+											"    pm.expect(jsonData.data[0].icd10code).to.eql('R51');\r",
+											"    pm.expect(jsonData.data[1].icd10code).to.not.eql(undefined);\r",
+											"    pm.expect(jsonData.data[1].icd10code).to.not.eql(null);\r",
+											"    pm.expect(jsonData.data[1].icd10code).to.eql('R51');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/icd.php?c=R51",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"icd.php"
+									],
+									"query": [
+										{
+											"key": "c",
+											"value": "R51"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get icd code by code regex match",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0faf650e-1091-40d0-9f6d-06951bcefeef",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Code search succesful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData.count).to.eql(5);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct codes returned\", function() {\r",
+											"    jsonData.data.forEach(function(item, idx){\r",
+											"        var regExpMatch = 'R5[1-5]$'\r",
+											"        pm.expect(item.icd10code).to.not.eql(undefined);\r",
+											"        pm.expect(item.icd10code).to.not.eql(null);\r",
+											"        if (item.icd10code.match(regExpMatch) === null) {\r",
+											"            console.log('Correct code failed for description: ' + item.icd10code);\r",
+											"        }\r",
+											"        pm.expect(item.icd10code.match(regExpMatch)).to.not.eql(null);\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/icd.php?c=R5[1-5]$&language=en",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"icd.php"
+									],
+									"query": [
+										{
+											"key": "c",
+											"value": "R5[1-5]$"
+										},
+										{
+											"key": "language",
+											"value": "en"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get icd code by description",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0faf650e-1091-40d0-9f6d-06951bcefeef",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Code search succesful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData.count).to.be.above(0);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct codes returned\", function() {\r",
+											"    jsonData.data.forEach(function(item, idx){\r",
+											"        pm.expect(item.icd10code).to.not.eql(undefined);\r",
+											"        pm.expect(item.icd10code).to.not.eql(null);\r",
+											"        if (item.shortDescription.toLowerCase().indexOf('headache') <= 0) {\r",
+											"            console.log('Correct code failed for description: ' + item.shortDescription);\r",
+											"        }\r",
+											"        pm.expect(item.shortDescription.toLowerCase().indexOf('headache')).to.be.above(-1);\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/icd.php?t=headache&language=en",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"icd.php"
+									],
+									"query": [
+										{
+											"key": "t",
+											"value": "headache"
+										},
+										{
+											"key": "language",
+											"value": "en"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get icd code by code search and language",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0faf650e-1091-40d0-9f6d-06951bcefeef",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Code search succesful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData.count).to.eql(1);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct code returned\", function() {\r",
+											"    pm.expect(jsonData.data.icd10code).to.not.eql(undefined);\r",
+											"    pm.expect(jsonData.data.icd10code).to.not.eql(null);\r",
+											"    pm.expect(jsonData.data.icd10code).to.eql('R51');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/icd.php?q=R51&language=en",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"icd.php"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "R51"
+										},
+										{
+											"key": "language",
+											"value": "en"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get icd code by code search",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0faf650e-1091-40d0-9f6d-06951bcefeef",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Code search succesful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData.count).to.eql(2);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct codes returned\", function() {\r",
+											"    pm.expect(jsonData.data[0].icd10code).to.not.eql(undefined);\r",
+											"    pm.expect(jsonData.data[0].icd10code).to.not.eql(null);\r",
+											"    pm.expect(jsonData.data[0].icd10code).to.eql('R51');\r",
+											"    pm.expect(jsonData.data[1].icd10code).to.not.eql(undefined);\r",
+											"    pm.expect(jsonData.data[1].icd10code).to.not.eql(null);\r",
+											"    pm.expect(jsonData.data[1].icd10code).to.eql('R51');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/icd.php?q=R51",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"icd.php"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "R51"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get icd code by description search",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0faf650e-1091-40d0-9f6d-06951bcefeef",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Code search succesful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData.count).to.be.above(0);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct codes returned\", function() {\r",
+											"    jsonData.data.forEach(function(item, idx){\r",
+											"        pm.expect(item.icd10code).to.not.eql(undefined);\r",
+											"        pm.expect(item.icd10code).to.not.eql(null);\r",
+											"        if (item.shortDescription.toLowerCase().indexOf('headache') <= 0) {\r",
+											"            console.log('Correct code failed for description: ' + item.shortDescription);\r",
+											"        }\r",
+											"        pm.expect(item.shortDescription.toLowerCase().indexOf('headache')).to.be.above(-1);\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/icd.php?q=headache&language=en",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"icd.php"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "headache"
+										},
+										{
+											"key": "language",
+											"value": "en"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Patch test",
+					"item": [
+						{
+							"name": "Get icd code to update by code match",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0faf650e-1091-40d0-9f6d-06951bcefeef",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Code search succesful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData.count).to.eql(1);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct codes returned\", function() {\r",
+											"    pm.expect(jsonData.data.icd10code).to.not.eql(undefined);\r",
+											"    pm.expect(jsonData.data.icd10code).to.not.eql(null);\r",
+											"    pm.expect(jsonData.data.icd10code).to.eql('R51');\r",
+											"    pm.expect(jsonData.data.icd10index).to.not.eql(undefined);\r",
+											"    pm.expect(jsonData.data.icd10index).to.not.eql(null);\r",
+											"    pm.variables.set(\"useCountIndex\", jsonData.data.icd10index);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Update count saved\", function() {\r",
+											"    pm.expect(jsonData.data.useCount).to.not.eql(undefined);\r",
+											"    pm.expect(jsonData.data.useCount).to.not.eql(null);\r",
+											"    pm.variables.set(\"useCountBefore\", jsonData.data.useCount);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/icd.php?c=R51&language=en",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"icd.php"
+									],
+									"query": [
+										{
+											"key": "c",
+											"value": "R51"
+										},
+										{
+											"key": "language",
+											"value": "en"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update icd code use count",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0faf650e-1091-40d0-9f6d-06951bcefeef",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Code search succesful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData.count).to.eql(1);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct value returned\", function() {\r",
+											"    pm.expect(jsonData.data.useCount).to.not.eql(undefined);\r",
+											"    pm.expect(jsonData.data.useCount).to.not.eql(null);\r",
+											"    pm.expect(pm.variables.get(\"useCountBefore\")).to.not.eql(undefined);\r",
+											"    pm.expect(pm.variables.get(\"useCountBefore\")).to.not.eql(null);\r",
+											"    pm.expect(parseInt(jsonData.data.useCount)).to.be.above(parseInt(pm.variables.get(\"useCountBefore\")));\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5358da0f-d5c1-4f72-a4a2-6370255e0ad4",
+										"exec": [
+											"pm.expect(pm.variables.get(\"useCountIndex\")).to.eql('R51');\r",
+											"pm.expect(pm.variables.get(\"useCountBefore\")).to.not.eql(undefined);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/icd.php?icd10index={{useCountIndex}}&language=en",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"icd.php"
+									],
+									"query": [
+										{
+											"key": "icd10index",
+											"value": "{{useCountIndex}}"
+										},
+										{
+											"key": "language",
+											"value": "en"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get icd code by code match",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0faf650e-1091-40d0-9f6d-06951bcefeef",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Code search succesful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData.count).to.eql(1);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Correct value returned\", function() {\r",
+											"    pm.expect(jsonData.data.useCount).to.not.eql(undefined);\r",
+											"    pm.expect(jsonData.data.useCount).to.not.eql(null);\r",
+											"    pm.expect(pm.variables.get(\"useCountBefore\")).to.not.eql(undefined);\r",
+											"    pm.expect(pm.variables.get(\"useCountBefore\")).to.not.eql(null);\r",
+											"    pm.expect(parseInt(jsonData.data.useCount)).to.be.above(parseInt(pm.variables.get(\"useCountBefore\")));\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/icd.php?c=R51&language=en",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"icd.php"
+									],
+									"query": [
+										{
+											"key": "c",
+											"value": "R51"
+										},
+										{
+											"key": "language",
+											"value": "en"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Error Tests",
+					"item": [
+						{
+							"name": "Get ICD Access  Missing Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token was successful\", function() {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/icd.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"icd.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get ICD access Invalid Token Format",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Invalid token check was successful\", function() {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{InvalidToken_Format}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/icd.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"icd.php"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
