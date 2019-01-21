@@ -116,7 +116,9 @@ function _comment_post ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['count'] = 1;
 		$returnValue['data'] = $newComment;
 		$logData['logAfterData'] = json_encode($returnValue['data']);
-		writeEntryToLog ($logData);
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+		writeEntryToLog ($dbLink, $logData);
 		@mysqli_free_result($qResult);
 	}
 	profileLogClose($profileData, __FILE__, $requestArgs);

@@ -26,23 +26,24 @@
  *
  *	POST: Adds a new patient record to the database
  * 		input data:
- *			`ClinicPatientID` - (Required) Patient ID issued by clinic.
- *			`FamilyID` - (Optional) the ID of the family's record
- *   		`NameLast` - (Required) Patient's last name(s)'
- *   		`NameFirst` - (Required) Patient''s first name'
- *   		`Sex` - (Required) 'Male','Female','Other' Patient''s sex'
- *   		`BirthDate` - (Required) Patient''s date of birth'
- *   		`HomeAddress1` - (Optional) Patient''s home address'
- *   		`HomeAddress2` - (Optional) additional home address info (e.g. apt, room, etc.)'
- *   		`HomeNeighborhood` - (Optional) Patient''s home neighborhood.'
- *   		`HomeCity` - (Optional) Patient''s home city'
- *   		`HomeCounty` - (Optional) Patient''s home county'
- *   		`HomeState` - (Optional) Patient''s home state',
- *			`ContactPhone` - (Optional) Patient''s primary phone number'
- *   		`ContactAltPhone` - (Optional) Patient''s alternate phone number'
- * 			`BloodType` - (Optional) Patient''s blood type ('A+','A-','B+','B-','AB+','AB-','O+','O-','NA')
- * 			`OrganDoner` - (Optional) Patient''s organ donor preference'
- * 			`PreferredLanguage` - '(Optional) Patient''s preferred language for communications'
+ *			`clinicPatientID` - (Required) Patient ID issued by clinic.
+ *			`familyID` - (Optional) the ID of the family's record
+ *   		`lastName` - (Required) Patient's last name(s)'
+ *   		`lastName1` - (Required) Patient's last name(s)'
+ *   		`firstName` - (Required) Patient''s first name'
+ *   		`sex` - (Required) 'Male','Female','Other' Patient''s sex'
+ *   		`birthDate` - (Required) Patient''s date of birth'
+ *   		`homeAddress1` - (Optional) Patient''s home address'
+ *   		`homeAddress2` - (Optional) additional home address info (e.g. apt, room, etc.)'
+ *   		`homeNeighborhood` - (Optional) Patient''s home neighborhood.'
+ *   		`homeCity` - (Optional) Patient''s home city'
+ *   		`homeCounty` - (Optional) Patient''s home county'
+ *   		`homeState` - (Optional) Patient''s home state',
+ *			`contactPhone` - (Optional) Patient''s primary phone number'
+ *   		`contactAltPhone` - (Optional) Patient''s alternate phone number'
+ * 			`bloodType` - (Optional) Patient''s blood type ('A+','A-','B+','B-','AB+','AB-','O+','O-','NA')
+ * 			`organDoner` - (Optional) Patient''s organ donor preference'
+ * 			`preferredLanguage` - '(Optional) Patient''s preferred language for communications'
  *
  *		Returns:
  *			201: the new patient record created
@@ -64,28 +65,37 @@ function _patient_post ($dbLink, $apiUserToken, $requestArgs) {
 	$dbInfo = array();
 	$dbInfo ['requestArgs'] = $requestArgs;
 
-	$logData = array();
-	$logData['table'] = 'patient';
-	$logData['action'] = 'post';
-	$logData['user'] = 'SYSTEM'; // TODO; get a real user id
-	$logData['before'] = ''; // no data, yet
+    // token parameter was verified before this function was called.
+    $logData = createLogEntry (
+        'API',
+        __FILE__,
+        'patient',
+         $_SERVER['REQUEST_METHOD'],
+         $apiUserToken,
+         $requestArgs,
+        null,
+        null,
+        null,
+        null);
 
-	if (empty($requestArgs['ClinicPatientID'])) {
+	if (empty($requestArgs['clinicPatientID'])) {
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
 			$returnValue['error'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to add patient record. The patient ID is missing.";
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
 	
 	// check for other required columns
 	$requiredPatientColumns = [
-		"NameLast"
-		,"NameFirst"
-		,"Sex"
+		"lastName"
+		,"firstName"
+		,"sex"
 		];
+
 	$missingColumnList = "";
 	foreach ($requiredPatientColumns as $column) {
 		if (empty($requestArgs[$column])) {
@@ -104,6 +114,10 @@ function _patient_post ($dbLink, $apiUserToken, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to add patient record. Required patient record field(s): ". $missingColumnList. " are missing.";
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
@@ -111,13 +125,14 @@ function _patient_post ($dbLink, $apiUserToken, $requestArgs) {
 	// clean leading and trailing spaces from string fields
 	$postArgs = cleanPatientStringFields ($requestArgs);
 
+    $dbInfo['postArgs'] = $postArgs;
 	// make insert query string to add new object
 	$insertQueryString = format_object_for_SQL_insert (DB_TABLE_PATIENT, $postArgs);
+    $dbInfo['insertQueryString'] = $insertQueryString;
 	// try to add the record to the database
 	$qResult = @mysqli_query($dbLink, $insertQueryString);
 	if (!$qResult) {
 		// SQL ERROR
-		$dbInfo['insertQueryString'] = $insertQueryString;
 		$dbInfo['sqlError'] = @mysqli_error($dbLink);
 		// format response
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
@@ -140,8 +155,8 @@ function _patient_post ($dbLink, $apiUserToken, $requestArgs) {
 		profileLogCheckpoint($profileData,'POST_COMPLETE');
 		// create query string for get operation
 		$getQueryString = "SELECT * FROM `".
-			DB_VIEW_PATIENT_GET. "` WHERE `ClinicPatientID` = '".
-			$postArgs['ClinicPatientID']."';";
+			DB_VIEW_PATIENT_GET. "` WHERE `clinicPatientID` = '".
+			$postArgs['clinicPatientID']."';";
 		$returnValue = getDbRecords($dbLink, $getQueryString);
 		if ($returnValue['httpResponse'] == 200) {
 			// found the new record
@@ -149,11 +164,18 @@ function _patient_post ($dbLink, $apiUserToken, $requestArgs) {
 			// adjust return value to reflect POST operation				
 			$returnValue['httpResponse'] = 201;
 			$returnValue['httpReason']	= "Success";
-			writeUpdateToLog ($logData);
 		}
 		@mysqli_free_result($qResult);
 	}
-	profileLogClose($profileData, __FILE__, $requestArgs);
-	return $returnValue;
+
+    $logData['logStatusCode'] = $returnValue['httpResponse'];
+    $logData['logsStatusMessage'] = $returnValue['httpReason'];
+    writeEntryToLog ($dbLink, $logData);
+
+    if (API_DEBUG_MODE) {
+        $returnValue['debug'] = $dbInfo;
+    }
+    profileLogClose($profileData, __FILE__, $requestArgs);
+    return $returnValue;
 }
-?>
+//EOF

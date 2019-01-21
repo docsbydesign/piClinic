@@ -94,6 +94,7 @@ if (!defined('DB_UTILS')) {
 				$dbValList .= 'NULL';
 			} else {
 				$escapedString = str_replace("'","''", $dbVal);
+				if (is_array($escapedString)) { $escapedString = json_encode($escapedString);}
 				$dbValList .= '\''.$escapedString.'\'';
 			}							
 		}

@@ -38,30 +38,41 @@
 require_once 'api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
-function _patient_delete ($dbLink, $apiUserToken, $formArgs) {
-	$profileData = [];
-	profileLogStart ($profileData);
-	// format db table fields as dbInfo array
-	$returnValue = array();
-	
-	$dbInfo = array();
-	$dbInfo ['formArgs'] = $formArgs;
+function _patient_delete ($dbLink, $apiUserToken, $requestArgs) {
+/*
+ *  Initialize profiling when enabled in piClinicConfig.php
+ */
+    $profileData = array();
+    profileLogStart ($profileData);
+    // format db table fields as dbInfo array
+    $returnValue = array();
 
-	$logData = array();
-	$logData['table'] = 'patient';
-	$logData['action'] = 'delete';
-	$logData['user'] = 'SYSTEM'; // TODO; get a real user id
+    $dbInfo = array();
+    $dbInfo ['requestArgs'] = $requestArgs;
 
-	
-	// confirm that we have the record ID 
-	if (empty( $formArgs["ClinicPatientID"])) {
+    // token parameter was verified before this function was called.
+    $logData = createLogEntry (
+        'API',
+        __FILE__,
+        'session',
+         $_SERVER['REQUEST_METHOD'],
+         $apiUserToken,
+         $requestArgs,
+        null,
+        null,
+        null,
+        null);
+
+	// confirm that we have the record ID
+	if (empty( $requestArgs["clinicPatientID"])) {
 		// missing primary key field
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
 			$returnValue['error'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 400;
-		$returnValue['httpReason']	= "Unable to delete patient record. The ClinicPatientID is missing.";
+		$returnValue['httpReason']	= "Unable to delete patient record. The clinicPatientID is missing.";
+        profileLogClose($profileData, __FILE__, $requestArgs,PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
@@ -69,8 +80,8 @@ function _patient_delete ($dbLink, $apiUserToken, $formArgs) {
 	// make sure the record is currently active
 	// create query string for get operation
 	$getQueryString = "SELECT * FROM `".
-		DB_VIEW_PATIENT_GET. "` WHERE `ClinicPatientID` = '".
-		$formArgs['ClinicPatientID']."';";
+		DB_VIEW_PATIENT_GET. "` WHERE `clinicPatientID` = '".
+		$requestArgs['clinicPatientID']."';";
 	$testReturnValue = getDbRecords($dbLink, $getQueryString);
 	if ($testReturnValue['httpResponse'] !=  200) {
 		// can't find the record to delete. It could already be deleted or it could not exist.
@@ -80,19 +91,20 @@ function _patient_delete ($dbLink, $apiUserToken, $formArgs) {
 		}
 		$returnValue['httpResponse'] = 404;
 		$returnValue['httpReason']	= "Patient record to delete not found.";
+        profileLogClose($profileData, __FILE__, $requestArgs,PROFILE_ERROR_NOTFOUND);
 		return $returnValue;
 	} else {
-		$logData['before'] = $testReturnValue['data'];
+        $logData['logBeforeData'] = json_encode($testReturnValue['data']);
 	}
 
 	// delete is really deactivate
 	// so the only field necessary from the caller is the primary key
 	$deleteArgs = array();
-	$deleteArgs["ClinicPatientID"] = $formArgs["ClinicPatientID"];
-	$deleteArgs["Active"] = 0;
+	$deleteArgs["clinicPatientID"] = $requestArgs["clinicPatientID"];
+	$deleteArgs["active"] = 0;
 	// and now it's ready to update
 	$columnsToUpdate = 0;
-	$deleteQueryString = format_object_for_SQL_update (DB_TABLE_PATIENT, $deleteArgs, "ClinicPatientID", $columnsToUpdate);
+	$deleteQueryString = format_object_for_SQL_update (DB_TABLE_PATIENT, $deleteArgs, "clinicPatientID", $columnsToUpdate);
 	
 	// check query string construction
 	if ($columnsToUpdate < 1) {
@@ -105,7 +117,8 @@ function _patient_delete ($dbLink, $apiUserToken, $formArgs) {
 		}
 		$returnValue['httpResponse'] = 500;
 		$returnValue['httpReason']	= "Unable to delete the patient record. There was a problem with the request.";
-		return $returnValue;		
+        profileLogClose($profileData, __FILE__, $requestArgs,PROFILE_ERROR_UPDATE);
+		return $returnValue;
 	}
 	
 	// try to delete the record in the database by marking it as inactive
@@ -132,13 +145,15 @@ function _patient_delete ($dbLink, $apiUserToken, $formArgs) {
 			$dbInfo['sqlError'] = @mysqli_error($dbLink);
 			$returnValue['error'] = $dbInfo;
 		}
-		$logData['after'] = "";
+        $logData['logAfterData'] = '';
 		$returnValue['httpResponse'] = 200;
 		$returnValue['httpReason']	= "Patient record deactivated.";
-		writeUpdateToLog ($logData);
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
 		@mysqli_free_result($qResult);		
 	}			
-	profileLogClose($profileData, __FILE__, $formArgs);	
+	profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;
 }
 ?>
