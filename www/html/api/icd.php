@@ -85,7 +85,7 @@ if (empty($apiUserToken)){
         $_SERVER['REQUEST_METHOD'],
         $apiUserToken,
         $_SERVER['QUERY_STRING'],
-        json_encode(getallheaders()),
+        null,
         null,
         null,
         null);

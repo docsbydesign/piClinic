@@ -61,10 +61,10 @@ function _icd_patch ($dbLink, $requestArgs, $apiUserToken) {
         null,
         null);
 	
-	// check for other required columns
+	// check for required columns and save the key field
 	$requiredIcdColumns = [
 		'icd10index'	// code, exact max
-		,'language'			// language to update
+		,'language'		// language to update
 		];
 
 	$missingColumnList = '';
@@ -94,23 +94,6 @@ function _icd_patch ($dbLink, $requestArgs, $apiUserToken) {
         return $returnValue;
 	}
 	
-	$updateKey = '';
-	// get lookup key field
-	if (isset($keyFields['icd10index'])) {
-		$updateKey = 'icd10index';
-	} else {
-		// something got lost.
-		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
-		if (API_DEBUG_MODE) {
-			$dbInfo['keyFields'] = $keyFields;
-			$returnValue['debug'] = $dbInfo;
-		}
-		$returnValue['httpResponse'] = 500;
-		$returnValue['httpReason']	= 'ICD update key was lost.';
-        profileLogClose($profileData, __FILE__, $requestArgs,PROFILE_ERROR_KEY);
-        return $returnValue;
-	}
-	
 	$patchArgs = $keyFields; // load the key values
 	// the values to update
 	$patchArgs['useCount'] = '`useCount` + 1';	
@@ -129,7 +112,6 @@ function _icd_patch ($dbLink, $requestArgs, $apiUserToken) {
 		if (API_DEBUG_MODE) {
 			$dbInfo['updateQueryString'] = $updateQueryString;
 			$dbInfo['patchArgs'] = $patchArgs;
-			$dbInfo['updateKey'] = $updateKey;
 			$dbInfo['keyFields'] = $keyFields;
 			$returnValue['debug'] = $dbInfo;
 		}
