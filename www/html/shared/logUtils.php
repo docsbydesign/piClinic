@@ -61,7 +61,7 @@ function profileLog () {
 *	Log UI error
 */
 function logApiError($inputParamList,
-                     $error='',
+                     $error='NotSpecified',
                      $scriptFile = 'NotSpecified',
                      $username = 'NotSpecified',
                      $table = 'NotSpecified',
@@ -81,13 +81,13 @@ function logApiError($inputParamList,
 		$logRecord['time'] = date ( 'c' ); //  ISO 8601 date format
 		$logRecord['file'] = $scriptFile;
 		if (empty($inputParamList)) {
-			$inputParamList = $_SERVER['QUERY_STRING'];
+			$inputParamList = (empty($_SERVER['QUERY_STRING']) ? 'NotSpecified' : $_SERVER['QUERY_STRING']);
 		}
 		$logRecord['params'] = $inputParamList;
 		$logRecord['user'] = $username;
-		$logRecord['method'] = $_SERVER['REQUEST_METHOD'];
-		$logRecord['addr'] = $_SERVER['REMOTE_ADDR'];
-		$logRecord['referrer'] = $_SERVER['HTTP_REFERER'];
+		$logRecord['method'] = (empty($_SERVER['REQUEST_METHOD']) ? 'NotSpecified' : $_SERVER['REQUEST_METHOD']);
+		$logRecord['addr'] = (empty($_SERVER['REMOTE_ADDR']) ? 'NotSpecified' : $_SERVER['REMOTE_ADDR']);
+		$logRecord['referrer'] = (empty($_SERVER['HTTP_REFERER']) ? 'NotSpecified' : $_SERVER['HTTP_REFERER']);
 		$logRecord['error'] = $error;
         $logRecord['table'] = $table;
         $logRecord['message'] = $message;

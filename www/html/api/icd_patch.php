@@ -139,8 +139,8 @@ function _icd_patch ($dbLink, $requestArgs, $apiUserToken) {
 			profileLogCheckpoint($profileData,'UPDATE_RETURNED');
 			// create query string for get operation			
 			$getQueryString = "SELECT * FROM `".
-				DB_VIEW_ICD10_GET. "` WHERE `".$updateKey."` = '".
-				$requestArgs[$updateKey]."' AND `language` = '".$requestArgs['language']."';";
+				DB_VIEW_ICD10_GET. "` WHERE `icd10index` = '".
+				$requestArgs['icd10index']."' AND `language` = '".$requestArgs['language']."';";
 			$returnValue = getDbRecords($dbLink, $getQueryString);
             $logData['logAfterData'] = json_encode($returnValue['data']);
             writeEntryToLog ($dbLink, $logData);
