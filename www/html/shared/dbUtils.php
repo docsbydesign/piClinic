@@ -93,8 +93,8 @@ if (!defined('DB_UTILS')) {
 			if (empty($dbVal) && (strlen($dbVal)==0)) {
 				$dbValList .= 'NULL';
 			} else {
-                $escapedString = str_replace("'","''", $dbVal);
-                if (is_array($escapedString)) { $escapedString = json_encode($escapedString);}
+				$escapedString = str_replace("'","''", $dbVal);
+				if (is_array($escapedString)) { $escapedString = json_encode($escapedString);}
 				$dbValList .= '\''.$escapedString.'\'';
 			}							
 		}
