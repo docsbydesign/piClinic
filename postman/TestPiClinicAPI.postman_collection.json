@@ -6,6 +6,57 @@
 	},
 	"item": [
 		{
+			"name": "Global initialization",
+			"item": [
+				{
+					"name": "Global Init",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "1135443f-87af-4084-8217-0a43d88c9e74",
+								"exec": [
+									" var varRandomString = function randomString(textLength) {\r",
+									"    if (textLength === null) {\r",
+									"        textLength = 16;\r",
+									"    }\r",
+									"    var text = \"\";\r",
+									"    var legal = \"AÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZaábcdeéfghiíjklmnñoópqrstuúvwxyz0123456789-¡!?¿\";\r",
+									"\r",
+									"  for (var i = 0; i < textLength; i++)\r",
+									"    text += legal.charAt(Math.floor(Math.random() * legal.length));\r",
+									"\r",
+									"  return text;\r",
+									"}\r",
+									"\r",
+									"postman.setEnvironmentVariable ('fnRandomString', varRandomString);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/phpinfo.php",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"phpinfo.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Method File Access Test",
 			"item": [
 				{
@@ -8311,18 +8362,8 @@
 													"script": {
 														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
 														"exec": [
-															"function randomString(textLength) {\r",
-															"    if (textLength === null) {\r",
-															"        textLength = 16;\r",
-															"    }\r",
-															"    var text = \"\";\r",
-															"    var legal = \"AÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZaábcdeéfghiíjklmnñoópqrstuúvwxyz0123456789-¡!?¿\";\r",
-															"\r",
-															"  for (var i = 0; i < textLength; i++)\r",
-															"    text += legal.charAt(Math.floor(Math.random() * legal.length));\r",
-															"\r",
-															"  return text;\r",
-															"}\r",
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
 															"\r",
 															" pm.variables.set('patchTestField', 'lastName');\r",
 															" pm.variables.set('patchTestValue', randomString(255));\r",
@@ -8486,18 +8527,8 @@
 													"script": {
 														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
 														"exec": [
-															" function randomString(textLength) {\r",
-															"    if (textLength === null) {\r",
-															"        textLength = 16;\r",
-															"    }\r",
-															"    var text = \"\";\r",
-															"    var legal = \"AÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZaábcdeéfghiíjklmnñoópqrstuúvwxyz0123456789-¡!?¿\";\r",
-															"\r",
-															"  for (var i = 0; i < textLength; i++)\r",
-															"    text += legal.charAt(Math.floor(Math.random() * legal.length));\r",
-															"\r",
-															"  return text;\r",
-															"}\r",
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
 															"\r",
 															"pm.variables.set('patchTestField','lastName2');\r",
 															"pm.variables.set('patchTestValue',randomString(255));\r",
@@ -8661,18 +8692,8 @@
 													"script": {
 														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
 														"exec": [
-															" function randomString(textLength) {\r",
-															"    if (textLength === null) {\r",
-															"        textLength = 16;\r",
-															"    }\r",
-															"    var text = \"\";\r",
-															"    var legal = \"AÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZaábcdeéfghiíjklmnñoópqrstuúvwxyz0123456789-¡!?¿\";\r",
-															"\r",
-															"  for (var i = 0; i < textLength; i++)\r",
-															"    text += legal.charAt(Math.floor(Math.random() * legal.length));\r",
-															"\r",
-															"  return text;\r",
-															"}\r",
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
 															"\r",
 															"pm.variables.set('patchTestField','firstName');\r",
 															"pm.variables.set('patchTestValue', randomString(255));\r",
@@ -8836,18 +8857,9 @@
 													"script": {
 														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
 														"exec": [
-															" function randomString(textLength) {\r",
-															"    if (textLength === null) {\r",
-															"        textLength = 16;\r",
-															"    }\r",
-															"    var text = \"\";\r",
-															"    var legal = \"AÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZaábcdeéfghiíjklmnñoópqrstuúvwxyz0123456789-¡!?¿\";\r",
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
 															"\r",
-															"  for (var i = 0; i < textLength; i++)\r",
-															"    text += legal.charAt(Math.floor(Math.random() * legal.length));\r",
-															"\r",
-															"  return text;\r",
-															"}\r",
 															"\r",
 															"pm.variables.set('patchTestField','middleInitial');\r",
 															"pm.variables.set('patchTestValue', randomString(255));\r",
@@ -9011,18 +9023,8 @@
 													"script": {
 														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
 														"exec": [
-															" function randomString(textLength) {\r",
-															"    if (textLength === null) {\r",
-															"        textLength = 16;\r",
-															"    }\r",
-															"    var text = \"\";\r",
-															"    var legal = \"AÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZaábcdeéfghiíjklmnñoópqrstuúvwxyz0123456789-¡!?¿\";\r",
-															"\r",
-															"  for (var i = 0; i < textLength; i++)\r",
-															"    text += legal.charAt(Math.floor(Math.random() * legal.length));\r",
-															"\r",
-															"  return text;\r",
-															"}\r",
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
 															"\r",
 															"pm.variables.set('patchTestField','homeAddress1');\r",
 															"pm.variables.set('patchTestValue', randomString(255));\r",
@@ -9186,18 +9188,8 @@
 													"script": {
 														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
 														"exec": [
-															" function randomString(textLength) {\r",
-															"    if (textLength === null) {\r",
-															"        textLength = 16;\r",
-															"    }\r",
-															"    var text = \"\";\r",
-															"    var legal = \"AÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZaábcdeéfghiíjklmnñoópqrstuúvwxyz0123456789-¡!?¿\";\r",
-															"\r",
-															"  for (var i = 0; i < textLength; i++)\r",
-															"    text += legal.charAt(Math.floor(Math.random() * legal.length));\r",
-															"\r",
-															"  return text;\r",
-															"}\r",
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
 															"\r",
 															"pm.variables.set('patchTestField','homeAddress2');\r",
 															"pm.variables.set('patchTestValue', randomString(16));\r",
