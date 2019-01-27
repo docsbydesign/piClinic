@@ -24,10 +24,10 @@
  *	Updates patient resources from the database 
  * 		or an HTML error message
  *
- * PATCH: Modifies one or more fields in an existing patient record as identified by ClinicPatientID
+ * PATCH: Modifies one or more fields in an existing patient record as identified by clinicPatientID
  *
  * 		input data:
- *			`ClinicPatientID` - (Required) Patient ID issued by clinic.
+ *			`clinicPatientID` - (Required) Patient ID issued by clinic.
  *			`FamilyID` - (Optional) the ID of the family's record
  *   		`NameLast` - (Optional) Patient's last name(s)'
  *   		`NameFirst` - (Optional) Patient''s first name'
@@ -55,37 +55,40 @@
 require_once 'api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
-function _patient_patch ($dbLink, $apiUserToken, $formArgs) {
+function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
 	$profileData = [];
 	profileLogStart ($profileData);
 	// format db table fields as dbInfo array
 	$returnValue = array();
 	
 	$dbInfo = array();
-	$dbInfo ['formArgs'] = $formArgs;
+	$dbInfo ['requestArgs'] = $requestArgs;
 
-	$logData = array();
-	$logData['table'] = 'patient';
-	$logData['action'] = 'patch';
-	$logData['user'] = 'SYSTEM'; // TODO; get a real user id
-	
-	// confirm that we have the record ID 
-	if (empty( $formArgs["ClinicPatientID"])) {
+    // token parameter was verified before this function was called.
+    $logData = createLogEntry ('API', __FILE__, 'patient', $_SERVER['REQUEST_METHOD'],  $apiUserToken, null, null, null, null, null);
+
+    // confirm that we have the record ID
+	if (empty( $requestArgs["clinicPatientID"])) {
 		// missing primary key field
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
 			$returnValue['error'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 400;
-		$returnValue['httpReason']	= "Unable to update patient record. The ClinicPatientID is missing.";
-		return $returnValue;
+		$returnValue['httpReason']	= "Unable to update patient record. The clinicPatientID is missing.";
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
+
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+        return $returnValue;
 	}
 	
 	// make sure the record is currently active
 	// create query string for get operation
 	$getQueryString = "SELECT * FROM `".
-		DB_VIEW_PATIENT_GET. "` WHERE `ClinicPatientID` = '".
-		$formArgs['ClinicPatientID']."';";
+		DB_VIEW_PATIENT_GET. "` WHERE `clinicPatientID` = '".
+		$requestArgs['clinicPatientID']."';";
 	$testReturnValue = getDbRecords($dbLink, $getQueryString);
 	if ($testReturnValue['httpResponse'] !=  200) {
 		// can't find the record to delete. It could already be deleted or it could not exist.
@@ -95,17 +98,22 @@ function _patient_patch ($dbLink, $apiUserToken, $formArgs) {
 		}
 		$returnValue['httpResponse'] = 404;
 		$returnValue['httpReason']	= "Patient record to update not found.";
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_NOTFOUND);
+
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
 		return $returnValue;
 	} else {
-		$logData['before'] = $testReturnValue['data'];		
+		$logData['logBeforeData'] = $testReturnValue['data'];
 	}
 	
 	// clean leading and trailing spaces from string fields
-	$patchArgs = cleanPatientStringFields ($formArgs);
+	$patchArgs = cleanPatientStringFields ($requestArgs);
 	
 	// make update query string from data buffer
 	$columnsToUpdate = 0;
-	$updateQueryString = format_object_for_SQL_update (DB_TABLE_PATIENT, $patchArgs, "ClinicPatientID", $columnsToUpdate);
+	$updateQueryString = format_object_for_SQL_update (DB_TABLE_PATIENT, $patchArgs, "clinicPatientID", $columnsToUpdate);
 	
 	// check query string construction
 	if ($columnsToUpdate < 1) {
@@ -116,16 +124,21 @@ function _patient_patch ($dbLink, $apiUserToken, $formArgs) {
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to update the patient record. No data fields were included in the request.";
-		return $returnValue;		
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_UPDATE);
+
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+		return $returnValue;
 	}
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
 
 	if (!empty($updateQueryString)) {
+        $dbInfo['updateQueryString'] = $updateQueryString;
 		// try to add the record to the database
 		$qResult = @mysqli_query($dbLink, $updateQueryString);
 		if (!$qResult) {
 			// SQL ERROR
-			$dbInfo['updateQueryString'] = $updateQueryString;
 			$dbInfo['sqlError'] = @mysqli_error($dbLink);
 			// format response
 			$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
@@ -134,15 +147,22 @@ function _patient_patch ($dbLink, $apiUserToken, $formArgs) {
 			}
 			$returnValue['httpResponse'] = 500;
 			$returnValue['httpReason']	= "Unable to update patient.";
+            profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_UPDATE);
+
+            $logData['logStatusCode'] = $returnValue['httpResponse'];
+            $logData['logsStatusMessage'] = $returnValue['httpReason'];
+            writeEntryToLog ($dbLink, $logData);
 		} else {
 			profileLogCheckpoint($profileData,'UPDATE_COMPLETE');
 			// create query string for get operation
 			$getQueryString = "SELECT * FROM `".
-				DB_VIEW_PATIENT_GET. "` WHERE `ClinicPatientID` = '".
-				$formArgs['ClinicPatientID']."';";
+				DB_VIEW_PATIENT_GET. "` WHERE `clinicPatientID` = '".
+				$requestArgs['clinicPatientID']."';";
 			$returnValue = getDbRecords($dbLink, $getQueryString);
-			$logData['after'] = $returnValue['data'];
-			writeUpdateToLog ($logData);
+			$logData['logAfterData'] = $returnValue['data'];
+            $logData['logStatusCode'] = $returnValue['httpResponse'];
+            $logData['logsStatusMessage'] = $returnValue['httpReason'];
+            writeEntryToLog ($dbLink, $logData);
 			@mysqli_free_result($qResult);
 		}			
 	} else {
@@ -153,8 +173,9 @@ function _patient_patch ($dbLink, $apiUserToken, $formArgs) {
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to update record. The patient ID is missing.";
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_KEY);
 	}
-	profileLogClose($profileData, __FILE__, $formArgs);	
+	profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;
 }
-?>
+//EOF

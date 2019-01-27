@@ -178,41 +178,41 @@ if (empty($apiUserToken)){
                 writeEntryToLog($dbLink, $logData);
             }
             break;
-            /*
-            case 'PATCH':
-                if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_CLINIC)) {
-                    $retVal = _patient_patch($dbLink, $apiUserToken, $requestData);
-                } else {
-                    // caller does not have a valid security token
-                    $retVal['httpResponse'] = 401;
-                    $retVal['httpReason'] = "User account is not authorized to create this resource.";
-                    $logData['logStatusCode'] = $retVal['httpResponse'];
-                    $logData['logStatusMessage'] = $retVal['httpReason'];
-                    writeEntryToLog($dbLink, $logData);
-                }
-                break;
-            */
-            case 'DELETE':
-                if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_CLINIC)) {
-                    $retVal = _patient_delete($dbLink, $apiUserToken, $requestData);
-                } else {
-                    // caller does not have a valid security token
-                    $retVal['httpResponse'] = 401;
-                    $retVal['httpReason'] = "User account is not authorized to create this resource.";
-                    $logData['logStatusCode'] = $retVal['httpResponse'];
-                    $logData['logStatusMessage'] = $retVal['httpReason'];
-                    writeEntryToLog($dbLink, $logData);
-                }
-                break;
 
-            default:
-                $retVal['contentType'] = 'Content-Type: application/json; charset=utf-8';
-                if (API_DEBUG_MODE) {
-                    $retVal['error'] = $requestData;
-                }
-                $retVal['httpResponse'] = 405;
-                $retVal['httpReason'] = "Method not supported.";
-                break;
+        case 'PATCH':
+            if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_CLINIC)) {
+                $retVal = _patient_patch($dbLink, $apiUserToken, $requestData);
+            } else {
+                // caller does not have a valid security token
+                $retVal['httpResponse'] = 401;
+                $retVal['httpReason'] = "User account is not authorized to create this resource.";
+                $logData['logStatusCode'] = $retVal['httpResponse'];
+                $logData['logStatusMessage'] = $retVal['httpReason'];
+                writeEntryToLog($dbLink, $logData);
+            }
+            break;
+
+        case 'DELETE':
+            if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_CLINIC)) {
+                $retVal = _patient_delete($dbLink, $apiUserToken, $requestData);
+            } else {
+                // caller does not have a valid security token
+                $retVal['httpResponse'] = 401;
+                $retVal['httpReason'] = "User account is not authorized to create this resource.";
+                $logData['logStatusCode'] = $retVal['httpResponse'];
+                $logData['logStatusMessage'] = $retVal['httpReason'];
+                writeEntryToLog($dbLink, $logData);
+            }
+            break;
+
+        default:
+            $retVal['contentType'] = 'Content-Type: application/json; charset=utf-8';
+            if (API_DEBUG_MODE) {
+                $retVal['error'] = $requestData;
+            }
+            $retVal['httpResponse'] = 405;
+            $retVal['httpReason'] = "Method not supported.";
+            break;
         }
 
     }
