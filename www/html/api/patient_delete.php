@@ -54,7 +54,7 @@ function _patient_delete ($dbLink, $apiUserToken, $requestArgs) {
     $logData = createLogEntry (
         'API',
         __FILE__,
-        'session',
+        'patient',
          $_SERVER['REQUEST_METHOD'],
          $apiUserToken,
          $requestArgs,

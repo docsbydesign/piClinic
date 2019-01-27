@@ -52,7 +52,7 @@ function _staff_delete ($dbLink, $apiUserToken, $requestArgs) {
     $logData = createLogEntry (
         'API',
         __FILE__,
-        'session',
+        'staff',
         $_SERVER['REQUEST_METHOD'],
         $apiUserToken, $requestArgs,
         null,

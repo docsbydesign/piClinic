@@ -117,7 +117,7 @@ if (empty($apiUserToken)){
 } else {
     $logData = createLogEntry ('API',
         __FILE__,
-        'session',
+        'staff',
         $_SERVER['REQUEST_METHOD'],
         $apiUserToken,
         $_SERVER['QUERY_STRING'],

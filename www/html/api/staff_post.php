@@ -60,7 +60,7 @@ function _staff_post ($dbLink, $apiUserToken, $requestArgs) {
 	$dbInfo['requestArgs'] = $requestArgs;
 
 	// token parameter was verified before this function was called.
-    $logData = createLogEntry ('API', __FILE__, 'session', $_SERVER['REQUEST_METHOD'], $apiUserToken, $requestArgs, null, null, null, null);
+    $logData = createLogEntry ('API', __FILE__, 'staff', $_SERVER['REQUEST_METHOD'], $apiUserToken, $requestArgs, null, null, null, null);
 
     // Create a list of missing required fields
     $missingColumnList = "";
