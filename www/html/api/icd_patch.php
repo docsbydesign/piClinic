@@ -143,6 +143,8 @@ function _icd_patch ($dbLink, $requestArgs, $apiUserToken) {
 				$requestArgs['icd10index']."' AND `language` = '".$requestArgs['language']."';";
 			$returnValue = getDbRecords($dbLink, $getQueryString);
             $logData['logAfterData'] = json_encode($returnValue['data']);
+            $logData['logStatusCode'] = $returnValue['httpResponse'];
+            $logData['logsStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
 			@mysqli_free_result($qResult);
 		}			
@@ -155,6 +157,8 @@ function _icd_patch ($dbLink, $requestArgs, $apiUserToken) {
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= 'Unable to update record. The ICD-10 entry key is missing.';
 	}
+    $logData['logStatusCode'] = $returnValue['httpResponse'];
+    $logData['logsStatusMessage'] = $returnValue['httpReason'];
     writeEntryToLog ($dbLink, $logData);
     profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;

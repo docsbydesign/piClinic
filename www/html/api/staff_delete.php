@@ -49,7 +49,16 @@ function _staff_delete ($dbLink, $apiUserToken, $requestArgs) {
 	$dbInfo ['requestArgs'] = $requestArgs;
 
     // token parameter was verified before this function was called.
-    $logData = createLogEntry ('API', __FILE__, 'session', $_SERVER['REQUEST_METHOD'],  $apiUserToken, null, null, null, null, null);
+    $logData = createLogEntry (
+        'API',
+        __FILE__,
+        'staff',
+        $_SERVER['REQUEST_METHOD'],
+        $apiUserToken, $requestArgs,
+        null,
+        null,
+        null,
+        null);
 
     // check for other required columns
     $staffDbFields = getStaffFieldInfo();
@@ -174,6 +183,8 @@ function _staff_delete ($dbLink, $apiUserToken, $requestArgs) {
 				$requestArgs[$updateKey]."';";
 			$returnValue = getDbRecords($dbLink, $getQueryString);
 			$logData['logAfterData'] = json_encode($returnValue['data']);
+			$logData['logStatusCode'] = $returnValue['httpResponse'];
+			$logData['logsStatusMessage'] = $returnValue['httpReason'];
 			writeEntryToLog ($dbLink, $logData);
 			@mysqli_free_result($qResult);
 		}			

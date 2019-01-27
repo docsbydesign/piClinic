@@ -213,30 +213,30 @@ ALTER TABLE `textmsg`
 DROP TABLE IF EXISTS `patient`;
 CREATE TABLE IF NOT EXISTS `patient` (
   `patientID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique patient record ID',
-  `Active` tinyint(1) NOT NULL DEFAULT '1' COMMENT '(Autofill) True indicates the record is active and valid, FALSE indicate the patient has been "deleted"',
-  `ClinicPatientID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Patient ID issued by clinic.',
-  `PatientNationalID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '(optional) National ID issued by government.',
-  `FamilyID` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '(optional) Family ID (usually ID of family folder.',
-  `NameLast` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Patient''s last name(s)',
-  `NameLast2` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) The patient''s second last name',
-  `NameFirst` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Patient''s first name',
-  `NameMI` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) Patient''s middle initial, if known',
-  `Sex` enum('M','F','X') CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s sex',
-  `BirthDate` datetime DEFAULT NULL COMMENT '(Not Required) Patient''s date of birth',
-  `NextVaccinationDate` datetime DEFAULT NULL COMMENT '(Not Required) Date patients next vaccination is due',
-  `HomeAddress1` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s home address',
-  `HomeAddress2` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) additional home address info (e.g. apt, room, etc.)',
-  `HomeNeighborhood` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s home neighborhood.',
-  `HomeCity` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s home city',
-  `HomeCounty` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s home county',
-  `HomeState` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s home state',
-  `ContactPhone` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s primary phone number',
-  `ContactAltPhone` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Requried) Patient''s alternate phone number',
-  `BloodType` enum('A+','A-','B+','B-','AB+','AB-','O+','O-','NA') CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s blood type',
-  `OrganDonor` tinyint(1) DEFAULT NULL COMMENT '(Not Required) Patient''s organ donor preference',
-  `PreferredLanguage` varchar(255) DEFAULT NULL COMMENT '(Not Required) Patient''s preferred language for communications',
-  `KnownAllergies` varchar(4095) DEFAULT NULL COMMENT '(Not Required) Known Allergies stored as |-separated list',
-  `CurrentMedications` varchar(4095) DEFAULT NULL COMMENT '(Not Required) Current medications stored as |-separated list',
+  `active` tinyint(1) NOT NULL DEFAULT '1' COMMENT '(Autofill) True indicates the record is active and valid, FALSE indicate the patient has been "deleted"',
+  `clinicPatientID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Patient ID issued by clinic.',
+  `patientNationalID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '(optional) National ID issued by government.',
+  `familyID` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '(optional) Family ID (usually ID of family folder.',
+  `lastName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Patient''s last name(s)',
+  `lastName2` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) The patient''s second last name',
+  `firstName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Patient''s first name',
+  `middleInitial` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) Patient''s middle initial, if known',
+  `sex` enum('M','F','X') CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s sex',
+  `birthDate` datetime DEFAULT NULL COMMENT '(Not Required) Patient''s date of birth',
+  `nextVaccinationDate` datetime DEFAULT NULL COMMENT '(Not Required) Date patients next vaccination is due',
+  `homeAddress1` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s home address',
+  `homeAddress2` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) additional home address info (e.g. apt, room, etc.)',
+  `homeNeighborhood` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s home neighborhood.',
+  `homeCity` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s home city',
+  `homeCounty` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s home county',
+  `homeState` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s home state',
+  `contactPhone` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s primary phone number',
+  `contactAltPhone` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Requried) Patient''s alternate phone number',
+  `bloodType` enum('A+','A-','B+','B-','AB+','AB-','O+','O-','NA') CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s blood type',
+  `organDonor` tinyint(1) DEFAULT NULL COMMENT '(Not Required) Patient''s organ donor preference',
+  `preferredLanguage` varchar(255) DEFAULT NULL COMMENT '(Not Required) Patient''s preferred language for communications',
+  `knownAllergies` varchar(4095) DEFAULT NULL COMMENT '(Not Required) Known Allergies stored as |-separated list',
+  `currentMedications` varchar(4095) DEFAULT NULL COMMENT '(Not Required) Current medications stored as |-separated list',
   `modifiedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '(Auto Fill) The last time this record was modified',
   `createdDate` datetime NOT NULL COMMENT '(Auto Fill) the date the patient record was created'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='information about the individual patients';
@@ -245,11 +245,11 @@ CREATE TABLE IF NOT EXISTS `patient` (
 -- Indexes for table `patient`
 --
 ALTER TABLE `patient`
- ADD UNIQUE KEY `ClinicPatientID` (`ClinicPatientID`);
+ ADD UNIQUE KEY `clinicPatientID` (`clinicPatientID`);
 ALTER TABLE `patient`
- ADD UNIQUE KEY `PatientNationalID` (`PatientNationalID`);
+ ADD UNIQUE KEY `patientNationalID` (`patientNationalID`);
 ALTER TABLE `patient`
- ADD INDEX `FamilyID` (`FamilyID`);
+ ADD INDEX `familyID` (`familyID`);
 
  
  -- ------------------------------------------------------
@@ -405,29 +405,29 @@ CREATE VIEW `thisClinicGet` AS
 DROP VIEW IF EXISTS `patientGet`;
 CREATE VIEW `patientGet` AS 
 	select 
-		`patient`.`ClinicPatientID` AS `ClinicPatientID`,
-		`patient`.`PatientNationalID` AS `PatientNationalID`,
-		`patient`.`FamilyID` AS `FamilyID`,
-		`patient`.`NameLast` AS `NameLast`,
-		`patient`.`NameLast2` AS `NameLast2`,
-		`patient`.`NameFirst` AS `NameFirst`,
-		`patient`.`NameMI` AS `NameMI`,
-		`patient`.`Sex` AS `Sex`,
-		`patient`.`BirthDate` AS `BirthDate`,
-		`patient`.`HomeAddress1` AS `HomeAddress1`,
-		`patient`.`HomeAddress2` AS `HomeAddress2`,
-		`patient`.`HomeNeighborhood` AS `HomeNeighborhood`,
-		`patient`.`HomeCity` AS `HomeCity`,
-		`patient`.`HomeCounty` AS `HomeCounty`,
-		`patient`.`HomeState` AS `HomeState`,
-		`patient`.`ContactPhone` AS `ContactPhone`,
-		`patient`.`ContactAltPhone` AS `ContactAltPhone`,
-		`patient`.`BloodType` AS `BloodType`,
-		`patient`.`OrganDonor` AS `OrganDonor`,
-		`patient`.`PreferredLanguage` AS `PreferredLanguage`,
-		`patient`.`KnownAllergies` AS `KnownAllergies`,
-		`patient`.`CurrentMedications` AS `CurrentMedications`
-	from `patient` WHERE `patient`.`Active` = 1;
+		`patient`.`clinicPatientID` AS `clinicPatientID`,
+		`patient`.`patientNationalID` AS `patientNationalID`,
+		`patient`.`familyID` AS `familyID`,
+		`patient`.`lastName` AS `lastName`,
+		`patient`.`lastName2` AS `lastName2`,
+		`patient`.`firstName` AS `firstName`,
+		`patient`.`middleInitial` AS `middleInitial`,
+		`patient`.`sex` AS `sex`,
+		`patient`.`birthDate` AS `birthDate`,
+		`patient`.`homeAddress1` AS `homeAddress1`,
+		`patient`.`homeAddress2` AS `homeAddress2`,
+		`patient`.`homeNeighborhood` AS `homeNeighborhood`,
+		`patient`.`homeCity` AS `homeCity`,
+		`patient`.`homeCounty` AS `homeCounty`,
+		`patient`.`homeState` AS `homeState`,
+		`patient`.`contactPhone` AS `contactPhone`,
+		`patient`.`contactAltPhone` AS `contactAltPhone`,
+		`patient`.`bloodType` AS `bloodType`,
+		`patient`.`organDonor` AS `organDonor`,
+		`patient`.`preferredLanguage` AS `preferredLanguage`,
+		`patient`.`knownAllergies` AS `knownAllergies`,
+		`patient`.`currentMedications` AS `currentMedications`
+	from `patient` WHERE `patient`.`active` = 1;
 	
 --
 -- Create view `patientList`
@@ -435,17 +435,17 @@ CREATE VIEW `patientGet` AS
 DROP VIEW IF EXISTS `patientList`;
 CREATE VIEW `patientList` AS 
 	select 
-		`patient`.`ClinicPatientID` AS `ClinicPatientID`,
-		`patient`.`FamilyID` AS `FamilyID`,
-		`patient`.`NameLast` AS `NameLast`,
-		`patient`.`NameLast2` AS `NameLast2`,
-		`patient`.`NameFirst` AS `NameFirst`,
-		`patient`.`NameMI` AS `NameMI`,
-		`patient`.`Sex` AS `Sex`,
-		`patient`.`BirthDate` AS `BirthDate`,
-		`patient`.`HomeCity` AS `HomeCity`,
-		`patient`.`HomeState` AS `HomeState`
-	from `patient` WHERE `patient`.`Active` = 1;
+		`patient`.`clinicPatientID` AS `clinicPatientID`,
+		`patient`.`familyID` AS `familyID`,
+		`patient`.`lastName` AS `lastName`,
+		`patient`.`lastName2` AS `lastName2`,
+		`patient`.`firstName` AS `firstName`,
+		`patient`.`middleInitial` AS `middleInitial`,
+		`patient`.`sex` AS `sex`,
+		`patient`.`birthDate` AS `birthDate`,
+		`patient`.`homeCity` AS `homeCity`,
+		`patient`.`homeState` AS `homeState`
+		from `patient` WHERE `patient`.`active` = 1;
 	
 DROP VIEW IF EXISTS `imageGet`;
 CREATE VIEW `imageGet` AS 
