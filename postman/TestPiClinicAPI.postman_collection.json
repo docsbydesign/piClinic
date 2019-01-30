@@ -9530,6 +9530,565 @@
 					"_postman_isSubFolder": true
 				}
 			]
+		},
+		{
+			"name": "Visit API Test",
+			"item": [
+				{
+					"name": "Session Open",
+					"item": [
+						{
+							"name": "Get Test User token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ed713fa2-ae3d-46f3-aa9c-38838bd026ba",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"token\", jsonData.data.token);\r",
+											"\r",
+											"pm.test(\"Login was successful\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?username={{testUser}}&password={{testUserPW}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{testUser}}"
+										},
+										{
+											"key": "password",
+											"value": "{{testUserPW}}"
+										}
+									]
+								},
+								"description": "Logs in as Test User"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Session Access",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"pm.test(\"Access check was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get SystemAdmin token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3d02fe32-8ed9-4f1b-aa4b-9f9d0f97c059",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.variables.set(\"SAtoken\", jsonData.data.token);\r",
+											"\r",
+											"pm.test(\"System Admin login was successful\", function() {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php?username={{systemAdminUser}}&password={{systemAdminPW}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{systemAdminUser}}"
+										},
+										{
+											"key": "password",
+											"value": "{{systemAdminPW}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Success Tests",
+					"item": [
+						{
+							"name": "Get a random patient",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+										"exec": [
+											"var userAcct = pm.environment.get('testUser');\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Reading existing patient info was successful\", function () {\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+											"        // this should be successful\r",
+											"        pm.response.to.have.status(200);\r",
+											"        pm.expect(jsonData.count > 1).to.eql(true);\r",
+											"        var ptIdx = Math.floor((Math.random() * jsonData.count));\r",
+											"        pm.expect(ptIdx >= 0).to.eql(true);\r",
+											"        pm.expect(ptIdx < jsonData.count).to.eql(true);\r",
+											"        var thisPatient = jsonData.data[ptIdx];\r",
+											"        pm.variables.set('patientID',thisPatient.clinicPatientID);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(401);\r",
+											"        pm.expect(jsonData.count).to.eql(0);\r",
+											"    }\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/patient.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"patient.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get random doctor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "284f1c2c-099c-4131-b059-7ce9ec4438c5",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Get random doctor successful\", function() {\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.response.to.have.status(200);\r",
+											"        pm.expect(jsonData.count > 1).to.eql(true);\r",
+											"        var drIdx = Math.floor((Math.random() * jsonData.count));\r",
+											"        pm.expect(drIdx >= 0).to.eql(true);\r",
+											"        pm.expect(drIdx < jsonData.count).to.eql(true);\r",
+											"        var thisDoctor = jsonData.data[drIdx];\r",
+											"        pm.variables.set('drUsername',thisDoctor.username);\r",
+											"        pm.variables.set('drFullName',thisDoctor.firstName + thisDoctor.lastName);\r",
+											"    } else if  (userAcct == 'TestCS') {\r",
+											"        // staff cam read, but can't create so the user is not found\r",
+											"        pm.response.to.have.status(404);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(401);\r",
+											"    }\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/staff.php?position=Doctor%",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"staff.php"
+									],
+									"query": [
+										{
+											"key": "position",
+											"value": "Doctor%"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new visit",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d479e5e2-a89b-4287-a28e-875b838b4f9d",
+										"exec": [
+											"var userAcct = pm.environment.get('testUser');\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Create new visit was successful\", function () {\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.response.to.have.status(201);\r",
+											"        pm.expect(jsonData.count).to.eql(1);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(401);\r",
+											"        pm.expect(jsonData.count).to.eql(0);\r",
+											"    }\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "visitType",
+											"value": "AUTOTEST",
+											"type": "text"
+										},
+										{
+											"key": "clinicPatientID",
+											"value": "{{patientID}}",
+											"type": "text"
+										},
+										{
+											"key": "staffUsername",
+											"value": "{{drUsername}}",
+											"type": "text"
+										},
+										{
+											"key": "staffName",
+											"value": "{{drFullName}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/api/visit.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"visit.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a random patient Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+										"exec": [
+											"var userAcct = pm.environment.get('testUser');\r",
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Reading existing patient info was successful\", function () {\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+											"        // this should be successful\r",
+											"        pm.response.to.have.status(200);\r",
+											"        pm.expect(jsonData.count > 1).to.eql(true);\r",
+											"        var ptIdx = Math.floor((Math.random() * jsonData.count));\r",
+											"        pm.expect(ptIdx >= 0).to.eql(true);\r",
+											"        pm.expect(ptIdx < jsonData.count).to.eql(true);\r",
+											"        var thisPatient = jsonData.data[ptIdx];\r",
+											"        pm.variables.set('patientID',thisPatient.clinicPatientID);\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(401);\r",
+											"        pm.expect(jsonData.count).to.eql(0);\r",
+											"    }\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/patient.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"patient.php"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Session Close",
+					"item": [
+						{
+							"name": "Close current session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+										"exec": [
+											"pm.test(\"Logout was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Session Access after logout",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "9746528d-2e17-4c7d-b744-3e720334bcb6",
+										"exec": [
+											"postman.setEnvironmentVariable(\"token\", null);",
+											"",
+											"pm.test(\"Access failed\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Close System Admin session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+										"exec": [
+											"pm.test(\"SystemAdmin Logout was successful\", function() {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{SAtoken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/session.php",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"session.php"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
 		}
 	]
 }
