@@ -104,9 +104,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
 		break;
 
-/*	case 'GET':
+	case 'GET':
         if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_STAFF)) {
-		$retVal = _visit_get($dbLink, $apiUserToken, $requestData);
+			$retVal = _visit_get($dbLink, $apiUserToken, $requestData);
         } else {
             // caller does not have a valid security token
             $retVal['httpResponse'] = 401;
@@ -117,7 +117,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
 		break;
 
-	case 'PATCH':
+/*	case 'PATCH':
         if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_CLINIC)) {
 			$retVal = _visit_patch($dbLink, $apiUserToken, $requestData);
         } else {

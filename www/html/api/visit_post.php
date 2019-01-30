@@ -138,9 +138,10 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 	$visitQuery = 'SELECT * FROM `'. DB_VIEW_VISIT_CHECK .
 		'` WHERE `clinicPatientID` = \''. $requestArgs['clinicPatientID'].'\' '.
 		'AND DATE_FORMAT(`dateTimeIn`, \'%Y-%m-%d\') = \''.$visitDate.'\';';
+	$dbInfo['visitQuery'] = $visitQuery;
 	$visitRecord = getDbRecords($dbLink, $visitQuery);
-	profileLogCheckpoint($profileData,'VISIT_CHECK_RETURNED');
 
+	profileLogCheckpoint($profileData,'VISIT_CHECK_RETURNED');
 	$dbInfo['visitPreviewQuery'] = $visitQuery;
 	if (($visitRecord['httpResponse'] == 200) && ($visitRecord['count'] > 0)) {
 		$ptVisit = [];
@@ -151,8 +152,8 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 			// the records are sorted with the most recent first
 			$ptVisit = $visitRecord['data'][0];
 		}
-		if (isset($ptVisit['PatientVisitIndex'])) {
-			$ptVisitIndex = $ptVisit['PatientVisitIndex'] + 1;			
+		if (isset($ptVisit['patientVisitIndex'])) {
+			$ptVisitIndex = $ptVisit['patientVisitIndex'] + 1;
 		} // else, leave it at 1
 		if ($ptVisitIndex > 99) {
 			// this is a server error. The same person should not

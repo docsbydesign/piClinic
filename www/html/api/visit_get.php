@@ -64,22 +64,21 @@ function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 	$returnValue = array();
 	
 	$dbInfo = array();
-	$dbInfo ['formArgs'] = $formArgs;
+	$dbInfo ['requestArgs'] = $requestArgs;
 
 	// check for other required columns
 	$requiredPatientColumns = [
 		"visitID"
-		,"ClinicPatientID"
-		,"PatientVisitID"
-		,"VisitStatus"
+		,"clinicPatientID"
+		,"patientVisitID"
+		,"visitStatus"
 		];
 
-	// TODO: Refactor this out 
 	//  NOTE: this is an "OR" test--only one is required
 	$missingColumnList = "";
 	// make sure one of the ID columns is present
 	foreach ($requiredPatientColumns as $column) {
-		if (empty($formArgs[$column])) {
+		if (empty($requestArgs[$column])) {
 			if (!empty($missingColumnList)) {
 				$missingColumnList .= ", ";
 			}
@@ -98,7 +97,7 @@ function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 		}
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		$returnValue['httpResponse'] = 400;
-		$returnValue['httpReason']	= "Unable to find a patient visit. At least one required query parameter is missing.";
+		$returnValue['httpReason']	= ' Unable to find a patient visit. One of these required query parameters is missing: ' . join( ', ', $requiredPatientColumns );
 		return $returnValue;
 	}
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
@@ -111,7 +110,7 @@ function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 	$returnValue['count'] = 0;
 	
 	// create query string for get operation
-	$getQueryString = makeVisitQueryStringFromRequestParameters ($formArgs);
+	$getQueryString = makeVisitQueryStringFromRequestParameters ($requestArgs);
 	// get the records that match if a valid query was returned
 	if (!empty($getQueryString)) {
 		$returnValue = getDbRecords($dbLink, $getQueryString);
@@ -119,7 +118,7 @@ function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 		// format response
 		$returnValue['data'] = "";
 		$returnValue['httpResponse'] = 400;
-		$returnValue['httpReason']	= "Unable to find a patient visit. A valid query could not be made from the query parameters. ";
+		$returnValue['httpReason']	= "Unable to find a matching patient visit. A valid query could not be made from the query parameters. ";
 	}
 	
 	if ($returnValue['count'] == 0) {
@@ -136,7 +135,7 @@ function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['error'] = $dbInfo;
 	}
 	// only log performance info on success.
-	profileLogClose($profileData, __FILE__, $formArgs);
+	profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;
 }
 ?>
