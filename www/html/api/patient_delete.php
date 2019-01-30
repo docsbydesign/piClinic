@@ -68,7 +68,7 @@ function _patient_delete ($dbLink, $apiUserToken, $requestArgs) {
 		// missing primary key field
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to delete patient record. The clinicPatientID is missing.";
@@ -87,7 +87,7 @@ function _patient_delete ($dbLink, $apiUserToken, $requestArgs) {
 		// can't find the record to delete. It could already be deleted or it could not exist.
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 404;
 		$returnValue['httpReason']	= "Patient record to delete not found.";
@@ -113,7 +113,7 @@ function _patient_delete ($dbLink, $apiUserToken, $requestArgs) {
 			$dbInfo['deleteQueryString'] = $deleteQueryString;
 			$dbInfo['columnsToUpdate'] = $columnsToUpdate;
 			$dbInfo['deleteArgs'] = $deleteArgs;
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 500;
 		$returnValue['httpReason']	= "Unable to delete the patient record. There was a problem with the request.";
@@ -130,7 +130,7 @@ function _patient_delete ($dbLink, $apiUserToken, $requestArgs) {
 		// format response
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 500;
 		$returnValue['httpReason']	= "Unable to update patient.";
@@ -143,7 +143,7 @@ function _patient_delete ($dbLink, $apiUserToken, $requestArgs) {
 			$dbInfo['columnsToUpdate'] = $columnsToUpdate;
 			$dbInfo['deleteArgs'] = $deleteArgs;
 			$dbInfo['sqlError'] = @mysqli_error($dbLink);
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
         $logData['logAfterData'] = '';
 		$returnValue['httpResponse'] = 200;

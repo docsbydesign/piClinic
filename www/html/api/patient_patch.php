@@ -72,7 +72,7 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
 		// missing primary key field
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to update patient record. The clinicPatientID is missing.";
@@ -94,7 +94,7 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
 		// can't find the record to delete. It could already be deleted or it could not exist.
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 404;
 		$returnValue['httpReason']	= "Patient record to update not found.";
@@ -120,7 +120,7 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
 			$dbInfo['updateQueryString'] = $updateQueryString;
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to update the patient record. No data fields were included in the request.";
@@ -143,7 +143,7 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
 			// format response
 			$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 			if (API_DEBUG_MODE) {
-				$returnValue['error'] = $dbInfo;
+				$returnValue['debug'] = $dbInfo;
 			}
 			$returnValue['httpResponse'] = 500;
 			$returnValue['httpReason']	= "Unable to update patient.";
@@ -169,7 +169,7 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
 		// missing primary key field
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to update record. The patient ID is missing.";
