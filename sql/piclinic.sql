@@ -261,42 +261,43 @@ DROP TABLE IF EXISTS `visit`;
 CREATE TABLE IF NOT EXISTS `visit` (
   `visitID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique record ID for visit records',
   `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '(optional) Set true to remove record from view and from reports.',
-  `StaffUsername` varchar(64)  COLLATE utf8_unicode_ci NOT NULL COMMENT '(required) user name of professional attending the patient.',
-  `StaffName` varchar(255) DEFAULT NULL COMMENT '(Auto Fill) staff name (first/last)',
-  `StaffPosition` enum('Nurse','NursesAid','NursingStudent','DoctorGeneral','DoctorSpecialist','MedicalStudent','ClinicStaff','Other','Unassigned') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Unassigned' COMMENT '(Auto Fill) Staff position type--loaded from staff.Position field of StaffUsername.',
-  `VisitType` varchar(255) NOT NULL COMMENT '(Required) Type of visit or attention recevied',
-  `VisitStatus` enum('Open','Closed','Deleted') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Open' COMMENT '(Not Required) Current status of the patient visit.',
-  `ComplaintPrimary` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT '(Not Required) summary of patient complaint or reason for visit',
-  `ComplaintAdditional` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT '(Not Required) summary of patient complaint or reason for visit',
-  `DateTimeIn` datetime DEFAULT NULL COMMENT '(Required) date/time record opened.',
-  `DateTimeOut` datetime DEFAULT NULL COMMENT '(Required) Date/time visit closed',
-  `Payment` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT 'Amount patient paid at time of visit',
+  `staffUsername` varchar(64)  COLLATE utf8_unicode_ci NOT NULL COMMENT '(required) user name of professional attending the patient.',
+  `staffName` varchar(255) DEFAULT NULL COMMENT '(Auto Fill) staff name (first/last)',
+  `staffPosition` enum('Nurse','NursesAid','NursingStudent','DoctorGeneral','DoctorSpecialist','MedicalStudent','ClinicStaff','Other','Unassigned') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Unassigned' COMMENT '(Auto Fill) Staff position type--loaded from staff.Position field of staffUsername.',
+  `visitType` varchar(255) NOT NULL COMMENT '(Required) Type of visit or attention recevied',
+  `visitStatus` enum('Open','Closed','Deleted') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Open' COMMENT '(Not Required) Current status of the patient visit.',
+  `primaryComplaint` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT '(Not Required) summary of patient complaint or reason for visit',
+  `secondaryComplaint` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT '(Not Required) summary of patient complaint or reason for visit',
+  `dateTimeIn` datetime DEFAULT NULL COMMENT '(Required) date/time record opened.',
+  `dateTimeOut` datetime DEFAULT NULL COMMENT '(Required) Date/time visit closed',
+  `payment` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT 'Amount patient paid at time of visit',
   `patientID` int(11) NOT NULL COMMENT '(Required) DB ID of patient being seen',
-  `ClinicPatientID` varchar(255) NOT NULL COMMENT '(Required) Clinic ID of patient being seen',
-  `FirstVisit` char(4) NOT NULL DEFAULT 'NO' COMMENT '(Required or autofill) Yes = this is the first visit record for the patient',
-  `PatientNationalID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '(optional) National ID issued by government.',
-  `PatientFamilyID` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '(optional) Family ID (usually ID of family folder.',
-  `PatientVisitID` varchar(22) NOT NULL COMMENT '(Required) Concatenation of internal patientID + YYYYMMDD + NN where YYYYMMDD is visit date and NN is sequence',
-  `PatientNameLast` varchar(255) NOT NULL COMMENT '(Required) Last name of patient being seen',
-  `PatientNameFirst` varchar(255) NOT NULL COMMENT '(Required) First name of patient being seen',
-  `PatientSex` enum('M','F','X') NOT NULL COMMENT '(Required) Sex of patient being seen',
+  `clinicPatientID` varchar(255) NOT NULL COMMENT '(Required) Clinic ID of patient being seen',
+  `firstVisit` char(4) NOT NULL DEFAULT 'NO' COMMENT '(Required or autofill) Yes = this is the first visit record for the patient',
+  `patientNationalID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '(optional) National ID issued by government.',
+  `patientFamilyID` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '(optional) Family ID (usually ID of family folder.',
+  `patientVisitID` varchar(22) NOT NULL COMMENT '(Required) Concatenation of internal patientID + YYYYMMDD + NN where YYYYMMDD is visit date and NN is sequence',
+  `patientLastName` varchar(255) NOT NULL COMMENT '(Required) Last name of patient being seen',
+  `patientFirstName` varchar(255) NOT NULL COMMENT '(Required) First name of patient being seen',
+  `patientSex` enum('M','F','X') NOT NULL COMMENT '(Required) Sex of patient being seen',
   `PatientBirthDate` datetime NOT NULL COMMENT '(Required) Patient''s birthdate',
-  `PatientHomeAddress1` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) patient''s home addres ',
-  `PatientHomeAddress2` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s address (2)',
-  `PatientHomeNeighborhood` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) patient''s neighborhood',
-  `PatientHomeCity` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Patient''s home city',
-  `PatientHomeCounty` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) patient''s county',
-  `PatientHomeState` varchar(255) NOT NULL COMMENT '(Required) Patient home state',
-  `PatientKnownAllergies` varchar(4095) DEFAULT NULL COMMENT '(Not Required) Known Allergies stored as |-separated list',
-  `PatientCurrentMedications` varchar(4095) DEFAULT NULL COMMENT '(Not Required) Current medications stored as |-separated list',
-  `Diagnosis1` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Condition/Activity/Diagnosis summary',
-  `Condition1` varchar(16) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Condition/Activity/Diagnosis code',
-  `Diagnosis2` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Condition/Activity/Diagnosis summary',
-  `Condition2` varchar(16) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Condition/Activity/Diagnosis code',
-  `Diagnosis3` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Condition/Activity/Diagnosis summary',
-  `Condition3` varchar(16) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Condition/Activity/Diagnosis code',
-  `ReferredTo` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Indicates if patient was referred to another clinic',
-  `ReferredFrom` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Indicates if patient was referred from another clinic',
+  `patientHomeAddress1` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) patient''s home addres ',
+  `patientHomeAddress2` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s address (2)',
+  `patientHomeNeighborhood` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) patient''s neighborhood',
+  `patientHomeCity` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Patient''s home city',
+  `patientHomeCounty` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) patient''s county',
+  `patientHomeState` varchar(255) NOT NULL COMMENT '(Required) Patient home state',
+  `patientKnownAllergies` varchar(4095) DEFAULT NULL COMMENT '(Not Required) Known Allergies stored as |-separated list',
+  `patientCurrentMedications` varchar(4095) DEFAULT NULL COMMENT '(Not Required) Current medications stored as |-separated list',
+  `patientNextVaccinationDate` datetime DEFAULT NULL COMMENT '(Not Required) Date patients next vaccination is due',
+  `diagnosis1` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Condition/Activity/Diagnosis summary',
+  `condition1` varchar(16) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Condition/Activity/Diagnosis code',
+  `diagnosis2` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Condition/Activity/Diagnosis summary',
+  `condition2` varchar(16) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Condition/Activity/Diagnosis code',
+  `diagnosis3` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Condition/Activity/Diagnosis summary',
+  `condition3` varchar(16) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) Condition/Activity/Diagnosis code',
+  `referredTo` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Indicates if patient was referred to another clinic',
+  `referredFrom` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Indicates if patient was referred from another clinic',
   `modifiedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '(Autofill) date/time of last record update',
   `createdDate` datetime NOT NULL COMMENT '(Auto fill) The date/time the record was created'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Details of a patient''s visit to the clinic';
@@ -305,7 +306,7 @@ CREATE TABLE IF NOT EXISTS `visit` (
 -- Indexes for table `visit`
 --
 ALTER TABLE `visit`
- ADD UNIQUE KEY `PatientVisitID` (`PatientVisitID`);
+ ADD UNIQUE KEY `patientVisitID` (`patientVisitID`);
 
 -- --------------------------------------------------------
 --
@@ -315,8 +316,8 @@ ALTER TABLE `visit`
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE IF NOT EXISTS `image` (
 `ImageID` int(11) NOT NULL AUTO_INCREMENT KEY COMMENT '(Autofill) unique record ID of image resource',
-  `ClinicPatientID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Patient ID issued by clinic.',
-  `PatientVisitID` varchar(22) DEFAULT NULL COMMENT '(Required when image is associated with a visit as well as a patient) Visit ID of patient visit to which this image belongs',
+  `clinicPatientID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Patient ID issued by clinic.',
+  `patientVisitID` varchar(22) DEFAULT NULL COMMENT '(Required when image is associated with a visit as well as a patient) Visit ID of patient visit to which this image belongs',
   `ImagePath` varchar(1024) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Path to image in local file system',
   `OriginalFileName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Autofill) original file name from source image',
   `ImageType` enum('ID','VisitForm','VisitPhoto','Other') COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Image use type. ID = patient face; VisitForm = a patient form; VisitPhoto = a photo taken as part of a visit.',
@@ -330,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `image` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table of images';
 
 ALTER TABLE `image`
- ADD KEY `ClinicPatientID` (`ClinicPatientID`), ADD KEY `PatientVisitID` (`PatientVisitID`);
+ ADD KEY `clinicPatientID` (`clinicPatientID`), ADD KEY `patientVisitID` (`patientVisitID`);
  
 -- ------------------------------------------------------
 
@@ -385,7 +386,6 @@ CREATE VIEW `icd10Get` AS
 		`lastUsedDate` AS `LastUsedDate`		
 	FROM `icd10` 
 	WHERE 1;
-	
 	
 -- --------------------------------------------------------
 --  VIEWS
@@ -451,8 +451,8 @@ DROP VIEW IF EXISTS `imageGet`;
 CREATE VIEW `imageGet` AS 
 	SELECT 
 		`image`.`ImageID` AS `ImageID`, 
-		`image`.`ClinicPatientID` AS `ClinicPatientID`,
-		`image`.`PatientVisitID` AS `PatientVisitID`,
+		`image`.`clinicPatientID` AS `clinicPatientID`,
+		`image`.`patientVisitID` AS `patientVisitID`,
 		`image`.`ImagePath` AS `ImagePath`, 
 		`image`.`OriginalFileName` AS `OriginalFileName`, 
 		`image`.`MimeType` AS `MimeType`, 		
@@ -466,53 +466,53 @@ CREATE VIEW `imageGet` AS
 DROP VIEW IF EXISTS `imagePatientList`;
 CREATE VIEW `imagePatientList` AS
 	SELECT 
-		`image`.`ClinicPatientID` AS `ClinicPatientID`,
-		`image`.`PatientVisitID` AS `PatientVisitID`,
-		STR_TO_DATE(SUBSTRING(`image`.`PatientVisitID`,1,10), '%Y-%m-%d') AS `PatientVisitDate`,
+		`image`.`clinicPatientID` AS `clinicPatientID`,
+		`image`.`patientVisitID` AS `patientVisitID`,
+		STR_TO_DATE(SUBSTRING(`image`.`patientVisitID`,1,10), '%Y-%m-%d') AS `PatientVisitDate`,
 		count(*) as `ImageCount` 
 	FROM `image` 
 	WHERE 
 		`image`.`ImageType` = 'VisitPhoto' 
 		OR `image`.`ImageType` = 'VisitForm' 
 	GROUP BY 
-		`image`.`ClinicPatientID`, 
+		`image`.`clinicPatientID`, 
 		`PatientVisitDate` 
 	ORDER BY 
-		`image`.`ClinicPatientID` ASC, 
+		`image`.`clinicPatientID` ASC, 
 		`PatientVisitDate` DESC;
 		
 DROP VIEW IF EXISTS `imagePatientFormList`;
 CREATE VIEW `imagePatientFormList` AS
 	SELECT 
-		`image`.`ClinicPatientID` AS `ClinicPatientID`,
-		`image`.`PatientVisitID` AS `PatientVisitID`,
-		STR_TO_DATE(SUBSTRING(`image`.`PatientVisitID`,1,10), '%Y-%m-%d') AS `PatientVisitDate`,
+		`image`.`clinicPatientID` AS `clinicPatientID`,
+		`image`.`patientVisitID` AS `patientVisitID`,
+		STR_TO_DATE(SUBSTRING(`image`.`patientVisitID`,1,10), '%Y-%m-%d') AS `PatientVisitDate`,
 		count(*) as `ImageCount` 
 	FROM `image` 
 	WHERE 
 		`image`.`ImageType` = 'VisitForm' 
 	GROUP BY 
-		`image`.`ClinicPatientID`, 
+		`image`.`clinicPatientID`, 
 		`PatientVisitDate` 
 	ORDER BY 
-		`image`.`ClinicPatientID` ASC, 
+		`image`.`clinicPatientID` ASC, 
 		`PatientVisitDate` DESC;
 		
 DROP VIEW IF EXISTS `imagePatientPhotoList`;
 CREATE VIEW `imagePatientPhotoList` AS
 	SELECT 
-		`image`.`ClinicPatientID` AS `ClinicPatientID`,
-		`image`.`PatientVisitID` AS `PatientVisitID`,
-		STR_TO_DATE(SUBSTRING(`image`.`PatientVisitID`,1,10), '%Y-%m-%d') AS `PatientVisitDate`,
+		`image`.`clinicPatientID` AS `clinicPatientID`,
+		`image`.`patientVisitID` AS `patientVisitID`,
+		STR_TO_DATE(SUBSTRING(`image`.`patientVisitID`,1,10), '%Y-%m-%d') AS `PatientVisitDate`,
 		count(*) as `ImageCount` 
 	FROM `image` 
 	WHERE 
 		`image`.`ImageType` = 'VisitPhoto' 
 	GROUP BY 
-		`image`.`ClinicPatientID`, 
+		`image`.`clinicPatientID`, 
 		`PatientVisitDate` 
 	ORDER BY 
-		`image`.`ClinicPatientID` ASC, 
+		`image`.`clinicPatientID` ASC, 
 		`PatientVisitDate` DESC;
 
 DROP VIEW IF EXISTS `staffGetByUser`;
@@ -579,233 +579,237 @@ CREATE VIEW `commentGet` AS
 DROP VIEW IF EXISTS visitEditGet;
 CREATE VIEW visitEditGet AS 
 	SELECT 
-		`PatientVisitID`,
+		`patientVisitID`,
 		`deleted`,
-		`StaffName`,
-		`StaffUsername`,
-		`StaffPosition`,
-		`VisitType`, 
-		`VisitStatus`, 
-		`ComplaintPrimary`, 
-		`ComplaintAdditional`, 
-		`DateTimeIn`, 
-		`DateTimeOut`, 
-		`Payment`,
-		`ClinicPatientID`,
-		`FirstVisit`,		
-		`PatientNationalID`,
-		`PatientFamilyID`,
-		`PatientNameLast`, 
-		`PatientNameFirst`, 
-		`PatientSex`, 
+		`staffName`,
+		`staffUsername`,
+		`staffPosition`,
+		`visitType`, 
+		`visitStatus`, 
+		`primaryComplaint`, 
+		`secondaryComplaint`, 
+		`dateTimeIn`, 
+		`dateTimeOut`, 
+		`payment`,
+		`clinicPatientID`,
+		`firstVisit`,		
+		`patientNationalID`,
+		`patientFamilyID`,
+		`patientLastName`, 
+		`patientFirstName`, 
+		`patientSex`, 
 		`PatientBirthDate`, 
-		`PatientHomeAddress1`, 
-		`PatientHomeAddress2`, 
-		`PatientHomeNeighborhood`, 
-		`PatientHomeCity`, 
-		`PatientHomeCounty`, 
-		`PatientHomeState`,
-		`PatientKnownAllergies`,
-		`PatientCurrentMedications`,
-		`Diagnosis1`,
-		`Condition1`,
-		`Diagnosis2`,
-		`Condition2`,
-		`Diagnosis3`,
-		`Condition3`,
-		`ReferredTo`,
-		`ReferredFrom`
+		`patientHomeAddress1`, 
+		`patientHomeAddress2`, 
+		`patientHomeNeighborhood`, 
+		`patientHomeCity`, 
+		`patientHomeCounty`, 
+		`patientHomeState`,
+		`patientKnownAllergies`,
+		`patientCurrentMedications`,
+		`patientNextVaccinationDate`,
+		`diagnosis1`,
+		`condition1`,
+		`diagnosis2`,
+		`condition2`,
+		`diagnosis3`,
+		`condition3`,
+		`referredTo`,
+		`referredFrom`
 		FROM `visit` 
 		WHERE 1;
 		
 DROP VIEW IF EXISTS visitGet;
 CREATE VIEW visitGet AS 
 	SELECT 
-		`PatientVisitID`, 
-		`StaffName`, 
-		`StaffUsername`,
-		`StaffPosition`,
-		`VisitType`, 
-		`VisitStatus`, 
-		`ComplaintPrimary`, 
-		`ComplaintAdditional`, 
-		`DateTimeIn`, 
-		`DateTimeOut`, 
-		`Payment`,
-		`ClinicPatientID`,
-		`FirstVisit`,		
-		`PatientNationalID`,
-		`PatientFamilyID`,
-		`PatientNameLast`, 
-		`PatientNameFirst`, 
-		`PatientSex`, 
+		`patientVisitID`, 
+		`staffName`, 
+		`staffUsername`,
+		`staffPosition`,
+		`visitType`, 
+		`visitStatus`, 
+		`primaryComplaint`, 
+		`secondaryComplaint`, 
+		`dateTimeIn`, 
+		`dateTimeOut`, 
+		`payment`,
+		`clinicPatientID`,
+		`firstVisit`,		
+		`patientNationalID`,
+		`patientFamilyID`,
+		`patientLastName`, 
+		`patientFirstName`, 
+		`patientSex`, 
 		`PatientBirthDate`, 
-		`PatientHomeAddress1`, 
-		`PatientHomeAddress2`, 
-		`PatientHomeNeighborhood`, 
-		`PatientHomeCity`, 
-		`PatientHomeCounty`, 
-		`PatientHomeState`,
-		`PatientKnownAllergies`,
-		`PatientCurrentMedications`,
-		`Diagnosis1`,
-		`Condition1`,
-		`Diagnosis2`,
-		`Condition2`,
-		`Diagnosis3`,
-		`Condition3`,
-		`ReferredTo`,
-		`ReferredFrom`
+		`patientHomeAddress1`, 
+		`patientHomeAddress2`, 
+		`patientHomeNeighborhood`, 
+		`patientHomeCity`, 
+		`patientHomeCounty`, 
+		`patientHomeState`,
+		`patientKnownAllergies`,
+		`patientCurrentMedications`,
+		`patientNextVaccinationDate`,
+		`diagnosis1`,
+		`condition1`,
+		`diagnosis2`,
+		`condition2`,
+		`diagnosis3`,
+		`condition3`,
+		`referredTo`,
+		`referredFrom`
 		FROM `visit` 
 		WHERE `visit`.`deleted` = FALSE;
 
 DROP VIEW IF EXISTS visitStart;
 CREATE VIEW visitStart AS 
 	SELECT 
-		`PatientVisitID`, 
-		`StaffName`,
-		`StaffUsername`,
-		`StaffPosition`,
-		`VisitType`, 
-		`VisitStatus`, 
-		`FirstVisit`,		
-		`ComplaintPrimary`, 
-		`ComplaintAdditional`, 
-		`DateTimeIn`, 
-		`DateTimeOut`, 
-		`Payment`,
-		`ClinicPatientID`,
-		`PatientNationalID`,
-		`ReferredTo`,
-		`ReferredFrom`		
+		`patientVisitID`, 
+		`staffName`,
+		`staffUsername`,
+		`staffPosition`,
+		`visitType`, 
+		`visitStatus`, 
+		`firstVisit`,		
+		`primaryComplaint`, 
+		`secondaryComplaint`, 
+		`dateTimeIn`, 
+		`dateTimeOut`, 
+		`payment`,
+		`clinicPatientID`,
+		`patientNationalID`,
+		`referredTo`,
+		`referredFrom`		
 		FROM `visit` 
 		WHERE `visit`.`deleted` = FALSE;		
 		
 DROP VIEW IF EXISTS visitOpen;
 CREATE VIEW visitOpen AS 
 	SELECT 
-		`PatientVisitID`, 
-		`StaffName`,
-		`StaffUsername`,
-		`StaffPosition`,
-		`VisitType`, 
-		`VisitStatus`, 
-		`ComplaintPrimary`, 
-		`ComplaintAdditional`, 
-		`DateTimeIn`, 
-		`DateTimeOut`, 
-		`Payment`,
-		`ClinicPatientID`, 
-		`FirstVisit`,		
-		`PatientNationalID`,
-		`PatientFamilyID`,
-		`PatientNameLast`, 
-		`PatientNameFirst`, 
-		`PatientSex`, 
+		`patientVisitID`, 
+		`staffName`,
+		`staffUsername`,
+		`staffPosition`,
+		`visitType`, 
+		`visitStatus`, 
+		`primaryComplaint`, 
+		`secondaryComplaint`, 
+		`dateTimeIn`, 
+		`dateTimeOut`, 
+		`payment`,
+		`clinicPatientID`, 
+		`firstVisit`,		
+		`patientNationalID`,
+		`patientFamilyID`,
+		`patientLastName`, 
+		`patientFirstName`, 
+		`patientSex`, 
 		`PatientBirthDate`, 
-		`PatientHomeAddress1`, 
-		`PatientHomeAddress2`, 
-		`PatientHomeNeighborhood`, 
-		`PatientHomeCity`, 
-		`PatientHomeCounty`, 
-		`PatientHomeState`, 
-		`PatientKnownAllergies`,
-		`PatientCurrentMedications`,
-		`Diagnosis1`,
-		`Condition1`,
-		`Diagnosis2`,
-		`Condition2`,
-		`Diagnosis3`,
-		`Condition3`,
-		`ReferredTo`,
-		`ReferredFrom`
+		`patientHomeAddress1`, 
+		`patientHomeAddress2`, 
+		`patientHomeNeighborhood`, 
+		`patientHomeCity`, 
+		`patientHomeCounty`, 
+		`patientHomeState`, 
+		`patientKnownAllergies`,
+		`patientCurrentMedications`,
+		`patientNextVaccinationDate`,
+		`diagnosis1`,
+		`condition1`,
+		`diagnosis2`,
+		`condition2`,
+		`diagnosis3`,
+		`condition3`,
+		`referredTo`,
+		`referredFrom`
 		FROM `visit` 
 		WHERE `deleted` = FALSE
-			AND `VisitStatus` = 'Open'; 
+			AND `visitStatus` = 'Open'; 
 		
 DROP VIEW IF EXISTS visitOpenSummary;
 CREATE VIEW visitOpenSummary AS
 	SELECT 
-		`PatientNameLast`, 
-		`PatientNameFirst`, 
-		`DateTimeIn`,
+		`patientLastName`, 
+		`patientFirstName`, 
+		`dateTimeIn`,
 		`patientID`,
-		`PatientVisitID`, 
-		`ClinicPatientID`,
-		`FirstVisit`,		
-		`PatientNationalID`
+		`patientVisitID`, 
+		`clinicPatientID`,
+		`firstVisit`,		
+		`patientNationalID`
 	FROM `visit` 
 	WHERE `deleted` = FALSE
-		AND `VisitStatus`='Open';
+		AND `visitStatus`='Open';
 
 DROP VIEW IF EXISTS visitCheck;	
 CREATE VIEW visitCheck AS
 	SELECT 
-		`ClinicPatientID`, 
-		`PatientNationalID`,
-		`PatientFamilyID`,
-		`PatientVisitID`,
-		CONVERT(SUBSTRING(`PatientVisitID`, 21, 2), UNSIGNED INTEGER) AS `PatientVisitIndex`,
-		`VisitType`, 
-		`VisitStatus`, 
-		`DateTimeIn`, 
-		`DateTimeOut`, 
-		`Payment`,
-		`PatientNameLast`, 
-		`PatientNameFirst`,
-		`FirstVisit`
+		`clinicPatientID`, 
+		`patientNationalID`,
+		`patientFamilyID`,
+		`patientVisitID`,
+		CONVERT(SUBSTRING(`patientVisitID`, 21, 2), UNSIGNED INTEGER) AS `patientVisitIndex`,
+		`visitType`, 
+		`visitStatus`, 
+		`dateTimeIn`, 
+		`dateTimeOut`, 
+		`payment`,
+		`patientLastName`, 
+		`patientFirstName`,
+		`firstVisit`
 		FROM `visit` 
 		WHERE `visit`.`deleted` = FALSE
-		ORDER BY `ClinicPatientID` ASC, `PatientVisitID` DESC
+		ORDER BY `clinicPatientID` ASC, `patientVisitID` DESC
 		;
 
 DROP VIEW IF EXISTS visitToday;
 CREATE VIEW visitToday AS
 	SELECT * 
 		FROM visitCheck 
-		WHERE DATE_FORMAT(`DateTimeIn`, '%Y%m%d') = DATE_FORMAT(NOW(), '%Y%m%d');
+		WHERE DATE_FORMAT(`dateTimeIn`, '%Y%m%d') = DATE_FORMAT(NOW(), '%Y%m%d');
 
 DROP VIEW IF EXISTS `visitPatientEditGet`;
 CREATE VIEW `visitPatientEditGet` AS 
 	SELECT 
 		`visit`.`visitID`, 
 		`visit`.`deleted`,
-		`visit`.`StaffUsername`, 
-		`visit`.`StaffName`,
-		`visit`.`StaffPosition`,
-		`visit`.`VisitType`, 
-		`visit`.`VisitStatus`, 
-		`visit`.`ComplaintPrimary`, 
-		`visit`.`ComplaintAdditional`, 
-		`visit`.`DateTimeIn`, 
-		`visit`.`DateTimeOut`, 
-		`visit`.`Payment`,
+		`visit`.`staffUsername`, 
+		`visit`.`staffName`,
+		`visit`.`staffPosition`,
+		`visit`.`visitType`, 
+		`visit`.`visitStatus`, 
+		`visit`.`primaryComplaint`, 
+		`visit`.`secondaryComplaint`, 
+		`visit`.`dateTimeIn`, 
+		`visit`.`dateTimeOut`, 
+		`visit`.`payment`,
 		`visit`.`patientID`, 
-		`visit`.`ClinicPatientID`, 
-		`visit`.`FirstVisit`,		
-		`visit`.`PatientNationalID`,
-		`visit`.`PatientFamilyID`,
-		`visit`.`PatientVisitID`, 
-		`visit`.`PatientNameLast` AS `NameLast`, 
-		`visit`.`PatientNameFirst` AS `NameFirst`, 
-		`visit`.`PatientSex` AS `Sex`, 
-		`visit`.`PatientBirthDate` AS `BirthDate`, 
-		`visit`.`PatientHomeAddress1`, 
-		`visit`.`PatientHomeAddress2`, 
-		`visit`.`PatientHomeNeighborhood`, 
-		`visit`.`PatientHomeCity`, 
-		`visit`.`PatientHomeCounty`, 
-		`visit`.`PatientHomeState`, 
-		`visit`.`PatientKnownAllergies` AS `KnownAllergies`,
-		`visit`.`PatientCurrentMedications` AS `CurrentMedications`,
-		`visit`.`Diagnosis1`, 
-		`visit`.`Condition1`, 
-		`visit`.`Diagnosis2`, 
-		`visit`.`Condition2`, 
-		`visit`.`Diagnosis3`, 
-		`visit`.`Condition3`, 
-		`visit`.`ReferredTo`, 
-		`visit`.`ReferredFrom`,
+		`visit`.`clinicPatientID`, 
+		`visit`.`firstVisit`,		
+		`visit`.`patientNationalID`,
+		`visit`.`patientFamilyID`,
+		`visit`.`patientVisitID`, 
+		`visit`.`patientLastName` AS `lastName`, 
+		`visit`.`patientFirstName` AS `firstName`, 
+		`visit`.`patientSex` AS `Sex`, 
+		`visit`.`PatientBirthDate` AS `birthDate`, 
+		`visit`.`patientHomeAddress1`, 
+		`visit`.`patientHomeAddress2`, 
+		`visit`.`patientHomeNeighborhood`, 
+		`visit`.`patientHomeCity`, 
+		`visit`.`patientHomeCounty`, 
+		`visit`.`patientHomeState`, 
+		`visit`.`patientKnownAllergies` AS `knownAllergies`,
+		`visit`.`patientCurrentMedications` AS `currentMedications`,
+		`visit`.`patientNextVaccinationDate` AS `nextVaccinationDate`,
+		`visit`.`diagnosis1`, 
+		`visit`.`condition1`, 
+		`visit`.`diagnosis2`, 
+		`visit`.`condition2`, 
+		`visit`.`diagnosis3`, 
+		`visit`.`condition3`, 
+		`visit`.`referredTo`, 
+		`visit`.`referredFrom`,
 		`patient`.`Active`, 
 		`patient`.`ContactPhone`, 
 		`patient`.`ContactAltPhone`, 
@@ -813,7 +817,7 @@ CREATE VIEW `visitPatientEditGet` AS
 		`patient`.`OrganDonor`, 
 		`patient`.`PreferredLanguage`
 		FROM `visit`
-		JOIN `patient`  ON `patient`.`ClinicPatientID` = `visit`.`ClinicPatientID`
+		JOIN `patient`  ON `patient`.`clinicPatientID` = `visit`.`clinicPatientID`
 		WHERE 1
 		;
 
@@ -821,42 +825,43 @@ DROP VIEW IF EXISTS `visitPatientGet`;
 CREATE VIEW `visitPatientGet` AS 
 	SELECT 
 		`visit`.`visitID`,
-		`visit`.`StaffUsername`, 
-		`visit`.`StaffName`, 
-		`visit`.`StaffPosition`,
-		`visit`.`VisitType`, 
-		`visit`.`VisitStatus`, 
-		`visit`.`ComplaintPrimary`, 
-		`visit`.`ComplaintAdditional`, 
-		`visit`.`DateTimeIn`, 
-		`visit`.`DateTimeOut`, 
-		`visit`.`Payment`,
+		`visit`.`staffUsername`, 
+		`visit`.`staffName`, 
+		`visit`.`staffPosition`,
+		`visit`.`visitType`, 
+		`visit`.`visitStatus`, 
+		`visit`.`primaryComplaint`, 
+		`visit`.`secondaryComplaint`, 
+		`visit`.`dateTimeIn`, 
+		`visit`.`dateTimeOut`, 
+		`visit`.`payment`,
 		`visit`.`patientID`, 
-		`visit`.`ClinicPatientID`, 
-		`visit`.`FirstVisit`,		
-		`visit`.`PatientNationalID`,
-		`visit`.`PatientFamilyID`,
-		`visit`.`PatientVisitID`, 
-		`visit`.`PatientNameLast` AS `NameLast`, 
-		`visit`.`PatientNameFirst` AS `NameFirst`, 
-		`visit`.`PatientSex` AS `Sex`, 
-		`visit`.`PatientBirthDate` AS `BirthDate`, 
-		`visit`.`PatientHomeAddress1`, 
-		`visit`.`PatientHomeAddress2`, 
-		`visit`.`PatientHomeNeighborhood`, 
-		`visit`.`PatientHomeCity`, 
-		`visit`.`PatientHomeCounty`, 
-		`visit`.`PatientHomeState`, 
-		`visit`.`PatientKnownAllergies` AS `KnownAllergies`,
-		`visit`.`PatientCurrentMedications` AS `CurrentMedications`,
-		`visit`.`Diagnosis1`, 
-		`visit`.`Condition1`, 
-		`visit`.`Diagnosis2`, 
-		`visit`.`Condition2`, 
-		`visit`.`Diagnosis3`, 
-		`visit`.`Condition3`, 
-		`visit`.`ReferredTo`, 
-		`visit`.`ReferredFrom`,
+		`visit`.`clinicPatientID`, 
+		`visit`.`firstVisit`,		
+		`visit`.`patientNationalID`,
+		`visit`.`patientFamilyID`,
+		`visit`.`patientVisitID`, 
+		`visit`.`patientLastName` AS `lastName`, 
+		`visit`.`patientFirstName` AS `firstName`, 
+		`visit`.`patientSex` AS `Sex`, 
+		`visit`.`PatientBirthDate` AS `birthDate`, 
+		`visit`.`patientHomeAddress1`, 
+		`visit`.`patientHomeAddress2`, 
+		`visit`.`patientHomeNeighborhood`, 
+		`visit`.`patientHomeCity`, 
+		`visit`.`patientHomeCounty`, 
+		`visit`.`patientHomeState`, 
+		`visit`.`patientKnownAllergies` AS `knownAllergies`,
+		`visit`.`patientCurrentMedications` AS `currentMedications`,
+		`visit`.`patientNextVaccinationDate` AS `nextVaccinationDate`,
+		`visit`.`diagnosis1`, 
+		`visit`.`condition1`, 
+		`visit`.`diagnosis2`, 
+		`visit`.`condition2`, 
+		`visit`.`diagnosis3`, 
+		`visit`.`condition3`, 
+		`visit`.`referredTo`, 
+		`visit`.`referredFrom`,
 		`patient`.`Active`, 
 		`patient`.`ContactPhone`, 
 		`patient`.`ContactAltPhone`, 
@@ -864,7 +869,7 @@ CREATE VIEW `visitPatientGet` AS
 		`patient`.`OrganDonor`, 
 		`patient`.`PreferredLanguage`
 		FROM `visit`
-		JOIN `patient`  ON `patient`.`ClinicPatientID` = `visit`.`ClinicPatientID`
+		JOIN `patient`  ON `patient`.`clinicPatientID` = `visit`.`clinicPatientID`
 		WHERE `visit`.`deleted` = FALSE
 ;
 
