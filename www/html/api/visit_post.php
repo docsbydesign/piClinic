@@ -75,7 +75,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 	if (!empty($missingColumnList)) {
 		// some required fields are missing so exit
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		$returnValue['httpResponse'] = 400;
@@ -83,6 +83,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logsStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
 	
@@ -98,7 +99,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 		if (API_DEBUG_MODE) {
 			$dbInfo['patientQueryString'] = $ptQuery;
 			$dbInfo['ptRecord'] = $ptRecord;
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		$returnValue['httpResponse'] = 404;
@@ -160,7 +161,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 			//   show up 100 times to the same clinic the same day
 			if (API_DEBUG_MODE) {
 				$dbInfo['ptVisit'] = $ptVisit;
-				$returnValue['error'] = $dbInfo;
+				$returnValue['debug'] = $dbInfo;
 			}
 			$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 			$returnValue['httpResponse'] = 500;
@@ -235,7 +236,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 		// format response
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		if (substr($dbInfo['sqlError'], 0, 9) == "Duplicate") {
 			// a "duplicate record" error was returned, so update the responee
@@ -265,6 +266,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 			// adjust return value to reflect POST operation
 			$returnValue['httpResponse'] = 201;
 			$returnValue['httpReason']	= "Success";
+			$logData['logAfterData'] = $returnValue['data'];
 		} else {
 			$returnValue['httpResponse'] = 500;
 			$returnValue['httpReason']	= "Database error: Could not retrieve new visit record.";
@@ -272,7 +274,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 	}
 
 	if (API_DEBUG_MODE) {
-		$returnValue['error'] = $dbInfo;
+		$returnValue['debug'] = $dbInfo;
 	}
 	// only log performance info on success.
 	profileLogClose($profileData, __FILE__, $requestArgs);

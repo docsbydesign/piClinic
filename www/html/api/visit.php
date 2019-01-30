@@ -117,7 +117,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
 		break;
 
-/*	case 'PATCH':
+	case 'PATCH':
         if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_CLINIC)) {
 			$retVal = _visit_patch($dbLink, $apiUserToken, $requestData);
         } else {
@@ -130,7 +130,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
 		break;
 
-*/	default:
+	default:
 		$retVal['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
 			$retVal['error']['queryParameters'] = $requestData;

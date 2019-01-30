@@ -10170,6 +10170,105 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Update new visit by patient visit ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dabb3fb8-0962-4846-9c3a-b8fdcc0bbd28",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"pm.test(\"Get new visit by patientVisitIDr successful\", function() {\r",
+											"    var userAcct = pm.environment.get('testUser');\r",
+											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+											"        // this should be successful\r",
+											"        pm.response.to.have.status(200);\r",
+											"        pm.expect(jsonData.count).to.eql(1);\r",
+											"        pm.expect(jsonData.data.patientVisitID).to.eql(pm.variables.get('newPatientVisitID'));\r",
+											"    } else {\r",
+											"        // the user doesn't have permission to do this.\r",
+											"        pm.response.to.have.status(401);\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-piClinic-token",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&visitStatus=Closed&dateTimeOut=now()&diagnosis1=R51&condition1=N&diagnosis2=I11&condition2=S&diagnosis3=E08&condition3=N&referredTo=Elsewhere&referredFrom=Somewhere",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"visit.php"
+									],
+									"query": [
+										{
+											"key": "patientVisitID",
+											"value": "{{newPatientVisitID}}"
+										},
+										{
+											"key": "visitStatus",
+											"value": "Closed"
+										},
+										{
+											"key": "dateTimeOut",
+											"value": "now()"
+										},
+										{
+											"key": "diagnosis1",
+											"value": "R51"
+										},
+										{
+											"key": "condition1",
+											"value": "N"
+										},
+										{
+											"key": "diagnosis2",
+											"value": "I11"
+										},
+										{
+											"key": "condition2",
+											"value": "S"
+										},
+										{
+											"key": "diagnosis3",
+											"value": "E08"
+										},
+										{
+											"key": "condition3",
+											"value": "N"
+										},
+										{
+											"key": "referredTo",
+											"value": "Elsewhere"
+										},
+										{
+											"key": "referredFrom",
+											"value": "Somewhere"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true

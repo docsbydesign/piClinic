@@ -28,7 +28,7 @@
  * 		input data:
  *			One of these is required
  *   		`visitID` - Returns a specific visit record
- *			`PatientVisitID` - Returns a specific visit record
+ *			`patientVisitID` - Returns a specific visit record
  *		these are optional (as you want to change them):
  *
  *		Returns:
@@ -51,25 +51,24 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 	$returnValue = array();
 	
 	$dbInfo = array();
-	$dbInfo ['formArgs'] = $formArgs;
+	$dbInfo ['requestArgs'] = $requestArgs;
 
-	$logData = array();
-	$logData['table'] = 'visit';
-	$logData['action'] = 'patch';
-	$logData['user'] = 'SYSTEM'; // TODO; get a real user id
-	$logData['before'] = ''; // no data, yet
-		
-	// check for other required columns
+    $returnValue = array();
+
+    // token parameter was verified before this function was called.
+    $logData = createLogEntry ('API', __FILE__, 'visit', $_SERVER['REQUEST_METHOD'], $apiUserToken, $requestArgs, null, null, null, null);
+
+    // check for other required columns
 	$requiredPatientColumns = [
 		'visitID'
-		,'PatientVisitID'
+		,'patientVisitID'
 		];
 
 	// TODO: Refactor this out (NOTE: this one is an "OR")
 	$missingColumnList = '';
 	// make sure one of the ID columns is present
 	foreach ($requiredPatientColumns as $column) {
-		if (empty($formArgs[$column])) {
+		if (empty($requestArgs[$column])) {
 			if (!empty($missingColumnList)) {
 				$missingColumnList .= ", ";
 			}
@@ -85,23 +84,31 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 	if (!empty($missingColumnList)) {
 		// some required fields are missing so exit
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		$returnValue['httpResponse'] = 400;
-		$returnValue['httpReason']	= "Unable to find a patient visit. At least one required query parameter is missing.";
+        $returnValue['httpReason']	= "Unable to update the patient visit. At least one of these required field(s) is missing: ". $requiredPatientColumns. " ";
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
 	
 	// make sure visitID parameter is an integer
-	if (isset($formArgs['visitID']) && !is_numeric($formArgs['visitID'])) {
+	if (isset($requestArgs['visitID']) && !is_numeric($requestArgs['visitID'])) {
 		// some required fields are missing so exit
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "visitID parameter must be a number.";
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
 	
@@ -110,11 +117,11 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 	// get the current visit record using the ID that we have
 	$getQueryString = "SELECT * FROM `".
 		DB_TABLE_VISIT. "` WHERE ";
-	if (isset($formArgs['visitId'])) {
-		$getQueryString .= "`visitId` = ". $formArgs['visitId'] . " AND ";
+	if (isset($requestArgs['visitId'])) {
+		$getQueryString .= "`visitId` = ". $requestArgs['visitId'] . " AND ";
 	}
-	if (isset($formArgs['PatientVisitID'])) {
-		$getQueryString .= "`PatientVisitID` = '". $formArgs['PatientVisitID'] . "' AND ";
+	if (isset($requestArgs['patientVisitID'])) {
+		$getQueryString .= "`patientVisitID` = '". $requestArgs['patientVisitID'] . "' AND ";
 	}
 	$getQueryString .= "TRUE ".DB_QUERY_LIMIT.";";
 	
@@ -123,9 +130,9 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 		// the specified visit record was not found,
 		//  return an error
 		if (API_DEBUG_MODE) {
-			$returnValue['error']['dupCheck']['$getQueryString'] = $getQueryString;
+			$returnValue['debug']['dupCheck']['$getQueryString'] = $getQueryString;
 			if (isset($returnValue['data'])){
-				$returnValue['error']['dupCheck']['$data'] = $returnValue['data'];						
+				$returnValue['debug']['dupCheck']['$data'] = $returnValue['data'];
 			}
 		} else {
 			// remove internal file path from object when not debug
@@ -153,54 +160,56 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 	// 	that can be updated and ignore those that shouldn't be changed.
 	$updateParams = [
 		// 'staffID'	// TODO: when this is supported
-		'StaffName'		// TODO: when this is supported
+		'staffName'		// TODO: when this is supported
 		,'deleted'
-		,'VisitType'
-		,'VisitStatus'
-		,'ComplaintPrimary'
-		,'ComplaintAdditional'
-		,'DateTimeIn'
-		,'DateTimeOut'
-        ,'Payment'
-		// 'PatientNationalID' // This shouldn't change after object creation
-		// 'PatientFamilyID' // This shouldn't change after object creation
+		,'visitType'
+		,'visitStatus'
+		,'primaryComplaint'
+		,'secondaryComplaint'
+		,'dateTimeIn'
+		,'dateTimeOut'
+        ,'payment'
+		// 'patientNationalID' // This shouldn't change after object creation
+		// 'patientFamilyID' // This shouldn't change after object creation
 		// 'patientID' 	// This shouldn't change after object creation
-		// 'ClinicPatientID' // This shouldn't change after object creation
-		// 'PatientVisitID' // This shouldn't change after object creation
-		// 'PatientNameLast' 	// This shouldn't change after object creation
-		// 'PatientNameFirst' 	// This shouldn't change after object creation
-		// 'PatientSex' 	// This shouldn't change after object creation
-		// 'PatientBirthDate' 	// This shouldn't change after object creation
-		// 'PatientHomeAddress1' 	// This shouldn't change after object creation
-		// 'PatientHomeAddress2' 	// This shouldn't change after object creation
-		// 'PatientHomeNeighborhood' 	// This shouldn't change after object creation
-		// 'PatientHomeCity' 	// This shouldn't change after object creation
-		// 'PatientHomeCounty' 	// This shouldn't change after object creation
-		// 'PatientHomeState' 	// This shouldn't change after object creation
-		,'Diagnosis1'
-		,'Condition1'
-		,'Diagnosis2'
-		,'Condition2'
-		,'Diagnosis3'
-		,'Condition3'
-		,'ReferredTo'
-		,'ReferredFrom'
+		// 'clinicPatientID' // This shouldn't change after object creation
+		// 'patientVisitID' // This shouldn't change after object creation
+		// 'patientNameLast' 	// This shouldn't change after object creation
+		// 'patientNameFirst' 	// This shouldn't change after object creation
+		// 'patientSex' 	// This shouldn't change after object creation
+		// 'patientBirthDate' 	// This shouldn't change after object creation
+		// 'patientHomeAddress1' 	// This shouldn't change after object creation
+		// 'patientHomeAddress2' 	// This shouldn't change after object creation
+		// 'patientHomeNeighborhood' 	// This shouldn't change after object creation
+		// 'patientHomeCity' 	// This shouldn't change after object creation
+		// 'patientHomeCounty' 	// This shouldn't change after object creation
+		// 'patientHomeState' 	// This shouldn't change after object creation
+		,'diagnosis1'
+		,'condition1'
+		,'diagnosis2'
+		,'condition2'
+		,'diagnosis3'
+		,'condition3'
+		,'referredTo'
+		,'referredFrom'
 		];
 	
 	foreach ($updateParams as $fieldName) {
-		if (isset($formArgs[$fieldName])) {
-			$dbArgs[$fieldName] = trim($formArgs[$fieldName]);
+		if (isset($requestArgs[$fieldName])) {
+			$dbArgs[$fieldName] = trim($requestArgs[$fieldName]);
 		}
 	}
-		
-	// pick the update key with preference to the visitID
+
+    // $dbArgs = cleanVisitStringFields ($requestArgs);
+
+    // pick the update key with preference to the visitID
 	$visitUpdateKey = '';
-	if (isset($formArgs['visitID'])) {
-		$dbArgs['visitID'] = $formArgs['visitID'];
+	if (isset($requestArgs['visitID'])) {
+		$dbArgs['visitID'] = $requestArgs['visitID'];
 		$visitUpdateKey = 'visitID';
-	} else if (isset($formArgs['PatientVisitID'])) {
-		$dbArgs['PatientVisitID'] = $formArgs['PatientVisitID'];
-		$visitUpdateKey = 'PatientVisitID';
+	} else if (isset($requestArgs['patientVisitID'])) {
+		$dbArgs['patientVisitID'] = $requestArgs['patientVisitID'];
+		$visitUpdateKey = 'patientVisitID';
 	}
 	
 	// save a copy of the values for the debugging output
@@ -215,13 +224,18 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 	if ($columnCount == 0) {
 		// something  happened while creating the update SQL query and it has no fields to modify
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		$returnValue['httpResponse'] = 500;
 		$returnValue['httpReason']	= "Visit resource could not be updated. No fields to update were found in the request.";
+        $logData['logStatusCode'] = $returnValue['httpResponse'];
+        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        writeEntryToLog ($dbLink, $logData);
+        profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_UPDATE);
 		return $returnValue;
     }
+
 	profileLogCheckpoint($profileData,'UPDATE_READY');
 	// try to update the record in the database
 	$qResult = @mysqli_query($dbLink, $updateQueryString);
@@ -230,7 +244,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 		$dbInfo['sqlError'] = @mysqli_error($dbLink);
 		// format response
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (!empty($dbInfo['sqlError'])) {
@@ -256,9 +270,9 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 			if ($returnValue['count'] > 0) {
 				$logData['after'] = $returnValue['data'];				
 			}
-			writeUpdateToLog ($logData);
 			$returnValue['httpResponse'] = 200;
 			$returnValue['httpReason']	= "Success";
+            $logData['logAfterData'] = $returnValue['data'];
 		} else {
 			$returnValue['httpResponse'] = 500;
 			$returnValue['httpReason']	= "Database error: Could not retrieve updated visit record.";
@@ -266,10 +280,13 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 	}
 
 	if (API_DEBUG_MODE) {
-		$returnValue['error'] = $dbInfo;
+		$returnValue['debug'] = $dbInfo;
 	}	
 	// only log performance info on success.
-	profileLogClose($profileData, __FILE__, $formArgs);
-	return $returnValue;
+	profileLogClose($profileData, __FILE__, $requestArgs);
+    $logData['logStatusCode'] = $returnValue['httpResponse'];
+    $logData['logsStatusMessage'] = $returnValue['httpReason'];
+    writeEntryToLog ($dbLink, $logData);
+    return $returnValue;
 }
-?>
+//EOF

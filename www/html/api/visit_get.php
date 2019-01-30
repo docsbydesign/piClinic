@@ -93,7 +93,7 @@ function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 	if (!empty($missingColumnList)) {
 		// one or more required fields are missing, so exit
 		if (API_DEBUG_MODE) {
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		$returnValue['httpResponse'] = 400;
@@ -126,16 +126,16 @@ function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 		// add debug info to the list
 		if (API_DEBUG_MODE) {
 			$dbInfo ['queryString'] = $getQueryString;
-			$returnValue['error'] = $dbInfo;
+			$returnValue['debug'] = $dbInfo;
 		}
 		return $returnValue;
 	}
 	
 	if (API_DEBUG_MODE) {
-		$returnValue['error'] = $dbInfo;
+		$returnValue['debug'] = $dbInfo;
 	}
 	// only log performance info on success.
 	profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;
 }
-?>
+//EOF
