@@ -121,5 +121,6 @@ if (!defined('REST_CONSTANTS')) {
     define('DB_VIEW_STAFF_GET_BY_NAME','staffGetByName',false);
     define('DB_VIEW_VISIT_CHECK','visitCheck', false);
     define('DB_VIEW_VISIT_GET_WITH_AGEGROUP','visitGetWithAgeGroup',false);
+    define('DB_VIEW_THISCLINIC', 'thisClinicGet', false);
 }
 //EOF

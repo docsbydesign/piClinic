@@ -148,27 +148,27 @@ CREATE TABLE IF NOT EXISTS `comment` (
 DROP TABLE IF EXISTS `clinic`;
 CREATE TABLE IF NOT EXISTS `clinic` (
   `clinicID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique record ID for clinic records',
-  `ThisClinic` tinyint(1) NOT NULL DEFAULT '0' COMMENT '(Required) Set to 1 to indicate the clinic in which the system is installed.',
-  `PublicID` varchar(127) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Clinic ID/code as assigned by controlling agency.',
-  `TypeCode` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Cinic Type designator',
-  `CareLevel` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Cinic care level designator',
-  `LongName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Require) Full, official clinic name',
-  `ShortName` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Short name for clinic, if applicable',
-  `Currency` varchar(16) COLLATE utf8_unicode_ci DEFAULT 'USD' COMMENT '(Not Required) Three-letter code for the currency handled in the clinic.',
-  `Address1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Clinic street address',
-  `Address2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Clinic street address',
-  `ClinicNeighborhood` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Clinic neighborhood',
-  `ClinicCity` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Clinic City',
-  `ClinicState` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) Clinic address state',
-  `ClinicRegion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) Clinic Region name',
-  `ClinicDirector` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) The name of the clinics director',
-  `ClinicService` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) Clinic service type: e.g. empty (routine), External, Emergency, other',
+  `thisClinic` tinyint(1) NOT NULL DEFAULT '0' COMMENT '(Required) Set to 1 to indicate the clinic in which the system is installed.',
+  `publicID` varchar(127) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Clinic ID/code as assigned by controlling agency.',
+  `typeCode` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Cinic Type designator',
+  `careLevel` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Cinic care level designator',
+  `longName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Require) Full, official clinic name',
+  `shortName` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Short name for clinic, if applicable',
+  `currency` varchar(16) COLLATE utf8_unicode_ci DEFAULT 'USD' COMMENT '(Not Required) Three-letter code for the currency handled in the clinic.',
+  `address1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Clinic street address',
+  `address2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Clinic street address',
+  `clinicNeighborhood` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Clinic neighborhood',
+  `clinicCity` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Clinic City',
+  `clinicState` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) Clinic address state',
+  `clinicRegion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) Clinic Region name',
+  `clinicDirector` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) The name of the clinics director',
+  `clinicService` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Required) Clinic service type: e.g. empty (routine), External, Emergency, other',
   `modifiedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '(Auto fill) The date/time of the most recent update',
   `createdDate` datetime NOT NULL COMMENT '(Auto Fill) The time the record was created'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Information about the clinic';
 
 ALTER TABLE `clinic`
- ADD UNIQUE KEY `PublicID` (`PublicID`);
+ ADD UNIQUE KEY `publicID` (`publicID`);
 
 
 -- --------------------------------------------------------
@@ -397,7 +397,7 @@ CREATE VIEW `icd10Get` AS
 DROP VIEW IF EXISTS `thisClinicGet`;
 CREATE VIEW `thisClinicGet` AS
 	select * from `clinic`
-	where `ThisClinic` IS TRUE;
+	where `thisClinic` IS TRUE;
 	
 --
 -- Create view `patientGet`

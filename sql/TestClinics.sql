@@ -6,7 +6,7 @@ SET time_zone = "+00:00";
 --
 USE `piclinic`;
 TRUNCATE TABLE `clinic`;
-INSERT INTO `clinic` (`PublicID`,`TypeCode`,`CareLevel`,`ShortName`,`ClinicCity`,`ClinicState`,`ClinicRegion`,`ClinicDirector`,`modifiedDate`,`createdDate`) VALUES
+INSERT INTO `clinic` (`publicID`,`typeCode`,`careLevel`,`shortName`,`clinicCity`,`clinicState`,`clinicRegion`,`clinicDirector`,`modifiedDate`,`createdDate`) VALUES
 
   (19,'CIS','Primario','ALONZO SUAZO','Tegucigapla','Francisco Morazán','Metropolitana del D.C.','Director [19] Name',NOW(),NOW()),
   (27,'CIS','Primario','FLOR DEL CAMPO','Tegucigapla','Francisco Morazán','Metropolitana del D.C.','Director [27] Name',NOW(),NOW()),

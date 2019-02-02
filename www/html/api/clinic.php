@@ -21,40 +21,20 @@
  */
 /*******************
  *
- *	Creates/Returns comment resources from the database 
+ *	Returns clinic resources from the database
  * 		or an HTML error message
  *
- *	POST: Adds a new comment record to the database
- * 		input data:
- *   		`CommentDate` - (Optional) date comment was started
- *  		`Username` - (Required) Username creating this session.
- *  		`ReferringUrl` - (Optional) Page from which comment page was called.
- *			`ReferringPage` - (Optional) Page name from path.
- *  		`ReturnUrl` - (Optional) Page to which user was sent after making the comment.
- *  		`CommentText` - (0Optional) User comment text.
- *
- *		Returns:
- *			201: the new comment record created
- *			400: required field is missing
- *			409: record already exists error
- *			500: server error information
- *
- *
- *	GET: Returns comment records that match the specified query parameters
+ *	GET: Clinic records that match the specified query parameters
  *
  *	Identification query parameters:
- *		The comment record(s) will be returned that the fields specified in the query parameter.
+ *		The clinic record(s) will be returned that match the fields specified in the query parameter.
  * 		
- *   		`CommentDate` - (Optional) date comment was started
- *  		`Username` - (Required) Username creating this session.
- *  		`ReferringUrl` - (Optional) Page URL from which comment page was called.
- *			`ReferringPage` - (Optional) Page name from path.
- *  		`ReturnUrl` - (Optional) Page to which user was sent after making the comment.
- *  		`CommentText` - (0Optional) User comment text.
- *			`createdDate` - Date user account was created
+ *			`clinicID` the internal ID of the clinic record
+ *          `shortName` wildcard match of the clinic's short name
+ *          `this` if true, return the clinic designated as "this" clinic
  *
  *		Returns:
- *			200: the matching comment record(s)
+ *			200: the matching clinic record(s)
  *			404: no record found that matches the query parameters
  *			500: server error information
  *
@@ -65,9 +45,8 @@ require_once 'api_common.php';
 require_once '../shared/security.php';
 require_once '../shared/profile.php';
 require_once '../shared/logUtils.php';
-require_once 'comment_common.php';
-require_once 'comment_post.php';
-require_once 'comment_get.php';
+require_once 'clinic_common.php';
+require_once 'clinic_get.php';
 /*
  *  Initialize profiling when enabled in piClinicConfig.php
  */
@@ -85,13 +64,13 @@ profileLogCheckpoint($profileData,'DB_OPEN');
 $retVal = array();
 
 if (empty($apiUserToken)){
-    $retVal = formatMissingTokenError ($retVal, 'comment');
+    $retVal = formatMissingTokenError ($retVal, 'clinic');
 } else {
     // Initalize the log entry for this call
     //  more fields will be added later in the routine
     $logData = createLogEntry ('API',
         __FILE__,
-        'comment',
+        'clinic',
         $_SERVER['REQUEST_METHOD'],
         null,
         $_SERVER['QUERY_STRING'],
@@ -101,17 +80,13 @@ if (empty($apiUserToken)){
         null);
 
     if (!validTokenString($apiUserToken)) {
-        $retVal = logInvalidTokenError ($dbLink, $retVal, $apiUserToken, 'comment', $logData);
+        $retVal = logInvalidTokenError ($dbLink, $retVal, $apiUserToken, 'clinic', $logData);
     } else {
         $logData['userToken'] = $apiUserToken;
         if (checkUiSessionAccess($dbLink, $apiUserToken, PAGE_ACCESS_READONLY)) {
             switch ($_SERVER['REQUEST_METHOD']) {
-                case 'POST':
-                    $retVal = _comment_post($dbLink, $apiUserToken, $requestData);
-                    break;
-
                 case 'GET':
-                    $retVal = _comment_get($dbLink, $apiUserToken, $requestData);
+                    $retVal = _clinic_get($dbLink, $apiUserToken, $requestData);
                     break;
 
                 default:

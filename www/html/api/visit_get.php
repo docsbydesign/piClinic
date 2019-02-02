@@ -100,7 +100,9 @@ function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['httpReason']	= ' Unable to find a patient visit. One of these required query parameters is missing: ' . join( ', ', $requiredPatientColumns );
 		return $returnValue;
 	}
+
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
+
 	// assume we can't find it...until we do
 	$returnValue['contentType'] = "Content-Type: text/plain; charset=utf-8";
 	$returnValue['data'] = NULL;
