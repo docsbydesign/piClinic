@@ -1,3 +1,4 @@
+USE `piclinic`;
 TRUNCATE TABLE `patient`;
 --
 -- Dumping data for table `patient`
