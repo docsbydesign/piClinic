@@ -45,68 +45,67 @@ copyrightText = """
 accessTest = """
 // check to make sure this file wasn't called directly
 //  it must be called from a script that supports access checking
-require_once 'api_common.php';
+require_once '../api/api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
 """
 
-def createStringsInFiles(arg_destdir, csvFilePath, csvRows, files, langs):
+def createStringsInFiles(file_info):
 	# for each file in the list
-	fileCount = 0
-	for file in files:
-		outFilePath = arg_destdir + file + '.php'
-		print ('Creating: ', outFilePath)
-		# open output file
-		with codecs.open(outFilePath,'w','utf-8') as outFile:
-			# write file header
-			outFile.write("<?php\n/*\n")
-			# outFile.write(" * File generated: {}\n".format( datetime.datetime.now().strftime('%c') ))
-			outFile.write(" *\n * Source file: {}".format(csvFilePath))
-			outFile.write(copyrightText)
-			outFile.write(" *\n */\n")
-			outFile.write(accessTest)
-			# 
-			for language in langs:
-				# deal with special case for UI_TEXT_CONSTANT
-				langField = language
-				if (langField == 'UITEST_LANGUAGE'):
-					langField = 'UI_TEXT_CONSTANT'
-				#write language header
-				outFile.write ("// Strings for {}\nif ($pageLanguage == {}) {}\n".format(language,language,'{'))
-				for uiTextItem in csvRows:
-					# only write the rows that apply to the current output file
-					if (uiTextItem[csv_source_file] == file):
-						outFile.write ("\tdefine('{}','{}',false);\n".format(uiTextItem['UI_TEXT_CONSTANT'], uiTextItem[langField]))
-				outFile.write ("{}\n".format('}'))
-			outFile.write ("?>\n")
-		fileCount = fileCount + 1
-	
-	return fileCount
+	outFilePath = file_info['text']
+	print ('Creating: ', outFilePath)
+	# open output file
+	with codecs.open(outFilePath,'w','utf-8') as outFile:
+		# write file header
+		outFile.write("<?php\n/*\n")
+		outFile.write(copyrightText)
+		outFile.write(" *\n */\n")
+		outFile.write(accessTest)
+		#
+		lang_idx = 0
+		for language in file_info['langs']:
+			# deal with special case for UI_TEXT_CONSTANT
+			langField = language
+			if (langField == 'UITEST_LANGUAGE'):
+				langField = 'UI_TEXT_CONSTANT'
+			#write language header
+			outFile.write ("// Strings for {}\nif ($pageLanguage == {}) {}\n".format(language,language,'{'))
+			for uiTextItem in file_info['file_strings']:
+				outFile.write ("\tdefine('{}','{}',false);\n".format(uiTextItem['UI_TEXT_CONSTANT'], uiTextItem[langField]))
+			outFile.write ("{}\n".format('}'))
+		outFile.write ("//EOF\n")
 
-def createTextFile (file_list, csv_rows):
+	return 1
 
-		# read the rest of the columns to make a list of the output languages
-		langs = ['UITEST_LANGUAGE']  # all files have at least this language
-		for key in csvFields:
-			if ((key != csv_source_file) and
-					(key != csv_constant)):
-				# it must be a language key so add it to the list
-				langs.append(key)
+def getLangStrings (csv_rows, string):
+	for row in csv_rows:
+		if row['UI_TEXT_CONSTANT'] == string:
+			return row
+	return None
 
-		langs.sort()
-		print('Languages in file: ', langs)
+def createTextFiles (file_list, csv_rows, langs):
 
-		files = []
-		for row in csv_rows:
-			files.append(row[csv_source_file])
-		files = set(files)
+	sortedCsvRows = sorted(csv_rows, key=lambda k: k[csv_constant])
 
-		# sort CSV by UI_TEXT_CONSTANT before creating files
-		sortedCsvRows = sorted(csv_rows, key=lambda k: k[csv_constant])
+	file_count = 0
+	for file_info in file_list:
+		file_strings = []
+		if file_info['strings']:
+			for string in file_info['strings']:
+				langStrings = getLangStrings(sortedCsvRows, string)
+				if langStrings:
+					file_strings.append(langStrings)
+					file_info['file_strings'] = file_strings
+			file_info['langs'] = langs
+			file_count += createStringsInFiles(file_info)
 
-		fileCount = createStringsInFiles(arg_codedir, os.path.abspath(arg_csvfile), sortedCsvRows, files, langs)
 
-		return fileCount
+#	print(json.dumps(file_list, indent=4))
+#	print(json.dumps(csv_rows, indent=4))
+
+	return
+#	return file_count
+
 
 def createFiles (arg_csvfile, arg_codedir):
 	# test the CSV file
@@ -115,10 +114,12 @@ def createFiles (arg_csvfile, arg_codedir):
 		print (arg_csvfile, ' was not found.')
 		return file_count
 	else:
+		# get the csv file date and then open the file
 		csv_file_date = os.path.getmtime(arg_csvfile)
 		# open the CSV file
 		with codecs.open(arg_csvfile, 'r', 'utf-8') as csv_file:
 			csv_read = csv.DictReader(csv_file, )
+
 			# convert csv_read to dict object
 			csv_rows = []
 			for row in csv_read:
@@ -126,11 +127,18 @@ def createFiles (arg_csvfile, arg_codedir):
 
 			# get columns found
 			csv_fields = csv_rows[0].keys()
+			# read the rest of the columns to make a list of the output languages
+			langs = ['UITEST_LANGUAGE']  # all files have at least this language
+			for key in csv_fields:
+				if (key != csv_constant):
+					# it must be a language key so add it to the list
+					langs.append(key)
 
 			# and make sure they are all there
 			if not ((csv_source_file in csv_fields) and (csv_constant in csv_fields)):
 				print('CSV file is missing required column(s)')
 
+		print('Languages in file: ', langs)
 
 	# create a list of the php files to scan
 	if (platform.system() == 'Windows'):
@@ -162,7 +170,7 @@ def createFiles (arg_csvfile, arg_codedir):
 				# else need to create the text file
 				php_files.append(newFile)
 
-	# get display strings in each file to
+	# get display strings used by each file
 	for php_file in php_files:
 		with open(php_file['source'], "r") as source_file:
 			text_vars = [];
@@ -174,9 +182,7 @@ def createFiles (arg_csvfile, arg_codedir):
 		php_file['strings'] = list(set(text_vars))
 		php_file['strings'].sort()
 
-	print (json.dumps (php_files, sort_keys=True, indent=4))
-
-	return # createTextFiles(php_files, csv_rows)
+	return createTextFiles(php_files, csv_rows, langs)
 
 
 def main (argv):
@@ -195,7 +201,7 @@ def main (argv):
 		print ("""			build-uiText.py <source-csv> <dest-path> 
 
 			<source-csv> the CSV that contains the string constants and contents
-			<dest-path> = Where to write the created .php include files with the strings
+			<code-path> = The folder with the source code that has the.php files using the strings
 """)
 	if len(argv) >= 3:
 		arg_codedir = argv[2]
