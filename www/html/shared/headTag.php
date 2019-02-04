@@ -68,7 +68,7 @@ define('REPORT_PAGE','/rptHome.php',false);
 define('ADMIN_PAGE','/adminHome.php',false);
 define('HELP_PAGE','/helpHome.php',false);
 function piClinicAppMenu($thisPage, $pageLanguage) {
-	require_once ('appMenuText.php');
+	require_once dirname(__FILE__).'/../uitext/appMenuText.php';
 	$menuItems = [];
 	$menuItems[0] = array ('link' => HOME_PAGE, 'linkText' => TEXT_CLINIC_HOME);
 	$menuItems[1] = array ('link' => REPORT_PAGE, 'linkText' => TEXT_CLINIC_REPORTS);

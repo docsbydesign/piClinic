@@ -32,7 +32,7 @@ if (basename(__FILE__) == basename($_SERVER['SCRIPT_NAME'])) {
 	header('Content-Type: text/html; charset=utf-8');
 	exit;	
 }
-require_once('piClinicConfig.php');
+require_once dirname(__FILE__).'/piClinicConfig.php';
 
 // Constants used by UI files
 if (!defined('UI_COMMON_CONSTANTS')) {

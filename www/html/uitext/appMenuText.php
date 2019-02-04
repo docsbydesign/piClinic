@@ -24,7 +24,7 @@
 
 // check to make sure this file wasn't called directly
 //  it must be called from a script that supports access checking
-require_once '../api/api_common.php';
+require_once dirname(__FILE__).'/../api/api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
@@ -57,4 +57,4 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	define('TEXT_CLINIC_HOME','Página principal',false);
 	define('TEXT_CLINIC_REPORTS','Informes',false);
 }
-?>
+//EOF

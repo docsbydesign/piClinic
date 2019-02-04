@@ -24,7 +24,7 @@
  *	Functions used by all API scripts
  *
  *********************/
-require_once '../shared/piClinicConfig.php';
+require_once dirname(__FILE__).'/../shared/piClinicConfig.php';
 
 function logInvalidTokenError ($dbLink, $returnValue, $token, $actionName, $logData) {
     if (!is_array($returnValue)) {

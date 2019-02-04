@@ -40,7 +40,7 @@ MESSAGE;
     exit(0);
 
 }
-require_once 'piClinicConfig.php';
+require_once dirname(__FILE__).'/piClinicConfig.php';
 
 define('PROFILE_END','End',false);
 define('PROFILE_ERROR_TOKEN','Error_token',false);
