@@ -27,18 +27,18 @@
 // set charset header
 header('Content-type: text/html; charset=utf-8');
 // include files 
-require_once('api/api_common.php');
-require_once('shared/ui_common.php');
-require_once('shared/headTag.php');
+require_once('./api/api_common.php');
+require_once('./shared/ui_common.php');
+require_once('./shared/headTag.php');
 
 $requestData = readRequestData ();
 $pageLanguage = getUiLanguage ($requestData);
 // load the strings for the page language
 //	assumes $pageLanguage contains a valid language
-require_once ('uitext/clinicLoginText.php');
+require_once ('./uitext/clinicLoginText.php');
 $loginData = array();
-$loginData['Username'] = '';
-$loginData['Password'] = '';
+$loginData['username'] = '';
+$loginData['password'] = '';
 ?>
 <?= pageHtmlTag($pageLanguage) ?>
 <?= pageHeadTag(TEXT_PAGE_TITLE) ?>
@@ -48,13 +48,13 @@ $loginData['Password'] = '';
 	<?php require ('uiErrorMessage.php') ?>
 	<div id="loginDiv">
 		<p class="piClinicPageTitle"><?= TEXT_PAGE_TITLE ?></p>
-		<form enctype="application/x-www-form-urlencoded" action="/startUiSession.php" method="post">
+		<form enctype="application/x-www-form-urlencoded" action="./startUiSession.php" method="post">
 			<p><label class="piClinicFieldLabel"><?= TEXT_LOGIN_USERNAME ?>:</label><br>
-				<?= dbFieldTextInput ($loginData, "Username", TEXT_LOGIN_USERNAME_PLACEHOLDER, false, true,
+				<?= dbFieldTextInput ($loginData, "username", TEXT_LOGIN_USERNAME_PLACEHOLDER, false, true,
 					'text', 'piClinicEdit', 64, 'username' ) ?>
 			</p>
 			<p><label class="piClinicFieldLabel"><?= TEXT_LOGIN_PASSWORD ?>:</label><br>
-				<?= dbFieldTextInput ($loginData, "Password", TEXT_LOGIN_PASSWORD_PLACEHOLDER, true, false, 'password', 'piClinicEdit', 128, 'current-password') ?>
+				<?= dbFieldTextInput ($loginData, "password", TEXT_LOGIN_PASSWORD_PLACEHOLDER, true, false, 'password', 'piClinicEdit', 128, 'current-password') ?>
 			</p>
 			<?= (!empty($requestData['lang']) ? '<input type="hidden" id="langField" name="lang" value="'.$pageLanguage.'" >': "") ?>
 			<p class="piClinicButton"><button type="submit"><?= TEXT_LOGIN_SUBMIT_BUTTON ?></button></p>

@@ -33,6 +33,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	define('TEXT_BLANK_VISIT_OPTION','TEXT_BLANK_VISIT_OPTION',false);
 	define('TEXT_CLINIC_ADMIN','TEXT_CLINIC_ADMIN',false);
 	define('TEXT_CLINIC_COMMENT','TEXT_CLINIC_COMMENT',false);
+	define('TEXT_CLINIC_COMMENT_TITLE','TEXT_CLINIC_COMMENT_TITLE',false);
 	define('TEXT_CLINIC_HELP','TEXT_CLINIC_HELP',false);
 	define('TEXT_CLINIC_HOME','TEXT_CLINIC_HOME',false);
 	define('TEXT_CLINIC_REPORTS','TEXT_CLINIC_REPORTS',false);
@@ -43,6 +44,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	define('TEXT_BLANK_VISIT_OPTION','(Select the visit type)',false);
 	define('TEXT_CLINIC_ADMIN','Admin',false);
 	define('TEXT_CLINIC_COMMENT','Comment',false);
+	define('TEXT_CLINIC_COMMENT_TITLE','Comment on this page',false);
 	define('TEXT_CLINIC_HELP','Help',false);
 	define('TEXT_CLINIC_HOME','Dashboard',false);
 	define('TEXT_CLINIC_REPORTS','Reports',false);
@@ -53,6 +55,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	define('TEXT_BLANK_VISIT_OPTION','(Escoge el tipo de la atención)',false);
 	define('TEXT_CLINIC_ADMIN','Admin',false);
 	define('TEXT_CLINIC_COMMENT','Comentario',false);
+	define('TEXT_CLINIC_COMMENT_TITLE','Hacer un comentario de esta página',false);
 	define('TEXT_CLINIC_HELP','Ayuda',false);
 	define('TEXT_CLINIC_HOME','Página principal',false);
 	define('TEXT_CLINIC_REPORTS','Informes',false);

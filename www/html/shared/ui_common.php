@@ -105,17 +105,27 @@ function getUiLanguage ($requestData){
 	// set page UI language
 	//  follow this sequence:
 	//		1. Check query parameter for lang=
+    //      2. Check if the language is specified for the current session
 	//		2. Check for "Accept-Language" header
 	//			sequence through options until first recognized
 	//		3. use UI_DEFAULT_LANGUAGE
 	$pageLanguage = "";
-	
+
 	//		1. Check query parameter for lang=
 	if (!empty($requestData['lang'])) {
 		$pageLanguage = checkLanguageSupported($requestData['lang']);
-	} 
+	}
+	//      2. Check the session language
+    if (empty($pageLanguage)) {
+        if (empty($_SESSION)) {
+            session_start();
+        }
+        if (!empty($_SESSION) && !empty($_SESSION['sessionLanguage'])) {
+            $pageLanguage = checkLanguageSupported($_SESSION['sessionLanguage']);
+        }
+    }
 
-	//		2. Check for "Accept-Language" header
+	//		3. Check for "Accept-Language" header
 	//			sequence through options until one is found
 	if (empty($pageLanguage)) {
 		// Check for Accept-Language header
@@ -130,8 +140,8 @@ function getUiLanguage ($requestData){
 			}
 		}
 	}
-	
-	//		3. use UI_DEFAULT_LANGUAGE
+
+	//		4. use UI_DEFAULT_LANGUAGE
 	if (empty($pageLanguage)) {
 		$pageLanguage = UI_DEFAULT_LANGUAGE;
 	}
@@ -296,4 +306,13 @@ function formatAgeFromBirthdate ($birthdate, $today=null, $yrText='y', $moText='
 	}
 	return ($ageYMD['days'].$dyText);
 }
-?>
+
+function makeUrlWithQueryParams ($url, $qParams) {
+    if (!empty($qParams) && is_array($qParams) && !empty(url)) {
+        $qParamString = implode('&', $qParams);
+        return $url . '?' . $qParamString;
+    } else {
+        return $url;
+    }
+}
+//EOF

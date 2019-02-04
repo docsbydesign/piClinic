@@ -48,6 +48,7 @@ TEXT_CLINICPATIENTID_LABEL,Patient,Paciente
 TEXT_CLINICVISITID_LABEL,Clinic visit number,Número de historia clínica
 TEXT_CLINIC_ADMIN,Admin,Admin
 TEXT_CLINIC_COMMENT,Comment,Comentario
+TEXT_CLINIC_COMMENT_TITLE,Comment on this page,Hacer un comentario de esta página
 TEXT_CLINIC_HELP,Help,Ayuda
 TEXT_CLINIC_HISTORY_ID_LABEL,Family ID,Número de historia clínica
 TEXT_CLINIC_HOME,Dashboard,Página principal
@@ -239,7 +240,6 @@ TEXT_LABEL_NURSE_PRO,Nurse: Profesional,Enfermera: Profesional
 TEXT_LABEL_NURSE_STU,Student nurse,Estudiante de enfermeria
 TEXT_LABEL_STAFF,Clinic staff,Personal de la clínica
 TEXT_LAST_VISIT_DATE_LABEL,Last visit,Úlitma visita
-TEXT_LINIC_COMMENT_TITLE,Comment on this page,Hacer un comentario de esta página
 TEXT_LOCATE_BY_ID_HEADING,Show patient info,Muestra el paciente
 TEXT_LOCATION_HEADING,Location,Procedencia
 TEXT_LOGIN_PASSWORD,Password,Contraseña

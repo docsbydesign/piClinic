@@ -25,9 +25,8 @@
 
 // check to make sure this file wasn't called directly
 //  it must be called from a script that supports access checking
-require_once 'api/api_common.php';
-require_once 'uitext/appMenuText.php';
-
+require_once './api/api_common.php';
+require_once './uitext/appMenuText.php';
 exitIfCalledFromBrowser(__FILE__);
 
 // These are create here to build apiMenuText.php
