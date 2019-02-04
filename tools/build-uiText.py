@@ -45,7 +45,7 @@ copyrightText = """
 accessTest = """
 // check to make sure this file wasn't called directly
 //  it must be called from a script that supports access checking
-require_once '../api/api_common.php';
+require_once dirname(__FILE__).'/../api/api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
 """
@@ -107,7 +107,7 @@ def createTextFiles (file_list, csv_rows, langs):
 #	return file_count
 
 
-def createFiles (arg_csvfile, arg_codedir):
+def createFiles (arg_build, arg_csvfile, arg_codedir):
 	# test the CSV file
 	file_count = 0
 	if not os.path.isfile(arg_csvfile):
@@ -135,7 +135,7 @@ def createFiles (arg_csvfile, arg_codedir):
 					langs.append(key)
 
 			# and make sure they are all there
-			if not ((csv_source_file in csv_fields) and (csv_constant in csv_fields)):
+			if not (csv_constant in csv_fields):
 				print('CSV file is missing required column(s)')
 
 		print('Languages in file: ', langs)
@@ -160,13 +160,15 @@ def createFiles (arg_csvfile, arg_codedir):
 				newFile = {}
 				newFile['source'] = arg_codedir + path_char + file
 				newFile['text'] = arg_codedir + path_char + 'uitext' + path_char + file[:-4]+'Text.php'
-				# if new file doesn't exist, it needs to
-				if os.path.isfile(newFile['text']):
-					# See if the text file is newer than the csv, if so, don't build a new one
-					if os.path.getmtime(newFile['text']) > csv_file_date:
+				if arg_build == 'new':
+					# if new file doesn't exist, it needs to
+					if os.path.isfile(newFile['text']):
 						# See if the text text file is newer than the source code file
-						if os.path.getmtime(newFile['text']) > os.path.getmtime(newFile['source']):
-							continue
+						if os.path.getmtime(newFile['source']) < os.path.getmtime(newFile['text']):
+							# See if the text file is newer than the csv, if so, don't build a new one
+							if os.path.getmtime(newFile['text']) > csv_file_date:
+								print ('Skipping ' + newFile['source'] + ' because the text file is newer than the source files.')
+								continue
 				# else need to create the text file
 				php_files.append(newFile)
 
@@ -187,29 +189,34 @@ def createFiles (arg_csvfile, arg_codedir):
 
 def main (argv):
 	# assign default values
-	arg_codedir = './'		# folder with the .php source files to scan; the default is current folder
+	arg_build = 'all'		# default: build all files
 	arg_csvfile = None		# required parameter: the file with the localized strings
-	
+	arg_codedir = './'		# folder with the .php source files to scan; the default is current folder
+
 	# read command line args and assign parameter value
 	# argv[0] = the script file name
-	# argv[1] = the csvfile (required)
-	# argv[2] = dest directory (optional)
-	if len(argv) >= 2:
-		# read the prefix string
-		arg_csvfile = argv[1]
+	# argv[1] = what to build: all | new
+	# argv[2] = the csvfile (required)
+	# argv[3] = dest directory (optional)
+
+	if len(argv) >= 3:
+		if argv[1] in ['all','new']:
+			arg_build = argv[1]
+		# read the csv file name
+		arg_csvfile = argv[2]
 	else:
 		print ("""			build-uiText.py <source-csv> <dest-path> 
-
+			[all|new]
 			<source-csv> the CSV that contains the string constants and contents
 			<code-path> = The folder with the source code that has the.php files using the strings
 """)
-	if len(argv) >= 3:
-		arg_codedir = argv[2]
+	if len(argv) >= 4:
+		arg_codedir = argv[3]
 
 	# ignore any other parameters
 		
 	# create the string files
-	filesCreated = createFiles (arg_csvfile, arg_codedir)
+	filesCreated = createFiles (arg_build, arg_csvfile, arg_codedir)
 	
 	return ("{} UI text files created.".format(filesCreated))
 
