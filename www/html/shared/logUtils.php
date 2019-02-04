@@ -45,8 +45,8 @@ MESSAGE;
  *	Functions used by all API scripts
  *
  *********************/
-require_once '../shared/piClinicConfig.php';
-require_once '../shared/dbUtils.php';
+require_once dirname(__FILE__).'/../shared/piClinicConfig.php';
+require_once dirname(__FILE__).'/../shared/dbUtils.php';
 /*
 * 	Profile log
 *	
@@ -60,11 +60,11 @@ function profileLog () {
 /*
 *	Log UI error
 */
-function logApiError($inputParamList,
+function logUiError($inputParamList,
                      $error='NotSpecified',
                      $scriptFile = 'NotSpecified',
                      $username = 'NotSpecified',
-                     $table = 'NotSpecified',
+                     $action = 'NotSpecified',
                      $message = null) {
     /*
      *   This is for errors that cannot be logged to the DB (for example, because
@@ -77,7 +77,7 @@ function logApiError($inputParamList,
 	$logFileHandle = fopen ($logFileName, "a+", false);
 	if ($logFileHandle) {
 		$logRecord = array();
-		$logRecord['type'] = 'apierror';
+		$logRecord['type'] = 'uierror';
 		$logRecord['time'] = date ( 'c' ); //  ISO 8601 date format
 		$logRecord['file'] = $scriptFile;
 		if (empty($inputParamList)) {
@@ -89,7 +89,7 @@ function logApiError($inputParamList,
 		$logRecord['addr'] = (empty($_SERVER['REMOTE_ADDR']) ? 'NotSpecified' : $_SERVER['REMOTE_ADDR']);
 		$logRecord['referrer'] = (empty($_SERVER['HTTP_REFERER']) ? 'NotSpecified' : $_SERVER['HTTP_REFERER']);
 		$logRecord['error'] = $error;
-        $logRecord['table'] = $table;
+        $logRecord['action'] = $action;
         $logRecord['message'] = $message;
 		// write result to file
 		fwrite ($logFileHandle, json_encode($logRecord)."\n");
@@ -99,6 +99,49 @@ function logApiError($inputParamList,
 		// not sure what to do if the log file doesn't open
 		return false;
 	}
+}
+/*
+*	Log API error
+*/
+function logApiError($inputParamList,
+                     $error='NotSpecified',
+                     $scriptFile = 'NotSpecified',
+                     $username = 'NotSpecified',
+                     $table = 'NotSpecified',
+                     $message = null) {
+    /*
+     *   This is for errors that cannot be logged to the DB (for example, because
+     *      the DB could not be opened.
+    */
+    $logFileName =  API_LOG_FILEPATH . "cts-error-" . date ('Y-m') . ".jlog";
+    $logFileTimeStamp = date ( 'c' ); //  ISO 8601 date format
+    // open the file for append access and create a new one if this one doesn't exist
+
+    $logFileHandle = fopen ($logFileName, "a+", false);
+    if ($logFileHandle) {
+        $logRecord = array();
+        $logRecord['type'] = 'apierror';
+        $logRecord['time'] = date ( 'c' ); //  ISO 8601 date format
+        $logRecord['file'] = $scriptFile;
+        if (empty($inputParamList)) {
+            $inputParamList = (empty($_SERVER['QUERY_STRING']) ? 'NotSpecified' : $_SERVER['QUERY_STRING']);
+        }
+        $logRecord['params'] = $inputParamList;
+        $logRecord['user'] = $username;
+        $logRecord['method'] = (empty($_SERVER['REQUEST_METHOD']) ? 'NotSpecified' : $_SERVER['REQUEST_METHOD']);
+        $logRecord['addr'] = (empty($_SERVER['REMOTE_ADDR']) ? 'NotSpecified' : $_SERVER['REMOTE_ADDR']);
+        $logRecord['referrer'] = (empty($_SERVER['HTTP_REFERER']) ? 'NotSpecified' : $_SERVER['HTTP_REFERER']);
+        $logRecord['error'] = $error;
+        $logRecord['table'] = $table;
+        $logRecord['message'] = $message;
+        // write result to file
+        fwrite ($logFileHandle, json_encode($logRecord)."\n");
+        fclose ($logFileHandle);
+        return true;
+    } else {
+        // not sure what to do if the log file doesn't open
+        return false;
+    }
 }
 /*
 *
