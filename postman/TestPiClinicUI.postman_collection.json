@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "896ab6af-a0ac-4b6a-8dc6-8899c856f122",
+		"name": "TestPiClinicUI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SessionOpen",
+			"item": [
+				{
+					"name": "Get testUser token API Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ed713fa2-ae3d-46f3-aa9c-38838bd026ba",
+								"exec": [
+									"pm.test(\"Login was successful\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Login token returned', function (){\r",
+									"    pm.expect(responseBody.length).to.be.above(0);\r",
+									"    var tokenRegEx = /\"token\":[\\s]*\"([\\w]+)\"/gm;\r",
+									"    found = responseBody.match(tokenRegEx);\r",
+									"    pm.expect(found).to.not.eql(undefined);\r",
+									"    console.log(found);\r",
+									"    var tokenString = found[0].substring(('\"token\": \"').length,found[0].length-1);\r",
+									"    console.log (tokenString);\r",
+									"    pm.variables.set('uiSessionToken',tokenString);\r",
+									"    pm.expect(pm.variables.get('uiSessionToken')).to.eql(tokenString);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/html",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/html",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/startUiSession.php?username={{testUser}}&password={{testUserPW}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"startUiSession.php"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{testUser}}"
+								},
+								{
+									"key": "password",
+									"value": "{{testUserPW}}"
+								}
+							]
+						},
+						"description": "Logs in as test user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Session Close",
+			"item": [
+				{
+					"name": "Close current session API",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aaa1cba2-7814-4be5-8931-c54e2dfc4b44",
+								"exec": [
+									"pm.test(\"Logout was successful\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-piClinic-token",
+								"value": "{{uiSessionToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/session.php",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"session.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Session Access after logout API",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9746528d-2e17-4c7d-b744-3e720334bcb6",
+								"exec": [
+									"postman.setEnvironmentVariable(\"token\", null);",
+									"",
+									"pm.test(\"Access failed\", function() {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-piClinic-token",
+								"value": "{{uiSessionToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/session.php",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"session.php"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "77022e4c-29d9-4e41-82f3-709bd911c4d3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "faf84920-d09e-41d9-a1ce-8ce325791e34",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

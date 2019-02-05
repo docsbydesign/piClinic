@@ -46,12 +46,12 @@ MESSAGE;
 
 }
 
-require_once 'piClinicConfig.php';
-require_once 'dbUtils.php';
-require_once '../api/api_common.php';
-require_once '../api/session_common.php';
-require_once '../api/session_get.php';
-require_once 'profile.php';
+require_once dirname(__FILE__).'/piClinicConfig.php';
+require_once dirname(__FILE__).'/dbUtils.php';
+require_once dirname(__FILE__).'/../api/api_common.php';
+require_once dirname(__FILE__).'/../api/session_common.php';
+require_once dirname(__FILE__).'/../api/session_get.php';
+require_once dirname(__FILE__).'/profile.php';
 
 define('PAGE_ACCESS_ADMIN', 32, false); 	// SystemAdmin
 define('PAGE_ACCESS_CLINIC', 16, false); 	// ClinicAdmin

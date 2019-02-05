@@ -45,7 +45,7 @@ if (!defined('REST_CONSTANTS')) {
 	define('REST_CONSTANTS', 'database_constants', false);
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// include password(s)
-	require_once '../../pass/dbPass.php';
+	require_once dirname(__FILE__).'/../../pass/dbPass.php';
 	// Contains paths to files and folders shared by the 
 	//  php scripts on the server.
 
