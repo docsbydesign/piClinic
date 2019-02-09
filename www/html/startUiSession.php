@@ -27,6 +27,7 @@
 require_once './shared/piClinicConfig.php';
 require_once './shared/dbUtils.php';
 require_once './shared/logUtils.php';
+require_once './shared/ui_common.php';
 require_once './api/api_common.php';
 require_once './api/session_common.php';
 require_once './api/session_post.php';
@@ -36,16 +37,14 @@ require_once './shared/profile.php';
 $profileData = [];
 profileLogStart ($profileData);
 
-// get the query paramater data from the request
-$formData = readRequestData();
+$sessionInfo = getUiSessionInfo();
 
-if (!empty(session_id())){
+// get the query paramater data from the request
+$sessionInfo['parameters'] = readRequestData();
+
+if (!empty($sessionInfo['token'])){
 	header('DEBUG_OldSessionFound: '.session_id());
-	// try to end the session normally
-	if (!empty($formData['Token'])) {
-        $requestData['Token'] = $formData['Token'];
-        $retVal = _session_delete($dbLink, $requestData['Token'], $requestData);
-    }
+    $retVal = _session_delete($dbLink, $sessionInfo['token'], $requestData);
 	// whatever happens, clear out the existing session to start cleanly
 	// destroy the session
 	session_destroy();
@@ -57,15 +56,15 @@ if (!empty(session_id())){
 }
 
 // format form parameters for call to post session
-$requestData['username'] = $formData['username'];
-$requestData['password'] = $formData['password'];
+$requestData = array();
+$requestData['username'] = $sessionInfo['parameters']['username'];
+$requestData['password'] = $sessionInfo['parameters']['password'];
 
 $successUrl = '/clinicDash.php';
 $errorUrl = '/clinicLogin.php';
 
 $dbLink = _openDBforUI($requestData, $errorUrl);
 profileLogCheckpoint($profileData,'DB_OPEN');
-
 
 switch ($_SERVER['REQUEST_METHOD']) {
 	case 'POST':
@@ -78,7 +77,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		$retVal['error']['requestData'] = $requestData;
 		$retVal['httpResponse'] = 405;
 		$retVal['httpReason']	= "Method not supported.";
-		logApiError($formData, $retVal, __FILE__ );	
+		logApiError($sessionInfo['parameters'], $retVal, __FILE__ );
 		break;
 }
 // close the DB link until next time
@@ -100,10 +99,10 @@ if ($retVal['httpResponse'] == 201) {
 	$errorUrl .= ((strpos($errorUrl, '?') === FALSE) ? '?' : '&' );
 	$errorUrl .= 'msg=LOGIN_FAILURE';
 	$retVal['error']['redirectUrl'] = $errorUrl;
-	logApiError($formData, $retVal, __FILE__ );	
+	logApiError($sessionInfo['parameters'], $retVal, __FILE__ );
 	header('httpReason: username or password not valid.');
 	header('Location: '.$errorUrl);
 }
-profileLogClose($profileData, __FILE__, $formData);
+profileLogClose($profileData, __FILE__, $sessionInfo['parameters']);
 return;
-?>
+//EOF

@@ -33,50 +33,30 @@ if (basename(__FILE__) == basename($_SERVER['SCRIPT_NAME'])) {
 	exit;	
 }
 require_once dirname(__FILE__).'/piClinicConfig.php';
+require_once dirname(__FILE__).'/../api/api_common.php';
 
 // Constants used by UI files
 if (!defined('UI_COMMON_CONSTANTS')) {
 	define('UI_COMMON_CONSTANTS', 'ui_common_constants', false);
-	
 	define('RPT_SHOW_DATA', 2, false);
 	define('RPT_SHOW_REPORT', 1, false);
 
 }
 /*
-*	Log UI error
-
-function logUiError($inputParamList, $error, $scriptFile = 'NotSpecified' ,$username = 'NotSpecified') {
-	$logFileName =  API_LOG_FILEPATH . "cts-error-" . date ('Y-m') . ".jlog";
-	$logFileTimeStamp = date ( 'c' ); //  ISO 8601 date format
-	// open the file for append access and create a new one if this one doesn't exist
-	$logFileHandle = fopen ($logFileName, "a+", false);
-	if ($logFileHandle) {
-		$logRecord = [];
-		$logRecord['type'] = 'uierror';
-		$logRecord['time'] = date ( 'c' ); //  ISO 8601 date format
-		$logRecord['file'] = $scriptFile;
-		if (empty($inputParamList)) {
-			$inputParamList = $_SERVER['QUERY_STRING'];
-		}
-		$logRecord['params'] = $inputParamList;
-		$logRecord['user'] = $username;
-		$logRecord['method'] = $_SERVER['REQUEST_METHOD'];
-		$logRecord['addr'] = $_SERVER['REMOTE_ADDR'];
-		$logRecord['referrer'] = (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
-		if (empty($error)) {
-			$error = '';
-		}
-		$logRecord['error'] = $error;
-		// write result to file
-		fwrite ($logFileHandle, json_encode($logRecord)."\n");
-		fclose ($logFileHandle);
-		return true;
-	} else {
-		// not sure what to do if the log file doesn't open
-		return false;
-	}
+ *  returns information about the current UI session
+ */
+function getUiSessionInfo() {
+    $sessionInfo = array('token'=> null, 'sessionLanguage'=> UI_DEFAULT_LANGUAGE, 'username' => null);
+    // Get the session info
+    session_start();
+    if (!empty($_SESSION)) {
+        $sessionInfo['token'] = $_SESSION['token'];
+        $sessionInfo['username']  = $_SESSION['username'];
+        $sessionInfo['sessionLanguage'] = $_SESSION['sessionLanguage'];
+    }
+    $sessionInfo['parameters'] = readRequestData();
+    return $sessionInfo;
 }
-*/
 /*
 *	returns the language to use for UI strings
 */
@@ -102,6 +82,7 @@ function checkLanguageSupported($langIdArg) {
 	}
 	return "";	// return an empty string if no match	
 }
+
 function getUiLanguage ($requestData){
 	// set page UI language
 	//  follow this sequence:

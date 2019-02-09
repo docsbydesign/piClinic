@@ -31,16 +31,18 @@ require_once('./api/api_common.php');
 require_once('./shared/ui_common.php');
 require_once('./shared/headTag.php');
 
-$requestData = readRequestData ();
-$pageLanguage = getUiLanguage ($requestData);
+$sessionInfo = getUiSessionInfo();
+// $pageLanguage is used by the UI string include files.
+$pageLanguage = $sessionInfo['sessionLanguage'];
 // load the strings for the page language
 //	assumes $pageLanguage contains a valid language
 require_once ('./uitext/clinicLoginText.php');
+
 $loginData = array();
 $loginData['username'] = '';
 $loginData['password'] = '';
 ?>
-<?= pageHtmlTag($pageLanguage) ?>
+<?= pageHtmlTag($sessionInfo['sessionLanguage']) ?>
 <?= pageHeadTag(TEXT_PAGE_TITLE) ?>
 <body>
 	<?= piClinicTag(); ?>
@@ -56,7 +58,7 @@ $loginData['password'] = '';
 			<p><label class="piClinicFieldLabel"><?= TEXT_LOGIN_PASSWORD ?>:</label><br>
 				<?= dbFieldTextInput ($loginData, "password", TEXT_LOGIN_PASSWORD_PLACEHOLDER, true, false, 'password', 'piClinicEdit', 128, 'current-password') ?>
 			</p>
-			<?= (!empty($requestData['lang']) ? '<input type="hidden" id="langField" name="lang" value="'.$pageLanguage.'" >': "") ?>
+			<?= (!empty($sessionInfo['sessionLanguage']) ? '<input type="hidden" id="langField" name="lang" value="'.$sessionInfo['sessionLanguage'].'" >': "") ?>
 			<p class="piClinicButton"><button type="submit"><?= TEXT_LOGIN_SUBMIT_BUTTON ?></button></p>
 		</form>
 	</div>

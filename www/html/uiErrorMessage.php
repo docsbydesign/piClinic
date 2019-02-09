@@ -92,4 +92,4 @@ if(isset($pageLanguage)) {
 		echo '</div>';
 	}
 }
-?>
+//EOF

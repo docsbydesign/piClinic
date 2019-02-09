@@ -38,20 +38,20 @@ require_once './shared/profile.php';
 require_once './shared/security.php';
 require_once './shared/ui_common.php';
 
-$requestData = readRequestData ();
-$apiUserToken = getTokenFromHeaders();
-session_Start();
+$sessionInfo = getUiSessionInfo();
 
-$lang = $_SESSION['sessionLanguage'];
+// $pageLanguage is used by the UI string include files.
+$pageLanguage = $sessionInfo['sessionLanguage'];
+// *************** HTML starts here ********************
 ?>
-<?= pageHtmlTag($lang) ?>
+<?= pageHtmlTag($sessionInfo['sessionLanguage']) ?>
 <?= pageHeadTag('TEST Clinic Dash') ?>
 <body>
 <h1>Clinic Dash</h1>
 <pre>
-<?= json_encode(['apiUserToken' => $apiUserToken], JSON_PRETTY_PRINT) ?><br>
+<?= json_encode(['apiUserToken' => $sessionInfo['token']], JSON_PRETTY_PRINT) ?><br>
 <?= json_encode($_SESSION, JSON_PRETTY_PRINT) ?><br>
-<?= json_encode(['pageLanguage' => getUiLanguage($requestData)]) ?>
+<?= json_encode(['pageLanguage' => $sessionInfo['sessionLanguage']]) ?>
 </pre>
 <p><a href="/endUiSession.php" title="Log out and end session">Log out</a></p>
 </body>

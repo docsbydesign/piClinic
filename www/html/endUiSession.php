@@ -26,6 +26,7 @@
  *********************/
 require_once './shared/dbUtils.php';
 require_once './shared/piClinicConfig.php';
+require_once './shared/ui_common.php';
 require_once './api/api_common.php';
 require_once './api/session_common.php';
 require_once './api/session_delete.php';
@@ -35,15 +36,14 @@ require_once './shared/profile.php';
 $profileData = [];
 profileLogStart ($profileData);
 
-// get the query paramater data from the request 
-$formData = readRequestData();
-$requestData = [];
+// get the query paramater data from the request
+$sessionInfo = getUiSessionInfo();
 
 // redirect to this page whether successful or not
 $errorUrl =
     $redirectUrl = '/clinicLogin.php';
 
-$dbLink = _openDBforUI($requestData, $errorUrl);
+$dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 profileLogCheckpoint($profileData,'DB_OPEN');
 
 // format form parameters for call to post session
@@ -58,15 +58,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
 	case 'GET':
 	case 'POST':
 	case 'DELETE':
-		$retVal = _session_delete($dbLink, $apiUserToken, $requestData);
+		$retVal = _session_delete($dbLink, $apiUserToken, $sessionInfo['parameters']);
 		break;
 			
 	default:
 		$retVal['contentType'] = 'Content-Type: application/json; charset=utf-8';
-		$retVal['error']['requestData'] = $requestData;
+		$retVal['error']['requestData'] = $sessionInfo['parameters'];
 		$retVal['httpResponse'] = 405;
 		$retVal['httpReason']	= "Method not supported.";
-		logApiError($formData, $retVal, __FILE__ );	
+		logApiError($sessionInfo['parameters'], $retVal, __FILE__ );
 		break;
 }
 // close the DB link until next time
@@ -89,11 +89,11 @@ setcookie(session_name(), '', time() - 3600, $params['path'], $params['domain'],
 if ($retVal['httpResponse'] == 200) {
 	header("httpReason: Session ended.");
 } else {
-	logApiError($formData, $retVal, __FILE__ );	
+	logApiError($sessionInfo['parameters'], $retVal, __FILE__ );
 	header("httpReason: Error encountered termiating session.");
 }
 // redirect to success URL
 header("Location: ".$redirectUrl);
-profileLogClose($profileData, __FILE__, $formData);
+profileLogClose($profileData, __FILE__, $sessionInfo['parameters']);
 return;
-?>
+//EOF
