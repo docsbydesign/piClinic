@@ -100,26 +100,19 @@
 						}
 					],
 					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "X-piClinic-token",
-								"value": "{{uiSessionToken}}",
-								"type": "text"
-							}
-						],
+						"method": "POST",
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/session.php",
+							"raw": "{{host}}/endUiSession.php",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"session.php"
+								"endUiSession.php"
 							]
 						}
 					},
