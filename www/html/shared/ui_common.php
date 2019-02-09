@@ -44,7 +44,7 @@ if (!defined('UI_COMMON_CONSTANTS')) {
 }
 /*
 *	Log UI error
-*/
+
 function logUiError($inputParamList, $error, $scriptFile = 'NotSpecified' ,$username = 'NotSpecified') {
 	$logFileName =  API_LOG_FILEPATH . "cts-error-" . date ('Y-m') . ".jlog";
 	$logFileTimeStamp = date ( 'c' ); //  ISO 8601 date format
@@ -76,6 +76,7 @@ function logUiError($inputParamList, $error, $scriptFile = 'NotSpecified' ,$user
 		return false;
 	}
 }
+*/
 /*
 *	returns the language to use for UI strings
 */

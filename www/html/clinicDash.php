@@ -28,6 +28,7 @@
 header('Content-type: text/html; charset=utf-8');
 // include files
 require_once './shared/piClinicConfig.php';
+require_once './shared/headTag.php';
 require_once './shared/dbUtils.php';
 require_once './api/api_common.php';
 require_once './api/session_common.php';
@@ -41,8 +42,10 @@ $requestData = readRequestData ();
 $apiUserToken = getTokenFromHeaders();
 session_Start();
 
+$lang = $_SESSION['sessionLanguage'];
 ?>
-<html>
+<?= pageHtmlTag($lang) ?>
+<?= pageHeadTag('TEST Clinic Dash') ?>
 <body>
 <h1>Clinic Dash</h1>
 <pre>
@@ -50,5 +53,6 @@ session_Start();
 <?= json_encode($_SESSION, JSON_PRETTY_PRINT) ?><br>
 <?= json_encode(['pageLanguage' => getUiLanguage($requestData)]) ?>
 </pre>
+<p><a href="/endUiSession.php" title="Log out and end session">Log out</a></p>
 </body>
 </html>
