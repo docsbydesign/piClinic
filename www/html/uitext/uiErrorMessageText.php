@@ -61,7 +61,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	define('TEXT_MESSAGE_ACCESS_FAILURE','No tiene permiso para ver la última página. Para verla, iniciar una sesión con otro usuario.',false);
 	define('TEXT_MESSAGE_DATABASE_OPEN_ERROR','Error con el servidor. El base de datos no abrió.',false);
-	define('TEXT_MESSAGE_GENERIC','Hubo un problema con el último cambio.  Revisa los datos y intenta de nuevo.',false);
+	define('TEXT_MESSAGE_GENERIC','Hubo un problema con el último cambio. Revisa los datos y intenta de nuevo.',false);
 	define('TEXT_MESSAGE_INTERNAL_ERROR','El sistema encontró un error grave.',false);
 	define('TEXT_MESSAGE_LOGIN_FAILURE','Usuario o contraseña no está correcto.',false);
 	define('TEXT_MESSAGE_NO_PATIENT_CREATED','No pude crear un expediente del paciente nuevo. Revisa los datos y intenta de nuevo.',false);

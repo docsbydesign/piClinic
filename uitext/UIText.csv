@@ -40,6 +40,7 @@ TEXT_BLANK_VISIT_OPTION,(Select the visit type),(Escoge el tipo de la atención)
 TEXT_BLOODTYPE_LABEL,Blood Type,Tipo de Sangre
 TEXT_CANCEL_EDIT,Cancel,Cancelar
 TEXT_CANCEL_NEW_VISIT,Cancel,Cancelar
+TEXT_CANCEL_SEARCH,Cancel,Cancelar
 TEXT_CANCEL_VISIT_EDIT,Cancel,Cancelar
 TEXT_CITY_LABEL,City,Municipio
 TEXT_CLINICPATIENTID_LABEL,Patient ID,Identidad del paciente
@@ -266,7 +267,7 @@ TEXT_LT_1MO_S,Less than 1 mon.-subsequent,Menores de 1 mes subsiguiente
 TEXT_LT_5YR,Less than 5 years,Menores de 5 años
 TEXT_MESSAGE_ACCESS_FAILURE,"You do not have access to the last page.<br>To view that page, log in with a different username.","No tiene permiso para ver la última página. Para verla, iniciar una sesión con otro usuario."
 TEXT_MESSAGE_DATABASE_OPEN_ERROR,Server Error - Database not opened.,Error con el servidor. El base de datos no abrió.
-TEXT_MESSAGE_GENERIC,There was a problem with the last entry. Check the data and try again.,Hubo un problema con el último cambio.  Revisa los datos y intenta de nuevo.
+TEXT_MESSAGE_GENERIC,There was a problem with the last entry. Check the data and try again.,Hubo un problema con el último cambio. Revisa los datos y intenta de nuevo.
 TEXT_MESSAGE_INTERNAL_ERROR,A serious internal error occured.,El sistema encontró un error grave.
 TEXT_MESSAGE_LOGIN_FAILURE,Username or password is not correct.,Usuario o contraseña no está correcto.
 TEXT_MESSAGE_NO_IMAGE_UPDATED,"The image was not updated. There was an error in the data entered in the form, possibly no file was specified. Check each entry and try again.",El imagen no fue cambiado. Hay un error en los datos del formulario. Revisalos bien y inténtalo de nuevo.
@@ -511,7 +512,7 @@ TEXT_REPORT_WEEKDAY_7,Sunday,Domingo
 TEXT_REPORT_WEEKDAY_LABEL,Day of the week,Día de la semana
 TEXT_REPORT_YEAR_LABEL,Year,Año
 TEXT_REPORT_YEAR_PLACEHOLDER,Report year (YYYY),Año del informe(AAAA)
-TEXT_RETURN_TO_SEARCH_LINK,Try again,Intentar de nuevo
+TEXT_RETURN_TO_SEARCH_LINK,Search again,Buscar de nuevo
 TEXT_RETURN_VISIT_SELECT,No,Subsiguiente
 TEXT_RETURN_VISIT_TEXT,No,Subsiguiente
 TEXT_RH_TOTAL,Total,Total
@@ -593,11 +594,10 @@ TEXT_SEX_LABEL,Sex (M/F),Sexo (H/M)
 TEXT_SEX_OPTION_F,F,M
 TEXT_SEX_OPTION_M,M,H
 TEXT_SEX_OPTION_X,X,X
-TEXT_SEX_OPTION_X,X,X
 TEXT_SHOWING_ONLY_END_EVENTS,Only \'end\' events are listed.,Sólo los eventos llamado \'end\' están listado.
 TEXT_SHOW_PATIENT_INFO,Show patient details,Mostrar los detalles del paciente
-TEXT_SHOW_PATIENT_SUBMIT_BUTTON,Continue,Sigue
-TEXT_SHOW_PATIENT_SUBMIT_BUTTON,Show info,Mostrar la información
+TEXT_SHOW_PATIENT_SUBMIT_BUTTON,Search,Buscar
+TEXT_SHOW_PATIENT_INFO_BUTTON,Show info,Mostrar la información
 TEXT_SHOW_REPORT_BUTTON,Show report,Mostrar informe
 TEXT_SHOW_VISIT_INFO,Show visit details,Mostrar los detalles de la visita
 TEXT_STAFF_ACCESS_LABEL,piClinic system permission,Permisso para acessar los datos del sistema piClinic

@@ -88,7 +88,7 @@ if (!empty($sessionInfo['parameters']['ata'])) {
         return;
     }
 } else {
-	$cancelLink = '/ptSearch.php';
+    $cancelLink = '/clinicDash.php';
 	$addNewLink = '/ptAddEdit.php';
 }
 
@@ -155,10 +155,14 @@ if ($patientInfo['count'] == 1) {
 	$ptArray = $patientInfo['data'];
 }
 	
-function writeTopicMenu ($cancel, $new) {
+function writeTopicMenu ($cancel, $new, $sessionInfo) {
 	$topicMenu = '<div id="topicMenuDiv" class="noprint">'."\n";
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";
-	$topicMenu .= '<li class="firstLink"><a href="'.$cancel.'">'.TEXT_RETURN_TO_SEARCH_LINK.'</a></li>'."\n";
+    $topicMenu .= '<li class="firstLink"><a href="'.$cancel.'">'.TEXT_CANCEL_SEARCH.'</a></li>'."\n";
+    $topicMenu .= '<li>'.
+        '<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">'.TEXT_RETURN_TO_SEARCH_LINK.': '.
+        dbFieldTextInput ($sessionInfo['parameters'], "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true).
+        '&nbsp;<button type="submit">'.TEXT_SHOW_PATIENT_SUBMIT_BUTTON.'</button></form></li>';
 	$topicMenu .= '<li><a href="'.$new.'">'.
 		TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON.'</a></li>'."\n";
 	$topicMenu .= '</ul></div>'."\n";
@@ -173,7 +177,7 @@ function writeTopicMenu ($cancel, $new) {
 	<?php require ('uiErrorMessage.php') ?>
 	<?= piClinicAppMenu(null, $pageLanguage) ?>
 	<div class="pageBody">
-	<?= writeTopicMenu ($cancelLink,$addNewLink) ?>
+	<?= writeTopicMenu ($cancelLink, $addNewLink, $sessionInfo) ?>
 	<div id="PatientList">
 		<h1 class="pageHeading"><?= TEXT_PATIENT_SEARCH_RESULTS_HEADING ?></h1>
 <?php
