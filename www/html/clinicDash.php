@@ -38,8 +38,10 @@ require_once './shared/profile.php';
 require_once './shared/security.php';
 require_once './shared/ui_common.php';
 
+// get the query parameter data from the request
+$requestData = readRequestData();
+// get the current session info (if any)
 $sessionInfo = getUiSessionInfo();
-
 // $pageLanguage is used by the UI string include files.
 $pageLanguage = $sessionInfo['pageLanguage'];
 require_once './uitext/clinicDashText.php';
@@ -58,7 +60,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 <body>
     <?= piClinicTag(); ?>
     <?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
-    <?php require ('uiErrorMessage.php') ?>
+    <?php require ('uiErrorMessage.php'); ?>
     <h1>Clinic Dash</h1>
     <pre>
     <?= json_encode(['apiUserToken' => $sessionInfo['token']], JSON_PRETTY_PRINT) ?><br>

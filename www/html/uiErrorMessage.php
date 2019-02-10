@@ -20,9 +20,14 @@
  *
  */
 /*
-*	Code fragment to decode and display error message text
-* 		as a div inline 
-*
+ *
+ *	Code fragment to decode and display error message text
+ * 		as a div inline
+ *
+ *      ASSUMES:
+ *          $requestData has been initialized
+ *
+ *
 */
 // check to make sure this file wasn't called directly
 //  it must be called from a script that supports access checking
@@ -91,5 +96,7 @@ if (isset($pageLanguage)) {
         unset ($requestData['msg']);
 		echo '</div>';
 	}
+} else {
+    echo "<!-- No page language set --!>\n";
 }
 //EOF

@@ -47,7 +47,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	define('TEXT_MESSAGE_DATABASE_OPEN_ERROR','Server Error - Database not opened.',false);
 	define('TEXT_MESSAGE_GENERIC','There was a problem with the last entry. Check the data and try again.',false);
 	define('TEXT_MESSAGE_INTERNAL_ERROR','A serious internal error occured.',false);
-	define('TEXT_MESSAGE_LOGIN_FAILURE','Username or password not correct.',false);
+	define('TEXT_MESSAGE_LOGIN_FAILURE','Username or password is not correct.',false);
 	define('TEXT_MESSAGE_NO_PATIENT_CREATED','Could not create a new patient record. Check the data and try again.',false);
 	define('TEXT_MESSAGE_NO_PATIENT_FOUND','Could not find any patients that match.',false);
 	define('TEXT_MESSAGE_NO_PATIENT_UPDATED','Could not update the patient\'s info. Check your changes and try again.',false);
