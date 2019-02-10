@@ -41,7 +41,7 @@ require_once './shared/ui_common.php';
 $sessionInfo = getUiSessionInfo();
 
 // $pageLanguage is used by the UI string include files.
-$pageLanguage = $sessionInfo['sessionLanguage'];
+$pageLanguage = $sessionInfo['pageLanguage'];
 // *************** HTML starts here ********************
 ?>
 <?= pageHtmlTag($sessionInfo['sessionLanguage']) ?>
@@ -51,7 +51,8 @@ $pageLanguage = $sessionInfo['sessionLanguage'];
 <pre>
 <?= json_encode(['apiUserToken' => $sessionInfo['token']], JSON_PRETTY_PRINT) ?><br>
 <?= json_encode($_SESSION, JSON_PRETTY_PRINT) ?><br>
-<?= json_encode(['pageLanguage' => $sessionInfo['sessionLanguage']]) ?>
+<?= json_encode($sessionInfo, JSON_PRETTY_PRINT) ?><br>
+<?= json_encode(['pageLanguage' => $pageLanguage]) ?>
 </pre>
 <p><a href="/endUiSession.php" title="Log out and end session">Log out</a></p>
 </body>

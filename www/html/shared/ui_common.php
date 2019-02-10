@@ -46,15 +46,18 @@ if (!defined('UI_COMMON_CONSTANTS')) {
  *  returns information about the current UI session
  */
 function getUiSessionInfo() {
-    $sessionInfo = array('token'=> null, 'sessionLanguage'=> UI_DEFAULT_LANGUAGE, 'username' => null);
+    $sessionInfo = array('token'=> null, 'username' => null, 'sessionLanguage'=> UI_DEFAULT_LANGUAGE, 'pageLanguage'=> UI_DEFAULT_LANGUAGE);
     // Get the session info
-    session_start();
+    if (empty(session_id())){
+        session_start();
+    }
     if (!empty($_SESSION)) {
         $sessionInfo['token'] = $_SESSION['token'];
         $sessionInfo['username']  = $_SESSION['username'];
         $sessionInfo['sessionLanguage'] = $_SESSION['sessionLanguage'];
     }
     $sessionInfo['parameters'] = readRequestData();
+    $sessionInfo['pageLanguage'] = getUiLanguage($sessionInfo['parameters']);
     return $sessionInfo;
 }
 /*
@@ -99,7 +102,7 @@ function getUiLanguage ($requestData){
 	}
 	//      2. Check the session language
     if (empty($pageLanguage)) {
-        if (empty($_SESSION)) {
+        if (empty(session_id())) {
             session_start();
         }
         if (!empty($_SESSION) && !empty($_SESSION['sessionLanguage'])) {

@@ -48,17 +48,11 @@ profileLogCheckpoint($profileData,'DB_OPEN');
 
 // format form parameters for call to post session
 
-$apiUserToken = getTokenFromHeaders();
-if ($apiUserToken == null) {
-    session_Start();
-    $apiUserToken = $_SESSION['token'];
-}
-
 switch ($_SERVER['REQUEST_METHOD']) {
 	case 'GET':
 	case 'POST':
 	case 'DELETE':
-		$retVal = _session_delete($dbLink, $apiUserToken, $sessionInfo['parameters']);
+		$retVal = _session_delete($dbLink, $sessionInfo['token'], $sessionInfo['parameters']);
 		break;
 			
 	default:

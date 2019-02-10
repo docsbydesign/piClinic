@@ -33,7 +33,7 @@ require_once('./shared/headTag.php');
 
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
-$pageLanguage = $sessionInfo['sessionLanguage'];
+$pageLanguage = $sessionInfo['pageLanguage'];
 // load the strings for the page language
 //	assumes $pageLanguage contains a valid language
 require_once ('./uitext/clinicLoginText.php');

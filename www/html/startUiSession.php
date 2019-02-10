@@ -86,8 +86,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
 if ($retVal['httpResponse'] == 201) {
 	// session created successfully so open PHP session
 	//  and redirect to home page
-	session_start();
-	$_SESSION['token'] = $retVal['data']['token'];
+    if (empty(session_id())){
+        session_start();
+    }
+    $_SESSION['token'] = $retVal['data']['token'];
 	$_SESSION['username'] = $retVal['data']['username'];
 	$_SESSION['sessionLanguage'] = $retVal['data']['sessionLanguage'];
 
