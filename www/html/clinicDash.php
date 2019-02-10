@@ -61,6 +61,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
     <?= piClinicTag(); ?>
     <?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
     <?php require ('uiErrorMessage.php'); ?>
+    <?= piClinicAppMenu(HOME_PAGE, $pageLanguage) ?>
     <h1>Clinic Dash</h1>
     <pre>
     <?= json_encode(['apiUserToken' => $sessionInfo['token']], JSON_PRETTY_PRINT) ?><br>
