@@ -358,7 +358,7 @@ TEXT_PATIENT_ID_LABEL,"Patient, Visit, or Family ID","Número del paciente, visi
 TEXT_PATIENT_ID_LABEL,Clinical History Number,Número de historia clínica
 TEXT_PATIENT_ID_LABEL,Lookup patient or visit,Buscar paciente o visita
 TEXT_PATIENT_ID_LABEL,Patient ID,Identidad del paciente
-TEXT_PATIENT_ID_PLACEHOLDER,New patient\'s clinc ID,Identidad del paciente
+TEXT_PATIENT_ID_PLACEHOLDER,Patient\'s name or ID,Identidad o nombre del paciente
 TEXT_PATIENT_ID_PLACEHOLDER,The ID number to search,El número para buscar
 TEXT_PATIENT_ID_PLACEHOLDER,The patient\'s name or clinic ID,El nombre o número del paciente
 TEXT_PATIENT_IMAGE_NOT_SPECIFIED,Image to delete was not specified,El imagen para borrar no estuvo especificado
@@ -479,6 +479,7 @@ TEXT_REPORT_MONTH_LABEL,Month,Mes
 TEXT_REPORT_MONTH_LABEL,Month,Mes
 TEXT_REPORT_MONTH_PLACEHOLDER,Report month (MM),Mes del informe (MM)
 TEXT_REPORT_NO_DATA,No data for this month,No hay datos para este mes
+TEXT_REPORT_PAGE_TITLE,Clinic Reports,Informes de la Clínica
 TEXT_REPORT_PATIENT_COUNT_LABEL,Patients seen,Paceientes atendidos
 TEXT_REPORT_PATIENT_ID_LABEL,Patient ID,Número de identidad del paciente
 TEXT_REPORT_PATIENT_NAME_LABEL,Patient name,Nombre del paciente

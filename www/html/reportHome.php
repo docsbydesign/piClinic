@@ -15,17 +15,19 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/MercerU-TCO/CTS/blob/master/LICENSE.
+ *  along with piClinic Console software at https://github.com/MercerU-TCO/CTS/blob/master/LICENSE. 
  *	If not, see <http://www.gnu.org/licenses/>.
  *
  */
 /*
-*	clinicDash
-*		Starts an authenticated session
+*
+*	Report Dashboard (home page)
+*
 *
 */
 // set charset header
 header('Content-type: text/html; charset=utf-8');
+// include files 
 // include files
 require_once './shared/piClinicConfig.php';
 require_once './shared/headTag.php';
@@ -44,44 +46,25 @@ $requestData = readRequestData();
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
 $pageLanguage = $sessionInfo['pageLanguage'];
-require_once './uitext/clinicDashText.php';
+require_once ('./uitext/reportHomeText.php');
 
 // open session variables and check for access to this page
 $pageAccessRequired = PAGE_ACCESS_READONLY;
 $referrerUrlOverride = NO_ACCESS_URL;
 require './uiSessionInfo.php';
-
-profileLogCheckpoint($profileData,'CODE_COMPLETE');
-
-// *************** HTML starts here ********************
 ?>
-<?= pageHtmlTag($sessionInfo['sessionLanguage']) ?>
-<?= pageHeadTag(TEXT_CLINIC_DASH_PAGE_TITLE) ?>
+<?= pageHtmlTag($pageLanguage) ?>
+<?= pageHeadTag(TEXT_REPORT_PAGE_TITLE) ?>
 <body>
-    <?= piClinicTag(); ?>
-    <?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
-    <?php require ('uiErrorMessage.php'); ?>
-    <?= piClinicAppMenu(HOME_PAGE, $pageLanguage) ?>
-    <div class="pageBody">
-        <div id="PatientLookupDiv" class="noprint">
-            <form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">
-                <p><label><?= TEXT_PATIENT_ID_LABEL ?>:</label><br>
-                    <?= dbFieldTextInput ($requestData, "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true) ?>
-                    <button type="submit"><?= TEXT_SHOW_PATIENT_SUBMIT_BUTTON ?></button>
-                </p>
-            </form>
-            <hr>
-        </div>
-        <div id="ClinicVisitsDiv">
-            <h1>Clinic Dash</h1>
-            <pre>
-<?= json_encode(['apiUserToken' => $sessionInfo['token']], JSON_PRETTY_PRINT) ?><br>
-<?= json_encode($_SESSION, JSON_PRETTY_PRINT) ?><br>
-<?= json_encode($sessionInfo, JSON_PRETTY_PRINT) ?><br>
-<?= json_encode(['pageLanguage' => $pageLanguage]) ?>
-            </pre>
-            <p><a href="/endUiSession.php" title="Log out and end session">Log out</a></p>
-        </div>
-    </div>
+	<?= piClinicTag(); ?>
+	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
+	<?php require ('uiErrorMessage.php') ?>
+	<?= piClinicAppMenu(REPORT_PAGE, $pageLanguage) ?>
+	<div class="pageBody">
+		<h1 class="pageHeading"><?= TEXT_REPORT_PAGE_TITLE ?></h1>
+		<ul class="optionList">
+            <li>No Reports yet...</li>
+		</ul>
+	</div>
 </body>
 </html>

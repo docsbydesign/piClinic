@@ -29,23 +29,14 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
-	define('TEXT_CLINIC_DASH_PAGE_TITLE','TEXT_CLINIC_DASH_PAGE_TITLE',false);
-	define('TEXT_PATIENT_ID_LABEL','TEXT_PATIENT_ID_LABEL',false);
-	define('TEXT_PATIENT_ID_PLACEHOLDER','TEXT_PATIENT_ID_PLACEHOLDER',false);
-	define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','TEXT_SHOW_PATIENT_SUBMIT_BUTTON',false);
+	define('TEXT_REPORT_PAGE_TITLE','TEXT_REPORT_PAGE_TITLE',false);
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	define('TEXT_CLINIC_DASH_PAGE_TITLE','Clinic information',false);
-	define('TEXT_PATIENT_ID_LABEL','Patient, Visit, or Family ID',false);
-	define('TEXT_PATIENT_ID_PLACEHOLDER','Patient\'s name or ID',false);
-	define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','Continue',false);
+	define('TEXT_REPORT_PAGE_TITLE','Clinic Reports',false);
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	define('TEXT_CLINIC_DASH_PAGE_TITLE','Información de la clínica',false);
-	define('TEXT_PATIENT_ID_LABEL','Número del paciente, visita, o familia',false);
-	define('TEXT_PATIENT_ID_PLACEHOLDER','Identidad o nombre del paciente',false);
-	define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','Sigue',false);
+	define('TEXT_REPORT_PAGE_TITLE','Informes de la Clínica',false);
 }
 //EOF

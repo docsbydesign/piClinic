@@ -65,7 +65,7 @@ function piClinicTag () {
 *
 */
 define('HOME_PAGE','/clinicDash.php',false);
-define('REPORT_PAGE','/rptHome.php',false);
+define('REPORT_PAGE','/reportHome.php',false);
 define('ADMIN_PAGE','/adminHome.php',false);
 define('HELP_PAGE','/helpHome.php',false);
 function piClinicAppMenu($thisPage, $pageLanguage) {
@@ -85,7 +85,7 @@ function piClinicAppMenu($thisPage, $pageLanguage) {
 		// home menu
 		if (empty($thisPage) || (!empty($thisPage) && ($thisPage != $item['link']))) {
 			$menuDiv .= "<li".($firstLink ? " class=\"firstLink\"" : "").">\n";
-			$menuDiv .= "<a href=\"".$item['link'].(!empty($pageLanguage) ? "?lang=".$pageLanguage : "")."\">".$item['linkText']."</a>\n";
+			$menuDiv .= "<a href=\"".$item['link']."\">".$item['linkText']."</a>\n";
 			$menuDiv .= "</li>\n";
 		} else {
 			$menuDiv .= "<li class=\"currentPage".($firstLink ? " firstLink" : "")."\">\n";
@@ -98,7 +98,7 @@ function piClinicAppMenu($thisPage, $pageLanguage) {
 	}
 	$menuDiv .= "</ul></div>\n";
 	$menuDiv .= "<div id=\"commentMenu\">\n";
-	$menuDiv .= "<a href=\"/userComment.php".(!empty($pageLanguage) ? "?lang=".$pageLanguage : "")."\" title=\"".
+	$menuDiv .= "<a href=\"/userComment.php\" title=\"".
 		TEXT_CLINIC_COMMENT_TITLE. "\">".TEXT_CLINIC_COMMENT."</a>\n";
 	$menuDiv .= "</div></div><div style=\"clear: both;\"></div>";
 	return $menuDiv;
