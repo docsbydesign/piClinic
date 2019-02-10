@@ -35,8 +35,9 @@
 *
 *
 */
-function pageHeadTag ($pageTitle, $additionalMarkup=null) {
+function pageHeadTag ($pageTitle, $sessionTimeout=1440, $additionalMarkup=null) {
 	$headTag = "<head>\n";
+	$headTag .= '<meta http-equiv="refresh" content="'.$sessionTimeout.'; url=endUiSession.php">';
 	$headTag .= '<title>'.$pageTitle."</title>\n";
 	$headTag .= '<meta charset="utf-8"/>';
 	$headTag .= '<link href="/assets/css/piClinic.css" rel="stylesheet">'."\n";

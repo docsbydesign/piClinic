@@ -474,38 +474,18 @@ textarea.commentTextEdit {
 * report styles 
 */
 div.reportPage {
-
-}
-
-@page portraitReport {
-	size: letter portrait;
-}
-
-@page legalReport {
-	size: legal portrait;
-}
-
-@page legalLandscapeReport {
-	size: legal landscape;
-}
-
-@page ledgerLandscapeReport {
-	size: ledger landscape;
 }
 
 div.portraitReport {
 	width: 800px;
-	page: portraitReport;
 }
 
 div.legalReport {
 	width: 800px;
-	page: legalReport;
 }
 
 div.ledgerLandscapeReport {
 	width: 2250px;
-	page: ledgerLandscapeReport;
 }
 
 div.newPage {

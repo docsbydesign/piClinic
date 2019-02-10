@@ -28,6 +28,7 @@
 header('Content-type: text/html; charset=utf-8');
 // include files
 require_once './shared/piClinicConfig.php';
+require_once './shared/headTag.php';
 require_once './shared/dbUtils.php';
 require_once './api/api_common.php';
 require_once './api/session_common.php';
@@ -37,18 +38,22 @@ require_once './shared/profile.php';
 require_once './shared/security.php';
 require_once './shared/ui_common.php';
 
-$requestData = readRequestData ();
-$apiUserToken = getTokenFromHeaders();
-session_Start();
+$sessionInfo = getUiSessionInfo();
 
+// $pageLanguage is used by the UI string include files.
+$pageLanguage = $sessionInfo['pageLanguage'];
+// *************** HTML starts here ********************
 ?>
-<html>
+<?= pageHtmlTag($sessionInfo['sessionLanguage']) ?>
+<?= pageHeadTag('TEST Clinic Dash') ?>
 <body>
 <h1>Clinic Dash</h1>
 <pre>
-<?= json_encode(['apiUserToken' => $apiUserToken], JSON_PRETTY_PRINT) ?><br>
+<?= json_encode(['apiUserToken' => $sessionInfo['token']], JSON_PRETTY_PRINT) ?><br>
 <?= json_encode($_SESSION, JSON_PRETTY_PRINT) ?><br>
-<?= json_encode(['pageLanguage' => getUiLanguage($requestData)]) ?>
+<?= json_encode($sessionInfo, JSON_PRETTY_PRINT) ?><br>
+<?= json_encode(['pageLanguage' => $pageLanguage]) ?>
 </pre>
+<p><a href="/endUiSession.php" title="Log out and end session">Log out</a></p>
 </body>
 </html>
