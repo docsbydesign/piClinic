@@ -29,14 +29,17 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
-	define('TEXT_REPORT_PAGE_TITLE','TEXT_REPORT_PAGE_TITLE',false);
+	define('TEXT_HELP_NO_CONTENT','TEXT_HELP_NO_CONTENT',false);
+	define('TEXT_PICLINIC_HELP_PAGE_TITLE','TEXT_PICLINIC_HELP_PAGE_TITLE',false);
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	define('TEXT_REPORT_PAGE_TITLE','Clinic reports',false);
+	define('TEXT_HELP_NO_CONTENT','Help is not yet available',false);
+	define('TEXT_PICLINIC_HELP_PAGE_TITLE','piClinic help',false);
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	define('TEXT_REPORT_PAGE_TITLE','Informes de la Clínica',false);
+	define('TEXT_HELP_NO_CONTENT','La ayuda todavía no está disponible',false);
+	define('TEXT_PICLINIC_HELP_PAGE_TITLE','Ayuda para el piClinic',false);
 }
 //EOF

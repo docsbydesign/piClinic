@@ -21,7 +21,7 @@
  */
 /*
 *
-*	Report Dashboard (home page)
+*	Help home page
 *
 *
 */
@@ -36,31 +36,36 @@ require_once './shared/profile.php';
 require_once './shared/security.php';
 require_once './shared/ui_common.php';
 
+$profileData = [];
+profileLogStart ($profileData);
+
 // get the query parameter data from the request
 $requestData = readRequestData();
 // get the current session info (if any)
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
 $pageLanguage = $sessionInfo['pageLanguage'];
-require_once ('./uitext/reportHomeText.php');
+require_once ('./uitext/helpHomeText.php');
 
 // open session variables and check for access to this page
 $pageAccessRequired = PAGE_ACCESS_READONLY;
-$referrerUrlOverride = NO_ACCESS_URL;
-require './uiSessionInfo.php';
+require('uiSessionInfo.php');
+
+profileLogCheckpoint($profileData,'CODE_COMPLETE');
 ?>
 <?= pageHtmlTag($pageLanguage) ?>
-<?= pageHeadTag(TEXT_REPORT_PAGE_TITLE) ?>
+<?= pageHeadTag(TEXT_PICLINIC_HELP_PAGE_TITLE) ?>
 <body>
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(REPORT_PAGE, $pageLanguage) ?>
+	<?= piClinicAppMenu(HELP_PAGE, $pageLanguage) ?>
 	<div class="pageBody">
-		<h1 class="pageHeading"><?= TEXT_REPORT_PAGE_TITLE ?></h1>
-		<ul class="optionList">
-            <li>No Reports yet...</li>
-		</ul>
+	<div id="ReportList">
+		<h1 class="pageHeading"><?= TEXT_PICLINIC_HELP_PAGE_TITLE ?></h1>
+		<p><?= TEXT_HELP_NO_CONTENT ?></p>
+	</div>
 	</div>
 </body>
+<?php $result = profileLogClose($profileData, __FILE__, $requestData); ?>
 </html>
