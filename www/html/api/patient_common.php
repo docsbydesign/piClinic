@@ -38,7 +38,7 @@ function formatPatientNameLastFirst ($ptData) {
 	if (!empty($ptData['lastName2'])) {
 		$patientName .= ' ' . $ptData['lastName2'];
 	}
-	$patientName .= ', ' . $ptData['NameFirst'];
+	$patientName .= ', ' . $ptData['firstName'];
 	if (!empty($ptData['middleInitial'])) {
 		$patientName .= ' ' . $ptData['middleInitial'];
 		if (strlen($ptData['middleInitial']) == 1) {

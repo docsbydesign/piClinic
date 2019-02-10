@@ -39,7 +39,6 @@ $profileData = [];
 profileLogStart ($profileData);
 
 // get the query parameter data from the request
-$requestData = readRequestData();
 // get the current session info (if any)
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
@@ -68,5 +67,5 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	</div>
 	</div>
 </body>
-<?php $result = profileLogClose($profileData, __FILE__, $requestData); ?>
+<?php $result = profileLogClose($profileData, __FILE__, $sessionInfo['parameters']); ?>
 </html>

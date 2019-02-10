@@ -39,12 +39,9 @@ profileLogStart ($profileData);
 
 $sessionInfo = getUiSessionInfo();
 
-// get the query paramater data from the request
-$sessionInfo['parameters'] = readRequestData();
-
 if (!empty($sessionInfo['token'])){
 	header('DEBUG_OldSessionFound: '.session_id());
-    $retVal = _session_delete($dbLink, $sessionInfo['token'], $requestData);
+    $retVal = _session_delete($dbLink, $sessionInfo['token'], $sessionInfo['parameters']);
 	// whatever happens, clear out the existing session to start cleanly
 	// destroy the session
 	session_destroy();

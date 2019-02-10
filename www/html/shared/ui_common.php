@@ -41,15 +41,16 @@ if (!defined('UI_COMMON_CONSTANTS')) {
 	define('RPT_SHOW_DATA', 2, false);
 	define('RPT_SHOW_REPORT', 1, false);
 
-    define('MSG_NOT_FOUND',"NOT_FOUND", false);
-    define('MSG_NOT_CREATED',"NOT_CREATED", false);
-    define('MSG_NOT_UPDATED',"NOT_UPDATED", false);
-    define('MSG_PATIENT_ID_IN_USE',"PATIENT_ID_IN_USE", false);
     define('MSG_DB_OPEN_ERROR',"DB_OPEN_ERROR", false);
-    define('MSG_UNSUPPORTED',"UNSUPPORTED", false);
     define('MSG_LOGIN_FAILURE',"LOGIN_FAILURE", false);
+    define('MSG_NOT_CREATED',"NOT_CREATED", false);
+    define('MSG_NOT_FOUND',"NOT_FOUND", false);
+    define('MSG_NOT_UPDATED',"NOT_UPDATED", false);
     define('MSG_NO_ACCESS',"NO_ACCESS", false);
+    define('MSG_PATIENT_ID_IN_USE',"PATIENT_ID_IN_USE", false);
     define('MSG_REQUIRED_FIELD_MISSING',"REQUIRED_FIELD_MISSING", false);
+    define('MSG_UNSUPPORTED',"UNSUPPORTED", false);
+    define('MSG_USER_NOT_FOUND',"USER_NOT_FOUND", false);
 }
 
 
@@ -304,7 +305,7 @@ function formatAgeFromBirthdate ($birthdate, $today=null, $yrText='y', $moText='
 }
 
 function makeUrlWithQueryParams ($url, $qParams) {
-    if (!empty($qParams) && is_array($qParams) && !empty(url)) {
+    if (!empty($qParams) && is_array($qParams) && !empty($url)) {
         $qParamString = http_build_query($qParams);
         return $url . '?' . $qParamString;
     } else {

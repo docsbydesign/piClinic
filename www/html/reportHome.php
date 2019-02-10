@@ -36,8 +36,6 @@ require_once './shared/profile.php';
 require_once './shared/security.php';
 require_once './shared/ui_common.php';
 
-// get the query parameter data from the request
-$requestData = readRequestData();
 // get the current session info (if any)
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.

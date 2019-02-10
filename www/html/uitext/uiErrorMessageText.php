@@ -40,6 +40,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	define('TEXT_MESSAGE_PATIENT_ID_IN_USE','TEXT_MESSAGE_PATIENT_ID_IN_USE',false);
 	define('TEXT_MESSAGE_REQUIRED_FIELD_MISSING','TEXT_MESSAGE_REQUIRED_FIELD_MISSING',false);
 	define('TEXT_MESSAGE_UNSUPPORTED_ERROR','TEXT_MESSAGE_UNSUPPORTED_ERROR',false);
+	define('TEXT_MESSAGE_USER_NOT_FOUND','TEXT_MESSAGE_USER_NOT_FOUND',false);
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
@@ -54,6 +55,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	define('TEXT_MESSAGE_PATIENT_ID_IN_USE','Could not create a new patient record. The patient ID is already assigned.',false);
 	define('TEXT_MESSAGE_REQUIRED_FIELD_MISSING','A required field was not filled in.',false);
 	define('TEXT_MESSAGE_UNSUPPORTED_ERROR','Cannot perform the action requested.',false);
+	define('TEXT_MESSAGE_USER_NOT_FOUND','The staff member could not be found.',false);
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
@@ -68,5 +70,6 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	define('TEXT_MESSAGE_PATIENT_ID_IN_USE','No pude crear un expediente del paciente nuevo. El ID del paciente esta usado por otro paciente.',false);
 	define('TEXT_MESSAGE_REQUIRED_FIELD_MISSING','Un campo requirido no tiene datos.',false);
 	define('TEXT_MESSAGE_UNSUPPORTED_ERROR','No puede hacer la acción pedido.',false);
+	define('TEXT_MESSAGE_USER_NOT_FOUND','La persona no estuvo encontrado.',false);
 }
 //EOF

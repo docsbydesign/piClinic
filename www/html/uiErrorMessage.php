@@ -78,6 +78,10 @@ if (isset($pageLanguage)) {
 					echo TEXT_MESSAGE_REQUIRED_FIELD_MISSING;
 					break;
 
+                case MSG_USER_NOT_FOUND :
+                    echo TEXT_MESSAGE_USER_NOT_FOUND;
+                    break;
+
 				default:
 					echo TEXT_MESSAGE_GENERIC;
 					break;

@@ -118,7 +118,7 @@ if (isset($sessionToken)){
 }
 if (isset($sessionToken) || isset($sessionUser)) {
 	$sessionDiv = '<div id="sessionDiv" class="noprint">';
-	$sessionSettings = '<a href="/staffAddEdit.php?UserEdit=true" ';
+	$sessionSettings = '<a href="/staffAddEdit.php?useredit=true" ';
 	$sessionSettings .= 'title="'.TEXT_SESSION_SETTINGS_TITLE.'">'.TEXT_SESSION_SETTINGS_LABEL. '</a>';
 	if (isset($sessionToken)) {
 		$sessionDiv .= '<p>'. $loggedInPrompt. '&nbsp;&nbsp;|&nbsp;&nbsp;';

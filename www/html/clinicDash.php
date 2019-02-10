@@ -36,8 +36,6 @@ require_once './shared/profile.php';
 require_once './shared/security.php';
 require_once './shared/ui_common.php';
 
-// get the query parameter data from the request
-$requestData = readRequestData();
 // get the current session info (if any)
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
@@ -64,7 +62,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
         <div id="PatientLookupDiv" class="noprint">
             <form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">
                 <p><label><?= TEXT_PATIENT_ID_LABEL ?>:</label><br>
-                    <?= dbFieldTextInput ($requestData, "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true) ?>
+                    <?= dbFieldTextInput ($sessionInfo['parameters'], "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true) ?>
                     <button type="submit"><?= TEXT_SHOW_PATIENT_SUBMIT_BUTTON ?></button>
                 </p>
             </form>
