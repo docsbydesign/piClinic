@@ -1,9 +1,10 @@
+USE `piclinic`;
 TRUNCATE TABLE `patient`;
 --
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`patientID`, `Active`, `ClinicPatientID`, `PatientNationalID`, `FamilyID`, `lastName`, `lastName2`, `firstName`, `middleInitial`, `Sex`, `BirthDate`, `HomeAddress1`, `HomeAddress2`, `HomeNeighborhood`, `HomeCity`, `HomeCounty`, `HomeState`, `ContactPhone`, `ContactAltPhone`, `BloodType`, `OrganDonor`, `PreferredLanguage`, `KnownAllergies`, `CurrentMedications`, `modifiedDate`, `createdDate`) VALUES
+INSERT INTO `patient` (`patientID`, `active`, `clinicPatientID`, `patientNationalID`, `familyID`, `lastName`, `lastName2`, `firstName`, `middleInitial`, `sex`, `birthDate`, `homeAddress1`, `homeAddress2`, `homeNeighborhood`, `homeCity`, `homeCounty`, `homeState`, `contactPhone`, `contactAltPhone`, `bloodType`, `organDonor`, `preferredLanguage`, `knownAllergies`, `currentMedications`, `modifiedDate`, `createdDate`) VALUES
 (1, 1, 'PT-GEN-000001', '0703-0038-00001', 'FAM000001', 'Fernández', 'Montoya', 'Yamel', 'A', 'F', '2001-07-21 00:00:00', '960 Calle Omoa', 'Apt. 131', 'Villa Santa', 'Danlí', NULL, 'El Paraíso', '111-111-0001', NULL, 'O+', 0, 'Español', 'penicillin|tetracycline|ibuprofen|naproxen|sulfa|aspirin|atracurium', NULL, '2018-05-19 21:01:57', '2018-05-19 17:01:57'),
 (2, 1, 'PT-GEN-000002', '1801-0009-00002', 'FAM000002', 'Reyna', 'Cortez', 'Nandor', 'C', 'M', '2009-01-12 00:00:00', '795 Avenida Yace', 'Apt. 626', 'La Rosa', 'Yoro', NULL, 'Yoro', '111-111-0002', NULL, 'O+', 1, 'Español', 'amoxicillin|penicillin|ibuprofen|naproxen|sulfa|insulin|vecuronium', NULL, '2018-05-19 21:01:57', '2018-05-19 17:01:57'),
 (3, 1, 'PT-GEN-000003', '0501-0566-00003', 'FAM000003', 'Tafoya', NULL, 'Domiciano', 'K', 'M', '1967-03-25 00:00:00', '716 Calle Paulaya', 'Apt. 699', 'SANDOVAL SORTO', 'San Pedro Sula', NULL, 'Cortés', '111-111-0003', NULL, 'O+', 0, 'Español', NULL, NULL, '2018-05-19 21:01:57', '2018-05-19 17:01:57'),

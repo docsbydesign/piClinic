@@ -35,7 +35,8 @@
  *			500: server error information
  *
  *********************/
-require_once 'api_common.php';
+require_once dirname(__FILE__).'/api_common.php';
+require_once dirname(__FILE__).'/../shared/logUtils.php';
 exitIfCalledFromBrowser(__FILE__);
 /*
  *  Closes a user session

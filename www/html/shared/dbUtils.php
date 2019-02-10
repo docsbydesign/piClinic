@@ -66,20 +66,55 @@ if (!defined('DB_UTILS')) {
             $retVal['error'] = $dbInfo;
             $retVal['httpResponse'] = 500;
             $retVal['httpReason']   = "Server Error - Database not opened.";
-            logApiError($requestData,
-                $retVal['httpResponse'],
-                __FILE__ ,
-                (!empty($requestData['token']) ? $requestData['token'] : "NotSpecified"),
-                'log',
-                $retVal['httpReason']);
+            $username = 'NotSpecified';
+            if (!empty($requestData['token'])) {
+                if (!empty($requestData['username'])) {
+                    $username = $requestData['username'];
+                }
+                $requestData['token'];
+            }
+            logApiError($requestData, $retVal['httpResponse'], __FILE__, $username, 'DB', $retVal['httpReason']);
             outputResults( $retVal);
             exit; // this is the end of the line if there's no DB access
         } else {
             return $dbLink;
         }
 	}
-		
-	function format_object_for_SQL_insert ($tableName, $object) {
+
+    function _openDBforUI($requestData, $errorUrl) {
+        $dbLink = _openDB();
+        $dbOpenError = mysqli_connect_errno();
+        $retVal = array();
+        $dbInfo = array();
+        if ($dbOpenError  != 0) {
+            // database not opened. Log and return an error
+            $retVal['contentType'] = CONTENT_TYPE_JSON;
+            $retVal['httpResponse'] = 500;
+            $retVal['httpReason'] = 'Server Error - Database not opened.';
+            $dbInfo['dbError'] = $dbOpenError .', '. mysqli_connect_error();
+            header('contentType: '.$retVal['contentType']);
+            header('X-piClinic-DbError: '. $dbInfo['dbError']);
+            header('X-piClinic-ErrorResponse: '.$retVal['httpResponse']);
+            header('X-piClinic-ErrorMessage: '.$retVal['httpReason']);
+            if (!empty($requestData['token'])) {
+                if (!empty($requestData['username'])) {
+                    $username = $requestData['username'];
+                }
+                $requestData['token'];
+            }
+            if (!empty($errorUrl)) {
+                // issue a redirect if there's a url to redirect
+                $redirectUrl = $errorUrl . '?msg=DB_OPEN_ERROR';
+                header('Location: '.$redirectUrl);
+            }
+            logUiError($requestData, $retVal['httpResponse'], __FILE__, $username, 'DB Open',$retVal['httpReason']);
+            exit; // this is the end of the line if there's no DB access
+        } else {
+            return $dbLink;
+        }
+    }
+
+    function format_object_for_SQL_insert ($tableName, $object) {
 		// set the dateCreated field
 		$now = new DateTime();
 		$object['createdDate'] = $now->format('Y-m-d H:i:s');
@@ -121,8 +156,18 @@ if (!defined('DB_UTILS')) {
 					$dbValString = 'NULL';
 				} else {
 					if ($quoteValues) {
-						$escapedString = str_replace("'","''",$dbVal);
-						$dbValString = '\''.$escapedString.'\'';
+                        // don't quote numbers or function names
+                        if (!is_numeric($dbVal)) {
+                            $escapedString = str_replace("'","''",$dbVal);
+                            // don't quote SQL function names
+                            if (mb_strtolower($escapedString) == 'now()') {
+                                $dbValString = $escapedString;
+                            } else {
+                                $dbValString = '\''.$escapedString.'\'';
+                            }
+                        } else {
+                            $dbValString = $dbVal;
+                        }
 					} else {
 						// note that the caller must ensure the value does not break
 						// the query string.
@@ -164,8 +209,18 @@ if (!defined('DB_UTILS')) {
 				if (empty($dbVal) && (strlen($dbVal)==0)) {
 					$dbValString = 'NULL';
 				} else {
-					$escapedString = str_replace("'","''",$dbVal);
-					$dbValString = '\''.$escapedString.'\'';
+                    // don't quote numbers or function names
+                    if (!is_numeric($dbVal)) {
+                        $escapedString = str_replace("'","''",$dbVal);
+                        // don't quote SQL function names
+                        if (mb_strtolower($escapedString) == 'now()') {
+                            $dbValString = $escapedString;
+                        } else {
+                            $dbValString = '\''.$escapedString.'\'';
+                        }
+                    } else {
+                        $dbValString = $dbVal;
+                    }
 				}
 				if ($dbCols > 0) {
 					$queryString .= ',';
@@ -253,7 +308,7 @@ if (!defined('DB_UTILS')) {
 	}
 
 	function openDbForUi ($requestData, $pageLanguage, &$dbStatus) {
-		require_once 'uiErrorMessageText.php';
+		require_once dirname(__FILE__).'/../uitext/uiErrorMessageText.php';
 		$dbInfo = array();
 		$dbLink = _openDB();
 		$dbOpenError = mysqli_connect_errno();
