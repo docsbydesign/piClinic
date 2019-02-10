@@ -156,8 +156,18 @@ if (!defined('DB_UTILS')) {
 					$dbValString = 'NULL';
 				} else {
 					if ($quoteValues) {
-						$escapedString = str_replace("'","''",$dbVal);
-						$dbValString = '\''.$escapedString.'\'';
+                        // don't quote numbers or function names
+                        if (!is_numeric($dbVal)) {
+                            $escapedString = str_replace("'","''",$dbVal);
+                            // don't quote SQL function names
+                            if (mb_strtolower($escapedString) == 'now()') {
+                                $dbValString = $escapedString;
+                            } else {
+                                $dbValString = '\''.$escapedString.'\'';
+                            }
+                        } else {
+                            $dbValString = $dbVal;
+                        }
 					} else {
 						// note that the caller must ensure the value does not break
 						// the query string.
@@ -199,8 +209,18 @@ if (!defined('DB_UTILS')) {
 				if (empty($dbVal) && (strlen($dbVal)==0)) {
 					$dbValString = 'NULL';
 				} else {
-					$escapedString = str_replace("'","''",$dbVal);
-					$dbValString = '\''.$escapedString.'\'';
+                    // don't quote numbers or function names
+                    if (!is_numeric($dbVal)) {
+                        $escapedString = str_replace("'","''",$dbVal);
+                        // don't quote SQL function names
+                        if (mb_strtolower($escapedString) == 'now()') {
+                            $dbValString = $escapedString;
+                        } else {
+                            $dbValString = '\''.$escapedString.'\'';
+                        }
+                    } else {
+                        $dbValString = $dbVal;
+                    }
 				}
 				if ($dbCols > 0) {
 					$queryString .= ',';
