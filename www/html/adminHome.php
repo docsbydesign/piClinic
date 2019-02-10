@@ -21,13 +21,12 @@
  */
 /*
 *
-*	Report Dashboard (home page)
+*	Administration Dashboard (home page)
 *
 *
 */
 // set charset header
 header('Content-type: text/html; charset=utf-8');
-// include files 
 // include files
 require_once './shared/piClinicConfig.php';
 require_once './shared/headTag.php';
@@ -36,6 +35,8 @@ require_once './api/api_common.php';
 require_once './shared/profile.php';
 require_once './shared/security.php';
 require_once './shared/ui_common.php';
+$profileData = [];
+profileLogStart ($profileData);
 
 // get the query parameter data from the request
 $requestData = readRequestData();
@@ -43,25 +44,29 @@ $requestData = readRequestData();
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
 $pageLanguage = $sessionInfo['pageLanguage'];
-require_once ('./uitext/reportHomeText.php');
+require_once ('./uitext/adminHomeText.php');
 
 // open session variables and check for access to this page
-$pageAccessRequired = PAGE_ACCESS_READONLY;
-$referrerUrlOverride = NO_ACCESS_URL;
-require './uiSessionInfo.php';
+$pageAccessRequired = PAGE_ACCESS_CLINIC;
+require('uiSessionInfo.php');
+
+profileLogCheckpoint($profileData,'CODE_COMPLETE');
 ?>
 <?= pageHtmlTag($pageLanguage) ?>
-<?= pageHeadTag(TEXT_REPORT_PAGE_TITLE) ?>
+<?= pageHeadTag(TEXT_PICLINIC_SYSTEM_PAGE_TITLE) ?>
 <body>
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(REPORT_PAGE, $pageLanguage) ?>
+	<?= piClinicAppMenu(ADMIN_PAGE, $pageLanguage) ?>
 	<div class="pageBody">
-		<h1 class="pageHeading"><?= TEXT_REPORT_PAGE_TITLE ?></h1>
-		<ul class="optionList">
-            <li>No Reports yet...</li>
+	<div id="ReportList">
+		<h1 class="pageHeading"><?= TEXT_PICLINIC_SYSTEM_PAGE_TITLE ?></h1>
+		<ul>
+            <li>No Admin actions yet...</li>
 		</ul>
 	</div>
+	</div>
 </body>
+<?php $result = profileLogClose($profileData, __FILE__, $requestData); ?>
 </html>

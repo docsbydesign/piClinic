@@ -48,6 +48,7 @@ MESSAGE;
 
 require_once dirname(__FILE__).'/piClinicConfig.php';
 require_once dirname(__FILE__).'/dbUtils.php';
+require_once dirname(__FILE__).'/logUtils.php';
 require_once dirname(__FILE__).'/../api/api_common.php';
 require_once dirname(__FILE__).'/../api/session_common.php';
 require_once dirname(__FILE__).'/../api/session_get.php';

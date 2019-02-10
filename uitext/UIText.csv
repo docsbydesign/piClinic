@@ -479,7 +479,7 @@ TEXT_REPORT_MONTH_LABEL,Month,Mes
 TEXT_REPORT_MONTH_LABEL,Month,Mes
 TEXT_REPORT_MONTH_PLACEHOLDER,Report month (MM),Mes del informe (MM)
 TEXT_REPORT_NO_DATA,No data for this month,No hay datos para este mes
-TEXT_REPORT_PAGE_TITLE,Clinic Reports,Informes de la Clínica
+TEXT_REPORT_PAGE_TITLE,Clinic reports,Informes de la Clínica
 TEXT_REPORT_PATIENT_COUNT_LABEL,Patients seen,Paceientes atendidos
 TEXT_REPORT_PATIENT_ID_LABEL,Patient ID,Número de identidad del paciente
 TEXT_REPORT_PATIENT_NAME_LABEL,Patient name,Nombre del paciente
