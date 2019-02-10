@@ -49,9 +49,11 @@ TEXT_CLINICVISITID_LABEL,Clinic visit number,Número de historia clínica
 TEXT_CLINIC_ADMIN,Admin,Admin
 TEXT_CLINIC_COMMENT,Comment,Comentario
 TEXT_CLINIC_COMMENT_TITLE,Comment on this page,Hacer un comentario de esta página
+TEXT_CLINIC_DASH_PAGE_TITLE,Clinic information,Información de la clínica
 TEXT_CLINIC_HELP,Help,Ayuda
 TEXT_CLINIC_HISTORY_ID_LABEL,Family ID,Número de historia clínica
 TEXT_CLINIC_HOME,Dashboard,Página principal
+TEXT_CLINIC_LOGIN_PAGE_TITLE,Clinic login,Iniciar sesión
 TEXT_CLINIC_REPORTS,Reports,Informes
 TEXT_CLOSE_PAGE_TITLE,Discharge patient,Cerrar la visita
 TEXT_CLOSE_VISIT,Discharge this patient,Dar de alta este paciente
@@ -63,6 +65,7 @@ TEXT_COMMENT_LIST_HEAD_CREATEDATE,Comment date,Fecha del comentario
 TEXT_COMMENT_LIST_HEAD_PAGE,Page,Página
 TEXT_COMMENT_LIST_HEAD_TEXT,Comment,Comentario
 TEXT_COMMENT_LIST_HEAD_USERNAME,Username,Usuario
+TEXT_COMMENT_PAGE_TITLE,piClinic Comment,Comentario de piClinic
 TEXT_COMMENT_PLACEHOLDER,Enter your comment about the piClinic here,Entrar su comentario del piClinic aquí
 TEXT_COMMENT_SUBMIT_BUTTON,Submit,Entregar
 TEXT_COMPLAINT_ADDITIONAL_LABEL,Additional complaint,Adicional motivo de la visita
@@ -93,6 +96,9 @@ TEXT_CONTACTPHONE_MISSING,(primary phone number not provided),(Primer número te
 TEXT_CURRENT_PATIENT_PHOTO,"Current patient photo.<br>To change, delete this photo and add the new photo.","La foto del paciente.<br>Para cambiarla, borre esta foto y agregue la nueva."
 TEXT_DAILY_LOG_DESC,Lists the patients seen in the clinic by a doctor on a specific date,Muestra los pacientes examinados por un/a medico/a en una fecha especificada
 TEXT_DAILY_LOG_TITLE,Daily Outpatient Log,Atenciones Ambulatorias
+TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
+TEXT_DAILY_PATIENT_LOG_PAGE_TITLE,Daily Outpatient Log,Atenciones Ambulatorias
+TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE,Daily Payment Log,Registros de Pagos del Día
 TEXT_DAILY_PMT_DESC,List of payments received from patients on a specified date,Registro de pagos recibidos por los pacientes durante la fecha especificada
 TEXT_DAILY_PMT_TITLE,Daily payment log,Registro de pagos del día
 TEXT_DAILY_VISIT_HEADING,Daily Outpatient Log,Atenciones Ambulatorias
@@ -277,6 +283,7 @@ TEXT_MESSAGE_UNSUPPORTED_ERROR,Cannot perform the action requested.,No puede hac
 TEXT_MONTHLY_PAGE_TITLE,Monthly Payment Log,Registro de Pagos del Mes
 TEXT_MONTHLY_PMT_DESC,List of payments received from patients during the specified month,Registro de pagos recibidos por los pacientes durante el mes especificado
 TEXT_MONTHLY_PMT_TITLE,Monthly payment report,Informe de pagos del mes
+TEXT_MONTHLY_REPORT_PAGE_TITLE_BY_POS,Monthly Report of Outpatient Care,Informe Mensual de Atenciones
 TEXT_MONTHLY_SUMMARY_BY_POS_DATA_LINK,Diagnoses tabulated in the Monthly Report of Outpatient Care,Diagnosticos tabulados en el Informe Mensual de Atenciones Ambulatorias (AT2-R)
 TEXT_MONTHLY_SUMMARY_BY_POS_DATA_TITLE,List of diagnostic codes tabulated in the Monthly Report of Outpatient Care,Lista de los codigos diagnosticos tabulados en el Informe Mensual de Atenciones Ambulatorias (AT2-R)
 TEXT_MONTHLY_SUMMARY_BY_POS_DESC,Summary of patients seen by medical professional,Resumen de pacientes atendidos por clase de profesional
@@ -327,27 +334,10 @@ TEXT_PAGE_NEW_PHOTO_TITLE,Add a patient photo,Agregar una foto del paciente
 TEXT_PAGE_NEW_TITLE,Add new staff member to piClinic,Agrega una persona nueva al sistema piClinic
 TEXT_PAGE_NEW_TITLE,New Patient,Paciente Nuevo
 TEXT_PAGE_SHOW_VISIT_TITLE,Visit image details,Detalles del imagen de la visita
-TEXT_PAGE_TITLE,Clinic information,Información de la clínica
-TEXT_PAGE_TITLE,Clinic login,Iniciar sesión
-TEXT_PAGE_TITLE,Clinic reports,Informes de la clínica
-TEXT_PAGE_TITLE,Daily Outpatient Log,Atenciones Ambulatorias
-TEXT_PAGE_TITLE,Daily Payment Log,Registros de Pagos del Día
-TEXT_PAGE_TITLE,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
-TEXT_PAGE_TITLE,Matching patients found,Pacientes encontrados
-TEXT_PAGE_TITLE,Patient Information,Información del paciente
-TEXT_PAGE_TITLE,Patient Search,Buscar Paciente
-TEXT_PAGE_TITLE,Patient Visit Details,Detalles de la visita
-TEXT_PAGE_TITLE,User comments,Comentarios de los usuarios
-TEXT_PAGE_TITLE,Visit log entry,Entrar datos del ATA
-TEXT_PAGE_TITLE,piClinic Comment,Comentario de piClinic
-TEXT_PAGE_TITLE,piClinic help,Ayuda para el piClinic
-TEXT_PAGE_TITLE,piClinic system administration,Administración del sistema piClinic
-TEXT_PAGE_TITLE,piClinic system log,Registro del sistema piClinic
-TEXT_PAGE_TITLE,piClinic users and clinic staff,Usuarios del sistema piClinic y personal de la clínica
-TEXT_PAGE_TITLE_BY_POS,Monthly Report of Outpatient Care,Informe Mensual de Atenciones
 TEXT_PARAMETER_ERROR_ACTION,Go back and try again,Volver a la página anterior y intenta de nuevo
 TEXT_PATIENTNATIONALID_LABEL,National ID,Cedula
 TEXT_PATIENTNATIONALID_PLACEHOLDER,Patient\'s National ID number,Numero de la cedula del paciente
+TEXT_PATIENTS_FOUND_PAGE_TITLE,Matching patients found,Pacientes encontrados
 TEXT_PATIENTVISITDATE_LABEL,Visit date,Fecha de la visita
 TEXT_PATIENTVISITID_LABEL,Clinical history number,Número de historia clínica
 TEXT_PATIENTVISITID_LABEL,ID,ID
@@ -373,6 +363,7 @@ TEXT_PATIENT_ID_PLACEHOLDER,The ID number to search,El número para buscar
 TEXT_PATIENT_ID_PLACEHOLDER,The patient\'s name or clinic ID,El nombre o número del paciente
 TEXT_PATIENT_IMAGE_NOT_SPECIFIED,Image to delete was not specified,El imagen para borrar no estuvo especificado
 TEXT_PATIENT_IMAGE_TYPE_NOT_SUPPORTED,The specified image type is not recognized,El tipo de imagen especificada no está reconocido
+TEXT_PATIENT_INFORMATION_PAGE_TITLE,Patient Information,Información del paciente
 TEXT_PATIENT_KNOWN_ALLERGIES_LABEL,Known allergies,Alergias conocidas
 TEXT_PATIENT_KNOWN_ALLERGIES_PLACEHOLDER,"Enter each known allergy, one allergy per line","Ingrese cada alergia conocida, una alergia por línea"
 TEXT_PATIENT_LABEL,Patient,Paciente
@@ -417,6 +408,7 @@ TEXT_PATIENT_SEARCH_NAMEMI_PLACEHOLDER,MI,Inicial
 TEXT_PATIENT_SEARCH_NAME_LABEL,Patient name,Nombre del paciente
 TEXT_PATIENT_SEARCH_NEIGHBORHOOD_PLACEHOLDER,Neighborhood,Localidad
 TEXT_PATIENT_SEARCH_NOT_FOUND_ATA,No matching patients found. Go back or add a new patient above.,No hay patientes con este ID. Volver o agregar un paciente nuevo.
+TEXT_PATIENT_SEARCH_PAGE_TITLE,Patient Search,Buscar Paciente
 TEXT_PATIENT_SEARCH_RESULTS_HEADING,Matching patients found,Pacientes encontrados
 TEXT_PATIENT_SEARCH_STATE_PLACEHOLDER,State,Departamento
 TEXT_PATIENT_SEARCH_SUBMIT_BUTTON,Show matching patients,Mostrar los pacientes que coincidan
@@ -430,6 +422,10 @@ TEXT_PAYMENT_CURRENCY,TBD,TBD
 TEXT_PAYMENT_LABEL,Payment,Pago
 TEXT_PAYMENT_PLACEHOLDER,Payment amount,Pago
 TEXT_PHONE_LABEL,Contact info,Información del contacto
+TEXT_PICLINIC_HELP_PAGE_TITLE,piClinic help,Ayuda para el piClinic
+TEXT_PICLINIC_LOG_PAGE_TITLE,piClinic system log,Registro del sistema piClinic
+TEXT_PICLINIC_SYSTEM_PAGE_TITLE,piClinic system administration,Administración del sistema piClinic
+TEXT_PICLINIC_USERS_PAGE_TITLE,piClinic users and clinic staff,Usuarios del sistema piClinic y personal de la clínica
 TEXT_POS_ALL,All,Todas
 TEXT_POS_DR_GENERAL,Doctor: General,Médico: General
 TEXT_POS_DR_SPECIALIST,Doctor: Specialist,Médico: Especialista
@@ -453,6 +449,7 @@ TEXT_REFERRAL_HEADING,Referral info,Referencia
 TEXT_REFERRAL_PLACEHOLDER,Clinic name,Nombre de la clínica
 TEXT_REFERRED_FROM_LABEL,Referred from,Recibida de
 TEXT_REFERRED_TO_LABEL,Referred to,Enviada a
+TEXT_REPORTS_PAGE_TITLE,Clinic reports,Informes de la clínica
 TEXT_REPORT_ADDRESS_LABEL,Home town,Procedencia
 TEXT_REPORT_AGE_GROUP_HEADING,Age group,Concepto
 TEXT_REPORT_AGE_LABEL,Age,Edad
@@ -652,6 +649,7 @@ TEXT_TABLE_REPORT_DOM_HEADER,Day of month,Día del mes
 TEXT_THOUSANDS_SEPARATOR,",","."
 TEXT_TYPE_LABEL,Service type,Servicio de atención
 TEXT_USERNAME_NOT_ACTIVE,Inactive username,Usuario inactivo
+TEXT_USER_COMMENTS_PAGE_TITLE,User comments,Comentarios de los usuarios
 TEXT_VALUE_NOT_SET,(not set),(vacio)
 TEXT_VALUE_NOT_SET,No data,No hay datos
 TEXT_VIEW_PATIENT,Show patient information,Mostrar información del paciente
@@ -669,6 +667,7 @@ TEXT_VISIT_DEFAULT,Test,Test
 TEXT_VISIT_DELETED_LABEL,Deleted state,Borrada o valida
 TEXT_VISIT_DELETED_SELECT_LABEL,Deleted,Borrada
 TEXT_VISIT_DELETED_TEXT,Deleted,Borrada
+TEXT_VISIT_DETAILS_PAGE_TITLE,Patient Visit Details,Detalles de la visita
 TEXT_VISIT_DISCHARGE_HEADING,Discharge,Dar de alta
 TEXT_VISIT_EDIT_ALL_FIELDS,Edit all fields or add images,Actualizar todos los datos o agregue imágenes de la visita
 TEXT_VISIT_FORM_HEADING,Patient form images,Imagines de formularios del paciente
@@ -687,6 +686,7 @@ TEXT_VISIT_LIST_HEAD_DOCTOR,Doctor,Medico
 TEXT_VISIT_LIST_HEAD_NAME,Name,Nombre
 TEXT_VISIT_LIST_HEAD_TIME,Arrived,Llegó
 TEXT_VISIT_LIST_MISSING,(missing),(no especificado)
+TEXT_VISIT_LOG_PAGE_TITLE,Visit log entry,Entrar datos del ATA
 TEXT_VISIT_MONTH_FORMAT,m,m
 TEXT_VISIT_MONTH_TEXT,m,m
 TEXT_VISIT_NOT_DELETED_TEXT,Valid,Valida

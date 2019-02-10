@@ -42,18 +42,30 @@ $sessionInfo = getUiSessionInfo();
 
 // $pageLanguage is used by the UI string include files.
 $pageLanguage = $sessionInfo['pageLanguage'];
+require_once './uitext/clinicDashText.php';
+
+// open session variables and check for access to this page
+$pageAccessRequired = PAGE_ACCESS_READONLY;
+$referrerUrlOverride = NO_ACCESS_URL;
+require './uiSessionInfo.php';
+
+profileLogCheckpoint($profileData,'CODE_COMPLETE');
+
 // *************** HTML starts here ********************
 ?>
 <?= pageHtmlTag($sessionInfo['sessionLanguage']) ?>
-<?= pageHeadTag('TEST Clinic Dash') ?>
+<?= pageHeadTag(TEXT_CLINIC_DASH_PAGE_TITLE) ?>
 <body>
-<h1>Clinic Dash</h1>
-<pre>
-<?= json_encode(['apiUserToken' => $sessionInfo['token']], JSON_PRETTY_PRINT) ?><br>
-<?= json_encode($_SESSION, JSON_PRETTY_PRINT) ?><br>
-<?= json_encode($sessionInfo, JSON_PRETTY_PRINT) ?><br>
-<?= json_encode(['pageLanguage' => $pageLanguage]) ?>
-</pre>
-<p><a href="/endUiSession.php" title="Log out and end session">Log out</a></p>
+    <?= piClinicTag(); ?>
+    <?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
+    <?php require ('uiErrorMessage.php') ?>
+    <h1>Clinic Dash</h1>
+    <pre>
+    <?= json_encode(['apiUserToken' => $sessionInfo['token']], JSON_PRETTY_PRINT) ?><br>
+    <?= json_encode($_SESSION, JSON_PRETTY_PRINT) ?><br>
+    <?= json_encode($sessionInfo, JSON_PRETTY_PRINT) ?><br>
+    <?= json_encode(['pageLanguage' => $pageLanguage]) ?>
+    </pre>
+    <p><a href="/endUiSession.php" title="Log out and end session">Log out</a></p>
 </body>
 </html>

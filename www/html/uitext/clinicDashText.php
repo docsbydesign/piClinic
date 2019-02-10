@@ -1,7 +1,6 @@
 <?php
 /*
- *
- * Source file: C:\Users\BobW\Documents\GitHub\merceru-tco\CTS\tools\UIText.csv
+
  *
  *	Copyright (c) 2018, Robert B. Watson
  *
@@ -25,28 +24,19 @@
 
 // check to make sure this file wasn't called directly
 //  it must be called from a script that supports access checking
-require_once './api/api_common.php';
-require_once './uitext/appMenuText.php';
+require_once dirname(__FILE__).'/../api/api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
-// These are create here to build appMenuText.php
-
-$unused = TEXT_BLANK_STAFF_OPTION;
-$unused = TEXT_BLANK_VISIT_OPTION;
-$unused = TEXT_CLINIC_ADMIN;
-$unused = TEXT_CLINIC_COMMENT;
-$unused = TEXT_CLINIC_COMMENT_TITLE;
-$unused = TEXT_CLINIC_HELP;
-$unused = TEXT_CLINIC_HOME;
-$unused = TEXT_CLINIC_REPORTS;
-$unused = TEXT_MESSAGE_NO_PATIENT_FOUND;
-$unused = TEXT_MESSAGE_NO_PATIENT_CREATED;
-$unused = TEXT_MESSAGE_NO_PATIENT_UPDATED;
-$unused = TEXT_MESSAGE_PATIENT_ID_IN_USE;
-$unused = TEXT_MESSAGE_DATABASE_OPEN_ERROR;
-$unused = TEXT_MESSAGE_UNSUPPORTED_ERROR;
-$unused = TEXT_MESSAGE_LOGIN_FAILURE;
-$unused = TEXT_MESSAGE_ACCESS_FAILURE;
-$unused = TEXT_MESSAGE_REQUIRED_FIELD_MISSING;
-$unused = TEXT_MESSAGE_GENERIC;
-$unused = TEXT_MESSAGE_INTERNAL_ERROR;
+// Strings for UITEST_LANGUAGE
+if ($pageLanguage == UITEST_LANGUAGE) {
+	define('TEXT_CLINIC_DASH_PAGE_TITLE','TEXT_CLINIC_DASH_PAGE_TITLE',false);
+}
+// Strings for UI_ENGLISH_LANGUAGE
+if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
+	define('TEXT_CLINIC_DASH_PAGE_TITLE','Clinic information',false);
+}
+// Strings for UI_SPANISH_LANGUAGE
+if ($pageLanguage == UI_SPANISH_LANGUAGE) {
+	define('TEXT_CLINIC_DASH_PAGE_TITLE','Información de la clínica',false);
+}
+//EOF

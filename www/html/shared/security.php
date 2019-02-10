@@ -59,6 +59,8 @@ define('PAGE_ACCESS_STAFF', 8, false); 		// ClinicStaff
 define('PAGE_ACCESS_READONLY', 4, false); 	// ClinicReadOnly (Any authorized user)
 define('PAGE_ACCESS_NONE', 0, false);		// no access
 
+define('NO_ACCESS_URL','/clinicLogin.php', false);	// default URL for access denials--it should not require an access check
+
 function getTokenFromHeaders() {
     if (!empty($_SERVER['HTTP_X_PICLINIC_TOKEN'])) {
         return $_SERVER['HTTP_X_PICLINIC_TOKEN'];
