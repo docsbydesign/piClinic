@@ -225,10 +225,10 @@ function writeTopicMenu ($lang, $cancelLink) {
                     <?= dbFieldTextInput ($staffData, 'AltcontactInfo', TEXT_STAFF_ALTCONTACTINFO_PLACEHOLDER, false) ?>
 				</p>
                 <p><label class="close"><?= TEXT_STAFF_PREFERRED_LANGUAGE_LABEL ?>:</label>&nbsp;
-                    <select id="activeField" name="active" class="requiredField">
-                        <option value="" <?= (!isset($staffData['active']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
-                        <option value="en" <?= ((isset($staffData['active']) && $staffData['active'] == 'en') ? 'selected' : '' ) ?>><?= TEXT_STAFF_LANGUAGE_OPTION_ENGLISH ?></option>
-                        <option value="es" <?= ((isset($staffData['active']) && $staffData['active'] == 'es') ? 'selected' : '' ) ?>><?= TEXT_STAFF_LANGUAGE_OPTION_SPANISH ?></option>
+                    <select id="activeField" name="preferredLanguage" class="requiredField">
+                        <option value="" <?= (!isset($staffData['preferredLanguage']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
+                        <option value="en" <?= ((isset($staffData['preferredLanguage']) && $staffData['preferredLanguage'] == 'en') ? 'selected' : '' ) ?>><?= TEXT_STAFF_LANGUAGE_OPTION_ENGLISH ?></option>
+                        <option value="es" <?= ((isset($staffData['preferredLanguage']) && $staffData['preferredLanguage'] == 'es') ? 'selected' : '' ) ?>><?= TEXT_STAFF_LANGUAGE_OPTION_SPANISH ?></option>
                     </select>
                 </p>
 			</div>
@@ -260,7 +260,7 @@ function writeTopicMenu ($lang, $cancelLink) {
 						</select>
 				</p>
 				<input type="hidden" id="modeField" name="mode" value="<?= $pageMode ?>">
-				<?= ($userEdit ? '<input type="hidden" id="UserEditField" name="UserEdit" value="<?= $selfMode ?>">' : '') ?>				
+				<?= ($userEdit ? '<input type="hidden" id="UserEditField" name="useredit" value="1">' : '') ?>
 				<input type="hidden" id="methodField" name="_method" value="<?= ($pageMode == 'add' ? 'POST' : 'PATCH'  ) ?>">
 			</div>
 			<p><button type="submit"><?= ($pageMode == 'add' ? TEXT_STAFF_NEW_SUBMIT_BUTTON  : TEXT_STAFF_EDIT_SUBMIT_BUTTON  ) ?></button></p>
