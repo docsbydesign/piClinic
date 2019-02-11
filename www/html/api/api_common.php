@@ -243,4 +243,5 @@ function guidString ($separator = '-') {
     $formatString = '%s%s'.$separator.'%s'.$separator.'%s'.$separator.'%s'.$separator.'%s%s%s';
     return vsprintf($formatString, str_split(bin2hex($data), 4));
 }
+
 //EOF

@@ -1,7 +1,6 @@
 <?php
 /*
- *
- * Source file: C:\Users\BobW\Documents\GitHub\merceru-tco\CTS\tools\UIText.csv
+
  *
  *	Copyright (c) 2018, Robert B. Watson
  *
@@ -25,23 +24,19 @@
 
 // check to make sure this file wasn't called directly
 //  it must be called from a script that supports access checking
-require_once './api/api_common.php';
-require_once './uitext/appMenuText.php';
+require_once dirname(__FILE__).'/../api/api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
-// These are create here to build appMenuText.php
-
-$unused = TEXT_BLANK_STAFF_OPTION;
-$unused = TEXT_BLANK_VISIT_OPTION;
-$unused = TEXT_CLINIC_ADMIN;
-$unused = TEXT_CLINIC_COMMENT;
-$unused = TEXT_CLINIC_COMMENT_TITLE;
-$unused = TEXT_CLINIC_HELP;
-$unused = TEXT_CLINIC_HOME;
-$unused = TEXT_CLINIC_REPORTS;
-// used in ui_common.php
-$unused = TEXT_DATE_MONTH_PLACEHOLDER;
-$unused = TEXT_DATE_DAY_PLACEHOLDER;
-$unused = TEXT_DATE_YEAR_PLACEHOLDER;
-unset($unused);
-// EOF
+// Strings for UITEST_LANGUAGE
+if ($pageLanguage == UITEST_LANGUAGE) {
+	define('TEXT_REPORT_PAGE_TITLE','TEXT_REPORT_PAGE_TITLE',false);
+}
+// Strings for UI_ENGLISH_LANGUAGE
+if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
+	define('TEXT_REPORT_PAGE_TITLE','Clinic reports',false);
+}
+// Strings for UI_SPANISH_LANGUAGE
+if ($pageLanguage == UI_SPANISH_LANGUAGE) {
+	define('TEXT_REPORT_PAGE_TITLE','Informes de la Clínica',false);
+}
+//EOF

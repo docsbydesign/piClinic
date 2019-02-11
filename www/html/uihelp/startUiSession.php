@@ -24,27 +24,24 @@
  *	Handles clinicLogin form to create session and redirect to first page
  *
  *********************/
-require_once './shared/piClinicConfig.php';
-require_once './shared/dbUtils.php';
-require_once './shared/logUtils.php';
-require_once './shared/ui_common.php';
-require_once './api/api_common.php';
-require_once './api/session_common.php';
-require_once './api/session_post.php';
-require_once './api/session_delete.php';
-require_once './shared/profile.php';
+require_once dirname(__FILE__).'/../shared/piClinicConfig.php';
+require_once dirname(__FILE__).'/../shared/dbUtils.php';
+require_once dirname(__FILE__).'/../shared/logUtils.php';
+require_once dirname(__FILE__).'/../shared/ui_common.php';
+require_once dirname(__FILE__).'/../api/api_common.php';
+require_once dirname(__FILE__).'/../api/session_common.php';
+require_once dirname(__FILE__).'/../api/session_post.php';
+require_once dirname(__FILE__).'/../api/session_delete.php';
+require_once dirname(__FILE__).'/../shared/profile.php';
 
 $profileData = [];
 profileLogStart ($profileData);
 
 $sessionInfo = getUiSessionInfo();
 
-// get the query paramater data from the request
-$sessionInfo['parameters'] = readRequestData();
-
 if (!empty($sessionInfo['token'])){
 	header('DEBUG_OldSessionFound: '.session_id());
-    $retVal = _session_delete($dbLink, $sessionInfo['token'], $requestData);
+    $retVal = _session_delete($dbLink, $sessionInfo['token'], $sessionInfo['parameters']);
 	// whatever happens, clear out the existing session to start cleanly
 	// destroy the session
 	session_destroy();
@@ -90,6 +87,7 @@ if ($retVal['httpResponse'] == 201) {
         session_start();
     }
     $_SESSION['token'] = $retVal['data']['token'];
+    $_SESSION['accessGranted'] = $retVal['data']['accessGranted'];
 	$_SESSION['username'] = $retVal['data']['username'];
 	$_SESSION['sessionLanguage'] = $retVal['data']['sessionLanguage'];
 

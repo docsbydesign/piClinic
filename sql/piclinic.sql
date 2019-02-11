@@ -280,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `visit` (
   `patientLastName` varchar(255) NOT NULL COMMENT '(Required) Last name of patient being seen',
   `patientFirstName` varchar(255) NOT NULL COMMENT '(Required) First name of patient being seen',
   `patientSex` enum('M','F','X') NOT NULL COMMENT '(Required) Sex of patient being seen',
-  `PatientBirthDate` datetime NOT NULL COMMENT '(Required) Patient''s birthdate',
+  `patientBirthDate` datetime NOT NULL COMMENT '(Required) Patient''s birthdate',
   `patientHomeAddress1` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) patient''s home addres ',
   `patientHomeAddress2` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Patient''s address (2)',
   `patientHomeNeighborhood` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT  NULL COMMENT '(Required) patient''s neighborhood',

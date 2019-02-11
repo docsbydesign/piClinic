@@ -29,29 +29,23 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
-	define('TEXT_CLINIC_LOGIN_PAGE_TITLE','TEXT_CLINIC_LOGIN_PAGE_TITLE',false);
-	define('TEXT_LOGIN_PASSWORD','TEXT_LOGIN_PASSWORD',false);
-	define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','TEXT_LOGIN_PASSWORD_PLACEHOLDER',false);
-	define('TEXT_LOGIN_SUBMIT_BUTTON','TEXT_LOGIN_SUBMIT_BUTTON',false);
-	define('TEXT_LOGIN_USERNAME','TEXT_LOGIN_USERNAME',false);
-	define('TEXT_LOGIN_USERNAME_PLACEHOLDER','TEXT_LOGIN_USERNAME_PLACEHOLDER',false);
+	define('TEXT_CLINIC_DASH_PAGE_TITLE','TEXT_CLINIC_DASH_PAGE_TITLE',false);
+	define('TEXT_PATIENT_ID_LABEL','TEXT_PATIENT_ID_LABEL',false);
+	define('TEXT_PATIENT_ID_PLACEHOLDER','TEXT_PATIENT_ID_PLACEHOLDER',false);
+	define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','TEXT_SHOW_PATIENT_SUBMIT_BUTTON',false);
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	define('TEXT_CLINIC_LOGIN_PAGE_TITLE','Clinic login',false);
-	define('TEXT_LOGIN_PASSWORD','Password',false);
-	define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','Password',false);
-	define('TEXT_LOGIN_SUBMIT_BUTTON','Login',false);
-	define('TEXT_LOGIN_USERNAME','Username',false);
-	define('TEXT_LOGIN_USERNAME_PLACEHOLDER','Username',false);
+	define('TEXT_CLINIC_DASH_PAGE_TITLE','Clinic information',false);
+	define('TEXT_PATIENT_ID_LABEL','Patient, Visit, or Family ID',false);
+	define('TEXT_PATIENT_ID_PLACEHOLDER','Patient\'s name or ID',false);
+	define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','Search',false);
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	define('TEXT_CLINIC_LOGIN_PAGE_TITLE','Iniciar sesión',false);
-	define('TEXT_LOGIN_PASSWORD','Contraseña',false);
-	define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','Contraseña',false);
-	define('TEXT_LOGIN_SUBMIT_BUTTON','Iniciar sesión',false);
-	define('TEXT_LOGIN_USERNAME','Usuario',false);
-	define('TEXT_LOGIN_USERNAME_PLACEHOLDER','Usuario',false);
+	define('TEXT_CLINIC_DASH_PAGE_TITLE','Información de la clínica',false);
+	define('TEXT_PATIENT_ID_LABEL','Número del paciente, visita, o familia',false);
+	define('TEXT_PATIENT_ID_PLACEHOLDER','Identidad o nombre del paciente',false);
+	define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','Buscar',false);
 }
 //EOF

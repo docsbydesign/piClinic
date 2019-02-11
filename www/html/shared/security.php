@@ -48,6 +48,7 @@ MESSAGE;
 
 require_once dirname(__FILE__).'/piClinicConfig.php';
 require_once dirname(__FILE__).'/dbUtils.php';
+require_once dirname(__FILE__).'/logUtils.php';
 require_once dirname(__FILE__).'/../api/api_common.php';
 require_once dirname(__FILE__).'/../api/session_common.php';
 require_once dirname(__FILE__).'/../api/session_get.php';
@@ -58,6 +59,8 @@ define('PAGE_ACCESS_CLINIC', 16, false); 	// ClinicAdmin
 define('PAGE_ACCESS_STAFF', 8, false); 		// ClinicStaff
 define('PAGE_ACCESS_READONLY', 4, false); 	// ClinicReadOnly (Any authorized user)
 define('PAGE_ACCESS_NONE', 0, false);		// no access
+
+define('NO_ACCESS_URL','/clinicLogin.php', false);	// default URL for access denials--it should not require an access check
 
 function getTokenFromHeaders() {
     if (!empty($_SERVER['HTTP_X_PICLINIC_TOKEN'])) {

@@ -29,29 +29,23 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
-	define('TEXT_CLINIC_LOGIN_PAGE_TITLE','TEXT_CLINIC_LOGIN_PAGE_TITLE',false);
-	define('TEXT_LOGIN_PASSWORD','TEXT_LOGIN_PASSWORD',false);
-	define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','TEXT_LOGIN_PASSWORD_PLACEHOLDER',false);
-	define('TEXT_LOGIN_SUBMIT_BUTTON','TEXT_LOGIN_SUBMIT_BUTTON',false);
-	define('TEXT_LOGIN_USERNAME','TEXT_LOGIN_USERNAME',false);
-	define('TEXT_LOGIN_USERNAME_PLACEHOLDER','TEXT_LOGIN_USERNAME_PLACEHOLDER',false);
+	define('TEXT_COMMENT_CANCEL','TEXT_COMMENT_CANCEL',false);
+	define('TEXT_COMMENT_PLACEHOLDER','TEXT_COMMENT_PLACEHOLDER',false);
+	define('TEXT_COMMENT_SUBMIT_BUTTON','TEXT_COMMENT_SUBMIT_BUTTON',false);
+	define('TEXT_USER_COMMENTS_PAGE_TITLE','TEXT_USER_COMMENTS_PAGE_TITLE',false);
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	define('TEXT_CLINIC_LOGIN_PAGE_TITLE','Clinic login',false);
-	define('TEXT_LOGIN_PASSWORD','Password',false);
-	define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','Password',false);
-	define('TEXT_LOGIN_SUBMIT_BUTTON','Login',false);
-	define('TEXT_LOGIN_USERNAME','Username',false);
-	define('TEXT_LOGIN_USERNAME_PLACEHOLDER','Username',false);
+	define('TEXT_COMMENT_CANCEL','Cancel',false);
+	define('TEXT_COMMENT_PLACEHOLDER','Enter your comment about the piClinic here',false);
+	define('TEXT_COMMENT_SUBMIT_BUTTON','Submit',false);
+	define('TEXT_USER_COMMENTS_PAGE_TITLE','User comments',false);
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	define('TEXT_CLINIC_LOGIN_PAGE_TITLE','Iniciar sesión',false);
-	define('TEXT_LOGIN_PASSWORD','Contraseña',false);
-	define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','Contraseña',false);
-	define('TEXT_LOGIN_SUBMIT_BUTTON','Iniciar sesión',false);
-	define('TEXT_LOGIN_USERNAME','Usuario',false);
-	define('TEXT_LOGIN_USERNAME_PLACEHOLDER','Usuario',false);
+	define('TEXT_COMMENT_CANCEL','Cancelar',false);
+	define('TEXT_COMMENT_PLACEHOLDER','Entrar su comentario del piClinic aquí',false);
+	define('TEXT_COMMENT_SUBMIT_BUTTON','Entregar',false);
+	define('TEXT_USER_COMMENTS_PAGE_TITLE','Comentarios de los usuarios',false);
 }
 //EOF

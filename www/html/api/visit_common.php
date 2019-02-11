@@ -155,19 +155,19 @@ function getIcdDescription ($dbLink, $icdCode, $lang, $showCode=0) {
 	//		+1 = show code after text
 	
 	$icdArgs = [];
-	$icdArgs['lang'] = $lang;
+	$icdArgs['language'] = $lang;
 	$icdArgs['ce'] = trim($icdCode);
-	$getValue = _icd_get ($dbLink, $icdArgs);
+	$getValue = _icd_get ($dbLink, null,  $icdArgs);
 	
 	$returnString = '';
 	if ($getValue['httpResponse'] == 200)  {
 		// found something		
 		if ($getValue['count'] == 1) {
 			if ($showCode > 0) {
-				$returnString = $getValue['data']['shortDescription'].' ['.$getValue['data']['icd10Code'].']';
+				$returnString = $getValue['data']['shortDescription'].' ['.$getValue['data']['icd10code'].']';
 			}
 			if ($showCode < 0) {
-				$returnString = '['.$getValue['data']['icd10Code'].'] '.$getValue['data']['shortDescription'];
+				$returnString = '['.$getValue['data']['icd10code'].'] '.$getValue['data']['shortDescription'];
 			}
 			if ($showCode == 0) {
 				$returnString = $getValue['data']['shortDescription'];

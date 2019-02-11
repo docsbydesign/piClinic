@@ -20,58 +20,67 @@
  *
  */
 /*
-*	Code fragment to decode and display error message text
-* 		as a div inline 
-*
+ *
+ *	Code fragment to decode and display error message text
+ * 		as a div inline
+ *
+ *      ASSUMES:
+ *          $requestData has been initialized
+ *
+ *
 */
 // check to make sure this file wasn't called directly
 //  it must be called from a script that supports access checking
 require_once 'api/api_common.php';
-require_once 'uitext/appMenuText.php';
+//require_once 'uitext/appMenuText.php';
 exitIfCalledFromBrowser(__FILE__);
 
-if(isset($pageLanguage)) {
+if (isset($pageLanguage)) {
 	require_once('./uitext/uiErrorMessageText.php');
 	if (((!empty($requestData)) && (!empty($requestData['msg']))) || (!empty($dbStatus))) {
 		echo ('<div class="errorMessage" id="uiErrorMessage">');
 		if (((!empty($requestData)) && (!empty($requestData['msg'])))) {
 			echo ('<p>');
 			switch ($requestData['msg']) {
-				case "NOT_FOUND" :
+				case MSG_NOT_FOUND :
 					echo TEXT_MESSAGE_NO_PATIENT_FOUND;
 					break;
 					
-				case "NOT_CREATED" :
+				case MSG_NOT_CREATED :
 					echo TEXT_MESSAGE_NO_PATIENT_CREATED;
 					break;
 				
-				case "NOT_UPDATED" :
+				case MSG_NOT_UPDATED :
 					echo TEXT_MESSAGE_NO_PATIENT_UPDATED;
 					break;
 
-				case "PATIENT_ID_IN_USE":
+				case MSG_PATIENT_ID_IN_USE :
 					echo TEXT_MESSAGE_PATIENT_ID_IN_USE;
 					break;
 					
-				case "DB_OPEN_ERROR":
+				case MSG_DB_OPEN_ERROR :
 					echo TEXT_MESSAGE_DATABASE_OPEN_ERROR;
 					break;
 
-				case "UNSUPPORTED":
+				case MSG_UNSUPPORTED :
 					echo TEXT_MESSAGE_UNSUPPORTED_ERROR;
 					break;
 					
-				case "LOGIN_FAILURE":
+				case MSG_LOGIN_FAILURE :
 					echo TEXT_MESSAGE_LOGIN_FAILURE;
 					break;
 
-				case "NO_ACCESS":
+				case MSG_NO_ACCESS :
 					echo TEXT_MESSAGE_ACCESS_FAILURE;
 					break;
 					
-				case "REQUIRED_FIELD_MISSING":
+				case MSG_REQUIRED_FIELD_MISSING :
 					echo TEXT_MESSAGE_REQUIRED_FIELD_MISSING;
 					break;
+
+                case MSG_USER_NOT_FOUND :
+                    echo TEXT_MESSAGE_USER_NOT_FOUND;
+                    break;
 
 				default:
 					echo TEXT_MESSAGE_GENERIC;
@@ -91,5 +100,7 @@ if(isset($pageLanguage)) {
         unset ($requestData['msg']);
 		echo '</div>';
 	}
+} else {
+    echo "<!-- No page language set --!>\n";
 }
 //EOF

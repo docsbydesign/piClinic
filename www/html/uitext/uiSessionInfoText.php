@@ -29,29 +29,26 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
-	define('TEXT_CLINIC_LOGIN_PAGE_TITLE','TEXT_CLINIC_LOGIN_PAGE_TITLE',false);
-	define('TEXT_LOGIN_PASSWORD','TEXT_LOGIN_PASSWORD',false);
-	define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','TEXT_LOGIN_PASSWORD_PLACEHOLDER',false);
-	define('TEXT_LOGIN_SUBMIT_BUTTON','TEXT_LOGIN_SUBMIT_BUTTON',false);
-	define('TEXT_LOGIN_USERNAME','TEXT_LOGIN_USERNAME',false);
-	define('TEXT_LOGIN_USERNAME_PLACEHOLDER','TEXT_LOGIN_USERNAME_PLACEHOLDER',false);
+	define('TEXT_SESSION_LOGOUT_LINK','TEXT_SESSION_LOGOUT_LINK',false);
+	define('TEXT_SESSION_LOGOUT_TITLE','TEXT_SESSION_LOGOUT_TITLE',false);
+	define('TEXT_SESSION_NAME_PROMPT','TEXT_SESSION_NAME_PROMPT',false);
+	define('TEXT_SESSION_SETTINGS_LABEL','TEXT_SESSION_SETTINGS_LABEL',false);
+	define('TEXT_SESSION_SETTINGS_TITLE','TEXT_SESSION_SETTINGS_TITLE',false);
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	define('TEXT_CLINIC_LOGIN_PAGE_TITLE','Clinic login',false);
-	define('TEXT_LOGIN_PASSWORD','Password',false);
-	define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','Password',false);
-	define('TEXT_LOGIN_SUBMIT_BUTTON','Login',false);
-	define('TEXT_LOGIN_USERNAME','Username',false);
-	define('TEXT_LOGIN_USERNAME_PLACEHOLDER','Username',false);
+	define('TEXT_SESSION_LOGOUT_LINK','Logout',false);
+	define('TEXT_SESSION_LOGOUT_TITLE','Logout',false);
+	define('TEXT_SESSION_NAME_PROMPT','Logged in as',false);
+	define('TEXT_SESSION_SETTINGS_LABEL','User settings',false);
+	define('TEXT_SESSION_SETTINGS_TITLE','Update user account settings and password',false);
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	define('TEXT_CLINIC_LOGIN_PAGE_TITLE','Iniciar sesión',false);
-	define('TEXT_LOGIN_PASSWORD','Contraseña',false);
-	define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','Contraseña',false);
-	define('TEXT_LOGIN_SUBMIT_BUTTON','Iniciar sesión',false);
-	define('TEXT_LOGIN_USERNAME','Usuario',false);
-	define('TEXT_LOGIN_USERNAME_PLACEHOLDER','Usuario',false);
+	define('TEXT_SESSION_LOGOUT_LINK','Cerrar sesión',false);
+	define('TEXT_SESSION_LOGOUT_TITLE','Cerrar sesión',false);
+	define('TEXT_SESSION_NAME_PROMPT','Inscrito como',false);
+	define('TEXT_SESSION_SETTINGS_LABEL','Configuración del usuario',false);
+	define('TEXT_SESSION_SETTINGS_TITLE','Actualizar la configuración y la contraseña de la cuenta de usuario ',false);
 }
 //EOF

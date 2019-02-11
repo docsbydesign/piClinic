@@ -102,13 +102,16 @@ if (!defined('DB_UTILS')) {
                 }
                 $requestData['token'];
             }
+            logUiError($requestData, $retVal['httpResponse'], __FILE__, $username, 'DB Open',$retVal['httpReason']);
             if (!empty($errorUrl)) {
                 // issue a redirect if there's a url to redirect
                 $redirectUrl = $errorUrl . '?msg=DB_OPEN_ERROR';
                 header('Location: '.$redirectUrl);
+                exit; // this is the end of the line if there's no DB access
+            } else {
+                // if no error URL, return null and let the caller handle the error.
+                return null;
             }
-            logUiError($requestData, $retVal['httpResponse'], __FILE__, $username, 'DB Open',$retVal['httpReason']);
-            exit; // this is the end of the line if there's no DB access
         } else {
             return $dbLink;
         }
@@ -306,7 +309,7 @@ if (!defined('DB_UTILS')) {
 		}
 		return $returnValue;
 	}
-
+/*
 	function openDbForUi ($requestData, $pageLanguage, &$dbStatus) {
 		require_once dirname(__FILE__).'/../uitext/uiErrorMessageText.php';
 		$dbInfo = array();
@@ -327,5 +330,6 @@ if (!defined('DB_UTILS')) {
 		}
 		return $dbLink;
 	}
+*/
 }
 //EOF
