@@ -129,7 +129,7 @@ function writeTopicMenu ($sessionInfo) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $pageLanguage) ?>
+	<?= piClinicAppMenu(null, $sessionInfo['pageLanguage']) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu($sessionInfo) ?>
 	<div class="nameBlock">

@@ -129,7 +129,7 @@ $patientInfo = _patient_get($dbLink, $sessionInfo['token'], $sessionInfo['parame
 if (($patientInfo['count'] == 0) && (empty($sessionInfo['parameters']['ata']))) {
 	// error redirect to the search page if nothing found
     $returnQP['msg'] = MSG_NOT_FOUND;
-	$redirectUrl = makeUrlWithQueryParams('/ptSearch.php', $returnQP);
+	$redirectUrl = makeUrlWithQueryParams('/clinicDash.php', $returnQP);
 
 	header("Location: ".$redirectUrl);
 	@mysqli_close($dbLink);
@@ -178,7 +178,7 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $pageLanguage) ?>
+	<?= piClinicAppMenu(null, $sessionInfo['pageLanguage']) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu ($cancelLink, $addNewLink, $sessionInfo) ?>
 	<div id="PatientList">

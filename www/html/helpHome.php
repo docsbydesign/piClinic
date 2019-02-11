@@ -57,7 +57,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(HELP_PAGE, $pageLanguage) ?>
+	<?= piClinicAppMenu(HELP_PAGE, $sessionInfo['pageLanguage']) ?>
 	<div class="pageBody">
 	<div id="ReportList">
 		<h1 class="pageHeading"><?= TEXT_PICLINIC_HELP_PAGE_TITLE ?></h1>

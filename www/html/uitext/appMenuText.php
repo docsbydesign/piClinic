@@ -37,6 +37,9 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	define('TEXT_CLINIC_HELP','TEXT_CLINIC_HELP',false);
 	define('TEXT_CLINIC_HOME','TEXT_CLINIC_HOME',false);
 	define('TEXT_CLINIC_REPORTS','TEXT_CLINIC_REPORTS',false);
+	define('TEXT_DATE_DAY_PLACEHOLDER','TEXT_DATE_DAY_PLACEHOLDER',false);
+	define('TEXT_DATE_MONTH_PLACEHOLDER','TEXT_DATE_MONTH_PLACEHOLDER',false);
+	define('TEXT_DATE_YEAR_PLACEHOLDER','TEXT_DATE_YEAR_PLACEHOLDER',false);
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
@@ -48,6 +51,9 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	define('TEXT_CLINIC_HELP','Help',false);
 	define('TEXT_CLINIC_HOME','Dashboard',false);
 	define('TEXT_CLINIC_REPORTS','Reports',false);
+	define('TEXT_DATE_DAY_PLACEHOLDER','Day',false);
+	define('TEXT_DATE_MONTH_PLACEHOLDER','Month',false);
+	define('TEXT_DATE_YEAR_PLACEHOLDER','Year',false);
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
@@ -59,5 +65,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	define('TEXT_CLINIC_HELP','Ayuda',false);
 	define('TEXT_CLINIC_HOME','Página principal',false);
 	define('TEXT_CLINIC_REPORTS','Informes',false);
+	define('TEXT_DATE_DAY_PLACEHOLDER','Día',false);
+	define('TEXT_DATE_MONTH_PLACEHOLDER','Mes',false);
+	define('TEXT_DATE_YEAR_PLACEHOLDER','Año',false);
 }
 //EOF

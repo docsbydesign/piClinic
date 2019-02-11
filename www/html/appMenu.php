@@ -39,5 +39,9 @@ $unused = TEXT_CLINIC_COMMENT_TITLE;
 $unused = TEXT_CLINIC_HELP;
 $unused = TEXT_CLINIC_HOME;
 $unused = TEXT_CLINIC_REPORTS;
-
+// used in ui_common.php
+$unused = TEXT_DATE_MONTH_PLACEHOLDER;
+$unused = TEXT_DATE_DAY_PLACEHOLDER;
+$unused = TEXT_DATE_YEAR_PLACEHOLDER;
+unset($unused);
 // EOF

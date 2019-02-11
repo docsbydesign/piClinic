@@ -40,6 +40,7 @@ require_once './shared/ui_common.php';
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
 $pageLanguage = $sessionInfo['pageLanguage'];
+$requestData = $sessionInfo['parameters'];
 require_once './uitext/clinicDashText.php';
 
 // open session variables and check for access to this page
@@ -57,7 +58,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
     <?= piClinicTag(); ?>
     <?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
     <?php require ('uiErrorMessage.php'); ?>
-    <?= piClinicAppMenu(HOME_PAGE, $pageLanguage) ?>
+    <?= piClinicAppMenu(HOME_PAGE, $sessionInfo['pageLanguage']) ?>
     <div class="pageBody">
         <div id="PatientLookupDiv" class="noprint">
             <form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">

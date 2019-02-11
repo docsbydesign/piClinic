@@ -353,6 +353,7 @@ TEXT_PATIENT_CURRENT_MEDS_LIST_HEAD,Current medications,Medicamentos actuales
 TEXT_PATIENT_CURRENT_VISIT_LIST_HEAD,Patient is currently in the clinic,El paciente está en la clínica ahora
 TEXT_PATIENT_DATA_HEAD,Patient data,Datos del paciente
 TEXT_PATIENT_DOES_NOT_MATCH_VISIT,The visit for the specified patient was not found,No encontró la visita para el paciente especificado
+TEXT_PATIENT_EDIT_PAGE_TITLE,Update Patient,Editar Paciente
 TEXT_PATIENT_EDIT_PATIENT_BUTTON,Update this patient\'s info,Actualizar la información del paciente
 TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON,Update visit info,Actualizar la información de esta visita
 TEXT_PATIENT_EDIT_SUBMIT_BUTTON,Update patient info,Actualizar información del paciente
@@ -386,6 +387,7 @@ TEXT_PATIENT_NEW_NAMELAST_PLACEHOLDER,Last name,Apellido
 TEXT_PATIENT_NEW_NAMEMI_PLACEHOLDER,MI,Inicial
 TEXT_PATIENT_NEW_NEIGHBORHOOD_PLACEHOLDER,Neighborhood,Localidad
 TEXT_PATIENT_NEW_ORGAN_DONOR_LABEL,Organ donor?,¿Donante de órganos?
+TEXT_PATIENT_NEW_PAGE_TITLE,New Patient,Nuevo Paciente
 TEXT_PATIENT_NEW_PREFERREDLANGUAGE_LABEL,Preferred language,Idioma preferido
 TEXT_PATIENT_NEW_PREFERREDLANGUAGE_PLACEHOLDER,Preferred language,Idioma preferido
 TEXT_PATIENT_NEW_STATE_PLACEHOLDER,State,Departamento
@@ -451,7 +453,6 @@ TEXT_REFERRAL_HEADING,Referral info,Referencia
 TEXT_REFERRAL_PLACEHOLDER,Clinic name,Nombre de la clínica
 TEXT_REFERRED_FROM_LABEL,Referred from,Recibida de
 TEXT_REFERRED_TO_LABEL,Referred to,Enviada a
-TEXT_REPORTS_PAGE_TITLE,Clinic reports,Informes de la clínica
 TEXT_REPORT_ADDRESS_LABEL,Home town,Procedencia
 TEXT_REPORT_AGE_GROUP_HEADING,Age group,Concepto
 TEXT_REPORT_AGE_LABEL,Age,Edad

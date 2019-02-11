@@ -53,7 +53,7 @@ require './uiSessionInfo.php';
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(REPORT_PAGE, $pageLanguage) ?>
+	<?= piClinicAppMenu(REPORT_PAGE, $sessionInfo['pageLanguage']) ?>
 	<div class="pageBody">
 		<h1 class="pageHeading"><?= TEXT_REPORT_PAGE_TITLE ?></h1>
 		<ul class="optionList">
