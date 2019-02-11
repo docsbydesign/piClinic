@@ -76,7 +76,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 <?= json_encode($sessionInfo, JSON_PRETTY_PRINT) ?><br>
 <?= json_encode(['pageLanguage' => $pageLanguage]) ?>
             </pre>
-            <p><a href="/endUiSession.php" title="Log out and end session">Log out</a></p>
+            <p><a href="/uihelp/endUiSession.php" title="Log out and end session">Log out</a></p>
         </div>
     </div>
 </body>

@@ -56,11 +56,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/startUiSession.php?username={{testUser}}&password={{testUserPW}}",
+							"raw": "{{host}}/uihelp/startUiSession.php?username={{testUser}}&password={{testUserPW}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"uihelp",
 								"startUiSession.php"
 							],
 							"query": [
@@ -107,11 +108,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/endUiSession.php",
+							"raw": "{{host}}/uihelp/endUiSession.php",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"uihelp",
 								"endUiSession.php"
 							]
 						}

@@ -24,14 +24,14 @@
  *	Terminates a clinic UI session and redirect to login page
  *
  *********************/
-require_once './shared/dbUtils.php';
-require_once './shared/piClinicConfig.php';
-require_once './shared/ui_common.php';
-require_once './api/api_common.php';
-require_once './api/session_common.php';
-require_once './api/session_delete.php';
-require_once './shared/security.php';
-require_once './shared/profile.php';
+require_once dirname(__FILE__).'/../shared/dbUtils.php';
+require_once dirname(__FILE__).'/../shared/piClinicConfig.php';
+require_once dirname(__FILE__).'/../shared/ui_common.php';
+require_once dirname(__FILE__).'/../api/api_common.php';
+require_once dirname(__FILE__).'/../api/session_common.php';
+require_once dirname(__FILE__).'/../api/session_delete.php';
+require_once dirname(__FILE__).'/../shared/security.php';
+require_once dirname(__FILE__).'/../shared/profile.php';
 
 $profileData = [];
 profileLogStart ($profileData);

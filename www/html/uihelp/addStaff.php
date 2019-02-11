@@ -48,16 +48,16 @@
  *
  *********************/
 
-require_once './shared/piClinicConfig.php';
-require_once './shared/dbUtils.php';
-require_once './api/api_common.php';
-require_once './shared/ui_common.php';
-require_once './shared/profile.php';
-require_once './shared/security.php';
-require_once './api/staff_common.php';
-require_once './api/staff_get.php';
-require_once './api/staff_patch.php';
-require_once './api/staff_post.php';
+require_once dirname(__FILE__).'/../shared/piClinicConfig.php';
+require_once dirname(__FILE__).'/../shared/dbUtils.php';
+require_once dirname(__FILE__).'/../api/api_common.php';
+require_once dirname(__FILE__).'/../shared/ui_common.php';
+require_once dirname(__FILE__).'/../shared/profile.php';
+require_once dirname(__FILE__).'/../shared/security.php';
+require_once dirname(__FILE__).'/../api/staff_common.php';
+require_once dirname(__FILE__).'/../api/staff_get.php';
+require_once dirname(__FILE__).'/../api/staff_patch.php';
+require_once dirname(__FILE__).'/../api/staff_post.php';
 
 $profileData = [];
 profileLogStart ($profileData);

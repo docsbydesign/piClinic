@@ -114,7 +114,7 @@ if (isset($sessionUser)) {
 	$logoutPrompt = TEXT_SESSION_LOGOUT_LINK;
 }
 if (isset($sessionToken)){
-	$logoutLink = '<a href="/endUiSession.php" title="'.TEXT_SESSION_LOGOUT_TITLE.'" >'.$logoutPrompt.'</a>';
+	$logoutLink = '<a href="/uihelp/endUiSession.php" title="'.TEXT_SESSION_LOGOUT_TITLE.'" >'.$logoutPrompt.'</a>';
 }
 if (isset($sessionToken) || isset($sessionUser)) {
 	$sessionDiv = '<div id="sessionDiv" class="noprint">';
