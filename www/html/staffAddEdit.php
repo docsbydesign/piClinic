@@ -224,6 +224,13 @@ function writeTopicMenu ($lang, $cancelLink) {
 					<?= dbFieldTextInput ($staffData, 'contactInfo', TEXT_STAFF_CONTACTINFO_PLACEHOLDER, false) ?>&nbsp; &nbsp;
                     <?= dbFieldTextInput ($staffData, 'AltcontactInfo', TEXT_STAFF_ALTCONTACTINFO_PLACEHOLDER, false) ?>
 				</p>
+                <p><label class="close"><?= TEXT_STAFF_PREFERRED_LANGUAGE_LABEL ?>:</label>&nbsp;
+                    <select id="activeField" name="active" class="requiredField">
+                        <option value="" <?= (!isset($staffData['active']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
+                        <option value="en" <?= ((isset($staffData['active']) && $staffData['active'] == 'en') ? 'selected' : '' ) ?>><?= TEXT_STAFF_LANGUAGE_OPTION_ENGLISH ?></option>
+                        <option value="es" <?= ((isset($staffData['active']) && $staffData['active'] == 'es') ? 'selected' : '' ) ?>><?= TEXT_STAFF_LANGUAGE_OPTION_SPANISH ?></option>
+                    </select>
+                </p>
 			</div>
 			<h2 <?= ($userEdit ? 'style="display: none;"' : '') ?>><?= TEXT_STAFF_CLINIC_INFO_LABEL ?></h2>
 			<div id="clinicInfo" class="indent1" <?= ($userEdit ? 'style="display: none;"' : '') ?>>

@@ -49,6 +49,8 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	define('TEXT_STAFF_CONTACTINFO_LABEL','TEXT_STAFF_CONTACTINFO_LABEL',false);
 	define('TEXT_STAFF_CONTACTINFO_PLACEHOLDER','TEXT_STAFF_CONTACTINFO_PLACEHOLDER',false);
 	define('TEXT_STAFF_EDIT_SUBMIT_BUTTON','TEXT_STAFF_EDIT_SUBMIT_BUTTON',false);
+	define('TEXT_STAFF_LANGUAGE_OPTION_ENGLISH','TEXT_STAFF_LANGUAGE_OPTION_ENGLISH',false);
+	define('TEXT_STAFF_LANGUAGE_OPTION_SPANISH','TEXT_STAFF_LANGUAGE_OPTION_SPANISH',false);
 	define('TEXT_STAFF_MEMBERID_LABEL','TEXT_STAFF_MEMBERID_LABEL',false);
 	define('TEXT_STAFF_MEMBERID_PLACEHOLDER','TEXT_STAFF_MEMBERID_PLACEHOLDER',false);
 	define('TEXT_STAFF_NAMEFIRST_PLACEHOLDER','TEXT_STAFF_NAMEFIRST_PLACEHOLDER',false);
@@ -57,6 +59,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	define('TEXT_STAFF_NEW_SUBMIT_BUTTON','TEXT_STAFF_NEW_SUBMIT_BUTTON',false);
 	define('TEXT_STAFF_PASSWORD_PLACEHOLDER','TEXT_STAFF_PASSWORD_PLACEHOLDER',false);
 	define('TEXT_STAFF_POSITION_LABEL','TEXT_STAFF_POSITION_LABEL',false);
+	define('TEXT_STAFF_PREFERRED_LANGUAGE_LABEL','TEXT_STAFF_PREFERRED_LANGUAGE_LABEL',false);
 	define('TEXT_STAFF_RESET_NEW_BUTTON','TEXT_STAFF_RESET_NEW_BUTTON',false);
 	define('TEXT_STAFF_USERNAME_LABEL','TEXT_STAFF_USERNAME_LABEL',false);
 	define('TEXT_STAFF_USERNAME_PLACEHOLDER','TEXT_STAFF_USERNAME_PLACEHOLDER',false);
@@ -83,6 +86,8 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	define('TEXT_STAFF_CONTACTINFO_LABEL','Contact info',false);
 	define('TEXT_STAFF_CONTACTINFO_PLACEHOLDER','Email address or telephone number',false);
 	define('TEXT_STAFF_EDIT_SUBMIT_BUTTON','Update information',false);
+	define('TEXT_STAFF_LANGUAGE_OPTION_ENGLISH','English',false);
+	define('TEXT_STAFF_LANGUAGE_OPTION_SPANISH','Spanish',false);
 	define('TEXT_STAFF_MEMBERID_LABEL','Clinic ID',false);
 	define('TEXT_STAFF_MEMBERID_PLACEHOLDER','ID provided by clinic',false);
 	define('TEXT_STAFF_NAMEFIRST_PLACEHOLDER','First name',false);
@@ -91,6 +96,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	define('TEXT_STAFF_NEW_SUBMIT_BUTTON','Add new staff member or user',false);
 	define('TEXT_STAFF_PASSWORD_PLACEHOLDER','Your new password',false);
 	define('TEXT_STAFF_POSITION_LABEL','Position in the clinic',false);
+	define('TEXT_STAFF_PREFERRED_LANGUAGE_LABEL','Display language',false);
 	define('TEXT_STAFF_RESET_NEW_BUTTON','Clear fields',false);
 	define('TEXT_STAFF_USERNAME_LABEL','Username/Password',false);
 	define('TEXT_STAFF_USERNAME_PLACEHOLDER','A unique username',false);
@@ -117,6 +123,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	define('TEXT_STAFF_CONTACTINFO_LABEL','Como contactar esa persona',false);
 	define('TEXT_STAFF_CONTACTINFO_PLACEHOLDER','Dirección de email o número telefónico',false);
 	define('TEXT_STAFF_EDIT_SUBMIT_BUTTON','Actualizar información',false);
+	define('TEXT_STAFF_LANGUAGE_OPTION_ENGLISH','Inglés',false);
+	define('TEXT_STAFF_LANGUAGE_OPTION_SPANISH','Español',false);
 	define('TEXT_STAFF_MEMBERID_LABEL','ID de la clínica',false);
 	define('TEXT_STAFF_MEMBERID_PLACEHOLDER','ID de la clínica',false);
 	define('TEXT_STAFF_NAMEFIRST_PLACEHOLDER','Nombre',false);
@@ -125,6 +133,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	define('TEXT_STAFF_NEW_SUBMIT_BUTTON','Agrega una persona o usuario nuevo',false);
 	define('TEXT_STAFF_PASSWORD_PLACEHOLDER','Su contraseña nueva',false);
 	define('TEXT_STAFF_POSITION_LABEL','Puesto en la clínica',false);
+	define('TEXT_STAFF_PREFERRED_LANGUAGE_LABEL','Idioma de la pantalla',false);
 	define('TEXT_STAFF_RESET_NEW_BUTTON','Borrar todo',false);
 	define('TEXT_STAFF_USERNAME_LABEL','Usuario/Contraseña',false);
 	define('TEXT_STAFF_USERNAME_PLACEHOLDER','Un usuario unico',false);

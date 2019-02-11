@@ -615,6 +615,8 @@ TEXT_STAFF_EDIT_SUBMIT_BUTTON,Update information,Actualizar información
 TEXT_STAFF_EDIT_USERNAME_TITLE,Edit user properties,Actualizar los propedades del usuario
 TEXT_STAFF_LABEL,Health professional,Profesional de salud
 TEXT_STAFF_LIST_HEAD,piClinic users and clinic staff,Usuarios del sistema piClinic y personal de la clínica
+TEXT_STAFF_LANGUAGE_OPTION_ENGLISH,English,Inglés
+TEXT_STAFF_LANGUAGE_OPTION_SPANISH,Spanish,Español
 TEXT_STAFF_LIST_HEAD_ACCESSGRANTED,Access,Permiso
 TEXT_STAFF_LIST_HEAD_CONTACTINFO,Contact info,Como contactar
 TEXT_STAFF_LIST_HEAD_CREATEDDATE,Date added,Fecha ingresada
@@ -643,6 +645,7 @@ TEXT_STAFF_POSITION_OPTION_NURSESAID,Nurse\'s aid,Enefermera-auxiliar
 TEXT_STAFF_POSITION_OPTION_NURSINGSTUDENT,Nursing student,Estudiante de enfermeria
 TEXT_STAFF_POSITION_OPTION_OTHER,Other staff,Otro personal
 TEXT_STAFF_POSITION_UNKNOWN,Unknown,Desconocido
+TEXT_STAFF_PREFERRED_LANGUAGE_LABEL,Display language,Idioma de la pantalla
 TEXT_STAFF_RESET_NEW_BUTTON,Clear fields,Borrar todo
 TEXT_STAFF_USERNAME_LABEL,Username/Password,Usuario/Contraseña
 TEXT_STAFF_USERNAME_PLACEHOLDER,A unique username,Un usuario unico
