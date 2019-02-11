@@ -365,7 +365,7 @@ TEXT_PATIENT_ID_PLACEHOLDER,The ID number to search,El número para buscar
 TEXT_PATIENT_ID_PLACEHOLDER,The patient\'s name or clinic ID,El nombre o número del paciente
 TEXT_PATIENT_IMAGE_NOT_SPECIFIED,Image to delete was not specified,El imagen para borrar no estuvo especificado
 TEXT_PATIENT_IMAGE_TYPE_NOT_SUPPORTED,The specified image type is not recognized,El tipo de imagen especificada no está reconocido
-TEXT_PATIENT_INFORMATION_PAGE_TITLE,Patient Information,Información del paciente
+TEXT_PATIENT_INFO_PAGE_TITLE,Patient Information,Información del paciente
 TEXT_PATIENT_KNOWN_ALLERGIES_LABEL,Known allergies,Alergias conocidas
 TEXT_PATIENT_KNOWN_ALLERGIES_PLACEHOLDER,"Enter each known allergy, one allergy per line","Ingrese cada alergia conocida, una alergia por línea"
 TEXT_PATIENT_LABEL,Patient,Paciente

@@ -136,9 +136,12 @@ if (($patientInfo['count'] == 0) && (empty($sessionInfo['parameters']['ata']))) 
 	return;
 } // else continue 
 
+// if not a familyID search and only one result, show the result.
 if ($patientInfo['count'] == 1) {
 	// there's only one match found so just show the patient form
-	if (empty($sessionInfo['parameters']['ata'])) {
+    //  if a familyID query returns only one result, show the list so the user knows
+    //  there is only one member in the family
+	if ((empty($sessionInfo['parameters']['ata']))  && (empty($sessionInfo['parameters']['familyID']))) {
 		// Automatically jump unless it's an ATA entries
         $redirQP = array();
         $redirQP['clinicPatientID'] = $patientInfo['data']['clinicPatientID'];
@@ -233,7 +236,7 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 			if (empty($sessionInfo['parameters']['ata'])) {
 				// create the link only if this is a regular pt. search result
 				echo '<a href="/ptResults.php?familyID='.
-					$pt['familyID'].(!empty($sessionInfo['parameters']['lang']) ? '&lang='.$pageLanguage : '').'">';
+					$pt['familyID'].'">';
 			}
 			echo $pt['familyID'];
 			if (empty($sessionInfo['parameters']['ata'])) {

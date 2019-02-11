@@ -95,11 +95,11 @@ if (empty($apiUserToken)){
 
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':
-                $retVal = _icd_get($dbLink, $requestData, $apiUserToken);
+                $retVal = _icd_get($dbLink, $apiUserToken, $requestData);
                 break;
 
             case 'PATCH':
-                $retVal = _icd_patch($dbLink, $requestData, $apiUserToken);
+                $retVal = _icd_patch($dbLink, $apiUserToken, $requestData);
                 break;
 
             default:

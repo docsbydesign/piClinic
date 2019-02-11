@@ -41,7 +41,7 @@
 require_once 'api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
-function _icd_patch ($dbLink, $requestArgs, $apiUserToken) {
+function _icd_patch ($dbLink, $apiUserToken, $requestArgs) {
 	$profileData = [];
 	profileLogStart ($profileData);
 	// format db table fields as dbInfo array

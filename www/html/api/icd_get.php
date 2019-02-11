@@ -54,7 +54,7 @@
 require_once 'api_common.php';
 exitIfCalledFromBrowser(__FILE__);
 
-function _icd_get ($dbLink, $formArgs, $apiUserToken) {
+function _icd_get ($dbLink, $apiUserToken, $formArgs) {
 	$profileData = [];
 	profileLogStart ($profileData);
 	// format db table fields as dbInfo array
