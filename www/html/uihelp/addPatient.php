@@ -82,6 +82,10 @@ if (isset($_SERVER['HTTP_REFERER'])) {
 	$referringPageUrl = '/clinicDash.php'; //default: return is the home page
 }
 
+// open DB or redirect to error URL1
+$errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
+$dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+
 // assign URLs to go to after action
 $errorUrl = $referringPageUrl;
 $successUrl = $referringPageUrl;
@@ -90,9 +94,6 @@ if (!empty($formData['returnUrl'])) {
 	$successUrl = $formData['returnUrl'];
 }
 
-// open DB or redirect to error URL1
-$errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
-$dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 
 // format arguments for database update
 // copy from request data sent by form

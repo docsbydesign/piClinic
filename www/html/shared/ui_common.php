@@ -63,9 +63,7 @@ function getUiSessionInfo() {
         session_start();
     }
     if (!empty($_SESSION)) {
-        $sessionInfo['token'] = $_SESSION['token'];
-        $sessionInfo['username']  = $_SESSION['username'];
-        $sessionInfo['sessionLanguage'] = $_SESSION['sessionLanguage'];
+        $sessionInfo = $_SESSION;
     }
     $sessionInfo['parameters'] = readRequestData();
     $sessionInfo['pageLanguage'] = getUiLanguage($sessionInfo['parameters']);

@@ -40,6 +40,7 @@ require_once './shared/ui_common.php';
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
 $pageLanguage = $sessionInfo['pageLanguage'];
+// requierd for error messages
 $requestData = $sessionInfo['parameters'];
 require_once './uitext/clinicDashText.php';
 
@@ -47,6 +48,16 @@ require_once './uitext/clinicDashText.php';
 $pageAccessRequired = PAGE_ACCESS_READONLY;
 $referrerUrlOverride = NO_ACCESS_URL;
 require './uiSessionInfo.php';
+
+// open DB or redirect to error URL1
+$errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
+$dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+
+// check for authorization to access this page
+if (!checkUiSessionAccess($dbLink, $sessionInfo['token'], PAGE_ACCESS_READONLY, $sessionInfo)){
+    // show this in the error div
+    $requestData['msg'] = MSG_NO_ACCESS;
+}
 
 profileLogCheckpoint($profileData,'CODE_COMPLETE');
 

@@ -87,6 +87,7 @@ if ($retVal['httpResponse'] == 201) {
         session_start();
     }
     $_SESSION['token'] = $retVal['data']['token'];
+    $_SESSION['accessGranted'] = $retVal['data']['accessGranted'];
 	$_SESSION['username'] = $retVal['data']['username'];
 	$_SESSION['sessionLanguage'] = $retVal['data']['sessionLanguage'];
 
