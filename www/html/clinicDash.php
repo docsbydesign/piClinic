@@ -53,12 +53,6 @@ require './uiSessionInfo.php';
 $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 
-// check for authorization to access this page
-if (!checkUiSessionAccess($dbLink, $sessionInfo['token'], PAGE_ACCESS_READONLY, $sessionInfo)){
-    // show this in the error div
-    $requestData['msg'] = MSG_NO_ACCESS;
-}
-
 profileLogCheckpoint($profileData,'CODE_COMPLETE');
 
 // *************** HTML starts here ********************

@@ -49,6 +49,12 @@ require_once ('./uitext/helpHomeText.php');
 $pageAccessRequired = PAGE_ACCESS_READONLY;
 require('uiSessionInfo.php');
 
+// open DB or redirect to error URL1
+$errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
+$dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+
+// if here, the DB is open
+
 profileLogCheckpoint($profileData,'CODE_COMPLETE');
 ?>
 <?= pageHtmlTag($pageLanguage) ?>

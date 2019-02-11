@@ -44,6 +44,17 @@ $errorUrl =
     $redirectUrl = '/clinicLogin.php';
 
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+
+// check for authorization to access this page
+if (!checkUiSessionAccess($dbLink, $sessionInfo['token'], PAGE_ACCESS_CLINIC, $sessionInfo)){
+    // don't do anything, just log this
+    $logError['httpResponse'] =  403;
+    $logError['httpReason'] = 'User account is not authorized to access this resource.';
+    $logError['error']['redirectUrl'] = $redirectUrl;
+    $logError['error']['requestData'] = $requestData;
+    logApiError($sessionInfo['parameters'], $logError, __FILE__ , $sessionInfo['username'], 'session', $logError['httpReason']);
+}
+
 profileLogCheckpoint($profileData,'DB_OPEN');
 
 // format form parameters for call to post session

@@ -51,6 +51,11 @@ require_once ('./uitext/ptAddEditText.php');
 $pageAccessRequired = PAGE_ACCESS_CLINIC;
 require('uiSessionInfo.php');
 
+// open DB or redirect to error URL1
+$errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
+$dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+// if here, the DB is open
+
 // get referrer URL to return to in error or if cancelled
 $referringPageUrl = NULL;
 if (isset($_SERVER['HTTP_REFERER'])) {
@@ -60,12 +65,6 @@ if (isset($_SERVER['HTTP_REFERER'])) {
 	//default: return is the home page
 	$referringPageUrl = '/clinicDash.php';
 }
-
-// open DB or redirect to error URL1
-$errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
-$dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
-
-// if here, the DB is open 
 
 // get patient info if possible
 //	if patient record found, enter "edit" mode

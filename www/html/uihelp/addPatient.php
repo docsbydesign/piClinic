@@ -86,6 +86,24 @@ if (isset($_SERVER['HTTP_REFERER'])) {
 $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 
+// check for authorization to access this page
+if (!checkUiSessionAccess($dbLink, $sessionInfo['token'], PAGE_ACCESS_CLINIC, $sessionInfo)){
+    // show this in the error div
+    $requestData['msg'] = MSG_NO_ACCESS;
+    $redirectUrl = makeUrlWithQueryParams('/clinicDash.php', $requestData);
+    $logError = [];
+    $logError['httpResponse'] =  403;
+    $logError['httpReason'] = 'User account is not authorized to access this resource.';
+    $logError['error']['redirectUrl'] = $redirectUrl;
+    $logError['error']['requestData'] = $requestData;
+    logApiError($formData, $logError, __FILE__ , $sessionInfo['username'], 'patient', $logError['httpReason']);
+    if (API_DEBUG_MODE) {
+        header("DEBUG: ".json_encode($logError));
+    }
+    header("Location: ". $redirectUrl);
+    return;    
+}
+
 // assign URLs to go to after action
 $errorUrl = $referringPageUrl;
 $successUrl = $referringPageUrl;
@@ -267,4 +285,4 @@ if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 }
 profileLogClose($profileData, __FILE__, $formData);
 return;
-?>
+//EOV
