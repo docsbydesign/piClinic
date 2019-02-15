@@ -1,0 +1,40 @@
+Notes on logging workflows for performance measurement
+
+Write to file as is done for profile and error logs.
+
+Log the following data
+	workflowName : [login, admit, discharge, report_<name>, patient_add, patient_edit, visit_edit]
+	contextID: GUID to identify workflow across files and requests
+	stepName: Workflow step (in multi-step workflows) All workflows must have 'start' and 'end'.
+	scriptName: PHP file name 
+	username: Username logged in at the time
+	clockTime: Date/Time (to second) of log entry
+	logTime: microtime of log entry
+	
+	
+EX:
+	login, XXX, start, clinicLogin.php, USER1, 2019-08-07 15:32:22, 1565191942.2223
+	login, XXX, end, clinicLogin.php, USER1, 2019-08-07 15:32:24, 1565191944.1223
+	
+	Specific Login workflow time = delta logTime
+	
+Functions
+	contextID = logWorkflowStart (workflowName)
+		stepName = start
+		scriptName =  __FILE__
+		username = username parameter, username from session, or token
+		clockTime & logTime from system
+		
+	logWorkflowStep (workflowName, contextID, stepName)
+		scriptName =  __FILE__
+		username = username parameter, username from session, or token
+		clockTime & logTime from system
+		
+	logWorkflowEnd (workflowName, contextID)
+		stepName = end
+		scriptName =  __FILE__
+		username = username parameter, username from session, or token
+		clockTime & logTime from system
+
+	writeWorkflowLogEntry (workflowDataObject)
+		(contains the data fields described above)
