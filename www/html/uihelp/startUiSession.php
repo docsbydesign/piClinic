@@ -63,6 +63,8 @@ $errorUrl = '/clinicLogin.php';
 $dbLink = _openDBforUI($requestData, $errorUrl);
 profileLogCheckpoint($profileData,'DB_OPEN');
 
+// no need to check authorization because the session initialization will do that
+
 switch ($_SERVER['REQUEST_METHOD']) {
 	case 'POST':
 		$retVal = _session_post($dbLink, null, $requestData);

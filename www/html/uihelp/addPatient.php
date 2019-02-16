@@ -90,18 +90,18 @@ $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 if (!checkUiSessionAccess($dbLink, $sessionInfo['token'], PAGE_ACCESS_CLINIC, $sessionInfo)){
     // show this in the error div
     $requestData['msg'] = MSG_NO_ACCESS;
-    $redirectUrl = makeUrlWithQueryParams('/clinicDash.php', $requestData);
+    $redirectUrl = makeUrlWithQueryParams($errorUrl, $requestData);
     $logError = [];
     $logError['httpResponse'] =  403;
     $logError['httpReason'] = 'User account is not authorized to access this resource.';
     $logError['error']['redirectUrl'] = $redirectUrl;
     $logError['error']['requestData'] = $requestData;
-    logApiError($formData, $logError, __FILE__ , $sessionInfo['username'], 'patient', $logError['httpReason']);
+    logApiError($sessionInfo['parameters'], $logError, __FILE__ , $sessionInfo['username'], 'patient', $logError['httpReason']);
     if (API_DEBUG_MODE) {
         header("DEBUG: ".json_encode($logError));
     }
     header("Location: ". $redirectUrl);
-    return;    
+    exit;
 }
 
 // assign URLs to go to after action
