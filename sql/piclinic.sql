@@ -565,12 +565,12 @@ DROP VIEW IF EXISTS `commentGet`;
 CREATE VIEW `commentGet` AS 
 	SELECT 
 		`commentID`,
-		`CommentDate`,
-		`Username`,
-		`ReferringUrl`,
-		`ReferringPage`,
-		`ReturnUrl`,
-		`CommentText`,
+		`commentDate`,
+		`username`,
+		`referringUrl`,
+		`referringPage`,
+		`returnUrl`,
+		`commentText`,
 		`createdDate`
 	FROM `comment`
 	ORDER BY `createdDate` DESC
@@ -598,7 +598,7 @@ CREATE VIEW visitEditGet AS
 		`patientLastName`, 
 		`patientFirstName`, 
 		`patientSex`, 
-		`PatientBirthDate`, 
+		`patientBirthDate`, 
 		`patientHomeAddress1`, 
 		`patientHomeAddress2`, 
 		`patientHomeNeighborhood`, 
@@ -640,7 +640,7 @@ CREATE VIEW visitGet AS
 		`patientLastName`, 
 		`patientFirstName`, 
 		`patientSex`, 
-		`PatientBirthDate`, 
+		`patientBirthDate`, 
 		`patientHomeAddress1`, 
 		`patientHomeAddress2`, 
 		`patientHomeNeighborhood`, 
@@ -704,7 +704,7 @@ CREATE VIEW visitOpen AS
 		`patientLastName`, 
 		`patientFirstName`, 
 		`patientSex`, 
-		`PatientBirthDate`, 
+		`patientBirthDate`, 
 		`patientHomeAddress1`, 
 		`patientHomeAddress2`, 
 		`patientHomeNeighborhood`, 
@@ -792,7 +792,7 @@ CREATE VIEW `visitPatientEditGet` AS
 		`visit`.`patientLastName` AS `lastName`, 
 		`visit`.`patientFirstName` AS `firstName`, 
 		`visit`.`patientSex` AS `Sex`, 
-		`visit`.`PatientBirthDate` AS `birthDate`, 
+		`visit`.`patientBirthDate` AS `birthDate`, 
 		`visit`.`patientHomeAddress1`, 
 		`visit`.`patientHomeAddress2`, 
 		`visit`.`patientHomeNeighborhood`, 
@@ -843,8 +843,8 @@ CREATE VIEW `visitPatientGet` AS
 		`visit`.`patientVisitID`, 
 		`visit`.`patientLastName` AS `lastName`, 
 		`visit`.`patientFirstName` AS `firstName`, 
-		`visit`.`patientSex` AS `Sex`, 
-		`visit`.`PatientBirthDate` AS `birthDate`, 
+		`visit`.`patientSex` AS `sex`, 
+		`visit`.`patientBirthDate` AS `birthDate`, 
 		`visit`.`patientHomeAddress1`, 
 		`visit`.`patientHomeAddress2`, 
 		`visit`.`patientHomeNeighborhood`, 
@@ -862,12 +862,12 @@ CREATE VIEW `visitPatientGet` AS
 		`visit`.`condition3`, 
 		`visit`.`referredTo`, 
 		`visit`.`referredFrom`,
-		`patient`.`Active`, 
-		`patient`.`ContactPhone`, 
-		`patient`.`ContactAltPhone`, 
-		`patient`.`BloodType`, 
-		`patient`.`OrganDonor`, 
-		`patient`.`PreferredLanguage`
+		`patient`.`active`, 
+		`patient`.`contactPhone`, 
+		`patient`.`contactAltPhone`, 
+		`patient`.`bloodType`, 
+		`patient`.`organDonor`, 
+		`patient`.`preferredLanguage`
 		FROM `visit`
 		JOIN `patient`  ON `patient`.`clinicPatientID` = `visit`.`clinicPatientID`
 		WHERE `visit`.`deleted` = FALSE

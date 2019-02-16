@@ -711,6 +711,7 @@ TEXT_VISIT_TYPE_PLACEHOLDER,Visit type,Tipo de la visita
 TEXT_VISIT_TYPE_SPECIAL,Special,Especial
 TEXT_VISIT_TYPE_SPECIALIST,Specialist,Especialista
 TEXT_VISIT_TYPE_TEST,Test,Prueba
+TEXT_VISIT_UNABLE_OPEN_VISIT,Unable to access this visit,No es posible abrir esta visita
 TEXT_VISIT_VISIT_HEADING,Visit,Visita
 TEXT_VISIT_YEAR_FORMAT,Y,Y
 TEXT_VISIT_YEAR_TEXT,y,a

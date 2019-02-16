@@ -218,14 +218,14 @@ function icdLookupJavaScript () {
  function conditionText ($conditionValue, $formatText = TRUE) {
 	$conditionText = ''; 
 	if ($formatText) {
-		$conditionText = '<span class="inactive">'.CONDITION_BLANK.'</span>'; 
+		$conditionText = '<span class="inactive">'.TEXT_CONDITION_BLANK.'</span>';
 	 } 
 	switch ($conditionValue) {
 		case "NEWDIAG":
-			$conditionText = CONDITION_NEW_SELECT;
+			$conditionText = TEXT_CONDITION_NEW_SELECT;
 			break;
 		case "SUBSDIAG":
-			$conditionText = CONDITION_SUBSEQUENT_SELECT;
+			$conditionText = TEXT_CONDITION_SUBSEQUENT_SELECT;
 			break;
 		default:
 			// leave as blank placeholder

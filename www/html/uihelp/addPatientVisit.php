@@ -237,7 +237,7 @@ if (!empty($formData['staffUsername']) && empty($formData['staffName'])) {
 	if (($staffResponse['httpResponse'] == 200) && ($staffResponse['count'] == 1)) {
 		// one record was returned 
 		$requestData['staffName'] = $staffResponse['data']['lastName']. ', '.$staffResponse['data']['firstName'];
-		$requestData['StaffPosition'] = $staffResponse['data']['Position'];
+		$requestData['staffPosition'] = $staffResponse['data']['position'];
 	}
 }
 
@@ -264,7 +264,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 if ($retVal['httpResponse'] == 201) {
 	if ($formData['ata']){
         $formData['clinicPatientID'] = $retVal['data']['clinicPatientID'];
-        $formData['patientVisitID'] = $retVal['data']['PatientVisitID'];
+        $formData['patientVisitID'] = $retVal['data']['patientVisitID'];
         $formData['ata'] = true;
         $redirectUrl = makeUrlWithQueryParams('/ataVisitEdit.php', $formData);
 	} else{
