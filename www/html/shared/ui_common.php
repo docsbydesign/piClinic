@@ -309,4 +309,36 @@ function makeUrlWithQueryParams ($url, $qParams) {
         return $url;
     }
 }
+
+function cleanUrlQueryParams($queryParamArray) {
+    $qpReturn = array();
+    if (!empty($queryParamArray)) {
+        $qpArray = $queryParamArray;
+        unset($qpArray['msg']);
+        unset($qpArray['lang']);
+        unset($qpArray['__source']);
+    }
+    return $qpArray;
+}
+
+function cleanedRefererUrl ()
+{
+    $httpReferer = '';
+    $httpRefererUrl = '';
+    $httpRefererQp = array();
+    if (!empty($_SERVER['HTTP_REFERER'])) {
+        $httpRefererParts = explode('?',$_SERVER['HTTP_REFERER']);
+        if (!empty($httpRefererParts[0])) {
+            $httpRefererUrl = $httpRefererParts[0];
+        }
+        if (!empty($httpRefererParts[1])) {
+            parse_str($httpRefererParts[1], $httpRefererQp);
+            $httpRefererQp = cleanUrlQueryParams($httpRefererQp);
+        }
+        return (makeUrlWithQueryParams($httpRefererUrl, $httpRefererQp));
+    }
+    return $httpReferer;
+}
+
 //EOF
+
