@@ -159,7 +159,20 @@ function outputDateInputFields ($format, $dateFieldName, $defaultMonth, $default
 	if (isset($defaultTime)) {
 		$timeInput = '<input class="timeNumeric" type="time" '.($requiredField ? 'required ' : '').' id="new'.$dateFieldName.'Time" name="'.$dateFieldName.'Time" value="'.$defaultTime.'">';
 	}
-	
+
+	if (false) {
+        // +++ DEBUG
+        $dbgVals = array();
+        $dbgVals['format'] = $format;
+        $dbgVals['defaultMonth'] = $defaultMonth;
+        $dbgVals['defaultDay'] = $defaultDay;
+        $dbgVals['defaultYear'] = $defaultYear;
+        $dbgVals['defaultTime']  =$defaultTime;
+
+        $htmlString = '<pre>'.json_encode($dbgVals, JSON_PRETTY_PRINT).'</pre>';
+        // --- DEBUG
+    }
+
 	$dateFields = explode("-", $format);
 	if (count($dateFields) < 3) {
 		// default to "M-D-Y"

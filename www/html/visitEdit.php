@@ -54,8 +54,6 @@ $pageLanguage = $sessionInfo['pageLanguage'];
 require_once ('./uitext/visitEditText.php');
 // functions to translate Enums to localized text
 require_once ('./visitUiStrings.php');
-//	assumes $pageLanguage contains a valid language
-// require_once ('staffUiStrings.php');
 
 // open session variables and check for access to this page
 $pageAccessRequired = PAGE_ACCESS_STAFF;
@@ -181,13 +179,9 @@ function writeOptionsMenu ($visitInfo) {
 			<p><label class="close"><?= TEXT_VISIT_DELETED_LABEL ?>:</label><?= ($visitInfo['deleted'] ?  TEXT_VISIT_DELETED_TEXT : TEXT_VISIT_NOT_DELETED_TEXT ) ?></p>
 		</div>
 	</div>
-	<div style="clear: both;"></div>
+    <div style="clear: both;"></div>
+    <div id="optionMenuDiv"></div>
 	<div id="PatientVisitView">
-		<div id="blankMenuDiv">
-		<ul class="topLinkMenuList">
-			<li class="firstLink"></li>
-		</ul>
-		</div>
 		<div id="PatientVisitDetails">
 			<form enctype="application/x-www-form-urlencoded" action="/uihelp/updatePatientVisit.php" method="post">
 				<h2><?= TEXT_VISIT_VISIT_HEADING ?></h2>
@@ -224,7 +218,7 @@ function writeOptionsMenu ($visitInfo) {
 									(!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_MONTH_FORMAT, strtotime($visitInfo['dateTimeIn'])) : "" ),
 									(!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DAY_FORMAT, strtotime($visitInfo['dateTimeIn'])) : "" ),
 									(!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_YEAR_FORMAT, strtotime($visitInfo['dateTimeIn'])) : "" ),
-									(!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_TIME_FORMAT, strtotime($visitInfo['dateTimeIn'])) : "" )
+									(!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_TIME_EDIT_FORMAT, strtotime($visitInfo['dateTimeIn'])) : "" )
 								) ?>
 							</p>
 						</div>
@@ -297,7 +291,7 @@ function writeOptionsMenu ($visitInfo) {
 									(!empty($visitInfo['dateTimeOut']) ? date(TEXT_VISIT_MONTH_FORMAT, strtotime($visitInfo['dateTimeOut'])) : "" ),
 									(!empty($visitInfo['dateTimeOut']) ? date(TEXT_VISIT_DAY_FORMAT, strtotime($visitInfo['dateTimeOut'])) : "" ),
 									(!empty($visitInfo['dateTimeOut']) ? date(TEXT_VISIT_YEAR_FORMAT, strtotime($visitInfo['dateTimeOut'])) : "" ),
-									(!empty($visitInfo['dateTimeOut']) ? date(TEXT_VISIT_TIME_FORMAT, strtotime($visitInfo['dateTimeOut'])) : "" )
+									(!empty($visitInfo['dateTimeOut']) ? date(TEXT_VISIT_TIME_EDIT_FORMAT, strtotime($visitInfo['dateTimeOut'])) : "" )
 								) ?>
 							</p>
 						</div>
