@@ -36,7 +36,9 @@ TEXT_BIRTHDAY_MONTH_FORMAT,m,m
 TEXT_BIRTHDAY_YEAR_FORMAT,Y,Y
 TEXT_BLANK_OPTION_SELECT,Choose,Escoge
 TEXT_BLANK_STAFF_OPTION,(Select the health professional),(Escoge el profesional de salud)
+TEXT_BLANK_STAFF_OPTION_VISIT,(Select the health professional),(Escoge el profesional de salud)
 TEXT_BLANK_VISIT_OPTION,(Select the visit type),(Escoge el tipo de la atención)
+TEXT_BLANK_VISIT_OPTION_VISIT,(Select the visit type),(Escoge el tipo de la atención)
 TEXT_BLOODTYPE_LABEL,Blood Type,Tipo de Sangre
 TEXT_CANCEL_EDIT,Cancel,Cancelar
 TEXT_CANCEL_NEW_VISIT,Cancel,Cancelar

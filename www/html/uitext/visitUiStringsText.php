@@ -31,7 +31,9 @@ exitIfCalledFromBrowser(__FILE__);
 if ($pageLanguage == UITEST_LANGUAGE) {
 	define('TEXT_CONDITION_BLANK','TEXT_CONDITION_BLANK',false);
 	define('TEXT_CONDITION_NEW_SELECT','TEXT_CONDITION_NEW_SELECT',false);
+	define('TEXT_CONDITION_SELECT','TEXT_CONDITION_SELECT',false);
 	define('TEXT_CONDITION_SUBSEQUENT_SELECT','TEXT_CONDITION_SUBSEQUENT_SELECT',false);
+	define('TEXT_DIAGNOSIS_LOADING','TEXT_DIAGNOSIS_LOADING',false);
 	define('TEXT_VISIT_TYPE_ALL','TEXT_VISIT_TYPE_ALL',false);
 	define('TEXT_VISIT_TYPE_EMERGENCY','TEXT_VISIT_TYPE_EMERGENCY',false);
 	define('TEXT_VISIT_TYPE_OUTPATIENT','TEXT_VISIT_TYPE_OUTPATIENT',false);
@@ -42,7 +44,9 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	define('TEXT_CONDITION_BLANK','(None)',false);
 	define('TEXT_CONDITION_NEW_SELECT','N',false);
+	define('TEXT_CONDITION_SELECT','(Select new or subsequent)',false);
 	define('TEXT_CONDITION_SUBSEQUENT_SELECT','S',false);
+	define('TEXT_DIAGNOSIS_LOADING','Loading...',false);
 	define('TEXT_VISIT_TYPE_ALL','All',false);
 	define('TEXT_VISIT_TYPE_EMERGENCY','Emergency',false);
 	define('TEXT_VISIT_TYPE_OUTPATIENT','Outpatient',false);
@@ -53,7 +57,9 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	define('TEXT_CONDITION_BLANK','(Ninguno)',false);
 	define('TEXT_CONDITION_NEW_SELECT','N',false);
+	define('TEXT_CONDITION_SELECT','(Escoge nuevo o subsiguiente)',false);
 	define('TEXT_CONDITION_SUBSEQUENT_SELECT','S',false);
+	define('TEXT_DIAGNOSIS_LOADING','Cargando...',false);
 	define('TEXT_VISIT_TYPE_ALL','Todos',false);
 	define('TEXT_VISIT_TYPE_EMERGENCY','Emergencia',false);
 	define('TEXT_VISIT_TYPE_OUTPATIENT','Consulta externa',false);

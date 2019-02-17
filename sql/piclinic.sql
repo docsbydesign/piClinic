@@ -791,7 +791,7 @@ CREATE VIEW `visitPatientEditGet` AS
 		`visit`.`patientVisitID`, 
 		`visit`.`patientLastName` AS `lastName`, 
 		`visit`.`patientFirstName` AS `firstName`, 
-		`visit`.`patientSex` AS `Sex`, 
+		`visit`.`patientSex` AS `sex`, 
 		`visit`.`patientBirthDate` AS `birthDate`, 
 		`visit`.`patientHomeAddress1`, 
 		`visit`.`patientHomeAddress2`, 

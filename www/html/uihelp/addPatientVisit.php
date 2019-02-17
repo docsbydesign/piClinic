@@ -183,8 +183,8 @@ $dbOptionalFields = [
 	,'staffName'	// 	TODO: coming soon
 	// 'visitType' required (see above)
 	,'visitStatus'		// assign if present, otherwise, use default
-	,'complaintPrimary'
-	,'complaintAdditional'
+	,'primaryComplaint'
+	,'secondaryComplaint'
     ,'payment'
 	// ,'dateTimeIn' 		(see above)
 	// ,'dateTimeOut'		(see above)

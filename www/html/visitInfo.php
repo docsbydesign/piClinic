@@ -113,8 +113,8 @@ if ($visitRecord['httpResponse'] != 200) {
 	$visitInfo['sex'] = '';
 	$visitInfo['birthDate'] = '';
 	$visitInfo['staffName'] = '';
-	$visitInfo['complaintPrimary'] = '';
-	$visitInfo['complaintAdditional'] = '';
+	$visitInfo['primaryComplaint'] = '';
+	$visitInfo['secondaryComplaint'] = '';
 	$visitInfo['visitType'] = '';
 	$visitInfo['visitStatus'] = '';
 } else {
@@ -214,10 +214,10 @@ function writeTopicMenu ($sessionInfo) {
 							<p><label class="close"><?= TEXT_REFERRED_FROM_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['referredFrom']) ? $visitInfo['referredFrom'] : '<span class="inactive">'.TEXT_REFERRAL_BLANK.'</span>') ?></p>
 						</div>
 						<div class="dataBlock">							
-							<p><label class="close"><?= TEXT_COMPLAINT_PRIMARY_LABEL ?>:</label>&nbsp;<?= (isset($visitInfo['complaintPrimary']) ? $visitInfo['complaintPrimary'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
+							<p><label class="close"><?= TEXT_COMPLAINT_PRIMARY_LABEL ?>:</label>&nbsp;<?= (isset($visitInfo['primaryComplaint']) ? $visitInfo['primaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
 						</div>
 						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?>:</label>&nbsp;<?= (isset($visitInfo['complaintAdditional']) ? $visitInfo['complaintAdditional'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
+							<p><label class="close"><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?>:</label>&nbsp;<?= (isset($visitInfo['secondaryComplaint']) ? $visitInfo['complaintAdditional'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
 						</div>
                         <div class="dataBlock">
                             <p><label class="close"><?= TEXT_PAYMENT_LABEL ?>:</label>
