@@ -184,7 +184,7 @@ function writeTopicMenu ($cancel) {
 	<div id="PatientVisitView">
         <div class="dataBlock"></div>
         <div id="PatientVisitDetails">
-            <form enctype="application/x-www-form-urlencoded" action="/addPatientVisit.php" method="post">
+            <form enctype="application/x-www-form-urlencoded" action="/uihelp/addPatientVisit.php" method="post">
                 <input type="hidden" id="ClinicPatientIDField" name="clinicPatientID" value="<?= $patientInfo['clinicPatientID'] ?>">
                 <div id="optionMenuDiv"></div>
                     <p><label class="close"><?= TEXT_FIRST_VISIT_LABEL ?>:</label>
@@ -238,7 +238,7 @@ function writeTopicMenu ($cancel) {
                             </p>
                         </div>
                         <div class="dataBlock bottomSpace">
-                            <p><label class="close"><?= TEXT_REFERRED_FROM_LABEL ?>:</label><?= dbFieldTextInput ($visitInfo, "ReferredFrom", TEXT_REFERRAL_PLACEHOLDER, false) ?></p>
+                            <p><label class="close"><?= TEXT_REFERRED_FROM_LABEL ?>:</label><?= dbFieldTextInput ($visitInfo, "referredFrom", TEXT_REFERRAL_PLACEHOLDER, false) ?></p>
                         </div>
                         <div class="dataBlock">
                             <p><label><?= TEXT_COMPLAINT_PRIMARY_LABEL ?>:</label><br>

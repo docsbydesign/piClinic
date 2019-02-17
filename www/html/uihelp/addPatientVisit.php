@@ -50,6 +50,7 @@ require_once dirname(__FILE__).'/../shared/security.php';
 require_once dirname(__FILE__).'/../shared/ui_common.php';
 require_once dirname(__FILE__).'/../api/visit_common.php';
 require_once dirname(__FILE__).'/../api/visit_patch.php';
+require_once dirname(__FILE__).'/../api/visit_post.php';
 require_once dirname(__FILE__).'/../api/staff_common.php';
 require_once dirname(__FILE__).'/../api/staff_get.php';
 
