@@ -58,7 +58,7 @@ TEXT_CLINIC_HISTORY_ID_LABEL,Family ID,Número de historia clínica
 TEXT_CLINIC_HOME,Dashboard,Página principal
 TEXT_CLINIC_LOGIN_PAGE_TITLE,Clinic login,Iniciar sesión
 TEXT_CLINIC_REPORTS,Reports,Informes
-TEXT_CLOSE_PAGE_TITLE,Discharge patient,Cerrar la visita
+TEXT_CLOSE_VISIT_PAGE_TITLE,Discharge patient,Cerrar la visita
 TEXT_CLOSE_VISIT,Discharge this patient,Dar de alta este paciente
 TEXT_CLOSE_VISIT_LINK,Discharge this patient,Dar de alta el paciente
 TEXT_COMMENT_CANCEL,Cancel,Cancelar
@@ -662,12 +662,11 @@ TEXT_VALUE_NOT_SET,(not set),(vacio)
 TEXT_VALUE_NOT_SET,No data,No hay datos
 TEXT_VIEW_PATIENT,Show patient information,Mostrar información del paciente
 TEXT_VISIT_ARRIVAL_HEADING,Arrival,Llegada
-TEXT_VISIT_DATE_FORMAT,H:i m/d/Y,H:i d-m-Y
 TEXT_VISIT_DATE_FORMAT,m/d/Y H:i,d-m-Y H:i
-TEXT_VISIT_DATE_FORMAT,m/d/Y,d-m-Y
 TEXT_VISIT_DATE_FORMAT_LABEL,(m/d/y hh:mm),(d-m-Y hh:mm)
 TEXT_VISIT_DATE_INPUT_FORMAT,M-D-Y-T,D-M-Y-T
 TEXT_VISIT_DATE_LABEL,Visit Date,Fecha de la visita
+TEXT_VISIT_DATE_ONLY_FORMAT,m/d/Y,d-m-Y
 TEXT_VISIT_DATE_TIME_LABEL,Visit Date,Fecha de la visita
 TEXT_VISIT_DAY_FORMAT,d,d
 TEXT_VISIT_DAY_TEXT,d,d
@@ -677,7 +676,7 @@ TEXT_VISIT_DELETED_SELECT_LABEL,Deleted,Borrada
 TEXT_VISIT_DELETED_TEXT,Deleted,Borrada
 TEXT_VISIT_DETAILS_PAGE_TITLE,Patient Visit Details,Detalles de la visita
 TEXT_VISIT_DISCHARGE_HEADING,Discharge,Dar de alta
-TEXT_VISIT_EDIT_ALL_FIELDS,Edit all fields or add images,Actualizar todos los datos o agregue imágenes de la visita
+TEXT_VISIT_EDIT_ALL_FIELDS,Edit all fields,Actualizar todos los dato de la visita
 TEXT_VISIT_FORM_HEADING,Patient form images,Imagines de formularios del paciente
 TEXT_VISIT_ID_LABEL,ID,ID
 TEXT_VISIT_LIST_ACTIONS,Visit actions,Acciones de la visita
@@ -702,7 +701,7 @@ TEXT_VISIT_PHOTO_HEADING,Patient photos,Fotos del paciente de esta visita
 TEXT_VISIT_STATUS_CLOSED,Discharged,Dado de alta
 TEXT_VISIT_STATUS_LABEL,Status,Estatus
 TEXT_VISIT_STATUS_OPEN,Admitted,Admitido
-TEXT_VISIT_TIME_FORMAT,H:i m/d/Y,H:i d-m-Y
+TEXT_VISIT_TIME_DATE_FORMAT,H:i m/d/Y,H:i d-m-Y
 TEXT_VISIT_TIME_EDIT_FORMAT,H:i,H:i
 TEXT_VISIT_TIME_FORMAT,h:i,H:i
 TEXT_VISIT_TYPE_ALL,All,Todos

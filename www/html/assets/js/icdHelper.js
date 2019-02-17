@@ -2,7 +2,7 @@
 
 // simple AJAX query class found at https://stackoverflow.com/questions/247483/http-get-request-in-javascript
 var HttpClient = function() {
-	this.get = function(aUrl, timeout, aCallback, eCallback) {
+	this.get = function(aUrl, timeout, token, aCallback, eCallback) {
 		var anHttpRequest = new XMLHttpRequest();
 		anHttpRequest.onreadystatechange = function() { 
 			if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
@@ -13,12 +13,15 @@ var HttpClient = function() {
 
 		anHttpRequest.open( "GET", aUrl, true );
 		anHttpRequest.timeout = timeout;
+		if (token != null) {
+			anHttpRequest.setRequestHeader('X-piClinic-token', token);
+		}
 		anHttpRequest.onTimeout = eCallback('timeout');
 		anHttpRequest.send( null );
 	}
 }
 
-function inputKeyUpEventHandler (event, inputElem, dataListId, lang) {
+function inputKeyUpEventHandler (event, inputElem, dataListId, token, lang) {
 	// searches diagnosis database for entries that contain
 	//  inputId.value and populates dataListId entries found
 	var minSearchLen = 2; // number of characters in input required to search
@@ -40,7 +43,7 @@ function inputKeyUpEventHandler (event, inputElem, dataListId, lang) {
 	//
 	if (lang == null) {lang = 'en';} //default to English
 	// the the qs= search query can be used to speed up searches by searching from the start of the text.
-	var searchPath = '/icd.php?lang=' + lang + '&sort=t&limit=' + maxSearchReturn.toString() + '&q='; // generic search query
+	var searchPath = '/api/icd.php?language=' + lang + '&sort=t&limit=' + maxSearchReturn.toString() + '&q='; // generic search query
 	//
 	// See if we need to go to the DB to get the matching strings
 	var getStrings = false;
@@ -78,7 +81,7 @@ function inputKeyUpEventHandler (event, inputElem, dataListId, lang) {
 		// get some autofill suggestions
 		searchPath += inputElem.value;
 		var descQuery = new HttpClient();
-		descQuery.get (searchPath, 500,
+		descQuery.get (searchPath, 500, token,
 			function (response) {
 				var responseObj = JSON.parse(response);
 				if (responseObj.count < 1) { return false;} // nothing to do, no data
@@ -99,23 +102,23 @@ function inputKeyUpEventHandler (event, inputElem, dataListId, lang) {
 						var thisOption = responseObj.data[d];
 						// append options 
 						optionList.push ('<option data-code-index="' +
-							thisOption.Icd10Index +
+							thisOption.icd10index +
 							'" value="' +
-							thisOption.ShortDescription + ' [' + thisOption.Icd10Code + ']'+
+							thisOption.shortDescription + ' [' + thisOption.icd10code + ']'+
 							'" />');
 					}
 				} else {
 					// an ICD-10 code match will only return 1 element so test it here
 					optionList.push ( '<option data-code-index="' +
-						responseObj.data.Icd10Index +
+						responseObj.data.icd10index +
 						'" value="' +
-						responseObj.data.ShortDescription + ' [' + responseObj.data.Icd10Code + ']'+
+						responseObj.data.shortDescription + ' [' + responseObj.data.icd10code + ']'+
 						'" />');
 				}
 				fetchTimeLoop = performance.now();
 				dataListObj.innerHTML = optionList.join('');
 				fetchTimeEnd = performance.now();
-				// console.log('**Fetch: success. ' + responseObj.count + ' objects in ' + (fetchTimeReturn - fetchTimeStart).toFixed(4) + '/' + (fetchTimeLoop - fetchTimeReturn).toFixed(4) + '/' + (fetchTimeEnd - fetchTimeLoop).toFixed(4) + ' mS');
+				console.log('**Fetch: success. ' + responseObj.count + ' objects in ' + (fetchTimeReturn - fetchTimeStart).toFixed(4) + '/' + (fetchTimeLoop - fetchTimeReturn).toFixed(4) + '/' + (fetchTimeEnd - fetchTimeLoop).toFixed(4) + ' mS');
 				return false;
 			},
 			function (status) {
@@ -123,7 +126,7 @@ function inputKeyUpEventHandler (event, inputElem, dataListId, lang) {
 				inputElem.style.width = '';
 				loadingText.style.display = 'none';
 				fetchTimeEnd = performance.now();
-				// console.log('**Fetch: error.  (' + status + '): '  + (fetchTimeEnd - fetchTimeStart) + ' mS');
+				console.log('**Fetch: error.  (' + status + '): '  + (fetchTimeEnd - fetchTimeStart) + ' mS');
 			}
 		);		
 	} else {
@@ -132,7 +135,7 @@ function inputKeyUpEventHandler (event, inputElem, dataListId, lang) {
 	return false;
 }
 
-function setCodeValue(TextObj, DataListId, CodeFieldId, lang) {
+function setCodeValue(TextObj, DataListId, CodeFieldId, token, lang) {
 	// look up the string to find the matching ICD-10 code
 	//  first look in the autofill buffer and, if no match is found,
 	//	write the string to look up
@@ -174,21 +177,21 @@ function setCodeValue(TextObj, DataListId, CodeFieldId, lang) {
 		var firstBracket = stringToMatch.indexOf('[');
 		var lastBracket = stringToMatch.indexOf(']');
 		var stringStart = 0;
-		var stringEnd = stringToMatch.length;
-		if (firstBracket == 0) {
-			// the code is at the front, so text starts after ]
-			stringStart = lastBracket + 1;
-		} else if (firstBracket > 0) { //if it starts after 
-			// the code is at the end of the string
-			stringEnd = firstBracket;
-		} // else no bracket
+		var stringLength = stringToMatch.length;
+		var searchParam = '&q='; // assume a generic search unless we find a code
+		if ((firstBracket >= 0) && (lastBracket >=0)){
+			// the string appears to have a code, so parse out the code
+			stringStart = firstBracket + 1;
+			stringLength = lastBracket - firstBracket - 1;
+			searchParam = '&ce=';
+		}
 		// trim down the string to match
-		stringToMatch = stringToMatch.substr(stringStart, stringEnd).trim();
-		var searchPath = '/icd.php?lang=' + lang + '&sort=t&limit=' + 
-			maxSearchReturn.toString() + 
-			'&q=' + stringToMatch; // generic search query
+		stringToMatch = stringToMatch.substr(stringStart, stringLength).trim();
+		var searchPath = '/api/icd.php?language=' + lang + '&sort=t&limit=' +
+			maxSearchReturn.toString() +
+			searchParam + stringToMatch; // search query
 		var descQuery = new HttpClient();
-		descQuery.get (searchPath, 1000,
+		descQuery.get (searchPath, 1000, token,
 			function (response) {
 				var responseObj = JSON.parse(response);
 				if (responseObj.count < 1) { 
@@ -206,9 +209,19 @@ function setCodeValue(TextObj, DataListId, CodeFieldId, lang) {
 					codeList[0] = responseObj.data;
 				}
 				for (var d = 0; d < codeList.length; d++ ) {
-					if (codeList[d].ShortDescription == stringToMatch) {
-						objForCode.value = codeList[d].Icd10Index;
-						return false;
+					// find a match in the returned data
+					if (searchParam == '&ce=') {
+						// compare ICD10 code
+						if (codeList[d].icd10code == stringToMatch) {
+							objForCode.value = codeList[d].icd10index;
+							return false;
+						}
+					} else {
+						//  compare the description
+						if (codeList[d].shortDescription == stringToMatch) {
+							objForCode.value = codeList[d].icd10index;
+							return false;
+						}
 					}
 				}
 				// if here, no match was found so return the stripped description string

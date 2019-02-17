@@ -183,9 +183,9 @@ function getIcdDescription ($dbLink, $icdCode, $lang, $showCode=0) {
 	}
 }
 
-function showDiagnosisInput ($dbLink, $visitInfo, $field, $lang, $placeholderText, $loadingText, $class='piClinicEdit', $charLimit=255, $autofocus=false, $requiredField=false) {
+function showDiagnosisInput ($dbLink, $visitInfo, $field, $sessionInfo, $placeholderText, $loadingText, $class='piClinicEdit', $charLimit=255, $autofocus=false, $requiredField=false) {
 	// create text control
-	$decodedValue = getIcdDescription($dbLink, $visitInfo[$field], $lang, SHOWCODE_CODE_AFTER_TEXT);
+	$decodedValue = getIcdDescription($dbLink, $visitInfo[$field], $sessionInfo['pageLanguage'], SHOWCODE_CODE_AFTER_TEXT);
 
 	$elemString = '<input '.
 		'type="text" '.
@@ -196,8 +196,8 @@ function showDiagnosisInput ($dbLink, $visitInfo, $field, $lang, $placeholderTex
 		'data-last-list-size="9999" '.
 		($autofocus ? 'autofocus="autofocus" ' : '').
 		($requiredField ? 'required ' : '').
-		'onkeyup="inputKeyUpEventHandler (event, this, \'diagData\', \''.$lang.'\')" '.
-		'onchange="setCodeValue(this, \'diagData\', \''.$field.'CodeId\', \''.$lang.'\')" '.
+		'onkeyup="inputKeyUpEventHandler (event, this, \'diagData\', \''.$sessionInfo['token'].'\', \''.$sessionInfo['pageLanguage'].'\')" '.
+		'onchange="setCodeValue(this, \'diagData\', \''.$field.'CodeId\', \''.$sessionInfo['token'].'\', \''.$sessionInfo['pageLanguage'].'\')" '.
 		'value="'.$decodedValue. '" '.
 		'placeholder="'.$placeholderText.'" '. 'class="'. $class . '" '.
 		'maxlength="'.(string)$charLimit.'"'.
