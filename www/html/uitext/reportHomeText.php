@@ -29,14 +29,14 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
-	define('TEXT_REPORT_PAGE_TITLE','TEXT_REPORT_PAGE_TITLE',false);
+	if (!defined('TEXT_REPORT_PAGE_TITLE')) { define('TEXT_REPORT_PAGE_TITLE','TEXT_REPORT_PAGE_TITLE',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	define('TEXT_REPORT_PAGE_TITLE','Clinic reports',false);
+	if (!defined('TEXT_REPORT_PAGE_TITLE')) { define('TEXT_REPORT_PAGE_TITLE','Clinic reports',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	define('TEXT_REPORT_PAGE_TITLE','Informes de la Clínica',false);
+	if (!defined('TEXT_REPORT_PAGE_TITLE')) { define('TEXT_REPORT_PAGE_TITLE','Informes de la Clínica',false); }
 }
 //EOF

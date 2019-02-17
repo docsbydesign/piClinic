@@ -29,26 +29,26 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
-	define('TEXT_SESSION_LOGOUT_LINK','TEXT_SESSION_LOGOUT_LINK',false);
-	define('TEXT_SESSION_LOGOUT_TITLE','TEXT_SESSION_LOGOUT_TITLE',false);
-	define('TEXT_SESSION_NAME_PROMPT','TEXT_SESSION_NAME_PROMPT',false);
-	define('TEXT_SESSION_SETTINGS_LABEL','TEXT_SESSION_SETTINGS_LABEL',false);
-	define('TEXT_SESSION_SETTINGS_TITLE','TEXT_SESSION_SETTINGS_TITLE',false);
+	if (!defined('TEXT_SESSION_LOGOUT_LINK')) { define('TEXT_SESSION_LOGOUT_LINK','TEXT_SESSION_LOGOUT_LINK',false); }
+	if (!defined('TEXT_SESSION_LOGOUT_TITLE')) { define('TEXT_SESSION_LOGOUT_TITLE','TEXT_SESSION_LOGOUT_TITLE',false); }
+	if (!defined('TEXT_SESSION_NAME_PROMPT')) { define('TEXT_SESSION_NAME_PROMPT','TEXT_SESSION_NAME_PROMPT',false); }
+	if (!defined('TEXT_SESSION_SETTINGS_LABEL')) { define('TEXT_SESSION_SETTINGS_LABEL','TEXT_SESSION_SETTINGS_LABEL',false); }
+	if (!defined('TEXT_SESSION_SETTINGS_TITLE')) { define('TEXT_SESSION_SETTINGS_TITLE','TEXT_SESSION_SETTINGS_TITLE',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	define('TEXT_SESSION_LOGOUT_LINK','Logout',false);
-	define('TEXT_SESSION_LOGOUT_TITLE','Logout',false);
-	define('TEXT_SESSION_NAME_PROMPT','Logged in as',false);
-	define('TEXT_SESSION_SETTINGS_LABEL','User settings',false);
-	define('TEXT_SESSION_SETTINGS_TITLE','Update user account settings and password',false);
+	if (!defined('TEXT_SESSION_LOGOUT_LINK')) { define('TEXT_SESSION_LOGOUT_LINK','Logout',false); }
+	if (!defined('TEXT_SESSION_LOGOUT_TITLE')) { define('TEXT_SESSION_LOGOUT_TITLE','Logout',false); }
+	if (!defined('TEXT_SESSION_NAME_PROMPT')) { define('TEXT_SESSION_NAME_PROMPT','Logged in as',false); }
+	if (!defined('TEXT_SESSION_SETTINGS_LABEL')) { define('TEXT_SESSION_SETTINGS_LABEL','User settings',false); }
+	if (!defined('TEXT_SESSION_SETTINGS_TITLE')) { define('TEXT_SESSION_SETTINGS_TITLE','Update user account settings and password',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	define('TEXT_SESSION_LOGOUT_LINK','Cerrar sesión',false);
-	define('TEXT_SESSION_LOGOUT_TITLE','Cerrar sesión',false);
-	define('TEXT_SESSION_NAME_PROMPT','Inscrito como',false);
-	define('TEXT_SESSION_SETTINGS_LABEL','Configuración del usuario',false);
-	define('TEXT_SESSION_SETTINGS_TITLE','Actualizar la configuración y la contraseña de la cuenta de usuario ',false);
+	if (!defined('TEXT_SESSION_LOGOUT_LINK')) { define('TEXT_SESSION_LOGOUT_LINK','Cerrar sesión',false); }
+	if (!defined('TEXT_SESSION_LOGOUT_TITLE')) { define('TEXT_SESSION_LOGOUT_TITLE','Cerrar sesión',false); }
+	if (!defined('TEXT_SESSION_NAME_PROMPT')) { define('TEXT_SESSION_NAME_PROMPT','Inscrito como',false); }
+	if (!defined('TEXT_SESSION_SETTINGS_LABEL')) { define('TEXT_SESSION_SETTINGS_LABEL','Configuración del usuario',false); }
+	if (!defined('TEXT_SESSION_SETTINGS_TITLE')) { define('TEXT_SESSION_SETTINGS_TITLE','Actualizar la configuración y la contraseña de la cuenta de usuario ',false); }
 }
 //EOF

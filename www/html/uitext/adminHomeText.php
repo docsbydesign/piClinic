@@ -29,14 +29,14 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
-	define('TEXT_PICLINIC_SYSTEM_PAGE_TITLE','TEXT_PICLINIC_SYSTEM_PAGE_TITLE',false);
+	if (!defined('TEXT_PICLINIC_SYSTEM_PAGE_TITLE')) { define('TEXT_PICLINIC_SYSTEM_PAGE_TITLE','TEXT_PICLINIC_SYSTEM_PAGE_TITLE',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	define('TEXT_PICLINIC_SYSTEM_PAGE_TITLE','piClinic system administration',false);
+	if (!defined('TEXT_PICLINIC_SYSTEM_PAGE_TITLE')) { define('TEXT_PICLINIC_SYSTEM_PAGE_TITLE','piClinic system administration',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	define('TEXT_PICLINIC_SYSTEM_PAGE_TITLE','Administración del sistema piClinic',false);
+	if (!defined('TEXT_PICLINIC_SYSTEM_PAGE_TITLE')) { define('TEXT_PICLINIC_SYSTEM_PAGE_TITLE','Administración del sistema piClinic',false); }
 }
 //EOF
