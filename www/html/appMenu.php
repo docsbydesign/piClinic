@@ -3,7 +3,7 @@
  *
  * Source file: C:\Users\BobW\Documents\GitHub\merceru-tco\CTS\tools\UIText.csv
  *
- *	Copyright (c) 2018, Robert B. Watson
+ *	Copyright (c) 2019, Robert B. Watson
  *
  *	This file is part of the piClinic Console.
  *
@@ -18,7 +18,7 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/MercerU-TCO/CTS/blob/master/LICENSE. 
+ *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
  *	If not, see <http://www.gnu.org/licenses/>.
  *
  */
