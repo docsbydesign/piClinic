@@ -1,6 +1,6 @@
 <?php
 /*
- *	Copyright (c) 2018, Robert B. Watson
+ *	Copyright (c) 2019, Robert B. Watson
  *
  *	This file is part of the piClinic Console.
  *
@@ -15,13 +15,14 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/MercerU-TCO/CTS/blob/master/LICENSE.
+ *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
  *	If not, see <http://www.gnu.org/licenses/>.
  *
  */
 /*
-*	clinicDash
-*		Starts an authenticated session
+*
+*	Clinic Dashboard (home page)
+*
 *
 */
 // set charset header
@@ -32,9 +33,14 @@ require_once './shared/headTag.php';
 require_once './shared/dbUtils.php';
 require_once './shared/logUtils.php';
 require_once './api/api_common.php';
+require_once './api/visit_common.php';
+require_once './api/visit_get.php';
 require_once './shared/profile.php';
 require_once './shared/security.php';
 require_once './shared/ui_common.php';
+
+$profileData = [];
+profileLogStart ($profileData);
 
 // get the current session info (if any)
 $sessionInfo = getUiSessionInfo();
@@ -47,7 +53,8 @@ require_once './uitext/clinicDashText.php';
 // open session variables and check for access to this page
 $pageAccessRequired = PAGE_ACCESS_READONLY;
 $referrerUrlOverride = NO_ACCESS_URL;
-require './uiSessionInfo.php';
+require('./uiSessionInfo.php');
+
 
 // open DB or redirect to error URL1
 $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
@@ -55,35 +62,116 @@ $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 
 profileLogCheckpoint($profileData,'CODE_COMPLETE');
 
-// *************** HTML starts here ********************
+$visitQueryString = [];
+$visitRecord = [];
+$visitRecord['httpResponse'] = 500; // not initialized, yet
+
+// get the currently open visits (admitted patients)
+$visitQueryString['visitStatus'] = 'Open';
+$visitQueryString['sortfield'] = 'patientLastName';
+$visitQueryString['sortorder'] = 'ASC';
+$visitRecord = _visit_get($dbLink, $sessionInfo['token'], $visitQueryString);
+profileLogCheckpoint($profileData,'CODE_COMPLETE');
 ?>
-<?= pageHtmlTag($sessionInfo['sessionLanguage']) ?>
+<?= pageHtmlTag($pageLanguage) ?>
 <?= pageHeadTag(TEXT_CLINIC_DASH_PAGE_TITLE) ?>
 <body>
-    <?= piClinicTag(); ?>
-    <?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
-    <?php require ('uiErrorMessage.php'); ?>
-    <?= piClinicAppMenu(HOME_PAGE, $sessionInfo['pageLanguage']) ?>
-    <div class="pageBody">
-        <div id="PatientLookupDiv" class="noprint">
-            <form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">
-                <p><label><?= TEXT_PATIENT_ID_LABEL ?>:</label><br>
-                    <?= dbFieldTextInput ($sessionInfo['parameters'], "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true) ?>
-                    <button type="submit"><?= TEXT_SHOW_PATIENT_SUBMIT_BUTTON ?></button>
-                </p>
-            </form>
-            <hr>
-        </div>
-        <div id="ClinicVisitsDiv">
-            <h1>Clinic Dash</h1>
-            <pre>
-<?= json_encode(['apiUserToken' => $sessionInfo['token']], JSON_PRETTY_PRINT) ?><br>
-<?= json_encode($_SESSION, JSON_PRETTY_PRINT) ?><br>
-<?= json_encode($sessionInfo, JSON_PRETTY_PRINT) ?><br>
-<?= json_encode(['pageLanguage' => $pageLanguage]) ?>
-            </pre>
-            <p><a href="/uihelp/endUiSession.php" title="Log out and end session">Log out</a></p>
-        </div>
-    </div>
+	<?= piClinicTag(); ?>
+	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
+	<?php require ('uiErrorMessage.php') ?>
+	<?= piClinicAppMenu(TEXT_CLINIC_HOME, $pageLanguage) ?>
+	<div class="pageBody">
+	<div id="PatientLookupDiv" class="noprint">
+		<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">
+			<p><label><?= TEXT_PATIENT_ID_LABEL ?>:</label><br>
+				<?= dbFieldTextInput ($requestData, "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true) ?>
+			<button type="submit"><?= TEXT_SHOW_PATIENT_SUBMIT_BUTTON ?></button>
+			</p>
+		</form>
+	<hr>
+	</div>
+	<div id="ClinicVisitsDiv">
+<?php
+	if ($visitRecord['httpResponse'] != 200){
+		// this is a normal condition and not an error
+		echo ('<p>'.TEXT_NO_OPEN_VISITS.'</p>');
+		if (API_DEBUG_MODE) {
+			$report['visitRecord'] = $visitRecord;
+			$report['query'] = $visitQueryString;
+			echo ('<div id="Debug" style="display:none;"> ');
+			echo ('<pre>'.json_encode($visitRecord, JSON_PRETTY_PRINT).'</pre>');
+			echo ('</div>');
+		}
+	} else {
+		echo ('<h2 id="visitListHeading">'.TEXT_OPEN_VISIT_LIST_HEAD.'</h2>');
+		echo ('<p class="openVisits">*'.TEXT_EARLIER_VISIT_NOTE.'</p>');
+		$visitList = [];
+		$earlierVisits = false;
+		if ($visitRecord['count'] == 1) {
+			// there's only one so make it an array element 
+			// so the rest of the code works
+			$visitList[0] = $visitRecord['data'];
+		} else {
+			$visitList = $visitRecord['data'];
+		}
+		// check to see if they are currently in the clinic
+		if (!empty($visitList)) {
+			$headerShown = false;
+			foreach ($visitList as $visit) {
+				if ($visit['visitStatus'] == 'Open') {
+					if (!$headerShown) {
+						echo ('<table class="piClinicList"><tr>');
+						echo ('<th>'.TEXT_VISIT_LIST_HEAD_NAME.'</th>');
+						echo ('<th>'.TEXT_VISIT_LIST_HEAD_DATE.'</th>');
+						echo ('<th>'.TEXT_VISIT_LIST_HEAD_DOCTOR.'</th>');
+						echo ('<th>'.TEXT_VISIT_LIST_HEAD_COMPLAINT.'</th>');
+						echo ('<th>'.TEXT_VISIT_LIST_ACTIONS.'</th>');
+						echo ('</tr>');
+						$headerShown = true;
+					}
+					echo ('<tr>');
+					echo ('<td class="nowrap"><a href="/ptInfo.php?clinicPatientID='.$visit['clinicPatientID'].'" '.
+						'title="'.TEXT_SHOW_PATIENT_INFO.'">'.$visit['patientLastName'].',&nbsp;'.$visit['patientFirstName'].'&nbsp;('.($visit['patientSex'] == 'M' ? TEXT_SEX_OPTION_M : ($visit['patientSex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).')</a></td>');
+					$visitTimeIn = strtotime($visit['dateTimeIn']);
+					$notToday = $visitTimeIn < strtotime(date('Y-m-d ').'00:00');
+					if ($notToday) {
+					    // set this whenever an earlier visit is detected
+                        //  so the message will be shown in the heading
+					    $earlierVisits = true;
+                    }
+					echo ('<td class="nowrap'.($notToday ? ' notToday': '' ).'" title="'.date(TEXT_VISIT_DATE_FORMAT, $visitTimeIn).'">'.($notToday ? '*': '&nbsp;' ).date(TEXT_VISIT_TIME_FORMAT, $visitTimeIn).'</td>');
+					echo ('<td class="nowrap'.(isset($visit['staffName']) ? '' : ' inactive' ).'">'.(isset($visit['staffName']) ? $visit['staffName'] : TEXT_VISIT_LIST_MISSING ).'</td>');
+					$complaintText = (isset($visit['primaryComplaint']) ? $visit['primaryComplaint'] : TEXT_VISIT_LIST_MISSING );
+					if (strlen($complaintText) > 40) {
+						$complaintText = substr($complaintText,0,40).'&nbsp;'.
+						'<a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
+						'&clinicPatientID='.$visit['clinicPatientID'].'" '.
+						'class="moreInfo"'.
+						'title="'.TEXT_MORE_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_MORE.'</a>';
+					}
+					echo ('<td'.(isset($visit['primaryComplaint']) ? '' : ' class="inactive"' ).'>'.$complaintText.'</td>');
+					echo ('<td class="nowrap"><a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
+						'&clinicPatientID='.$visit['clinicPatientID'].'" '.
+						'title="'.TEXT_SHOW_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_VIEW.'</a>&nbsp;&nbsp;|&nbsp;&nbsp;'.
+						'<a href="/visitEdit.php?patientVisitID='.$visit['patientVisitID'].
+						'&clinicPatientID='.$visit['clinicPatientID'].'" '.
+						'title="'.TEXT_EDIT_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_EDIT.'</a>&nbsp;&nbsp;|&nbsp;&nbsp;'.
+						'<a href="/visitClose.php?patientVisitID='.$visit['patientVisitID'].
+						'&clinicPatientID='.$visit['clinicPatientID'].'" '.
+						'title="'.TEXT_DISCHARGE_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_DISCHARGE.'</a></td>');
+					echo ('</tr>');					
+				}
+			}
+			echo ('</table>');
+			echo ('<style>p.openVisits {'. ($earlierVisits ? 'display:inline; ' : 'display: none; ' ).'} </style>');
+			echo ('<style>h2 {'. ($earlierVisits ? 'margin-bottom: 0; ' : '' ).'} </style>');
+		}
+	}
+
+	@mysqli_close($dbLink);
+?>
+	</div>
+	</div>
 </body>
+<?php $result = profileLogClose($profileData, __FILE__, $requestData); ?>
 </html>

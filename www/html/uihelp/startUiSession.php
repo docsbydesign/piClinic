@@ -1,6 +1,6 @@
 <?php
 /*
- *	Copyright (c) 2018, Robert B. Watson
+ *	Copyright (c) 2019, Robert B. Watson
  *
  *	This file is part of the piClinic Console.
  *
@@ -15,7 +15,7 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/MercerU-TCO/CTS/blob/master/LICENSE. 
+ *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
  *	If not, see <http://www.gnu.org/licenses/>.
  *
  */
@@ -62,6 +62,8 @@ $errorUrl = '/clinicLogin.php';
 
 $dbLink = _openDBforUI($requestData, $errorUrl);
 profileLogCheckpoint($profileData,'DB_OPEN');
+
+// no need to check authorization because the session initialization will do that
 
 switch ($_SERVER['REQUEST_METHOD']) {
 	case 'POST':

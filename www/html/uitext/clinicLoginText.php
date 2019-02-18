@@ -2,7 +2,7 @@
 /*
 
  *
- *	Copyright (c) 2018, Robert B. Watson
+ *	Copyright (c) 2019, Robert B. Watson
  *
  *	This file is part of the piClinic Console.
  *
@@ -17,7 +17,7 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/MercerU-TCO/CTS/blob/master/LICENSE. 
+ *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
  *	If not, see <http://www.gnu.org/licenses/>.
  *
  */
@@ -29,29 +29,29 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
-	define('TEXT_CLINIC_LOGIN_PAGE_TITLE','TEXT_CLINIC_LOGIN_PAGE_TITLE',false);
-	define('TEXT_LOGIN_PASSWORD','TEXT_LOGIN_PASSWORD',false);
-	define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','TEXT_LOGIN_PASSWORD_PLACEHOLDER',false);
-	define('TEXT_LOGIN_SUBMIT_BUTTON','TEXT_LOGIN_SUBMIT_BUTTON',false);
-	define('TEXT_LOGIN_USERNAME','TEXT_LOGIN_USERNAME',false);
-	define('TEXT_LOGIN_USERNAME_PLACEHOLDER','TEXT_LOGIN_USERNAME_PLACEHOLDER',false);
+	if (!defined('TEXT_CLINIC_LOGIN_PAGE_TITLE')) { define('TEXT_CLINIC_LOGIN_PAGE_TITLE','TEXT_CLINIC_LOGIN_PAGE_TITLE',false); }
+	if (!defined('TEXT_LOGIN_PASSWORD')) { define('TEXT_LOGIN_PASSWORD','TEXT_LOGIN_PASSWORD',false); }
+	if (!defined('TEXT_LOGIN_PASSWORD_PLACEHOLDER')) { define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','TEXT_LOGIN_PASSWORD_PLACEHOLDER',false); }
+	if (!defined('TEXT_LOGIN_SUBMIT_BUTTON')) { define('TEXT_LOGIN_SUBMIT_BUTTON','TEXT_LOGIN_SUBMIT_BUTTON',false); }
+	if (!defined('TEXT_LOGIN_USERNAME')) { define('TEXT_LOGIN_USERNAME','TEXT_LOGIN_USERNAME',false); }
+	if (!defined('TEXT_LOGIN_USERNAME_PLACEHOLDER')) { define('TEXT_LOGIN_USERNAME_PLACEHOLDER','TEXT_LOGIN_USERNAME_PLACEHOLDER',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	define('TEXT_CLINIC_LOGIN_PAGE_TITLE','Clinic login',false);
-	define('TEXT_LOGIN_PASSWORD','Password',false);
-	define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','Password',false);
-	define('TEXT_LOGIN_SUBMIT_BUTTON','Login',false);
-	define('TEXT_LOGIN_USERNAME','Username',false);
-	define('TEXT_LOGIN_USERNAME_PLACEHOLDER','Username',false);
+	if (!defined('TEXT_CLINIC_LOGIN_PAGE_TITLE')) { define('TEXT_CLINIC_LOGIN_PAGE_TITLE','Clinic login',false); }
+	if (!defined('TEXT_LOGIN_PASSWORD')) { define('TEXT_LOGIN_PASSWORD','Password',false); }
+	if (!defined('TEXT_LOGIN_PASSWORD_PLACEHOLDER')) { define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','Password',false); }
+	if (!defined('TEXT_LOGIN_SUBMIT_BUTTON')) { define('TEXT_LOGIN_SUBMIT_BUTTON','Login',false); }
+	if (!defined('TEXT_LOGIN_USERNAME')) { define('TEXT_LOGIN_USERNAME','Username',false); }
+	if (!defined('TEXT_LOGIN_USERNAME_PLACEHOLDER')) { define('TEXT_LOGIN_USERNAME_PLACEHOLDER','Username',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	define('TEXT_CLINIC_LOGIN_PAGE_TITLE','Iniciar sesión',false);
-	define('TEXT_LOGIN_PASSWORD','Contraseña',false);
-	define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','Contraseña',false);
-	define('TEXT_LOGIN_SUBMIT_BUTTON','Iniciar sesión',false);
-	define('TEXT_LOGIN_USERNAME','Usuario',false);
-	define('TEXT_LOGIN_USERNAME_PLACEHOLDER','Usuario',false);
+	if (!defined('TEXT_CLINIC_LOGIN_PAGE_TITLE')) { define('TEXT_CLINIC_LOGIN_PAGE_TITLE','Iniciar sesión',false); }
+	if (!defined('TEXT_LOGIN_PASSWORD')) { define('TEXT_LOGIN_PASSWORD','Contraseña',false); }
+	if (!defined('TEXT_LOGIN_PASSWORD_PLACEHOLDER')) { define('TEXT_LOGIN_PASSWORD_PLACEHOLDER','Contraseña',false); }
+	if (!defined('TEXT_LOGIN_SUBMIT_BUTTON')) { define('TEXT_LOGIN_SUBMIT_BUTTON','Iniciar sesión',false); }
+	if (!defined('TEXT_LOGIN_USERNAME')) { define('TEXT_LOGIN_USERNAME','Usuario',false); }
+	if (!defined('TEXT_LOGIN_USERNAME_PLACEHOLDER')) { define('TEXT_LOGIN_USERNAME_PLACEHOLDER','Usuario',false); }
 }
 //EOF

@@ -1,6 +1,6 @@
 <?php
 /*
- *	Copyright (c) 2018, Robert B. Watson
+ *	Copyright (c) 2019, Robert B. Watson
  *
  *	This file is part of the piClinic Console.
  *
@@ -15,7 +15,7 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/MercerU-TCO/CTS/blob/master/LICENSE. 
+ *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
  *	If not, see <http://www.gnu.org/licenses/>.
  *
  */
@@ -183,9 +183,9 @@ function getIcdDescription ($dbLink, $icdCode, $lang, $showCode=0) {
 	}
 }
 
-function showDiagnosisInput ($dbLink, $visitInfo, $field, $lang, $placeholderText, $loadingText, $class='piClinicEdit', $charLimit=255, $autofocus=false, $requiredField=false) {
+function showDiagnosisInput ($dbLink, $visitInfo, $field, $sessionInfo, $placeholderText, $loadingText, $class='piClinicEdit', $charLimit=255, $autofocus=false, $requiredField=false) {
 	// create text control
-	$decodedValue = getIcdDescription($dbLink, $visitInfo[$field], $lang, SHOWCODE_CODE_AFTER_TEXT);
+	$decodedValue = getIcdDescription($dbLink, $visitInfo[$field], $sessionInfo['pageLanguage'], SHOWCODE_CODE_AFTER_TEXT);
 
 	$elemString = '<input '.
 		'type="text" '.
@@ -196,8 +196,8 @@ function showDiagnosisInput ($dbLink, $visitInfo, $field, $lang, $placeholderTex
 		'data-last-list-size="9999" '.
 		($autofocus ? 'autofocus="autofocus" ' : '').
 		($requiredField ? 'required ' : '').
-		'onkeyup="inputKeyUpEventHandler (event, this, \'diagData\', \''.$lang.'\')" '.
-		'onchange="setCodeValue(this, \'diagData\', \''.$field.'CodeId\', \''.$lang.'\')" '.
+		'onkeyup="inputKeyUpEventHandler (event, this, \'diagData\', \''.$sessionInfo['token'].'\', \''.$sessionInfo['pageLanguage'].'\')" '.
+		'onchange="setCodeValue(this, \'diagData\', \''.$field.'CodeId\', \''.$sessionInfo['token'].'\', \''.$sessionInfo['pageLanguage'].'\')" '.
 		'value="'.$decodedValue. '" '.
 		'placeholder="'.$placeholderText.'" '. 'class="'. $class . '" '.
 		'maxlength="'.(string)$charLimit.'"'.
@@ -218,14 +218,14 @@ function icdLookupJavaScript () {
  function conditionText ($conditionValue, $formatText = TRUE) {
 	$conditionText = ''; 
 	if ($formatText) {
-		$conditionText = '<span class="inactive">'.CONDITION_BLANK.'</span>'; 
+		$conditionText = '<span class="inactive">'.TEXT_CONDITION_BLANK.'</span>';
 	 } 
 	switch ($conditionValue) {
 		case "NEWDIAG":
-			$conditionText = CONDITION_NEW_SELECT;
+			$conditionText = TEXT_CONDITION_NEW_SELECT;
 			break;
 		case "SUBSDIAG":
-			$conditionText = CONDITION_SUBSEQUENT_SELECT;
+			$conditionText = TEXT_CONDITION_SUBSEQUENT_SELECT;
 			break;
 		default:
 			// leave as blank placeholder

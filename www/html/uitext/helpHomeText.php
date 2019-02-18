@@ -2,7 +2,7 @@
 /*
 
  *
- *	Copyright (c) 2018, Robert B. Watson
+ *	Copyright (c) 2019, Robert B. Watson
  *
  *	This file is part of the piClinic Console.
  *
@@ -17,7 +17,7 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/MercerU-TCO/CTS/blob/master/LICENSE. 
+ *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
  *	If not, see <http://www.gnu.org/licenses/>.
  *
  */
@@ -29,17 +29,17 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
-	define('TEXT_HELP_NO_CONTENT','TEXT_HELP_NO_CONTENT',false);
-	define('TEXT_PICLINIC_HELP_PAGE_TITLE','TEXT_PICLINIC_HELP_PAGE_TITLE',false);
+	if (!defined('TEXT_HELP_NO_CONTENT')) { define('TEXT_HELP_NO_CONTENT','TEXT_HELP_NO_CONTENT',false); }
+	if (!defined('TEXT_PICLINIC_HELP_PAGE_TITLE')) { define('TEXT_PICLINIC_HELP_PAGE_TITLE','TEXT_PICLINIC_HELP_PAGE_TITLE',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	define('TEXT_HELP_NO_CONTENT','Help is not yet available',false);
-	define('TEXT_PICLINIC_HELP_PAGE_TITLE','piClinic help',false);
+	if (!defined('TEXT_HELP_NO_CONTENT')) { define('TEXT_HELP_NO_CONTENT','Help is not yet available',false); }
+	if (!defined('TEXT_PICLINIC_HELP_PAGE_TITLE')) { define('TEXT_PICLINIC_HELP_PAGE_TITLE','piClinic help',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	define('TEXT_HELP_NO_CONTENT','La ayuda todavía no está disponible',false);
-	define('TEXT_PICLINIC_HELP_PAGE_TITLE','Ayuda para el piClinic',false);
+	if (!defined('TEXT_HELP_NO_CONTENT')) { define('TEXT_HELP_NO_CONTENT','La ayuda todavía no está disponible',false); }
+	if (!defined('TEXT_PICLINIC_HELP_PAGE_TITLE')) { define('TEXT_PICLINIC_HELP_PAGE_TITLE','Ayuda para el piClinic',false); }
 }
 //EOF

@@ -1,6 +1,6 @@
 <?php
 /*
- *	Copyright (c) 2018, Robert B. Watson
+ *	Copyright (c) 2019, Robert B. Watson
  *
  *	This file is part of the piClinic Console.
  *
@@ -15,7 +15,7 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/MercerU-TCO/CTS/blob/master/LICENSE. 
+ *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
  *	If not, see <http://www.gnu.org/licenses/>.
  *
  */
@@ -57,6 +57,24 @@ $formData = $sessionInfo['parameters'];
 // open DB or redirect to error URL1
 $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+
+// check for authorization to access this page
+if (!checkUiSessionAccess($dbLink, $sessionInfo['token'], PAGE_ACCESS_READONLY, $sessionInfo)){
+    // show this in the error div
+    $requestData['msg'] = MSG_NO_ACCESS;
+    $redirectUrl = makeUrlWithQueryParams($errorUrl, $requestData);
+    $logError = [];
+    $logError['httpResponse'] =  403;
+    $logError['httpReason'] = 'User account is not authorized to access this resource.';
+    $logError['error']['redirectUrl'] = $redirectUrl;
+    $logError['error']['requestData'] = $requestData;
+    logApiError($sessionInfo['parameters'], $logError, __FILE__ , $sessionInfo['username'], 'comment', $logError['httpReason']);
+    if (API_DEBUG_MODE) {
+        header("DEBUG: ".json_encode($logError));
+    }
+    header("Location: ". $redirectUrl);
+    exit;
+}
 
 // clear the query parameters that shouldn't be repeated
 unset ($formData['msg']);

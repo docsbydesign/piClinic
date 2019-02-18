@@ -1,6 +1,6 @@
 <?php
 /*
- *	Copyright (c) 2018, Robert B. Watson
+ *	Copyright (c) 2019, Robert B. Watson
  *
  *	This file is part of the piClinic Console.
  *
@@ -15,7 +15,7 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/MercerU-TCO/CTS/blob/master/LICENSE. 
+ *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
  *	If not, see <http://www.gnu.org/licenses/>.
  *
  */
@@ -159,7 +159,20 @@ function outputDateInputFields ($format, $dateFieldName, $defaultMonth, $default
 	if (isset($defaultTime)) {
 		$timeInput = '<input class="timeNumeric" type="time" '.($requiredField ? 'required ' : '').' id="new'.$dateFieldName.'Time" name="'.$dateFieldName.'Time" value="'.$defaultTime.'">';
 	}
-	
+
+	if (false) {
+        // +++ DEBUG
+        $dbgVals = array();
+        $dbgVals['format'] = $format;
+        $dbgVals['defaultMonth'] = $defaultMonth;
+        $dbgVals['defaultDay'] = $defaultDay;
+        $dbgVals['defaultYear'] = $defaultYear;
+        $dbgVals['defaultTime']  =$defaultTime;
+
+        $htmlString = '<pre>'.json_encode($dbgVals, JSON_PRETTY_PRINT).'</pre>';
+        // --- DEBUG
+    }
+
 	$dateFields = explode("-", $format);
 	if (count($dateFields) < 3) {
 		// default to "M-D-Y"
@@ -309,4 +322,36 @@ function makeUrlWithQueryParams ($url, $qParams) {
         return $url;
     }
 }
+
+function cleanUrlQueryParams($queryParamArray) {
+    $qpReturn = array();
+    if (!empty($queryParamArray)) {
+        $qpArray = $queryParamArray;
+        unset($qpArray['msg']);
+        unset($qpArray['lang']);
+        unset($qpArray['__source']);
+    }
+    return $qpArray;
+}
+
+function cleanedRefererUrl ()
+{
+    $httpReferer = '';
+    $httpRefererUrl = '';
+    $httpRefererQp = array();
+    if (!empty($_SERVER['HTTP_REFERER'])) {
+        $httpRefererParts = explode('?',$_SERVER['HTTP_REFERER']);
+        if (!empty($httpRefererParts[0])) {
+            $httpRefererUrl = $httpRefererParts[0];
+        }
+        if (!empty($httpRefererParts[1])) {
+            parse_str($httpRefererParts[1], $httpRefererQp);
+            $httpRefererQp = cleanUrlQueryParams($httpRefererQp);
+        }
+        return (makeUrlWithQueryParams($httpRefererUrl, $httpRefererQp));
+    }
+    return $httpReferer;
+}
+
 //EOF
+

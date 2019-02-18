@@ -1,6 +1,6 @@
 <?php
 /*
- *	Copyright (c) 2018, Robert B. Watson
+ *	Copyright (c) 2019, Robert B. Watson
  *
  *	This file is part of the piClinic Console.
  *
@@ -15,7 +15,7 @@
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/MercerU-TCO/CTS/blob/master/LICENSE. 
+ *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
  *	If not, see <http://www.gnu.org/licenses/>.
  *
  */
@@ -188,7 +188,7 @@ function writeTopicMenu ($sessionInfo) {
 						$headerShown = true;
 					}
 					echo ('<tr>');
-					echo ('<td class="nowrap" title="'.date(TEXT_VISIT_DATE_FORMAT, strtotime($visit['dateTimeIn'])).'">'.date(TEXT_VISIT_TIME_FORMAT, strtotime($visit['dateTimeIn'])).'</td>');
+					echo ('<td class="nowrap" title="'.date(TEXT_VISIT_DATE_ONLY_FORMAT, strtotime($visit['dateTimeIn'])).'">'.date(TEXT_VISIT_DATE_ONLY_FORMAT, strtotime($visit['dateTimeIn'])).'</td>');
 					echo ('<td class="nowrap'.(isset($visit['staffName']) ? '' : ' inactive' ).'">'.(isset($visit['staffName']) ? $visit['staffName'] : TEXT_VISIT_LIST_MISSING ).'</td>');
 					$complaintText = (isset($visit['primaryComplaint']) ? $visit['primaryComplaint'] : TEXT_VISIT_LIST_MISSING );
 					if (strlen($complaintText) > 40) {
@@ -344,7 +344,7 @@ function writeTopicMenu ($sessionInfo) {
 							echo ('<tr>');
 							echo ('<td class="nowrap"><a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
 								'&clinicPatientID='.$visit['clinicPatientID'].'">'.
-								date(TEXT_VISIT_DATE_FORMAT, strtotime($visit['dateTimeIn'])).'</a></td>');
+								date(TEXT_VISIT_DATE_ONLY_FORMAT, strtotime($visit['dateTimeIn'])).'</a></td>');
 							echo ('<td class="nowrap"'.(isset($visit['staffName']) ? '' : ' class="inactive"' ).'>'.(isset($visit['staffName']) ? $visit['staffName'] : TEXT_VISIT_LIST_MISSING ).'</td>');
 							echo ('<td>');
 							$displayText = '';

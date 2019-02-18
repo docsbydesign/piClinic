@@ -36,7 +36,9 @@ TEXT_BIRTHDAY_MONTH_FORMAT,m,m
 TEXT_BIRTHDAY_YEAR_FORMAT,Y,Y
 TEXT_BLANK_OPTION_SELECT,Choose,Escoge
 TEXT_BLANK_STAFF_OPTION,(Select the health professional),(Escoge el profesional de salud)
+TEXT_BLANK_STAFF_OPTION_VISIT,(Select the health professional),(Escoge el profesional de salud)
 TEXT_BLANK_VISIT_OPTION,(Select the visit type),(Escoge el tipo de la atención)
+TEXT_BLANK_VISIT_OPTION_VISIT,(Select the visit type),(Escoge el tipo de la atención)
 TEXT_BLOODTYPE_LABEL,Blood Type,Tipo de Sangre
 TEXT_CANCEL_EDIT,Cancel,Cancelar
 TEXT_CANCEL_NEW_VISIT,Cancel,Cancelar
@@ -56,7 +58,7 @@ TEXT_CLINIC_HISTORY_ID_LABEL,Family ID,Número de historia clínica
 TEXT_CLINIC_HOME,Dashboard,Página principal
 TEXT_CLINIC_LOGIN_PAGE_TITLE,Clinic login,Iniciar sesión
 TEXT_CLINIC_REPORTS,Reports,Informes
-TEXT_CLOSE_PAGE_TITLE,Discharge patient,Cerrar la visita
+TEXT_CLOSE_VISIT_PAGE_TITLE,Discharge patient,Cerrar la visita
 TEXT_CLOSE_VISIT,Discharge this patient,Dar de alta este paciente
 TEXT_CLOSE_VISIT_LINK,Discharge this patient,Dar de alta el paciente
 TEXT_COMMENT_CANCEL,Cancel,Cancelar
@@ -299,9 +301,9 @@ TEXT_MONTHLY_SUMMARY_TITLE,Daily Report of Outpatient Care,Informe Diario de Ate
 TEXT_MONTHLY_VISIT_HEADING,Monthly Payment Log,Registro de Pagos del Mes
 TEXT_MORE_VISIT_INFO,See the complete complaint in the visit description,Ver la descripcción completa
 TEXT_NEIGHBORHOOD_LABEL,Neighborhood,Localidad
-TEXT_NEW_PAGE_TITLE,Admit patient,Abre una visita nueva para el paciente
 TEXT_NEW_PATIENT_HEADING,Add new patient,Agregar paciente nuevo
 TEXT_NEW_STAFF_HEADING,Add new staff member to piClinic,Agrega una persona nueva al sistema piClinic
+TEXT_NEW_VISIT_PAGE_TITLE,Admit patient,Abre una visita nueva para el paciente
 TEXT_NOT_SPECIFIED,Not specified,No especificada
 TEXT_NO_COMMENT_RECORDS,No comments,No hay comentarios
 TEXT_NO_LOG_DATA,No data in this log file.,Este registro no tiene datos.
@@ -326,15 +328,15 @@ TEXT_ORGAN_DONOR,[Organ Donor],[Donante de órganos]
 TEXT_PAGE_DELETE_CONFIRM_TITLE,Confirm image delete,Confirmar borrar el imagen
 TEXT_PAGE_EDIT_FORM_TITLE,Update the patient form,Actualizar el formulario del paciente
 TEXT_PAGE_EDIT_IMAGE_TITLE,Update the patient image,Actualizar el imagen del paciente
-TEXT_PAGE_EDIT_PHOTO_TITLE,Update the patient photo,Actualizar la foto del paciente
 TEXT_PAGE_EDIT_PATIENT_TITLE,Update Patient,Editar Paciente
+TEXT_PAGE_EDIT_PHOTO_TITLE,Update the patient photo,Actualizar la foto del paciente
 TEXT_PAGE_EDIT_STAFF_TITLE,Update staff information,Actualizar los datos personal
 TEXT_PAGE_LABEL,Page,Página
 TEXT_PAGE_NEW_FORM_TITLE,Add a patient form,Agregar un formulario del paciente
 TEXT_PAGE_NEW_IMAGE_TITLE,Add a patient image,Agregar un imagen del paciente
+TEXT_PAGE_NEW_PATIENT_TITLE,New Patient,Paciente Nuevo
 TEXT_PAGE_NEW_PHOTO_TITLE,Add a patient photo,Agregar una foto del paciente
 TEXT_PAGE_NEW_STAFF_TITLE,Add new staff member to piClinic,Agrega una persona nueva al sistema piClinic
-TEXT_PAGE_NEW_PATIENT_TITLE,New Patient,Paciente Nuevo
 TEXT_PAGE_SHOW_VISIT_TITLE,Visit image details,Detalles del imagen de la visita
 TEXT_PARAMETER_ERROR_ACTION,Go back and try again,Volver a la página anterior y intenta de nuevo
 TEXT_PATIENTNATIONALID_LABEL,National ID,Cedula
@@ -597,8 +599,8 @@ TEXT_SEX_OPTION_M,M,H
 TEXT_SEX_OPTION_X,X,X
 TEXT_SHOWING_ONLY_END_EVENTS,Only \'end\' events are listed.,Sólo los eventos llamado \'end\' están listado.
 TEXT_SHOW_PATIENT_INFO,Show patient details,Mostrar los detalles del paciente
-TEXT_SHOW_PATIENT_SUBMIT_BUTTON,Search,Buscar
 TEXT_SHOW_PATIENT_INFO_BUTTON,Show info,Mostrar la información
+TEXT_SHOW_PATIENT_SUBMIT_BUTTON,Search,Buscar
 TEXT_SHOW_REPORT_BUTTON,Show report,Mostrar informe
 TEXT_SHOW_VISIT_INFO,Show visit details,Mostrar los detalles de la visita
 TEXT_STAFF_ACCESS_LABEL,piClinic system permission,Permisso para acessar los datos del sistema piClinic
@@ -615,9 +617,9 @@ TEXT_STAFF_DATE_FORMAT,m/d/Y H:i,d-m-Y H:i
 TEXT_STAFF_EDIT_SUBMIT_BUTTON,Update information,Actualizar información
 TEXT_STAFF_EDIT_USERNAME_TITLE,Edit user properties,Actualizar los propedades del usuario
 TEXT_STAFF_LABEL,Health professional,Profesional de salud
-TEXT_STAFF_LIST_HEAD,piClinic users and clinic staff,Usuarios del sistema piClinic y personal de la clínica
 TEXT_STAFF_LANGUAGE_OPTION_ENGLISH,English,Inglés
 TEXT_STAFF_LANGUAGE_OPTION_SPANISH,Spanish,Español
+TEXT_STAFF_LIST_HEAD,piClinic users and clinic staff,Usuarios del sistema piClinic y personal de la clínica
 TEXT_STAFF_LIST_HEAD_ACCESSGRANTED,Access,Permiso
 TEXT_STAFF_LIST_HEAD_CONTACTINFO,Contact info,Como contactar
 TEXT_STAFF_LIST_HEAD_CREATEDDATE,Date added,Fecha ingresada
@@ -660,12 +662,11 @@ TEXT_VALUE_NOT_SET,(not set),(vacio)
 TEXT_VALUE_NOT_SET,No data,No hay datos
 TEXT_VIEW_PATIENT,Show patient information,Mostrar información del paciente
 TEXT_VISIT_ARRIVAL_HEADING,Arrival,Llegada
-TEXT_VISIT_DATE_FORMAT,H:i m/d/Y,H:i d-m-Y
 TEXT_VISIT_DATE_FORMAT,m/d/Y H:i,d-m-Y H:i
-TEXT_VISIT_DATE_FORMAT,m/d/Y,d-m-Y
 TEXT_VISIT_DATE_FORMAT_LABEL,(m/d/y hh:mm),(d-m-Y hh:mm)
 TEXT_VISIT_DATE_INPUT_FORMAT,M-D-Y-T,D-M-Y-T
 TEXT_VISIT_DATE_LABEL,Visit Date,Fecha de la visita
+TEXT_VISIT_DATE_ONLY_FORMAT,m/d/Y,d-m-Y
 TEXT_VISIT_DATE_TIME_LABEL,Visit Date,Fecha de la visita
 TEXT_VISIT_DAY_FORMAT,d,d
 TEXT_VISIT_DAY_TEXT,d,d
@@ -675,7 +676,7 @@ TEXT_VISIT_DELETED_SELECT_LABEL,Deleted,Borrada
 TEXT_VISIT_DELETED_TEXT,Deleted,Borrada
 TEXT_VISIT_DETAILS_PAGE_TITLE,Patient Visit Details,Detalles de la visita
 TEXT_VISIT_DISCHARGE_HEADING,Discharge,Dar de alta
-TEXT_VISIT_EDIT_ALL_FIELDS,Edit all fields or add images,Actualizar todos los datos o agregue imágenes de la visita
+TEXT_VISIT_EDIT_ALL_FIELDS,Edit all fields,Actualizar todos los dato de la visita
 TEXT_VISIT_FORM_HEADING,Patient form images,Imagines de formularios del paciente
 TEXT_VISIT_ID_LABEL,ID,ID
 TEXT_VISIT_LIST_ACTIONS,Visit actions,Acciones de la visita
@@ -700,9 +701,9 @@ TEXT_VISIT_PHOTO_HEADING,Patient photos,Fotos del paciente de esta visita
 TEXT_VISIT_STATUS_CLOSED,Discharged,Dado de alta
 TEXT_VISIT_STATUS_LABEL,Status,Estatus
 TEXT_VISIT_STATUS_OPEN,Admitted,Admitido
-TEXT_VISIT_TIME_FORMAT,H:i m/d/Y,H:i d-m-Y
-TEXT_VISIT_TIME_FORMAT,H:i,H:i
-TEXT_VISIT_TIME_FORMAT,h:i a,H:i
+TEXT_VISIT_TIME_DATE_FORMAT,H:i m/d/Y,H:i d-m-Y
+TEXT_VISIT_TIME_EDIT_FORMAT,H:i,H:i
+TEXT_VISIT_TIME_FORMAT,h:i,H:i
 TEXT_VISIT_TYPE_ALL,All,Todos
 TEXT_VISIT_TYPE_EMERGENCY,Emergency,Emergencia
 TEXT_VISIT_TYPE_LABEL,Visit type,Tipo de la visita
@@ -711,6 +712,7 @@ TEXT_VISIT_TYPE_PLACEHOLDER,Visit type,Tipo de la visita
 TEXT_VISIT_TYPE_SPECIAL,Special,Especial
 TEXT_VISIT_TYPE_SPECIALIST,Specialist,Especialista
 TEXT_VISIT_TYPE_TEST,Test,Prueba
+TEXT_VISIT_UNABLE_OPEN_VISIT,Unable to access this visit,No es posible abrir esta visita
 TEXT_VISIT_VISIT_HEADING,Visit,Visita
 TEXT_VISIT_YEAR_FORMAT,Y,Y
 TEXT_VISIT_YEAR_TEXT,y,a
