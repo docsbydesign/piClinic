@@ -75,7 +75,6 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_SEX_OPTION_X')) { define('TEXT_SEX_OPTION_X','TEXT_SEX_OPTION_X',false); }
 	if (!defined('TEXT_SHOW_PATIENT_SUBMIT_BUTTON')) { define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','TEXT_SHOW_PATIENT_SUBMIT_BUTTON',false); }
 	if (!defined('TEXT_SHOW_VISIT_INFO')) { define('TEXT_SHOW_VISIT_INFO','TEXT_SHOW_VISIT_INFO',false); }
-	if (!defined('TEXT_VISIT_DATE_FORMAT')) { define('TEXT_VISIT_DATE_FORMAT','TEXT_VISIT_DATE_FORMAT',false); }
 	if (!defined('TEXT_VISIT_DATE_ONLY_FORMAT')) { define('TEXT_VISIT_DATE_ONLY_FORMAT','TEXT_VISIT_DATE_ONLY_FORMAT',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTIONS')) { define('TEXT_VISIT_LIST_ACTIONS','TEXT_VISIT_LIST_ACTIONS',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_DISCHARGE')) { define('TEXT_VISIT_LIST_ACTION_DISCHARGE','TEXT_VISIT_LIST_ACTION_DISCHARGE',false); }
@@ -88,7 +87,6 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_VISIT_LIST_HEAD_DOCTOR')) { define('TEXT_VISIT_LIST_HEAD_DOCTOR','TEXT_VISIT_LIST_HEAD_DOCTOR',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_TIME')) { define('TEXT_VISIT_LIST_HEAD_TIME','TEXT_VISIT_LIST_HEAD_TIME',false); }
 	if (!defined('TEXT_VISIT_LIST_MISSING')) { define('TEXT_VISIT_LIST_MISSING','TEXT_VISIT_LIST_MISSING',false); }
-	if (!defined('TEXT_VISIT_TIME_FORMAT')) { define('TEXT_VISIT_TIME_FORMAT','TEXT_VISIT_TIME_FORMAT',false); }
 	if (!defined('TEXT_YMD_AGE_DAYS')) { define('TEXT_YMD_AGE_DAYS','TEXT_YMD_AGE_DAYS',false); }
 	if (!defined('TEXT_YMD_AGE_MONTHS')) { define('TEXT_YMD_AGE_MONTHS','TEXT_YMD_AGE_MONTHS',false); }
 	if (!defined('TEXT_YMD_AGE_YEARS')) { define('TEXT_YMD_AGE_YEARS','TEXT_YMD_AGE_YEARS',false); }
@@ -141,7 +139,6 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_SEX_OPTION_X')) { define('TEXT_SEX_OPTION_X','X',false); }
 	if (!defined('TEXT_SHOW_PATIENT_SUBMIT_BUTTON')) { define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','Search',false); }
 	if (!defined('TEXT_SHOW_VISIT_INFO')) { define('TEXT_SHOW_VISIT_INFO','Show visit details',false); }
-	if (!defined('TEXT_VISIT_DATE_FORMAT')) { define('TEXT_VISIT_DATE_FORMAT','m/d/Y H:i',false); }
 	if (!defined('TEXT_VISIT_DATE_ONLY_FORMAT')) { define('TEXT_VISIT_DATE_ONLY_FORMAT','m/d/Y',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTIONS')) { define('TEXT_VISIT_LIST_ACTIONS','Visit actions',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_DISCHARGE')) { define('TEXT_VISIT_LIST_ACTION_DISCHARGE','Discharge',false); }
@@ -154,7 +151,6 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_LIST_HEAD_DOCTOR')) { define('TEXT_VISIT_LIST_HEAD_DOCTOR','Doctor',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_TIME')) { define('TEXT_VISIT_LIST_HEAD_TIME','Arrived',false); }
 	if (!defined('TEXT_VISIT_LIST_MISSING')) { define('TEXT_VISIT_LIST_MISSING','(missing)',false); }
-	if (!defined('TEXT_VISIT_TIME_FORMAT')) { define('TEXT_VISIT_TIME_FORMAT','h:i',false); }
 	if (!defined('TEXT_YMD_AGE_DAYS')) { define('TEXT_YMD_AGE_DAYS','d',false); }
 	if (!defined('TEXT_YMD_AGE_MONTHS')) { define('TEXT_YMD_AGE_MONTHS','m',false); }
 	if (!defined('TEXT_YMD_AGE_YEARS')) { define('TEXT_YMD_AGE_YEARS','y',false); }
@@ -207,7 +203,6 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_SEX_OPTION_X')) { define('TEXT_SEX_OPTION_X','X',false); }
 	if (!defined('TEXT_SHOW_PATIENT_SUBMIT_BUTTON')) { define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','Buscar',false); }
 	if (!defined('TEXT_SHOW_VISIT_INFO')) { define('TEXT_SHOW_VISIT_INFO','Mostrar los detalles de la visita',false); }
-	if (!defined('TEXT_VISIT_DATE_FORMAT')) { define('TEXT_VISIT_DATE_FORMAT','d-m-Y H:i',false); }
 	if (!defined('TEXT_VISIT_DATE_ONLY_FORMAT')) { define('TEXT_VISIT_DATE_ONLY_FORMAT','d-m-Y',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTIONS')) { define('TEXT_VISIT_LIST_ACTIONS','Acciones de la visita',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_DISCHARGE')) { define('TEXT_VISIT_LIST_ACTION_DISCHARGE','Dar de alta',false); }
@@ -220,7 +215,6 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_LIST_HEAD_DOCTOR')) { define('TEXT_VISIT_LIST_HEAD_DOCTOR','Medico',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_TIME')) { define('TEXT_VISIT_LIST_HEAD_TIME','Llegó',false); }
 	if (!defined('TEXT_VISIT_LIST_MISSING')) { define('TEXT_VISIT_LIST_MISSING','(no especificado)',false); }
-	if (!defined('TEXT_VISIT_TIME_FORMAT')) { define('TEXT_VISIT_TIME_FORMAT','H:i',false); }
 	if (!defined('TEXT_YMD_AGE_DAYS')) { define('TEXT_YMD_AGE_DAYS','d',false); }
 	if (!defined('TEXT_YMD_AGE_MONTHS')) { define('TEXT_YMD_AGE_MONTHS','m',false); }
 	if (!defined('TEXT_YMD_AGE_YEARS')) { define('TEXT_YMD_AGE_YEARS','a',false); }
