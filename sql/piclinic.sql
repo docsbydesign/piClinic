@@ -308,31 +308,6 @@ CREATE TABLE IF NOT EXISTS `visit` (
 ALTER TABLE `visit`
  ADD UNIQUE KEY `patientVisitID` (`patientVisitID`);
 
--- --------------------------------------------------------
---
--- Table structure for table `image`
---
-
-DROP TABLE IF EXISTS `image`;
-CREATE TABLE IF NOT EXISTS `image` (
-`ImageID` int(11) NOT NULL AUTO_INCREMENT KEY COMMENT '(Autofill) unique record ID of image resource',
-  `clinicPatientID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Patient ID issued by clinic.',
-  `patientVisitID` varchar(22) DEFAULT NULL COMMENT '(Required when image is associated with a visit as well as a patient) Visit ID of patient visit to which this image belongs',
-  `ImagePath` varchar(1024) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Path to image in local file system',
-  `OriginalFileName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Autofill) original file name from source image',
-  `ImageType` enum('ID','VisitForm','VisitPhoto','Other') COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Image use type. ID = patient face; VisitForm = a patient form; VisitPhoto = a photo taken as part of a visit.',
-  `ImageDate` datetime NULL COMMENT '(NotRequired) Date/time to associate with the image (e.g. visit date)',
-  `Page` int(11) DEFAULT 1 COMMENT '(Not Required) The page of an image sequence',
-  `ImageCaption` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '(Not Required) Short text to describe the file',
-  `ImageDescription` varchar(1024) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '(Not Required) Text to describe the file',
-  `MimeType` varchar(127) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '(Autofill) Mime type of image as read from POST info',
-  `modifiedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '(AutoFill) date/time of the most recent update',
-  `createdDate` datetime NOT NULL COMMENT '(Required) Date/time the record was created'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table of images';
-
-ALTER TABLE `image`
- ADD KEY `clinicPatientID` (`clinicPatientID`), ADD KEY `patientVisitID` (`patientVisitID`);
- 
 -- ------------------------------------------------------
 
 DROP TABLE IF EXISTS `monthdays`;
@@ -364,12 +339,12 @@ DROP TABLE IF EXISTS `icd10`;
 CREATE TABLE IF NOT EXISTS `icd10` (
   `icd10ID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique record ID for ICD10 records.',
   `tableSeq` int(11) NOT NULL COMMENT '(Required) sequence from ICD-10 data file.',
-  `lang` char(2) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) 2-letter language ID',
-  `Icd10Code` char(8) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) ICD-10 code with punctuation',
-  `Icd10Index` char(8) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required)  ICD-10 code without punctuation',
-  `HIPAA` Boolean DEFAULT 0 COMMENT '(Not Required) 1 if HIPAA code',
-  `ShortDescription` varchar(255) COLLATE utf8_unicode_ci NULL COMMENT '(Required) Short description of diagnosis',
-  `LongDescription` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Long description of diagnosis',
+  `language` char(2) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) 2-letter language ID',
+  `icd10code` char(8) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) ICD-10 code with punctuation',
+  `icd10index` char(8) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required)  ICD-10 code without punctuation',
+  `hipaa` Boolean DEFAULT 0 COMMENT '(Not Required) 1 if HIPAA code',
+  `shortDescription` varchar(255) COLLATE utf8_unicode_ci NULL COMMENT '(Required) Short description of diagnosis',
+  `longDescription` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Long description of diagnosis',
   `useCount` bigint(20) NOT NULL DEFAULT 0 COMMENT '(Not required) Incremented when lastUsedDate is updated.',
   `lastUsedDate` datetime NULL COMMENT '(Not required) Updated when used by the app.',
   `modifiedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '(Auto fill) The date/time of the most recent update',
@@ -379,11 +354,12 @@ CREATE TABLE IF NOT EXISTS `icd10` (
 DROP VIEW IF EXISTS `icd10Get`;
 CREATE VIEW `icd10Get` AS 
 	SELECT 
-		`lang` AS `Lang`, 
-		`Icd10Code`, `Icd10Index`, 
-		`ShortDescription`,
-		`useCount` AS `UseCount`,
-		`lastUsedDate` AS `LastUsedDate`		
+		`language` AS `language`, 
+		`icd10code`, 
+		`icd10index`, 
+		`shortDescription`,
+		`useCount` AS `useCount`,
+		`lastUsedDate` AS `lastUsedDate`		
 	FROM `icd10` 
 	WHERE 1;
 	
@@ -426,7 +402,8 @@ CREATE VIEW `patientGet` AS
 		`patient`.`organDonor` AS `organDonor`,
 		`patient`.`preferredLanguage` AS `preferredLanguage`,
 		`patient`.`knownAllergies` AS `knownAllergies`,
-		`patient`.`currentMedications` AS `currentMedications`
+		`patient`.`currentMedications` AS `currentMedications`,
+		`patient`.`nextVaccinationDate` AS `nextVaccinationDate`
 	from `patient` WHERE `patient`.`active` = 1;
 	
 --
@@ -446,74 +423,6 @@ CREATE VIEW `patientList` AS
 		`patient`.`homeCity` AS `homeCity`,
 		`patient`.`homeState` AS `homeState`
 		from `patient` WHERE `patient`.`active` = 1;
-	
-DROP VIEW IF EXISTS `imageGet`;
-CREATE VIEW `imageGet` AS 
-	SELECT 
-		`image`.`ImageID` AS `ImageID`, 
-		`image`.`clinicPatientID` AS `clinicPatientID`,
-		`image`.`patientVisitID` AS `patientVisitID`,
-		`image`.`ImagePath` AS `ImagePath`, 
-		`image`.`OriginalFileName` AS `OriginalFileName`, 
-		`image`.`MimeType` AS `MimeType`, 		
-		`image`.`ImageType` AS `ImageType`, 
-		`image`.`ImageDate` AS `ImageDate`,
-		`image`.`Page` AS `Page`,
-		`image`.`ImageCaption`  AS `ImageCaption`,
-		`image`.`ImageDescription`  AS `ImageDescription`
-	FROM `image` WHERE 1;
-
-DROP VIEW IF EXISTS `imagePatientList`;
-CREATE VIEW `imagePatientList` AS
-	SELECT 
-		`image`.`clinicPatientID` AS `clinicPatientID`,
-		`image`.`patientVisitID` AS `patientVisitID`,
-		STR_TO_DATE(SUBSTRING(`image`.`patientVisitID`,1,10), '%Y-%m-%d') AS `PatientVisitDate`,
-		count(*) as `ImageCount` 
-	FROM `image` 
-	WHERE 
-		`image`.`ImageType` = 'VisitPhoto' 
-		OR `image`.`ImageType` = 'VisitForm' 
-	GROUP BY 
-		`image`.`clinicPatientID`, 
-		`PatientVisitDate` 
-	ORDER BY 
-		`image`.`clinicPatientID` ASC, 
-		`PatientVisitDate` DESC;
-		
-DROP VIEW IF EXISTS `imagePatientFormList`;
-CREATE VIEW `imagePatientFormList` AS
-	SELECT 
-		`image`.`clinicPatientID` AS `clinicPatientID`,
-		`image`.`patientVisitID` AS `patientVisitID`,
-		STR_TO_DATE(SUBSTRING(`image`.`patientVisitID`,1,10), '%Y-%m-%d') AS `PatientVisitDate`,
-		count(*) as `ImageCount` 
-	FROM `image` 
-	WHERE 
-		`image`.`ImageType` = 'VisitForm' 
-	GROUP BY 
-		`image`.`clinicPatientID`, 
-		`PatientVisitDate` 
-	ORDER BY 
-		`image`.`clinicPatientID` ASC, 
-		`PatientVisitDate` DESC;
-		
-DROP VIEW IF EXISTS `imagePatientPhotoList`;
-CREATE VIEW `imagePatientPhotoList` AS
-	SELECT 
-		`image`.`clinicPatientID` AS `clinicPatientID`,
-		`image`.`patientVisitID` AS `patientVisitID`,
-		STR_TO_DATE(SUBSTRING(`image`.`patientVisitID`,1,10), '%Y-%m-%d') AS `PatientVisitDate`,
-		count(*) as `ImageCount` 
-	FROM `image` 
-	WHERE 
-		`image`.`ImageType` = 'VisitPhoto' 
-	GROUP BY 
-		`image`.`clinicPatientID`, 
-		`PatientVisitDate` 
-	ORDER BY 
-		`image`.`clinicPatientID` ASC, 
-		`PatientVisitDate` DESC;
 
 DROP VIEW IF EXISTS `staffGetByUser`;
 CREATE VIEW `staffGetByUser` AS 
@@ -810,12 +719,12 @@ CREATE VIEW `visitPatientEditGet` AS
 		`visit`.`condition3`, 
 		`visit`.`referredTo`, 
 		`visit`.`referredFrom`,
-		`patient`.`Active`, 
-		`patient`.`ContactPhone`, 
-		`patient`.`ContactAltPhone`, 
-		`patient`.`BloodType`, 
-		`patient`.`OrganDonor`, 
-		`patient`.`PreferredLanguage`
+		`patient`.`active`, 
+		`patient`.`contactPhone`, 
+		`patient`.`contactAltPhone`, 
+		`patient`.`bloodType`, 
+		`patient`.`organDonor`, 
+		`patient`.`preferredLanguage`
 		FROM `visit`
 		JOIN `patient`  ON `patient`.`clinicPatientID` = `visit`.`clinicPatientID`
 		WHERE 1
