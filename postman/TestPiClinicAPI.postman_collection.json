@@ -29,7 +29,14 @@
 									"  return text;\r",
 									"}\r",
 									"\r",
-									"postman.setEnvironmentVariable ('fnRandomString', varRandomString);"
+									"/* Adapted from: https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript */\r",
+									"var varRandomIntFromInterval = function randomIntFromInterval(min,max) // min and max included\r",
+									"{\r",
+									"    return Math.floor(Math.random()*(max-min+1)+min);\r",
+									"}\r",
+									"\r",
+									"postman.setEnvironmentVariable ('fnRandomString', varRandomString);\r",
+									"postman.setEnvironmentVariable ('fnRandomInt', varRandomIntFromInterval);"
 								],
 								"type": "text/javascript"
 							}
@@ -11117,6 +11124,7 @@
 															"\r",
 															"pm.variables.set('patchTestField','bloodType');\r",
 															"pm.variables.set('patchTestValue', randItem);\r",
+															"pm.variables.set('patchTestValueEncoded',pm.variables.get('patchTestValue').replace('+','%2B'));\r",
 															""
 														],
 														"type": "text/javascript"
@@ -11138,18 +11146,9 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "urlencoded",
-													"urlencoded": [
-														{
-															"key": "{{patchTestField}}",
-															"value": "{{patchTestValue}}",
-															"type": "text"
-														}
-													]
-												},
+												"body": {},
 												"url": {
-													"raw": "{{host}}/api/patient.php?{{patchTestField}}={{patchTestValue}}&clinicPatientID={{newPatientID}}",
+													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}&{{patchTestField}}={{patchTestValueEncoded}}",
 													"host": [
 														"{{host}}"
 													],
@@ -11159,12 +11158,12 @@
 													],
 													"query": [
 														{
-															"key": "{{patchTestField}}",
-															"value": "{{patchTestValue}}"
-														},
-														{
 															"key": "clinicPatientID",
 															"value": "{{newPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValueEncoded}}"
 														}
 													]
 												}
@@ -12017,440 +12016,1814 @@
 					"name": "Success Tests",
 					"item": [
 						{
-							"name": "Get a random patient",
-							"event": [
+							"name": "Visit Test Prep",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
-										"exec": [
-											"var userAcct = pm.environment.get('testUser');\r",
-											"var jsonData = JSON.parse(responseBody);\r",
-											"\r",
-											"pm.test(\"Reading existing patient info was successful\", function () {\r",
-											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
-											"        // this should be successful\r",
-											"        pm.response.to.have.status(200);\r",
-											"        pm.expect(jsonData.count > 1).to.eql(true);\r",
-											"        var ptIdx = Math.floor((Math.random() * jsonData.count));\r",
-											"        pm.expect(ptIdx >= 0).to.eql(true);\r",
-											"        pm.expect(ptIdx < jsonData.count).to.eql(true);\r",
-											"        var thisPatient = jsonData.data[ptIdx];\r",
-											"        pm.variables.set('patientID',thisPatient.clinicPatientID);\r",
-											"    } else {\r",
-											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(401);\r",
-											"        pm.expect(jsonData.count).to.eql(0);\r",
-											"    }\r",
-											"});\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-piClinic-token",
-										"type": "text",
-										"value": "{{token}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/patient.php",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"patient.php"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get random doctor",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "284f1c2c-099c-4131-b059-7ce9ec4438c5",
-										"exec": [
-											"var jsonData = JSON.parse(responseBody);\r",
-											"\r",
-											"pm.test(\"Get random doctor successful\", function() {\r",
-											"    var userAcct = pm.environment.get('testUser');\r",
-											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
-											"        // this should be successful\r",
-											"        pm.response.to.have.status(200);\r",
-											"        pm.expect(jsonData.count > 1).to.eql(true);\r",
-											"        var drIdx = Math.floor((Math.random() * jsonData.count));\r",
-											"        pm.expect(drIdx >= 0).to.eql(true);\r",
-											"        pm.expect(drIdx < jsonData.count).to.eql(true);\r",
-											"        var thisDoctor = jsonData.data[drIdx];\r",
-											"        pm.variables.set('drUsername',thisDoctor.username);\r",
-											"        pm.variables.set('drFullName',thisDoctor.firstName + thisDoctor.lastName);\r",
-											"    } else {\r",
-											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(401);\r",
-											"    }\r",
-											"});\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "X-piClinic-token",
-										"type": "text",
-										"value": "{{token}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/staff.php?position=Doctor%",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"staff.php"
-									],
-									"query": [
+									"name": "Get a random patient",
+									"event": [
 										{
-											"key": "position",
-											"value": "Doctor%"
+											"listen": "test",
+											"script": {
+												"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+												"exec": [
+													"var userAcct = pm.environment.get('testUser');\r",
+													"var jsonData = JSON.parse(responseBody);\r",
+													"\r",
+													"pm.test(\"Reading existing patient info was successful\", function () {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"        pm.expect(jsonData.count > 1).to.eql(true);\r",
+													"        var ptIdx = Math.floor((Math.random() * jsonData.count));\r",
+													"        pm.expect(ptIdx >= 0).to.eql(true);\r",
+													"        pm.expect(ptIdx < jsonData.count).to.eql(true);\r",
+													"        var thisPatient = jsonData.data[ptIdx];\r",
+													"        pm.variables.set('patientID',thisPatient.clinicPatientID);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(401);\r",
+													"        pm.expect(jsonData.count).to.eql(0);\r",
+													"    }\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
 										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create a new visit",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "d479e5e2-a89b-4287-a28e-875b838b4f9d",
-										"exec": [
-											"var userAcct = pm.environment.get('testUser');\r",
-											"var jsonData = JSON.parse(responseBody);\r",
-											"\r",
-											"pm.test(\"Create new visit was successful\", function () {\r",
-											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
-											"        // this should be successful\r",
-											"        pm.response.to.have.status(201);\r",
-											"        pm.expect(jsonData.count).to.eql(1);\r",
-											"        var newVisit = jsonData.data;\r",
-											"        pm.expect(newVisit).to.not.eql(null);\r",
-											"        pm.variables.set('newPatientVisitID', newVisit.patientVisitID);\r",
-											"        pm.variables.set('newClinicPatientID', newVisit.clinicPatientID);\r",
-											"    } else {\r",
-											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(401);\r",
-											"        pm.expect(jsonData.count).to.eql(0);\r",
-											"    }\r",
-											"});\r",
-											""
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
 										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "X-piClinic-token",
-										"type": "text",
-										"value": "{{token}}"
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/patient.php",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"patient.php"
+											]
+										}
 									},
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/x-www-form-urlencoded"
-									}
-								],
-								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "visitType",
-											"value": "AUTOTEST",
-											"type": "text"
-										},
-										{
-											"key": "clinicPatientID",
-											"value": "{{patientID}}",
-											"type": "text"
-										},
-										{
-											"key": "staffUsername",
-											"value": "{{drUsername}}",
-											"type": "text"
-										},
-										{
-											"key": "staffName",
-											"value": "{{drFullName}}",
-											"type": "text"
-										}
-									]
+									"response": []
 								},
-								"url": {
-									"raw": "{{host}}/api/visit.php",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"visit.php"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get new visit by patient visit ID",
-							"event": [
 								{
-									"listen": "test",
-									"script": {
-										"id": "dabb3fb8-0962-4846-9c3a-b8fdcc0bbd28",
-										"exec": [
-											"var jsonData = JSON.parse(responseBody);\r",
-											"\r",
-											"pm.test(\"Get new visit by patientVisitIDr successful\", function() {\r",
-											"    var userAcct = pm.environment.get('testUser');\r",
-											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
-											"        // this should be successful\r",
-											"        pm.response.to.have.status(200);\r",
-											"        pm.expect(jsonData.count).to.eql(1);\r",
-											"        pm.expect(jsonData.data.patientVisitID).to.eql(pm.variables.get('newPatientVisitID'));\r",
-											"    } else if  (userAcct == 'TestCS') {\r",
-											"        // staff cam read, but can't create so the user is not found\r",
-											"        pm.response.to.have.status(404);\r",
-											"    } else {\r",
-											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(401);\r",
-											"    }\r",
-											"});"
+									"name": "Get random doctor",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "284f1c2c-099c-4131-b059-7ce9ec4438c5",
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);\r",
+													"\r",
+													"pm.test(\"Get random doctor successful\", function() {\r",
+													"    var userAcct = pm.environment.get('testUser');\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"        pm.expect(jsonData.count > 1).to.eql(true);\r",
+													"        var drIdx = Math.floor((Math.random() * jsonData.count));\r",
+													"        pm.expect(drIdx >= 0).to.eql(true);\r",
+													"        pm.expect(drIdx < jsonData.count).to.eql(true);\r",
+													"        var thisDoctor = jsonData.data[drIdx];\r",
+													"        pm.variables.set('drUsername',thisDoctor.username);\r",
+													"        pm.variables.set('drFullName',thisDoctor.firstName + thisDoctor.lastName);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(401);\r",
+													"    }\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
 										],
-										"type": "text/javascript"
-									}
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/staff.php?position=Doctor%",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"staff.php"
+											],
+											"query": [
+												{
+													"key": "position",
+													"value": "Doctor%"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create a new visit",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d479e5e2-a89b-4287-a28e-875b838b4f9d",
+												"exec": [
+													"var userAcct = pm.environment.get('testUser');\r",
+													"var jsonData = JSON.parse(responseBody);\r",
+													"\r",
+													"pm.test(\"Create new visit was successful\", function () {\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(201);\r",
+													"        pm.expect(jsonData.count).to.eql(1);\r",
+													"        var newVisit = jsonData.data;\r",
+													"        pm.expect(newVisit).to.not.eql(null);\r",
+													"        pm.variables.set('newPatientVisitID', newVisit.patientVisitID);\r",
+													"        pm.variables.set('newClinicPatientID', newVisit.clinicPatientID);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(401);\r",
+													"        pm.expect(jsonData.count).to.eql(0);\r",
+													"    }\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											},
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/x-www-form-urlencoded"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "visitType",
+													"value": "AUTOTEST",
+													"type": "text"
+												},
+												{
+													"key": "clinicPatientID",
+													"value": "{{patientID}}",
+													"type": "text"
+												},
+												{
+													"key": "staffUsername",
+													"value": "{{drUsername}}",
+													"type": "text"
+												},
+												{
+													"key": "staffName",
+													"value": "{{drFullName}}",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{host}}/api/visit.php",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"visit.php"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get new visit by patient visit ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "dabb3fb8-0962-4846-9c3a-b8fdcc0bbd28",
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);\r",
+													"\r",
+													"pm.test(\"Get new visit by patientVisitIDr successful\", function() {\r",
+													"    var userAcct = pm.environment.get('testUser');\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"        pm.expect(jsonData.count).to.eql(1);\r",
+													"        pm.expect(jsonData.data.patientVisitID).to.eql(pm.variables.get('newPatientVisitID'));\r",
+													"    } else if  (userAcct == 'TestCS') {\r",
+													"        // staff cam read, but can't create so the user is not found\r",
+													"        pm.response.to.have.status(404);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(401);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"visit.php"
+											],
+											"query": [
+												{
+													"key": "patientVisitID",
+													"value": "{{newPatientVisitID}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get new visit by patient clinic ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "dabb3fb8-0962-4846-9c3a-b8fdcc0bbd28",
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);\r",
+													"\r",
+													"pm.test(\"Get new visit by patientClinicID successful\", function() {\r",
+													"    var userAcct = pm.environment.get('testUser');\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"        pm.expect(jsonData.count >= 1).to.eql(true);\r",
+													"        if (jsonData.count > 1) {\r",
+													"            pm.expect(jsonData.data[0].patientClinicID).to.eql(pm.variables.get('patientClinicID'));\r",
+													"        } else {\r",
+													"            pm.expect(jsonData.data.patientClinicID).to.eql(pm.variables.get('patientClinicID'));\r",
+													"        }\r",
+													"    } else if  (userAcct == 'TestCS') {\r",
+													"        // staff cam read, but can't create so the user is not found\r",
+													"        pm.response.to.have.status(404);\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(401);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/visit.php?clinicPatientID={{newClinicPatientID}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"visit.php"
+											],
+											"query": [
+												{
+													"key": "clinicPatientID",
+													"value": "{{newClinicPatientID}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Discharge visit by patient visit ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "dabb3fb8-0962-4846-9c3a-b8fdcc0bbd28",
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);\r",
+													"\r",
+													"pm.test(\"Get new visit by patientVisitIDr successful\", function() {\r",
+													"    var userAcct = pm.environment.get('testUser');\r",
+													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+													"        // this should be successful\r",
+													"        pm.response.to.have.status(200);\r",
+													"        pm.expect(jsonData.count).to.eql(1);\r",
+													"        pm.expect(jsonData.data.patientVisitID).to.eql(pm.variables.get('newPatientVisitID'));\r",
+													"    } else {\r",
+													"        // the user doesn't have permission to do this.\r",
+													"        pm.response.to.have.status(401);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "X-piClinic-token",
+												"type": "text",
+												"value": "{{token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&visitStatus=Closed&dateTimeOut=now()&diagnosis1=R51&condition1=N&diagnosis2=I11&condition2=S&diagnosis3=E08&condition3=N&referredTo=Elsewhere&referredFrom=Somewhere",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"api",
+												"visit.php"
+											],
+											"query": [
+												{
+													"key": "patientVisitID",
+													"value": "{{newPatientVisitID}}"
+												},
+												{
+													"key": "visitStatus",
+													"value": "Closed"
+												},
+												{
+													"key": "dateTimeOut",
+													"value": "now()"
+												},
+												{
+													"key": "diagnosis1",
+													"value": "R51"
+												},
+												{
+													"key": "condition1",
+													"value": "N"
+												},
+												{
+													"key": "diagnosis2",
+													"value": "I11"
+												},
+												{
+													"key": "condition2",
+													"value": "S"
+												},
+												{
+													"key": "diagnosis3",
+													"value": "E08"
+												},
+												{
+													"key": "condition3",
+													"value": "N"
+												},
+												{
+													"key": "referredTo",
+													"value": "Elsewhere"
+												},
+												{
+													"key": "referredFrom",
+													"value": "Somewhere"
+												}
+											]
+										}
+									},
+									"response": []
 								}
 							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "X-piClinic-token",
-										"type": "text",
-										"value": "{{token}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"visit.php"
-									],
-									"query": [
-										{
-											"key": "patientVisitID",
-											"value": "{{newPatientVisitID}}"
-										}
-									]
-								}
-							},
-							"response": []
+							"_postman_isSubFolder": true
 						},
 						{
-							"name": "Get new visit by patient clinic ID",
-							"event": [
+							"name": "Visit Patch Tests",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"id": "dabb3fb8-0962-4846-9c3a-b8fdcc0bbd28",
-										"exec": [
-											"var jsonData = JSON.parse(responseBody);\r",
-											"\r",
-											"pm.test(\"Get new visit by patientClinicID successful\", function() {\r",
-											"    var userAcct = pm.environment.get('testUser');\r",
-											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
-											"        // this should be successful\r",
-											"        pm.response.to.have.status(200);\r",
-											"        pm.expect(jsonData.count >= 1).to.eql(true);\r",
-											"        if (jsonData.count > 1) {\r",
-											"            pm.expect(jsonData.data[0].patientClinicID).to.eql(pm.variables.get('patientClinicID'));\r",
-											"        } else {\r",
-											"            pm.expect(jsonData.data.patientClinicID).to.eql(pm.variables.get('patientClinicID'));\r",
-											"        }\r",
-											"    } else if  (userAcct == 'TestCS') {\r",
-											"        // staff cam read, but can't create so the user is not found\r",
-											"        pm.response.to.have.status(404);\r",
-											"    } else {\r",
-											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(401);\r",
-											"    }\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
+									"name": "Set up for Visit patch test",
+									"item": [
+										{
+											"name": "Get random doctor",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "284f1c2c-099c-4131-b059-7ce9ec4438c5",
+														"exec": [
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"Get random doctor successful\", function() {\r",
+															"    var userAcct = pm.environment.get('testUser');\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count > 1).to.eql(true);\r",
+															"        var drIdx = Math.floor((Math.random() * jsonData.count));\r",
+															"        pm.expect(drIdx >= 0).to.eql(true);\r",
+															"        pm.expect(drIdx < jsonData.count).to.eql(true);\r",
+															"        var thisDoctor = jsonData.data[drIdx];\r",
+															"        pm.expect(thisDoctor).to.not.eql(undefined);\r",
+															"        pm.variables.set('drUsername',thisDoctor.username);\r",
+															"        pm.variables.set('drFullName',thisDoctor.firstName + thisDoctor.lastName);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "X-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{host}}/api/staff.php?position=Doctor%",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"staff.php"
+													],
+													"query": [
+														{
+															"key": "position",
+															"value": "Doctor%"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get a random patient",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"Reading existing patient info was successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA') || (userAcct == 'TestCS')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count > 1).to.eql(true);\r",
+															"        var ptIdx = Math.floor((Math.random() * jsonData.count));\r",
+															"        pm.expect(ptIdx >= 0).to.eql(true);\r",
+															"        pm.expect(ptIdx < jsonData.count).to.eql(true);\r",
+															"        var thisPatient = jsonData.data[ptIdx];\r",
+															"        pm.expect(thisPatient).to.not.eql(undefined);\r",
+															"        pm.variables.set('patientID',thisPatient.clinicPatientID);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "d6439202-1fd4-44d9-b992-a847e8a9aef6",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{host}}/api/patient.php",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"patient.php"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create a new visit Copy",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "d479e5e2-a89b-4287-a28e-875b838b4f9d",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"Create new visit was successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(201);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var newVisit = jsonData.data;\r",
+															"        pm.expect(newVisit).to.not.eql(null);\r",
+															"        pm.variables.set('newPatientVisitID', newVisit.patientVisitID);\r",
+															"        pm.variables.set('newClinicPatientID', newVisit.clinicPatientID);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1bb392c8-fce4-4807-97eb-b88e6da79f01",
+														"exec": [
+															"pm.expect( pm.variables.get('patientID')).to.not.eql(undefined);\r",
+															"pm.expect( pm.variables.get('drUsername')).to.not.eql(undefined);\r",
+															"pm.expect( pm.variables.get('drFullName')).to.not.eql(undefined);\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "X-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													},
+													{
+														"key": "Content-Type",
+														"name": "Content-Type",
+														"type": "text",
+														"value": "application/x-www-form-urlencoded"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "visitType",
+															"value": "AUTOTEST",
+															"type": "text"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{patientID}}",
+															"type": "text"
+														},
+														{
+															"key": "staffUsername",
+															"value": "{{drUsername}}",
+															"type": "text"
+														},
+														{
+															"key": "staffName",
+															"value": "{{drFullName}}",
+															"type": "text"
+														}
+													]
+												},
+												"url": {
+													"raw": "{{host}}/api/visit.php",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check visitType",
+									"item": [
+										{
+											"name": "Patch visit visitType",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"New test patient added successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200)\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"var visitTypeOptions = ['All','Outpatient','Emergency','Specialist','Test'];\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'visitType');\r",
+															" pm.variables.set('patchTestValue', visitTypeOptions[randomIntBetween(0,visitTypeOptions.length-1)]);\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test update",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check visitStatus",
+									"item": [
+										{
+											"name": "Patch visit visitType",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"New test patient added successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200)\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"var visitStatusOptions = ['Open','Closed','Deleted'];\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'visitStatus');\r",
+															" pm.variables.set('patchTestValue', visitStatusOptions[randomIntBetween(0,visitStatusOptions.length-1)]);\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test update",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check primaryComplaint",
+									"item": [
+										{
+											"name": "Patch visit primaryComplaint",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"New test patient added successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200)\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'primaryComplaint');\r",
+															" pm.variables.set('patchTestValue', randomString(4096));\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test update",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check secondaryComplaint",
+									"item": [
+										{
+											"name": "Patch visit secondaryComplaint",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"New test patient added successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200)\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'secondaryComplaint');\r",
+															" pm.variables.set('patchTestValue', randomString(4096));\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test update",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check payment",
+									"item": [
+										{
+											"name": "Patch visit payment",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"New test patient added successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200)\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'referredFrom');\r",
+															" pm.variables.set('patchTestValue', randomString(255));\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test update",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check referredTo",
+									"item": [
+										{
+											"name": "Patch visit secondaryComplaint",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"New test patient added successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200)\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'secondaryComplaint');\r",
+															" pm.variables.set('patchTestValue', randomString(4096));\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test update",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check referredFrom",
+									"item": [
+										{
+											"name": "Patch visit secondaryComplaint",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"New test patient added successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200)\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'secondaryComplaint');\r",
+															" pm.variables.set('patchTestValue', randomString(4096));\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test update",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
 								}
 							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "X-piClinic-token",
-										"type": "text",
-										"value": "{{token}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/visit.php?clinicPatientID={{newClinicPatientID}}",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"visit.php"
-									],
-									"query": [
-										{
-											"key": "clinicPatientID",
-											"value": "{{newClinicPatientID}}"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update new visit by patient visit ID",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "dabb3fb8-0962-4846-9c3a-b8fdcc0bbd28",
-										"exec": [
-											"var jsonData = JSON.parse(responseBody);\r",
-											"\r",
-											"pm.test(\"Get new visit by patientVisitIDr successful\", function() {\r",
-											"    var userAcct = pm.environment.get('testUser');\r",
-											"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
-											"        // this should be successful\r",
-											"        pm.response.to.have.status(200);\r",
-											"        pm.expect(jsonData.count).to.eql(1);\r",
-											"        pm.expect(jsonData.data.patientVisitID).to.eql(pm.variables.get('newPatientVisitID'));\r",
-											"    } else {\r",
-											"        // the user doesn't have permission to do this.\r",
-											"        pm.response.to.have.status(401);\r",
-											"    }\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "PATCH",
-								"header": [
-									{
-										"key": "X-piClinic-token",
-										"type": "text",
-										"value": "{{token}}"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&visitStatus=Closed&dateTimeOut=now()&diagnosis1=R51&condition1=N&diagnosis2=I11&condition2=S&diagnosis3=E08&condition3=N&referredTo=Elsewhere&referredFrom=Somewhere",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"api",
-										"visit.php"
-									],
-									"query": [
-										{
-											"key": "patientVisitID",
-											"value": "{{newPatientVisitID}}"
-										},
-										{
-											"key": "visitStatus",
-											"value": "Closed"
-										},
-										{
-											"key": "dateTimeOut",
-											"value": "now()"
-										},
-										{
-											"key": "diagnosis1",
-											"value": "R51"
-										},
-										{
-											"key": "condition1",
-											"value": "N"
-										},
-										{
-											"key": "diagnosis2",
-											"value": "I11"
-										},
-										{
-											"key": "condition2",
-											"value": "S"
-										},
-										{
-											"key": "diagnosis3",
-											"value": "E08"
-										},
-										{
-											"key": "condition3",
-											"value": "N"
-										},
-										{
-											"key": "referredTo",
-											"value": "Elsewhere"
-										},
-										{
-											"key": "referredFrom",
-											"value": "Somewhere"
-										}
-									]
-								}
-							},
-							"response": []
+							"_postman_isSubFolder": true
 						}
 					],
 					"_postman_isSubFolder": true
