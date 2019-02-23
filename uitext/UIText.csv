@@ -58,9 +58,9 @@ TEXT_CLINIC_HISTORY_ID_LABEL,Family ID,Número de historia clínica
 TEXT_CLINIC_HOME,Dashboard,Página principal
 TEXT_CLINIC_LOGIN_PAGE_TITLE,Clinic login,Iniciar sesión
 TEXT_CLINIC_REPORTS,Reports,Informes
-TEXT_CLOSE_VISIT_PAGE_TITLE,Discharge patient,Cerrar la visita
 TEXT_CLOSE_VISIT,Discharge this patient,Dar de alta este paciente
 TEXT_CLOSE_VISIT_LINK,Discharge this patient,Dar de alta el paciente
+TEXT_CLOSE_VISIT_PAGE_TITLE,Discharge patient,Cerrar la visita
 TEXT_COMMENT_CANCEL,Cancel,Cancelar
 TEXT_COMMENT_LABEL,Describe what you like or what you would like to be different with the piClinic,Describe lo que le guste o lo que le gustaría ver diferente en el piClinic
 TEXT_COMMENT_LIST_HEAD,User comments,Comentarios de los usuarios
@@ -478,8 +478,30 @@ TEXT_REPORT_DAY,Day of month,Día del mes
 TEXT_REPORT_DAY_OF_MONTH_LABEL,Day of the month,Día del mes
 TEXT_REPORT_DIAGNOSIS_LABEL,Diagnoses/Activities,Diagnostico/Actividad
 TEXT_REPORT_DIRECTOR_LABEL,Clinic Director,Director del Establecimiento
+TEXT_REPORT_GROUP_FINANCE,Financial Reports,Informes Financieros
+TEXT_REPORT_GROUP_PATIENTS,Patient Activity,Actividad de los pacientes
 TEXT_REPORT_HEADING,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
 TEXT_REPORT_HEADING_BY_POS,Monthly Report of Outpatient Care,Informe Mensual de Atenciones Ambulatorias
+TEXT_REPORT_LINK_DESC_DAILY_PATIENT_LOG,Lists the patients seen in the clinic by a doctor on a specific date,Muestra los pacientes examinados por un/a medico/a en una fecha especificada
+TEXT_REPORT_LINK_DESC_DAILY_PAYMENT_LOG,List of payments received from patients on a specified date,Registro de pagos recibidos por los pacientes durante la fecha especificada
+TEXT_REPORT_LINK_DESC_MONTHLY_PATIENT_BY_DAY_LOG,Summary of patients seen by day and age group,Resumen de pacientes atendidos por día y grupo de edad
+TEXT_REPORT_LINK_DESC_MONTHLY_PATIENT_BY_POS_LOG,Summary of patients seen by medical professional,Resumen de pacientes atendidos por clase de profesional
+TEXT_REPORT_LINK_DESC_MONTHLY_PAYMENT_LOG,List of payments received from patients during the specified month,Registro de pagos recibidos por los pacientes durante el mes especificado
+TEXT_REPORT_LINK_TEXT_DAILY_PATIENT_LOG,Daily Outpatient Log,Atenciones Ambulatorias
+TEXT_REPORT_LINK_TEXT_DAILY_PAYMENT_LOG,Daily Payment Log,Registros de Pagos del Día
+TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_DAY_LOG,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
+TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_POS_LOG,Monthly Report of Outpatient Care,Informe Mensual de Atenciones Ambulatorias (AT2-R)
+TEXT_REPORT_LINK_TEXT_MONTHLY_PAYMENT_LOG,Monthly payment report,Informe de pagos del mes
+TEXT_REPORT_LINK_TITLE_DAILY_PATIENT_LOG,Daily Patient Log,Atenciones Ambulatorias
+TEXT_REPORT_LINK_TITLE_DAILY_PAYMENT_LOG,Daily payment log,Registro de pagos del día
+TEXT_REPORT_LINK_TITLE_MONTHLY_PATIENT_BY_DAY_LOG,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
+TEXT_REPORT_LINK_TITLE_MONTHLY_PATIENT_BY_POS_LOG,Monthly Report of Outpatient Care,Informe Mensual de Atenciones Ambulatorias (AT2-R)
+TEXT_REPORT_LINK_TITLE_MONTHLY_PAYMENT_LOG,Monthly payment report,Informe de pagos del mes
+TEXT_REPORT_LINK_URI_DAILY_PATIENT_LOG,,
+TEXT_REPORT_LINK_URI_DAILY_PAYMENT_LOG,,
+TEXT_REPORT_LINK_URI_MONTHLY_PATIENT_BY_DAY_LOG,,
+TEXT_REPORT_LINK_URI_MONTHLY_PATIENT_BY_POS_LOG,,
+TEXT_REPORT_LINK_URI_MONTHLY_PAYMENT_LOG,,
 TEXT_REPORT_MONTH_LABEL,Month,Mes
 TEXT_REPORT_MONTH_LABEL,Month,Mes
 TEXT_REPORT_MONTH_PLACEHOLDER,Report month (MM),Mes del informe (MM)

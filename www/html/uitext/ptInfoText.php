@@ -24,7 +24,13 @@
 
 // check to make sure this file wasn't called directly
 //  it must be called from a script that supports access checking
-require_once dirname(__FILE__).'/../api/api_common.php';
+$apiCommonInclude = dirname(__FILE__).'/../api/api_common.php';
+if (!file_exists($apiCommonInclude)) {
+    // if not over one, try up one more directory and then over.
+    // it should be in one of these two locations.
+    $apiCommonInclude = dirname(__FILE__).'/../../api/api_common.php';
+}
+require_once $apiCommonInclude;
 exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
