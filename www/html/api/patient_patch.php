@@ -114,12 +114,12 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
 	// make update query string from data buffer
 	$columnsToUpdate = 0;
 	$updateQueryString = format_object_for_SQL_update (DB_TABLE_PATIENT, $patchArgs, "clinicPatientID", $columnsToUpdate);
-	
+    $dbInfo['updateQueryString'] = $updateQueryString;
+
 	// check query string construction
 	if ($columnsToUpdate < 1) {
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
-			$dbInfo['updateQueryString'] = $updateQueryString;
 			$returnValue['debug'] = $dbInfo;
 		}
 		$returnValue['httpResponse'] = 400;
@@ -134,7 +134,6 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
 
 	if (!empty($updateQueryString)) {
-        $dbInfo['updateQueryString'] = $updateQueryString;
 		// try to add the record to the database
 		$qResult = @mysqli_query($dbLink, $updateQueryString);
 		if (!$qResult) {
@@ -168,13 +167,13 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
 	} else {
 		// missing primary key field
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
-		if (API_DEBUG_MODE) {
-			$returnValue['debug'] = $dbInfo;
-		}
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to update record. The patient ID is missing.";
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_KEY);
 	}
+    if (API_DEBUG_MODE) {
+        $returnValue['debug'] = $dbInfo;
+    }
 	profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;
 }
