@@ -1,6 +1,5 @@
 <?php
 /*
-
  *
  *	Copyright (c) 2019, Robert B. Watson
  *

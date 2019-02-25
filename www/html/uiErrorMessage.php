@@ -31,12 +31,12 @@
 */
 // check to make sure this file wasn't called directly
 //  it must be called from a script that supports access checking
-require_once 'api/api_common.php';
+require_once dirname(__FILE__).'/api/api_common.php';
 //require_once 'uitext/appMenuText.php';
 exitIfCalledFromBrowser(__FILE__);
 
 if (isset($pageLanguage)) {
-	require_once('./uitext/uiErrorMessageText.php');
+	require_once dirname(__FILE__).'/./uitext/uiErrorMessageText.php';
 	if (((!empty($requestData)) && (!empty($requestData['msg']))) || (!empty($dbStatus))) {
 		echo ('<div class="errorMessage" id="uiErrorMessage">');
 		if (((!empty($requestData)) && (!empty($requestData['msg'])))) {
