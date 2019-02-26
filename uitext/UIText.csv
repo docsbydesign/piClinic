@@ -318,8 +318,9 @@ TEXT_NO_REPORT_PROMPT,Select a date.,Escoge una fecha.
 TEXT_NO_REPORT_PROMPT,Select a health professional and date.,Escoge un profesional de salud y una fecha.
 TEXT_NO_STAFF_RECORDS,No users or staff members found,No hay usuarios o personal de la clínica
 TEXT_NO_SUMMARY_REPORT_PROMPT,Select a service type and date.,Escoge un servicio de atención y una fecha.
-TEXT_NO_VISITS_FOUND,No visits found for this date.,No visitas encontradas en este fecha.
-TEXT_NO_VISITS_FOUND,This person did not see any patients on this date.,Esta persona no tuvo pacientes en este fecha.
+TEXT_NO_VISITS_FOUND_DAY,No visits found for this date.,No visitas encontradas en este fecha.
+TEXT_NO_VISITS_FOUND_MONTH,No visits found for this month.,No visitas encontradas en este mes.
+TEXT_NO_VISITS_FOUND_DOCTOR,This person did not see any patients on this date.,Esta persona no tuvo pacientes en este fecha.
 TEXT_NO_VISIT_IMAGES,This visit does not have any images,Esta visita no tiene imágenes 
 TEXT_OF_PAGES,of,de
 TEXT_OPEN_VISIT_LIST_HEAD,Patients admitted to the clinic,Pacientes admitidos a la clínica

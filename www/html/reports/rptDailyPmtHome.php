@@ -42,7 +42,6 @@
 *
 */
 // set charset header
-
 header('Content-type: text/html; charset=utf-8');
 // include files
 require_once '../shared/piClinicConfig.php';
@@ -366,7 +365,7 @@ header('Content-type: text/html; charset=utf-8');
         echo '<hr>';
     } else {
         // no visits
-        echo '<p>'.TEXT_NO_VISITS_FOUND.'</p>';
+        echo '<p>'.TEXT_NO_VISITS_FOUND_DAY.'</p>';
     }
     echo ('</div>');
     ?>
