@@ -76,6 +76,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 <?= pageHtmlTag($pageLanguage) ?>
 <?= pageHeadTag(TEXT_CLINIC_DASH_PAGE_TITLE) ?>
 <body>
+    <!-- "token": "<?= $sessionInfo['token'] ?>" -->
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
