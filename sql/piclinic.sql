@@ -362,6 +362,93 @@ CREATE VIEW `icd10Get` AS
 		`lastUsedDate` AS `lastUsedDate`		
 	FROM `icd10` 
 	WHERE 1;
+
+--
+-- Functions
+--
+DELIMITER $$
+
+DROP FUNCTION IF EXISTS `AgeYMD`$$
+-- Returns a string showing the age (date difference) in years, months, days (YY-MM-DD)
+CREATE DEFINER=`root`@`localhost` FUNCTION `AgeYMD` (`lateDateArg` DATETIME, `earlyDateArg` DATETIME) RETURNS VARCHAR(10) CHARSET utf8 NO SQL
+BEGIN
+  DECLARE Y_ED INT;
+  DECLARE M_ED INT;
+  DECLARE D_ED INT;
+  DECLARE Y_LD INT;
+  DECLARE M_LD INT;
+  DECLARE D_LD INT;
+  DECLARE D_MONTH INT;
+  DECLARE Y_DIF INT;
+  DECLARE M_DIF INT;
+  DECLARE D_DIF INT;
+  DECLARE RETURN_AGE VARCHAR(10);
+  
+  IF (lateDateArg = earlyDateArg) THEN
+	-- if the dates are the same, the age is 0
+	SET @RETURN_AGE = '00-00-00';
+  ELSE
+	-- arrange the local values such that the 
+	-- later date is larger than the earlier date
+  	IF(lateDateArg > earlyDateArg) THEN
+    	SET @Y_ED = YEAR(earlyDateArg);
+        SET @M_ED = MONTH(earlyDateArg);
+        SET @D_ED = DAY(earlyDateArg);
+        SET @Y_LD = YEAR(lateDateArg);
+        SET @M_LD = MONTH(lateDateArg);
+        SET @D_LD = DAY(lateDateArg);
+    ELSE
+    	SET @Y_LD = YEAR(earlyDateArg);
+        SET @M_LD = MONTH(earlyDateArg);
+        SET @D_LD = DAY(earlyDateArg);
+        SET @Y_ED = YEAR(lateDateArg);
+        SET @M_ED = MONTH(lateDateArg);
+        SET @D_ED = DAY(lateDateArg);
+    END IF;
+	-- if the early days value is larger than the later days value
+	-- borrow from the other fields to make it work
+	IF (@D_LD < @D_ED) THEN
+		-- borrow the days from the previous month so the 
+		-- later days value is larger than the early days
+		SET @M_LD = @M_LD -1;
+		-- if the previous math results in a month before January...
+		IF (@M_LD = 0) THEN
+			-- set it to December of prev. year.
+			SET @M_LD = 12;
+			SET @Y_LD = @Y_LD - 1;
+		END IF;
+		-- Get the days from the previous month
+		-- first, assuming it's not a leap year
+		SELECT `days` FROM `monthdays` WHERE `monthId` = @M_LD INTO @D_MONTH;
+		-- and add them to the current day value
+		SET @D_LD = @D_LD + @D_MONTH;
+		-- then adjust it if the M_LD is Feb of a leap year
+		IF ((@Y_LD % 4) = 0) AND (@M_LD = 2) THEN
+			-- if it's not one of the fake leap years, add in the leap day
+			IF ((@Y_LD % 400) > 0) THEN
+				SET @D_LD = @D_LD + 1;
+			END IF;
+		END IF;
+	END IF;
+	IF (@M_LD < @M_ED) THEN
+		SET @M_LD = @M_LD + 12;
+		SET @Y_LD = @Y_LD - 1;
+	END IF;
+	
+	-- do the math and compute the differences
+  	SET @Y_DIF = @Y_LD - @Y_ED;
+    SET @M_DIF = @M_LD - @M_ED;
+    SET @D_DIF = @D_LD - @D_ED;	
+	-- format the string
+	SET @RETURN_AGE = CONCAT(LPAD(CAST(@Y_DIF as CHAR),2,'0'), '-',
+							LPAD(CAST(@M_DIF as CHAR),2,'0'), '-',
+							LPAD(CAST(@D_DIF as CHAR),2,'0'));
+	
+  END IF;
+  RETURN @RETURN_AGE;
+END$$
+
+DELIMITER ;
 	
 -- --------------------------------------------------------
 --  VIEWS
@@ -782,3 +869,401 @@ CREATE VIEW `visitPatientGet` AS
 		WHERE `visit`.`deleted` = FALSE
 ;
 
+DROP VIEW IF EXISTS visitGetWithAgeGroup;
+CREATE VIEW visitGetWithAgeGroup AS 
+	SELECT 
+		`patientVisitID`, 
+		`staffName`, 
+		`staffUsername`,
+		`staffPosition`,
+		`visitType`, 
+		`visitStatus`, 
+		`primaryComplaint`, 
+		`secondaryComplaint`, 
+		`dateTimeIn`, 
+		`dateTimeOut`, 
+		`clinicPatientID`, 
+		`firstVisit`,
+		`patientNationalID`,
+		`patientFamilyID`,
+		`patientLastName`, 
+		`patientFirstName`, 
+		`patientSex`, 
+		`patientBirthDate`,
+		AgeYMD(`dateTimeIn`, `patientBirthDate`) as `patientAgeYMD`,
+		`patientHomeAddress1`, 
+		`patientHomeAddress2`, 
+		`patientHomeNeighborhood`, 
+		`patientHomeCity`, 
+		`patientHomeCounty`, 
+		`patientHomeState`,
+		`patientKnownAllergies`,
+		`patientCurrentMedications`,
+		`diagnosis1`,
+		`condition1`,
+		`diagnosis2`,
+		`condition2`,
+		`diagnosis3`,
+		`condition3`,
+		`referredTo`,
+		`referredFrom`,
+-- computed age groups
+		CASE WHEN (`patientSex` = 'M')  THEN 1 ELSE 0 END AS `PT_MALE`,
+		CASE WHEN (`patientSex` = 'F')  THEN 1 ELSE 0 END AS `PT_FEMALE`,
+		CASE WHEN (`referredFrom` IS NOT NULL AND `referredFrom` != '') THEN 1 ELSE 0 END AS `PT_REFERRED_IN`,
+		CASE WHEN (`referredFrom` IS NOT NULL AND `referredFrom` != '') THEN 0 ELSE 1 END AS `PT_WALK_IN`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,5) = '00-00')  THEN 1 ELSE 0 END AS `LT_1MO`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) = '00')  THEN 1 ELSE 0 END AS `LT_1YR`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  THEN 1 ELSE 0 END AS `LT_5YR`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,5) = '00-00') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `LT_1MO_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) = '00') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `LT_1YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `LT_5YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,5) = '00-00') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `LT_1MO_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) = '00') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `LT_1YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `LT_5YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,5) >= '00-01') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) = '00') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_1MO_LT_1YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '01') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_1YR_LT_5YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '05') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '10') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_5YR_LT_10YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '05') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '15') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_5YR_LT_15YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '10') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '15') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_10YR_LT_15YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '15') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '20') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_15YR_LT_20YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '15') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '50') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_15YR_LT_50YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '15') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_15YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '20') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '25') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_20YR_LT_25YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '20') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '50') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_20YR_LT_50YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '25') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '30') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_25YR_LT_30YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '25') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '40') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_25YR_LT_40YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '30') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '50') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_30YR_LT_50YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '40') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '60') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_40YR_LT_60YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '50') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '60') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_50YR_LT_60YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '50') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_50YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '60') AND (`firstVisit` = 'YES') THEN 1 ELSE 0 END AS `GE_60YR_N`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,5) >= '00-01') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) = '00') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_1MO_LT_1YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '01') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_1YR_LT_5YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '05') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '10') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_5YR_LT_10YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '05') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '15') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_5YR_LT_15YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '10') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '15') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_10YR_LT_15YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '15') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '20') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_15YR_LT_20YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '15') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '50') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_15YR_LT_50YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '15') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_15YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '20') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '25') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_20YR_LT_25YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '20') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '50') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_20YR_LT_50YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '25') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '30') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_25YR_LT_30YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '25') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '40') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_25YR_LT_40YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '30') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '50') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_30YR_LT_50YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '40') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '60') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_40YR_LT_60YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '50') AND (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '60') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_50YR_LT_60YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '50') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_50YR_S`,
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '60') AND (`firstVisit` = 'NO') THEN 1 ELSE 0 END AS `GE_60YR_S`	FROM `visit` 
+	WHERE `visit`.`deleted` = FALSE;
+		
+DROP VIEW IF EXISTS visitGetAT2Data;
+CREATE VIEW visitGetAT2Data AS 
+	SELECT 
+		`patientVisitID`, 
+		`staffName`, 
+		`staffPosition`,
+		`visitType`,
+		`dateTimeIn`, 
+		`dateTimeOut`, 
+		`clinicPatientID`, 
+		`firstVisit`,
+		`patientNationalID`,
+		`patientFamilyID`,
+		`patientLastName`, 
+		`patientFirstName`, 
+		`patientSex`, 
+		`patientBirthDate`,
+		AgeYMD(`dateTimeIn`, `patientBirthDate`) as `patientAgeYMD`,
+		`diagnosis1`,
+		`condition1`,
+		`diagnosis2`,
+		`condition2`,
+		`diagnosis3`,
+		`condition3`,
+-- computed fields
+-- AT2 Line 1
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,5) = '00-00') AND (`firstVisit` = 'YES') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_01`,
+-- AT2 Line 2
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,5) = '00-00') AND (`firstVisit` = 'NO') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_02`,
+-- AT2 Line 3
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,5) >= '00-01') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) = '00') AND 
+				(`firstVisit` = 'YES') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_03`,
+-- AT2 Line 4
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,5) >= '00-01') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) = '00') AND 
+				(`firstVisit` = 'NO') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_04`,
+-- AT2 Line 5
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '01') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05') AND 
+				(`firstVisit` = 'YES') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_05`,
+-- AT2 Line 6
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '01') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05') AND 
+				(`firstVisit` = 'NO') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_06`,
+-- AT2 Line 7
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '05') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '10') AND
+				(`firstVisit` = 'YES') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_07`,
+-- AT2 Line 8
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '05') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '10') AND 
+				(`firstVisit` = 'NO') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_08`,
+-- AT2 Line 9
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '10') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '15') AND 
+				(`firstVisit` = 'YES') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_09`,
+-- AT2 Line 10
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '10') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '15') AND 
+				(`firstVisit` = 'NO') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_10`,
+-- AT2 Line 11
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '15') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '20') AND 
+				(`firstVisit` = 'YES') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_11`,
+-- AT2 Line 12
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '15') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '20') AND 
+				(`firstVisit` = 'NO') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_12`,
+-- AT2 Line 13
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '20') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '50') AND 
+				(`firstVisit` = 'YES') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_13`,
+-- AT2 Line 14
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '20') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '50') AND 
+				(`firstVisit` = 'NO')
+			THEN 1 ELSE 0 END AS `RPT_LINE_14`,
+-- AT2 Line 15
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '50') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '60') AND 
+				(`firstVisit` = 'YES') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_15`,
+-- AT2 Line 16
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '50') AND 
+				(SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '60') AND 
+				(`firstVisit` = 'NO') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_16`,
+-- AT2 Line 17
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '60') AND (`firstVisit` = 'YES') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_17`,
+-- AT2 Line 18
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) >= '60') AND (`firstVisit` = 'NO') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_18`,
+-- AT2 Line 19
+		1  AS `RPT_LINE_19`,
+-- AT2 Line 20
+		CASE WHEN (`patientSex` = 'F')  
+			THEN 1 ELSE 0 END AS `RPT_LINE_20`,
+-- AT2 Line 21
+		CASE WHEN (`patientSex` = 'M')  
+			THEN 1 ELSE 0 END AS `RPT_LINE_21`,
+-- AT2 Line 23
+		CASE WHEN (`referredFrom` IS NOT NULL AND `referredFrom` != '') 
+			THEN 0 ELSE 1 END AS `RPT_LINE_22`,
+-- AT2 Line 23
+		CASE WHEN (`referredFrom` IS NOT NULL AND `referredFrom` != '') 
+			THEN 1 ELSE 0 END AS `RPT_LINE_23`,
+-- AT2 Line 24
+		CASE WHEN ((`diagnosis1` REGEXP '^[*]RPT001') OR  
+				(`diagnosis2` REGEXP '^[*]RPT001') OR  
+				(`diagnosis3` REGEXP '^[*]RPT001'))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_24`,
+-- AT2 Line 25
+		CASE WHEN ((`diagnosis1` REGEXP '^D06$') OR  
+				(`diagnosis2` REGEXP '^D06$') OR  
+				(`diagnosis3` REGEXP '^D06$'))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_25`,
+-- AT2 Line 26
+		CASE WHEN (((`diagnosis1` REGEXP '^Z3[3|4][0-9]?$' ) AND (`condition1` = 'NEWDIAG')) OR 
+				((`diagnosis2` REGEXP '^Z3[3|4][0-9]?$' ) AND (`condition2` = 'NEWDIAG')) OR 
+				((`diagnosis3` REGEXP '^Z3[3|4][0-9]?$' ) AND (`condition3` = 'NEWDIAG')))
+			THEN 1 ELSE 0 END AS `RPT_LINE_26`,	
+-- AT2 Line 27
+		CASE WHEN (((`diagnosis1` REGEXP '^Z3[3|4][0-9]?$' ) AND (`condition1` = 'SUBSDIAG')) OR 
+				((`diagnosis2` REGEXP '^Z3[3|4][0-9]?$' ) AND (`condition2` = 'SUBSDIAG')) OR 
+				((`diagnosis3` REGEXP '^Z3[3|4][0-9]?$' ) AND (`condition3` = 'SUBSDIAG')))
+			THEN 1 ELSE 0 END AS `RPT_LINE_27`,
+-- AT2 Line 28
+		CASE WHEN ((`diagnosis1` REGEXP '^Z392$') OR  
+				(`diagnosis2` REGEXP '^Z392$') OR  
+				(`diagnosis3` REGEXP '^Z392$'))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_28`,
+-- AT2 Line 29
+		CASE WHEN ((`diagnosis1` REGEXP '^Z304101$') OR  
+				(`diagnosis2` REGEXP '^Z304101$') OR  
+				(`diagnosis3` REGEXP '^Z304101$'))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_29`,
+-- AT2 Line 30
+		CASE WHEN ((`diagnosis1` REGEXP '^Z304103$') OR  
+				(`diagnosis2` REGEXP '^Z304103$') OR  
+				(`diagnosis3` REGEXP '^Z304103$'))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_30`,
+-- AT2 Line 31
+		CASE WHEN ((`diagnosis1` REGEXP '^Z304106$') OR  
+				(`diagnosis2` REGEXP '^Z304106$') OR  
+				(`diagnosis3` REGEXP '^Z304106$'))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_31`,
+-- AT2 Line 32
+		CASE WHEN ((`diagnosis1` REGEXP '^Z304910$') OR  
+				(`diagnosis2` REGEXP '^Z304910$') OR  
+				(`diagnosis3` REGEXP '^Z304910$'))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_32`,
+-- AT2 Line 33
+		CASE WHEN ((`diagnosis1` REGEXP '^Z304030$') OR  
+				(`diagnosis2` REGEXP '^Z304030$') OR  
+				(`diagnosis3` REGEXP '^Z304030$'))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_33`,
+-- AT2 Line 34
+		CASE WHEN ((`diagnosis1` REGEXP '^Z3042$') OR 
+				(`diagnosis2` REGEXP '^Z3042$') OR 
+				(`diagnosis3` REGEXP '^Z3042$'))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_34`,
+-- AT2 Line 35
+		CASE WHEN ((`diagnosis1` REGEXP '^Z30430$') OR
+				(`diagnosis2` REGEXP '^Z30430$') OR
+				(`diagnosis3` REGEXP '^Z30430$'))
+			THEN 1 ELSE 0 END AS `RPT_LINE_35`,
+-- AT2 Line 36
+		CASE WHEN ((`diagnosis1` REGEXP '^[*]RPT002$') OR 
+				(`diagnosis2` REGEXP '^[*]RPT002$') OR
+				(`diagnosis3` REGEXP '^[*]RPT002$'))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_36`,
+-- AT2 Line 37
+		CASE WHEN ((`diagnosis1` REGEXP '^Z3046$') OR
+				(`diagnosis2` REGEXP '^Z3046$') OR
+				(`diagnosis3` REGEXP '^Z3046$')) 
+			THEN 1 ELSE 0 END AS `RPT_LINE_37`,
+-- AT2 Line 38
+		CASE WHEN ((SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  AND 
+					((`diagnosis1` REGEXP '^A09$') OR  
+					 (`diagnosis2` REGEXP '^A09$')  OR  
+					 (`diagnosis3` REGEXP '^A09$')))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_38`,
+-- AT2 Line 39
+		CASE WHEN ((SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  AND 
+					(((`diagnosis1` REGEXP '^A09$' ) AND (`condition1` = 'SUBSDIAG')) OR 
+					((`diagnosis2` REGEXP '^A09$' ) AND (`condition2` = 'SUBSDIAG')) OR 
+					((`diagnosis3` REGEXP '^A09$' ) AND (`condition3` = 'SUBSDIAG'))))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_39`,
+-- AT2 Line 40
+		CASE WHEN ((SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  AND 
+					((`diagnosis1` REGEXP '^[*]RPT005$') OR  
+					 (`diagnosis2` REGEXP '^[*]RPT005$')  OR  
+					 (`diagnosis3` REGEXP '^[*]RPT005$')))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_40`,
+-- AT2 Line 41
+		CASE WHEN ((SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  AND (`firstVisit` = 'YES') AND
+					((`diagnosis1` REGEXP '^J15$' ) OR 
+					(`diagnosis2` REGEXP '^J15$' ) OR 
+					(`diagnosis3` REGEXP '^J15$' )))
+			THEN 1 ELSE 0 END AS `RPT_LINE_41`,
+-- AT2 Line 42
+		CASE WHEN ((SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  AND 
+					(((`diagnosis1` REGEXP '^J15$' ) AND (`condition1` = 'SUBSDIAG')) OR 
+					((`diagnosis2` REGEXP '^J15$' ) AND (`condition2` = 'SUBSDIAG')) OR 
+					((`diagnosis3` REGEXP '^J15$' ) AND (`condition3` = 'SUBSDIAG'))))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_42`,
+-- AT2 Line 43
+		CASE WHEN ((SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05') AND
+					((`diagnosis1` REGEXP '^D(5[6-9]|6[0-9]|7[0-7])[0-9]?$' ) OR 
+					(`diagnosis2` REGEXP '^D(5[6-9]|6[0-9]|7[0-7])[0-9]?$' ) OR 
+					(`diagnosis3` REGEXP '^D(5[6-9]|6[0-9]|7[0-7])[0-9]?$' )))
+			THEN 1 ELSE 0 END AS `RPT_LINE_43`,
+-- AT2 Line 44
+		CASE WHEN (SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  THEN 1 ELSE 0 END AS `RPT_LINE_44`,
+-- AT2 Line 45
+		CASE WHEN ((SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  AND 
+					((`diagnosis1` REGEXP '^[*]RPT007$') OR  
+					 (`diagnosis2` REGEXP '^[*]RPT007$')  OR  
+					 (`diagnosis3` REGEXP '^[*]RPT007$')))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_45`,
+-- AT2 Line 46
+		CASE WHEN ((SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  AND 
+					((`diagnosis1` REGEXP '^[*]RPT008$') OR  
+					 (`diagnosis2` REGEXP '^[*]RPT008$')  OR  
+					 (`diagnosis3` REGEXP '^[*]RPT008$')))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_46`,
+-- AT2 Line 47
+		CASE WHEN ((SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  AND 
+					((`diagnosis1` REGEXP '^[*]RPT009$') OR  
+					 (`diagnosis2` REGEXP '^[*]RPT009$')  OR  
+					 (`diagnosis3` REGEXP '^[*]RPT009$')))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_47`,
+-- AT2 Line 48
+		CASE WHEN ((SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  AND 
+					((`diagnosis1` REGEXP '^[*]RPT010$') OR  
+					 (`diagnosis2` REGEXP '^[*]RPT010$')  OR  
+					 (`diagnosis3` REGEXP '^[*]RPT010$')))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_48`,
+-- AT2 Line 49
+		CASE WHEN ((SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  AND 
+					((`diagnosis1` REGEXP '^[*]RPT011$') OR  
+					 (`diagnosis2` REGEXP '^[*]RPT011$')  OR  
+					 (`diagnosis3` REGEXP '^[*]RPT011$')))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_49`,
+-- AT2 Line 50
+		CASE WHEN ((SUBSTR(AgeYMD(`dateTimeIn`, `patientBirthDate`),1,2) < '05')  AND 
+					((`diagnosis1` REGEXP '^[*]RPT012$') OR  
+					 (`diagnosis2` REGEXP '^[*]RPT012$')  OR  
+					 (`diagnosis3` REGEXP '^[*]RPT012$')))  
+			THEN 1 ELSE 0 END AS `RPT_LINE_50`,
+-- AT2 Line 51
+		CASE WHEN (`diagnosis1` REGEXP '^[*]RPT013$') OR  
+				(`diagnosis2` REGEXP '^[*]RPT013$')  OR  
+				(`diagnosis3` REGEXP '^[*]RPT013$')
+			THEN 1 ELSE 0 END AS `RPT_LINE_51`,
+-- AT2 Line 52
+		CASE WHEN (`diagnosis1` REGEXP '^[*]RPT014$') OR  
+				(`diagnosis2` REGEXP '^[*]RPT014$')  OR  
+				(`diagnosis3` REGEXP '^[*]RPT014$')
+			THEN 1 ELSE 0 END AS `RPT_LINE_52`
+	FROM `visit` 
+	WHERE `visit`.`deleted` = FALSE;
+
+-- Diagnosis code report data for preceding query
+DROP VIEW IF EXISTS visitGetAT2DataFields;
+CREATE VIEW visitGetAT2DataFields AS 
+	SELECT '24' AS `REPORT_ROW`, 'RPT_LINE_24' AS `RPT_STRING`, 'Deteccion de Sintomaticos Respiratorios' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^[*]RPT001$') 
+	UNION ALL SELECT '25' AS `REPORT_ROW`, 'RPT_LINE_25' AS `RPT_STRING`, 'Deteccion de Cancer Cervico Uterino' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^D06$') 
+	UNION ALL SELECT '26' AS `REPORT_ROW`, 'RPT_LINE_26' AS `RPT_STRING`, 'Embarazadas Nueava' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^Z3[3|4][0-9]?$') 
+	UNION ALL SELECT '27' AS `REPORT_ROW`, 'RPT_LINE_27' AS `RPT_STRING`, 'Embarazadas en Control' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^Z3[3|4][0-9]?$') 
+	UNION ALL SELECT '28' AS `REPORT_ROW`, 'RPT_LINE_28' AS `RPT_STRING`, 'Controles Puerperales' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^Z392$') 
+	UNION ALL SELECT '29' AS `REPORT_ROW`, 'RPT_LINE_29' AS `RPT_STRING`, 'Anticoncpetivo Oral 1 Ciclo' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^Z304101$') 
+	UNION ALL SELECT '30' AS `REPORT_ROW`, 'RPT_LINE_30' AS `RPT_STRING`, 'Anticoncpetivo Oral 3 Ciclo' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^Z304103$') 
+	UNION ALL SELECT '31' AS `REPORT_ROW`, 'RPT_LINE_31' AS `RPT_STRING`, 'Anticonceptivo Oral 6 Ciclo' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^Z304106$') 
+	UNION ALL SELECT '32' AS `REPORT_ROW`, 'RPT_LINE_32' AS `RPT_STRING`, 'Condones 10 Unidades' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^Z304910$') 
+	UNION ALL SELECT '33' AS `REPORT_ROW`, 'RPT_LINE_33' AS `RPT_STRING`, 'Condones 30 Unidades' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^Z304030$') 
+	UNION ALL SELECT '34' AS `REPORT_ROW`, 'RPT_LINE_34' AS `RPT_STRING`, 'Depo porvera Aplicadas' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^Z3042$') 
+	UNION ALL SELECT '35' AS `REPORT_ROW`, 'RPT_LINE_35' AS `RPT_STRING`, 'DIU insertados' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^Z30430$') 
+	UNION ALL SELECT '36' AS `REPORT_ROW`, 'RPT_LINE_36' AS `RPT_STRING`, '(Collar)' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^[*]RPT002$') 
+	UNION ALL SELECT '37' AS `REPORT_ROW`, 'RPT_LINE_37' AS `RPT_STRING`, 'Implante Sub Dermico' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^Z3046$') 
+	UNION ALL SELECT '38' AS `REPORT_ROW`, 'RPT_LINE_38' AS `RPT_STRING`, 'Diarrea' AS `ROW_TEXT_ES`, '< 05' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^A09$') 
+	UNION ALL SELECT '39' AS `REPORT_ROW`, 'RPT_LINE_39' AS `RPT_STRING`, 'Diarrea que acuden a cita de seguimiento' AS `ROW_TEXT_ES`, '< 05' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^A09$') 
+	UNION ALL SELECT '40' AS `REPORT_ROW`, 'RPT_LINE_40' AS `RPT_STRING`, 'Deshidratacion Rehidratados en la US' AS `ROW_TEXT_ES`, '< 05' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^[*]RPT005$') 
+	UNION ALL SELECT '41' AS `REPORT_ROW`, 'RPT_LINE_41' AS `RPT_STRING`, 'Neumonia (nueva en el año)' AS `ROW_TEXT_ES`, '< 05' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^J15$') 
+	UNION ALL SELECT '42' AS `REPORT_ROW`, 'RPT_LINE_42' AS `RPT_STRING`, 'Neumonia que acuden a su cita de Seguimiento' AS `ROW_TEXT_ES`, '< 05' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^J15$') 
+	UNION ALL SELECT '43' AS `REPORT_ROW`, 'RPT_LINE_43' AS `RPT_STRING`, 'Algun grado de sindrome anémico diagnosticado por laboratorio' AS `ROW_TEXT_ES`, '< 05' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^D(5[6-9]|6[0-9]|7[0-7])[0-9]?$') 
+	UNION ALL SELECT '45' AS `REPORT_ROW`, 'RPT_LINE_45' AS `RPT_STRING`, 'Crecimiento adecuado' AS `ROW_TEXT_ES`, '< 05' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^[*]RPT007$') 
+	UNION ALL SELECT '46' AS `REPORT_ROW`, 'RPT_LINE_46' AS `RPT_STRING`, 'Crecimiento inadecuado' AS `ROW_TEXT_ES`, '< 05' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^[*]RPT008$') 
+	UNION ALL SELECT '47' AS `REPORT_ROW`, 'RPT_LINE_47' AS `RPT_STRING`, 'Bajo percentil 3' AS `ROW_TEXT_ES`, '< 05' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^[*]RPT009$') 
+	UNION ALL SELECT '48' AS `REPORT_ROW`, 'RPT_LINE_48' AS `RPT_STRING`, 'Daño nutricional servero' AS `ROW_TEXT_ES`, '< 05' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^[*]RPT010$') 
+	UNION ALL SELECT '49' AS `REPORT_ROW`, 'RPT_LINE_49' AS `RPT_STRING`, 'Discapacidad nuevo en el año' AS `ROW_TEXT_ES`, '< 05' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^[*]RPT011$') 
+	UNION ALL SELECT '50' AS `REPORT_ROW`, 'RPT_LINE_50' AS `RPT_STRING`, 'Probable alteracion del desarrollo' AS `ROW_TEXT_ES`, '< 05' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^[*]RPT012$') 
+	UNION ALL SELECT '51' AS `REPORT_ROW`, 'RPT_LINE_51' AS `RPT_STRING`, 'Atención pretnatal nueva en las primeras 12 SG' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^[*]RPT013$') 
+	UNION ALL SELECT '52' AS `REPORT_ROW`, 'RPT_LINE_52' AS `RPT_STRING`, 'Atención puerperal nueva en los primeros 10 dias' AS `ROW_TEXT_ES`, '' AS AGE_GROUP, `icd10code`,`icd10index`,`language`,`ShortDescription` FROM `icd10` WHERE 1 AND (`icd10index` REGEXP '^[*]RPT014$') 
+;
