@@ -66,22 +66,22 @@ function showVisitTypeString($visitTypeID, $visitTypeArray) {
 		return ($visitTypeID);
 	}
 	// no valid parameter so return an empty string
-	return NOT_SPECIFIED;
+	return TEXT_NOT_SPECIFIED;
 }
 
 function writeDiagnosisDataBlock ($sessionInfo, $dbLink, $visitInfo, $index, $diagnosisLabel, $diagnosisPlaceholder) {
     assert (($index == 1) || ($index == 2) || ($index == 3));
     $conditionIndex = 'condition'.strval($index);
     $diagnosisField = 'diagnosis'.strval($index);
-    echo '<div class="dataBlock">'."\n";
-	echo '  <p><label class="close">'.$diagnosisLabel.':</label>'."\n";
-    echo '  <select id="Condition'.strval($index).'Select" name="condition'.strval($index).'">'."\n";
-    echo '      <option value="" '.(empty($visitInfo[$conditionIndex])  ? "selected" : "").'>'.TEXT_CONDITION_SELECT.'</option>'."\n";
-    echo '	    <option value="NEWDIAG" '.((!empty($visitInfo[$conditionIndex]) && $visitInfo[$conditionIndex] == 'NEWDIAG') ? "selected" : "" ).'>'.TEXT_CONDITION_NEW_SELECT. '</option>'."\n";
-	echo '      <option value="SUBSDIAG" '.((!empty($visitInfo[$conditionIndex]) && $visitInfo[$conditionIndex] == 'SUBSDIAG') ? "selected" : "" ).'>'.TEXT_CONDITION_SUBSEQUENT_SELECT. '</option>'."\n";
-    echo '  </select>'."\n";
-	echo '  <br>'.showDiagnosisInput ($dbLink, $visitInfo, $diagnosisField, $sessionInfo, $diagnosisPlaceholder, TEXT_DIAGNOSIS_LOADING, 'piClinicEdit fullWidth').'</p>'."\n";
-	echo '</div>'."\n";
-    return;
+    $returnString = '<div class="dataBlock">'."\n";
+    $returnString .= '  <p><label class="close">'.$diagnosisLabel.':</label>'."\n";
+    $returnString .= '  <select id="Condition'.strval($index).'Select" name="condition'.strval($index).'">'."\n";
+    $returnString .= '      <option value="" '.(empty($visitInfo[$conditionIndex])  ? "selected" : "").'>'.TEXT_CONDITION_SELECT.'</option>'."\n";
+    $returnString .= '	    <option value="NEWDIAG" '.((!empty($visitInfo[$conditionIndex]) && $visitInfo[$conditionIndex] == 'NEWDIAG') ? "selected" : "" ).'>'.TEXT_CONDITION_NEW_SELECT. '</option>'."\n";
+    $returnString .= '      <option value="SUBSDIAG" '.((!empty($visitInfo[$conditionIndex]) && $visitInfo[$conditionIndex] == 'SUBSDIAG') ? "selected" : "" ).'>'.TEXT_CONDITION_SUBSEQUENT_SELECT. '</option>'."\n";
+    $returnString .= '  </select>'."\n";
+    $returnString .= '  <br>'.showDiagnosisInput ($dbLink, $visitInfo, $diagnosisField, $sessionInfo, $diagnosisPlaceholder, TEXT_DIAGNOSIS_LOADING, 'piClinicEdit fullWidth').'</p>'."\n";
+    $returnString .= '</div>'."\n";
+    return $returnString;
 }
 

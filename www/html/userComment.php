@@ -46,24 +46,21 @@ require('uiSessionInfo.php');
 $referringPageUrl = '';
 $returnUrl = '';
 $referringPage = '';
-if (isset($_SERVER['HTTP_REFERER'])) {
-	$referringPageUrl = $_SERVER['HTTP_REFERER'];
+if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
+	$referringPageUrl = cleanedRefererUrl();
 	$referringPage = parse_url($referringPageUrl, PHP_URL_PATH);
 	$returnUrl = $referringPageUrl;
 } else {
 	$returnUrl =  '/clinicDash.php'; //default: return is the home page
-	$returnUrl .= (!empty($requestData['lang']) ? '?lang='.$pageLanguage : '');
 }
 $username = $sessionInfo['username'];
 $now = new DateTime();
 $commentOpenTime = $now->format('Y-m-d H:i:s');
 
 function writeTopicMenu ($lang) {
-	$returnUrl = '';
-	if (isset($_SERVER['HTTP_REFERER'])) {
-		$returnUrl = $_SERVER['HTTP_REFERER'];
-	} else {
-		$returnUrl =  '/clinicDash.php'; //default: return is the home page
+	$returnUrl = '/clinicDash.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'Cancel'); //default: return is the home page
+    if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
+		$returnUrl = cleanedRefererUrl().createFromLink (FROM_LINK_QP, __FILE__, 'Cancel');
 	}
 	$topicMenu = '<div id="topicMenuDiv">'."\n";
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";
@@ -79,7 +76,7 @@ function writeTopicMenu ($lang) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $pageLanguage) ?>
+	<?= piClinicAppMenu(null, __FILE__) ?>
 	<?= writeTopicMenu ($pageLanguage) ?>
 	<div class="pageBody">
 	<div id="commentDiv">
@@ -93,7 +90,8 @@ function writeTopicMenu ($lang) {
 			<input type="hidden" id="ReferringUrlField" name="referringUrl" value="<?= $referringPageUrl ?>">
 			<input type="hidden" id="ReferringPageField" name="referringPage" value="<?= $referringPage ?>">
 			<input type="hidden" id="ReturnUrlField" name="returnUrl" value="<?= $returnUrl ?>">
-			<p><button type="submit"><?= TEXT_COMMENT_SUBMIT_BUTTON ?></button></p>
+            <input type="hidden" id="SubmitBtnTag" name="<?= FROM_LINK ?>" value="<?= createFromLink (null, __FILE__, 'btn_submit') ?>">
+			<p><button class="btn_submit" type="submit"><?= TEXT_COMMENT_SUBMIT_BUTTON ?></button></p>
 		</form>
 	</div>
 	</div>

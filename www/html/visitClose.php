@@ -59,8 +59,8 @@ require_once ('./visitUiStrings.php');
 $pageAccessRequired = PAGE_ACCESS_STAFF;
 require('uiSessionInfo.php');
 // referrer URL to return to (in most cases)
-if (isset($_SERVER['HTTP_REFERER'])) {
-    $referringPageUrl = cleanedRefererUrl();
+if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
+    $referringPageUrl = cleanedRefererUrl(createFromLink (null, __FILE__, 'Cancel'));
 } else {
     //default return is the visit info page
     $referringPageQP = array();
@@ -70,6 +70,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     if (isset($requestData['clinicPatientID'])) {
         $referringPageQP['clinicPatientID'] = $requestData['clinicPatientID'];
     }
+    $referringPageQP[FROM_LINK] = createFromLink (null, __FILE__, 'Cancel');
     $referringPageUrl = makeUrlWithQueryParams('/visitInfo.php', $referringPageQP);
 }
 $cancelUrl = $referringPageUrl;
@@ -143,9 +144,9 @@ $visitInfo['dateTimeOut'] =  date_format(date_create('now'), 'Y-m-d H:i:s'); // 
 function writeTopicMenu ($lang, $visitInfo) {
 	$topicMenu = '<div id="topicMenuDiv">'."\n";
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";
-	$topicMenu .= '<li class="firstLink"><a href="/visitInfo.php?patientVisitID='.$visitInfo['patientVisitID'].
+	$topicMenu .= '<li class="firstLink"><a class="a_cancel" href="/visitInfo.php?patientVisitID='.$visitInfo['patientVisitID'].
 		'&clinicPatientID='. $visitInfo['clinicPatientID'].
-		(!empty($lang) ? "&lang=".$lang : ""). '">'.TEXT_CANCEL_VISIT_EDIT.'</a></li>';
+		createFromLink (FROM_LINK_QP, __FILE__, 'a_cancel'). '">'.TEXT_CANCEL_VISIT_EDIT.'</a></li>';
 	$topicMenu .= '</ul></div>'."\n";
 	return $topicMenu;
 }
@@ -155,8 +156,8 @@ function writeOptionsMenu ($sessionInfo, $visitInfo) {
 	if (isset($visitInfo['clinicPatientID'])) {
 		$optionsMenu .= '<div id="optionMenuDiv">'."\n";
 		$optionsMenu .= '<ul class="topLinkMenuList">';
-		$optionsMenu .= '<li class="firstLink"><a href="/visitEdit.php?patientVisitID='.$visitInfo['patientVisitID'].
-			'&clinicPatientID='. $visitInfo['clinicPatientID'] .'">'.TEXT_VISIT_EDIT_ALL_FIELDS.'</a></li>';
+		$optionsMenu .= '<li class="firstLink"><a class="a_editall" href="/visitEdit.php?patientVisitID='.$visitInfo['patientVisitID'].
+			'&clinicPatientID='. $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_editall') .'">'.TEXT_VISIT_EDIT_ALL_FIELDS.'</a></li>';
 		$optionsMenu .= '</ul></div>';	}
 	return $optionsMenu;
 }
@@ -168,7 +169,7 @@ function writeOptionsMenu ($sessionInfo, $visitInfo) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $pageLanguage) ?>
+	<?= piClinicAppMenu(null, __FILE__) ?>
 	<datalist id="diagData"></datalist>
 	<div class="pageBody">
 	<?= writeTopicMenu($pageLanguage, $visitInfo) ?>
@@ -177,7 +178,7 @@ function writeOptionsMenu ($sessionInfo, $visitInfo) {
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
 				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>
 			<p><?= date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($visitInfo['birthDate'])) ?>&nbsp;(<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>)&nbsp;&nbsp;&nbsp;
-			<span class="idInHeading"><a href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'] ?><?= (!empty($requestData['lang']) ? '&lang='.$pageLanguage : '') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
+			<span class="idInHeading"><a class="a_patientview" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'] ?><?= createFromLink (FROM_LINK_QP, __FILE__, 'a_patientview') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
 		</div>
 		<div class="infoBlock">
 			<p><label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?></p>
@@ -253,6 +254,7 @@ function writeOptionsMenu ($sessionInfo, $visitInfo) {
 					<div style="clear: both;"></div>
 					<input type="hidden" id="PatientVisitIDField" name="patientVisitID" value="<?= $visitInfo['patientVisitID'] ?>" >
 					<input type="hidden" id="returnUrlField" name="returnUrl" value="<?= $referringPageUrl ?>">
+                    <input type="hidden" class="btn_submit" id="SubmitBtnTag" name="<?= FROM_LINK ?>" value="<?= createFromLink (null, __FILE__, 'btn_submit') ?>">
 					<p><button type="submit"><?= TEXT_PATIENT_SUBMIT_CLOSE_PATIENT_VISIT_BUTTON ?></button></p>
 				</form>
 			</div>

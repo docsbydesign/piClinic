@@ -76,8 +76,8 @@ $formData = $sessionInfo['parameters'];
 
 // get referrer URL to return to in error or by default
 $referringPageUrl = NULL;
-if (isset($_SERVER['HTTP_REFERER'])) {
-	$referringPageUrl = $_SERVER['HTTP_REFERER'];
+if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
+	$referringPageUrl = cleanedRefererUrl();
 } else {
 	$referringPageUrl = '/clinicDash.php'; //default: return is the home page
 }

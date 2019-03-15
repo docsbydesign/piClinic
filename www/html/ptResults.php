@@ -88,8 +88,8 @@ if (!empty($sessionInfo['parameters']['ata'])) {
         return;
     }
 } else {
-    $cancelLink = '/clinicDash.php';
-	$addNewLink = '/ptAddEdit.php';
+    $cancelLink = '/clinicDash.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'Cancel');
+	$addNewLink = '/ptAddEdit.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'AddNewPatient');
 }
 
 // open DB
@@ -165,7 +165,7 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
     $topicMenu .= '<li>'.
         '<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">'.TEXT_RETURN_TO_SEARCH_LINK.': '.
         dbFieldTextInput ($sessionInfo['parameters'], "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true).
-        '&nbsp;<button type="submit">'.TEXT_SHOW_PATIENT_SUBMIT_BUTTON.'</button></form></li>';
+        '&nbsp;<button type="submit">'.TEXT_SHOW_PATIENT_SUBMIT_BUTTON.'</button> </form></li>';
 	$topicMenu .= '<li><a href="'.$new.'">'.
 		TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON.'</a></li>'."\n";
 	$topicMenu .= '</ul></div>'."\n";
@@ -178,7 +178,7 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $sessionInfo['pageLanguage']) ?>
+	<?= piClinicAppMenu(null, __FILE__) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu ($cancelLink, $addNewLink, $sessionInfo) ?>
 	<div id="PatientList">
@@ -228,15 +228,15 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 			if (!empty($sessionInfo['parameters']['lang'])) {
 				$nameLink .= "&lang=".$pageLanguage; 
 			}
-			echo '<p><a href="'.$nameLink.'">';
+			echo '<p><a class="a_ptNameView" href="'.$nameLink.createFromLink (FROM_LINK_QP, __FILE__, 'a_ptNameView').'">';
 			echo formatPatientNameLastFirst ($pt).'&nbsp;&nbsp;';
 			echo '('.($pt['sex'] == 'M' ? TEXT_SEX_OPTION_M : ($pt['sex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).')<br>';
 			echo '<span class="idInHeading">'.$pt['clinicPatientID'].'</span></a></p>';
 			echo '<p class="familyLink">';
 			if (empty($sessionInfo['parameters']['ata'])) {
 				// create the link only if this is a regular pt. search result
-				echo '<a href="/ptResults.php?familyID='.
-					$pt['familyID'].'">';
+				echo '<a class="a_ptFamilyView" href="/ptResults.php?familyID='.
+					$pt['familyID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptFamilyView').'">';
 			}
 			echo $pt['familyID'];
 			if (empty($sessionInfo['parameters']['ata'])) {

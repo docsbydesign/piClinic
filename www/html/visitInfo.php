@@ -139,7 +139,7 @@ function writeTopicMenu ($sessionInfo) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $pageLanguage) ?>
+	<?= piClinicAppMenu(null, __FILE__) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu($sessionInfo) ?>
 	<div class="nameBlock">
@@ -147,7 +147,7 @@ function writeTopicMenu ($sessionInfo) {
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
 				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>
 			<p><?= date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($visitInfo['birthDate'])) ?>&nbsp;(<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>)&nbsp;&nbsp;&nbsp;
-			<span class="idInHeading"><a href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'] ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
+			<span class="idInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
 		</div>
 		<div class="infoBlock">
 			<p><label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?></p>
@@ -171,8 +171,8 @@ function writeTopicMenu ($sessionInfo) {
 							echo('<li class="firstLink">');
 							$firstLinkDefined = true;
 						}
-						echo ('<a href="/visitClose.php?patientVisitID='.$visitInfo['patientVisitID'].
-						'&clinicPatientID='.$visitInfo['clinicPatientID'].'">'. TEXT_CLOSE_VISIT . '</a></li>');
+						echo ('<a class="a_visitClose" href="/visitClose.php?patientVisitID='.$visitInfo['patientVisitID'].
+						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitClose').'">'. TEXT_CLOSE_VISIT . '</a></li>');
 					}
 				
 					if ($firstLinkDefined) {
@@ -181,8 +181,8 @@ function writeTopicMenu ($sessionInfo) {
 						echo('<li class="firstLink">');
 						$firstLinkDefined = true;
 					}
-					echo ('<a href="/visitEdit.php?patientVisitID='. $visitInfo['patientVisitID'] .
-						'&clinicPatientID='.$visitInfo['clinicPatientID'].'" '.
+					echo ('<a class="a_visitEdit" href="/visitEdit.php?patientVisitID='. $visitInfo['patientVisitID'] .
+						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitEdit').'" '.
 						'title="'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'">'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'</a></li>');
 				}
 			?>	

@@ -329,12 +329,13 @@ function cleanUrlQueryParams($queryParamArray) {
         $qpArray = $queryParamArray;
         unset($qpArray['msg']);
         unset($qpArray['lang']);
+        unset($qpArray[FROM_LINK]);
         unset($qpArray['__source']);
     }
     return $qpArray;
 }
 
-function cleanedRefererUrl ()
+function cleanedRefererUrl ($fromLinkValue = null)
 {
     $httpReferer = '';
     $httpRefererUrl = '';
@@ -348,10 +349,29 @@ function cleanedRefererUrl ()
             parse_str($httpRefererParts[1], $httpRefererQp);
             $httpRefererQp = cleanUrlQueryParams($httpRefererQp);
         }
+        if (!empty($fromLink)) {
+            $httpRefererQp[FROM_LINK] = $fromLinkValue;
+        }
         return (makeUrlWithQueryParams($httpRefererUrl, $httpRefererQp));
     }
     return $httpReferer;
 }
 
+function createFromLink ($queryParamName, $filePath, $linkData) {
+    //clean file path down to just the local path
+    // get file name
+    $linkQP = $filePath;
+    if (substr($filePath,0,strlen(ROOT_DIR_PATH)) == ROOT_DIR_PATH) {
+        $linkQP = substr($filePath, strlen(ROOT_DIR_PATH));
+    }
+    // add on the link ID info
+    $linkQP .= '|'.$linkData;
+    // and if there's a query parameter with the delimiter, add that, too.
+    if (!empty($queryParamName)){
+        $linkQP = $queryParamName . '=' . $linkQP;
+    }
+    // return the result
+    return $linkQP;
+}
 //EOF
 

@@ -84,7 +84,7 @@ if (!checkUiSessionAccess($dbLink, $sessionInfo['token'], PAGE_ACCESS_CLINIC, $s
 // get referrer URL to return to in error or by default
 $referringPageUrl = NULL;
 $referringQueryParams = array();
-if (isset($_SERVER['HTTP_REFERER'])) {
+if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
     $referringPageUrl = cleanedRefererUrl();
 } else {
     //default return is the visit info page

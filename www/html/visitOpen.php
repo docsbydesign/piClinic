@@ -56,8 +56,8 @@ require_once ('./visitUiStrings.php');
 $pageAccessRequired = PAGE_ACCESS_STAFF;
 require('uiSessionInfo.php');
 // referrer URL to return to (in most cases)
-if (isset($_SERVER['HTTP_REFERER'])) {
-    $referringPageUrl = cleanedRefererUrl();
+if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
+    $referringPageUrl = cleanedRefererUrl(createFromLink (null, __FILE__, 'a_cancel'));
 } else {
     //default return is the visit info page
     $referringPageQP = array();
@@ -67,9 +67,10 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     if (isset($requestData['clinicPatientID'])) {
         $referringPageQP['clinicPatientID'] = $requestData['clinicPatientID'];
     }
+    $referringPageQP[FROM_LINK] = createFromLink (null, __FILE__, 'a_cancel');
     $referringPageUrl = makeUrlWithQueryParams('/visitInfo.php', $referringPageQP);
 }
-$cancelUrl = $referringPageUrl;
+$cancelUrl = $referringPageUrl.createFromLink (FROM_LINK_QP, __FILE__, 'a_cancel');
 
 // open DB
 $errorUrl = makeUrlWithQueryParams('/clinicDash.php', ['msg'=>MSG_DB_OPEN_ERROR]);
@@ -155,7 +156,7 @@ $visitInfo['referredFrom'] = (isset($requestData['referredFrom']) ? $requestData
 function writeTopicMenu ($cancel) {
 	$topicMenu = '<div id="topicMenuDiv">'."\n";
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";
-	$topicMenu .= '<li class="firstLink"><a href="'.$cancel.'">'.TEXT_CANCEL_NEW_VISIT.'</a></li>'."\n";
+	$topicMenu .= '<li class="firstLink"><a class="a_cancel" href="'.$cancel.'">'.TEXT_CANCEL_NEW_VISIT.'</a></li>'."\n";
 	$topicMenu .= '</ul></div>'."\n";
 	return $topicMenu;
 }
@@ -166,7 +167,7 @@ function writeTopicMenu ($cancel) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $pageLanguage) ?>
+	<?= piClinicAppMenu(null, __FILE__) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu($cancelUrl) ?>
 	<div class="nameBlock">
@@ -174,7 +175,7 @@ function writeTopicMenu ($cancel) {
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($patientInfo) ?>
 				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$patientInfo['sex'].')' ?></span></h1>
 			<p><?= date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($patientInfo['birthDate'])) ?>&nbsp;(<?php echo date_diff(date_create($patientInfo['birthDate']), date_create('now'))->y; ?>)&nbsp;&nbsp;&nbsp;
-			<span class="idInHeading"><a href="/ptInfo.php?clinicPatientID=<?= $patientInfo['clinicPatientID'] ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
+			<span class="a_ptInfo idInHeading"><a href="/ptInfo.php?clinicPatientID=<?= $patientInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
 		</div>
 		<div class="infoBlock">
 			<p><label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?></p>
@@ -284,7 +285,8 @@ function writeTopicMenu ($cancel) {
                     </div>
                 </div>
                 <div style="clear: both;"></div>
-                <p><button type="submit"><?= TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON ?></button></p>
+                <input type="hidden" id="SubmitBtnTag" name="<?= FROM_LINK ?>" value="<?= createFromLink (null, __FILE__, 'btn_submit') ?>">
+                <p><button class="btn_submit" type="submit"><?= TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON ?></button></p>
             </form>
         </div>
         <hr>

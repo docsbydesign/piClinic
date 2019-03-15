@@ -68,14 +68,19 @@ define('HOME_PAGE','/clinicDash.php',false);
 define('REPORT_PAGE','/reportHome.php',false);
 define('ADMIN_PAGE','/adminHome.php',false);
 define('HELP_PAGE','/helpHome.php',false);
-function piClinicAppMenu($thisPage, $pageLanguage) {
+/**
+ * @param $thisPage
+ * @param $pageLanguage
+ * @return string
+ */
+function piClinicAppMenu($thisPage, $hostFile) {
 	// $pageLanguage is used by appMenuText.php.
 	require_once dirname(__FILE__).'/../uitext/appMenuText.php';
 	$menuItems = [];
-	$menuItems[0] = array ('link' => HOME_PAGE, 'linkText' => TEXT_CLINIC_HOME);
-	$menuItems[1] = array ('link' => REPORT_PAGE, 'linkText' => TEXT_CLINIC_REPORTS);
-	$menuItems[2] = array ('link' => ADMIN_PAGE, 'linkText' => TEXT_CLINIC_ADMIN);
-	$menuItems[3] = array ('link' => HELP_PAGE, 'linkText' => TEXT_CLINIC_HELP);
+	$menuItems[0] = array ('link' => HOME_PAGE, 'linkText' => TEXT_CLINIC_HOME, 'linkClass' => 'a_mainHome');
+	$menuItems[1] = array ('link' => REPORT_PAGE, 'linkText' => TEXT_CLINIC_REPORTS, 'linkClass' => 'a_mainReports');
+	$menuItems[2] = array ('link' => ADMIN_PAGE, 'linkText' => TEXT_CLINIC_ADMIN, 'linkClass' => 'a_mainAdmin');
+	$menuItems[3] = array ('link' => HELP_PAGE, 'linkText' => TEXT_CLINIC_HELP, 'linkClass' => 'a_mainHelp');
 	
 	$menuDiv = "<div id=\"topLinkMenuDiv\" class=\"noprint\"><div id=\"appMenu\">\n";
 	$menuDiv .= "<ul class=\"topLinkMenuList\">\n";
@@ -86,7 +91,7 @@ function piClinicAppMenu($thisPage, $pageLanguage) {
 		// home menu
 		if (empty($thisPage) || (!empty($thisPage) && ($thisPage != $item['link']))) {
 			$menuDiv .= "<li".($firstLink ? " class=\"firstLink\"" : "").">\n";
-			$menuDiv .= "<a href=\"".$item['link']."\">".$item['linkText']."</a>\n";
+			$menuDiv .= "<a class=\"" .$item['linkClass']. "\" href=\"".$item['link'].createFromLink(FIRST_FROM_LINK_QP,$hostFile, $item['linkClass'])."\">".$item['linkText']."</a>\n";
 			$menuDiv .= "</li>\n";
 		} else {
 			$menuDiv .= "<li class=\"currentPage".($firstLink ? " firstLink" : "")."\">\n";
@@ -99,7 +104,7 @@ function piClinicAppMenu($thisPage, $pageLanguage) {
 	}
 	$menuDiv .= "</ul></div>\n";
 	$menuDiv .= "<div id=\"commentMenu\">\n";
-	$menuDiv .= "<a href=\"/userComment.php\" title=\"".
+	$menuDiv .= "<a class=\"a_mainComment\" href=\"/userComment.php".createFromLink(FIRST_FROM_LINK_QP,$hostFile, 'a_mainComment')."\" title=\"".
 		TEXT_CLINIC_COMMENT_TITLE. "\">".TEXT_CLINIC_COMMENT."</a>\n";
 	$menuDiv .= "</div></div><div style=\"clear: both;\"></div>";
 	return $menuDiv;
