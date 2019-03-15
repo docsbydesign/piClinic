@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "19d7e6c2-2f5a-4ff3-984c-7751448ca891",
+		"_postman_id": "f4a59b19-f02c-41e8-87de-b064cd8735fb",
 		"name": "TestPiClinicAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -8112,7 +8112,7 @@
 												},
 												{
 													"key": "clinicPatientID",
-													"value": "PT-TEST-{{$randomInt}}",
+													"value": "PT-TEST-{{$guid}}",
 													"type": "text"
 												}
 											]
@@ -8401,7 +8401,7 @@
 														},
 														{
 															"key": "clinicPatientID",
-															"value": "PT-TEST-{{$randomInt}}",
+															"value": "PT-TEST-{{$guid}}",
 															"type": "text"
 														}
 													]
@@ -8439,7 +8439,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -8638,7 +8638,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -8801,7 +8801,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -8966,7 +8966,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -9131,7 +9131,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -9296,7 +9296,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -9462,7 +9462,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -9627,7 +9627,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -9792,7 +9792,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -9979,7 +9979,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -10166,7 +10166,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -10353,7 +10353,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -10540,7 +10540,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -10727,7 +10727,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -10914,7 +10914,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -11101,7 +11101,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -11146,7 +11146,10 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {},
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}&{{patchTestField}}={{patchTestValueEncoded}}",
 													"host": [
@@ -11281,7 +11284,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -11468,7 +11471,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -12099,6 +12102,7 @@
 													"        var thisDoctor = jsonData.data[drIdx];\r",
 													"        pm.variables.set('drUsername',thisDoctor.username);\r",
 													"        pm.variables.set('drFullName',thisDoctor.firstName + thisDoctor.lastName);\r",
+													"        pm.variables.set('drStaffPosition', thisDoctor.position);\r",
 													"    } else {\r",
 													"        // the user doesn't have permission to do this.\r",
 													"        pm.response.to.have.status(401);\r",
@@ -12210,6 +12214,11 @@
 												{
 													"key": "staffName",
 													"value": "{{drFullName}}",
+													"type": "text"
+												},
+												{
+													"key": "staffPosition",
+													"value": "{{drStaffPosition}}",
 													"type": "text"
 												}
 											]
@@ -12486,6 +12495,7 @@
 															"        pm.expect(thisDoctor).to.not.eql(undefined);\r",
 															"        pm.variables.set('drUsername',thisDoctor.username);\r",
 															"        pm.variables.set('drFullName',thisDoctor.firstName + thisDoctor.lastName);\r",
+															"        pm.variables.set('drStaffPosition', thisDoctor.position);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -12635,10 +12645,12 @@
 													"script": {
 														"id": "1bb392c8-fce4-4807-97eb-b88e6da79f01",
 														"exec": [
-															"pm.expect( pm.variables.get('patientID')).to.not.eql(undefined);\r",
-															"pm.expect( pm.variables.get('drUsername')).to.not.eql(undefined);\r",
-															"pm.expect( pm.variables.get('drFullName')).to.not.eql(undefined);\r",
-															""
+															"var userAcct = pm.environment.get('testUser');\r",
+															"if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"    pm.expect( pm.variables.get('patientID')).to.not.eql(undefined);\r",
+															"    pm.expect( pm.variables.get('drUsername')).to.not.eql(undefined);\r",
+															"    pm.expect( pm.variables.get('drFullName')).to.not.eql(undefined);\r",
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -12681,6 +12693,11 @@
 															"key": "staffName",
 															"value": "{{drFullName}}",
 															"type": "text"
+														},
+														{
+															"key": "staffPosition",
+															"value": "{{drStaffPosition}}",
+															"type": "text"
 														}
 													]
 												},
@@ -12717,7 +12734,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -12757,7 +12774,10 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {},
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -12878,7 +12898,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -12918,7 +12938,10 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {},
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -13039,7 +13062,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -13078,7 +13101,10 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {},
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -13199,7 +13225,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -13238,7 +13264,10 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {},
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -13359,7 +13388,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -13398,7 +13427,10 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {},
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -13519,7 +13551,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -13558,7 +13590,10 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {},
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -13679,7 +13714,7 @@
 															"pm.test(\"New test patient added successful\", function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
-															"        pm.response.to.have.status(200)\r",
+															"        pm.response.to.have.status(200);\r",
 															"    } else {\r",
 															"        // the user doesn't have permission to do this.\r",
 															"        pm.response.to.have.status(401);\r",
@@ -13718,7 +13753,10 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {},
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [

@@ -27,7 +27,7 @@
  */
 /* These strings are used in the UI and must be included after the language specific strings */
 /* Define staff position values */
-require_once ('./uitext/visitUiStringsText.php');
+require_once dirname(__FILE__).'/./uitext/visitUiStringsText.php';
 
 // [DB Value, Display String, Usage]
 //
