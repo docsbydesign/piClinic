@@ -1,0 +1,38 @@
+Apache logging notes
+
+For the logging software to work, Apache must be configured as follows:
+
+1) enable the unique_id module (https://httpd.apache.org/docs/2.4/mod/mod_unique_id.html)
+	a) sudo a2enmod unique_id
+	b) sudo systemctl restart apache2
+	
+2) define the correct log format that will output the unique ID and the request timestamp in mSec.
+	a) edit /etc/apache2/apache2.conf
+		- find the LogFormat line that ends with "combined"
+		- comment it out by placing a # character at the beginning of the line
+		- just below the commented line, place this command:
+		
+		LogFormat "%h %l %u %{%Y-%m-%d %T}t.%{msec_frac}t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\" \"%{UNIQUE_ID}e\"" combined
+		
+		This displays:
+			%h: 	Requesting (HOST) IP
+			%l:		Remote log file (not used, usually just -)
+			%u: 	User name (as recognized byh Apache, usually just -)
+			%{%Y-%m-%d %T}t.%{msec_frac}t: the date/time (with mSec) in the current timezone
+			\"%r\"	The HTTP: 
+						Method
+						Request
+						Protocol
+			%>s: 	The final HTTP Status of the request
+			%O:		The bytes returned
+			\"%{Referer}i\": 	The HTTP referrer within double quotes
+			\"%{User-Agent}i\":	The User Agent within double quotes
+			\"%{UNIQUE_ID}e\":	The Unique ID of the request
+		
+		- save the edited file
+	b) sudo systemctl restart apache2
+	
+TODO: 
+	Write log parsing code.
+ 
+						
