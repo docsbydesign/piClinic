@@ -51,7 +51,7 @@ require('uiSessionInfo.php');
 
 // open DB or redirect to error URL1
 $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
-$dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+$dbLink = _openDBforUI($sessionInfo['parameters'], $pageLanguage, $errorUrl);
 
 // if here, the DB is open
 
@@ -63,7 +63,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(HELP_PAGE, __FILE__) ?>
+	<?= piClinicAppMenu(HELP_PAGE, $pageLanguage,__FILE__) ?>
 	<div class="pageBody">
 	<div id="ReportList">
 		<h1 class="pageHeading"><?= TEXT_PICLINIC_HELP_PAGE_TITLE ?></h1>

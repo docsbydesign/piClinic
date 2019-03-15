@@ -74,6 +74,7 @@ if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename
     $referringPageQP[FROM_LINK] = createFromLink (null, __FILE__, 'a_cancel');
     $referringPageUrl = makeUrlWithQueryParams('/visitInfo.php', $referringPageQP); 
 }
+$cancelLinkUrl = $referringPageUrl;
 
 // open DB
 $errorUrl = makeUrlWithQueryParams('/clinicDash.php', ['msg'=>MSG_DB_OPEN_ERROR]);
@@ -144,13 +145,12 @@ if ($visitRecord['httpResponse'] != 200) {
 }
 // at this point, $visitInfo should have one patient visit record ready to edit.
 
-function writeOptionsMenu ($visitInfo) {
+function writeOptionsMenu ($visitInfo, $cancelLink) {
 	$optionsMenu = '';
 	if (isset($visitInfo['clinicPatientID'])) {
 		$optionsMenu .= '<div id="optionMenuDiv">'."\n";
 		$optionsMenu .= '<ul class="topLinkMenuList">';
-		$optionsMenu .= '<li class="firstLink"><a class="a_cancel" href="/visitInfo.php?patientVisitID='.$visitInfo['patientVisitID'].
-			'&clinicPatientID='. $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'Cancel').'">'.TEXT_CANCEL_VISIT_EDIT.'</a></li>';
+		$optionsMenu .= '<li class="firstLink"><a class="a_cancel" href="'.$cancelLink.'">'.TEXT_CANCEL_VISIT_EDIT.'</a></li>';
 		$optionsMenu .= '</ul></div>';	}
 	return $optionsMenu;
 }
@@ -161,10 +161,10 @@ function writeOptionsMenu ($visitInfo) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, __FILE__) ?>
+	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
 	<datalist id="diagData"></datalist>
 	<div class="pageBody">
-	<?= writeOptionsMenu($visitInfo) ?>
+	<?= writeOptionsMenu($visitInfo, $cancelLinkUrl) ?>
 	<div class="nameBlock">
 		<div class="infoBlock">
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>

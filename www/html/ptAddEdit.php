@@ -60,7 +60,7 @@ $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 $referringPageUrl = NULL;
 // if there's a referring page and it's not this page, go there, otherwise go back to the dashboard
 if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
-	$referringPageUrl = cleanedRefererUrl(createFromLink (null, __FILE__, 'a_cancel'));
+    $cancelLinkUrl = $referringPageUrl = cleanedRefererUrl(createFromLink (null, __FILE__, 'a_cancel'));
 } else {
 	//default: return is the home page
 	$referringPageUrl = '/clinicDash.php';
@@ -163,7 +163,7 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, __FILE__) ?>
+	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu($cancelLinkUrl) ?>
 	<div id="patientDataDiv">

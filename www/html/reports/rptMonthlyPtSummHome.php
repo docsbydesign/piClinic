@@ -653,7 +653,7 @@ header('Content-type: text/html; charset=utf-8');
 <?= piClinicTag(); ?>
 <?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 <?php require ('../uiErrorMessage.php') ?>
-<?= piClinicAppMenu(null, __FILE__) ?>
+<?= piClinicAppMenu(null,  $pageLanguage, __FILE__) ?>
 <div class="pageBody">
     <div id="MonthlySummaryPrompt" class="noprint <?= ( $reportFormat == RPT_SHOW_DATA ? 'hideDiv' : '') ?>">
         <form enctype="application/x-www-form-urlencoded" action="/reports/rptMonthlyPtSummHome.php" method="get">

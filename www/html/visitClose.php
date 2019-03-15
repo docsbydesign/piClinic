@@ -141,17 +141,15 @@ if ($visitRecord['httpResponse'] != 200) {
 $visitInfo['visitStatus'] = 'Closed';
 $visitInfo['dateTimeOut'] =  date_format(date_create('now'), 'Y-m-d H:i:s'); // now;
 
-function writeTopicMenu ($lang, $visitInfo) {
+function writeTopicMenu ($cancelLink) {
 	$topicMenu = '<div id="topicMenuDiv">'."\n";
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";
-	$topicMenu .= '<li class="firstLink"><a class="a_cancel" href="/visitInfo.php?patientVisitID='.$visitInfo['patientVisitID'].
-		'&clinicPatientID='. $visitInfo['clinicPatientID'].
-		createFromLink (FROM_LINK_QP, __FILE__, 'a_cancel'). '">'.TEXT_CANCEL_VISIT_EDIT.'</a></li>';
+	$topicMenu .= '<li class="firstLink"><a class="a_cancel" href="'. $cancelLink. '">'.TEXT_CANCEL_VISIT_EDIT.'</a></li>';
 	$topicMenu .= '</ul></div>'."\n";
 	return $topicMenu;
 }
 
-function writeOptionsMenu ($sessionInfo, $visitInfo) {
+function writeOptionsMenu ($visitInfo) {
 	$optionsMenu = '';
 	if (isset($visitInfo['clinicPatientID'])) {
 		$optionsMenu .= '<div id="optionMenuDiv">'."\n";
@@ -169,10 +167,10 @@ function writeOptionsMenu ($sessionInfo, $visitInfo) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, __FILE__) ?>
+	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
 	<datalist id="diagData"></datalist>
 	<div class="pageBody">
-	<?= writeTopicMenu($pageLanguage, $visitInfo) ?>
+	<?= writeTopicMenu($cancelUrl) ?>
 	<div class="nameBlock">
 		<div class="infoBlock">
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
@@ -187,7 +185,7 @@ function writeOptionsMenu ($sessionInfo, $visitInfo) {
 	</div>
 	<div style="clear: both;"></div>
 	<div id="PatientVisitView">
-		<?= writeOptionsMenu($sessionInfo, $visitInfo) ?>
+		<?= writeOptionsMenu($visitInfo) ?>
 		<div id="PatientVisitDataView">
 			<div id="PatientVisitDetails">
 				<form enctype="application/x-www-form-urlencoded" action="/uihelp/updatePatientVisit.php" method="post">

@@ -76,7 +76,7 @@ function writeTopicMenu ($lang) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, __FILE__) ?>
+	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
 	<?= writeTopicMenu ($pageLanguage) ?>
 	<div class="pageBody">
 	<div id="commentDiv">

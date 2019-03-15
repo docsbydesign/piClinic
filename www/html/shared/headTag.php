@@ -73,7 +73,7 @@ define('HELP_PAGE','/helpHome.php',false);
  * @param $pageLanguage
  * @return string
  */
-function piClinicAppMenu($thisPage, $hostFile) {
+function piClinicAppMenu($thisPage, $pageLanguage, $hostFile) {
 	// $pageLanguage is used by appMenuText.php.
 	require_once dirname(__FILE__).'/../uitext/appMenuText.php';
 	$menuItems = [];
