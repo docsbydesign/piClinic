@@ -34,5 +34,23 @@ For the logging software to work, Apache must be configured as follows:
 	
 TODO: 
 	Write log parsing code.
+	
+RegEx to parse log: 
+^(\S+) (\S+) (\S+) \[?([\w: \--\/]+\s?[+\-]?\d{0,4})\]? "(\S+)\s?(\S+)?\s?(\S+)?" (\d{3}|-) (\d+|-)\s?"?([^"]*)"?\s?"?([^"]*)?"?\s?"?([^"]*)?"?$
+
+Capture groups:
+		0: 	Entire string that matches
+		1:	Requesting IP
+		2: 	Remote Log
+		3: 	User name
+		4: 	DateTime as [25/Jan/2000:14:00:01 +0100] or 2019-03-15 18:21:20.922
+		5: 	HTTP Method
+		6:	Request
+		7:	Protocol
+		8:	Final HTTP Status
+		9:	Bytes returned
+		10:	HTTP Referrer
+		11:	User Agent string
+		12: Unique Response ID
  
 						
