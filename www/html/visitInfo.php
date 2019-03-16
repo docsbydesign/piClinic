@@ -177,7 +177,8 @@ function writeTopicMenu ($sessionInfo) {
 							$firstLinkDefined = true;
 						}
 						echo ('<a class="a_visitClose" href="/visitClose.php?patientVisitID='.$visitInfo['patientVisitID'].
-						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitClose').'">'. TEXT_CLOSE_VISIT . '</a></li>');
+						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitClose').
+                            '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_DISCHARGE').'">'. TEXT_CLOSE_VISIT . '</a></li>');
 					}
 				
 					if ($firstLinkDefined) {
@@ -187,7 +188,8 @@ function writeTopicMenu ($sessionInfo) {
 						$firstLinkDefined = true;
 					}
 					echo ('<a class="a_visitEdit" href="/visitEdit.php?patientVisitID='. $visitInfo['patientVisitID'] .
-						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitEdit').'" '.
+						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitEdit').
+                        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_EDIT').'" '.
 						'title="'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'">'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'</a></li>');
 				}
 			?>	

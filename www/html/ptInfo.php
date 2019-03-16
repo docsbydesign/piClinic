@@ -122,7 +122,8 @@ function writeTopicMenu ($sessionInfo) {
         TEXT_FIND_ANOTHER_LINK.': '.
         dbFieldTextInput ($sessionInfo['parameters'], "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true).
         '&nbsp;<button type="submit">'.TEXT_SHOW_PATIENT_SUBMIT_BUTTON.'</button></form></li>';
-	$topicMenu .= '<li><a class="a_patientAddNew" href="/ptAddEdit.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'a_patientAddNew').'">'.TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON.'</a></li>'."\n";
+	$topicMenu .= '<li><a class="a_patientAddNew" href="/ptAddEdit.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'a_patientAddNew').
+        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_ADD_NEW').'">'.TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON.'</a></li>'."\n";
 	$topicMenu .= '</ul></div>'."\n";
 	return $topicMenu;
 }
@@ -149,7 +150,7 @@ function writeTopicMenu ($sessionInfo) {
 		<ul class="topLinkMenuList">
 			<li class="firstLink">
                 <?php  $linkParams = array(); $linkParams['clinicPatientID'] = $patientData['clinicPatientID']; ?>
-				<a class="a_ptedit" href="<?= makeUrlWithQueryParams('/ptAddEdit.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_ptedit') ?>" ><?= TEXT_PATIENT_EDIT_PATIENT_BUTTON ?></a>
+				<a class="a_ptedit" href="<?= makeUrlWithQueryParams('/ptAddEdit.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_ptedit') ?><?= '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PATIENT_EDIT') ?>" ><?= TEXT_PATIENT_EDIT_PATIENT_BUTTON ?></a>
 			</li>
 			<?php
 				// show the admit patient link only if there is not an open visit.
@@ -168,7 +169,8 @@ function writeTopicMenu ($sessionInfo) {
                         $linkParams = [
                             'clinicPatientID' => $patientData['clinicPatientID'],
                             'lastVisit' => (empty($visitList) ? 0 : urlencode($visitList[0]['dateTimeIn']) )];
-						echo ('<li><a class="a_visitopen" href="'.makeUrlWithQueryParams('/visitOpen.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_visitopen').'">'.TEXT_PATIENT_OPEN_NEW_VISIT.'</a></li>');
+						echo ('<li><a class="a_visitopen" href="'.makeUrlWithQueryParams('/visitOpen.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_visitopen').
+                            '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_OPEN').'">'.TEXT_PATIENT_OPEN_NEW_VISIT.'</a></li>');
 					}
 				}				
 			?>
@@ -199,7 +201,8 @@ function writeTopicMenu ($sessionInfo) {
 						$complaintText = substr($complaintText,0,40).'&nbsp;'.
 						'<a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
 						'&clinicPatientID='.$visit['clinicPatientID'].
-                            createFromLink (FROM_LINK_QP, __FILE__, 'a_inclinic_moreInfo').'" '.
+                            createFromLink (FROM_LINK_QP, __FILE__, 'a_inclinic_moreInfo').
+                            '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'CLINIC_VISIT_VIEW').'">'.TEXT_PATIENT_OPEN_NEW_VISIT.'" '.
 						'class="a_inclinic_moreInfo moreInfo"'.
 						'title="'.TEXT_MORE_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_MORE.'</a>';
 					}
@@ -210,11 +213,13 @@ function writeTopicMenu ($sessionInfo) {
 						'title="'.TEXT_SHOW_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_VIEW.'</a>&nbsp;&nbsp;|&nbsp;&nbsp;'.
 						'<a class="a_inclinic_visitedit" href="/visitEdit.php?patientVisitID='.$visit['patientVisitID'].
 						'&clinicPatientID='.$visit['clinicPatientID'].
-                        createFromLink (FROM_LINK_QP, __FILE__, 'a_inclinic_visitedit').'" '.
+                        createFromLink (FROM_LINK_QP, __FILE__, 'a_inclinic_visitedit').
+                        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'CLINIC_VISIT_EDIT').'" '.
 						'title="'.TEXT_EDIT_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_EDIT.'</a>&nbsp;&nbsp;|&nbsp;&nbsp;'.
 						'<a class="a_inclinic_visitclose" href="/visitClose.php?patientVisitID='.$visit['patientVisitID'].
 						'&clinicPatientID='.$visit['clinicPatientID'].
-                        createFromLink (FROM_LINK_QP, __FILE__, 'a_inclinic_visitclose').'" '.
+                        createFromLink (FROM_LINK_QP, __FILE__, 'a_inclinic_visitclose').
+                        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'CLINIC_VISIT_CLOSE').'" '.
 						'title="'.TEXT_DISCHARGE_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_DISCHARGE.'</a></td>');
 					echo ('</tr>');					
 				}
@@ -236,7 +241,8 @@ function writeTopicMenu ($sessionInfo) {
 					<div class="dataBlock">
                         <?php $linkParams = ['familyID' => $patientData['familyID'], ]; ?>
 						<p><label><?= TEXT_FAMILYID_LABEL ?>:</label>
-                            <a class="a_viewFamily" href="<?= makeUrlWithQueryParams('/ptResults.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_viewFamily') ?>">
+                            <a class="a_viewFamily" href="<?= makeUrlWithQueryParams('/ptResults.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_viewFamily').
+                            '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_FAMILY_LIST') ?>">
                             <?= $patientData['familyID'] ?></a></p>
 					</div>
 					<div class="dataBlock">
