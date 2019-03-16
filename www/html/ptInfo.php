@@ -54,6 +54,8 @@ require('uiSessionInfo.php');
 // open DB or redirect to error URL
 $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+// log any open workflows.
+$logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 
 // get patient info (if DB opened successfully)
 $patientInfo = array();
@@ -81,7 +83,6 @@ $visitList = [];
 
 // get all of this patient's visit records
 $getQueryString['clinicPatientID'] = $sessionInfo['parameters']['clinicPatientID'];
-$getQueryString['lang'] = $sessionInfo['pageLanguage'];
 $getQueryString['sortfield'] = 'DateTimeIn';
 $getQueryString['sortorder'] = 'DESC';
 $visitRecord = _visit_get($dbLink, $sessionInfo['token'], $getQueryString);
@@ -116,6 +117,7 @@ function writeTopicMenu ($sessionInfo) {
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";
 	$topicMenu .= '<li class="firstLink">'.
         '<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">'.
+        '<input type="hidden" id="WorkflowID" name="'. WORKFLOW_QUERY_PARAM .'" value="'. getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_SEARCH') .'" >'.
         '<input type="hidden" class="btn_search" id="SearchBtnTag" name="'.FROM_LINK.'" value="'.createFromLink (null, __FILE__, `btn_search`).' ?>">'.
         TEXT_FIND_ANOTHER_LINK.': '.
         dbFieldTextInput ($sessionInfo['parameters'], "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true).

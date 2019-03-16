@@ -47,6 +47,7 @@ MESSAGE;
  *********************/
 require_once dirname(__FILE__).'/../shared/piClinicConfig.php';
 require_once dirname(__FILE__).'/../shared/dbUtils.php';
+require_once dirname(__FILE__).'/../api/api_common.php';
 /*
 * 	Profile log
 *	
@@ -203,8 +204,8 @@ function createLogEntry ($logClass,
 // expects a logEntryObject created by createLogEntry
 function writeEntryToLog ($dbLink, $logData) {
     // test for invalid parameter.
-    if ($logData === false) return false;
-    if ($dbLink === false) return false;
+    if (empty($logData)) return false;
+    if (empty($dbLink)) return false;
     //---------------
     // clean fields for writing to the DB
     if (!empty($logData['logQueryString']) && is_array($logData['logQueryString'])) {
@@ -256,5 +257,199 @@ function writeEntryToLog ($dbLink, $logData) {
         @mysqli_free_result($qResult);
     }
     return $returnValue;
+}
+
+/*
+ * Workflow tracking functions
+ */
+define('WORKFLOW_TYPE_HOME','HF',false);
+define('WORKFLOW_TYPE_SUB','SF',false);
+define('WORKFLOW_TYPE_LEN', 2, false); // the size of the type prefix
+define('WORKFLOW_QUERY_PARAM','workflow',false);
+define('WORKFLOW_SESSION_ARRAY','workflow',false);
+define('WORKFLOW_STEP_STARTED','Start', false);
+define('WORKFLOW_STEP_STEP','Step', false);
+define('WORKFLOW_STEP_COMPLETE','Complete', false);
+define('WORKFLOW_STEP_ABANDONED','Abandoned', false);
+define('WORKFLOW_NOT_ACTIVE','Inactive',false);
+
+function logGetCurrentWorkflowID() {
+    // the current one is the last one in the array
+    if (empty(session_id())){
+        session_start();
+    }
+    assert (!empty($_SESSION), "ERROR: Session array is not initialized.");
+    // the current one is the last one in the array
+    if (!empty($_SESSION[WORKFLOW_SESSION_ARRAY])) {
+        return ($_SESSION[WORKFLOW_SESSION_ARRAY][count($_SESSION[WORKFLOW_SESSION_ARRAY])-1]);
+    }
+    // no workflow is active
+    return null;
+}
+
+function logWorkflowStep ($sessionInfo, $filename, $step, $workflowID, $dbLink, $activeWorkflowArray = null) {
+    $currentTime = microtime(true);
+    $currentTimeString = sprintf("%06d",($currentTime - floor($currentTime)) * 1000000);
+    $timestamp= new DateTime( date('Y-m-d H:i:s.'.$currentTimeString, $currentTime) );
+
+    // see if there is some path data to record
+    $pathData = 'uninitialized';
+    if (!empty($sessionInfo['parameters']['fromLink'])) {
+        $fromLink = explode('|', $sessionInfo['parameters']['fromLink']);
+        if (count($fromLink) == 2) {
+            // then this is what we expect
+            $pathData = [
+                'prevPage' => $fromLink[0],
+                'prevLink' => $fromLink[1],
+                'thisPage' => basename($filename)
+            ];
+        } else {
+            $pathData = $sessionInfo['parameters']['fromLink'];
+        }
+    } else {
+        $pathData = $sessionInfo;
+    }
+
+    // get root workflow ID
+    $rootWorkflowID = '';
+    $rootWorkflowName = '';
+    if (!empty($activeWorkflowArray)) {
+        foreach ($activeWorkflowArray as $wfID) {
+            if (substr($wfID, 0, WORKFLOW_TYPE_LEN) == WORKFLOW_TYPE_HOME) {
+                $rootWorkflowID = $wfID;
+                break;
+            }
+        }
+        if (!empty($rootWorkflowID)) {
+            // parse the ID to see if it has a name. If it does, pull it out.
+            $workflowFormat = '/^(HF|SF)_((([A-Z_]*[A-Z]{1})_))?([a-z0-9_]{8}_[a-z0-9_]{4}_[a-z0-9_]{4}_[a-z0-9_]{4}_[a-z0-9_]{12})$/';
+            if (preg_match ($workflowFormat, $rootWorkflowID, $nameElements) == 1) {
+                if (!empty($nameElements[4])) {
+                    $rootWorkflowName = $nameElements[4];
+                }
+            } else {
+                $rootWorkflowName = 'NO_NAME';
+            }
+        } else {
+            $rootWorkflowID = 'NO_ID';
+        }
+    }
+
+    $workflowData = [
+        'requestID' => getenv('UNIQUE_ID'),
+        'workflowID' => $workflowID,
+        'workflowStep' => $step,
+        'timestamp' => $timestamp->format("Y-m-d H:i:s.u"),
+        'activeWorkflows' => $activeWorkflowArray
+    ];
+    $logData = createLogEntry (
+        'WORKFLOW',
+        $filename,
+        $rootWorkflowName,
+        $rootWorkflowID,
+        $userToken = $sessionInfo['token'],
+        $logQueryString = $_SERVER['QUERY_STRING'],
+        $logBeforeData = $pathData,
+        $logAfterData = json_encode($workflowData),
+        $logStatusCode = 200,
+        $logStatusMessage = 'Workflow logged successfully.');
+
+    return writeEntryToLog ($dbLink, $logData);
+}
+
+
+function  closeSessionWorkflow($sessionInfo, $filename, $dbLink, $workflowStep = WORKFLOW_STEP_COMPLETE) {
+    if (empty(session_id())){
+        session_start();
+    }
+    assert (!empty($_SESSION), "ERROR: Session array is not initialized.");
+    $returnValue = null;
+    if (!empty($_SESSION[WORKFLOW_SESSION_ARRAY])) {
+        // close each open workflow from last to first
+        for ($itemID = count($_SESSION[WORKFLOW_SESSION_ARRAY])-1; $itemID >= 0; $itemID -= 1) {
+            $returnValue = logWorkflowStep ($sessionInfo, $filename, $workflowStep, $_SESSION[WORKFLOW_SESSION_ARRAY][$itemID], $dbLink, $_SESSION[WORKFLOW_SESSION_ARRAY]);
+        }
+        // then clear the workflow array
+        unset($_SESSION[WORKFLOW_SESSION_ARRAY]);
+    } // else, no workflow is active so nothing to do
+    return $returnValue;
+}
+
+function createNewSessionWorkflow ($sessionInfo, $filename, $workflowID, $dbLink) {
+    if (empty(session_id())){
+        session_start();
+    }
+    assert (!empty($_SESSION), "ERROR: Session array is not initialized.");
+    if (empty($_SESSION[WORKFLOW_SESSION_ARRAY])) {
+        $_SESSION[WORKFLOW_SESSION_ARRAY] = array();
+    }
+    $returnValue = null;
+    // add a new workflow to the existing array
+    foreach ($_SESSION[WORKFLOW_SESSION_ARRAY] as $activeWorkflow) {
+        if ($activeWorkflow == $workflowID ) {
+            // log as a step and exit
+            $returnValue = logWorkflowStep ($sessionInfo, $filename,WORKFLOW_STEP_STEP, $workflowID, $dbLink, $_SESSION[WORKFLOW_SESSION_ARRAY]);
+            return $returnValue; // this workflow has already been opened.
+        }
+    }
+    // if here, this is a new workflow so log the start and add it to the end
+    array_push($_SESSION[WORKFLOW_SESSION_ARRAY], $workflowID);
+    $returnValue = logWorkflowStep ($sessionInfo, $filename,WORKFLOW_STEP_STARTED, $workflowID, $dbLink, $_SESSION[WORKFLOW_SESSION_ARRAY]);
+    return $returnValue;
+}
+
+function getWorkflowID($type, $name = null) {
+    // only return a Workflow ID if a valid type was passed in.
+    if (($type == WORKFLOW_TYPE_HOME) || ($type == WORKFLOW_TYPE_SUB)) {
+        if (!empty($name)) {
+            // limit name strings to 16 characters or less.
+            return $type.'_'.substr($name,0,16).'_'.guidString('_');
+        } else {
+            return $type.'_'.guidString('_');
+        }
+    }
+    return '';
+}
+
+function logWorkflow($sessionInfo, $filename, $dbLink, $workflowStep = null) {
+        $logProcesssed = 'None';
+    $logResult = null;
+    assert (!empty($dbLink), "ERROR: workflow logging requires the database.");
+    // if there's a workflow ID in the QP
+    $queryParams = $sessionInfo['parameters'];
+    // if this is a Home flow, close out any existing flows and start a new one; otherwise add it to the list of workflows
+    if (!empty($queryParams[WORKFLOW_QUERY_PARAM])) {
+        switch (substr($queryParams[WORKFLOW_QUERY_PARAM], 0, WORKFLOW_TYPE_LEN)) {
+            case WORKFLOW_TYPE_HOME:
+                $logResult = closeSessionWorkflow($sessionInfo, $filename, $dbLink, WORKFLOW_STEP_ABANDONED);
+                $logResult = createNewSessionWorkflow($sessionInfo, $filename, $queryParams[WORKFLOW_QUERY_PARAM], $dbLink);
+                $logProcesssed = 'NewHome';
+                break;
+
+            case WORKFLOW_TYPE_SUB:
+            default:
+                $logResult = createNewSessionWorkflow($sessionInfo, $filename, $queryParams[WORKFLOW_QUERY_PARAM], $dbLink);
+                $logProcesssed = 'NewSub';
+                break;
+        }
+    } else if (!empty($workflowStep)) {
+        // this is just another step in the workflow so log it.
+        if (($workflowStep == WORKFLOW_STEP_COMPLETE) || ($workflowStep == WORKFLOW_STEP_ABANDONED)) {
+            $logResult = closeSessionWorkflow($sessionInfo, $filename, $dbLink, $workflowStep);
+            $logProcesssed = 'Closed';
+        } else {
+            $logResult = logWorkflowStep ($sessionInfo, $filename, $workflowStep, logGetCurrentWorkflowID(), $dbLink, $_SESSION[WORKFLOW_SESSION_ARRAY]);
+            $logProcesssed = 'Step';
+        }
+    } else if (!empty($sessionInfo['workflow'])) {
+        // this is just another step in the workflow so log it.
+        $logResult = logWorkflowStep ($sessionInfo, $filename, WORKFLOW_STEP_STEP, logGetCurrentWorkflowID(), $dbLink, $_SESSION[WORKFLOW_SESSION_ARRAY]);
+        $logProcesssed = 'Step';
+    } else {
+        // no workflow started so nothing to do
+        $logResult = logWorkflowStep ($sessionInfo, $filename, WORKFLOW_NOT_ACTIVE, null, $dbLink);
+        $logProcesssed = 'PageView';
+    }
+    return $logProcesssed . "\n". json_encode($logResult, JSON_PRETTY_PRINT);
 }
 //EOF

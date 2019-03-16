@@ -55,6 +55,8 @@ require('uiSessionInfo.php');
 $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 // if here, the DB is open
+// log any open workflows.
+$logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 
 // get referrer URL to return to in error or if cancelled
 $referringPageUrl = NULL;

@@ -52,6 +52,8 @@ require('uiSessionInfo.php');
 // open DB or redirect to error URL1
 $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
 $dbLink = _openDBforUI($sessionInfo['parameters'], $pageLanguage, $errorUrl);
+// log any open workflows.
+$logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 
 // if here, the DB is open
 

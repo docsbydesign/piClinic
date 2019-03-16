@@ -202,9 +202,6 @@ if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 	// successful update returns 200
 	if ($retVal['httpResponse'] == 200) {
 		$redirectUrl = '/ptInfo.php?clinicPatientID='.$requestData['clinicPatientID'];
-		if (!empty($formData['lang'])) { 
-			$redirectUrl .="&lang=".$formData['lang']; 
-		}
 		header("Location: ".$redirectUrl);
 	} else {
 		$returnQP = "";
@@ -253,9 +250,6 @@ if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 		} else {
 			//  this patient was added for another reason so show the new patient
 			$redirectUrl = '/ptInfo.php?clinicPatientID='.$requestData['clinicPatientID'];
-		}
-		if (!empty($formData['lang'])) { 
-			$redirectUrl .="&lang=".$formData['lang']; 
 		}
 		header("httpReason: Successful new record");
 		header("Location: ".$redirectUrl);

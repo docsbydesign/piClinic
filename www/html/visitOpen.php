@@ -76,6 +76,9 @@ $cancelUrl = $referringPageUrl.createFromLink (FROM_LINK_QP, __FILE__, 'a_cancel
 $errorUrl = makeUrlWithQueryParams('/clinicDash.php', ['msg'=>MSG_DB_OPEN_ERROR]);
 // this will open the DB or, if it can't open the DB, return to the dashboard with an error
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+// log any open workflows.
+$logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
+
 
 // Get the selected visit record
 // create query string for get operation

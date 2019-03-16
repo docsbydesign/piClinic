@@ -63,6 +63,8 @@ require('uiSessionInfo.php');
 $errorUrl = makeUrlWithQueryParams('/clinicDash.php', ['msg'=>MSG_DB_OPEN_ERROR]);
 // this will open the DB or, if it can't open the DB, return to the dashboard with an error
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+// log any open workflows.
+$logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 
 // Get the selected visit record
 // create query string for get operation
@@ -127,7 +129,10 @@ function writeTopicMenu ($sessionInfo) {
     $topicMenu .= '<li class="firstLink">'.
         '<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">'.TEXT_FIND_ANOTHER_LINK.': '.
         dbFieldTextInput ($sessionInfo['parameters'], "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true).
-        '&nbsp;<button type="submit">'.TEXT_SHOW_PATIENT_SUBMIT_BUTTON.'</button></form></li>';
+        '&nbsp;<button type="submit">'.TEXT_SHOW_PATIENT_SUBMIT_BUTTON.'</button>'.
+        '<input type="hidden" id="WorkflowID" name="'. WORKFLOW_QUERY_PARAM .'" value="'. getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_SEARCH') .'" >'.
+        '<input type="hidden" class="btn_search" id="SearchBtnTag" name="'.FROM_LINK.'" value="'.createFromLink (null, __FILE__, `btn_search`).' ?>">'.
+        '</form></li>';
 	$topicMenu .= '</ul></div>'."\n";
 	return $topicMenu;
 }

@@ -61,6 +61,8 @@ $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 
 profileLogCheckpoint($profileData,'CODE_COMPLETE');
+// close any open workflows.
+$logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink, WORKFLOW_STEP_COMPLETE);
 
 $visitQueryString = [];
 $visitRecord = [];
@@ -88,6 +90,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 				<?= dbFieldTextInput ($requestData, "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true) ?>
 			<button class="btn_ptSearch" type="submit"><?= TEXT_SHOW_PATIENT_SUBMIT_BUTTON ?></button>
 			</p>
+            <input type="hidden" id="WorkflowID" name="<?= WORKFLOW_QUERY_PARAM ?>" value="<?= getWorkflowID(WORKFLOW_TYPE_HOME, 'PT_SEARCH') ?>" >
             <input type="hidden" id="SearchBtnTag" name="<?= FROM_LINK ?>" value="<?= createFromLink (null, __FILE__, 'btn_ptSearch') ?>">
 		</form>
 	<hr>
