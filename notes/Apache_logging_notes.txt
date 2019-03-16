@@ -53,4 +53,22 @@ Capture groups:
 		11:	User Agent string
 		12: Unique Response ID
  
+ 
+SQL querie(s)
+
+# READ workflow stats from log database 
+SELECT 
+	`logClass`, 
+    `logTable`, 
+    `logAction`,
+    count(*) as `pages`,
+    min(createdDate) as `startTime`, 
+    max(createdDate) as `endTime`, 
+    TIME_TO_SEC(TIMEDIFF(max(`createdDate`), min(`createdDate`))) as 'elapsedTime'
+from `log`
+where `logClass` = 'WORKFLOW' 
+group by `logTable`, `logAction`
+order by `logTable`, `logAction`;
+
+)
 						
