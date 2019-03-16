@@ -70,5 +70,23 @@ where `logClass` = 'WORKFLOW'
 group by `logTable`, `logAction`
 order by `logTable`, `logAction`;
 
-)
+SELECT SUBSTRING(`logAfterData`,LOCATE('"requestID":"',`logAfterData`)+13,24) as `IDString`, `logAfterData`from `log` where `logClass` = 'WORKFLOW' ;
+
+# READ workflow stats from log database t
+# shows acutal requests (pages viewed) to take into account sub workflows that show up as separate log entries.
+SELECT 
+	`logClass`, 
+    `logTable`, 
+    `logAction`,
+	COUNT(DISTINCT SUBSTRING(`logAfterData`,LOCATE('"requestID":"',`logAfterData`)+13,24)) as `Requests`,
+    count(*) as `pages`,
+    min(createdDate) as `startTime`, 
+    max(createdDate) as `endTime`, 
+    TIME_TO_SEC(TIMEDIFF(max(`createdDate`), min(`createdDate`))) as 'elapsedTime'
+from `log`
+where `logClass` = 'WORKFLOW' 
+group by `logTable`, `logAction`
+order by `logTable`, `logAction`;
+
+
 						
