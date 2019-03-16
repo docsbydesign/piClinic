@@ -446,7 +446,7 @@ header('Content-type: text/html; charset=utf-8');
 <?= piClinicTag(); ?>
 <?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 <?php require ('../uiErrorMessage.php') ?>
-<?= piClinicAppMenu(null, $pageLanguage) ?>
+<?= piClinicAppMenu(null,  $pageLanguage, __FILE__) ?>
 <div class="pageBody">
     <div id="DailyVisitListPrompt" class="noprint">
         <form enctype="application/x-www-form-urlencoded" action="/reports/rptDailyLogHome.php" method="get">
@@ -477,7 +477,6 @@ header('Content-type: text/html; charset=utf-8');
 					<button type="submit" name="export" value="tsv" title="<?= TEXT_EXPORT_TSV_BUTTON_TEXT ?>"><?= TEXT_EXPORT_TSV_BUTTON ?></button>
 					</span>
             </p>
-            <?= (!empty($requestData['lang']) ? '<input type="hidden" id="langField" name="lang" value="'.$pageLanguage.'" >': "") ?>
         </form>
         <hr>
     </div>

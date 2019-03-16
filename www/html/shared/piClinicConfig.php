@@ -69,6 +69,11 @@ if (!defined('REST_CONSTANTS')) {
     define('CONTENT_TYPE_HTML','text/html; charset=utf-8;', false);
     define('CONTENT_TYPE_HEADER_HTML','Content-Type: text/html; charset=utf-8;', false);
 
+    define('ROOT_DIR_PATH', '/var/www/html/', false); // used to filter out path in fromLink values
+    define('FIRST_FROM_LINK_QP', '?fromLink', false); // query parameter string when first QP
+    define('FROM_LINK_QP','&fromLink', false); // use in query paramter string after first QP
+    define('FROM_LINK','fromLink',false); // used in form Values
+
 	// languages
 	define('UI_DEFAULT_LANGUAGE','en', false);
     define('UITEST_LANGUAGE','ui',false);

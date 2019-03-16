@@ -60,8 +60,8 @@ $pageAccessRequired = PAGE_ACCESS_STAFF;
 require('uiSessionInfo.php');
 
 // referrer URL to return to (in most cases)
-if (isset($_SERVER['HTTP_REFERER'])) {
-    $referringPageUrl = cleanedRefererUrl();
+if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
+    $referringPageUrl = cleanedRefererUrl(createFromLink (null, __FILE__, 'a_cancel'));
 } else {
     //default return is the visit info page
     $referringPageQP = array();
@@ -71,13 +71,17 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     if (isset($requestData['clinicPatientID'])) {
         $referringPageQP['clinicPatientID'] = $requestData['clinicPatientID'];
     }
+    $referringPageQP[FROM_LINK] = createFromLink (null, __FILE__, 'a_cancel');
     $referringPageUrl = makeUrlWithQueryParams('/visitInfo.php', $referringPageQP); 
 }
+$cancelLinkUrl = $referringPageUrl;
 
 // open DB
 $errorUrl = makeUrlWithQueryParams('/clinicDash.php', ['msg'=>MSG_DB_OPEN_ERROR]);
 // this will open the DB or, if it can't open the DB, return to the dashboard with an error
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+// log any open workflows.
+$logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 
 // Get the selected visit record
 // create query string for get operation
@@ -143,13 +147,12 @@ if ($visitRecord['httpResponse'] != 200) {
 }
 // at this point, $visitInfo should have one patient visit record ready to edit.
 
-function writeOptionsMenu ($visitInfo) {
+function writeOptionsMenu ($visitInfo, $cancelLink) {
 	$optionsMenu = '';
 	if (isset($visitInfo['clinicPatientID'])) {
 		$optionsMenu .= '<div id="optionMenuDiv">'."\n";
 		$optionsMenu .= '<ul class="topLinkMenuList">';
-		$optionsMenu .= '<li class="firstLink"><a href="/visitInfo.php?patientVisitID='.$visitInfo['patientVisitID'].
-			'&clinicPatientID='. $visitInfo['clinicPatientID'].'">'.TEXT_CANCEL_VISIT_EDIT.'</a></li>';
+		$optionsMenu .= '<li class="firstLink"><a class="a_cancel" href="'.$cancelLink.'">'.TEXT_CANCEL_VISIT_EDIT.'</a></li>';
 		$optionsMenu .= '</ul></div>';	}
 	return $optionsMenu;
 }
@@ -160,16 +163,16 @@ function writeOptionsMenu ($visitInfo) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $pageLanguage) ?>
+	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
 	<datalist id="diagData"></datalist>
 	<div class="pageBody">
-	<?= writeOptionsMenu($visitInfo) ?>
+	<?= writeOptionsMenu($visitInfo, $cancelLinkUrl) ?>
 	<div class="nameBlock">
 		<div class="infoBlock">
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
 				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>
 			<p><?= date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($visitInfo['birthDate'])) ?>&nbsp;(<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>)&nbsp;&nbsp;&nbsp;
-			<span class="idInHeading"><a href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'] ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
+			<span class="idInHeading"><a href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'PatientView') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
 		</div>
 		<div class="infoBlock">
 			<p><label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?></p>
@@ -315,7 +318,8 @@ function writeOptionsMenu ($visitInfo) {
 				<div style="clear: both;"></div>
 				<input type="hidden" id="PatientVisitIDField" name="patientVisitID" value="<?= $visitInfo['patientVisitID'] ?>" >
 				<input type="hidden" id="returnUrlField" name="returnUrl" value="<?= $referringPageUrl ?>">
-				<p><button type="submit"><?= TEXT_PATIENT_SUBMIT_PATIENT_VISIT_BUTTON ?></button></p>
+                <input type="hidden" id="SubmitBtnTag" name="<?= FROM_LINK ?>" value="<?= createFromLink (null, __FILE__, 'btn_submit') ?>">
+				<p><button class="btn_submit" type="submit"><?= TEXT_PATIENT_SUBMIT_PATIENT_VISIT_BUTTON ?></button></p>
 			</form>
 		</div>
 	</div>

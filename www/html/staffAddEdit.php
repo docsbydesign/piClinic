@@ -53,6 +53,8 @@ require('uiSessionInfo.php');
 $errorUrl = makeUrlWithQueryParams('/clinicDash.php', ['msg'=>MSG_DB_OPEN_ERROR]);
 // this will open the DB or, if it can't open the DB, return to the dashboard with an error
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+// log any open workflows.
+$logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 
 // get staff info if possible
 //	if staff record found, enter "edit" mode
@@ -107,10 +109,10 @@ if (!empty($sessionInfo['parameters']['mode'])) {
 		// logged in user not found for some reason
 		// return to calling page
 		$redirectUrl = NULL;
-		if (isset($_SERVER['HTTP_REFERER'])) {
-			$redirectUrl = $_SERVER['HTTP_REFERER'];
+        if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
+			$redirectUrl = cleanedRefererUrl(createFromLink (null, __FILE__, 'ErrorRedirect'));
 		} else {
-			$redirectUrl = '/clinicDash.php'; //default: return is the home page
+			$redirectUrl = '/clinicDash.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'ErrorRedirect'); //default: return is the home page
 		}
 		// Leave to the previous page or the default page as set.
 		header("Location: ".$redirectUrl);
@@ -128,9 +130,9 @@ if (!empty($sessionInfo['parameters']['mode'])) {
 $queryParamFields = null;
 
 $cancelLink = '';
-if (isset($_SERVER['HTTP_REFERER'])) {
+if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
 	// default cancel action is to go back to the calling page
-	$cancelLink = $_SERVER['HTTP_REFERER'];
+	$cancelLink = cleanedRefererUrl(createFromLink (null, __FILE__, 'a_cancel'));
 } else {
 	// if no referrer, define a reasonable value.
 	if ($userEdit) {
@@ -138,6 +140,7 @@ if (isset($_SERVER['HTTP_REFERER'])) {
 	} else {
 		$cancelLink = "/adminShowUsers.php";
 	}
+	$cancelLink .= createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'a_cancel');
 }
 
 if (empty($staffData)){
@@ -174,7 +177,7 @@ if (($pageMode == 'add') && (!(isset($staffData['active']) && (($staffData['acti
 function writeTopicMenu ($lang, $cancelLink) {
 	$topicMenu = '<div id="topicMenuDiv">'."\n";
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";
-	$topicMenu .= '<li class="firstLink"><a href="'.$cancelLink.'">'.TEXT_CANCEL_EDIT.'</a></li>'."\n";
+	$topicMenu .= '<li class="firstLink"><a class="a_cancel" href="'.$cancelLink.'">'.TEXT_CANCEL_EDIT.'</a></li>'."\n";
 	$topicMenu .= '</ul></div>'."\n";
 	return $topicMenu;
 }
@@ -186,7 +189,7 @@ function writeTopicMenu ($lang, $cancelLink) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $sessionInfo['pageLanguage']) ?>
+	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu ($pageLanguage, $cancelLink) ?>
 	<div id="staffDataDiv">
@@ -262,17 +265,11 @@ function writeTopicMenu ($lang, $cancelLink) {
 				<input type="hidden" id="modeField" name="mode" value="<?= $pageMode ?>">
 				<?= ($userEdit ? '<input type="hidden" id="UserEditField" name="useredit" value="1">' : '') ?>
 				<input type="hidden" id="methodField" name="_method" value="<?= ($pageMode == 'add' ? 'POST' : 'PATCH'  ) ?>">
+                <input type="hidden" id="SubmitBtnTag" name="<?= FROM_LINK ?>" value="<?= createFromLink (null, __FILE__, 'btn_submit') ?>">
 			</div>
-			<p><button type="submit"><?= ($pageMode == 'add' ? TEXT_STAFF_NEW_SUBMIT_BUTTON  : TEXT_STAFF_EDIT_SUBMIT_BUTTON  ) ?></button></p>
+			<p><button class="btn_submit" type="submit"><?= ($pageMode == 'add' ? TEXT_STAFF_NEW_SUBMIT_BUTTON  : TEXT_STAFF_EDIT_SUBMIT_BUTTON  ) ?></button></p>
 		</form>
 	</div>
-	<!--
-	<div id="clearFields" style="display:<?= ($pageMode == 'add' ?  'block' : 'none' ) ?>">
-		<form enctype="application/x-www-form-urlencoded" action="/staffAddEdit.php" method="get">
-			<p><button type="submit"><?= TEXT_STAFF_RESET_NEW_BUTTON ?></button></p>
-		</form>
-	</div>
-	-->
 	</div>
 </body>
 <?php

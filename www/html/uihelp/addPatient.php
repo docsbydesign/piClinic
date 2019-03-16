@@ -76,8 +76,8 @@ $formData = $sessionInfo['parameters'];
 
 // get referrer URL to return to in error or by default
 $referringPageUrl = NULL;
-if (isset($_SERVER['HTTP_REFERER'])) {
-	$referringPageUrl = $_SERVER['HTTP_REFERER'];
+if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
+	$referringPageUrl = cleanedRefererUrl();
 } else {
 	$referringPageUrl = '/clinicDash.php'; //default: return is the home page
 }
@@ -202,9 +202,6 @@ if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 	// successful update returns 200
 	if ($retVal['httpResponse'] == 200) {
 		$redirectUrl = '/ptInfo.php?clinicPatientID='.$requestData['clinicPatientID'];
-		if (!empty($formData['lang'])) { 
-			$redirectUrl .="&lang=".$formData['lang']; 
-		}
 		header("Location: ".$redirectUrl);
 	} else {
 		$returnQP = "";
@@ -253,9 +250,6 @@ if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 		} else {
 			//  this patient was added for another reason so show the new patient
 			$redirectUrl = '/ptInfo.php?clinicPatientID='.$requestData['clinicPatientID'];
-		}
-		if (!empty($formData['lang'])) { 
-			$redirectUrl .="&lang=".$formData['lang']; 
 		}
 		header("httpReason: Successful new record");
 		header("Location: ".$redirectUrl);

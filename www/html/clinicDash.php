@@ -61,6 +61,8 @@ $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 
 profileLogCheckpoint($profileData,'CODE_COMPLETE');
+// close any open workflows.
+$logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink, WORKFLOW_STEP_COMPLETE);
 
 $visitQueryString = [];
 $visitRecord = [];
@@ -80,14 +82,16 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(TEXT_CLINIC_HOME, $pageLanguage) ?>
+	<?= piClinicAppMenu(HOME_PAGE, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
 	<div id="PatientLookupDiv" class="noprint">
 		<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">
 			<p><label><?= TEXT_PATIENT_ID_LABEL ?>:</label><br>
 				<?= dbFieldTextInput ($requestData, "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true) ?>
-			<button type="submit"><?= TEXT_SHOW_PATIENT_SUBMIT_BUTTON ?></button>
+			<button class="btn_ptSearch" type="submit"><?= TEXT_SHOW_PATIENT_SUBMIT_BUTTON ?></button>
 			</p>
+            <input type="hidden" id="WorkflowID" name="<?= WORKFLOW_QUERY_PARAM ?>" value="<?= getWorkflowID(WORKFLOW_TYPE_HOME, 'PT_SEARCH') ?>" >
+            <input type="hidden" id="SearchBtnTag" name="<?= FROM_LINK ?>" value="<?= createFromLink (null, __FILE__, 'btn_ptSearch') ?>">
 		</form>
 	<hr>
 	</div>
@@ -131,8 +135,11 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 						$headerShown = true;
 					}
 					echo ('<tr>');
-					echo ('<td class="nowrap"><a href="/ptInfo.php?clinicPatientID='.$visit['clinicPatientID'].'" '.
-						'title="'.TEXT_SHOW_PATIENT_INFO.'">'.$visit['patientLastName'].',&nbsp;'.$visit['patientFirstName'].'&nbsp;('.($visit['patientSex'] == 'M' ? TEXT_SEX_OPTION_M : ($visit['patientSex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).')</a></td>');
+					echo ('<td class="nowrap"><a class="a_ptedit" href="/ptInfo.php?clinicPatientID='.$visit['clinicPatientID'].
+                        createFromLink (FROM_LINK_QP, __FILE__, 'a_ptedit').
+                        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_HOME, 'PT_VIEW').'" '.
+						'title="'.TEXT_SHOW_PATIENT_INFO.'">'.$visit['patientLastName'].',&nbsp;'.$visit['patientFirstName'].'&nbsp;('.
+                        ($visit['patientSex'] == 'M' ? TEXT_SEX_OPTION_M : ($visit['patientSex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).')</a></td>');
 					$visitTimeIn = strtotime($visit['dateTimeIn']);
 					$notToday = $visitTimeIn < strtotime(date('Y-m-d ').'00:00');
 					if ($notToday) {
@@ -146,19 +153,24 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 					if (strlen($complaintText) > 40) {
 						$complaintText = substr($complaintText,0,40).'&nbsp;'.
 						'<a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
-						'&clinicPatientID='.$visit['clinicPatientID'].'" '.
-						'class="moreInfo"'.
+						'&clinicPatientID='.$visit['clinicPatientID'].
+                        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_HOME, 'VISIT_MORE').
+                        createFromLink (FROM_LINK_QP, __FILE__, 'a_visitmore').
+						'class="a_visitmore moreInfo"'.
 						'title="'.TEXT_MORE_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_MORE.'</a>';
 					}
 					echo ('<td'.(isset($visit['primaryComplaint']) ? '' : ' class="inactive"' ).'>'.$complaintText.'</td>');
-					echo ('<td class="nowrap"><a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
-						'&clinicPatientID='.$visit['clinicPatientID'].'" '.
+					echo ('<td class="nowrap"><a class="a_visitview" href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
+						'&clinicPatientID='.$visit['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitview').
+                        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_HOME, 'VISIT_VIEW').'" '.
 						'title="'.TEXT_SHOW_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_VIEW.'</a>&nbsp;&nbsp;|&nbsp;&nbsp;'.
-						'<a href="/visitEdit.php?patientVisitID='.$visit['patientVisitID'].
-						'&clinicPatientID='.$visit['clinicPatientID'].'" '.
+						'<a class="a_visitedit" href="/visitEdit.php?patientVisitID='.$visit['patientVisitID'].
+						'&clinicPatientID='.$visit['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitedit').
+                        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_HOME, 'VISIT_EDIT').'" '.
 						'title="'.TEXT_EDIT_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_EDIT.'</a>&nbsp;&nbsp;|&nbsp;&nbsp;'.
-						'<a href="/visitClose.php?patientVisitID='.$visit['patientVisitID'].
-						'&clinicPatientID='.$visit['clinicPatientID'].'" '.
+						'<a class="a_visitclose" href="/visitClose.php?patientVisitID='.$visit['patientVisitID'].
+						'&clinicPatientID='.$visit['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitclose').
+                        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_HOME, 'VISIT_CLOSE').'" '.
 						'title="'.TEXT_DISCHARGE_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_DISCHARGE.'</a></td>');
 					echo ('</tr>');					
 				}

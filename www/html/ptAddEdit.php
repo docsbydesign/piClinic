@@ -55,15 +55,18 @@ require('uiSessionInfo.php');
 $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 // if here, the DB is open
+// log any open workflows.
+$logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 
 // get referrer URL to return to in error or if cancelled
 $referringPageUrl = NULL;
-if (isset($_SERVER['HTTP_REFERER'])) {
-	// this link should have the language, if it has been specified
-	$referringPageUrl = $_SERVER['HTTP_REFERER'];
+// if there's a referring page and it's not this page, go there, otherwise go back to the dashboard
+if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
+    $cancelLinkUrl = $referringPageUrl = cleanedRefererUrl(createFromLink (null, __FILE__, 'a_cancel'));
 } else {
 	//default: return is the home page
 	$referringPageUrl = '/clinicDash.php';
+    $cancelLinkUrl = $referringPageUrl . createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'a_cancel');
 }
 
 // get patient info if possible
@@ -151,7 +154,7 @@ if (empty($patientData)){
 function writeTopicMenu ($cancelLink, $ata=false) {
 	$topicMenu = '<div id="topicMenuDiv">'."\n";
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";
-	$topicMenu .= '<li class="firstLink"><a href="'.$cancelLink.'">'.TEXT_PATIENT_CANCEL_ADD.'</a></li>'."\n";
+	$topicMenu .= '<li class="firstLink"><a class="a_cancel" href="'.$cancelLink.'">'.TEXT_PATIENT_CANCEL_ADD.'</a></li>'."\n";
 	$topicMenu .= '</ul></div>'."\n";
 	return $topicMenu;
 }
@@ -162,9 +165,9 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $sessionInfo['pageLanguage']) ?>
+	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
-	<?= writeTopicMenu($referringPageUrl) ?>
+	<?= writeTopicMenu($cancelLinkUrl) ?>
 	<div id="patientDataDiv">
 		<h2><?= ($pageMode == 'add' ? TEXT_NEW_PATIENT_HEADING  : TEXT_EDIT_PATIENT_HEADING  ) ?></h2>
 		<form enctype="application/x-www-form-urlencoded" action="/uihelp/addPatient.php" method="post">
@@ -288,8 +291,8 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 					echo ('<input type="hidden" id="ataField" name="ata" value="true">');
 				}			
 			?>
-			<?= (!empty($requestData['lang']) ? '<input type="hidden" id="langField1" name="lang" value="'.$pageLanguage.'" >': '') ?>
-			<p><button type="submit"><?= ($pageMode == 'add' ? TEXT_PATIENT_NEW_SUBMIT_BUTTON  : TEXT_PATIENT_EDIT_SUBMIT_BUTTON  ) ?></button></p>
+            <input type="hidden" id="SubmitBtnTag" name="<?= FROM_LINK ?>" value="<?= createFromLink (null, __FILE__, 'btn_submit') ?>">
+			<p><button class="btn_submit" type="submit"><?= ($pageMode == 'add' ? TEXT_PATIENT_NEW_SUBMIT_BUTTON  : TEXT_PATIENT_EDIT_SUBMIT_BUTTON  ) ?></button></p>
 		</form>
 		<hr>
 	</div>

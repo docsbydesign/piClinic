@@ -105,6 +105,7 @@ if ($retVal['httpResponse'] == 201) {
 	header('httpReason: username or password not valid.');
 	header('Location: '.$errorUrl);
 }
+
 profileLogClose($profileData, __FILE__, $sessionInfo['parameters']);
 return;
 //EOF

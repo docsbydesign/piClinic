@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `userToken` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) sessionID of user.',
   `logClass` varchar(16) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) type of log entry.',
   `logTable` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB Table being accessed.',
-  `logAction` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB action being attempted.',
+  `logAction` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB action being attempted.',
   `logQueryString` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Query string that initiated the action',
   `logBeforeData` varchar(4096) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB Record before change.',
   `logAfterData` varchar(4096) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) DB Record after change.',

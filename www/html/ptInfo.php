@@ -54,6 +54,8 @@ require('uiSessionInfo.php');
 // open DB or redirect to error URL
 $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+// log any open workflows.
+$logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 
 // get patient info (if DB opened successfully)
 $patientInfo = array();
@@ -81,7 +83,6 @@ $visitList = [];
 
 // get all of this patient's visit records
 $getQueryString['clinicPatientID'] = $sessionInfo['parameters']['clinicPatientID'];
-$getQueryString['lang'] = $sessionInfo['pageLanguage'];
 $getQueryString['sortfield'] = 'DateTimeIn';
 $getQueryString['sortorder'] = 'DESC';
 $visitRecord = _visit_get($dbLink, $sessionInfo['token'], $getQueryString);
@@ -115,10 +116,14 @@ function writeTopicMenu ($sessionInfo) {
 	$topicMenu = '<div id="topicMenuDiv" class="noprint">'."\n";
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";
 	$topicMenu .= '<li class="firstLink">'.
-        '<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">'.TEXT_FIND_ANOTHER_LINK.': '.
+        '<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">'.
+        '<input type="hidden" id="WorkflowID" name="'. WORKFLOW_QUERY_PARAM .'" value="'. getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_SEARCH') .'" >'.
+        '<input type="hidden" class="btn_search" id="SearchBtnTag" name="'.FROM_LINK.'" value="'.createFromLink (null, __FILE__, `btn_search`).' ?>">'.
+        TEXT_FIND_ANOTHER_LINK.': '.
         dbFieldTextInput ($sessionInfo['parameters'], "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true).
         '&nbsp;<button type="submit">'.TEXT_SHOW_PATIENT_SUBMIT_BUTTON.'</button></form></li>';
-	$topicMenu .= '<li><a href="/ptAddEdit.php'.(!empty($lang) ? '?lang='.$lang : '').'">'.TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON.'</a></li>'."\n";
+	$topicMenu .= '<li><a class="a_patientAddNew" href="/ptAddEdit.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'a_patientAddNew').
+        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_ADD_NEW').'">'.TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON.'</a></li>'."\n";
 	$topicMenu .= '</ul></div>'."\n";
 	return $topicMenu;
 }
@@ -129,7 +134,7 @@ function writeTopicMenu ($sessionInfo) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $sessionInfo['pageLanguage']) ?>
+	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu($sessionInfo) ?>
 	<div class="nameBlock">
@@ -145,7 +150,7 @@ function writeTopicMenu ($sessionInfo) {
 		<ul class="topLinkMenuList">
 			<li class="firstLink">
                 <?php  $linkParams = array(); $linkParams['clinicPatientID'] = $patientData['clinicPatientID']; ?>
-				<a href="<?= makeUrlWithQueryParams('/ptAddEdit.php', $linkParams) ?>" ><?= TEXT_PATIENT_EDIT_PATIENT_BUTTON ?></a>
+				<a class="a_ptedit" href="<?= makeUrlWithQueryParams('/ptAddEdit.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_ptedit') ?><?= '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PATIENT_EDIT') ?>" ><?= TEXT_PATIENT_EDIT_PATIENT_BUTTON ?></a>
 			</li>
 			<?php
 				// show the admit patient link only if there is not an open visit.
@@ -164,7 +169,8 @@ function writeTopicMenu ($sessionInfo) {
                         $linkParams = [
                             'clinicPatientID' => $patientData['clinicPatientID'],
                             'lastVisit' => (empty($visitList) ? 0 : urlencode($visitList[0]['dateTimeIn']) )];
-						echo ('<li><a href="'.makeUrlWithQueryParams('/visitOpen.php', $linkParams).'">'.TEXT_PATIENT_OPEN_NEW_VISIT.'</a></li>');
+						echo ('<li><a class="a_visitopen" href="'.makeUrlWithQueryParams('/visitOpen.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_visitopen').
+                            '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_OPEN').'">'.TEXT_PATIENT_OPEN_NEW_VISIT.'</a></li>');
 					}
 				}				
 			?>
@@ -195,22 +201,25 @@ function writeTopicMenu ($sessionInfo) {
 						$complaintText = substr($complaintText,0,40).'&nbsp;'.
 						'<a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
 						'&clinicPatientID='.$visit['clinicPatientID'].
-						(!empty($sessionInfo['parameters']['lang']) ? "&lang=".$pageLanguage : "").'" '.
-						'class="moreInfo"'.
+                            createFromLink (FROM_LINK_QP, __FILE__, 'a_inclinic_moreInfo').
+                            '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'CLINIC_VISIT_VIEW').'">'.TEXT_PATIENT_OPEN_NEW_VISIT.'" '.
+						'class="a_inclinic_moreInfo moreInfo"'.
 						'title="'.TEXT_MORE_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_MORE.'</a>';
 					}
 					echo ('<td'.(isset($visit['primaryComplaint']) ? '' : ' class="inactive"' ).'>'.$complaintText.'</td>');
-					echo ('<td class="nowrap"><a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
+					echo ('<td class="nowrap"><a class="a_inclinic_visitview" href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
 						'&clinicPatientID='.$visit['clinicPatientID'].
-						(!empty($sessionInfo['parameters']['lang']) ? "&lang=".$pageLanguage : "").'" '.
+                        createFromLink (FROM_LINK_QP, __FILE__, 'a_inclinic_visitview').'" '.
 						'title="'.TEXT_SHOW_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_VIEW.'</a>&nbsp;&nbsp;|&nbsp;&nbsp;'.
-						'<a href="/visitEdit.php?patientVisitID='.$visit['patientVisitID'].
+						'<a class="a_inclinic_visitedit" href="/visitEdit.php?patientVisitID='.$visit['patientVisitID'].
 						'&clinicPatientID='.$visit['clinicPatientID'].
-						(!empty($sessionInfo['parameters']['lang']) ? "&lang=".$pageLanguage : "").'" '.
+                        createFromLink (FROM_LINK_QP, __FILE__, 'a_inclinic_visitedit').
+                        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'CLINIC_VISIT_EDIT').'" '.
 						'title="'.TEXT_EDIT_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_EDIT.'</a>&nbsp;&nbsp;|&nbsp;&nbsp;'.
-						'<a href="/visitClose.php?patientVisitID='.$visit['patientVisitID'].
+						'<a class="a_inclinic_visitclose" href="/visitClose.php?patientVisitID='.$visit['patientVisitID'].
 						'&clinicPatientID='.$visit['clinicPatientID'].
-						(!empty($sessionInfo['parameters']['lang']) ? "&lang=".$pageLanguage : "").'" '.
+                        createFromLink (FROM_LINK_QP, __FILE__, 'a_inclinic_visitclose').
+                        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'CLINIC_VISIT_CLOSE').'" '.
 						'title="'.TEXT_DISCHARGE_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_DISCHARGE.'</a></td>');
 					echo ('</tr>');					
 				}
@@ -232,7 +241,8 @@ function writeTopicMenu ($sessionInfo) {
 					<div class="dataBlock">
                         <?php $linkParams = ['familyID' => $patientData['familyID'], ]; ?>
 						<p><label><?= TEXT_FAMILYID_LABEL ?>:</label>
-                            <a href="<?= makeUrlWithQueryParams('/ptResults.php', $linkParams) ?>">
+                            <a class="a_viewFamily" href="<?= makeUrlWithQueryParams('/ptResults.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_viewFamily').
+                            '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_FAMILY_LIST') ?>">
                             <?= $patientData['familyID'] ?></a></p>
 					</div>
 					<div class="dataBlock">
@@ -342,8 +352,8 @@ function writeTopicMenu ($sessionInfo) {
 								$headerShown = true;
 							}
 							echo ('<tr>');
-							echo ('<td class="nowrap"><a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
-								'&clinicPatientID='.$visit['clinicPatientID'].'">'.
+							echo ('<td class="nowrap"><a class="a_visitSummaryView" href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
+								'&clinicPatientID='.$visit['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitSummaryView').'">'.
 								date(TEXT_VISIT_DATE_ONLY_FORMAT, strtotime($visit['dateTimeIn'])).'</a></td>');
 							echo ('<td class="nowrap"'.(isset($visit['staffName']) ? '' : ' class="inactive"' ).'>'.(isset($visit['staffName']) ? $visit['staffName'] : TEXT_VISIT_LIST_MISSING ).'</td>');
 							echo ('<td>');

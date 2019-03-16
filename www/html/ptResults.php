@@ -66,16 +66,14 @@ if (!empty($sessionInfo['parameters']['ata'])) {
 		(isset($sessionInfo['parameters']['visitDateYear']) ? '&visitDateYear='.$sessionInfo['parameters']['visitDateYear'] : "").
 		(isset($sessionInfo['parameters']['visitDateMonth']) ? '&visitDateMonth='.$sessionInfo['parameters']['visitDateMonth'] : "").
 		(isset($sessionInfo['parameters']['visitDateDay']) ? '&visitDateDay='.$sessionInfo['parameters']['visitDateDay'] : "").
-		(isset($sessionInfo['parameters']['visitDateTime']) ? '&visitDateTime='.$sessionInfo['parameters']['visitDateTime'] : "").
-		(!empty($sessionInfo['parameters']['lang']) ? '&lang='.$pageLanguage : '');
+		(isset($sessionInfo['parameters']['visitDateTime']) ? '&visitDateTime='.$sessionInfo['parameters']['visitDateTime'] : "");
 	$addNewLink = '/ptAddEdit.php?ata=true'.
 		(isset($sessionInfo['parameters']['visitType']) ? '&visitType='.$sessionInfo['parameters']['visitType'] : "").
 		(isset($sessionInfo['parameters']['visitStaffUser']) ? '&visitStaffUser='.$sessionInfo['parameters']['visitStaffUser'] : "").
 		(isset($sessionInfo['parameters']['visitDateYear']) ? '&visitDateYear='.$sessionInfo['parameters']['visitDateYear'] : "").
 		(isset($sessionInfo['parameters']['visitDateMonth']) ? '&visitDateMonth='.$sessionInfo['parameters']['visitDateMonth'] : "").
 		(isset($sessionInfo['parameters']['visitDateDay']) ? '&visitDateDay='.$sessionInfo['parameters']['visitDateDay'] : "").
-		(isset($sessionInfo['parameters']['visitDateTime']) ? '&visitDateTime='.$sessionInfo['parameters']['visitDateTime'] : "").
-		(!empty($sessionInfo['parameters']['lang']) ? '&lang='.$pageLanguage :  "");
+		(isset($sessionInfo['parameters']['visitDateTime']) ? '&visitDateTime='.$sessionInfo['parameters']['visitDateTime'] : "");
 	// check for required fields
 	if (!isset($sessionInfo['parameters']['visitType']) ||
 		!isset($sessionInfo['parameters']['visitStaffUser']) ||
@@ -88,14 +86,16 @@ if (!empty($sessionInfo['parameters']['ata'])) {
         return;
     }
 } else {
-    $cancelLink = '/clinicDash.php';
-	$addNewLink = '/ptAddEdit.php';
+    $cancelLink = '/clinicDash.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'Cancel');
+	$addNewLink = '/ptAddEdit.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'AddNewPatient');
 }
 
 // open DB
 $errorUrl = makeUrlWithQueryParams('/clinicDash.php', ['msg'=>MSG_DB_OPEN_ERROR]);
 // this will open the DB or, if it can't open the DB, return to the dashboard with an error
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+// log any open workflows.
+$logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 
 $ptArray = [];
 
@@ -164,8 +164,10 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
     $topicMenu .= '<li class="firstLink"><a href="'.$cancel.'">'.TEXT_CANCEL_SEARCH.'</a></li>'."\n";
     $topicMenu .= '<li>'.
         '<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">'.TEXT_RETURN_TO_SEARCH_LINK.': '.
+        '<input type="hidden" id="WorkflowID" name="'. WORKFLOW_QUERY_PARAM .'" value="'. getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_SEARCH') .'" >'.
+        '<input type="hidden" class="btn_search" id="SearchBtnTag" name="'.FROM_LINK.'" value="'.createFromLink (null, __FILE__, `btn_search`).' ?>">'.
         dbFieldTextInput ($sessionInfo['parameters'], "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true).
-        '&nbsp;<button type="submit">'.TEXT_SHOW_PATIENT_SUBMIT_BUTTON.'</button></form></li>';
+        '&nbsp;<button type="submit">'.TEXT_SHOW_PATIENT_SUBMIT_BUTTON.'</button> </form></li>';
 	$topicMenu .= '<li><a href="'.$new.'">'.
 		TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON.'</a></li>'."\n";
 	$topicMenu .= '</ul></div>'."\n";
@@ -178,7 +180,7 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $sessionInfo['pageLanguage']) ?>
+	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu ($cancelLink, $addNewLink, $sessionInfo) ?>
 	<div id="PatientList">
@@ -224,19 +226,15 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 				// for generic searches, clicking on a person goes to their pt. record
 				$nameLink = '/ptInfo.php?clinicPatientID='.$pt['clinicPatientID'];
 			}
-			// add the language if present.
-			if (!empty($sessionInfo['parameters']['lang'])) {
-				$nameLink .= "&lang=".$pageLanguage; 
-			}
-			echo '<p><a href="'.$nameLink.'">';
+			echo '<p><a class="a_ptNameView" href="'.$nameLink.createFromLink (FROM_LINK_QP, __FILE__, 'a_ptNameView').'">';
 			echo formatPatientNameLastFirst ($pt).'&nbsp;&nbsp;';
 			echo '('.($pt['sex'] == 'M' ? TEXT_SEX_OPTION_M : ($pt['sex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).')<br>';
 			echo '<span class="idInHeading">'.$pt['clinicPatientID'].'</span></a></p>';
 			echo '<p class="familyLink">';
 			if (empty($sessionInfo['parameters']['ata'])) {
 				// create the link only if this is a regular pt. search result
-				echo '<a href="/ptResults.php?familyID='.
-					$pt['familyID'].'">';
+				echo '<a class="a_ptFamilyView" href="/ptResults.php?familyID='.
+					$pt['familyID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptFamilyView').'">';
 			}
 			echo $pt['familyID'];
 			if (empty($sessionInfo['parameters']['ata'])) {
