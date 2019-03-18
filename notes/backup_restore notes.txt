@@ -1,0 +1,51 @@
+Idea is to create backup files in /var/backups/piclinic/files and then create a single archive in /var/backups/piclinic and then delete the raw files.
+
+##------------ backup
+
+# backup database
+mysqldump -u root -p1Password \
+--databases piclinic \
+--add-drop-database \
+--add-drop-table \
+--default-character-set=utf8 \
+--dump-date \
+--host=localhost \
+--log-error=/var/log/piclinic/mysqldump_error.log \
+--routines \
+--result-file=/var/backups/piclinic/files/piclinic_mysql.sql
+
+# backup code
+tar -cvpzf /var/backups/piclinic/files/piclinic_www.tar.gz /var/www
+
+#backup logs
+tar -cvpzf /var/backups/piclinic/files/piclinic_logs.tar.gz /var/log/apache2 /var/log/piclinic
+
+#collect into a single archive
+tar -cvpzf /var/backups/piclinic/piclinic_date.tar.gz /var/backups/piclinic/files
+
+## This creates a backup file: piclinic_date_tar.gz
+
+
+##------------ restore
+
+#restore individual archives to ./files folder
+tar -xvzf piclinic_date.tar.gz -C files --strip-components=4
+
+#restore app files
+rm -R /var/www/*
+tar -xvzf files/piclinic_www.tar.gz -C /
+
+#restore database
+mysql -f -u root -p1Password < files/piclinic_mysql.sql
+
+
+
+
+
+
+
+
+
+
+
+	
