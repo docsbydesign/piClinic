@@ -190,5 +190,5 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	</div>
 	</div>
 </body>
-<?php $result = profileLogClose($profileData, __FILE__, $requestData); ?>
+<?php $result = profileLogClose($profileData, __FILE__, $sessionInfo['parameters']); ?>
 </html>
