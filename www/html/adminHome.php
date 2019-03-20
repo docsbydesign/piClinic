@@ -63,8 +63,8 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 		<h1 class="pageHeading"><?= TEXT_PICLINIC_SYSTEM_PAGE_TITLE ?></h1>
 		<ul>
             <li><a href="/adminShowUsers.php" title="<?= TEXT_ADMIN_MANAGE_USERS_TITLE ?>"><?= TEXT_ADMIN_MANAGE_USERS_LINK ?></a>:&nbsp;<?= TEXT_ADMIN_MANAGE_USERS_DESCRIPTION ?></li>
-            <!-- <li><a href="/adminLogViewer.php<" title="<?= TEXT_ADMIN_LOG_VIEWER_TITLE ?>"><?= TEXT_ADMIN_LOG_VIEWER_LINK ?></a>:&nbsp;<?= TEXT_ADMIN_LOG_VIEWER_DESCRIPTION ?></li> -->
-            <li class="separated"><a href="/adminShowComments.php" title="<?= TEXT_ADMIN_SHOW_COMMENTS_TITLE ?>"><?= TEXT_ADMIN_SHOW_COMMENTS_LINK ?></a>:&nbsp;<?= TEXT_ADMIN_SHOW_COMMENTS_DESCRIPTION ?></li>
+            <li class="separated"><a href="/adminLogViewer.php<" title="<?= TEXT_ADMIN_LOG_VIEWER_TITLE ?>"><?= TEXT_ADMIN_LOG_VIEWER_LINK ?></a>:&nbsp;<?= TEXT_ADMIN_LOG_VIEWER_DESCRIPTION ?></li>
+            <li><a href="/adminShowComments.php" title="<?= TEXT_ADMIN_SHOW_COMMENTS_TITLE ?>"><?= TEXT_ADMIN_SHOW_COMMENTS_LINK ?></a>:&nbsp;<?= TEXT_ADMIN_SHOW_COMMENTS_DESCRIPTION ?></li>
             <li class="separated"><a href="/reports/rptMonthlyPtSummHome.php?showdiag=2" title="<?= TEXT_MONTHLY_SUMMARY_DATA_TITLE ?>"><?= TEXT_MONTHLY_SUMMARY_DATA_LINK ?></a></li>
             <li><a href="/reports/rptMonthlyPosSummHome.php?showdiag=2" title="<?= TEXT_MONTHLY_SUMMARY_BY_POS_DATA_TITLE ?>"><?= TEXT_MONTHLY_SUMMARY_BY_POS_DATA_LINK ?></a></li>
 		</ul>
