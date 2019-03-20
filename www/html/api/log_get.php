@@ -69,7 +69,7 @@ function _log_get($dbLink, $apiUserToken, $requestArgs) {
     }
 
     // If there are any missing columns, return an error here
-    if (!empty($missingColumnList)) {
+    if (!empty($missingColumnList) && empty($requestArgs['fieldOpts']) ) {
         // some required fields are missing so exit
         $returnValue['contentType'] = CONTENT_TYPE_JSON;
         if (API_DEBUG_MODE) {
@@ -92,8 +92,24 @@ function _log_get($dbLink, $apiUserToken, $requestArgs) {
 	$returnValue['httpReason']	= "Resource not found.";
 	$returnValue['format'] = 'json';
 
-    // Create query string for get operation
-	$getQueryString = makeLogQueryStringFromRequestParameters ($requestArgs);
+	$getQueryString = '';
+	if (!empty($requestArgs['fieldOpts'])) {
+        $getQueryString =
+            'SELECT DISTINCT \'userToken\' AS `fieldName`, `userToken` as `fieldValue` FROM `log` where 1 '.
+            'UNION '.
+            'SELECT DISTINCT \'sourceModule\' AS `fieldName`, `sourceModule` as `fieldValue` FROM `log` where 1 '.
+            'UNION '.
+            'SELECT DISTINCT \'logClass\' AS `fieldName`, `logClass` as `fieldValue` FROM `log` where 1 '.
+            'UNION '.
+            'SELECT DISTINCT \'logTable\' AS `fieldName`, `logTable` as `fieldValue` FROM `log` where 1 '.
+            'UNION '.
+            'SELECT DISTINCT \'logAction\' AS `fieldName`, `logAction` as `fieldValue` FROM `log` where 1 '.
+            'UNION '.
+            'SELECT DISTINCT \'logStatusCode\' AS `fieldName`, `logStatusCode` as `fieldValue` FROM `log` where 1; ';
+    } else {
+        // Create query string for get operation
+        $getQueryString = makeLogQueryStringFromRequestParameters($requestArgs);
+    }
     $dbInfo ['queryString'] = $getQueryString;
 	// get the log records that match
 	$returnValue = getDbRecords($dbLink, $getQueryString);
