@@ -36,7 +36,6 @@ exitIfCalledFromBrowser(__FILE__);
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_CLINIC_DASH_PAGE_TITLE')) { define('TEXT_CLINIC_DASH_PAGE_TITLE','TEXT_CLINIC_DASH_PAGE_TITLE',false); }
-	if (!defined('TEXT_CLINIC_HOME')) { define('TEXT_CLINIC_HOME','TEXT_CLINIC_HOME',false); }
 	if (!defined('TEXT_DISCHARGE_VISIT_INFO')) { define('TEXT_DISCHARGE_VISIT_INFO','TEXT_DISCHARGE_VISIT_INFO',false); }
 	if (!defined('TEXT_EARLIER_VISIT_NOTE')) { define('TEXT_EARLIER_VISIT_NOTE','TEXT_EARLIER_VISIT_NOTE',false); }
 	if (!defined('TEXT_EDIT_VISIT_INFO')) { define('TEXT_EDIT_VISIT_INFO','TEXT_EDIT_VISIT_INFO',false); }
@@ -67,7 +66,6 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_CLINIC_DASH_PAGE_TITLE')) { define('TEXT_CLINIC_DASH_PAGE_TITLE','Clinic information',false); }
-	if (!defined('TEXT_CLINIC_HOME')) { define('TEXT_CLINIC_HOME','Dashboard',false); }
 	if (!defined('TEXT_DISCHARGE_VISIT_INFO')) { define('TEXT_DISCHARGE_VISIT_INFO','Discharge this patient',false); }
 	if (!defined('TEXT_EARLIER_VISIT_NOTE')) { define('TEXT_EARLIER_VISIT_NOTE','Visits from an earlier date',false); }
 	if (!defined('TEXT_EDIT_VISIT_INFO')) { define('TEXT_EDIT_VISIT_INFO','Edit this visit',false); }
@@ -98,7 +96,6 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_CLINIC_DASH_PAGE_TITLE')) { define('TEXT_CLINIC_DASH_PAGE_TITLE','Información de la clínica',false); }
-	if (!defined('TEXT_CLINIC_HOME')) { define('TEXT_CLINIC_HOME','Página principal',false); }
 	if (!defined('TEXT_DISCHARGE_VISIT_INFO')) { define('TEXT_DISCHARGE_VISIT_INFO','Dar de alta este paciente',false); }
 	if (!defined('TEXT_EARLIER_VISIT_NOTE')) { define('TEXT_EARLIER_VISIT_NOTE','Visitas de una fecha anterior',false); }
 	if (!defined('TEXT_EDIT_VISIT_INFO')) { define('TEXT_EDIT_VISIT_INFO','Actualizar esta visita',false); }

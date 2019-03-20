@@ -66,7 +66,6 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_STAFF_PASSWORD_PLACEHOLDER')) { define('TEXT_STAFF_PASSWORD_PLACEHOLDER','TEXT_STAFF_PASSWORD_PLACEHOLDER',false); }
 	if (!defined('TEXT_STAFF_POSITION_LABEL')) { define('TEXT_STAFF_POSITION_LABEL','TEXT_STAFF_POSITION_LABEL',false); }
 	if (!defined('TEXT_STAFF_PREFERRED_LANGUAGE_LABEL')) { define('TEXT_STAFF_PREFERRED_LANGUAGE_LABEL','TEXT_STAFF_PREFERRED_LANGUAGE_LABEL',false); }
-	if (!defined('TEXT_STAFF_RESET_NEW_BUTTON')) { define('TEXT_STAFF_RESET_NEW_BUTTON','TEXT_STAFF_RESET_NEW_BUTTON',false); }
 	if (!defined('TEXT_STAFF_USERNAME_LABEL')) { define('TEXT_STAFF_USERNAME_LABEL','TEXT_STAFF_USERNAME_LABEL',false); }
 	if (!defined('TEXT_STAFF_USERNAME_PLACEHOLDER')) { define('TEXT_STAFF_USERNAME_PLACEHOLDER','TEXT_STAFF_USERNAME_PLACEHOLDER',false); }
 }
@@ -103,7 +102,6 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_STAFF_PASSWORD_PLACEHOLDER')) { define('TEXT_STAFF_PASSWORD_PLACEHOLDER','Your new password',false); }
 	if (!defined('TEXT_STAFF_POSITION_LABEL')) { define('TEXT_STAFF_POSITION_LABEL','Position in the clinic',false); }
 	if (!defined('TEXT_STAFF_PREFERRED_LANGUAGE_LABEL')) { define('TEXT_STAFF_PREFERRED_LANGUAGE_LABEL','Display language',false); }
-	if (!defined('TEXT_STAFF_RESET_NEW_BUTTON')) { define('TEXT_STAFF_RESET_NEW_BUTTON','Clear fields',false); }
 	if (!defined('TEXT_STAFF_USERNAME_LABEL')) { define('TEXT_STAFF_USERNAME_LABEL','Username/Password',false); }
 	if (!defined('TEXT_STAFF_USERNAME_PLACEHOLDER')) { define('TEXT_STAFF_USERNAME_PLACEHOLDER','A unique username',false); }
 }
@@ -140,7 +138,6 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_STAFF_PASSWORD_PLACEHOLDER')) { define('TEXT_STAFF_PASSWORD_PLACEHOLDER','Su contraseña nueva',false); }
 	if (!defined('TEXT_STAFF_POSITION_LABEL')) { define('TEXT_STAFF_POSITION_LABEL','Puesto en la clínica',false); }
 	if (!defined('TEXT_STAFF_PREFERRED_LANGUAGE_LABEL')) { define('TEXT_STAFF_PREFERRED_LANGUAGE_LABEL','Idioma de la pantalla',false); }
-	if (!defined('TEXT_STAFF_RESET_NEW_BUTTON')) { define('TEXT_STAFF_RESET_NEW_BUTTON','Borrar todo',false); }
 	if (!defined('TEXT_STAFF_USERNAME_LABEL')) { define('TEXT_STAFF_USERNAME_LABEL','Usuario/Contraseña',false); }
 	if (!defined('TEXT_STAFF_USERNAME_PLACEHOLDER')) { define('TEXT_STAFF_USERNAME_PLACEHOLDER','Un usuario unico',false); }
 }
