@@ -66,15 +66,25 @@ $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 // log any open workflows.
 $logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 
-$logData = _log_get($dbLink, $sessionInfo['token'], []);
+$logRequestData = filterRequestToValidParameters ($requestData);
+$logData = _log_get($dbLink, $sessionInfo['token'], $logRequestData);
 $logFilters = _log_get($dbLink, $sessionInfo['token'], ['fieldOpts' => 'true']);
 
+$filterOptions = array();
 if ($logFilters['count'] > 1) {
     // sort the array
     $logFilterList = $logFilters['data'];
     array_multisort(array_column($logFilterList, 'fieldName'),  SORT_NATURAL | SORT_FLAG_CASE ,
         array_column($logFilterList, 'fieldValue'), SORT_NATURAL | SORT_FLAG_CASE,
         $logFilterList);
+    // create the select box lists
+    foreach ($logFilterList as $row) {
+        if (empty($filterOptions[$row['fieldName']])){
+            // if there's no option list for this field, create an empty one
+            $filterOptions[$row['fieldName']] = [];
+        }
+        array_push($filterOptions[$row['fieldName']],$row['fieldValue']);
+    }
 }
 
 ?>
@@ -87,40 +97,97 @@ if ($logFilters['count'] > 1) {
 	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
 	<h1 class="pageHeading"><?= TEXT_ADMIN_LOG_VIEWER_TITLE ?></h1>
-	<div id="logSelectorDiv">
+	<div id="logSelectorDiv" class="noprint ">
+        <pre><?=json_encode($logRequestData, JSON_PRETTY_PRINT) ?></pre>
 		<form enctype="application/x-www-form-urlencoded" action="/adminLogViewer.php"  method="get">
-				<div class="infoBlock">
-                    <pre>
-                        <?= json_encode($logFilterList, JSON_PRETTY_PRINT) ?>
-                    </pre>
-                    <table>
-                        <tr>
-                            <th>fieldName</th>
-                            <th>fieldValue</th>
-                        </tr>
+            <div class="infoBlock">
+            <label class="close"><?= TEXT_LOG_ACTION_FIELD_NAME_SELECT ?></label>:
+                <select name="logAction" <?= empty($filterOptions['logAction']) ? 'disabled="disabled"' : '' ?>>
                     <?php
-
-                        foreach ($logFilterList as $row) {
-                            echo ('<tr>');
-                            echo ('<td>');
-                                echo ($row['fieldName']);
-                            echo ('</td>');
-                            echo ('<td>');
-                                echo ($row['fieldValue']);
-                            echo ('</td>');
-                            echo ('</tr>');
+                        if (!empty($filterOptions['logAction'])) {
+                            echo '<option value="">'.TEXT_BLANK_OPTION_SELECT.'</option>'."\n";
+                            foreach ($filterOptions['logAction'] as $optionValue) {
+                                echo '<option value="'.$optionValue.'">'.$optionValue.'</option>'."\n";
+                            }
                         }
                     ?>
-                    </table>
-					<p><button type="submit"><?= TEXT_LOG_FILE_SUBMIT_BUTTON ?></button></p>
-				</div>
-			</div>
-			<div style="clear: both;"></div>
-		</form>
-	</div>
-	<hr>
-	<div id="TESTING">
-	</div>
+                </select>
+
+            <label class="close"><?= TEXT_LOG_CLASS_FIELD_NAME_SELECT ?></label>:
+            <select name="logClass" <?= empty($filterOptions['logClass']) ? 'disabled="disabled"' : '' ?>>
+                <?php
+                if (!empty($filterOptions['logClass'])) {
+                    echo '<option value="">'.TEXT_BLANK_OPTION_SELECT.'</option>'."\n";
+                    foreach ($filterOptions['logClass'] as $optionValue) {
+                        echo '<option value="'.$optionValue.'">'.$optionValue.'</option>'."\n";
+                    }
+                }
+                ?>
+            </select>
+
+            <label class="close"><?= TEXT_LOG_STATUS_FIELD_NAME_SELECT ?></label>:
+            <select name="logStatusCode" <?= empty($filterOptions['logStatusCode']) ? 'disabled="disabled"' : '' ?>>
+                <?php
+                if (!empty($filterOptions['logStatusCode'])) {
+                    echo '<option value="">'.TEXT_BLANK_OPTION_SELECT.'</option>'."\n";
+                    foreach ($filterOptions['logStatusCode'] as $optionValue) {
+                        echo '<option value="'.$optionValue.'">'.$optionValue.'</option>'."\n";
+                    }
+                }
+                ?>
+            </select>
+
+            <label class="close"><?= TEXT_LOG_TABLE_FIELD_NAME_SELECT ?></label>:
+            <select name="logTable" <?= empty($filterOptions['logTable']) ? 'disabled="disabled"' : '' ?>>
+                <?php
+                if (!empty($filterOptions['logTable'])) {
+                    echo '<option value="">'.TEXT_BLANK_OPTION_SELECT.'</option>'."\n";
+                    foreach ($filterOptions['logTable'] as $optionValue) {
+                        echo '<option value="'.$optionValue.'">'.$optionValue.'</option>'."\n";
+                    }
+                }
+                ?>
+            </select>
+
+            <label class="close"><?= TEXT_SOURCE_MODULE_FIELD_NAME_SELECT ?></label>:
+            <select name="sourceModule" <?= empty($filterOptions['sourceModule']) ? 'disabled="disabled"' : '' ?>>
+                <?php
+                if (!empty($filterOptions['sourceModule'])) {
+                    echo '<option value="">'.TEXT_BLANK_OPTION_SELECT.'</option>'."\n";
+                    foreach ($filterOptions['sourceModule'] as $optionValue) {
+                        echo '<option value="'.$optionValue.'">'.$optionValue.'</option>'."\n";
+                    }
+                }
+                ?>
+            </select>
+
+            <label class="close"><?= TEXT_USER_TOKEN_FIELD_NAME_SELECT ?></label>:
+            <select name="userToken" <?= empty($filterOptions['userToken']) ? 'disabled="disabled"' : '' ?>>
+                <?php
+                if (!empty($filterOptions['userToken'])) {
+                    echo '<option value="">'.TEXT_BLANK_OPTION_SELECT.'</option>'."\n";
+                    foreach ($filterOptions['userToken'] as $optionValue) {
+                        echo '<option value="'.$optionValue.'">'.$optionValue.'</option>'."\n";
+                    }
+                }
+                ?>
+            </select>
+            </div>
+            <div style="clear: both;"></div>
+            <div class="infoBlock">
+                <p><button type="submit"><?= TEXT_LOG_FILE_SUBMIT_BUTTON ?></button></p>
+            </div>
+        </form>
+    </div>
+    <div style="clear: both;"></div>
+    <hr>
+    <div class="infoBlock">
+            <pre>
+                <?= json_encode($logData , JSON_PRETTY_PRINT) ?>
+            </pre>
+    </div>
+    <div style="clear: both;"></div>
+
 	</div>
 </body>
 </html>

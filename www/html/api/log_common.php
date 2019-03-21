@@ -59,6 +59,24 @@ function getLogFieldInfo() {
     return $returnValue;
 }
 
+function filterRequestToValidParameters ($queryParamArrayIn) {
+    $fieldInfoArray = getLogFieldInfo();
+    $queryParamArrayOut = array();
+    if (!empty($queryParamArrayIn)){
+        foreach ($queryParamArrayIn as $p_key => $p_value) {
+            // find key (field name) in list of valid query params
+            foreach ($fieldInfoArray as $fieldInfo) {
+                if ($p_key == $fieldInfo[LOG_REQ_ARG]) {
+                    // found it
+                    $queryParamArrayOut[$p_key] = $p_value;
+                    break;
+                }
+            }
+        }
+    }
+    return $queryParamArrayOut;
+}
+
 /*
  *  Creates a MySQL query string to retrieve log reoords as filtered by
  *      the fields passed in the $requestParamters argument.

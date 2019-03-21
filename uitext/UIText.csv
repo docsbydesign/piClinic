@@ -256,6 +256,8 @@ TEXT_LOGIN_PASSWORD_PLACEHOLDER,Password,Contraseña
 TEXT_LOGIN_SUBMIT_BUTTON,Login,Iniciar sesión
 TEXT_LOGIN_USERNAME,Username,Usuario
 TEXT_LOGIN_USERNAME_PLACEHOLDER,Username,Usuario
+TEXT_LOG_ACTION_FIELD_NAME_SELECT,Action,Action
+TEXT_LOG_CLASS_FIELD_NAME_SELECT,Class,Class
 TEXT_LOG_FILE_LABEL,File,Archivo
 TEXT_LOG_FILE_RECORD_COUNT_LABEL,events,eventos
 TEXT_LOG_FILE_SELECT_LABEL,Available logs,Registros disponibles
@@ -263,6 +265,8 @@ TEXT_LOG_FILE_SUBMIT_BUTTON,Show log,Mostrar registro
 TEXT_LOG_FORMAT_SELECT_LABEL,Format,Formato
 TEXT_LOG_LIMIT_LABEL,Events to show,Eventos para mostrar
 TEXT_LOG_LIST_SHOWING,Showing the most recent,Mostrando los más recientes
+TEXT_LOG_STATUS_FIELD_NAME_SELECT,Status,Status
+TEXT_LOG_TABLE_FIELD_NAME_SELECT,Table,Table
 TEXT_LOOKUP_PATIENT_LINK,Search for patient,Buscar el paciente
 TEXT_LT_1MO_N,Less than 1 mon.-1st visit,Menores de 1 mes de la primera vez
 TEXT_LT_1MO_S,Less than 1 mon.-subsequent,Menores de 1 mes subsiguiente 
@@ -319,8 +323,8 @@ TEXT_NO_REPORT_PROMPT,Select a health professional and date.,Escoge un profesion
 TEXT_NO_STAFF_RECORDS,No users or staff members found,No hay usuarios o personal de la clínica
 TEXT_NO_SUMMARY_REPORT_PROMPT,Select a service type and date.,Escoge un servicio de atención y una fecha.
 TEXT_NO_VISITS_FOUND_DAY,No visits found for this date.,No visitas encontradas en este fecha.
-TEXT_NO_VISITS_FOUND_MONTH,No visits found for this month.,No visitas encontradas en este mes.
 TEXT_NO_VISITS_FOUND_DOCTOR,This person did not see any patients on this date.,Esta persona no tuvo pacientes en este fecha.
+TEXT_NO_VISITS_FOUND_MONTH,No visits found for this month.,No visitas encontradas en este mes.
 TEXT_NO_VISIT_IMAGES,This visit does not have any images,Esta visita no tiene imágenes 
 TEXT_OF_PAGES,of,de
 TEXT_OPEN_VISIT_LIST_HEAD,Patients admitted to the clinic,Pacientes admitidos a la clínica
@@ -626,6 +630,7 @@ TEXT_SHOW_PATIENT_INFO_BUTTON,Show info,Mostrar la información
 TEXT_SHOW_PATIENT_SUBMIT_BUTTON,Search,Buscar
 TEXT_SHOW_REPORT_BUTTON,Show report,Mostrar informe
 TEXT_SHOW_VISIT_INFO,Show visit details,Mostrar los detalles de la visita
+TEXT_SOURCE_MODULE_FIELD_NAME_SELECT,Source,Source
 TEXT_STAFF_ACCESS_LABEL,piClinic system permission,Permisso para acessar los datos del sistema piClinic
 TEXT_STAFF_ACCOUNT_INFO_LABEL,User information,Información del usuario
 TEXT_STAFF_ACTIVE_LABEL,Account status,Estado de la cuenta
@@ -681,6 +686,7 @@ TEXT_THOUSANDS_SEPARATOR,",","."
 TEXT_TYPE_LABEL,Service type,Servicio de atención
 TEXT_USERNAME_NOT_ACTIVE,Inactive username,Usuario inactivo
 TEXT_USER_COMMENTS_PAGE_TITLE,User comments,Comentarios de los usuarios
+TEXT_USER_TOKEN_FIELD_NAME_SELECT,Token,Token
 TEXT_VALUE_NOT_SET,(not set),(vacio)
 TEXT_VALUE_NOT_SET,No data,No hay datos
 TEXT_VIEW_PATIENT,Show patient information,Mostrar información del paciente
