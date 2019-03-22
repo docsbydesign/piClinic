@@ -67,8 +67,15 @@ $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 $logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 
 $logRequestData = filterRequestToValidParameters ($requestData);
-$logData = _log_get($dbLink, $sessionInfo['token'], $logRequestData);
+$logResults = _log_get($dbLink, $sessionInfo['token'], $logRequestData);
 $logFilters = _log_get($dbLink, $sessionInfo['token'], ['fieldOpts' => 'true']);
+
+$logData = array();
+if ($logResults['count'] == 1) {
+    $logData[0] = $logResults['data'];
+} else {
+    $logData = $logResults['data'];
+} // else if 0, leave empty
 
 $filterOptions = array();
 if ($logFilters['count'] > 1) {
@@ -98,7 +105,6 @@ if ($logFilters['count'] > 1) {
 	<div class="pageBody">
 	<h1 class="pageHeading"><?= TEXT_ADMIN_LOG_VIEWER_TITLE ?></h1>
 	<div id="logSelectorDiv" class="noprint ">
-        <pre><?=json_encode($logRequestData, JSON_PRETTY_PRINT) ?></pre>
 		<form enctype="application/x-www-form-urlencoded" action="/adminLogViewer.php"  method="get">
             <div class="infoBlock">
             <label class="close"><?= TEXT_LOG_ACTION_FIELD_NAME_SELECT ?></label>:
@@ -182,9 +188,44 @@ if ($logFilters['count'] > 1) {
     <div style="clear: both;"></div>
     <hr>
     <div class="infoBlock">
-            <pre>
-                <?= json_encode($logData , JSON_PRETTY_PRINT) ?>
-            </pre>
+        <table>
+            <tr>
+                <th><?= TEXT_LOG_DISPLAY_ID ?></th>
+                <th><?= TEXT_LOG_DISPLAY_SOURCE ?></th>
+                <th><?= TEXT_LOG_DISPLAY_TOKEN ?></th>
+                <th><?= TEXT_LOG_DISPLAY_CLASS ?></th>
+                <th><?= TEXT_LOG_DISPLAY_TABLE ?></th>
+                <th><?= TEXT_LOG_DISPLAY_ACTION ?></th>
+                <th><?= TEXT_LOG_DISPLAY_QUERY_STRING ?></th>
+                <th><?= TEXT_LOG_DISPLAY_BEFORE_DATA ?></th>
+                <th><?= TEXT_LOG_DISPLAY_AFTER_DATA ?></th>
+                <th><?= TEXT_LOG_DISPLAY_STATUS_CODE ?></th>
+                <th><?= TEXT_LOG_DISPLAY_STATUS_MSG ?></th>
+                <th><?= TEXT_LOG_DISPLAY_CREATED_DATE ?></th>
+            </tr>
+            <?php
+                if (empty($logData)) {
+                    echo '<tr colspan="11">TEXT_NO_LOG_DATA</tr>';
+                } else {
+                    foreach ($logData as $logEntry) {
+                        echo '<tr>';
+                            echo '<td>'. $logEntry['logId'] ."</td>\n";
+                            echo '<td>'. substr($logEntry['sourceModule'], strlen('/var/www/html') )."</td>\n";
+                            echo '<td>'. $logEntry['userToken'] ."</td>\n";
+                            echo '<td>'. $logEntry['logClass'] ."</td>\n";
+                            echo '<td>'. $logEntry['logTable'] ."</td>\n";
+                            echo '<td>'. $logEntry['logAction'] ."</td>\n";
+                            echo '<td>'. $logEntry['logQueryString'] ."</td>\n";
+                            echo '<td><pre>'. json_encode(json_decode($logEntry['logBeforeData']), JSON_PRETTY_PRINT) ."</pre></td>\n";
+                            echo '<td><pre>'. json_encode(json_decode($logEntry['logAfterData']), JSON_PRETTY_PRINT) ."</pre></td>\n";
+                            echo '<td>'. $logEntry['logStatusCode'] ."</td>\n";
+                            echo '<td>'. $logEntry['logStatusMessage'] ."</td>\n";
+                            echo '<td>'. $logEntry['createdDate'] ."</td>\n";
+                        echo '</tr>';
+                    }
+                }
+            ?>
+        </table>
     </div>
     <div style="clear: both;"></div>
 

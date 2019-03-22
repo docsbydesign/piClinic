@@ -99,7 +99,7 @@ if ($retVal['httpResponse'] == 201) {
 } else {
 	// login failure
 	$errorUrl .= ((strpos($errorUrl, '?') === FALSE) ? '?' : '&' );
-	$errorUrl .= 'msg=LOGIN_FAILURE';
+	$errorUrl .= 'msg='.MSG_LOGIN_FAILURE;
 	$retVal['error']['redirectUrl'] = $errorUrl;
 	logApiError($sessionInfo['parameters'], $retVal, __FILE__ );
 	header('httpReason: username or password not valid.');
