@@ -194,6 +194,17 @@ TEXT_HEADING_NURSE_PRO,Profesional,Profesional
 TEXT_HEADING_PROFESSIONAL_NAME,Name,Nombre
 TEXT_HEADING_PROFESSIONAL_TYPE,Type of health professional,Tipo de profesional de salud
 TEXT_HEADING_TOTAL,TOTAL,TOTAL
+TEXT_HELP_INTRODUCTION,Map of piClinic screens,Mapa de las pantallas de la consola piClinic
+TEXT_HELP_NOKEY_ADD,Add new patient,Agregar paciente nuevo
+TEXT_HELP_NOKEY_ADMIN,System administration,Administración del sistema
+TEXT_HELP_NOKEY_ADMIT,Admit patient,Abra una visita nueva
+TEXT_HELP_NOKEY_DASHBOARD,Clinic information,Información de la clínica
+TEXT_HELP_NOKEY_DISCHARGE,Discharge this patient,Dar de alta este paciente
+TEXT_HELP_NOKEY_EDIT,Edit patient info,Actualizar información del paciente
+TEXT_HELP_NOKEY_EDIT_VISIT_DETAILS,Edit visit info,Actualizar información de la visita
+TEXT_HELP_NOKEY_FIND_PATIENT,Find patient,Buscar paciente
+TEXT_HELP_NOKEY_PATIENT_INFO,View patient info,Revisar información del paciente
+TEXT_HELP_NOKEY_REPORTS,Reports,Informes
 TEXT_HELP_NO_CONTENT,Help is not yet available,La ayuda todavía no está disponible
 TEXT_HOMEADDRESS1_LABEL,Address 1,Dirección
 TEXT_HOMEADDRESS1_MISSING,(Address 1 not specified),(Dirección no especificada)

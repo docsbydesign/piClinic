@@ -27,8 +27,11 @@
 $apiCommonInclude = dirname(__FILE__).'/../api/api_common.php';
 if (!file_exists($apiCommonInclude)) {
     // if not over one, try up one more directory and then over.
-    // it should be in one of these two locations.
     $apiCommonInclude = dirname(__FILE__).'/../../api/api_common.php';
+    if (!file_exists($apiCommonInclude)) {
+        // if not over one, try up one more directory and then over.
+        $apiCommonInclude = dirname(__FILE__).'/../../../api/api_common.php';
+    }
 }
 require_once $apiCommonInclude;
 exitIfCalledFromBrowser(__FILE__);

@@ -69,7 +69,8 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	<div class="pageBody">
 	<div id="ReportList">
 		<h1 class="pageHeading"><?= TEXT_PICLINIC_HELP_PAGE_TITLE ?></h1>
-		<p><?= TEXT_HELP_NO_CONTENT ?></p>
+		<p><?= TEXT_HELP_INTRODUCTION ?></p>
+        <img src="/api/locImage.php?image=/assets/images/piClinic_Help_noKey.svg<?= '&language='.$pageLanguage ?>">
 	</div>
 	</div>
 </body>
