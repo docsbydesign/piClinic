@@ -57,12 +57,14 @@ function _locImage_get ($dbLink, $apiUserToken, $requestArgs) {
     $returnValue['httpResponse'] = 404;
     $returnValue['httpReason']	= 'Resource not found.';
 
-    if (empty($requestArgs['image'])) {
+    if (empty($requestArgs['image']) || empty($requestArgs['language'])) {
         // missing required parameter.
         $returnValue['httpResponse'] = 400;
-        $returnValue['httpReason']	= 'Required parameter \'image\' missing.';
+        $returnValue['httpReason']	= 'A required parameter is missing. Both image and language must be specified.';
         return $returnValue;
     }
+
+    $pageLanguage = $requestArgs['language']; // used by included file
 
     profileLogCheckpoint($profileData,'PARAMETERS_VALID');
 
@@ -77,6 +79,44 @@ function _locImage_get ($dbLink, $apiUserToken, $requestArgs) {
     if (file_exists($dbVal['imagePath'])){
         $dbVal['imageExists'] = 'Yes';
         $imageData['mimeType'] = mime_content_type ($imageData['imagePath']);
+        if ($imageData['mimeType'] == 'image/svg+xml') {
+            // see if this image has a corresponding localized text file
+            // file is in the uitext sub folder of the folder that has the image
+            // get the base filename
+            $uiTextFile = basename($imageData['imagePath']);
+            // find the file's directory
+            $uiTextFolder = substr($imageData['imagePath'],0, -(strlen($uiTextFile)));
+            $uiTextFolder .= 'uitext/'; // add in subfolder name
+            $uiTextFile = substr($uiTextFile, 0,  -(strlen('.svg')));
+            // build the text file path now
+            $uiTextFilePath = $uiTextFolder . $uiTextFile . 'Text.php';
+            $dbVal['textFilePath'] = $uiTextFilePath;
+            if (file_exists($uiTextFilePath)) {
+                // read it in
+                require_once ($uiTextFilePath);
+                // scan and replace the text
+                $imageFileData = file_get_contents($imageData['imagePath']);
+                if ($imageFileData !== FALSE) {
+                    // create a list of substitutable text tokens
+                    $locTags = array();
+                    preg_match_all("/TEXT_[0-9A-Z_]+/", $imageFileData, $locTags, PREG_SET_ORDER);
+                    $dbVal['locTags'] = $locTags;
+                    foreach ($locTags as $tag) {
+                        // collect the changes in the original string
+                        // add characters to provide context for the search and replace strings
+                        $oldString = '>'.$tag[0].'<';
+                        $newString = '>'.constant($tag[0]).'<';
+                        $imageFileData = str_replace ($oldString, $newString, $imageFileData);
+                    }
+                    $imageData['imageBytes'] = $imageFileData;
+                } else {
+                    $dbVal['textFileError'] = error_get_last();
+                }
+            } else {
+                $dbVal['textFileError'] = ["error" => 'Text file not found', "path" => $uiTextFilePath];
+            }
+        }
+
         $returnValue['data'] = $imageData;
         $returnValue['httpResponse'] = 200;
         $returnValue['httpReason']	= 'Success-1';
