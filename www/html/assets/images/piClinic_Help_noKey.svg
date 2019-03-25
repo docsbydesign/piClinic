@@ -69,7 +69,7 @@
 	.st3{font-size:12px;}
 	.st4{fill:none;stroke:#000000;stroke-miterlimit:10;}
 </style><a
-   xlink:href="LINK_Dashboard"
+   xlink:href="LINK_HELP_NOKEY_DASHBOARD"
    transform="translate(-151.8,-59)"
    onmouseout="style.fill = &quot;#000000&quot;"
    onmouseover="style.fill = &quot;#558ED5&quot;"
@@ -97,12 +97,12 @@
    id="text72"
    x="183.03516"
    y="91.143555"
-   style="font-size:12px;font-family:Helvetica-Regular">TEXT_Dashboard</text>
+   style="font-size:12px;font-family:Helvetica-Regular">TEXT_HELP_NOKEY_DASHBOARD</text>
 
 
 
 </g></a><a
-   xlink:href="LINK_FindPatient"
+   xlink:href="LINK_HELP_NOKEY_FIND_PATIENT"
    transform="translate(-151.8,-59)"
    onmouseout="style.fill = &quot;#000000&quot;"
    onmouseover="style.fill = &quot;#558ED5&quot;"
@@ -130,12 +130,12 @@
    id="text76"
    style="font-size:12px;font-family:Helvetica-Regular"
    x="183.03516"
-   y="189.14355">TEXT_FindPatient</text>
+   y="189.14355">TEXT_HELP_NOKEY_FIND_PATIENT</text>
 
 
 
 </g></a><a
-   xlink:href="LINK_PatientInfo"
+   xlink:href="LINK_HELP_NOKEY_PATIENT_INFO"
    transform="translate(-151.8,-59)"
    style="stroke:none"
    onmouseout="style.fill = &quot;#000000&quot;"
@@ -169,7 +169,7 @@
    id="text80"
    style="font-size:12px;font-family:Helvetica-Regular;fill-opacity:1;stroke:none;stroke-opacity:1"
    x="235.03516"
-   y="284.14355">TEXT_PatientInfo</text>
+   y="284.14355">TEXT_HELP_NOKEY_PATIENT_INFO</text>
 
 
 
@@ -180,7 +180,7 @@
      height="56.499992"
      x="231"
      y="252.75" /></a><a
-   xlink:href="LINK_Admit"
+   xlink:href="LINK_HELP_NOKEY_ADMIT"
    transform="translate(-151.8,-59)"
    onmouseout="style.fill = &quot;#000000&quot;"
    onmouseover="style.fill = &quot;#558ED5&quot;"
@@ -208,12 +208,12 @@
    id="text84"
    style="font-size:12px;font-family:Helvetica-Regular"
    x="300.03516"
-   y="379.14355">TEXT_Admit</text>
+   y="379.14355">TEXT_HELP_NOKEY_ADMIT</text>
 
 
 
 </g></a><a
-   xlink:href="LINK_Edit"
+   xlink:href="LINK_HELP_NOKEY_EDIT"
    transform="translate(-151.8,-59)"
    onmouseout="style.fill = &quot;#000000&quot;"
    onmouseover="style.fill = &quot;#558ED5&quot;"
@@ -241,12 +241,12 @@
    id="text88"
    style="font-size:12px;font-family:Helvetica-Regular"
    x="179.03516"
-   y="475.14355">TEXT_Edit</text>
+   y="475.14355">TEXT_HELP_NOKEY_EDIT</text>
 
 
 
 </g></a><a
-   xlink:href="LINK_Add"
+   xlink:href="LINK_HELP_NOKEY_ADD"
    transform="translate(-151.8,-59)"
    onmouseout="style.fill = &quot;#000000&quot;"
    onmouseover="style.fill = &quot;#558ED5&quot;"
@@ -274,12 +274,12 @@
    id="text92"
    style="font-size:12px;font-family:Helvetica-Regular"
    x="180.03516"
-   y="574.14355">TEXT_Add</text>
+   y="574.14355">TEXT_HELP_NOKEY_ADD</text>
 
 
 
 </g></a><a
-   xlink:href="LINK_EditVisitDetails"
+   xlink:href="LINK_HELP_NOKEY_EDIT_VISIT_DETAILS"
    transform="translate(-151.8,-59)"
    onmouseout="style.fill = &quot;#000000&quot;"
    onmouseover="style.fill = &quot;#558ED5&quot;"
@@ -308,12 +308,12 @@
    id="text96"
    style="font-size:12px;font-family:Helvetica-Regular"
    x="428.03516"
-   y="475.14355">TEXT_EditVisitDetails</text>
+   y="475.14355">TEXT_HELP_NOKEY_EDIT_VISIT_DETAILS</text>
 
 
 
 </g></a><a
-   xlink:href="LINK_Discharge"
+   xlink:href="LINK_HELP_NOKEY_DISCHARGE"
    transform="translate(-151.8,-59)"
    onmouseout="style.fill = &quot;#000000&quot;"
    onmouseover="style.fill = &quot;#558ED5&quot;"
@@ -341,12 +341,12 @@
    id="text100"
    style="font-size:12px;font-family:Helvetica-Regular"
    x="364.03516"
-   y="575.14355">TEXT_Discharge</text>
+   y="575.14355">TEXT_HELP_NOKEY_DISCHARGE</text>
 
 
 
 </g></a><a
-   xlink:href="LINK_Admin"
+   xlink:href="LINK_HELP_NOKEY_ADMIN"
    transform="translate(-151.8,-59)"
    onmouseout="style.fill = &quot;#000000&quot;"
    onmouseover="style.fill = &quot;#558ED5&quot;"
@@ -374,12 +374,12 @@
    id="text104"
    x="558.03516"
    y="91.143555"
-   style="font-size:12px;font-family:Helvetica-Regular">TEXT_Admin</text>
+   style="font-size:12px;font-family:Helvetica-Regular">TEXT_HELP_NOKEY_ADMIN</text>
 
 
 
 </g></a><a
-   xlink:href="LINK_Reports"
+   xlink:href="LINK_HELP_NOKEY_REPORTS"
    transform="translate(-151.8,-59)"
    onmouseout="style.fill = &quot;#000000&quot;"
    onmouseover="style.fill = &quot;#558ED5&quot;"
@@ -400,7 +400,7 @@
    id="text108"
    x="371.03516"
    y="90.958984"
-   style="font-size:12px;font-family:Helvetica-Regular">TEXT_Reports</text>
+   style="font-size:12px;font-family:Helvetica-Regular">TEXT_HELP_NOKEY_REPORTS</text>
 
 
 
