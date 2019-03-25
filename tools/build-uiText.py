@@ -48,8 +48,11 @@ accessTest = """
 $apiCommonInclude = dirname(__FILE__).'/../api/api_common.php';
 if (!file_exists($apiCommonInclude)) {
     // if not over one, try up one more directory and then over.
-    // it should be in one of these two locations.
     $apiCommonInclude = dirname(__FILE__).'/../../api/api_common.php';
+    if (!file_exists($apiCommonInclude)) {
+        // if not over one, try up one more directory and then over.
+        $apiCommonInclude = dirname(__FILE__).'/../../../api/api_common.php';
+    }
 }
 require_once $apiCommonInclude;
 exitIfCalledFromBrowser(__FILE__);
@@ -156,7 +159,7 @@ def createFiles (arg_build, arg_csvfile, arg_codedir):
     php_files = []
     for file in files:
         # check the last 8 characters of the name
-        if file[-4:] != '.php':
+        if (file[-4:] not in ['.php', '.svg' ]) :
             continue
         else:
             # make sure this isn't a text string file
