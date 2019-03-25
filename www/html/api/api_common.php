@@ -100,15 +100,16 @@ function outputResults($results) {
 			}
 			if ($results ['httpResponse'] == 200) {
 				// get file path and open file
-				if (file_exists($imageData['ImagePath'])) {
-					$imageBytes = file_get_contents($imageData['ImagePath']);
-					$imageSize = strlen($imageBytes);
-					if ($imageSize > 0) {
+				if (file_exists($imageData['imagePath'])) {
+					$imageBytes = file_get_contents($imageData['imagePath']);
+                    $imageFileSize = filesize($imageData['imagePath']);
+					if ($imageBytes !== FALSE) {
 						// write the image
 						http_response_code($results['httpResponse']);
+                        $imageSize = strlen($imageBytes);
 						header("Access-Control-Allow-Origin: *"); // allow CORS in browsers
 						header("Response-String: ".$results['httpReason']);
-						header('Content-type: '.$imageData['MimeType'].';');
+						header('Content-type: '.$imageData['mimeType'].';');
 						header("Content-Length: " . $imageSize);
 						echo $imageBytes;
 						/*
@@ -118,6 +119,10 @@ function outputResults($results) {
 					} else {
 						// empty image file
 						// no image data so reconfigure response to server error
+                        header("X-piClinic-ImageFilePath: ". $imageData['imagePath']);
+                        header("X-piClinic-ImageFileSize: ". $imageFileSize);
+                        header("X-piClinic-ImageBytes: ". $imageBytes);
+                        header("X-piClinic-ImageFileError: ".  json_encode(error_get_last()));
 						$results ['httpResponse'] = 500;
 						$results ['contentType'] = CONTENT_TYPE_JSON;
 						$results ['httpReason'] = 'Image file is empty.';
