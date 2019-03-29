@@ -199,12 +199,13 @@ function writeTopicMenu ($sessionInfo) {
 					$complaintText = (isset($visit['primaryComplaint']) ? $visit['primaryComplaint'] : TEXT_VISIT_LIST_MISSING );
 					if (strlen($complaintText) > 40) {
 						$complaintText = substr($complaintText,0,40).'&nbsp;'.
-						'<a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
-						'&clinicPatientID='.$visit['clinicPatientID'].
+						    '<a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
+                            '&clinicPatientID='.$visit['clinicPatientID'].
                             createFromLink (FROM_LINK_QP, __FILE__, 'a_inclinic_moreInfo').
-                            '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'CLINIC_VISIT_VIEW').'">'.TEXT_PATIENT_OPEN_NEW_VISIT.'" '.
-						'class="a_inclinic_moreInfo moreInfo"'.
-						'title="'.TEXT_MORE_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_MORE.'</a>';
+                            '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'CLINIC_VISIT_VIEW').
+                            '" '.
+                            'class="a_inclinic_moreInfo moreInfo" '.
+                            'title="'.TEXT_MORE_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_MORE.'</a>';
 					}
 					echo ('<td'.(isset($visit['primaryComplaint']) ? '' : ' class="inactive"' ).'>'.$complaintText.'</td>');
 					echo ('<td class="nowrap"><a class="a_inclinic_visitview" href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
