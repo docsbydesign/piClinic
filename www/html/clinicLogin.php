@@ -44,7 +44,7 @@ $loginData['username'] = '';
 $loginData['password'] = '';
 ?>
 <?= pageHtmlTag($sessionInfo['sessionLanguage']) ?>
-<?= pageHeadTag(TEXT_CLINIC_LOGIN_PAGE_TITLE) ?>
+<?= pageHeadTag(TEXT_CLINIC_LOGIN_PAGE_TITLE, 86400) ?>
 <body>
 	<?= piClinicTag(); ?>
 	<div id="sessionDiv"><p>&nbsp;</p><!-- placeholder for this page --></div>

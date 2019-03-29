@@ -309,6 +309,7 @@ TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED,The patient ID was not specified.,No estuv
 TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND,Patient visit not found.,No se encontro la visita del paciente.
 TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED,Patient visit ID not specified.,ID de la visita no está especificada.
 TEXT_MESSAGE_REQUIRED_FIELD_MISSING,A required field was not filled in.,Un campo requirido no tiene datos.
+TEXT_MESSAGE_SESSION_TIMEOUT,You haven\'t been using the system for a while so you were logged out,,No ha estado usando la consola por un rato y su sesión ha estado cerrado automáticamente.
 TEXT_MESSAGE_UNSUPPORTED_ERROR,Cannot perform the action requested.,No puede hacer la acción pedido.
 TEXT_MESSAGE_USER_NOT_FOUND,The staff member could not be found.,La persona no estuvo encontrado.
 TEXT_MONTHLY_PAGE_TITLE,Monthly Payment Log,Registro de Pagos del Mes

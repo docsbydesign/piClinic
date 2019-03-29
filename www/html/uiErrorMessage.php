@@ -82,6 +82,10 @@ if (isset($pageLanguage)) {
                     echo TEXT_MESSAGE_USER_NOT_FOUND;
                     break;
 
+                case MSG_SESSION_TIMEOUT :
+                    echo TEXT_MESSAGE_SESSION_TIMEOUT;
+                    break;
+
 				default:
 					echo TEXT_MESSAGE_GENERIC;
 					break;

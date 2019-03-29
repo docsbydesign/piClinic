@@ -42,6 +42,10 @@ $sessionInfo = getUiSessionInfo();
 // redirect to this page whether successful or not
 $errorUrl =
     $redirectUrl = '/clinicLogin.php';
+if (!empty($sessionInfo['parameters']['msg'])) {
+    // pass message to session close
+    $redirectUrl = makeUrlWithQueryParams($errorUrl, ['msg' => $sessionInfo['parameters']['msg']]);
+}
 
 $dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
 
@@ -61,16 +65,6 @@ if (!checkUiSessionAccess($dbLink, $sessionInfo['token'], PAGE_ACCESS_READONLY, 
     }
     header("Location: ". $redirectUrl);
     exit;
-}
-
-// check for authorization to access this page
-if (!checkUiSessionAccess($dbLink, $sessionInfo['token'], PAGE_ACCESS_CLINIC, $sessionInfo)){
-    // don't do anything, just log this
-    $logError['httpResponse'] =  403;
-    $logError['httpReason'] = 'User account is not authorized to access this resource.';
-    $logError['error']['redirectUrl'] = $redirectUrl;
-    $logError['error']['requestData'] = $requestData;
-    logApiError($sessionInfo['parameters'], $logError, __FILE__ , $sessionInfo['username'], 'session', $logError['httpReason']);
 }
 
 profileLogCheckpoint($profileData,'DB_OPEN');

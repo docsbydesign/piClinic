@@ -49,6 +49,7 @@ if (!defined('UI_COMMON_CONSTANTS')) {
     define('MSG_NO_ACCESS',"NO_ACCESS", false);
     define('MSG_PATIENT_ID_IN_USE',"PATIENT_ID_IN_USE", false);
     define('MSG_REQUIRED_FIELD_MISSING',"REQUIRED_FIELD_MISSING", false);
+    define('MSG_SESSION_TIMEOUT',"SESSION_TIMEOUT",false);
     define('MSG_UNSUPPORTED',"UNSUPPORTED", false);
     define('MSG_USER_NOT_FOUND',"USER_NOT_FOUND", false);
 }
@@ -317,7 +318,11 @@ function formatAgeFromBirthdate ($birthdate, $today=null, $yrText='y', $moText='
 function makeUrlWithQueryParams ($url, $qParams) {
     if (!empty($qParams) && is_array($qParams) && !empty($url)) {
         $qParamString = http_build_query($qParams);
-        return $url . '?' . $qParamString;
+        if (!empty($qParamString)) {
+            return $url . '?' . $qParamString;
+        } else {
+            return $url;
+        }
     } else {
         return $url;
     }
