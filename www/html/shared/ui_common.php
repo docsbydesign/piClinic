@@ -340,26 +340,35 @@ function cleanUrlQueryParams($queryParamArray) {
     return $qpArray;
 }
 
-function cleanedRefererUrl ($fromLinkValue = null)
-{
-    $httpReferer = '';
-    $httpRefererUrl = '';
-    $httpRefererQp = array();
-    if (!empty($_SERVER['HTTP_REFERER'])) {
-        $httpRefererParts = explode('?',$_SERVER['HTTP_REFERER']);
-        if (!empty($httpRefererParts[0])) {
-            $httpRefererUrl = $httpRefererParts[0];
+function cleanTheUrl ($urlToClean, $newQpArray = null, $fromLinkValue = null) {
+    if (!empty($urlToClean)) {
+        $urlParts = explode('?',$_SERVER['REQUEST_URI']);
+        if (!empty($urlParts[0])) {
+            $urlRoot = $urlParts[0];
         }
-        if (!empty($httpRefererParts[1])) {
-            parse_str($httpRefererParts[1], $httpRefererQp);
-            $httpRefererQp = cleanUrlQueryParams($httpRefererQp);
+        if (!empty($urlParts[1])) {
+            parse_str($urlParts[1], $urlQP);
+            $urlQP = cleanUrlQueryParams($urlQP);
         }
-        if (!empty($fromLink)) {
-            $httpRefererQp[FROM_LINK] = $fromLinkValue;
+        if (!empty($newQpArray) && is_array($newQpArray)) {
+            foreach ($newQpArray as $key=>$value) {
+                $urlQP[$key] = $value;
+            }
         }
-        return (makeUrlWithQueryParams($httpRefererUrl, $httpRefererQp));
+        if (!empty($fromLinkValue)) {
+            $urlQP[FROM_LINK] = $fromLinkValue;
+        }
+        return (makeUrlWithQueryParams($urlRoot, $urlQP));
     }
-    return $httpReferer;
+    return $urlToClean;
+}
+
+function cleanedCallingUrl ($newQpArray = null, $fromLinkValue = null) {
+    return cleanTheUrl ($_SERVER['REQUEST_URI'], $newQpArray, $fromLinkValue);
+}
+
+function cleanedRefererUrl ($fromLinkValue = null) {
+    return cleanTheUrl ($_SERVER['HTTP_REFERER'], null, $fromLinkValue);
 }
 
 function createFromLink ($queryParamName, $filePath, $linkData) {

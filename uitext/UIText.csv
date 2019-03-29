@@ -649,6 +649,7 @@ TEXT_SEX_OPTION_F,F,M
 TEXT_SEX_OPTION_M,M,H
 TEXT_SEX_OPTION_X,X,X
 TEXT_SHOWING_ONLY_END_EVENTS,Only \'end\' events are listed.,Sólo los eventos llamado \'end\' están listado.
+TEXT_SHOW_LANGUAGE_PROMPT,Show this screen in,Mostrar esta pantalla en
 TEXT_SHOW_PATIENT_INFO,Show patient details,Mostrar los detalles del paciente
 TEXT_SHOW_PATIENT_INFO_BUTTON,Show info,Mostrar la información
 TEXT_SHOW_PATIENT_SUBMIT_BUTTON,Search,Buscar

@@ -119,33 +119,42 @@ p.imageTag {
 /*
  * 	piClinic Session information
  */
-div#sessionDiv {
+div#sessionMenu {
 	background-color: #558ED5;
 	margin-top: 0px;
-}
-div#sessionDiv p {
 	font-size: 70%;
 	color: #FFF;
+	height: 15px;
+}
+div#sessionDiv {
+	float: left;
+}
+div#sessionMenu p {
 	margin: 0;
 	padding: 0 0 0 20px;
 }
-div#sessionDiv a {
+div#sessionMenu a {
 	color: #FFF;
 	text-decoration: none;
 }
-div#sessionDiv a:link {
+div#sessionMenu a:link {
 	color: #FFF;
 }
-div#sessionDiv a:visited {
+div#sessionMenu a:visited {
 	color: #FFF;
 }
-div#sessionDiv a:hover {
+div#sessionMenu a:hover {
 	color: #FFF;
 	text-decoration: underline;
 }
-div#sessionDiv a:active {
+div#sessionMenu a:active {
 	color: #FFF;
 	text-decoration: underline;
+}
+div#sessionPageMenu {
+	float: right;
+	text-align: right;
+	padding: 0 15px 0 0;
 }
 /*
  *  app menu styles
