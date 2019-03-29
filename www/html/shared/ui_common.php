@@ -342,7 +342,7 @@ function cleanUrlQueryParams($queryParamArray) {
 
 function cleanTheUrl ($urlToClean, $newQpArray = null, $fromLinkValue = null) {
     if (!empty($urlToClean)) {
-        $urlParts = explode('?',$_SERVER['REQUEST_URI']);
+        $urlParts = explode('?',$urlToClean);
         if (!empty($urlParts[0])) {
             $urlRoot = $urlParts[0];
         }
@@ -372,8 +372,8 @@ function cleanedRefererUrl ($fromLinkValue = null) {
 }
 
 function createFromLink ($queryParamName, $filePath, $linkData) {
-    //clean file path down to just the local path
     // get file name
+    // clean file path down to just the local path
     $linkQP = $filePath;
     if (substr($filePath,0,strlen(ROOT_DIR_PATH)) == ROOT_DIR_PATH) {
         $linkQP = substr($filePath, strlen(ROOT_DIR_PATH));
