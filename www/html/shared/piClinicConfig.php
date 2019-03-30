@@ -107,6 +107,7 @@ if (!defined('REST_CONSTANTS')) {
     define('DB_TABLE_STAFF','staff', false);
     define('DB_TABLE_VISIT','visit', false);
     define('DB_TABLE_TEXTMSG','textmsg', false);
+    define('DB_TABLE_WFLOG','wflog', false);
 
 	// database views
     define('DB_VIEW_COMMENT_GET','commentGet', false);

@@ -289,6 +289,7 @@ if ($retVal['httpResponse'] == 200) {
 	if (API_DEBUG_MODE) {
 		header ('DEBUG_RetVal: '.json_encode($retVal));
 	}
+
 	header("Location: ".$redirectUrl);
 } else {
 	$msgText = ( $retVal['httpResponse'] == 409 ? "PATIENT_ID_IN_USE" : "NOT_UPDATED");

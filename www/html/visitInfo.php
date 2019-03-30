@@ -86,7 +86,7 @@ if ((!empty($requestData['patientVisitID'])) && empty($dbStatus)) {
 } else {
 	if (empty($dbStatus)) {
 		// no query parameter found.
-		$dbStatus['contentType'] = 'Content-Type: application/json; charset=utf-8';		
+		$dbStatus['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
 			$dbInfo['sqlError'] = @mysqli_error($dbLink);
 			$dbInfo['getQueryString'] = $getQueryString;
@@ -178,7 +178,7 @@ function writeTopicMenu ($sessionInfo) {
 						}
 						echo ('<a class="a_visitClose" href="/visitClose.php?patientVisitID='.$visitInfo['patientVisitID'].
 						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitClose').
-                            '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_DISCHARGE').'">'. TEXT_CLOSE_VISIT . '</a></li>');
+                            '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_CLOSE').'">'. TEXT_CLOSE_VISIT . '</a></li>');
 					}
 				
 					if ($firstLinkDefined) {
