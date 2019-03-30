@@ -86,6 +86,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		logApiError($sessionInfo['parameters'], $retVal, __FILE__ );
 		break;
 }
+// close any open workflows before destroying the session
+closeSessionWorkflow($sessionInfo, __FILE__, $dbLink, $workflowStep = WORKFLOW_STEP_ABANDONED);
+
 // close the DB link until next time
 @mysqli_close($dbLink);
 

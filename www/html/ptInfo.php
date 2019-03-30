@@ -150,7 +150,9 @@ function writeTopicMenu ($sessionInfo) {
 		<ul class="topLinkMenuList">
 			<li class="firstLink">
                 <?php  $linkParams = array(); $linkParams['clinicPatientID'] = $patientData['clinicPatientID']; ?>
-				<a class="a_ptedit" href="<?= makeUrlWithQueryParams('/ptAddEdit.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_ptedit') ?><?= '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PATIENT_EDIT') ?>" ><?= TEXT_PATIENT_EDIT_PATIENT_BUTTON ?></a>
+				<a class="a_ptedit" href="<?= makeUrlWithQueryParams('/ptAddEdit.php', $linkParams).
+                '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_EDIT').
+                createFromLink (FROM_LINK_QP, __FILE__, 'a_ptedit') ?><?= '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_EDIT') ?>" ><?= TEXT_PATIENT_EDIT_PATIENT_BUTTON ?></a>
 			</li>
 			<?php
 				// show the admit patient link only if there is not an open visit.

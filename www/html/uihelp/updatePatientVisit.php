@@ -265,8 +265,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		logApiError($formData, $retVal, __FILE__ );
 		break;
 }
-// close the DB link until next time
-@mysqli_close($dbLink);
 
 // if the update was successful, go to show the patient 
 //  otherwise go back to the entry form
@@ -289,7 +287,9 @@ if ($retVal['httpResponse'] == 200) {
 	if (API_DEBUG_MODE) {
 		header ('DEBUG_RetVal: '.json_encode($retVal));
 	}
-
+	// close any of the workflows that this completes
+    closeMatchingWorkflow($sessionInfo, __FILE__, $dbLink,
+        ['VISIT_EDIT','VISIT_CLOSE','CLINIC_VISIT_EDIT','CLINIC_VISIT_CLOSE'], $workflowStep = WORKFLOW_STEP_COMPLETE, $updatedVisit);
 	header("Location: ".$redirectUrl);
 } else {
 	$msgText = ( $retVal['httpResponse'] == 409 ? "PATIENT_ID_IN_USE" : "NOT_UPDATED");
@@ -304,4 +304,6 @@ if ($retVal['httpResponse'] == 200) {
 	header('ReasonCode: '.$retVal['httpReason']);
 	header("Location: ".$redirectUrl);
 }
+// close the DB link until next time
+@mysqli_close($dbLink);
 //EOF

@@ -257,10 +257,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		break;
 }
 
-// close the DB link until next time
-@mysqli_close($dbLink);
-
-// if the new record was added successfully, go to show the patient 
+// if the new record was added successfully, go to show the patient
 //  otherwise go back to the entry form
 if ($retVal['httpResponse'] == 201) {
 	if ($formData['ata']){
@@ -271,6 +268,10 @@ if ($retVal['httpResponse'] == 201) {
 	} else{
 		$redirectUrl = makeUrlWithQueryParams('/ptInfo.php', ['clinicPatientID' => $retVal['data']['clinicPatientID']]);
 	}
+    // close any of the workflows that this completes
+    closeMatchingWorkflow($sessionInfo, __FILE__, $dbLink,
+        ['VISIT_OPEN'], $workflowStep = WORKFLOW_STEP_COMPLETE, $retVal['data']);
+
 	header("Location: ".$redirectUrl);
 } else {
 	$formData['msg']= ( $retVal['httpResponse'] == 409 ? "PATIENT_ID_IN_USE" : "NOT_UPDATED");
@@ -284,5 +285,7 @@ if ($retVal['httpResponse'] == 201) {
 	header("Location: ".$redirectUrl);
 }
 profileLogClose($profileData, __FILE__, $formData);
+// close the DB link until next time
+@mysqli_close($dbLink);
 return;
 // EOF

@@ -233,7 +233,7 @@ function writeTopicMenu ($cancel) {
                                             foreach ($visitTypes as $visitType){
                                                 if (showVisitType($visitType, VISIT_TYPE_EDIT)) {
                                                     echo('<option value="' . $visitType[0] . '" ' .
-                                                        (isset($requestData['visitType']) ? ((!empty($visitType[0]) && ($visitType[0] == $requestData['visitType'])) ? 'selected="selected"' : '') : '') .
+                                                        (isset($visitInfo['visitType']) ? ((!empty($visitType[0]) && ($visitType[0] == $visitInfo['visitType'])) ? 'selected="selected"' : '') : '') .
                                                         '>' . $visitType[1] . '</option>');
                                                 }
                                             }
@@ -294,5 +294,10 @@ function writeTopicMenu ($cancel) {
         </div>
         <hr>
 	</div>
+<div>
+    <pre>
+        <?= json_encode($visitInfo, JSON_PRETTY_PRINT) ?>
+    </pre>
+</div>
 </body>
 <?php @mysqli_close($dbLink); ?>

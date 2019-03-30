@@ -87,7 +87,9 @@ if (!empty($sessionInfo['parameters']['ata'])) {
     }
 } else {
     $cancelLink = '/clinicDash.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'Cancel');
-	$addNewLink = '/ptAddEdit.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'AddNewPatient');
+	$addNewLink = '/ptAddEdit.php'.
+        '?'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_ADD_NEW').
+        createFromLink (FROM_LINK_QP, __FILE__, 'AddNewPatient');
 }
 
 // open DB

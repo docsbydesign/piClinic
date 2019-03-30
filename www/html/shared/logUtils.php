@@ -341,8 +341,7 @@ function getWorkflowIdComponent ($workflowID, $component) {
     }
 }
 
-function logSessionWorkflow ($sessionInfo, $filename, $step, $workflowID, $dblink, $activeWorkflows = null) {
-    echo ('Logging...');
+function logSessionWorkflow ($sessionInfo, $filename, $step, $workflowID, $dblink, $activeWorkflows = null, $logData = null) {
     $wfSuccess = true;
     $wfLogEntry = array();
     $wfLogEntry['sourceModule'] = $filename;
@@ -375,18 +374,18 @@ function logSessionWorkflow ($sessionInfo, $filename, $step, $workflowID, $dblin
         $wfLogEntry['activeWorkflows'] = json_encode($activeWorkflows);
 
         for ($wfItem = count($activeWorkflows)-1; $wfItem >= 0; $wfItem -= 1) {
-            echo ('Writing loop...');
             // for each entry in the session workflow list
             $wfLogEntry['logClass'] = getWorkflowIdComponent($activeWorkflows[$wfItem], WF_TYPE);
             $wfLogEntry['wfName'] = getWorkflowIdComponent($activeWorkflows[$wfItem], WF_NAME);
             $wfLogEntry['wfGuid'] = getWorkflowIdComponent($activeWorkflows[$wfItem], WF_GUID);
             if ($workflowID == $activeWorkflows[$wfItem]) {
                 $wfLogEntry['wfStep'] = $step;
+                $wfLogEntry['logAfterData'] = (is_array($logData) ? json_encode($logData) : $logData);
             } else {
                 $wfLogEntry['wfStep'] = WORKFLOW_STEP_STEP;
+                $wfLogEntry['logAfterData'] = null;
             }
             $wfLogEntry['logBeforeData'] = null;
-            $wfLogEntry['logAfterData'] = null;
             $wfLogEntry['logStatusCode'] = null;
             $wfLogEntry['logStatusMessage'] = null;
 
@@ -395,17 +394,17 @@ function logSessionWorkflow ($sessionInfo, $filename, $step, $workflowID, $dblin
             assert($dbResult, "Unable to write to workflow log with query: ".$logQueryString);
             if (!$dbResult) {
                 // SQL ERROR
-                $dbInfo['logQueryString'] = $logQueryString;
-                $dbInfo['sqlError'] = @mysqli_error($dblink);
-                // format response
-                echo ($dbInfo['sqlError']. "\n");
-                echo ($logQueryString. "\n");
-                // log an error?
+                if (API_DEBUG_MODE) {
+                    $dbInfo['logQueryString'] = $logQueryString;
+                    $dbInfo['sqlError'] = @mysqli_error($dblink);
+                    // format response
+                    echo ($dbInfo['sqlError']. "\n");
+                    echo ($logQueryString. "\n");
+                }
                 $wfSuccess = false;
             }
         }
     } else {
-        echo ('Writing one...');
         // for each entry in the session workflow list
         $wfLogEntry['logClass'] = null;
         $wfLogEntry['wfName'] = null;
@@ -491,7 +490,7 @@ function logWorkflowStep ($sessionInfo, $filename, $step, $workflowID, $dbLink, 
     return writeEntryToLog ($dbLink, $logData);
 }
 
-function closeMatchingWorkflow($sessionInfo, $filename, $dbLink, $workflowToMatch, $workflowStep = WORKFLOW_STEP_COMPLETE) {
+function closeMatchingWorkflow($sessionInfo, $filename, $dbLink, $workflowsToMatch, $workflowStep = WORKFLOW_STEP_COMPLETE, $logData = null) {
     // closes the last (most recent) workflow in the session workflow list
     if (empty(session_id())){
         session_start();
@@ -502,19 +501,36 @@ function closeMatchingWorkflow($sessionInfo, $filename, $dbLink, $workflowToMatc
         // close the last (most recent) workflow from last to first
         // the one to close should be the last one
         $itemID = count($_SESSION[WORKFLOW_SESSION_ARRAY])-1;
-        if (getWorkflowIdComponent($_SESSION[WORKFLOW_SESSION_ARRAY][$itemID],WF_NAME) == $workflowToMatch ) {
-            $returnValue = logSessionWorkflow ($sessionInfo, $filename, $workflowStep, $_SESSION[WORKFLOW_SESSION_ARRAY][$itemID], $dbLink, $_SESSION[WORKFLOW_SESSION_ARRAY]);
-            // and then remove it
-            unset($_SESSION[WORKFLOW_SESSION_ARRAY][$itemID]);
+        $workflowMatchList = array();
+        if (is_array($workflowsToMatch)) {
+            $workflowMatchList = $workflowsToMatch;
         } else {
+            $workflowMatchList[0] = $workflowsToMatch;
+        }
+        $wfClosed = false;
+        foreach ($workflowMatchList as $workflowName) {
+            if (getWorkflowIdComponent($_SESSION[WORKFLOW_SESSION_ARRAY][$itemID],WF_NAME) == $workflowName ) {
+                $returnValue = logSessionWorkflow($sessionInfo, $filename, $workflowStep, $_SESSION[WORKFLOW_SESSION_ARRAY][$itemID], $dbLink, $_SESSION[WORKFLOW_SESSION_ARRAY], $logData);
+                // and then remove it
+                unset($_SESSION[WORKFLOW_SESSION_ARRAY][$itemID]);
+                $wfClosed = true;
+                break;
+            }
+        }
+        if (!$wfClosed) {
             // if it's not the last one, find it and close it
             for ($itemID = count($_SESSION[WORKFLOW_SESSION_ARRAY])-1; $itemID >= 0; $itemID -= 1) {
-                if (getWorkflowIdComponent($_SESSION[WORKFLOW_SESSION_ARRAY][$itemID], WF_NAME) == $workflowToMatch) {
-                    $returnValue = logSessionWorkflow($sessionInfo, $filename, $workflowStep, $_SESSION[WORKFLOW_SESSION_ARRAY][$itemID], $dbLink, $_SESSION[WORKFLOW_SESSION_ARRAY]);
-                    // and then remove it
-                    unset($_SESSION[WORKFLOW_SESSION_ARRAY][$itemID]);
-                    break;
+                foreach ($workflowMatchList as $workflowName) {
+                    if (getWorkflowIdComponent($_SESSION
+                        [WORKFLOW_SESSION_ARRAY][$itemID], WF_NAME) == $workflowName) {
+                        $returnValue = logSessionWorkflow($sessionInfo, $filename, $workflowStep, $_SESSION[WORKFLOW_SESSION_ARRAY][$itemID], $dbLink, $_SESSION[WORKFLOW_SESSION_ARRAY]);
+                        // and then remove it
+                        unset($_SESSION[WORKFLOW_SESSION_ARRAY][$itemID]);
+                        $wfClosed = true;
+                        break;
+                    }
                 }
+                if ($wfClosed) { break; }
             }
         }
     } // else, no workflow is active so nothing to do
@@ -566,8 +582,8 @@ function getWorkflowID($type, $name = null) {
     // only return a Workflow ID if a valid type was passed in.
     if (($type == WORKFLOW_TYPE_HOME) || ($type == WORKFLOW_TYPE_SUB)) {
         if (!empty($name)) {
-            // limit name strings to 16 characters or less.
-            return $type.'_'.substr($name,0,16).'_'.guidString('_');
+            // limit name strings to 24 characters or less.
+            return $type.'_'.substr($name,0,24).'_'.guidString('_');
         } else {
             return $type.'_'.guidString('_');
         }
