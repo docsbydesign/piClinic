@@ -47,7 +47,7 @@ $loginData['password'] = '';
 <?= pageHeadTag(TEXT_CLINIC_LOGIN_PAGE_TITLE, 86400) ?>
 <body>
 	<?= piClinicTag(); ?>
-	<div id="sessionDiv"><p>&nbsp;</p><!-- placeholder for this page --></div>
+	<div id="sessionMenu"><p>&nbsp;</p><!-- placeholder for this page --></div>
 	<?php require ('uiErrorMessage.php') ?>
 	<div id="loginDiv">
 		<p class="piClinicPageTitle"><?= TEXT_CLINIC_LOGIN_PAGE_TITLE ?></p>
