@@ -186,7 +186,7 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
     <div id="optionMenuDiv"></div>
 	<div id="PatientVisitView">
 		<div id="PatientVisitDetails">
-			<form enctype="application/x-www-form-urlencoded" action="/uihelp/updatePatientVisit.php" method="post">
+			<form enctype="multipart/form-data" action="/uihelp/updatePatientVisit.php" method="post">
 				<h2><?= TEXT_VISIT_VISIT_HEADING ?></h2>
 				<div class="indent1">
 				<div class="dataBlock">

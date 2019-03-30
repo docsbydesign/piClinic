@@ -170,7 +170,7 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 	<?= writeTopicMenu($cancelLinkUrl) ?>
 	<div id="patientDataDiv">
 		<h2><?= ($pageMode == 'add' ? TEXT_NEW_PATIENT_HEADING  : TEXT_EDIT_PATIENT_HEADING  ) ?></h2>
-		<form enctype="application/x-www-form-urlencoded" action="/uihelp/addPatient.php" method="post">
+		<form enctype="multipart/form-data" action="/uihelp/addPatient.php" method="post">
 			<p>
 				<label class="close"><?= TEXT_PATIENT_ID_LABEL ?>:</label>&nbsp;
 					<span style="display:<?= ($pageMode == 'edit' ?  'inline' : 'none' ) ?>">

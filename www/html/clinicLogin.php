@@ -51,7 +51,7 @@ $loginData['password'] = '';
 	<?php require ('uiErrorMessage.php') ?>
 	<div id="loginDiv">
 		<p class="piClinicPageTitle"><?= TEXT_CLINIC_LOGIN_PAGE_TITLE ?></p>
-		<form enctype="application/x-www-form-urlencoded" action="/uihelp/startUiSession.php" method="post">
+		<form enctype="multipart/form-data" action="/uihelp/startUiSession.php" method="post">
 			<p><label class="piClinicFieldLabel"><?= TEXT_LOGIN_USERNAME ?>:</label><br>
 				<?= dbFieldTextInput ($loginData, "username", TEXT_LOGIN_USERNAME_PLACEHOLDER, false, true,
 					'text', 'piClinicEdit', 64, 'username' ) ?>

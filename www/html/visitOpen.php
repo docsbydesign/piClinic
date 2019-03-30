@@ -188,7 +188,7 @@ function writeTopicMenu ($cancel) {
 	<div id="PatientVisitView">
         <div class="dataBlock"></div>
         <div id="PatientVisitDetails">
-            <form enctype="application/x-www-form-urlencoded" action="/uihelp/addPatientVisit.php" method="post">
+            <form enctype="multipart/form-data" action="/uihelp/addPatientVisit.php" method="post">
                 <input type="hidden" id="ClinicPatientIDField" name="clinicPatientID" value="<?= $patientInfo['clinicPatientID'] ?>">
                 <div id="optionMenuDiv"></div>
                     <p><label class="close"><?= TEXT_FIRST_VISIT_LABEL ?>:</label>

@@ -197,7 +197,7 @@ function writeTopicMenu ($lang, $cancelLink) {
 			<h1 class="pageHeading noBottomPad"><?= ($pageMode == 'add' ? TEXT_NEW_STAFF_HEADING  : TEXT_EDIT_STAFF_HEADING  ) ?></h1>
 		</div>
 		<div style="clear: both;"></div>
-		<form enctype="application/x-www-form-urlencoded" action="/uihelp/addStaff.php" method="post">
+		<form enctype="multipart/form-data" action="/uihelp/addStaff.php" method="post">
 			<h2><?= TEXT_STAFF_ACCOUNT_INFO_LABEL ?></h2>
 			<div id="accountInfo" class="indent1">
 				<p <?= ($userEdit ? 'style="display: none;"' : '') ?>><label class="close"><?= TEXT_STAFF_ACTIVE_LABEL ?>:</label>&nbsp;
