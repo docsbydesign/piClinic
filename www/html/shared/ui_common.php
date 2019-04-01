@@ -52,6 +52,7 @@ if (!defined('UI_COMMON_CONSTANTS')) {
     define('MSG_SESSION_TIMEOUT',"SESSION_TIMEOUT",false);
     define('MSG_UNSUPPORTED',"UNSUPPORTED", false);
     define('MSG_USER_NOT_FOUND',"USER_NOT_FOUND", false);
+    define('MSG_TOPIC_NOT_FOUND',"MSG_TOPIC_NOT_FOUND", false);
 }
 
 /*

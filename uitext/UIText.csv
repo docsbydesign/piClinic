@@ -194,6 +194,8 @@ TEXT_HEADING_NURSE_PRO,Profesional,Profesional
 TEXT_HEADING_PROFESSIONAL_NAME,Name,Nombre
 TEXT_HEADING_PROFESSIONAL_TYPE,Type of health professional,Tipo de profesional de salud
 TEXT_HEADING_TOTAL,TOTAL,TOTAL
+TEXT_HELP_CANCEL,Cancel,Cancelar
+TEXT_HELP_EDIT_CANCEL,Cancel,Cancelar
 TEXT_HELP_INTRODUCTION,Map of piClinic screens,Mapa de las pantallas de la consola piClinic
 TEXT_HELP_NOKEY_ADD,Add new patient,Agregar paciente nuevo
 TEXT_HELP_NOKEY_ADMIN,System administration,Administración del sistema
@@ -206,6 +208,11 @@ TEXT_HELP_NOKEY_FIND_PATIENT,Find patient,Buscar paciente
 TEXT_HELP_NOKEY_PATIENT_INFO,View patient info,Revisar información del paciente
 TEXT_HELP_NOKEY_REPORTS,Reports,Informes
 TEXT_HELP_NO_CONTENT,Help is not yet available,La ayuda todavía no está disponible
+TEXT_HELP_REF_PAGE,Page,Página
+TEXT_HELP_SUBMIT_BUTTON,Save,Actualizar
+TEXT_HELP_TOPIC_EDIT_PAGE_TITLE,Help content edit,Editar contenido de ayuda
+TEXT_HELP_TOPIC_ID,Content ID,ID del contenido
+TEXT_HELP_TOPIC_TEXT,HTML Content,Contenido HTML
 TEXT_HOMEADDRESS1_LABEL,Address 1,Dirección
 TEXT_HOMEADDRESS1_MISSING,(Address 1 not specified),(Dirección no especificada)
 TEXT_HOMEADDRESS2_LABEL,Address 2,Dirección adicional
@@ -310,6 +317,7 @@ TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND,Patient visit not found.,No se encontro la 
 TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED,Patient visit ID not specified.,ID de la visita no está especificada.
 TEXT_MESSAGE_REQUIRED_FIELD_MISSING,A required field was not filled in.,Un campo requirido no tiene datos.
 TEXT_MESSAGE_SESSION_TIMEOUT,You haven\'t been using the system for a while so you were logged out,,No ha estado usando la consola por un rato y su sesión ha estado cerrado automáticamente.
+TEXT_MESSAGE_TOPIC_NOT_FOUND,Help topic not found.,Contendio no encontrado
 TEXT_MESSAGE_UNSUPPORTED_ERROR,Cannot perform the action requested.,No puede hacer la acción pedido.
 TEXT_MESSAGE_USER_NOT_FOUND,The staff member could not be found.,La persona no estuvo encontrado.
 TEXT_MONTHLY_PAGE_TITLE,Monthly Payment Log,Registro de Pagos del Mes

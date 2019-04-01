@@ -49,6 +49,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_IN_USE')) { define('TEXT_MESSAGE_PATIENT_ID_IN_USE','TEXT_MESSAGE_PATIENT_ID_IN_USE',false); }
 	if (!defined('TEXT_MESSAGE_REQUIRED_FIELD_MISSING')) { define('TEXT_MESSAGE_REQUIRED_FIELD_MISSING','TEXT_MESSAGE_REQUIRED_FIELD_MISSING',false); }
 	if (!defined('TEXT_MESSAGE_SESSION_TIMEOUT')) { define('TEXT_MESSAGE_SESSION_TIMEOUT','TEXT_MESSAGE_SESSION_TIMEOUT',false); }
+	if (!defined('TEXT_MESSAGE_TOPIC_NOT_FOUND')) { define('TEXT_MESSAGE_TOPIC_NOT_FOUND','TEXT_MESSAGE_TOPIC_NOT_FOUND',false); }
 	if (!defined('TEXT_MESSAGE_UNSUPPORTED_ERROR')) { define('TEXT_MESSAGE_UNSUPPORTED_ERROR','TEXT_MESSAGE_UNSUPPORTED_ERROR',false); }
 	if (!defined('TEXT_MESSAGE_USER_NOT_FOUND')) { define('TEXT_MESSAGE_USER_NOT_FOUND','TEXT_MESSAGE_USER_NOT_FOUND',false); }
 }
@@ -65,6 +66,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_IN_USE')) { define('TEXT_MESSAGE_PATIENT_ID_IN_USE','Could not create a new patient record. The patient ID is already assigned.',false); }
 	if (!defined('TEXT_MESSAGE_REQUIRED_FIELD_MISSING')) { define('TEXT_MESSAGE_REQUIRED_FIELD_MISSING','A required field was not filled in.',false); }
 	if (!defined('TEXT_MESSAGE_SESSION_TIMEOUT')) { define('TEXT_MESSAGE_SESSION_TIMEOUT','You haven\'t been using the system for a while so you were logged out',false); }
+	if (!defined('TEXT_MESSAGE_TOPIC_NOT_FOUND')) { define('TEXT_MESSAGE_TOPIC_NOT_FOUND','Help topic not found.',false); }
 	if (!defined('TEXT_MESSAGE_UNSUPPORTED_ERROR')) { define('TEXT_MESSAGE_UNSUPPORTED_ERROR','Cannot perform the action requested.',false); }
 	if (!defined('TEXT_MESSAGE_USER_NOT_FOUND')) { define('TEXT_MESSAGE_USER_NOT_FOUND','The staff member could not be found.',false); }
 }
@@ -81,6 +83,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_IN_USE')) { define('TEXT_MESSAGE_PATIENT_ID_IN_USE','No pude crear un expediente del paciente nuevo. El ID del paciente esta usado por otro paciente.',false); }
 	if (!defined('TEXT_MESSAGE_REQUIRED_FIELD_MISSING')) { define('TEXT_MESSAGE_REQUIRED_FIELD_MISSING','Un campo requirido no tiene datos.',false); }
 	if (!defined('TEXT_MESSAGE_SESSION_TIMEOUT')) { define('TEXT_MESSAGE_SESSION_TIMEOUT','',false); }
+	if (!defined('TEXT_MESSAGE_TOPIC_NOT_FOUND')) { define('TEXT_MESSAGE_TOPIC_NOT_FOUND','Contendio no encontrado',false); }
 	if (!defined('TEXT_MESSAGE_UNSUPPORTED_ERROR')) { define('TEXT_MESSAGE_UNSUPPORTED_ERROR','No puede hacer la acción pedido.',false); }
 	if (!defined('TEXT_MESSAGE_USER_NOT_FOUND')) { define('TEXT_MESSAGE_USER_NOT_FOUND','La persona no estuvo encontrado.',false); }
 }

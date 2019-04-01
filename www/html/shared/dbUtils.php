@@ -309,27 +309,5 @@ if (!defined('DB_UTILS')) {
 		}
 		return $returnValue;
 	}
-/*
-	function openDbForUi ($requestData, $pageLanguage, &$dbStatus) {
-		require_once dirname(__FILE__).'/../uitext/uiErrorMessageText.php';
-		$dbInfo = array();
-		$dbLink = _openDB();
-		$dbOpenError = mysqli_connect_errno();
-		if ( $dbOpenError  != 0  ) {
-			// database not opened.
-			$dbStatus['contentType'] = CONTENT_TYPE_JSON;
-			if (API_DEBUG_MODE) {
-				$dbInfo['sqlError'] = 'Error: '. $dbOpenError .', '.
-					mysqli_connect_error();
-				$dbInfo['requestData'] = $requestData;
-				$dbInfo['language'] = $pageLanguage;
-				$dbStatus['error'] = $dbInfo;
-			}
-			$dbStatus['httpResponse'] = 500;
-			$dbStatus['httpReason']   = MESSAGE_DATABASE_OPEN_ERROR;
-		}
-		return $dbLink;
-	}
-*/
 }
 //EOF

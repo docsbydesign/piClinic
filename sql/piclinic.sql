@@ -168,6 +168,28 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `createdDate` datetime NOT NULL COMMENT '(Autofill) The date and time this commant was saved.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table that records comments from users.';
 
+-- ------------------------------------------------------
+--
+-- Table structure for table `help`
+--
+
+DROP TABLE IF EXISTS `help`;
+CREATE TABLE IF NOT EXISTS `help` (
+  `helpID` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique comment ID for comment records',
+  `topicID` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) The topic ID used to relate this entry to similar entries in other languages.',
+  `language` varchar (8) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) The 2-letter language code that describes the language.',
+  `refPage` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) The page this topic applies to. NULL indicates the topic is accessed by reference.',
+  `helpText`  var char(4095) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) The text to display. Can be HTML.',
+  `lastChangeBy` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Username of last editor.',
+  `modifiedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '(Auto fill) The date/time of the most recent update',
+  `createdDate` datetime NOT NULL COMMENT '(Autofill) The date and time this commant was saved.'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table that records comments from users.';
+--
+-- Indexes for table `help`
+--
+ALTER TABLE `help`
+ ADD UNIQUE KEY (`topicID`, `language`);
+ 
 -- --------------------------------------------------------
 --
 -- Table structure for table `clinic`

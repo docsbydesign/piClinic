@@ -99,6 +99,7 @@ if (!defined('REST_CONSTANTS')) {
 	// database tables
     define('DB_TABLE_CLINIC','clinic',false);
     define('DB_TABLE_COMMENT','comment', false);
+    define('DB_TABLE_HELP', 'help', false);
     define('DB_TABLE_ICD10','icd10', false);
     define('DB_TABLE_IMAGE','image', false);
     define('DB_TABLE_LOG','log', false);
