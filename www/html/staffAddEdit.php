@@ -217,7 +217,7 @@ function writeTopicMenu ($lang, $cancelLink) {
 							echo ('<input type="hidden" id="usernameField" name="username" value="'.$staffData['username'].'">');
 						}
 					?>
-					<?= dbFieldTextInput ($staffData, 'Password', TEXT_STAFF_PASSWORD_PLACEHOLDER, ($pageMode == 'add' ? true : false )) ?>
+					<?= dbFieldTextInput ($staffData, 'password', TEXT_STAFF_PASSWORD_PLACEHOLDER, ($pageMode == 'add' ? true : false )) ?>
 				</p>
 				<p><label><?= TEXT_STAFF_NAME_LABEL ?>:</label><br>
 					<?= dbFieldTextInput ($staffData, 'lastName', TEXT_STAFF_NAMELAST_PLACEHOLDER, true) ?>,&nbsp;
@@ -225,7 +225,7 @@ function writeTopicMenu ($lang, $cancelLink) {
 				</p>
 				<p><label><?= TEXT_STAFF_CONTACTINFO_LABEL ?>:</label><br>
 					<?= dbFieldTextInput ($staffData, 'contactInfo', TEXT_STAFF_CONTACTINFO_PLACEHOLDER, false) ?>&nbsp; &nbsp;
-                    <?= dbFieldTextInput ($staffData, 'AltcontactInfo', TEXT_STAFF_ALTCONTACTINFO_PLACEHOLDER, false) ?>
+                    <?= dbFieldTextInput ($staffData, 'altContactInfo', TEXT_STAFF_ALTCONTACTINFO_PLACEHOLDER, false) ?>
 				</p>
                 <p><label class="close"><?= TEXT_STAFF_PREFERRED_LANGUAGE_LABEL ?>:</label>&nbsp;
                     <select id="activeField" name="preferredLanguage" class="requiredField">
