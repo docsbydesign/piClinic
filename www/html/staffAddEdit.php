@@ -44,6 +44,7 @@ $pageLanguage = $sessionInfo['pageLanguage'];
 // load the strings for the page language
 //	assumes $pageLanguage contains a valid language
 require_once ('./uitext/staffAddEditText.php');
+require_once ('./staffUiStrings.php');
 
 // open session variables and check for access to this page
 $pageAccessRequired = (!empty($sessionInfo['parameters']['useredit']) ? PAGE_ACCESS_READONLY : PAGE_ACCESS_CLINIC);
