@@ -233,6 +233,8 @@ TEXT_HOME_NEIGHBORHOOD_PLACEHOLDER,Neighborhood,Localidad
 TEXT_HOME_PAGE_LINK,Dashboard,Página principal
 TEXT_HOME_STATE_LABEL,State,Departamento
 TEXT_HOME_STATE_PLACEHOLDER,State,Departamento
+TEXT_ICD_LINK_TEXT,Lookup code,Buscar codigo
+TEXT_ICD_LINK_TITLE,Lookup an ICD-10 code in the Spanish reference book,Buscar un codigo CIE-10 en el libro de referencia
 TEXT_IMAGE_ADD_BUTTON,Add this image to the patient\'s record,Agrega este imagen al paciente
 TEXT_IMAGE_CANCEL_EDIT,Cancel,Cancelar
 TEXT_IMAGE_CAPTION_PLACEHOLDER,Short text about the image,Texto corto sobre el imagen
