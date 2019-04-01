@@ -254,10 +254,10 @@ function writeTopicMenu ($lang, $cancelLink) {
 						<select id="positionField" name="position" class="requiredField">
 							<option value="" <?= (empty($staffData['position']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
                             <?php
-                            foreach ($staffpositions as $staffposition){
-                                echo ('<option value="'.$staffposition[0].'" '.
-                                    ((!empty($staffData['position']) && $staffData['position'] == $staffposition[0]) ? 'selected' : '' ).
-                                    '>'.$staffposition[1].'</option>');
+                            foreach ($staffPositions as $staffPosition){
+                                echo ('<option value="'.$staffPosition[0].'" '.
+                                    ((!empty($staffData['position']) && $staffData['position'] == $staffPosition[0]) ? 'selected' : '' ).
+                                    '>'.$staffPosition[1].'</option>');
                             }
                             ?>
 						</select>
