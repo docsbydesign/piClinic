@@ -294,10 +294,5 @@ function writeTopicMenu ($cancel) {
         </div>
         <hr>
 	</div>
-<div>
-    <pre>
-        <?= json_encode($visitInfo, JSON_PRETTY_PRINT) ?>
-    </pre>
-</div>
 </body>
 <?php @mysqli_close($dbLink); ?>
