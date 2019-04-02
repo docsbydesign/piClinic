@@ -452,7 +452,7 @@ TEXT_PATIENT_SEARCH_NAMELAST_PLACEHOLDER,First last name,Apellido
 TEXT_PATIENT_SEARCH_NAMEMI_PLACEHOLDER,MI,Inicial
 TEXT_PATIENT_SEARCH_NAME_LABEL,Patient name,Nombre del paciente
 TEXT_PATIENT_SEARCH_NEIGHBORHOOD_PLACEHOLDER,Neighborhood,Localidad
-TEXT_PATIENT_SEARCH_NOT_FOUND_ATA,No matching patients found. Go back or add a new patient above.,No hay patientes con este ID. Volver o agregar un paciente nuevo.
+TEXT_PATIENT_SEARCH_NOT_FOUND_ATA,No matching patients found. Retry your search or add a new patient above.,No hay pacientes con este ID o nombre. Buscar de nuevo o agregar un paciente nuevo.
 TEXT_PATIENT_SEARCH_PAGE_TITLE,Patient Search,Buscar Paciente
 TEXT_PATIENT_SEARCH_RESULTS_HEADING,Matching patients found,Pacientes encontrados
 TEXT_PATIENT_SEARCH_STATE_PLACEHOLDER,State,Departamento
