@@ -148,7 +148,6 @@ if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
     $visitInfo['diagnosis1'] = '';
     $visitInfo['diagnosis2'] = '';
     $visitInfo['diagnosis3'] = '';
-
 } else {
 	$visitInfo = $visitRecord['data'];
 }
@@ -187,7 +186,7 @@ function writeOptionsMenu ($visitInfo) {
 	<datalist id="diagData"></datalist>
 	<div class="pageBody">
 	<?= writeTopicMenu($cancelUrl) ?>
-	<div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>"">
+	<div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
 		<div class="infoBlock">
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
 				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>

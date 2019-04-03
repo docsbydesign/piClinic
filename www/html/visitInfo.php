@@ -101,17 +101,27 @@ if ((!empty($requestData['patientVisitID'])) && empty($dbStatus)) {
 // if the visit record was not returned, exit in error
 // if it was, save the data to $visitInfo
 $visitInfo = array();
-if ($visitRecord['httpResponse'] != 200) {
-	$dbStatus = $visitRecord;
-	if ($dbStatus['httpResponse'] == 404) {
-		$dbStatus['httpReason']	= TEXT_PATIENT_VISIT_NOT_FOUND;
-	} else {
-		$dbStatus['httpReason']	= TEXT_VISIT_UNABLE_OPEN_VISIT;
-	}
+if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
+    if (!empty($visitRecord) ) {
+        $dbStatus = $visitRecord;
+        if ($dbStatus['httpResponse'] == 404) {
+            $dbStatus['httpReason']	= TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND;
+        } else {
+            $dbStatus['httpReason']	= TEXT_MESSAGE_GENERIC;
+        }
+    } else {
+        $requestData['msg'] = MSG_NOT_FOUND;
+    }
 	// load fields that should have data so the form doesn't break
+    if (!isset($visitInfo['patientVisitID'])) {
+        $visitInfo['patientVisitID'] = '';
+    }
+    if (!isset($visitInfo['dateTimeIn'])) {
+        $visitInfo['dateTimeIn'] = '';
+    }
 	$visitInfo['clinicPatientID'] = '';
-	$visitInfo['patientLastName'] = '';
-	$visitInfo['patientFirstName'] = '';
+	$visitInfo['lastName'] = '';
+	$visitInfo['firstName'] = '';
 	$visitInfo['sex'] = '';
 	$visitInfo['birthDate'] = '';
 	$visitInfo['staffName'] = '';
@@ -119,6 +129,12 @@ if ($visitRecord['httpResponse'] != 200) {
 	$visitInfo['secondaryComplaint'] = '';
 	$visitInfo['visitType'] = '';
 	$visitInfo['visitStatus'] = '';
+    $visitInfo['diagnosis1'] = '';
+    $visitInfo['diagnosis2'] = '';
+    $visitInfo['diagnosis3'] = '';
+    $visitInfo['condition1'] = '';
+    $visitInfo['condition2'] = '';
+    $visitInfo['condition3'] = '';
 } else {
 	$visitInfo = $visitRecord['data'];	
 }
@@ -147,7 +163,7 @@ function writeTopicMenu ($sessionInfo) {
 	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu($sessionInfo) ?>
-	<div class="nameBlock">
+	<div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
 		<div class="infoBlock">
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
 				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>
@@ -163,7 +179,7 @@ function writeTopicMenu ($sessionInfo) {
 		</div>
 	</div>
 	<div style="clear: both;"></div>
-	<div id="optionMenuDiv" class="noprint">
+	<div id="optionMenuDiv" class="noprint<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
 		<ul class="topLinkMenuList">
 			<?php
 				$firstLinkDefined = false;
@@ -195,7 +211,7 @@ function writeTopicMenu ($sessionInfo) {
 			?>	
 			</ul>
 	</div>
-	<div id="PatientVisitView">
+	<div id="PatientVisitView" class="<?= (empty($visitRecord) ? 'hideDiv' : '') ?>">
 		<div id="PatientVisitDataView">
 			<div id="PatientVisitDetails">
 				<h2><?= TEXT_VISIT_VISIT_HEADING ?></h2>
