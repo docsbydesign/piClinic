@@ -350,7 +350,7 @@ header('Content-type: text/html; charset=utf-8');
     <div id="MonthlySummaryPrompt" class="noprint">
         <form enctype="application/x-www-form-urlencoded" action="/reports/rptMonthlyPmtHome.php" method="get">
             <p>
-                <label class="close"><?= TEXT_DATE_LABEL ?>:</label><input type="number" min="2000" max="2100" id="ReportYearField" name="Year" class="fourDigitNumeric" title="<?= TEXT_REPORT_YEAR_PLACEHOLDER ?>" value="<?= $reportYearArg ?>" placeholder="<?= REPORT_YEAR_PLACEHOLDER ?>">-
+                <label class="close"><?= TEXT_DATE_LABEL ?>:</label><input type="number" min="2000" max="2100" id="ReportYearField" name="Year" class="fourDigitNumeric" title="<?= TEXT_REPORT_YEAR_PLACEHOLDER ?>" value="<?= $reportYearArg ?>" placeholder="<?= TEXT_REPORT_YEAR_PLACEHOLDER ?>">-
                 <input type="number" min="1" max="12" id="ReportMonthField" name="Month" class="twoDigitNumeric" title="<?= TEXT_REPORT_MONTH_PLACEHOLDER ?>" value="<?= $reportMonthArg ?>" placeholder="<?= TEXT_REPORT_MONTH_PLACEHOLDER ?>">&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <p>

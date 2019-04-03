@@ -73,6 +73,7 @@ if (!defined('REST_CONSTANTS')) {
     define('FIRST_FROM_LINK_QP', '?fromLink', false); // query parameter string when first QP
     define('FROM_LINK_QP','&fromLink', false); // use in query paramter string after first QP
     define('FROM_LINK','fromLink',false); // used in form Values
+    define('FROM_LINK_SEP','-',false); // character used to separate elements in From link
 
 	// languages
 	define('UI_DEFAULT_LANGUAGE','en', false);

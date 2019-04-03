@@ -56,7 +56,7 @@
   <title
      id="title999">piClinic Workflow Graphic 2</title>
   <a
-     xlink:href="LINK_HELP_NOKEY_UPDATE_PATIENT_INFO"
+     xlink:href="LINK_HELP_NOKEY_UPDATE_PT_INFO"
      id="a6804">
     <g
        id="g6802"
@@ -75,11 +75,11 @@
          id="text1043"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:sans-serif;-inkscape-font-specification:sans-serif"
          x="28.074263"
-         y="185.53809">TEXT_HELP_NOKEY_UPDATE_PATIENT_INFO</text>
+         y="185.53809">TEXT_HELP_WORK_UPDATE_PT</text>
     </g>
   </a>
   <a
-     xlink:href="LINK_HELP_NOKEY_ADMIT_PATIENT"
+     xlink:href="LINK_HELP_NOKEY_ADMIT_PT"
      id="a6822">
     <g
        id="g6820"
@@ -142,12 +142,12 @@
          y="286.53809">
         <tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif"
-           id="tspan3071">TEXT_HELP_NOKEY_ADMIT_PATIENT</tspan>
+           id="tspan3071">TEXT_HELP_WORK_ADMIT_PT</tspan>
       </text>
     </g>
   </a>
   <a
-     xlink:href="LINK_HELP_NOKEY_DISCHARGE_PATIENT"
+     xlink:href="LINK_HELP_NOKEY_DISCHARGE_PT"
      id="a6841">
     <g
        id="g6839"
@@ -169,12 +169,12 @@
          y="387.53809">
         <tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif"
-           id="tspan3073">TEXT_HELP_NOKEY_DISCHARGE_PATIENT</tspan>
+           id="tspan3073">TEXT_HELP_WORK_DISCHARGE_PT</tspan>
       </text>
     </g>
   </a>
   <a
-     xlink:href="LINK_HELP_NOKEY_FIND_PATIENT"
+     xlink:href="LINK_HELP_NOKEY_FIND_PT"
      transform="translate(0.03910657)"
      id="a3080">
     <g
@@ -198,12 +198,12 @@
          y="50.557129">
         <tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;font-size:15.82413533px"
-           id="tspan1633">TEXT_HELP_NOKEY_FIND_PATIENT</tspan>
+           id="tspan1633">TEXT_HELP_WORK_FIND_PT</tspan>
       </text>
     </g>
   </a>
   <a
-     xlink:href="LINK_HELP_NOKEY_ADD_PATIENT"
+     xlink:href="LINK_HELP_NOKEY_ADD_PT"
      id="a6794">
     <g
        id="g6792"
@@ -225,7 +225,7 @@
          y="50.557129">
         <tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:5;stroke-miterlimit:3.5999999;stroke-dasharray:none;font-size:16px"
-           id="tspan1637">TEXT_HELP_NOKEY_ ADD_PATIENT</tspan>
+           id="tspan1637">TEXT_HELP_WORK_ADD_PT</tspan>
       </text>
     </g>
   </a>

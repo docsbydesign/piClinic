@@ -117,12 +117,11 @@ require './uiSessionInfo.php';
                         echo '<hr>'."\n";
                         echo '<ul class="optionList">'."\n";
                     }
-                    echo '<li><a href="'.$report['linkURI'].'" title="'.$report['linkTitle'].'">'.$report['linkText'].'</a>:&nbsp'.$report['linkDesc'].'</li>'."\n";
+                    echo '<li><a href="'.$report['linkURI'].'" title="'.$report['linkTitle'].'">'.$report['linkText'].'</a>:&nbsp;'.$report['linkDesc'].'</li>'."\n";
                 }
                 echo '</ul>'."\n";
                 echo '<hr>'."\n";
             ?>
-		</ul>
 	</div>
 </body>
 </html>

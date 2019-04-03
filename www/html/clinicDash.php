@@ -155,8 +155,8 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 						'<a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
 						'&clinicPatientID='.$visit['clinicPatientID'].
                         '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_HOME, 'VISIT_MORE').
-                        createFromLink (FROM_LINK_QP, __FILE__, 'a_visitmore').
-						'class="a_visitmore moreInfo"'.
+                        createFromLink (FROM_LINK_QP, __FILE__, 'a_visitmore').'" '.
+						'class="a_visitmore moreInfo" '.
 						'title="'.TEXT_MORE_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_MORE.'</a>';
 					}
 					echo ('<td'.(isset($visit['primaryComplaint']) ? '' : ' class="inactive"' ).'>'.$complaintText.'</td>');
@@ -176,8 +176,6 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 				}
 			}
 			echo ('</table>');
-			echo ('<style>p.openVisits {'. ($earlierVisits ? 'display:inline; ' : 'display: none; ' ).'} </style>');
-			echo ('<style>h2 {'. ($earlierVisits ? 'margin-bottom: 0; ' : '' ).'} </style>');
 		}
 	}
 
@@ -185,6 +183,8 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 ?>
 	</div>
 	</div>
+    <style>p.openVisits <?= '{'. ($earlierVisits ? 'display:inline; ' : 'display: none; ' ).'}' ?> </style>
+    <style>h2 <?= '{'. ($earlierVisits ? 'margin-bottom: 0; ' : '' ).'}' ?> </style>
 </body>
 <?php $result = profileLogClose($profileData, __FILE__, $requestData); ?>
 </html>

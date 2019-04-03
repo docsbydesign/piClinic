@@ -350,7 +350,7 @@ function logSessionWorkflow ($sessionInfo, $filename, $step, $workflowID, $dblin
     // see if there is some path data to record
     $wfLogEntry['prevPage'] = null;
     if (!empty($sessionInfo['parameters']['fromLink'])) {
-        $fromLink = explode('|', $sessionInfo['parameters']['fromLink']);
+        $fromLink = explode(FROM_LINK_SEP, $sessionInfo['parameters']['fromLink']);
         if (count($fromLink) == 2) {
             // then this is what we expect
             $wfLogEntry['prevPage'] = $fromLink[0];
@@ -435,7 +435,7 @@ function logWorkflowStep ($sessionInfo, $filename, $step, $workflowID, $dbLink, 
     // see if there is some path data to record
     $pathData = 'uninitialized';
     if (!empty($sessionInfo['parameters']['fromLink'])) {
-        $fromLink = explode('|', $sessionInfo['parameters']['fromLink']);
+        $fromLink = explode(FROM_LINK_SEP, $sessionInfo['parameters']['fromLink']);
         if (count($fromLink) == 2) {
             // then this is what we expect
             $pathData = [

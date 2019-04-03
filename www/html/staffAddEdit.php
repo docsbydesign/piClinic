@@ -229,7 +229,7 @@ function writeTopicMenu ($lang, $cancelLink) {
                     <?= dbFieldTextInput ($staffData, 'altContactInfo', TEXT_STAFF_ALTCONTACTINFO_PLACEHOLDER, false) ?>
 				</p>
                 <p><label class="close"><?= TEXT_STAFF_PREFERRED_LANGUAGE_LABEL ?>:</label>&nbsp;
-                    <select id="activeField" name="preferredLanguage" class="requiredField">
+                    <select id="preferredLanguageField" name="preferredLanguage" class="requiredField">
                         <option value="" <?= (!isset($staffData['preferredLanguage']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
                         <option value="en" <?= ((isset($staffData['preferredLanguage']) && $staffData['preferredLanguage'] == 'en') ? 'selected' : '' ) ?>><?= TEXT_STAFF_LANGUAGE_OPTION_ENGLISH ?></option>
                         <option value="es" <?= ((isset($staffData['preferredLanguage']) && $staffData['preferredLanguage'] == 'es') ? 'selected' : '' ) ?>><?= TEXT_STAFF_LANGUAGE_OPTION_SPANISH ?></option>

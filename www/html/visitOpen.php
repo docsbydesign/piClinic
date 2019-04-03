@@ -186,11 +186,10 @@ function writeTopicMenu ($cancel) {
 	</div>
 	<div style="clear: both;"></div>
 	<div id="PatientVisitView">
-        <div class="dataBlock"></div>
-        <div id="PatientVisitDetails">
+        <div id="PatientVisitDetails" class="dataBlock">
             <form enctype="multipart/form-data" action="/uihelp/addPatientVisit.php" method="post">
                 <input type="hidden" id="ClinicPatientIDField" name="clinicPatientID" value="<?= $patientInfo['clinicPatientID'] ?>">
-                <div id="optionMenuDiv"></div>
+                <div id="optionMenuDiv">
                     <p><label class="close"><?= TEXT_FIRST_VISIT_LABEL ?>:</label>
                         <select id="FirstVisitSelect" name="firstVisit" class="requiredField">
                             <option value="YES" <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'YES') ? "selected" : "" ) ?>><?= TEXT_FIRST_VISIT_SELECT ?></option>
@@ -228,7 +227,7 @@ function writeTopicMenu ($cancel) {
                         <div class="dataBlock bottomSpace">
                             <p><label class="close"><?= TEXT_VISIT_TYPE_LABEL ?>:</label> &nbsp;
                                     <select id="visitTypeField" name="visitType" required class="requiredField">
-                                        <option value="" <?= (empty($requestData['visitType']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_VISIT_OPTION ?></option>
+                                        <option value="" <?= (empty($visitInfo['visitType']) ? 'selected="selected"' : '' ) ?>><?= TEXT_BLANK_VISIT_OPTION ?></option>
                                         <?php
                                             foreach ($visitTypes as $visitType){
                                                 if (showVisitType($visitType, VISIT_TYPE_EDIT)) {
@@ -294,5 +293,6 @@ function writeTopicMenu ($cancel) {
         </div>
         <hr>
 	</div>
+    </div>
 </body>
 <?php @mysqli_close($dbLink); ?>

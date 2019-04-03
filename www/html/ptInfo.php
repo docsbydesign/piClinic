@@ -170,8 +170,9 @@ function writeTopicMenu ($sessionInfo) {
 						// only show this link if they do not have a visit open at the moment
                         $linkParams = [
                             'clinicPatientID' => $patientData['clinicPatientID'],
-                            'lastVisit' => (empty($visitList) ? 0 : urlencode($visitList[0]['dateTimeIn']) )];
-						echo ('<li><a class="a_visitopen" href="'.makeUrlWithQueryParams('/visitOpen.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_visitopen').
+                            'lastVisit' => (empty($visitList) ? '' : $visitList[0]['dateTimeIn'] )];
+						echo ('<li><a class="a_visitopen" href="'.
+                            makeUrlWithQueryParams('/visitOpen.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_visitopen').
                             '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_OPEN').'">'.TEXT_PATIENT_OPEN_NEW_VISIT.'</a></li>');
 					}
 				}				

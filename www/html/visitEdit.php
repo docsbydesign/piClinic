@@ -183,7 +183,6 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 		</div>
 	</div>
     <div style="clear: both;"></div>
-    <div id="optionMenuDiv"></div>
 	<div id="PatientVisitView">
 		<div id="PatientVisitDetails">
 			<form enctype="multipart/form-data" action="/uihelp/updatePatientVisit.php" method="post">

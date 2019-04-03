@@ -219,6 +219,11 @@ TEXT_HELP_TOPIC_EDIT_PAGE_TITLE,Help content edit,Editar contenido de ayuda
 TEXT_HELP_TOPIC_ID,Content ID,ID del contenido
 TEXT_HELP_TOPIC_TEXT,HTML Content,Contenido HTML
 TEXT_HELP_WORKFLOW,piClinic Tasks,Tareas de la consola piClinic
+TEXT_HELP_WORK_ADD_PT,Add a new patient,Agregar un paciente nuevo
+TEXT_HELP_WORK_ADMIT_PT,Admit a bpatient to clinic,Abra una visita nueva para un paciente
+TEXT_HELP_WORK_DISCHARGE_PT,Discharge a patient,Dar de alta un paciente
+TEXT_HELP_WORK_FIND_PT,Search for a patient,Buscar un paciente
+TEXT_HELP_WORK_UPDATE_PT,Update patient info,Actualizar un paciente
 TEXT_HOMEADDRESS1_LABEL,Address 1,Dirección
 TEXT_HOMEADDRESS1_MISSING,(Address 1 not specified),(Dirección no especificada)
 TEXT_HOMEADDRESS2_LABEL,Address 2,Dirección adicional

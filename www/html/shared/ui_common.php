@@ -380,7 +380,7 @@ function createFromLink ($queryParamName, $filePath, $linkData) {
         $linkQP = substr($filePath, strlen(ROOT_DIR_PATH));
     }
     // add on the link ID info
-    $linkQP .= '|'.$linkData;
+    $linkQP .= FROM_LINK_SEP.$linkData;
     // and if there's a query parameter with the delimiter, add that, too.
     if (!empty($queryParamName)){
         $linkQP = $queryParamName . '=' . $linkQP;

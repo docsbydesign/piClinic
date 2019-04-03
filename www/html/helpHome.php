@@ -120,16 +120,16 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
                     <tr>
                         <td class="nowrap">
                             <ul>
-                                <li><a target="_icd10_1" href="/files/ICD10Volume1_en_2008.pdf">ICD-10,&nbsp;Volume&nbsp;1&nbsp;(Descriptions)</a></li>
-                                <li><a target="_icd10_2" href="/files/ICD10Volume2_en_2008.pdf">ICD-10,&nbsp;Volume&nbsp;2&nbsp;(Instructions)</a></li>
-                                <li><a target="_icd10_3" href="/files/ICD10Volume3_en_2008.pdf">ICD-10,&nbsp;Volume&nbsp;3&nbsp;(Index)</a></li>
+                                <li><a target="icd10_1" href="/files/ICD10Volume1_en_2008.pdf">ICD-10,&nbsp;Volume&nbsp;1&nbsp;(Descriptions)</a></li>
+                                <li><a target="icd10_2" href="/files/ICD10Volume2_en_2008.pdf">ICD-10,&nbsp;Volume&nbsp;2&nbsp;(Instructions)</a></li>
+                                <li><a target="icd10_3" href="/files/ICD10Volume3_en_2008.pdf">ICD-10,&nbsp;Volume&nbsp;3&nbsp;(Index)</a></li>
                             </ul>
                         </td>
                         <td class="nowrap">
                             <ul>
-                                <li><a target="_icd10_1" href="/files/CIE-10_2008_Chapter_1.pdf">CIE-10,&nbsp;Volumen&nbsp;1&nbsp;(Descripcciones&nbsp;de&nbsp;los&nbsp;codigos)</a></li>
-                                <li><a target="_icd10_2" href="/files/CIE-10_2008_Chapter_2.pdf">CIE-10,&nbsp;Volumen&nbsp;2&nbsp;(Manual&nbsp;de&nbsp;instrucciones)</a></li>
-                                <li><a target="_icd10_3" href="/files/CIE-10_2008_Chapter_3.pdf">CIE-10,&nbsp;Volumen&nbsp;3&nbsp;(Índice&nbsp;alfabético)</a></li>
+                                <li><a target="icd10_1" href="/files/CIE-10_2008_Chapter_1.pdf">CIE-10,&nbsp;Volumen&nbsp;1&nbsp;(Descripcciones&nbsp;de&nbsp;los&nbsp;codigos)</a></li>
+                                <li><a target="icd10_2" href="/files/CIE-10_2008_Chapter_2.pdf">CIE-10,&nbsp;Volumen&nbsp;2&nbsp;(Manual&nbsp;de&nbsp;instrucciones)</a></li>
+                                <li><a target="icd10_3" href="/files/CIE-10_2008_Chapter_3.pdf">CIE-10,&nbsp;Volumen&nbsp;3&nbsp;(Índice&nbsp;alfabético)</a></li>
                             </ul>
                         </td>
                     </tr>
