@@ -43,6 +43,7 @@ require_once './api/visit_get.php';
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
 $pageLanguage = $sessionInfo['pageLanguage'];
+$requestData = $sessionInfo['parameters'];
 // load the strings for the page language
 //	assumes $pageLanguage contains a valid language
 require_once ('./uitext/ptInfoText.php');
@@ -53,7 +54,7 @@ require('uiSessionInfo.php');
 
 // open DB or redirect to error URL
 $errorUrl = '/clinicDash.php';  // where to go in case the DB can't be opened.
-$dbLink = _openDBforUI($sessionInfo['parameters'], $errorUrl);
+$dbLink = _openDBforUI($requestData, $errorUrl);
 // log any open workflows.
 $logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 
@@ -61,55 +62,62 @@ $logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 $patientInfo = array();
 // database is good, so read the patient record
 // create query string for get operation
-if (!empty($sessionInfo['parameters']['clinicPatientID'])){
+if (!empty($requestData['clinicPatientID'])){
     // Get the patient info from the database
-    $getQP['clinicPatientID'] = $sessionInfo['parameters']['clinicPatientID'];
+    $getQP['clinicPatientID'] = $requestData['clinicPatientID'];
     $patientInfo = _patient_get ($dbLink, $sessionInfo['token'], $getQP);
 } else {
     // no query parameter found.
     $retVal['contentType'] = 'Content-Type: application/json; charset=utf-8';
     $dbInfo['sqlError'] = @mysqli_error($dbLink);
-    $dbInfo['requestData'] = $sessionInfo['parameters'];
+    $dbInfo['requestData'] = $requestData;
     $dbInfo['language'] = $pageLanguage;
     $retVal['error'] = json_encode ($dbInfo);
     $retVal['httpResponse'] = 400;
     $retVal['httpReason']	= TEXT_MESSAGE_PATIENT_ID_NOT_FOUND;
     // no patients found, return to search page with message
-    logUiError($sessionInfo['parameters'], $retVal, __FILE__, $sessionInfo['username']);
+    logUiError($requestData, $retVal, __FILE__, $sessionInfo['username']);
 }
 
 // get any earlier visits by this patient to the clinic
 $visitList = [];
 
 // get all of this patient's visit records
-$getQueryString['clinicPatientID'] = $sessionInfo['parameters']['clinicPatientID'];
-$getQueryString['sortfield'] = 'DateTimeIn';
-$getQueryString['sortorder'] = 'DESC';
-$visitRecord = _visit_get($dbLink, $sessionInfo['token'], $getQueryString);
-if ($visitRecord['httpResponse'] != 200){
-    if (API_DEBUG_MODE) {
-        $report['visitRecord'] = $visitRecord;
-        $report['query'] = $getQueryString;
-        if ($visitRecord['httpResponse'] != 404) {
-            // 	This will create an error message below.
-            //	Anything but 404 here is normal.
-            $dbStatus['visitlookup'] = $report;
-        }
-    }
+if (empty($requestData['clinicPatientID'])) {
+    $requestData['msg'] = MSG_NOT_FOUND;
 } else {
-    if ($visitRecord['count'] == 1) {
-        // there's only one so make it an array element
-        // so the rest of the code works
-        $visitList[0] = $visitRecord['data'];
+    $getQueryString['clinicPatientID'] = $requestData['clinicPatientID'];
+    $getQueryString['sortfield'] = 'DateTimeIn';
+    $getQueryString['sortorder'] = 'DESC';
+    $visitRecord = _visit_get($dbLink, $sessionInfo['token'], $getQueryString);
+    if ($visitRecord['httpResponse'] != 200){
+        if (API_DEBUG_MODE) {
+            $report['visitRecord'] = $visitRecord;
+            $report['query'] = $getQueryString;
+            if ($visitRecord['httpResponse'] != 404) {
+                // 	This will create an error message below.
+                //	Anything but 404 here is normal.
+                $dbStatus['visitlookup'] = $report;
+            }
+        }
+        $requestData['msg'] = MSG_NOT_FOUND;
     } else {
-        $visitList = $visitRecord['data'];
-    }
-} // else unable to get any visits
+        if ($visitRecord['count'] == 1) {
+            // there's only one so make it an array element
+            // so the rest of the code works
+            $visitList[0] = $visitRecord['data'];
+        } else {
+            $visitList = $visitRecord['data'];
+        }
+    } // else unable to get any visits
+}
 $indent = '&nbsp;&nbsp;&nbsp;&nbsp;';
 // at this point, $patientInfo['data'] should have one patient record
 $patientData = null;
-if ($patientInfo['count'] == 1) {
-	$patientData = $patientInfo['data'];
+if (!empty($patientInfo)) {
+    if ($patientInfo['count'] == 1) {
+        $patientData = $patientInfo['data'];
+    }
 }
 
 function writeTopicMenu ($sessionInfo) {
@@ -137,7 +145,10 @@ function writeTopicMenu ($sessionInfo) {
 	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu($sessionInfo) ?>
-	<div class="nameBlock">
+    <div class="<?= (empty($patientData) ? '' : 'hideDiv') ?>">
+
+    </div>
+	<div class="nameBlock<?= (empty($patientData) ? ' hideDiv' : '' ) ?>">
 		<div class="infoBlock">
 		    <h1 class="pageHeading">
                 <?= formatPatientNameLastFirst ($patientData) ?>&nbsp;&nbsp;
@@ -146,7 +157,7 @@ function writeTopicMenu ($sessionInfo) {
 		</div>
 	</div>
 	<br style="clear: left;" />
-	<div id="optionMenuDiv" class="noprint">
+	<div id="optionMenuDiv" class="noprint<?= (empty($patientData) ? ' hideDiv' : '' ) ?>">
 		<ul class="topLinkMenuList">
 			<li class="firstLink">
                 <?php  $linkParams = array(); $linkParams['clinicPatientID'] = $patientData['clinicPatientID']; ?>
@@ -233,7 +244,7 @@ function writeTopicMenu ($sessionInfo) {
 			}
 		}
 ?>
-	<div id="PatientView">
+	<div id="PatientView" class="<?= (empty($patientData) ? 'hideDiv' : '' ) ?>">
 		<div id="PatientDataView">
 			<h2 id="patientInfoHeading"><?= TEXT_PATIENT_DATA_HEAD ?></h2>
 			<div class="indent1 infoBlock">
