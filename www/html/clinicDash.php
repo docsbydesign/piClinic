@@ -97,6 +97,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	</div>
 	<div id="ClinicVisitsDiv">
 <?php
+    $earlierVisits = false;
 	if ($visitRecord['httpResponse'] != 200){
 		// this is a normal condition and not an error
 		echo ('<p>'.TEXT_NO_OPEN_VISITS.'</p>');
@@ -111,7 +112,6 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 		echo ('<h2 id="visitListHeading">'.TEXT_OPEN_VISIT_LIST_HEAD.'</h2>');
 		echo ('<p class="openVisits">*'.TEXT_EARLIER_VISIT_NOTE.'</p>');
 		$visitList = [];
-		$earlierVisits = false;
 		if ($visitRecord['count'] == 1) {
 			// there's only one so make it an array element 
 			// so the rest of the code works
