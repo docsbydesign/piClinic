@@ -244,7 +244,7 @@ function writeTopicMenu ($sessionInfo) {
 						</div>
 						<div class="dataBlock">
 							<p><label class="close"><?= TEXT_DIAGNOSIS1_LABEL ?>:</label>&nbsp;<?= conditionText($visitInfo['condition1']) ?>
-                                &nbsp;&nbsp;&nbsp;&nbsp;<a class="moreInfo" href="./files/CIE-10_2008_Chapter_1.pdf" target="_icd10" title="<?= TEXT_ICD_LINK_TITLE ?>"><?= TEXT_ICD_LINK_TEXT ?></a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<a class="moreInfo" href="http://192.169.15.134/helpHome.php?topic=icd" title="<?= TEXT_ICD_LINK_TITLE ?>"><?= TEXT_ICD_LINK_TEXT ?></a>
 							<br>
 								<?php
 									$displayText = '';
@@ -264,7 +264,7 @@ function writeTopicMenu ($sessionInfo) {
 						</div>
 						<div class="dataBlock">
 							<p><label class="close"><?= TEXT_DIAGNOSIS2_LABEL ?>:</label>&nbsp;<?= conditionText($visitInfo['condition2']) ?>
-                                &nbsp;&nbsp;&nbsp;&nbsp;<a class="moreInfo" href="./files/CIE-10_2008_Chapter_1.pdf" target="_icd10" title="<?= TEXT_ICD_LINK_TITLE ?>"><?= TEXT_ICD_LINK_TEXT ?></a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<a class="moreInfo" href="http://192.169.15.134/helpHome.php?topic=icd" title="<?= TEXT_ICD_LINK_TITLE ?>"><?= TEXT_ICD_LINK_TEXT ?></a>
 							<br>
 								<?php
 									$displayText = '';
@@ -284,7 +284,7 @@ function writeTopicMenu ($sessionInfo) {
 						</div>
 						<div class="dataBlock">
 							<p><label class="close"><?= TEXT_DIAGNOSIS3_LABEL ?>:</label>&nbsp;<?= conditionText($visitInfo['condition3']) ?>
-                                &nbsp;&nbsp;&nbsp;&nbsp;<a class="moreInfo" href="./files/CIE-10_2008_Chapter_1.pdf" target="_icd10" title="<?= TEXT_ICD_LINK_TITLE ?>"><?= TEXT_ICD_LINK_TEXT ?></a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<a class="moreInfo" href="http://192.169.15.134/helpHome.php?topic=icd" title="<?= TEXT_ICD_LINK_TITLE ?>"><?= TEXT_ICD_LINK_TEXT ?></a>
 							<br>
 								<?php
 									$displayText = 'text';

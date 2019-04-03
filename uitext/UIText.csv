@@ -196,7 +196,12 @@ TEXT_HEADING_PROFESSIONAL_TYPE,Type of health professional,Tipo de profesional d
 TEXT_HEADING_TOTAL,TOTAL,TOTAL
 TEXT_HELP_CANCEL,Cancel,Cancelar
 TEXT_HELP_EDIT_CANCEL,Cancel,Cancelar
+TEXT_HELP_ICD,ICD-10 reference documents,Referencias del codigo CIE-10
 TEXT_HELP_INTRODUCTION,Map of piClinic screens,Mapa de las pantallas de la consola piClinic
+TEXT_HELP_MENU_HOME,piClinic screens,Pantallas de la consola
+TEXT_HELP_MENU_ICD,ICD-10 codes,Codigos del CIE-10
+TEXT_HELP_MENU_PROMPT,Help with,Ayuda con
+TEXT_HELP_MENU_WORKFLOW,piClinic Tasks,Tareas en la consola
 TEXT_HELP_NOKEY_ADD,Add new patient,Agregar paciente nuevo
 TEXT_HELP_NOKEY_ADMIN,System administration,Administración del sistema
 TEXT_HELP_NOKEY_ADMIT,Admit patient,Abra una visita nueva
@@ -213,6 +218,7 @@ TEXT_HELP_SUBMIT_BUTTON,Save,Actualizar
 TEXT_HELP_TOPIC_EDIT_PAGE_TITLE,Help content edit,Editar contenido de ayuda
 TEXT_HELP_TOPIC_ID,Content ID,ID del contenido
 TEXT_HELP_TOPIC_TEXT,HTML Content,Contenido HTML
+TEXT_HELP_WORKFLOW,piClinic Tasks,Tareas de la consola piClinic
 TEXT_HOMEADDRESS1_LABEL,Address 1,Dirección
 TEXT_HOMEADDRESS1_MISSING,(Address 1 not specified),(Dirección no especificada)
 TEXT_HOMEADDRESS2_LABEL,Address 2,Dirección adicional
