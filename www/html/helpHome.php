@@ -68,9 +68,38 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	<?= piClinicAppMenu(HELP_PAGE, $pageLanguage,__FILE__) ?>
 	<div class="pageBody">
 	<div id="ReportList">
+        <div id="HelpHome">
 		<h1 class="pageHeading"><?= TEXT_PICLINIC_HELP_PAGE_TITLE ?></h1>
 		<p><?= TEXT_HELP_INTRODUCTION ?></p>
         <object type="image/svg+xml" data="/api/locImage.php?image=/assets/images/piClinic_Help_noKey.svg<?= '&language='.$pageLanguage ?>"></object>
+        </div>
+        <div id="HelpWorkflows">
+            <h1 class="pageHeading"><?= TEXT_PICLINIC_HELP_PAGE_TITLE ?></h1>
+            <p><?= TEXT_HELP_INTRODUCTION ?></p>
+            <object type="image/svg+xml" data="/api/locImage.php?image=/assets/images/piClinic_Workflows.svg<?= '&language='.$pageLanguage ?>"></object>
+        </div>
+        <div id="HelpIcdRef">
+            <h1 class="pageHeading"><?= TEXT_PICLINIC_HELP_PAGE_TITLE ?></h1>
+            <p><?= TEXT_HELP_INTRODUCTION ?></p>
+            <table>
+                <tr>
+                    <th>English References</th>
+                    <th>Referencias en Español</th>
+                </tr>
+                <tr>
+                    <td><a href="/files/ICD10Volume1_en_2008.pdf">ICD-10, Volume 1</a></td>
+                    <td><a href="/files/CIE-10_2008_Chapter_1.pdf">CIE-10, Volumen 1</a></td>
+                </tr>
+                <tr>
+                    <td><a href="/files/ICD10Volume2_en_2008.pdf">ICD-10, Volume 1</a></td>
+                    <td><a href="/files/CIE-10_2008_Chapter_2.pdf">CIE-10, Volumen 1</a></td>
+                </tr>
+                <tr>
+                    <td><a href="/files/ICD10Volume3_en_2008.pdf">ICD-10, Volume 1</a></td>
+                    <td><a href="/files/CIE-10_2008_Chapter_3.pdf">CIE-10, Volumen 1</a></td>
+                </tr>
+            </table>
+        </div>
 	</div>
 	</div>
 </body>
