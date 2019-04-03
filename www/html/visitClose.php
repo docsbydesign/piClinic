@@ -116,14 +116,24 @@ if (!empty($requestData['patientVisitID'])) {
 // if the visit record was not returned, exit in error
 // if it was, save the data to $visitInfo
 $visitInfo = array();
-if ($visitRecord['httpResponse'] != 200) {
-	$dbStatus = $visitRecord;
-	if ($dbStatus['httpResponse'] == 404) {
-		$dbStatus['httpReason']	= TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND;
-	} else {
-		$dbStatus['httpReason']	= TEXT_MESSAGE_GENERIC;
-	}
+if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
+    if (!empty($visitRecord) ) {
+        $dbStatus = $visitRecord;
+        if ($dbStatus['httpResponse'] == 404) {
+            $dbStatus['httpReason']	= TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND;
+        } else {
+            $dbStatus['httpReason']	= TEXT_MESSAGE_GENERIC;
+        }
+    } else {
+        $requestData['msg'] = MSG_NOT_FOUND;
+    }
 	// load fields that should have data so the form doesn't break
+    if (!isset($visitInfo['patientVisitID'])) {
+        $visitInfo['patientVisitID'] = '';
+    }
+    if (!isset($visitInfo['dateTimeIn'])) {
+        $visitInfo['dateTimeIn'] = '';
+    }
 	$visitInfo['clinicPatientID'] = '';
 	$visitInfo['patientFamilyID'] = '';
 	$visitInfo['lastName'] = '';
@@ -135,6 +145,10 @@ if ($visitRecord['httpResponse'] != 200) {
 	$visitInfo['secondaryComplaint'] = '';
 	$visitInfo['visitType'] = '';
 	$visitInfo['visitStatus'] = '';
+    $visitInfo['diagnosis1'] = '';
+    $visitInfo['diagnosis2'] = '';
+    $visitInfo['diagnosis3'] = '';
+
 } else {
 	$visitInfo = $visitRecord['data'];
 }
@@ -173,7 +187,7 @@ function writeOptionsMenu ($visitInfo) {
 	<datalist id="diagData"></datalist>
 	<div class="pageBody">
 	<?= writeTopicMenu($cancelUrl) ?>
-	<div class="nameBlock">
+	<div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>"">
 		<div class="infoBlock">
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
 				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>
@@ -186,7 +200,7 @@ function writeOptionsMenu ($visitInfo) {
 		</div>
 	</div>
 	<div style="clear: both;"></div>
-	<div id="PatientVisitView">
+	<div id="PatientVisitView" class="<?= (empty($visitRecord) ? 'hideDiv' : '') ?>">
 		<?= writeOptionsMenu($visitInfo) ?>
 		<div id="PatientVisitDataView">
 			<div id="PatientVisitDetails">
