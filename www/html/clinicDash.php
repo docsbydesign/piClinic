@@ -97,6 +97,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	</div>
 	<div id="ClinicVisitsDiv">
 <?php
+    $earlierVisits = false;
 	if ($visitRecord['httpResponse'] != 200){
 		// this is a normal condition and not an error
 		echo ('<p>'.TEXT_NO_OPEN_VISITS.'</p>');
@@ -111,7 +112,6 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 		echo ('<h2 id="visitListHeading">'.TEXT_OPEN_VISIT_LIST_HEAD.'</h2>');
 		echo ('<p class="openVisits">*'.TEXT_EARLIER_VISIT_NOTE.'</p>');
 		$visitList = [];
-		$earlierVisits = false;
 		if ($visitRecord['count'] == 1) {
 			// there's only one so make it an array element 
 			// so the rest of the code works
@@ -155,8 +155,8 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 						'<a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
 						'&clinicPatientID='.$visit['clinicPatientID'].
                         '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_HOME, 'VISIT_MORE').
-                        createFromLink (FROM_LINK_QP, __FILE__, 'a_visitmore').
-						'class="a_visitmore moreInfo"'.
+                        createFromLink (FROM_LINK_QP, __FILE__, 'a_visitmore').'" '.
+						'class="a_visitmore moreInfo" '.
 						'title="'.TEXT_MORE_VISIT_INFO.'">'.TEXT_VISIT_LIST_ACTION_MORE.'</a>';
 					}
 					echo ('<td'.(isset($visit['primaryComplaint']) ? '' : ' class="inactive"' ).'>'.$complaintText.'</td>');
@@ -176,8 +176,6 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 				}
 			}
 			echo ('</table>');
-			echo ('<style>p.openVisits {'. ($earlierVisits ? 'display:inline; ' : 'display: none; ' ).'} </style>');
-			echo ('<style>h2 {'. ($earlierVisits ? 'margin-bottom: 0; ' : '' ).'} </style>');
 		}
 	}
 
@@ -185,6 +183,8 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 ?>
 	</div>
 	</div>
+    <style>p.openVisits <?= '{'. ($earlierVisits ? 'display:inline; ' : 'display: none; ' ).'}' ?> </style>
+    <style>h2 <?= '{'. ($earlierVisits ? 'margin-bottom: 0; ' : '' ).'}' ?> </style>
 </body>
 <?php $result = profileLogClose($profileData, __FILE__, $requestData); ?>
 </html>

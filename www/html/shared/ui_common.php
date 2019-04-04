@@ -49,8 +49,10 @@ if (!defined('UI_COMMON_CONSTANTS')) {
     define('MSG_NO_ACCESS',"NO_ACCESS", false);
     define('MSG_PATIENT_ID_IN_USE',"PATIENT_ID_IN_USE", false);
     define('MSG_REQUIRED_FIELD_MISSING',"REQUIRED_FIELD_MISSING", false);
+    define('MSG_SESSION_TIMEOUT',"SESSION_TIMEOUT",false);
     define('MSG_UNSUPPORTED',"UNSUPPORTED", false);
     define('MSG_USER_NOT_FOUND',"USER_NOT_FOUND", false);
+    define('MSG_TOPIC_NOT_FOUND',"MSG_TOPIC_NOT_FOUND", false);
 }
 
 /*
@@ -317,7 +319,11 @@ function formatAgeFromBirthdate ($birthdate, $today=null, $yrText='y', $moText='
 function makeUrlWithQueryParams ($url, $qParams) {
     if (!empty($qParams) && is_array($qParams) && !empty($url)) {
         $qParamString = http_build_query($qParams);
-        return $url . '?' . $qParamString;
+        if (!empty($qParamString)) {
+            return $url . '?' . $qParamString;
+        } else {
+            return $url;
+        }
     } else {
         return $url;
     }
@@ -335,37 +341,46 @@ function cleanUrlQueryParams($queryParamArray) {
     return $qpArray;
 }
 
-function cleanedRefererUrl ($fromLinkValue = null)
-{
-    $httpReferer = '';
-    $httpRefererUrl = '';
-    $httpRefererQp = array();
-    if (!empty($_SERVER['HTTP_REFERER'])) {
-        $httpRefererParts = explode('?',$_SERVER['HTTP_REFERER']);
-        if (!empty($httpRefererParts[0])) {
-            $httpRefererUrl = $httpRefererParts[0];
+function cleanTheUrl ($urlToClean, $newQpArray = null, $fromLinkValue = null) {
+    if (!empty($urlToClean)) {
+        $urlParts = explode('?',$urlToClean);
+        if (!empty($urlParts[0])) {
+            $urlRoot = $urlParts[0];
         }
-        if (!empty($httpRefererParts[1])) {
-            parse_str($httpRefererParts[1], $httpRefererQp);
-            $httpRefererQp = cleanUrlQueryParams($httpRefererQp);
+        if (!empty($urlParts[1])) {
+            parse_str($urlParts[1], $urlQP);
+            $urlQP = cleanUrlQueryParams($urlQP);
         }
-        if (!empty($fromLink)) {
-            $httpRefererQp[FROM_LINK] = $fromLinkValue;
+        if (!empty($newQpArray) && is_array($newQpArray)) {
+            foreach ($newQpArray as $key=>$value) {
+                $urlQP[$key] = $value;
+            }
         }
-        return (makeUrlWithQueryParams($httpRefererUrl, $httpRefererQp));
+        if (!empty($fromLinkValue)) {
+            $urlQP[FROM_LINK] = $fromLinkValue;
+        }
+        return (makeUrlWithQueryParams($urlRoot, $urlQP));
     }
-    return $httpReferer;
+    return $urlToClean;
+}
+
+function cleanedCallingUrl ($newQpArray = null, $fromLinkValue = null) {
+    return cleanTheUrl ($_SERVER['REQUEST_URI'], $newQpArray, $fromLinkValue);
+}
+
+function cleanedRefererUrl ($fromLinkValue = null) {
+    return cleanTheUrl ($_SERVER['HTTP_REFERER'], null, $fromLinkValue);
 }
 
 function createFromLink ($queryParamName, $filePath, $linkData) {
-    //clean file path down to just the local path
     // get file name
+    // clean file path down to just the local path
     $linkQP = $filePath;
     if (substr($filePath,0,strlen(ROOT_DIR_PATH)) == ROOT_DIR_PATH) {
         $linkQP = substr($filePath, strlen(ROOT_DIR_PATH));
     }
     // add on the link ID info
-    $linkQP .= '|'.$linkData;
+    $linkQP .= FROM_LINK_SEP.$linkData;
     // and if there's a query parameter with the delimiter, add that, too.
     if (!empty($queryParamName)){
         $linkQP = $queryParamName . '=' . $linkQP;

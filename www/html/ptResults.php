@@ -87,7 +87,9 @@ if (!empty($sessionInfo['parameters']['ata'])) {
     }
 } else {
     $cancelLink = '/clinicDash.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'Cancel');
-	$addNewLink = '/ptAddEdit.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'AddNewPatient');
+	$addNewLink = '/ptAddEdit.php'.
+        '?'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_ADD_NEW').
+        createFromLink (FROM_LINK_QP, __FILE__, 'AddNewPatient');
 }
 
 // open DB
@@ -127,14 +129,9 @@ $patientInfo = _patient_get($dbLink, $sessionInfo['token'], $sessionInfo['parame
 // at this point, $patientInfo['data'] can have zero or more patient records (up to query limit)
 
 if (($patientInfo['count'] == 0) && (empty($sessionInfo['parameters']['ata']))) {
-	// error redirect to the search page if nothing found
-    $returnQP['msg'] = MSG_NOT_FOUND;
-	$redirectUrl = makeUrlWithQueryParams('/clinicDash.php', $returnQP);
-
-	header("Location: ".$redirectUrl);
-	@mysqli_close($dbLink);
-	return;
-} // else continue 
+	// Display error on this page
+    $requestData['msg'] = MSG_NOT_FOUND;
+} // else continue
 
 // if not a familyID search and only one result, show the result.
 if ($patientInfo['count'] == 1) {

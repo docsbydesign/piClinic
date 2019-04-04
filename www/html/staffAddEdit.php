@@ -44,6 +44,7 @@ $pageLanguage = $sessionInfo['pageLanguage'];
 // load the strings for the page language
 //	assumes $pageLanguage contains a valid language
 require_once ('./uitext/staffAddEditText.php');
+require_once ('./staffUiStrings.php');
 
 // open session variables and check for access to this page
 $pageAccessRequired = (!empty($sessionInfo['parameters']['useredit']) ? PAGE_ACCESS_READONLY : PAGE_ACCESS_CLINIC);
@@ -197,7 +198,7 @@ function writeTopicMenu ($lang, $cancelLink) {
 			<h1 class="pageHeading noBottomPad"><?= ($pageMode == 'add' ? TEXT_NEW_STAFF_HEADING  : TEXT_EDIT_STAFF_HEADING  ) ?></h1>
 		</div>
 		<div style="clear: both;"></div>
-		<form enctype="application/x-www-form-urlencoded" action="/uihelp/addStaff.php" method="post">
+		<form enctype="multipart/form-data" action="/uihelp/addStaff.php" method="post">
 			<h2><?= TEXT_STAFF_ACCOUNT_INFO_LABEL ?></h2>
 			<div id="accountInfo" class="indent1">
 				<p <?= ($userEdit ? 'style="display: none;"' : '') ?>><label class="close"><?= TEXT_STAFF_ACTIVE_LABEL ?>:</label>&nbsp;
@@ -217,7 +218,7 @@ function writeTopicMenu ($lang, $cancelLink) {
 							echo ('<input type="hidden" id="usernameField" name="username" value="'.$staffData['username'].'">');
 						}
 					?>
-					<?= dbFieldTextInput ($staffData, 'Password', TEXT_STAFF_PASSWORD_PLACEHOLDER, ($pageMode == 'add' ? true : false )) ?>
+					<?= dbFieldTextInput ($staffData, 'password', TEXT_STAFF_PASSWORD_PLACEHOLDER, ($pageMode == 'add' ? true : false )) ?>
 				</p>
 				<p><label><?= TEXT_STAFF_NAME_LABEL ?>:</label><br>
 					<?= dbFieldTextInput ($staffData, 'lastName', TEXT_STAFF_NAMELAST_PLACEHOLDER, true) ?>,&nbsp;
@@ -225,10 +226,10 @@ function writeTopicMenu ($lang, $cancelLink) {
 				</p>
 				<p><label><?= TEXT_STAFF_CONTACTINFO_LABEL ?>:</label><br>
 					<?= dbFieldTextInput ($staffData, 'contactInfo', TEXT_STAFF_CONTACTINFO_PLACEHOLDER, false) ?>&nbsp; &nbsp;
-                    <?= dbFieldTextInput ($staffData, 'AltcontactInfo', TEXT_STAFF_ALTCONTACTINFO_PLACEHOLDER, false) ?>
+                    <?= dbFieldTextInput ($staffData, 'altContactInfo', TEXT_STAFF_ALTCONTACTINFO_PLACEHOLDER, false) ?>
 				</p>
                 <p><label class="close"><?= TEXT_STAFF_PREFERRED_LANGUAGE_LABEL ?>:</label>&nbsp;
-                    <select id="activeField" name="preferredLanguage" class="requiredField">
+                    <select id="preferredLanguageField" name="preferredLanguage" class="requiredField">
                         <option value="" <?= (!isset($staffData['preferredLanguage']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
                         <option value="en" <?= ((isset($staffData['preferredLanguage']) && $staffData['preferredLanguage'] == 'en') ? 'selected' : '' ) ?>><?= TEXT_STAFF_LANGUAGE_OPTION_ENGLISH ?></option>
                         <option value="es" <?= ((isset($staffData['preferredLanguage']) && $staffData['preferredLanguage'] == 'es') ? 'selected' : '' ) ?>><?= TEXT_STAFF_LANGUAGE_OPTION_SPANISH ?></option>
@@ -254,10 +255,10 @@ function writeTopicMenu ($lang, $cancelLink) {
 						<select id="positionField" name="position" class="requiredField">
 							<option value="" <?= (empty($staffData['position']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
                             <?php
-                            foreach ($staffpositions as $staffposition){
-                                echo ('<option value="'.$staffposition[0].'" '.
-                                    ((!empty($staffData['position']) && $staffData['position'] == $staffposition[0]) ? 'selected' : '' ).
-                                    '>'.$staffposition[1].'</option>');
+                            foreach ($staffPositions as $staffPosition){
+                                echo ('<option value="'.$staffPosition[0].'" '.
+                                    ((!empty($staffData['position']) && $staffData['position'] == $staffPosition[0]) ? 'selected' : '' ).
+                                    '>'.$staffPosition[1].'</option>');
                             }
                             ?>
 						</select>

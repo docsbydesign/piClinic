@@ -117,19 +117,34 @@ if (!empty($requestData['patientVisitID'])) {
 		}
 		$dbStatus['httpResponse'] = 400;
 		$dbStatus['httpReason']	= TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED;
+		$cancelLinkUrl = '/clinicDash.php';
 	} // else display DB error message
+    $staffResponse['count'] = 0;
+    $staffResponse['data'] = '';
+    $staffResponse['httpResponse'] = 500;
+
 }
 // if the visit record was not returned, exit in error
 // if it was, save the data to $visitInfo
 $visitInfo = array();
-if ($visitRecord['httpResponse'] != 200) {
-	$dbStatus = $visitRecord;
-	if ($dbStatus['httpResponse'] == 404) {
-		$dbStatus['httpReason']	= TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND;
-	} else {
-		$dbStatus['httpReason']	= TEXT_VISIT_UNABLE_OPEN_VISIT;
-	}
-	// load fields that should have data so the form doesn't break
+if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
+    if (!empty($visitRecord) ) {
+    	$dbStatus = $visitRecord;
+        if ($dbStatus['httpResponse'] == 404) {
+            $dbStatus['httpReason']	= TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND;
+        } else {
+            $dbStatus['httpReason']	= TEXT_VISIT_UNABLE_OPEN_VISIT;
+        }
+    } else {
+        $requestData['msg'] = MSG_NOT_FOUND;
+    }
+    // load fields that should have data so the form doesn't break
+    if (!isset($visitInfo['patientVisitID'])) {
+        $visitInfo['patientVisitID'] = '';
+    }
+    if (!isset($visitInfo['dateTimeIn'])) {
+        $visitInfo['dateTimeIn'] = '';
+    }
 	$visitInfo['deleted'] = FALSE;
 	$visitInfo['firstVisit'] = 'YES';
 	$visitInfo['clinicPatientID'] = '';
@@ -142,6 +157,9 @@ if ($visitRecord['httpResponse'] != 200) {
 	$visitInfo['secondaryComplaint'] = '';
 	$visitInfo['visitType'] = '';
 	$visitInfo['visitStatus'] = '';
+    $visitInfo['diagnosis1'] = '';
+    $visitInfo['diagnosis2'] = '';
+    $visitInfo['diagnosis3'] = '';
 } else {
 	$visitInfo = $visitRecord['data'];
 }
@@ -167,7 +185,7 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 	<datalist id="diagData"></datalist>
 	<div class="pageBody">
 	<?= writeOptionsMenu($visitInfo, $cancelLinkUrl) ?>
-	<div class="nameBlock">
+	<div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
 		<div class="infoBlock">
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
 				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>
@@ -183,10 +201,9 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 		</div>
 	</div>
     <div style="clear: both;"></div>
-    <div id="optionMenuDiv"></div>
-	<div id="PatientVisitView">
+	<div id="PatientVisitView" class="<?= (empty($visitRecord) ? 'hideDiv' : '') ?>">
 		<div id="PatientVisitDetails">
-			<form enctype="application/x-www-form-urlencoded" action="/uihelp/updatePatientVisit.php" method="post">
+			<form enctype="multipart/form-data" action="/uihelp/updatePatientVisit.php" method="post">
 				<h2><?= TEXT_VISIT_VISIT_HEADING ?></h2>
 				<div class="indent1">
 				<div class="dataBlock">
@@ -271,7 +288,7 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 													'>'.$staffMember['lastName'].','. $staffMember['firstName'] .'</option>');
 											}
 										}
-									} else {
+									} else if ($staffResponse['count'] == 1) {
 										$staffMember = $staffResponse['data'];
 										if ($staffMember['medicalStaff']) {
 											echo ('<option value="'.$staffMember['username'].'" '.

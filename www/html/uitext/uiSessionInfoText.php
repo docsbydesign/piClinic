@@ -43,6 +43,9 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_SESSION_NAME_PROMPT')) { define('TEXT_SESSION_NAME_PROMPT','TEXT_SESSION_NAME_PROMPT',false); }
 	if (!defined('TEXT_SESSION_SETTINGS_LABEL')) { define('TEXT_SESSION_SETTINGS_LABEL','TEXT_SESSION_SETTINGS_LABEL',false); }
 	if (!defined('TEXT_SESSION_SETTINGS_TITLE')) { define('TEXT_SESSION_SETTINGS_TITLE','TEXT_SESSION_SETTINGS_TITLE',false); }
+	if (!defined('TEXT_SHOW_LANGUAGE_PROMPT')) { define('TEXT_SHOW_LANGUAGE_PROMPT','TEXT_SHOW_LANGUAGE_PROMPT',false); }
+	if (!defined('TEXT_STAFF_LANGUAGE_OPTION_ENGLISH')) { define('TEXT_STAFF_LANGUAGE_OPTION_ENGLISH','TEXT_STAFF_LANGUAGE_OPTION_ENGLISH',false); }
+	if (!defined('TEXT_STAFF_LANGUAGE_OPTION_SPANISH')) { define('TEXT_STAFF_LANGUAGE_OPTION_SPANISH','TEXT_STAFF_LANGUAGE_OPTION_SPANISH',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
@@ -51,6 +54,9 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_SESSION_NAME_PROMPT')) { define('TEXT_SESSION_NAME_PROMPT','Logged in as',false); }
 	if (!defined('TEXT_SESSION_SETTINGS_LABEL')) { define('TEXT_SESSION_SETTINGS_LABEL','User settings',false); }
 	if (!defined('TEXT_SESSION_SETTINGS_TITLE')) { define('TEXT_SESSION_SETTINGS_TITLE','Update user account settings and password',false); }
+	if (!defined('TEXT_SHOW_LANGUAGE_PROMPT')) { define('TEXT_SHOW_LANGUAGE_PROMPT','Show this screen in',false); }
+	if (!defined('TEXT_STAFF_LANGUAGE_OPTION_ENGLISH')) { define('TEXT_STAFF_LANGUAGE_OPTION_ENGLISH','English',false); }
+	if (!defined('TEXT_STAFF_LANGUAGE_OPTION_SPANISH')) { define('TEXT_STAFF_LANGUAGE_OPTION_SPANISH','Spanish',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
@@ -59,5 +65,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_SESSION_NAME_PROMPT')) { define('TEXT_SESSION_NAME_PROMPT','Inscrito como',false); }
 	if (!defined('TEXT_SESSION_SETTINGS_LABEL')) { define('TEXT_SESSION_SETTINGS_LABEL','Configuración del usuario',false); }
 	if (!defined('TEXT_SESSION_SETTINGS_TITLE')) { define('TEXT_SESSION_SETTINGS_TITLE','Actualizar la configuración y la contraseña de la cuenta de usuario ',false); }
+	if (!defined('TEXT_SHOW_LANGUAGE_PROMPT')) { define('TEXT_SHOW_LANGUAGE_PROMPT','Mostrar esta pantalla en',false); }
+	if (!defined('TEXT_STAFF_LANGUAGE_OPTION_ENGLISH')) { define('TEXT_STAFF_LANGUAGE_OPTION_ENGLISH','Inglés',false); }
+	if (!defined('TEXT_STAFF_LANGUAGE_OPTION_SPANISH')) { define('TEXT_STAFF_LANGUAGE_OPTION_SPANISH','Español',false); }
 }
 //EOF

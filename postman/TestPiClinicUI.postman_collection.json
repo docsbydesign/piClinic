@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "896ab6af-a0ac-4b6a-8dc6-8899c856f122",
+		"_postman_id": "2eed9bfc-251c-43a8-923b-522db47e2488",
 		"name": "TestPiClinicUI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -76,6 +76,1161 @@
 							]
 						},
 						"description": "Logs in as test user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PHP error tests: root folder",
+			"item": [
+				{
+					"name": "adminHome.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/adminHome.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"adminHome.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "adminShowComments.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/adminShowComments.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"adminShowComments.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "adminShowUsers.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/adminShowUsers.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"adminShowUsers.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clinicDash.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/clinicDash.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clinicDash.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clinicLogin.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/clinicLogin.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clinicLogin.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "helpHome.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/helpHome.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"helpHome.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ptAddEdit.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/ptAddEdit.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ptAddEdit.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ptAddEdit.php w/param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/ptAddEdit.php?fromLink=AUTOTEST&clinicPatientID=PT-GEN-000066",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ptAddEdit.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								},
+								{
+									"key": "clinicPatientID",
+									"value": "PT-GEN-000066"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ptInfo.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/ptInfo.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ptInfo.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ptInfo.php w/param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/ptInfo.php?fromLink=AUTOTEST&clinicPatientID=PT-GEN-000066",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ptInfo.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								},
+								{
+									"key": "clinicPatientID",
+									"value": "PT-GEN-000066"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ptResults.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/ptResults.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ptResults.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ptResults.php w/param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/ptResults.php?fromLink=AUTOTEST&q=FAM000012",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ptResults.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								},
+								{
+									"key": "q",
+									"value": "FAM000012"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reportHome.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/reportHome.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reportHome.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "staffAddEdit.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/staffAddEdit.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"staffAddEdit.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userComment.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/userComment.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"userComment.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "visitClose.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/visitClose.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"visitClose.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "visitEdit.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/visitEdit.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"visitEdit.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "visitInfo.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/visitInfo.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"visitInfo.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "visitOpen.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/visitOpen.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"visitOpen.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PHP tests: reports folder",
+			"item": [
+				{
+					"name": "rptDailyLogHome.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/reports/rptDailyLogHome.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reports",
+								"rptDailyLogHome.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rptDailyPmtHome.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/reports/rptDailyPmtHome.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reports",
+								"rptDailyPmtHome.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rptMonthlyPmtHome.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/reports/rptMonthlyPmtHome.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reports",
+								"rptMonthlyPmtHome.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rptMonthlyPosSummHome.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/reports/rptMonthlyPosSummHome.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reports",
+								"rptMonthlyPosSummHome.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rptMonthlyPtSummHome.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/reports/rptMonthlyPtSummHome.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reports",
+								"rptMonthlyPtSummHome.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
 					},
 					"response": []
 				}

@@ -113,6 +113,7 @@ if ($logFilters['count'] > 1) {
                         if (!empty($filterOptions['logAction'])) {
                             echo '<option value="">'.TEXT_BLANK_OPTION_SELECT.'</option>'."\n";
                             foreach ($filterOptions['logAction'] as $optionValue) {
+                                if (empty($optionValue)) { continue; }
                                 echo '<option value="'.$optionValue.'">'.$optionValue.'</option>'."\n";
                             }
                         }
@@ -125,6 +126,7 @@ if ($logFilters['count'] > 1) {
                 if (!empty($filterOptions['logClass'])) {
                     echo '<option value="">'.TEXT_BLANK_OPTION_SELECT.'</option>'."\n";
                     foreach ($filterOptions['logClass'] as $optionValue) {
+                        if (empty($optionValue)) { continue; }
                         echo '<option value="'.$optionValue.'">'.$optionValue.'</option>'."\n";
                     }
                 }
@@ -137,6 +139,7 @@ if ($logFilters['count'] > 1) {
                 if (!empty($filterOptions['logStatusCode'])) {
                     echo '<option value="">'.TEXT_BLANK_OPTION_SELECT.'</option>'."\n";
                     foreach ($filterOptions['logStatusCode'] as $optionValue) {
+                        if (empty($optionValue)) { continue; }
                         echo '<option value="'.$optionValue.'">'.$optionValue.'</option>'."\n";
                     }
                 }
@@ -149,6 +152,7 @@ if ($logFilters['count'] > 1) {
                 if (!empty($filterOptions['logTable'])) {
                     echo '<option value="">'.TEXT_BLANK_OPTION_SELECT.'</option>'."\n";
                     foreach ($filterOptions['logTable'] as $optionValue) {
+                        if (empty($optionValue)) { continue; }
                         echo '<option value="'.$optionValue.'">'.$optionValue.'</option>'."\n";
                     }
                 }
@@ -161,6 +165,7 @@ if ($logFilters['count'] > 1) {
                 if (!empty($filterOptions['sourceModule'])) {
                     echo '<option value="">'.TEXT_BLANK_OPTION_SELECT.'</option>'."\n";
                     foreach ($filterOptions['sourceModule'] as $optionValue) {
+                        if (empty($optionValue)) { continue; }
                         echo '<option value="'.$optionValue.'">'.$optionValue.'</option>'."\n";
                     }
                 }
@@ -173,6 +178,7 @@ if ($logFilters['count'] > 1) {
                 if (!empty($filterOptions['userToken'])) {
                     echo '<option value="">'.TEXT_BLANK_OPTION_SELECT.'</option>'."\n";
                     foreach ($filterOptions['userToken'] as $optionValue) {
+                        if (empty($optionValue)) { continue; }
                         echo '<option value="'.$optionValue.'">'.$optionValue.'</option>'."\n";
                     }
                 }

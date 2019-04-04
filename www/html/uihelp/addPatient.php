@@ -193,8 +193,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		logApiError($formData, $retVal, __FILE__ );	
 		break;
 }
-// close the DB link until next time
-@mysqli_close($dbLink);
 
 // if the update was successful, go to show the patient 
 //  otherwise go back to the entry form
@@ -202,6 +200,8 @@ if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 	// successful update returns 200
 	if ($retVal['httpResponse'] == 200) {
 		$redirectUrl = '/ptInfo.php?clinicPatientID='.$requestData['clinicPatientID'];
+        closeMatchingWorkflow($sessionInfo, __FILE__, $dbLink,
+            ['PT_EDIT'], $workflowStep = WORKFLOW_STEP_COMPLETE, $retVal['data']);
 		header("Location: ".$redirectUrl);
 	} else {
 		$returnQP = "";
@@ -251,6 +251,8 @@ if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 			//  this patient was added for another reason so show the new patient
 			$redirectUrl = '/ptInfo.php?clinicPatientID='.$requestData['clinicPatientID'];
 		}
+        closeMatchingWorkflow($sessionInfo, __FILE__, $dbLink,
+            ['PT_ADD_NEW'], $workflowStep = WORKFLOW_STEP_COMPLETE, $retVal['data']);
 		header("httpReason: Successful new record");
 		header("Location: ".$redirectUrl);
 	} else {
@@ -277,6 +279,9 @@ if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 		header("Location: ".$redirectUrl);
 	}
 }
+// close the DB link until next time
+@mysqli_close($dbLink);
+
 profileLogClose($profileData, __FILE__, $formData);
 return;
 //EOV

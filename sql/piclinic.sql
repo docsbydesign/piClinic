@@ -122,6 +122,34 @@ CREATE TABLE IF NOT EXISTS `log` (
   `createdDate` datetime NOT NULL COMMENT '(Autofill) The date and time this entry was created.'	
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table that logs data and error events.';
 
+-- ------------------------------------------------------
+--
+-- Table structure for table `wflog`
+--
+
+DROP TABLE IF EXISTS `wflog`;
+CREATE TABLE IF NOT EXISTS `wflog` (
+  `wflogId` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique record ID for log records',
+  `sourceModule` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Module creating the log entry.',
+  `logQueryString` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Query string that initiated the action',
+  `prevPage` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) page before the one logging the workflow',
+  `prevLink` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Link used on the page before the one logging the workflow',
+  `requestId` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Unique request ID provided by Web server',
+  `userToken` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(optional) sessionID of user.',
+  `logClass` varchar(8) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) type of log entry (home or sub step).',
+  `wfName` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) workflow name',
+  `wfGuid` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) unique workflow ID',
+  `wfStep` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) workflow step',
+  `wfHomeGuid` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) unique workflow ID of HOME step',
+  `wfMicrotime` double DEFAULT 0.0 COMMENT '(optional) micro time stamp of log entry',
+  `wfMicrotimeString` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Microtime value formatted as date/time string',
+  `activeWorkflows` varchar(4096) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) JSON string of session workflow list',
+  `logBeforeData` varchar(4096) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) data.',
+  `logAfterData` varchar(4096) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) data',
+  `logStatusCode` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Status code of action.',
+  `logStatusMessage` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Text status message resulting from action.',
+  `createdDate` datetime NOT NULL COMMENT '(Autofill) The date and time this entry was created.'	
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table that logs workflow events.';
 
 -- ------------------------------------------------------
 --
@@ -140,6 +168,28 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `createdDate` datetime NOT NULL COMMENT '(Autofill) The date and time this commant was saved.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table that records comments from users.';
 
+-- ------------------------------------------------------
+--
+-- Table structure for table `help`
+--
+
+DROP TABLE IF EXISTS `help`;
+CREATE TABLE IF NOT EXISTS `help` (
+  `helpID` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique comment ID for comment records',
+  `topicID` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) The topic ID used to relate this entry to similar entries in other languages.',
+  `language` varchar (8) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) The 2-letter language code that describes the language.',
+  `refPage` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) The page this topic applies to. NULL indicates the topic is accessed by reference.',
+  `helpText`  varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) The text to display. Can be HTML.',
+  `lastChangeBy` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Optional) Username of last editor.',
+  `modifiedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '(Auto fill) The date/time of the most recent update',
+  `createdDate` datetime NOT NULL COMMENT '(Autofill) The date and time this commant was saved.'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table that records comments from users.';
+--
+-- Indexes for table `help`
+--
+ALTER TABLE `help`
+ ADD UNIQUE KEY (`topicID`, `language`);
+ 
 -- --------------------------------------------------------
 --
 -- Table structure for table `clinic`

@@ -76,9 +76,11 @@ def createStringsInFiles(file_info):
                 langField = 'UI_TEXT_CONSTANT'
             #write language header
             outFile.write ("// Strings for {}\nif ($pageLanguage == {}) {}\n".format(language,language,'{'))
-            for uiTextItem in file_info['file_strings']:
-                outFile.write ("\tif (!defined('{}')) {{ define('{}','{}',false); }}\n".format(uiTextItem['UI_TEXT_CONSTANT'], uiTextItem['UI_TEXT_CONSTANT'], uiTextItem[langField]))
-            outFile.write ("{}\n".format('}'))
+            if 'file_strings' in file_info:
+                for uiTextItem in file_info['file_strings']:
+                    outFile.write ("\tif (!defined('{}')) {{ define('{}','{}',false); }}\n".format(uiTextItem['UI_TEXT_CONSTANT'], uiTextItem['UI_TEXT_CONSTANT'], uiTextItem[langField]))
+                outFile.write ("{}\n".format('}'))
+            # else no strings to write
         outFile.write ("//EOF\n")
 
     return 1

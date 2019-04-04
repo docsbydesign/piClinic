@@ -68,7 +68,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','Patient\'s name or ID',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_FOUND_ATA')) { define('TEXT_PATIENT_SEARCH_FOUND_ATA','Found these patients. Select one to enter their visit info or add a new patient above.',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_FOUND_NOT_ATA')) { define('TEXT_PATIENT_SEARCH_FOUND_NOT_ATA','Found these patients. Select one to view thier info.',false); }
-	if (!defined('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA')) { define('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA','No matching patients found. Go back or add a new patient above.',false); }
+	if (!defined('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA')) { define('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA','No matching patients found. Retry your search or add a new patient above.',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_RESULTS_HEADING')) { define('TEXT_PATIENT_SEARCH_RESULTS_HEADING','Matching patients found',false); }
 	if (!defined('TEXT_RETURN_TO_SEARCH_LINK')) { define('TEXT_RETURN_TO_SEARCH_LINK','Search again',false); }
 	if (!defined('TEXT_SEX_OPTION_F')) { define('TEXT_SEX_OPTION_F','F',false); }
@@ -88,7 +88,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','Identidad o nombre del paciente',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_FOUND_ATA')) { define('TEXT_PATIENT_SEARCH_FOUND_ATA','Encontró estos pacientes. Haz clik para agregar su visita o agregue un paciente nuevo.',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_FOUND_NOT_ATA')) { define('TEXT_PATIENT_SEARCH_FOUND_NOT_ATA','Encontró estos pacientes. Haz clik para ver sus detalles.',false); }
-	if (!defined('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA')) { define('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA','No hay patientes con este ID. Volver o agregar un paciente nuevo.',false); }
+	if (!defined('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA')) { define('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA','No hay pacientes con este ID o nombre. Buscar de nuevo o agregar un paciente nuevo.',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_RESULTS_HEADING')) { define('TEXT_PATIENT_SEARCH_RESULTS_HEADING','Pacientes encontrados',false); }
 	if (!defined('TEXT_RETURN_TO_SEARCH_LINK')) { define('TEXT_RETURN_TO_SEARCH_LINK','Buscar de nuevo',false); }
 	if (!defined('TEXT_SEX_OPTION_F')) { define('TEXT_SEX_OPTION_F','M',false); }

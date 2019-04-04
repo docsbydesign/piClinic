@@ -81,7 +81,7 @@ function writeTopicMenu ($lang) {
 	<div class="pageBody">
 	<div id="commentDiv">
 		<h1 class="pageHeading"><?= TEXT_USER_COMMENTS_PAGE_TITLE ?></h1>
-		<form enctype="application/x-www-form-urlencoded" action="/uihelp/addComment.php" method="post">
+		<form enctype="multipart/form-data" action="/uihelp/addComment.php" method="post">
 			<p><label><?= TEXT_COMMENT_CANCEL ?>:</label><br>
 			<textarea name="commentText" id="CommentTextEdit" class="commentTextEdit" placeholder="<?= TEXT_COMMENT_PLACEHOLDER ?>" maxlength="2048"></textarea>
 			</p>

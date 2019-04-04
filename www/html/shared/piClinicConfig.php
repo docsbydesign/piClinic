@@ -73,6 +73,7 @@ if (!defined('REST_CONSTANTS')) {
     define('FIRST_FROM_LINK_QP', '?fromLink', false); // query parameter string when first QP
     define('FROM_LINK_QP','&fromLink', false); // use in query paramter string after first QP
     define('FROM_LINK','fromLink',false); // used in form Values
+    define('FROM_LINK_SEP','-',false); // character used to separate elements in From link
 
 	// languages
 	define('UI_DEFAULT_LANGUAGE','en', false);
@@ -99,6 +100,7 @@ if (!defined('REST_CONSTANTS')) {
 	// database tables
     define('DB_TABLE_CLINIC','clinic',false);
     define('DB_TABLE_COMMENT','comment', false);
+    define('DB_TABLE_HELP', 'help', false);
     define('DB_TABLE_ICD10','icd10', false);
     define('DB_TABLE_IMAGE','image', false);
     define('DB_TABLE_LOG','log', false);
@@ -107,6 +109,7 @@ if (!defined('REST_CONSTANTS')) {
     define('DB_TABLE_STAFF','staff', false);
     define('DB_TABLE_VISIT','visit', false);
     define('DB_TABLE_TEXTMSG','textmsg', false);
+    define('DB_TABLE_WFLOG','wflog', false);
 
 	// database views
     define('DB_VIEW_COMMENT_GET','commentGet', false);

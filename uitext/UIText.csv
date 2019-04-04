@@ -194,7 +194,14 @@ TEXT_HEADING_NURSE_PRO,Profesional,Profesional
 TEXT_HEADING_PROFESSIONAL_NAME,Name,Nombre
 TEXT_HEADING_PROFESSIONAL_TYPE,Type of health professional,Tipo de profesional de salud
 TEXT_HEADING_TOTAL,TOTAL,TOTAL
+TEXT_HELP_CANCEL,Cancel,Cancelar
+TEXT_HELP_EDIT_CANCEL,Cancel,Cancelar
+TEXT_HELP_ICD,ICD-10 reference documents,Referencias del codigo CIE-10
 TEXT_HELP_INTRODUCTION,Map of piClinic screens,Mapa de las pantallas de la consola piClinic
+TEXT_HELP_MENU_HOME,piClinic screens,Pantallas de la consola
+TEXT_HELP_MENU_ICD,ICD-10 codes,Codigos del CIE-10
+TEXT_HELP_MENU_PROMPT,Help with,Ayuda con
+TEXT_HELP_MENU_WORKFLOW,piClinic Tasks,Tareas en la consola
 TEXT_HELP_NOKEY_ADD,Add new patient,Agregar paciente nuevo
 TEXT_HELP_NOKEY_ADMIN,System administration,Administración del sistema
 TEXT_HELP_NOKEY_ADMIT,Admit patient,Abra una visita nueva
@@ -206,6 +213,17 @@ TEXT_HELP_NOKEY_FIND_PATIENT,Find patient,Buscar paciente
 TEXT_HELP_NOKEY_PATIENT_INFO,View patient info,Revisar información del paciente
 TEXT_HELP_NOKEY_REPORTS,Reports,Informes
 TEXT_HELP_NO_CONTENT,Help is not yet available,La ayuda todavía no está disponible
+TEXT_HELP_REF_PAGE,Page,Página
+TEXT_HELP_SUBMIT_BUTTON,Save,Actualizar
+TEXT_HELP_TOPIC_EDIT_PAGE_TITLE,Help content edit,Editar contenido de ayuda
+TEXT_HELP_TOPIC_ID,Content ID,ID del contenido
+TEXT_HELP_TOPIC_TEXT,HTML Content,Contenido HTML
+TEXT_HELP_WORKFLOW,piClinic Tasks,Tareas de la consola piClinic
+TEXT_HELP_WORK_ADD_PT,Add a new patient,Agregar un paciente nuevo
+TEXT_HELP_WORK_ADMIT_PT,Admit a bpatient to clinic,Abra una visita nueva para un paciente
+TEXT_HELP_WORK_DISCHARGE_PT,Discharge a patient,Dar de alta un paciente
+TEXT_HELP_WORK_FIND_PT,Search for a patient,Buscar un paciente
+TEXT_HELP_WORK_UPDATE_PT,Update patient info,Actualizar un paciente
 TEXT_HOMEADDRESS1_LABEL,Address 1,Dirección
 TEXT_HOMEADDRESS1_MISSING,(Address 1 not specified),(Dirección no especificada)
 TEXT_HOMEADDRESS2_LABEL,Address 2,Dirección adicional
@@ -226,6 +244,8 @@ TEXT_HOME_NEIGHBORHOOD_PLACEHOLDER,Neighborhood,Localidad
 TEXT_HOME_PAGE_LINK,Dashboard,Página principal
 TEXT_HOME_STATE_LABEL,State,Departamento
 TEXT_HOME_STATE_PLACEHOLDER,State,Departamento
+TEXT_ICD_LINK_TEXT,Lookup code,Buscar codigo
+TEXT_ICD_LINK_TITLE,Lookup an ICD-10 code in the Spanish reference book,Buscar un codigo CIE-10 en el libro de referencia
 TEXT_IMAGE_ADD_BUTTON,Add this image to the patient\'s record,Agrega este imagen al paciente
 TEXT_IMAGE_CANCEL_EDIT,Cancel,Cancelar
 TEXT_IMAGE_CAPTION_PLACEHOLDER,Short text about the image,Texto corto sobre el imagen
@@ -309,6 +329,8 @@ TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED,The patient ID was not specified.,No estuv
 TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND,Patient visit not found.,No se encontro la visita del paciente.
 TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED,Patient visit ID not specified.,ID de la visita no está especificada.
 TEXT_MESSAGE_REQUIRED_FIELD_MISSING,A required field was not filled in.,Un campo requirido no tiene datos.
+TEXT_MESSAGE_SESSION_TIMEOUT,You haven\'t been using the system for a while so you were logged out,,No ha estado usando la consola por un rato y su sesión ha estado cerrado automáticamente.
+TEXT_MESSAGE_TOPIC_NOT_FOUND,Help topic not found.,Contendio no encontrado
 TEXT_MESSAGE_UNSUPPORTED_ERROR,Cannot perform the action requested.,No puede hacer la acción pedido.
 TEXT_MESSAGE_USER_NOT_FOUND,The staff member could not be found.,La persona no estuvo encontrado.
 TEXT_MONTHLY_PAGE_TITLE,Monthly Payment Log,Registro de Pagos del Mes
@@ -441,7 +463,7 @@ TEXT_PATIENT_SEARCH_NAMELAST_PLACEHOLDER,First last name,Apellido
 TEXT_PATIENT_SEARCH_NAMEMI_PLACEHOLDER,MI,Inicial
 TEXT_PATIENT_SEARCH_NAME_LABEL,Patient name,Nombre del paciente
 TEXT_PATIENT_SEARCH_NEIGHBORHOOD_PLACEHOLDER,Neighborhood,Localidad
-TEXT_PATIENT_SEARCH_NOT_FOUND_ATA,No matching patients found. Go back or add a new patient above.,No hay patientes con este ID. Volver o agregar un paciente nuevo.
+TEXT_PATIENT_SEARCH_NOT_FOUND_ATA,No matching patients found. Retry your search or add a new patient above.,No hay pacientes con este ID o nombre. Buscar de nuevo o agregar un paciente nuevo.
 TEXT_PATIENT_SEARCH_PAGE_TITLE,Patient Search,Buscar Paciente
 TEXT_PATIENT_SEARCH_RESULTS_HEADING,Matching patients found,Pacientes encontrados
 TEXT_PATIENT_SEARCH_STATE_PLACEHOLDER,State,Departamento
@@ -648,6 +670,7 @@ TEXT_SEX_OPTION_F,F,M
 TEXT_SEX_OPTION_M,M,H
 TEXT_SEX_OPTION_X,X,X
 TEXT_SHOWING_ONLY_END_EVENTS,Only \'end\' events are listed.,Sólo los eventos llamado \'end\' están listado.
+TEXT_SHOW_LANGUAGE_PROMPT,Show this screen in,Mostrar esta pantalla en
 TEXT_SHOW_PATIENT_INFO,Show patient details,Mostrar los detalles del paciente
 TEXT_SHOW_PATIENT_INFO_BUTTON,Show info,Mostrar la información
 TEXT_SHOW_PATIENT_SUBMIT_BUTTON,Search,Buscar
@@ -722,7 +745,7 @@ TEXT_VISIT_DATE_ONLY_FORMAT,m/d/Y,d-m-Y
 TEXT_VISIT_DATE_TIME_LABEL,Visit Date,Fecha de la visita
 TEXT_VISIT_DAY_FORMAT,d,d
 TEXT_VISIT_DAY_TEXT,d,d
-TEXT_VISIT_DEFAULT,Test,Test
+TEXT_VISIT_DEFAULT,Outpatient,Outpatient
 TEXT_VISIT_DELETED_LABEL,Deleted state,Borrada o valida
 TEXT_VISIT_DELETED_SELECT_LABEL,Deleted,Borrada
 TEXT_VISIT_DELETED_TEXT,Deleted,Borrada

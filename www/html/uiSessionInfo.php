@@ -36,6 +36,15 @@ exitIfCalledFromBrowser(__FILE__);
 require_once dirname(__FILE__).'/./shared/ui_common.php';
 require_once dirname(__FILE__).'/./uitext/uiSessionInfoText.php';
 
+
+function getSupportedUiLanguages() {
+    $langArray = array();
+    $langArray[UI_ENGLISH_LANGUAGE] = TEXT_STAFF_LANGUAGE_OPTION_ENGLISH;
+    $langArray[UI_SPANISH_LANGUAGE] = TEXT_STAFF_LANGUAGE_OPTION_SPANISH;
+    return $langArray;
+}
+
+
 // open session variables
 $sessionToken = $sessionInfo['token'];
 $sessionUser = $sessionInfo['username'];
@@ -116,17 +125,40 @@ if (isset($sessionUser)) {
 if (isset($sessionToken)){
 	$logoutLink = '<a href="/uihelp/endUiSession.php" title="'.TEXT_SESSION_LOGOUT_TITLE.'" >'.$logoutPrompt.'</a>';
 }
+// make language option list.
+$langArray = getSupportedUiLanguages();
+$langLinkText = '';
+
+foreach ($langArray as $langId => $langText) {
+    if ($langId != $sessionInfo['pageLanguage']) {
+        // don't create a link to show the current language
+        $pageLangUrl = cleanedCallingUrl (['lang'=>$langId]);
+        if (!empty($langLinkText)) {
+            // add a separator
+            $langLinkText .= '&nbsp;&nbsp;|&nbsp;&nbsp;';
+        }
+        $langLinkText .= '<a href="'.$pageLangUrl.'" class="langLing">'.$langText.'</a>';
+    }
+}
+
 if (isset($sessionToken) || isset($sessionUser)) {
-	$sessionDiv = '<div id="sessionDiv" class="noprint">';
+	$sessionDiv = '<div id="sessionMenu" class="noprint">';
+	// build session info menu
+    $sessionDiv .= '<div id="sessionDiv" class="noprint">';
 	$sessionSettings = '<a href="/staffAddEdit.php?useredit=true" ';
 	$sessionSettings .= 'title="'.TEXT_SESSION_SETTINGS_TITLE.'">'.TEXT_SESSION_SETTINGS_LABEL. '</a>';
 	if (isset($sessionToken)) {
 		$sessionDiv .= '<p>'. $loggedInPrompt. '&nbsp;&nbsp;|&nbsp;&nbsp;';
 		$sessionDiv .= $sessionSettings . '&nbsp;&nbsp;|&nbsp;&nbsp;' .$logoutLink. '</p>';
 	}
-	$sessionDiv .= '</div>';	
+	$sessionDiv .= '</div>';
+	// build session page language
+    $sessionDiv .= '<div id="sessionPageMenu" class="noprint"><p>'.TEXT_SHOW_LANGUAGE_PROMPT.': '.$langLinkText.'</p></div>';
+    $sessionDiv .= '</div>';
+    $sessionDiv .= '<div style="clear: both;"></div>';
 } else {
 	// need to define this variable, even if it's empty
-	$sessionDiv = '<div id="sessionDiv" style="display:none; ">&nbsp;</div>';	
+	$sessionDiv = '<div id="sessionMenu" style="display:none; ">&nbsp;</div>';
+    $sessionDiv .= '<div style="clear: both;"></div>';
 }
 //EOF
