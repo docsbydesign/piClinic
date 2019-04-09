@@ -1,0 +1,11 @@
+--
+--	Summarize WFLog Data
+--    to show time in each workflow accomplished
+--
+
+SELECT `wfGuid`,
+	`logClass`,
+	`wfName`, 
+	ROUND(max(`wfMicrotime`)-min(`wfMicrotime`),4) as `Elapsed Time` from `wflog` 
+where `logClass` = 'SF' 
+group by `wfGuid`;
