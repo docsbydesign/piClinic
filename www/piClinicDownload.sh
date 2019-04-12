@@ -3,12 +3,14 @@
 # constants
 TEMPDIR="/var/local/piclinic/downloads/"
 TEMP_DBFILE="piclinic_db.sql"
+TEMP_DBLOGS="piclinic_logs.sql"
 VERBOSE="0"
+ERRORS="0"
 #
 # usage text
 usage()
 {
-    echo "usage: piClinicDownload  [-h] -f file -t [db|log|system] -p mysqlpassword ]"
+    echo "usage: piClinicDownload  [-h] [-v] -f file -t [db|log|system] -p mysqlpassword"
 }
 #
 # check for command line parameters
@@ -47,11 +49,13 @@ then
     case $TYPE_PARAM in
         log )
                         TEMP_ARCHIVE=$TEMPDIR"piclinic_archive.tar"
+						TEMP_DB_LOG="$TEMPDIR$TEMP_DBLOGS"
 						TEMP_DB_PATH=""
 						OUTFILE="$TEMPDIR$FILENAME"
                         ;;
         db  )
                         TEMP_ARCHIVE=""
+						TEMP_DB_LOG=""
 						TEMP_DB_PATH="$TEMPDIR$TEMP_DBFILE"
 						OUTFILE="$TEMPDIR$FILENAME"
                         ;;
@@ -101,6 +105,38 @@ then
 	else
 		tar -rvf $TEMP_ARCHIVE -C /var log/piclinic
 	fi
+	# dump only log tables from piclinic database
+	#  but only if dumping the whole database (as they are included in it)
+	if [ "$TEMP_DB_LOG" != "" ]
+	then
+		mysqldump -uCTS-user -p$PASSWORD piclinic wflog > $TEMP_DB_LOG 
+		if [ $? -eq 0 ]
+		then
+			mysqldump -uCTS-user -p$PASSWORD piclinic log >> $TEMP_DB_LOG
+		else
+			ERRORS="1"
+		fi
+		if [ $? -eq 0 ]
+		then
+			mysqldump -uCTS-user -p$PASSWORD piclinic comment >> $TEMP_DB_LOG
+		else
+			ERRORS="1"
+		fi
+		# archive the dump if it worked/
+		if [ -f $TEMP_DB_LOG ]
+		then
+			# add it to the log archive, if it exists, otherwise create a new archive
+			if [ ! -f $TEMP_ARCHIVE ]
+			then
+				tar -cvf $TEMP_ARCHIVE -C $TEMPDIR $TEMP_DBLOGS
+			else
+				tar -rvf $TEMP_ARCHIVE -C $TEMPDIR $TEMP_DBLOGS
+			fi
+		else
+			echo "MYSQL dump command failed."
+			ERRORS="1"
+		fi
+	fi
 	if [ "$VERBOSE" = "1" ]
 	then
 		ls -l $TEMPDIR
@@ -128,6 +164,7 @@ then
 		fi
 	else
 		echo "MYSQL dump command failed."
+		ERRORS="1"
 	fi
 	if [ "$VERBOSE" = "1" ]
 	then
@@ -144,7 +181,7 @@ then
 		ls -l $TEMPDIR
 	fi
 else
-	exit 1 #archive not successful
+	ERRORS="1"
 fi
 #
 # that's all
@@ -153,4 +190,11 @@ then
 	echo "piClinic archive complete"
 	set +x
 fi
-exit 0
+if [ "$ERRORS" = "0" ]
+then
+	# remove the temporary archive
+	rm -f $TEMP_ARCHIVE
+	exit 0
+else
+	exit 1
+fi
