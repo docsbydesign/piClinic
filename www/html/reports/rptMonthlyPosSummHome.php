@@ -585,7 +585,8 @@ function showDateSelect($dateArray, $reportYearArg, $reportMonthArg) {
         $inputHtml .= '<input type="number" min="1" max="12" id="ReportMonthField" name="month" class="twoDigitNumeric" '.
             'title="'.TEXT_REPORT_MONTH_PLACEHOLDER.'" value="'.$reportMonthArg.'" placeholder="'.TEXT_REPORT_MONTH_PLACEHOLDER.'"">';
         $inputHtml .= '&nbsp;&nbsp;';
-        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptMonthlyPosSummHome.php?dateInput=select" title="">Show report date list</a></span>';
+        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptMonthlyPosSummHome.php?dateInput=select" title="'.
+            TEXT_SHOW_REPORT_DATE_LIST_TITLE.'">'.TEXT_SHOW_REPORT_DATE_LIST_LINK.'</a></span>';
     } else {
         $reportYearMonth = strval($reportYearArg).'/'.strval($reportMonthArg).'/01';
         $reportDate = date('Y-m', (strtotime($reportYearMonth)));
@@ -598,7 +599,8 @@ function showDateSelect($dateArray, $reportYearArg, $reportMonthArg) {
             $inputHtml .= '>'.$dateElem['reportDate'].'</option>';
         }
         $inputHtml .= '</select>&nbsp;&nbsp;';
-        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptMonthlyPosSummHome.php?dateInput=text" title="">Show date entry field</a></span>';
+        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptMonthlyPosSummHome.php?dateInput=text" title="'.
+            TEXT_SHOW_REPORT_DATE_FIELD_TITLE.'">'.TEXT_SHOW_REPORT_DATE_FIELD_LINK.'</a></span>';
     }
     $inputHtml .= '&nbsp;&nbsp;&nbsp;&nbsp;';
     return $inputHtml;

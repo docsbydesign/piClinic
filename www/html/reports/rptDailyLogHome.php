@@ -444,7 +444,8 @@ function showDateSelect($dateArray, $reportDate) {
         $inputHtml .= '<input type="text" id="dateTimeInField" name="dateTimeIn" value="'.date('Y-m-d', strtotime($reportDate)).'" '.
             'placeholder="'.TEXT_REPORT_DATE_PLACEHOLDER.'" maxlength="255">';
         $inputHtml .= '&nbsp;&nbsp;';
-        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptDailyLogHome.php?dateInput=select" title="">Show report date list</a></span>';
+        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptDailyLogHome.php?dateInput=select" title="'.
+            TEXT_SHOW_REPORT_DATE_LIST_TITLE.'">'.TEXT_SHOW_REPORT_DATE_LIST_LINK.'</a></span>';
     } else {
         $inputHtml .= '<select id="dateTimeInField" name="dateTimeIn" class="requiredField">';
         foreach ($dateArray as $dateElem) {
@@ -455,7 +456,8 @@ function showDateSelect($dateArray, $reportDate) {
             $inputHtml .= '>'.$dateElem['reportDate'].'</option>';
         }
         $inputHtml .= '</select>&nbsp;&nbsp;';
-        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptDailyLogHome.php?dateInput=text" title="">Show date entry field</a></span>';
+        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptDailyLogHome.php?dateInput=text" title="'.
+            TEXT_SHOW_REPORT_DATE_FIELD_TITLE.'">'.TEXT_SHOW_REPORT_DATE_FIELD_LINK.'</a></span>';
     }
     $inputHtml .= '&nbsp;&nbsp;&nbsp;&nbsp;';
     return $inputHtml;

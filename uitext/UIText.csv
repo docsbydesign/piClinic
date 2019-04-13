@@ -125,7 +125,6 @@ TEXT_DATE_LABEL,Date&nbsp;(mm/dd/yyyy),Fecha&nbsp;(dd/mm/aaaa)
 TEXT_DATE_LABEL,Report date (YYYY-MM),Fecha del informe (AAAA-MM)
 TEXT_DATE_MONTH_PLACEHOLDER,Month,Mes
 TEXT_DATE_PROMPT_LABEL,Date&nbsp;(yyyy-mm-dd),Fecha&nbsp;(aaaa-mm-dd)
-TEXT_MO_DATE_PROMPT_LABEL,Date&nbsp;(yyyy-mm),Fecha&nbsp;(aaaa-mm)
 TEXT_DATE_TIME_IN_LABEL,Admitted to clinic,Llegó a la clínica
 TEXT_DATE_TIME_OUT_LABEL,Departed clinic,Salió de la clínica
 TEXT_DATE_TIME_OUT_LABEL,Discharged from clinic,Salió de la clínica
@@ -363,6 +362,7 @@ TEXT_MONTHLY_SUMMARY_DESC,Summary of patients seen by day and age group,Resumen 
 TEXT_MONTHLY_SUMMARY_TITLE,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
 TEXT_MONTHLY_VISIT_HEADING,Monthly Payment Log,Registro de Pagos del Mes
 TEXT_MORE_VISIT_INFO,See the complete complaint in the visit description,Ver la descripcción completa
+TEXT_MO_DATE_PROMPT_LABEL,Date&nbsp;(yyyy-mm),Fecha&nbsp;(aaaa-mm)
 TEXT_NEIGHBORHOOD_LABEL,Neighborhood,Localidad
 TEXT_NEW_PATIENT_HEADING,Add new patient,Agregar paciente nuevo
 TEXT_NEW_STAFF_HEADING,Add new staff member to piClinic,Agrega una persona nueva al sistema piClinic
@@ -689,6 +689,10 @@ TEXT_SHOW_PATIENT_INFO,Show patient details,Mostrar los detalles del paciente
 TEXT_SHOW_PATIENT_INFO_BUTTON,Show info,Mostrar la información
 TEXT_SHOW_PATIENT_SUBMIT_BUTTON,Search,Buscar
 TEXT_SHOW_REPORT_BUTTON,Show report,Mostrar informe
+TEXT_SHOW_REPORT_DATE_FIELD_LINK,Show date entry field,Muestra el campo para la fecha
+TEXT_SHOW_REPORT_DATE_FIELD_TITLE,Display the field into which you can enter a date,Muestra el campo para entrar la fecha directamente
+TEXT_SHOW_REPORT_DATE_LIST_LINK,Show report date list,Muestra la lista de fechas
+TEXT_SHOW_REPORT_DATE_LIST_TITLE,Display the list of available report dates,Muestra la lista de fechas que tengan informes
 TEXT_SHOW_VISIT_INFO,Show visit details,Mostrar los detalles de la visita
 TEXT_SOURCE_MODULE_FIELD_NAME_SELECT,Source,Source
 TEXT_STAFF_ACCESS_LABEL,piClinic system permission,Permisso para acessar los datos del sistema piClinic
