@@ -620,7 +620,7 @@ header('Content-type: text/html; charset=utf-8');
         <div id="MonthlySummaryPrompt" class="noprint <?= ( $reportFormat == RPT_SHOW_DATA ? 'hideDiv' : '') ?>">
             <form enctype="application/x-www-form-urlencoded" action="/reports/rptMonthlyPosSummHome.php" method="get">
                 <p>
-                    <label><?= TEXT_MO_DATE_PROMPT_LABEL ?>:</label>&nbsp;
+                    <label class="close"><?= TEXT_MO_DATE_PROMPT_LABEL ?>:</label>
                     <?= showDateSelect($reportDateList, $reportYearArg, $reportMonthArg) ?>
                     <label class="close"><?= TEXT_TYPE_LABEL ?>:</label><select id="visitTypeField" name="type" class="">
                         <?php
@@ -759,9 +759,6 @@ header('Content-type: text/html; charset=utf-8');
                 }
                 ?>
             </div>
-            <pre>
-                <?= json_encode($requestData, JSON_PRETTY_PRINT) ?>
-            </pre>
         </div>
     </div>
     </body>
