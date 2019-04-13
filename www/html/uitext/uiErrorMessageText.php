@@ -39,6 +39,7 @@ exitIfCalledFromBrowser(__FILE__);
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_ACCESS_FAILURE')) { define('TEXT_MESSAGE_ACCESS_FAILURE','TEXT_MESSAGE_ACCESS_FAILURE',false); }
+	if (!defined('TEXT_MESSAGE_BACKUP_FAIL')) { define('TEXT_MESSAGE_BACKUP_FAIL','TEXT_MESSAGE_BACKUP_FAIL',false); }
 	if (!defined('TEXT_MESSAGE_DATABASE_OPEN_ERROR')) { define('TEXT_MESSAGE_DATABASE_OPEN_ERROR','TEXT_MESSAGE_DATABASE_OPEN_ERROR',false); }
 	if (!defined('TEXT_MESSAGE_GENERIC')) { define('TEXT_MESSAGE_GENERIC','TEXT_MESSAGE_GENERIC',false); }
 	if (!defined('TEXT_MESSAGE_INTERNAL_ERROR')) { define('TEXT_MESSAGE_INTERNAL_ERROR','TEXT_MESSAGE_INTERNAL_ERROR',false); }
@@ -56,6 +57,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_ACCESS_FAILURE')) { define('TEXT_MESSAGE_ACCESS_FAILURE','You do not have access to the last page.<br>To view that page, log in with a different username.',false); }
+	if (!defined('TEXT_MESSAGE_BACKUP_FAIL')) { define('TEXT_MESSAGE_BACKUP_FAIL','Unable to create backup file',false); }
 	if (!defined('TEXT_MESSAGE_DATABASE_OPEN_ERROR')) { define('TEXT_MESSAGE_DATABASE_OPEN_ERROR','Server Error - Database not opened.',false); }
 	if (!defined('TEXT_MESSAGE_GENERIC')) { define('TEXT_MESSAGE_GENERIC','There was a problem with the last entry. Check the data and try again.',false); }
 	if (!defined('TEXT_MESSAGE_INTERNAL_ERROR')) { define('TEXT_MESSAGE_INTERNAL_ERROR','A serious internal error occured.',false); }
@@ -73,6 +75,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_ACCESS_FAILURE')) { define('TEXT_MESSAGE_ACCESS_FAILURE','No tiene permiso para ver la última página. Para verla, iniciar una sesión con otro usuario.',false); }
+	if (!defined('TEXT_MESSAGE_BACKUP_FAIL')) { define('TEXT_MESSAGE_BACKUP_FAIL','No pudo crear archivo para descargar',false); }
 	if (!defined('TEXT_MESSAGE_DATABASE_OPEN_ERROR')) { define('TEXT_MESSAGE_DATABASE_OPEN_ERROR','Error con el servidor. El base de datos no abrió.',false); }
 	if (!defined('TEXT_MESSAGE_GENERIC')) { define('TEXT_MESSAGE_GENERIC','Hubo un problema con el último cambio. Revisa los datos y intenta de nuevo.',false); }
 	if (!defined('TEXT_MESSAGE_INTERNAL_ERROR')) { define('TEXT_MESSAGE_INTERNAL_ERROR','El sistema encontró un error grave.',false); }

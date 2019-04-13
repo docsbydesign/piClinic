@@ -8,13 +8,13 @@ TEXT_ADD_NEW_USER,Add new user or staff member,Agrega una persona o usario nuevo
 TEXT_ADD_PATIENT_PHOTO,Add a photo of this patient,Agregar la foto del paciente
 TEXT_ADD_VISIT_FORM_IMAGE,Add a patient form page image,Agrega un imagen de una formulario de la visita
 TEXT_ADD_VISIT_PHOTO_IMAGE,Add a photo or image to this visit record,Agrega una foto o un imagen a esta visita
-TEXT_ADMIN_BACKUP_ALL_DESCRIPTION,Backup piClinic System,Guardar todo el sistema de la consola piClinic
+TEXT_ADMIN_BACKUP_ALL_DESCRIPTION,Backup piClinic System (This can take up to a minute or two),Guardar todo el sistema de la consola piClinic (Se puede demorar unos minutos)
 TEXT_ADMIN_BACKUP_ALL_LINK,Backup entire system,Guardar el sistema
 TEXT_ADMIN_BACKUP_ALL_TITLE,Backup piClinic System,Guardar todo el sistema de la consola piClinic
-TEXT_ADMIN_BACKUP_DB_DESCRIPTION,Backup piClinic database,Guardar el base de datos de la consola piClinic
+TEXT_ADMIN_BACKUP_DB_DESCRIPTION,Backup piClinic database (This can take up to a minute),Guardar el base de datos de la consola piClinic (Se puede demorar hasta un minuto)
 TEXT_ADMIN_BACKUP_DB_LINK,Backup piClinic database,Guardar el base de datos
 TEXT_ADMIN_BACKUP_DB_TITLE,Backup piClinic database,Guardar el base de datos de la consola piClinic
-TEXT_ADMIN_BACKUP_LOG_DESCRIPTION,Backup piClinic system logs,Guardar los registros de la actividad de la consola piClinic
+TEXT_ADMIN_BACKUP_LOG_DESCRIPTION,Backup piClinic system logs (This can take up to a minute or two),Guardar los registros de la actividad de la consola piClinic (Se puede demorar unos minutos)
 TEXT_ADMIN_BACKUP_LOG_LINK,Backup system logs,Guardar los registros de la consola
 TEXT_ADMIN_BACKUP_LOG_TITLE,Backup piClinic system logs,Guardar los registros de la actividad de la consola piClinic
 TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION,Backup piClinic patient info,Guardar los datos de todos los pacientes
@@ -327,6 +327,7 @@ TEXT_LT_1MO_N,Less than 1 mon.-1st visit,Menores de 1 mes de la primera vez
 TEXT_LT_1MO_S,Less than 1 mon.-subsequent,Menores de 1 mes subsiguiente 
 TEXT_LT_5YR,Less than 5 years,Menores de 5 años
 TEXT_MESSAGE_ACCESS_FAILURE,"You do not have access to the last page.<br>To view that page, log in with a different username.","No tiene permiso para ver la última página. Para verla, iniciar una sesión con otro usuario."
+TEXT_MESSAGE_BACKUP_FAIL,Unable to create backup file,No pudo crear archivo para descargar
 TEXT_MESSAGE_DATABASE_OPEN_ERROR,Server Error - Database not opened.,Error con el servidor. El base de datos no abrió.
 TEXT_MESSAGE_GENERIC,There was a problem with the last entry. Check the data and try again.,Hubo un problema con el último cambio. Revisa los datos y intenta de nuevo.
 TEXT_MESSAGE_INTERNAL_ERROR,A serious internal error occured.,El sistema encontró un error grave.

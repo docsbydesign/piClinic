@@ -32,7 +32,6 @@
 *		displays a log of daily patients seen (Atenciones Ambulatorios)
 *
 */
-// This page is not implemented yet, so return to the report home with an error message
 /*
 *	rptMonthlyPmt
 *		displays a log of the payments received each day during the selected month

@@ -67,13 +67,13 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	if (!defined('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION','Backup piClinic System',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION','Backup piClinic System (This can take up to a minute or two)',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_ALL_LINK')) { define('TEXT_ADMIN_BACKUP_ALL_LINK','Backup entire system',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_ALL_TITLE')) { define('TEXT_ADMIN_BACKUP_ALL_TITLE','Backup piClinic System',false); }
-	if (!defined('TEXT_ADMIN_BACKUP_DB_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_DB_DESCRIPTION','Backup piClinic database',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_DB_DESCRIPTION','Backup piClinic database (This can take up to a minute)',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_DB_LINK')) { define('TEXT_ADMIN_BACKUP_DB_LINK','Backup piClinic database',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_DB_TITLE')) { define('TEXT_ADMIN_BACKUP_DB_TITLE','Backup piClinic database',false); }
-	if (!defined('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION','Backup piClinic system logs',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION','Backup piClinic system logs (This can take up to a minute or two)',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_LOG_LINK')) { define('TEXT_ADMIN_BACKUP_LOG_LINK','Backup system logs',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_LOG_TITLE')) { define('TEXT_ADMIN_BACKUP_LOG_TITLE','Backup piClinic system logs',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION','Backup piClinic patient info',false); }
@@ -96,13 +96,13 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	if (!defined('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION','Guardar todo el sistema de la consola piClinic',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION','Guardar todo el sistema de la consola piClinic (Se puede demorar unos minutos)',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_ALL_LINK')) { define('TEXT_ADMIN_BACKUP_ALL_LINK','Guardar el sistema',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_ALL_TITLE')) { define('TEXT_ADMIN_BACKUP_ALL_TITLE','Guardar todo el sistema de la consola piClinic',false); }
-	if (!defined('TEXT_ADMIN_BACKUP_DB_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_DB_DESCRIPTION','Guardar el base de datos de la consola piClinic',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_DB_DESCRIPTION','Guardar el base de datos de la consola piClinic (Se puede demorar hasta un minuto)',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_DB_LINK')) { define('TEXT_ADMIN_BACKUP_DB_LINK','Guardar el base de datos',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_DB_TITLE')) { define('TEXT_ADMIN_BACKUP_DB_TITLE','Guardar el base de datos de la consola piClinic',false); }
-	if (!defined('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION','Guardar los registros de la actividad de la consola piClinic',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION','Guardar los registros de la actividad de la consola piClinic (Se puede demorar unos minutos)',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_LOG_LINK')) { define('TEXT_ADMIN_BACKUP_LOG_LINK','Guardar los registros de la consola',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_LOG_TITLE')) { define('TEXT_ADMIN_BACKUP_LOG_TITLE','Guardar los registros de la actividad de la consola piClinic',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION','Guardar los datos de todos los pacientes',false); }

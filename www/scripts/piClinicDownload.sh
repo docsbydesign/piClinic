@@ -40,7 +40,7 @@ while [ "$1" != "" ]; do
         -v | --verbose ) VERBOSE="1"
                         ;;
         -h | --help )   usage
-                        exit
+                        exit 0
                         ;;
         * )             usage
                         exit 1
@@ -90,6 +90,9 @@ then
 	echo "VERBOSE:		 $VERBOSE"
 	set -x
 fi
+#
+# remove any previous files
+rm -R $TEMPDIR*
 #
 # make sure we're creating a new archive
 if [ -f $OUTFILE ] 
@@ -205,7 +208,7 @@ fi
 # that's all
 if [ "$VERBOSE" = "1" ]
 then
-	echo "piClinic archive complete"
+	echo "piClinic archive ready: "$OUTFILE
 	set +x
 fi
 if [ "$ERRORS" = "0" ]
