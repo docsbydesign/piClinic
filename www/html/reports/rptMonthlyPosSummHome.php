@@ -135,7 +135,7 @@ if (!empty($requestData['month']) && !empty($requestData['year'])) {
  */
 $reportDateList = [];
 if (empty($requestData['dateInput']) || $requestData['dateInput'] == 'select') {
-    $reportDateQuery = 'SELECT distinct DATE_FORMAT(`dateTimeIn`,\'%Y-%m\') AS `reportDate` FROM `visit` WHERE 1 order by `dateTimeIn` desc;';
+    $reportDateQuery = 'SELECT distinct DATE_FORMAT(`dateTimeIn`,\'%Y-%m\') AS `reportDate` FROM `visit` WHERE 1 order by `reportDate` desc;';
     $reportDateResult = getDbRecords($dbLink, $reportDateQuery);
     if ($reportDateResult['count'] > 0) {
         if ($reportDateResult['count'] == 1) {
