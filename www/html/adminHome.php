@@ -65,10 +65,10 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
             <li><a href="/adminShowUsers.php" title="<?= TEXT_ADMIN_MANAGE_USERS_TITLE ?>"><?= TEXT_ADMIN_MANAGE_USERS_LINK ?></a>:&nbsp;<?= TEXT_ADMIN_MANAGE_USERS_DESCRIPTION ?></li>
             <li class="separated"><a href="/adminLogViewer.php" title="<?= TEXT_ADMIN_LOG_VIEWER_TITLE ?>"><?= TEXT_ADMIN_LOG_VIEWER_LINK ?></a>:&nbsp;<?= TEXT_ADMIN_LOG_VIEWER_DESCRIPTION ?></li>
             <li><a href="/adminShowComments.php" title="<?= TEXT_ADMIN_SHOW_COMMENTS_TITLE ?>"><?= TEXT_ADMIN_SHOW_COMMENTS_LINK ?></a>:&nbsp;<?= TEXT_ADMIN_SHOW_COMMENTS_DESCRIPTION ?></li>
-            <li class="separated"><a href="/adminBackup.php?type=patient" title="">Patient record backup</a></li>
-            <li><a href="/adminBackup.php?type=log" title="">System log backup</a></li>
-            <li><a href="/adminBackup.php?type=db" title="">System database backup</a></li>
-            <li><a href="/adminBackup.php?type=system" title="">Full system backup</a></li>
+            <li class="separated"><a href="/adminBackup.php?type=patient" title="<?= TEXT_ADMIN_BACKUP_PATIENT_TITLE ?>"><?= TEXT_ADMIN_BACKUP_PATIENT_LINK ?></a>: <?= TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION ?></li>
+            <li><a href="/adminBackup.php?type=log" title="<?= TEXT_ADMIN_BACKUP_LOG_TITLE ?>"><?= TEXT_ADMIN_BACKUP_LOG_LINK ?></a>: <?= TEXT_ADMIN_BACKUP_LOG_DESCRIPTION ?></li>
+            <li><a href="/adminBackup.php?type=db" title="<?= TEXT_ADMIN_BACKUP_DB_TITLE ?>"><?= TEXT_ADMIN_BACKUP_DB_LINK ?></a>: <?= TEXT_ADMIN_BACKUP_DB_DESCRIPTION ?></li>
+            <li><a href="/adminBackup.php?type=system" title="<?= TEXT_ADMIN_BACKUP_ALL_TITLE ?>"><?= TEXT_ADMIN_BACKUP_ALL_LINK ?></a>: <?= TEXT_ADMIN_BACKUP_ALL_DESCRIPTION ?></li>
             <li class="separated"><a href="/reports/rptMonthlyPtSummHome.php?showdiag=2" title="<?= TEXT_MONTHLY_SUMMARY_DATA_TITLE ?>"><?= TEXT_MONTHLY_SUMMARY_DATA_LINK ?></a></li>
             <li><a href="/reports/rptMonthlyPosSummHome.php?showdiag=2" title="<?= TEXT_MONTHLY_SUMMARY_BY_POS_DATA_TITLE ?>"><?= TEXT_MONTHLY_SUMMARY_BY_POS_DATA_LINK ?></a></li>
 		</ul>

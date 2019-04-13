@@ -38,6 +38,18 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
+	if (!defined('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION','TEXT_ADMIN_BACKUP_ALL_DESCRIPTION',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_ALL_LINK')) { define('TEXT_ADMIN_BACKUP_ALL_LINK','TEXT_ADMIN_BACKUP_ALL_LINK',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_ALL_TITLE')) { define('TEXT_ADMIN_BACKUP_ALL_TITLE','TEXT_ADMIN_BACKUP_ALL_TITLE',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_DB_DESCRIPTION','TEXT_ADMIN_BACKUP_DB_DESCRIPTION',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_LINK')) { define('TEXT_ADMIN_BACKUP_DB_LINK','TEXT_ADMIN_BACKUP_DB_LINK',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_TITLE')) { define('TEXT_ADMIN_BACKUP_DB_TITLE','TEXT_ADMIN_BACKUP_DB_TITLE',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION','TEXT_ADMIN_BACKUP_LOG_DESCRIPTION',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_LOG_LINK')) { define('TEXT_ADMIN_BACKUP_LOG_LINK','TEXT_ADMIN_BACKUP_LOG_LINK',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_LOG_TITLE')) { define('TEXT_ADMIN_BACKUP_LOG_TITLE','TEXT_ADMIN_BACKUP_LOG_TITLE',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION','TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_LINK')) { define('TEXT_ADMIN_BACKUP_PATIENT_LINK','TEXT_ADMIN_BACKUP_PATIENT_LINK',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_TITLE')) { define('TEXT_ADMIN_BACKUP_PATIENT_TITLE','TEXT_ADMIN_BACKUP_PATIENT_TITLE',false); }
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_DESCRIPTION')) { define('TEXT_ADMIN_LOG_VIEWER_DESCRIPTION','TEXT_ADMIN_LOG_VIEWER_DESCRIPTION',false); }
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_LINK')) { define('TEXT_ADMIN_LOG_VIEWER_LINK','TEXT_ADMIN_LOG_VIEWER_LINK',false); }
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_TITLE')) { define('TEXT_ADMIN_LOG_VIEWER_TITLE','TEXT_ADMIN_LOG_VIEWER_TITLE',false); }
@@ -55,6 +67,18 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
+	if (!defined('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION','Backup piClinic System',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_ALL_LINK')) { define('TEXT_ADMIN_BACKUP_ALL_LINK','Backup entire system',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_ALL_TITLE')) { define('TEXT_ADMIN_BACKUP_ALL_TITLE','Backup piClinic System',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_DB_DESCRIPTION','Backup piClinic database',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_LINK')) { define('TEXT_ADMIN_BACKUP_DB_LINK','Backup piClinic database',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_TITLE')) { define('TEXT_ADMIN_BACKUP_DB_TITLE','Backup piClinic database',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION','Backup piClinic system logs',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_LOG_LINK')) { define('TEXT_ADMIN_BACKUP_LOG_LINK','Backup system logs',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_LOG_TITLE')) { define('TEXT_ADMIN_BACKUP_LOG_TITLE','Backup piClinic system logs',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION','Backup piClinic patient info',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_LINK')) { define('TEXT_ADMIN_BACKUP_PATIENT_LINK','Backup patient info',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_TITLE')) { define('TEXT_ADMIN_BACKUP_PATIENT_TITLE','Backup piClinic patient info',false); }
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_DESCRIPTION')) { define('TEXT_ADMIN_LOG_VIEWER_DESCRIPTION','Display system errors and events',false); }
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_LINK')) { define('TEXT_ADMIN_LOG_VIEWER_LINK','piClinic system log',false); }
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_TITLE')) { define('TEXT_ADMIN_LOG_VIEWER_TITLE','Display system errors and events',false); }
@@ -72,6 +96,18 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
+	if (!defined('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION','Guardar todo el sistema de la consola piClinic',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_ALL_LINK')) { define('TEXT_ADMIN_BACKUP_ALL_LINK','Guardar el sistema',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_ALL_TITLE')) { define('TEXT_ADMIN_BACKUP_ALL_TITLE','Guardar todo el sistema de la consola piClinic',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_DB_DESCRIPTION','Guardar el base de datos de la consola piClinic',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_LINK')) { define('TEXT_ADMIN_BACKUP_DB_LINK','Guardar el base de datos',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_TITLE')) { define('TEXT_ADMIN_BACKUP_DB_TITLE','Guardar el base de datos de la consola piClinic',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION','Guardar los registros de la actividad de la consola piClinic',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_LOG_LINK')) { define('TEXT_ADMIN_BACKUP_LOG_LINK','Guardar los registros de la consola',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_LOG_TITLE')) { define('TEXT_ADMIN_BACKUP_LOG_TITLE','Guardar los registros de la actividad de la consola piClinic',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION','Guardar los datos de todos los pacientes',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_LINK')) { define('TEXT_ADMIN_BACKUP_PATIENT_LINK','Guardar los datos del los pacientes',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_TITLE')) { define('TEXT_ADMIN_BACKUP_PATIENT_TITLE','Guardar los datos de todos los pacientes',false); }
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_DESCRIPTION')) { define('TEXT_ADMIN_LOG_VIEWER_DESCRIPTION','Mostrar los errores y eventos del sistema',false); }
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_LINK')) { define('TEXT_ADMIN_LOG_VIEWER_LINK','Registro del sistema piClinic',false); }
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_TITLE')) { define('TEXT_ADMIN_LOG_VIEWER_TITLE','Mostrar los errores y eventos del sistema',false); }

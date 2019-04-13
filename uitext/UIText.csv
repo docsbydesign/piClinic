@@ -8,6 +8,18 @@ TEXT_ADD_NEW_USER,Add new user or staff member,Agrega una persona o usario nuevo
 TEXT_ADD_PATIENT_PHOTO,Add a photo of this patient,Agregar la foto del paciente
 TEXT_ADD_VISIT_FORM_IMAGE,Add a patient form page image,Agrega un imagen de una formulario de la visita
 TEXT_ADD_VISIT_PHOTO_IMAGE,Add a photo or image to this visit record,Agrega una foto o un imagen a esta visita
+TEXT_ADMIN_BACKUP_ALL_DESCRIPTION,Backup piClinic System,Guardar todo el sistema de la consola piClinic
+TEXT_ADMIN_BACKUP_ALL_LINK,Backup entire system,Guardar el sistema
+TEXT_ADMIN_BACKUP_ALL_TITLE,Backup piClinic System,Guardar todo el sistema de la consola piClinic
+TEXT_ADMIN_BACKUP_DB_DESCRIPTION,Backup piClinic database,Guardar el base de datos de la consola piClinic
+TEXT_ADMIN_BACKUP_DB_LINK,Backup piClinic database,Guardar el base de datos
+TEXT_ADMIN_BACKUP_DB_TITLE,Backup piClinic database,Guardar el base de datos de la consola piClinic
+TEXT_ADMIN_BACKUP_LOG_DESCRIPTION,Backup piClinic system logs,Guardar los registros de la actividad de la consola piClinic
+TEXT_ADMIN_BACKUP_LOG_LINK,Backup system logs,Guardar los registros de la consola
+TEXT_ADMIN_BACKUP_LOG_TITLE,Backup piClinic system logs,Guardar los registros de la actividad de la consola piClinic
+TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION,Backup piClinic patient info,Guardar los datos de todos los pacientes
+TEXT_ADMIN_BACKUP_PATIENT_LINK,Backup patient info,Guardar los datos del los pacientes
+TEXT_ADMIN_BACKUP_PATIENT_TITLE,Backup piClinic patient info,Guardar los datos de todos los pacientes
 TEXT_ADMIN_ENTER_ATA_DESCRIPTION,Enter information from the daily patient visit logs,Entrar los datos del formulario Atenciones Ambulatorias
 TEXT_ADMIN_ENTER_ATA_LINK,Enter ATA information,Entrar datos del ATA
 TEXT_ADMIN_ENTER_ATA_TITLE,Enter information from the daily patient visit logs,Entrar los datos del formulario Atenciones Ambulatorias
