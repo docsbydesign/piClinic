@@ -87,35 +87,15 @@ $reportDate = '';
 $reportTypeCond = '';
 if (!empty($requestData['dateTimeIn'])) {
     $reportDate = date('Y-m-d', strtotime($requestData['dateTimeIn']));
-} else {
-    // default is yesterday
-    // time value is in seconds and 86400 seconds = 1 day
-    $reportDate = date('Y-m-d', (time() - 86400));
 }
 
 $staffDataRecord = NULL;
 $staffInfo = NULL;
-if (empty($dbStatus)) {
-    // get the list of staff who have a visit record, sorted by name
-    //  I used this to account for position changes that would show up in the visit table but not the staff table
-    //  This method of creating the filter options will always reflect what's in the visit list and should be fast enough to not cause problems
-    $staffQueryString = 'SELECT DISTINCT CONCAT(`staffName`, \'|\', `staffPosition`) AS `composite`, `staffName`, `staffPosition` FROM `visit` WHERE `deleted` = 0 order by `staffName`;';
-    $staffDataRecord = getDbRecords($dbLink, $staffQueryString);
-} else {
-    // this error is caught by uiErrorMessage.php below, but
-    //  it should probably be logged as well
-    $retVal = [];
-    // database not opened.
-    $retVal['contentType'] = 'Content-Type: application/json; charset=utf-8';
-    $retVal['httpResponse'] = 500;
-    $retVal['httpReason']   = "Server Error - Database not opened.";
-    $dbInfo['sqlError'] = 'Error: '. $dbOpenError .', '.
-        mysqli_connect_error();
-    $retVal['error'] = $dbInfo;
-    logUiError($requestData, $retVal['httpResponse'], __FILE__, $sessionInfo['username'], "report", $retVal['httpReason']);
-    // this message overrides any preceding error
-    $requestData['msg'] = 'DB_OPEN_ERROR';
-}
+// get the list of staff who have a visit record, sorted by name
+//  I used this to account for position changes that would show up in the visit table but not the staff table
+//  This method of creating the filter options will always reflect what's in the visit list and should be fast enough to not cause problems
+$staffQueryString = 'SELECT DISTINCT CONCAT(`staffName`, \'|\', `staffPosition`) AS `composite`, `staffName`, `staffPosition` FROM `visit` WHERE `deleted` = 0 order by `staffName`;';
+$staffDataRecord = getDbRecords($dbLink, $staffQueryString);
 
 // if the staff can't be read, this is the only name to pick
 $medProfs = [];
@@ -134,6 +114,22 @@ if (($staffDataRecord != NULL) && ($staffDataRecord['count'] >= 1)) {
                 "display" => $staffItem['staffName'].' - '.staffPosDisplayString ($staffItem['staffPosition'])
             ];
             array_push ( $medProfs, $staffPush);
+        }
+    }
+}
+/*
+ *  Get the list of reportable dates from the visit table
+ *      if the dateInput param is present and = select
+ */
+$reportDateList = [];
+if (empty($requestData['dateInput']) || $requestData['dateInput'] == 'select') {
+    $reportDateQuery = 'SELECT distinct DATE_FORMAT(`dateTimeIn`,\'%Y-%m-%d\') AS `reportDate` FROM `visit` WHERE 1 order by `dateTimeIn` desc;';
+    $reportDateResult = getDbRecords($dbLink, $reportDateQuery);
+    if ($reportDateResult['count'] > 0) {
+        if ($reportDateResult['count'] == 1) {
+            $reportDateList[0] = $reportDateResult['data'];
+        } else {
+            $reportDateList = $reportDateResult['data'];
         }
     }
 }
@@ -437,6 +433,35 @@ if (!empty($requestData['export'])) {
         return;
     }
 }
+
+function showDateSelect($dateArray, $reportDate) {
+    $inputHtml = '';
+    if (empty($dateArray)){
+        if (empty($reportDate)){
+            // if no date, set it to yesterday
+            $reportDate = date('Y-m-d', (time() - 86400));
+        }
+        $inputHtml .= '<input type="text" id="dateTimeInField" name="dateTimeIn" value="'.date('Y-m-d', strtotime($reportDate)).'" '.
+            'placeholder="'.TEXT_REPORT_DATE_PLACEHOLDER.'" maxlength="255">';
+        $inputHtml .= '&nbsp;&nbsp;';
+        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptDailyLogHome.php?dateInput=select" title="">Show report date list</a></span>';
+    } else {
+        $inputHtml .= '<select id="dateTimeInField" name="dateTimeIn" class="requiredField">';
+        foreach ($dateArray as $dateElem) {
+            $inputHtml .= '<option value="'.$dateElem['reportDate'].'"';
+            if ($dateElem['reportDate'] == $reportDate) {
+                $inputHtml .= ' selected=selected';
+            }
+            $inputHtml .= '>'.$dateElem['reportDate'].'</option>';
+        }
+        $inputHtml .= '</select>&nbsp;&nbsp;';
+        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptDailyLogHome.php?dateInput=text" title="">Show date entry field</a></span>';
+    }
+    $inputHtml .= '&nbsp;&nbsp;&nbsp;&nbsp;';
+    return $inputHtml;
+}
+
+
 header('Content-type: text/html; charset=utf-8');
 // $visitList has the list of visits specified by the query parameters
 ?>
@@ -452,7 +477,7 @@ header('Content-type: text/html; charset=utf-8');
         <form enctype="application/x-www-form-urlencoded" action="/reports/rptDailyLogHome.php" method="get">
             <p>
                 <label><?= TEXT_DATE_PROMPT_LABEL ?>:</label>&nbsp;
-                <input type="text" id="dateTimeInField" name="dateTimeIn" value="<?= date('Y-m-d', strtotime($reportDate)) ?>" placeholder="<?= TEXT_REPORT_DATE_PLACEHOLDER ?>" maxlength="255">&nbsp;&nbsp;&nbsp;&nbsp;
+                <?= showDateSelect($reportDateList, $reportDate) ?>
                 <label class="close"><?= TEXT_TYPE_LABEL ?>:</label><select id="visitTypeField" name="type" class="">
                     <?php
                     foreach ($visitTypes as $typeItem) {
