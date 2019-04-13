@@ -113,6 +113,15 @@ $backupRepsonse = exec($backupCommand, $cmdOutput, $cmdStatus);
 // check on result of command:
 // success response starts with "piClinic archive ready: " followed by the archive file path
 
+if (empty($backupRepsonse)) {
+    // a problem occured
+    $redirectUrl = makeUrlWithQueryParams($errorUrl, ['msg'=>MSG_BACKUP_FAIL]);
+    header('httpStatus: 500'); // server error
+    header("httpReason: Error creating backup archive - No response from archive utility");
+    header("Location: ".$redirectUrl);
+}
+
+
 $successResponse = 'piClinic archive ready: ';
 if (substr_compare($backupRepsonse, $successResponse, 0, strlen($successResponse) ) == 0) {
     // success create link
@@ -139,8 +148,8 @@ if (substr_compare($backupRepsonse, $successResponse, 0, strlen($successResponse
         }
 } else {
     // a problem occured
-    $redirectUrl = makeUrlWithQueryParams($errorUrl, ['msg'=>MSG_REQUIRED_FIELD_MISSING]);
+    $redirectUrl = makeUrlWithQueryParams($errorUrl, ['msg'=>MSG_BACKUP_FAIL]);
     header('httpStatus: 500'); // server error
-    header("httpReason: Error creating backup archive");
+    header("httpReason: Error creating backup archive - archive utility returned an error");
     header("Location: ".$redirectUrl);
 }
