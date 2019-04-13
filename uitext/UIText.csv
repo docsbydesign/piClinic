@@ -125,6 +125,7 @@ TEXT_DATE_LABEL,Date&nbsp;(mm/dd/yyyy),Fecha&nbsp;(dd/mm/aaaa)
 TEXT_DATE_LABEL,Report date (YYYY-MM),Fecha del informe (AAAA-MM)
 TEXT_DATE_MONTH_PLACEHOLDER,Month,Mes
 TEXT_DATE_PROMPT_LABEL,Date&nbsp;(yyyy-mm-dd),Fecha&nbsp;(aaaa-mm-dd)
+TEXT_MO_DATE_PROMPT_LABEL,Date&nbsp;(yyyy-mm),Fecha&nbsp;(aaaa-mm)
 TEXT_DATE_TIME_IN_LABEL,Admitted to clinic,Llegó a la clínica
 TEXT_DATE_TIME_OUT_LABEL,Departed clinic,Salió de la clínica
 TEXT_DATE_TIME_OUT_LABEL,Discharged from clinic,Salió de la clínica
