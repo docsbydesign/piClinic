@@ -4,13 +4,18 @@
 TEMPDIR="/var/local/piclinic/downloads/"
 TEMP_DBFILE="piclinic_db.sql"
 TEMP_DBLOGS="piclinic_logs.sql"
+TEMP_ARCHIVE=""
+TEMP_LOG_PATH=""
+TEMP_PT_PATH=""
+TEMP_DB_PATH=""
+OUTFILE=""
 VERBOSE="0"
 ERRORS="0"
 #
 # usage text
 usage()
 {
-    echo "usage: piClinicDownload  [-h] [-v] -f file -t [db|log|system] -p mysqlpassword"
+    echo "usage: piClinicDownload  [-h] [-v] -f file -t [db|patient|log|system] -p mysqlpassword"
 }
 #
 # check for command line parameters
@@ -43,26 +48,30 @@ while [ "$1" != "" ]; do
     shift
 done
 #
+# Initialize path/file variables
+TEMP_ARCHIVE=$TEMPDIR"piclinic_archive.tar"
+OUTFILE="$TEMPDIR$FILENAME"
+#
 # check the download type
 if [ "$TYPE_PARAM" != "" ]
 then
     case $TYPE_PARAM in
+		# archive log files
         log )
-                        TEMP_ARCHIVE=$TEMPDIR"piclinic_archive.tar"
-						TEMP_DB_LOG="$TEMPDIR$TEMP_DBLOGS"
-						TEMP_DB_PATH=""
-						OUTFILE="$TEMPDIR$FILENAME"
+						TEMP_LOG_PATH="$TEMPDIR$TEMP_DBLOGS"
                         ;;
+		# archive patient activity tables
+        patient )
+						TEMP_PT_PATH="$TEMPDIR$TEMP_DBFILE"
+                        ;;
+		# archive complete database
         db  )
-                        TEMP_ARCHIVE=""
-						TEMP_DB_LOG=""
 						TEMP_DB_PATH="$TEMPDIR$TEMP_DBFILE"
-						OUTFILE="$TEMPDIR$FILENAME"
                         ;;
+		# archive piclinic system (logs and database)
         system )
-                        TEMP_ARCHIVE=$TEMPDIR"piclinic_archive.tar"
+						TEMP_LOG_PATH="$TEMPDIR$TEMP_DBLOGS"
 						TEMP_DB_PATH="$TEMPDIR$TEMP_DBFILE"
-						OUTFILE="$TEMPDIR$FILENAME"
                         ;;
         * )             usage
                         exit 1
@@ -89,7 +98,7 @@ then
 fi
 #
 # archive logs if requested
-if [ "$TEMP_ARCHIVE" != "" ]
+if [ "$TEMP_LOG_PATH" != "" ]
 then
 	if [ "$VERBOSE" = "1" ]
 	then
@@ -107,23 +116,10 @@ then
 	fi
 	# dump only log tables from piclinic database
 	#  but only if dumping the whole database (as they are included in it)
-	if [ "$TEMP_DB_LOG" != "" ]
+	if [ "$TEMP_DB_PATH" = "" ]
 	then
-		mysqldump -uCTS-user -p$PASSWORD piclinic wflog > $TEMP_DB_LOG 
-		if [ $? -eq 0 ]
-		then
-			mysqldump -uCTS-user -p$PASSWORD piclinic log >> $TEMP_DB_LOG
-		else
-			ERRORS="1"
-		fi
-		if [ $? -eq 0 ]
-		then
-			mysqldump -uCTS-user -p$PASSWORD piclinic comment >> $TEMP_DB_LOG
-		else
-			ERRORS="1"
-		fi
-		# archive the dump if it worked/
-		if [ -f $TEMP_DB_LOG ]
+		mysqldump -uCTS-user -p$PASSWORD piclinic wflog log comment session > $TEMP_LOG_PATH 
+		if [ -f $TEMP_LOG_PATH ]
 		then
 			# add it to the log archive, if it exists, otherwise create a new archive
 			if [ ! -f $TEMP_ARCHIVE ]
@@ -136,6 +132,28 @@ then
 			echo "MYSQL dump command failed."
 			ERRORS="1"
 		fi
+	fi
+	if [ "$VERBOSE" = "1" ]
+	then
+		ls -l $TEMPDIR
+	fi
+fi
+#
+# archive patients if requested
+if [ "$TEMP_PT_PATH" != "" ]
+then
+	if [ "$VERBOSE" = "1" ]
+	then
+		echo "Saving patient data"
+		set -x #echo on
+	fi
+	mysqldump -uCTS-user -p$PASSWORD piclinic clinic patient textmsg visit > $TEMP_PT_PATH 
+	if [ -f $TEMP_PT_PATH ]
+	then
+		tar -cvf $TEMP_ARCHIVE -C $TEMPDIR $TEMP_DBFILE
+	else
+		echo "MYSQL dump command failed."
+		ERRORS="1"
 	fi
 	if [ "$VERBOSE" = "1" ]
 	then
