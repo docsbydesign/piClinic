@@ -159,6 +159,24 @@ if (empty($dbStatus) & !$noData) {
         }
     }
 }
+/*
+ *  Get the list of reportable dates from the visit table
+ *      if the dateInput param is present and = select
+ */
+$reportDateList = [];
+if (empty($requestData['dateInput']) || $requestData['dateInput'] == 'select') {
+    $reportDateQuery = 'SELECT distinct DATE_FORMAT(`dateTimeIn`,\'%Y-%m-%d\') AS `reportDate` FROM `visit` WHERE 1 order by `reportDate` desc;';
+    $reportDateResult = getDbRecords($dbLink, $reportDateQuery);
+    if ($reportDateResult['count'] > 0) {
+        if ($reportDateResult['count'] == 1) {
+            $reportDateList[0] = $reportDateResult['data'];
+        } else {
+            $reportDateList = $reportDateResult['data'];
+        }
+    }
+}
+
+
 // set page title
 $reportTitle = TEXT_DAILY_PMT_TITLE;
 if (!$noData) {
@@ -257,6 +275,36 @@ if (!empty($requestData['export'])) {
         return;
     }
 }
+
+function showDateSelect($dateArray, $reportDate) {
+    $inputHtml = '';
+    if (empty($dateArray)){
+        if (empty($reportDate)){
+            // if no date, set it to yesterday
+            $reportDate = date('Y-m-d', (time() - 86400));
+        }
+        $inputHtml .= '<input type="text" id="dateTimeInField" name="dateTimeIn" value="'.date('Y-m-d', strtotime($reportDate)).'" '.
+            'placeholder="'.TEXT_REPORT_DATE_PLACEHOLDER.'" maxlength="255">';
+        $inputHtml .= '&nbsp;&nbsp;';
+        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptDailyLogHome.php?dateInput=select" title="'.
+            TEXT_SHOW_REPORT_DATE_LIST_TITLE.'">'.TEXT_SHOW_REPORT_DATE_LIST_LINK.'</a></span>';
+    } else {
+        $inputHtml .= '<select id="dateTimeInField" name="dateTimeIn" class="requiredField">';
+        foreach ($dateArray as $dateElem) {
+            $inputHtml .= '<option value="'.$dateElem['reportDate'].'"';
+            if ($dateElem['reportDate'] == $reportDate) {
+                $inputHtml .= ' selected=selected';
+            }
+            $inputHtml .= '>'.$dateElem['reportDate'].'</option>';
+        }
+        $inputHtml .= '</select>&nbsp;&nbsp;';
+        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptDailyLogHome.php?dateInput=text" title="'.
+            TEXT_SHOW_REPORT_DATE_FIELD_TITLE.'">'.TEXT_SHOW_REPORT_DATE_FIELD_LINK.'</a></span>';
+    }
+    $inputHtml .= '&nbsp;&nbsp;&nbsp;&nbsp;';
+    return $inputHtml;
+}
+
 header('Content-type: text/html; charset=utf-8');
 // $visitList has the list of visits specified by the query parameters
 ?>
@@ -272,7 +320,7 @@ header('Content-type: text/html; charset=utf-8');
         <form enctype="application/x-www-form-urlencoded" action="/reports/rptDailyPmtHome.php" method="get">
             <p>
                 <label><?= TEXT_DATE_PROMPT_LABEL ?>:</label>&nbsp;
-                <input type="text" id="dateTimeInField" name="dateTimeIn" value="<?= date('Y-m-d', strtotime($reportDate)) ?>" placeholder="<?= TEXT_REPORT_DATE_PLACEHOLDER ?>" maxlength="255">&nbsp;&nbsp;&nbsp;&nbsp;
+                <?= showDateSelect($reportDateList, $reportDate) ?>
             </p>
             <p>
                 <button type="submit"><?= TEXT_SHOW_REPORT_BUTTON ?></button>

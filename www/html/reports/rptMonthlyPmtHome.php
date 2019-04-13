@@ -32,7 +32,6 @@
 *		displays a log of daily patients seen (Atenciones Ambulatorios)
 *
 */
-// This page is not implemented yet, so return to the report home with an error message
 /*
 *	rptMonthlyPmt
 *		displays a log of the payments received each day during the selected month
@@ -79,17 +78,27 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 $noData = true; // true when no report date query parameters are present
 $reportYearArg = date('Y');	// numeric, 4-digit year
 $reportMonthArg = date('m');	// numeric, 2-digit month
-if (!empty($requestData['Year'])) {
-    // check it out before keeping it
-    if (is_numeric($requestData['Year'])) {
-        $reportYearArg = $requestData['Year'];
+
+if (!empty($requestData['yearMonth'])) {
+    // if a composite date is passed, break it into components
+    $dateComponents = explode('-', $requestData['yearMonth']);
+    if (count($dateComponents) == 2) {
+        $requestData['year'] = $dateComponents[0];
+        $requestData['month'] = $dateComponents[1];
     }
 }
 
-if (!empty($requestData['Month'])) {
+if (!empty($requestData['year'])) {
     // check it out before keeping it
-    if (is_numeric($requestData['Month'])) {
-        $reportMonthArg = $requestData['Month'];
+    if (is_numeric($requestData['year'])) {
+        $reportYearArg = $requestData['year'];
+    }
+}
+
+if (!empty($requestData['month'])) {
+    // check it out before keeping it
+    if (is_numeric($requestData['month'])) {
+        $reportMonthArg = $requestData['month'];
         if ($reportMonthArg < 1 ) {
             $reportMonthArg = 1;
         }
@@ -103,7 +112,7 @@ $reportFirstDate = '';
 $reportLastDate = '';
 $lastReportDate = '';
 $reportYearMo = '';
-if (!empty($requestData['Month']) && !empty($requestData['Year'])) {
+if (!empty($requestData['month']) && !empty($requestData['year'])) {
     $noData = false;
     $reportFirstDate = date('Y-m-d',strtotime($reportYearArg.'-'.$reportMonthArg.'-01'));
     $reportEndYear = $reportYearArg;
@@ -189,6 +198,23 @@ if (empty($dbStatus) & !$noData) {
         } else {
             // somehow more than one clinic was returned so take the first one.
             $clinicInfo = $clinicRecord['data'][0];
+        }
+    }
+}
+
+/*
+ *  Get the list of reportable dates from the visit table
+ *      if the dateInput param is present and = select
+ */
+$reportDateList = [];
+if (empty($requestData['dateInput']) || $requestData['dateInput'] == 'select') {
+    $reportDateQuery = 'SELECT distinct DATE_FORMAT(`dateTimeIn`,\'%Y-%m\') AS `reportDate` FROM `visit` WHERE 1 order by `reportDate` desc;';
+    $reportDateResult = getDbRecords($dbLink, $reportDateQuery);
+    if ($reportDateResult['count'] > 0) {
+        if ($reportDateResult['count'] == 1) {
+            $reportDateList[0] = $reportDateResult['data'];
+        } else {
+            $reportDateList = $reportDateResult['data'];
         }
     }
 }
@@ -336,6 +362,36 @@ if (!empty($requestData['export'])) {
         return;
     }
 }
+
+function showDateSelect($dateArray, $reportYearArg, $reportMonthArg) {
+    $inputHtml = '';
+    if (empty($dateArray)){
+        $inputHtml .= '<input type="number" min="2000" max="2100" id="ReportYearField" name="year" class="fourDigitNumeric" '.
+            'title="'.TEXT_REPORT_YEAR_PLACEHOLDER.'" value="'.$reportYearArg.'" placeholder="'.TEXT_REPORT_YEAR_PLACEHOLDER.'">-';
+        $inputHtml .= '<input type="number" min="1" max="12" id="ReportMonthField" name="month" class="twoDigitNumeric" '.
+            'title="'.TEXT_REPORT_MONTH_PLACEHOLDER.'" value="'.$reportMonthArg.'" placeholder="'.TEXT_REPORT_MONTH_PLACEHOLDER.'"">';
+        $inputHtml .= '&nbsp;&nbsp;';
+        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptMonthlyPosSummHome.php?dateInput=select" title="'.
+            TEXT_SHOW_REPORT_DATE_LIST_TITLE.'">'.TEXT_SHOW_REPORT_DATE_LIST_LINK.'</a></span>';
+    } else {
+        $reportYearMonth = strval($reportYearArg).'/'.strval($reportMonthArg).'/01';
+        $reportDate = date('Y-m', (strtotime($reportYearMonth)));
+        $inputHtml .= '<select id="ReportYearMonthField" name="yearMonth" class="requiredField">';
+        foreach ($dateArray as $dateElem) {
+            $inputHtml .= '<option value="'.$dateElem['reportDate'].'"';
+            if ($dateElem['reportDate'] == $reportDate) {
+                $inputHtml .= ' selected=selected';
+            }
+            $inputHtml .= '>'.$dateElem['reportDate'].'</option>';
+        }
+        $inputHtml .= '</select>&nbsp;&nbsp;';
+        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptMonthlyPosSummHome.php?dateInput=text" title="'.
+            TEXT_SHOW_REPORT_DATE_FIELD_TITLE.'">'.TEXT_SHOW_REPORT_DATE_FIELD_LINK.'</a></span>';
+    }
+    $inputHtml .= '&nbsp;&nbsp;&nbsp;&nbsp;';
+    return $inputHtml;
+}
+
 header('Content-type: text/html; charset=utf-8');
 // $visitList has the list of visits specified by the query parameters
 ?>
@@ -350,8 +406,8 @@ header('Content-type: text/html; charset=utf-8');
     <div id="MonthlySummaryPrompt" class="noprint">
         <form enctype="application/x-www-form-urlencoded" action="/reports/rptMonthlyPmtHome.php" method="get">
             <p>
-                <label class="close"><?= TEXT_DATE_LABEL ?>:</label><input type="number" min="2000" max="2100" id="ReportYearField" name="Year" class="fourDigitNumeric" title="<?= TEXT_REPORT_YEAR_PLACEHOLDER ?>" value="<?= $reportYearArg ?>" placeholder="<?= TEXT_REPORT_YEAR_PLACEHOLDER ?>">-
-                <input type="number" min="1" max="12" id="ReportMonthField" name="Month" class="twoDigitNumeric" title="<?= TEXT_REPORT_MONTH_PLACEHOLDER ?>" value="<?= $reportMonthArg ?>" placeholder="<?= TEXT_REPORT_MONTH_PLACEHOLDER ?>">&nbsp;&nbsp;&nbsp;&nbsp;
+                <label class="close"><?= TEXT_MO_DATE_PROMPT_LABEL ?>:</label>
+                <?= showDateSelect($reportDateList, $reportYearArg, $reportMonthArg) ?>
             </p>
             <p>
                 <button type="submit"><?= TEXT_SHOW_REPORT_BUTTON ?></button>

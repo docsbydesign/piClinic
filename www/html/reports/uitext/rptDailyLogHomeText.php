@@ -102,6 +102,10 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_SEX_OPTION_M')) { define('TEXT_SEX_OPTION_M','TEXT_SEX_OPTION_M',false); }
 	if (!defined('TEXT_SEX_OPTION_X')) { define('TEXT_SEX_OPTION_X','TEXT_SEX_OPTION_X',false); }
 	if (!defined('TEXT_SHOW_REPORT_BUTTON')) { define('TEXT_SHOW_REPORT_BUTTON','TEXT_SHOW_REPORT_BUTTON',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_LINK')) { define('TEXT_SHOW_REPORT_DATE_FIELD_LINK','TEXT_SHOW_REPORT_DATE_FIELD_LINK',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_TITLE')) { define('TEXT_SHOW_REPORT_DATE_FIELD_TITLE','TEXT_SHOW_REPORT_DATE_FIELD_TITLE',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_LINK')) { define('TEXT_SHOW_REPORT_DATE_LIST_LINK','TEXT_SHOW_REPORT_DATE_LIST_LINK',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_TITLE')) { define('TEXT_SHOW_REPORT_DATE_LIST_TITLE','TEXT_SHOW_REPORT_DATE_LIST_TITLE',false); }
 	if (!defined('TEXT_STAFF_LABEL')) { define('TEXT_STAFF_LABEL','TEXT_STAFF_LABEL',false); }
 	if (!defined('TEXT_STAFF_NAME_LABEL')) { define('TEXT_STAFF_NAME_LABEL','TEXT_STAFF_NAME_LABEL',false); }
 	if (!defined('TEXT_STATE_LABEL')) { define('TEXT_STATE_LABEL','TEXT_STATE_LABEL',false); }
@@ -174,6 +178,10 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_SEX_OPTION_M')) { define('TEXT_SEX_OPTION_M','M',false); }
 	if (!defined('TEXT_SEX_OPTION_X')) { define('TEXT_SEX_OPTION_X','X',false); }
 	if (!defined('TEXT_SHOW_REPORT_BUTTON')) { define('TEXT_SHOW_REPORT_BUTTON','Show report',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_LINK')) { define('TEXT_SHOW_REPORT_DATE_FIELD_LINK','Show date entry field',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_TITLE')) { define('TEXT_SHOW_REPORT_DATE_FIELD_TITLE','Display the field into which you can enter a date',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_LINK')) { define('TEXT_SHOW_REPORT_DATE_LIST_LINK','Show report date list',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_TITLE')) { define('TEXT_SHOW_REPORT_DATE_LIST_TITLE','Display the list of available report dates',false); }
 	if (!defined('TEXT_STAFF_LABEL')) { define('TEXT_STAFF_LABEL','Health professional',false); }
 	if (!defined('TEXT_STAFF_NAME_LABEL')) { define('TEXT_STAFF_NAME_LABEL','Name',false); }
 	if (!defined('TEXT_STATE_LABEL')) { define('TEXT_STATE_LABEL','State',false); }
@@ -246,6 +254,10 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_SEX_OPTION_M')) { define('TEXT_SEX_OPTION_M','H',false); }
 	if (!defined('TEXT_SEX_OPTION_X')) { define('TEXT_SEX_OPTION_X','X',false); }
 	if (!defined('TEXT_SHOW_REPORT_BUTTON')) { define('TEXT_SHOW_REPORT_BUTTON','Mostrar informe',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_LINK')) { define('TEXT_SHOW_REPORT_DATE_FIELD_LINK','Muestra el campo para la fecha',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_TITLE')) { define('TEXT_SHOW_REPORT_DATE_FIELD_TITLE','Muestra el campo para entrar la fecha directamente',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_LINK')) { define('TEXT_SHOW_REPORT_DATE_LIST_LINK','Muestra la lista de fechas',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_TITLE')) { define('TEXT_SHOW_REPORT_DATE_LIST_TITLE','Muestra la lista de fechas que tengan informes',false); }
 	if (!defined('TEXT_STAFF_LABEL')) { define('TEXT_STAFF_LABEL','Profesional de salud',false); }
 	if (!defined('TEXT_STAFF_NAME_LABEL')) { define('TEXT_STAFF_NAME_LABEL','Nombre',false); }
 	if (!defined('TEXT_STATE_LABEL')) { define('TEXT_STATE_LABEL','Departamento',false); }

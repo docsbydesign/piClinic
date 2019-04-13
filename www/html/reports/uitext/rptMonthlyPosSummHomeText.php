@@ -58,6 +58,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_HEADING_NURSE_PRO')) { define('TEXT_HEADING_NURSE_PRO','TEXT_HEADING_NURSE_PRO',false); }
 	if (!defined('TEXT_HEADING_TOTAL')) { define('TEXT_HEADING_TOTAL','TEXT_HEADING_TOTAL',false); }
 	if (!defined('TEXT_MONTHLY_REPORT_PAGE_TITLE_BY_POS')) { define('TEXT_MONTHLY_REPORT_PAGE_TITLE_BY_POS','TEXT_MONTHLY_REPORT_PAGE_TITLE_BY_POS',false); }
+	if (!defined('TEXT_MO_DATE_PROMPT_LABEL')) { define('TEXT_MO_DATE_PROMPT_LABEL','TEXT_MO_DATE_PROMPT_LABEL',false); }
 	if (!defined('TEXT_NO_SUMMARY_REPORT_PROMPT')) { define('TEXT_NO_SUMMARY_REPORT_PROMPT','TEXT_NO_SUMMARY_REPORT_PROMPT',false); }
 	if (!defined('TEXT_REPORT_AGI_RSM_DC')) { define('TEXT_REPORT_AGI_RSM_DC','TEXT_REPORT_AGI_RSM_DC',false); }
 	if (!defined('TEXT_REPORT_AT2R')) { define('TEXT_REPORT_AT2R','TEXT_REPORT_AT2R',false); }
@@ -141,6 +142,10 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_RPT_MONTH_11')) { define('TEXT_RPT_MONTH_11','TEXT_RPT_MONTH_11',false); }
 	if (!defined('TEXT_RPT_MONTH_12')) { define('TEXT_RPT_MONTH_12','TEXT_RPT_MONTH_12',false); }
 	if (!defined('TEXT_SHOW_REPORT_BUTTON')) { define('TEXT_SHOW_REPORT_BUTTON','TEXT_SHOW_REPORT_BUTTON',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_LINK')) { define('TEXT_SHOW_REPORT_DATE_FIELD_LINK','TEXT_SHOW_REPORT_DATE_FIELD_LINK',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_TITLE')) { define('TEXT_SHOW_REPORT_DATE_FIELD_TITLE','TEXT_SHOW_REPORT_DATE_FIELD_TITLE',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_LINK')) { define('TEXT_SHOW_REPORT_DATE_LIST_LINK','TEXT_SHOW_REPORT_DATE_LIST_LINK',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_TITLE')) { define('TEXT_SHOW_REPORT_DATE_LIST_TITLE','TEXT_SHOW_REPORT_DATE_LIST_TITLE',false); }
 	if (!defined('TEXT_STAFF_LABEL')) { define('TEXT_STAFF_LABEL','TEXT_STAFF_LABEL',false); }
 	if (!defined('TEXT_THOUSANDS_SEPARATOR')) { define('TEXT_THOUSANDS_SEPARATOR','TEXT_THOUSANDS_SEPARATOR',false); }
 	if (!defined('TEXT_TYPE_LABEL')) { define('TEXT_TYPE_LABEL','TEXT_TYPE_LABEL',false); }
@@ -168,6 +173,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_HEADING_NURSE_PRO')) { define('TEXT_HEADING_NURSE_PRO','Profesional',false); }
 	if (!defined('TEXT_HEADING_TOTAL')) { define('TEXT_HEADING_TOTAL','TOTAL',false); }
 	if (!defined('TEXT_MONTHLY_REPORT_PAGE_TITLE_BY_POS')) { define('TEXT_MONTHLY_REPORT_PAGE_TITLE_BY_POS','Monthly Report of Outpatient Care',false); }
+	if (!defined('TEXT_MO_DATE_PROMPT_LABEL')) { define('TEXT_MO_DATE_PROMPT_LABEL','Date&nbsp;(yyyy-mm)',false); }
 	if (!defined('TEXT_NO_SUMMARY_REPORT_PROMPT')) { define('TEXT_NO_SUMMARY_REPORT_PROMPT','Select a service type and date.',false); }
 	if (!defined('TEXT_REPORT_AGI_RSM_DC')) { define('TEXT_REPORT_AGI_RSM_DC','Information Management/RSM-DC',false); }
 	if (!defined('TEXT_REPORT_AT2R')) { define('TEXT_REPORT_AT2R','AT2-R',false); }
@@ -251,6 +257,10 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_RPT_MONTH_11')) { define('TEXT_RPT_MONTH_11','November',false); }
 	if (!defined('TEXT_RPT_MONTH_12')) { define('TEXT_RPT_MONTH_12','December',false); }
 	if (!defined('TEXT_SHOW_REPORT_BUTTON')) { define('TEXT_SHOW_REPORT_BUTTON','Show report',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_LINK')) { define('TEXT_SHOW_REPORT_DATE_FIELD_LINK','Show date entry field',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_TITLE')) { define('TEXT_SHOW_REPORT_DATE_FIELD_TITLE','Display the field into which you can enter a date',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_LINK')) { define('TEXT_SHOW_REPORT_DATE_LIST_LINK','Show report date list',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_TITLE')) { define('TEXT_SHOW_REPORT_DATE_LIST_TITLE','Display the list of available report dates',false); }
 	if (!defined('TEXT_STAFF_LABEL')) { define('TEXT_STAFF_LABEL','Health professional',false); }
 	if (!defined('TEXT_THOUSANDS_SEPARATOR')) { define('TEXT_THOUSANDS_SEPARATOR',',',false); }
 	if (!defined('TEXT_TYPE_LABEL')) { define('TEXT_TYPE_LABEL','Service type',false); }
@@ -278,6 +288,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_HEADING_NURSE_PRO')) { define('TEXT_HEADING_NURSE_PRO','Profesional',false); }
 	if (!defined('TEXT_HEADING_TOTAL')) { define('TEXT_HEADING_TOTAL','TOTAL',false); }
 	if (!defined('TEXT_MONTHLY_REPORT_PAGE_TITLE_BY_POS')) { define('TEXT_MONTHLY_REPORT_PAGE_TITLE_BY_POS','Informe Mensual de Atenciones',false); }
+	if (!defined('TEXT_MO_DATE_PROMPT_LABEL')) { define('TEXT_MO_DATE_PROMPT_LABEL','Fecha&nbsp;(aaaa-mm)',false); }
 	if (!defined('TEXT_NO_SUMMARY_REPORT_PROMPT')) { define('TEXT_NO_SUMMARY_REPORT_PROMPT','Escoge un servicio de atención y una fecha.',false); }
 	if (!defined('TEXT_REPORT_AGI_RSM_DC')) { define('TEXT_REPORT_AGI_RSM_DC','Área de Gestion de la Informacion/RSM-DC',false); }
 	if (!defined('TEXT_REPORT_AT2R')) { define('TEXT_REPORT_AT2R','AT2-R',false); }
@@ -361,6 +372,10 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_RPT_MONTH_11')) { define('TEXT_RPT_MONTH_11','Noviembre',false); }
 	if (!defined('TEXT_RPT_MONTH_12')) { define('TEXT_RPT_MONTH_12','Deciembre',false); }
 	if (!defined('TEXT_SHOW_REPORT_BUTTON')) { define('TEXT_SHOW_REPORT_BUTTON','Mostrar informe',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_LINK')) { define('TEXT_SHOW_REPORT_DATE_FIELD_LINK','Muestra el campo para la fecha',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_TITLE')) { define('TEXT_SHOW_REPORT_DATE_FIELD_TITLE','Muestra el campo para entrar la fecha directamente',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_LINK')) { define('TEXT_SHOW_REPORT_DATE_LIST_LINK','Muestra la lista de fechas',false); }
+	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_TITLE')) { define('TEXT_SHOW_REPORT_DATE_LIST_TITLE','Muestra la lista de fechas que tengan informes',false); }
 	if (!defined('TEXT_STAFF_LABEL')) { define('TEXT_STAFF_LABEL','Profesional de salud',false); }
 	if (!defined('TEXT_THOUSANDS_SEPARATOR')) { define('TEXT_THOUSANDS_SEPARATOR','.',false); }
 	if (!defined('TEXT_TYPE_LABEL')) { define('TEXT_TYPE_LABEL','Servicio de atención',false); }

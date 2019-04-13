@@ -41,6 +41,7 @@ if (!defined('UI_COMMON_CONSTANTS')) {
 	define('RPT_SHOW_DATA', 2, false);
 	define('RPT_SHOW_REPORT', 1, false);
 
+    define('MSG_BACKUP_FAIL',"MSG_BACKUP_FAIL",false);
     define('MSG_DB_OPEN_ERROR',"DB_OPEN_ERROR", false);
     define('MSG_LOGIN_FAILURE',"LOGIN_FAILURE", false);
     define('MSG_NOT_CREATED',"NOT_CREATED", false);
@@ -50,9 +51,9 @@ if (!defined('UI_COMMON_CONSTANTS')) {
     define('MSG_PATIENT_ID_IN_USE',"PATIENT_ID_IN_USE", false);
     define('MSG_REQUIRED_FIELD_MISSING',"REQUIRED_FIELD_MISSING", false);
     define('MSG_SESSION_TIMEOUT',"SESSION_TIMEOUT",false);
+    define('MSG_TOPIC_NOT_FOUND',"MSG_TOPIC_NOT_FOUND", false);
     define('MSG_UNSUPPORTED',"UNSUPPORTED", false);
     define('MSG_USER_NOT_FOUND',"USER_NOT_FOUND", false);
-    define('MSG_TOPIC_NOT_FOUND',"MSG_TOPIC_NOT_FOUND", false);
 }
 
 /*

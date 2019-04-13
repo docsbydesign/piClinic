@@ -185,6 +185,7 @@ def createFiles (arg_build, arg_csvfile, arg_codedir):
     # get display strings used by each file
     for php_file in php_files:
         with open(php_file['source'], "r") as source_file:
+            print ("reading: " + php_file['source'])
             text_vars = [];
             for line in source_file:
                 matches = re.findall ('TEXT_[0-9A-Z_]+', line, )

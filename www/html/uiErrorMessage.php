@@ -90,6 +90,10 @@ if (isset($pageLanguage)) {
                     echo TEXT_MESSAGE_SESSION_TIMEOUT;
                     break;
 
+                case MSG_BACKUP_FAIL:
+                    echo TEXT_MESSAGE_BACKUP_FAIL;
+                    break;
+
 				default:
 					echo TEXT_MESSAGE_GENERIC;
 					break;

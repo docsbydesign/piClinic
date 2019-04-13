@@ -129,7 +129,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
                             <ul>
                                 <li><a target="icd10_1" href="/files/CIE-10_2008_Chapter_1.pdf">CIE-10,&nbsp;Volumen&nbsp;1&nbsp;(Descripcciones&nbsp;de&nbsp;los&nbsp;codigos)</a></li>
                                 <li><a target="icd10_2" href="/files/CIE-10_2008_Chapter_2.pdf">CIE-10,&nbsp;Volumen&nbsp;2&nbsp;(Manual&nbsp;de&nbsp;instrucciones)</a></li>
-                                <li><a target="icd10_3" href="/files/CIE-10_2008_Chapter_3.pdf">CIE-10,&nbsp;Volumen&nbsp;3&nbsp;(Índice&nbsp;alfabético)</a></li>
+                                <li><a target="icd10_3" href="/files/CIE-10_2008_Chapter_3.pdf">CIE-10,&nbsp;Volumen&nbsp;3&nbsp;(Indice&nbsp;alfabético)</a></li>
                             </ul>
                         </td>
                     </tr>
