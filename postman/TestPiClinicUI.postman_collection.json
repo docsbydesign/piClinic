@@ -85,6 +85,53 @@
 			"name": "PHP error tests: root folder",
 			"item": [
 				{
+					"name": "adminBackup.php",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "745271d6-11eb-4812-bd9b-3267d721c15a",
+								"exec": [
+									"pm.test(\"Test for successful response\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"No PHP errors found\", function() {\r",
+									"    var uiResponse = pm.response.text();\r",
+									"    pm.expect(uiResponse).is.not.eql(undefined);\r",
+									"    pm.expect(uiResponse.indexOf('/var/www/html')).is.eql(-1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/adminHome.php?fromLink=AUTOTEST",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"adminHome.php"
+							],
+							"query": [
+								{
+									"key": "fromLink",
+									"value": "AUTOTEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "adminHome.php",
 					"event": [
 						{
@@ -992,7 +1039,7 @@
 			]
 		},
 		{
-			"name": "PHP tests: reports folder",
+			"name": "PHP error tests: reports folder",
 			"item": [
 				{
 					"name": "rptDailyLogHome.php",
@@ -1234,6 +1281,28 @@
 					},
 					"response": []
 				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3a6e3c3b-7b03-4082-a4dd-3750d2f4b138",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "2ac52d9b-3dde-404d-8f8d-a56e4bd2c78d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -1257,7 +1326,13 @@
 					],
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "X-piClinic-token",
+								"value": "{{uiSessionToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
@@ -1288,6 +1363,17 @@
 									"pm.test(\"Access failed\", function() {",
 									"    pm.response.to.have.status(404);",
 									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "396055e4-63b1-4fbb-b099-43a1a2d81ca8",
+								"exec": [
+									"// wait for the last test to finish up...",
+									"setTimeout(function(){}, 1000);"
 								],
 								"type": "text/javascript"
 							}
