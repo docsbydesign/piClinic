@@ -63,6 +63,8 @@ $pageAccessRequired = PAGE_ACCESS_CLINIC;
 $referrerUrlOverride = NO_ACCESS_URL;
 require('./uiSessionInfo.php');
 
+$errorUrl = '/adminHome.php';
+
 // check for query parameters and format query values
 if (empty($requestData) || empty($requestData['type'])) {
     // server error
