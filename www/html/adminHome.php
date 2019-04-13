@@ -43,6 +43,7 @@ profileLogStart ($profileData);
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
 $pageLanguage = $sessionInfo['pageLanguage'];
+$requestData = $sessionInfo['parameters'];
 require_once ('./uitext/adminHomeText.php');
 
 // open session variables and check for access to this page
