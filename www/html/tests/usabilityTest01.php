@@ -86,6 +86,8 @@ if ($icdResult['count'] > 0) {
     $testInfo['icdName'] = 'NO DIAGNOSIS';
 }
 
+$testInfo['newDiag'] = (rand(0,1) ? "(N) new" : "(S) subsequent");
+
 // get a date that had a visit
 $dateQueryString = "SELECT distinct DATE_FORMAT(`dateTimeIn`,'%M %d, %Y') AS `reportDate` FROM `visit` WHERE 1 order by `reportDate` desc;";
 $dateResult = getDbRecords($dbLink, $dateQueryString);
@@ -122,12 +124,12 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
             <li>A patient has just walked in and has an appointment scheduled for today. The patient’s name is <span style="text-decoration: underline"><?= $testInfo['ptName'] ?></span>. Search for this patient on the site.</li>
             <li>Update this patient’s primary phone number to <span style="text-decoration: underline"><?= $testInfo['phNumber'] ?></span>.</li>
             <li>The patient claims to feel generally ill and would like to be see the doctor. Admit the patient into the clinic. This visit type will be an <strong>Outpatient</strong>. The doctor the patient will see is <span style="text-decoration: underline"><?= $testInfo['drName'] ?></span>. Go back to the dashboard.</li>
-            <li>Some time has passed and the patient you saw in step 2 has seen the doctor and is now back at your desk. Discharge the patient from the clinic. The doctor diagnosed the patient with <span style="text-decoration: underline"><?= $testInfo['icdName'] ?></span>.</li>
+            <li>Some time has passed and <?= $testInfo['ptName'] ?>, the patient you saw earlier, has seen the doctor and is now ready to leave. Discharge the patient from the clinic. The doctor diagnosed the patient with a <span style="text-decoration: underline"><?= $testInfo['newDiag'] ?></span> diagnosis of <span style="text-decoration: underline"><?= $testInfo['icdName'] ?></span>.</li>
             <li>One of the doctors needs to see which patients he cared for on <span style="text-decoration: underline"><?= $testInfo['date'] ?></span>. Pull up the daily outpatient log for that day. </li>
         </ol>
         <p>After you have finished testing, add a comment with- <strong>&lt;your name&gt; - finished.</strong>, and any feedback from your experience.</p>
 	</div>
-    <div class="noshow"></div>
+    <div class="noshow">
     <pre>
         <?= $ptQueryString ?><br>
         <?= json_encode($ptResult, JSON_PRETTY_PRINT) ?>
@@ -137,6 +139,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
         <?= json_encode($dateResult, JSON_PRETTY_PRINT) ?>
         <?= json_encode($testInfo, JSON_PRETTY_PRINT) ?>
     </pre>
+    </div>
 </body>
 <?php @mysqli_close($dbLink); ?>
 </html>
