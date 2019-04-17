@@ -100,7 +100,6 @@ if (empty($requestData['clinicPatientID'])) {
                 $dbStatus['visitlookup'] = $report;
             }
         }
-        $requestData['msg'] = MSG_NOT_FOUND;
     } else {
         if ($visitRecord['count'] == 1) {
             // there's only one so make it an array element
