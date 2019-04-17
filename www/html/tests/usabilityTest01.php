@@ -1,0 +1,142 @@
+<?php
+/*
+ *	Copyright (c) 2019, Robert B. Watson
+ *
+ *	This file is part of the piClinic Console.
+ *
+ *  piClinic Console is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  piClinic Console is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
+ *	If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+/*
+*
+*	Display smart usability-test instructions
+*
+*/
+// set charset header
+header('Content-type: text/html; charset=utf-8');
+// include files
+require_once dirname(__FILE__).'/../shared/piClinicConfig.php';
+require_once dirname(__FILE__).'/../shared/headTag.php';
+require_once dirname(__FILE__).'/../shared/dbUtils.php';
+require_once dirname(__FILE__).'/../api/api_common.php';
+require_once dirname(__FILE__).'/../shared/profile.php';
+require_once dirname(__FILE__).'/../shared/security.php';
+require_once dirname(__FILE__).'/../shared/ui_common.php';
+
+$profileData = [];
+profileLogStart ($profileData);
+
+$pageLanguage = 'en';
+
+// open DB or redirect to error URL
+$errorUrl = 'https://piclinic.org';  // where to go in case the DB can't be opened.
+$dbLink = _openDBforUI(null, $errorUrl);
+
+$testInfo = [];
+
+// get existing patient that is not currently in the clinic
+$ptQueryString = "SELECT `firstName`, `lastName`,  `lastName2` FROM `patient` WHERE `patientID` = ".rand(1,100).";";
+$ptResult = getDbRecords($dbLink, $ptQueryString);
+
+if ($ptResult['count'] == 1) {
+    $testInfo['ptName'] = $ptResult['data']['firstName'];
+    $testInfo['ptName'] .= ' '. $ptResult['data']['lastName'];
+    if (!empty($ptResult['data']['lastName'])) {
+        $testInfo['ptName'] .= ' '. $ptResult['data']['lastName2'];
+    }
+} else {
+    $testInfo['ptName'] = 'NO PATIENT NAME';
+}
+
+// get existing patient that is not currently in the clinic
+
+
+// get a doctor who is registered in the clinic
+$drQueryString = "SELECT `firstName`, `lastName` FROM `staff` WHERE `position` = 'DoctorGeneral';";
+$drResult = getDbRecords($dbLink, $drQueryString);
+
+if ($drResult['count'] > 0) {
+    $drIdx = rand(0,$drResult['count']-1);
+    $testInfo['drName'] = $drResult['data'][$drIdx]['firstName'];
+    $testInfo['drName'] .= ' '. $drResult['data'][$drIdx]['lastName'];
+} else {
+    $testInfo['drName'] = 'NO DOCTOR NAME';
+}
+
+// get a diagnosis to apply to this patient
+$icdQueryString = "SELECT `shortDescription` FROM `icd10` WHERE `language`='en' AND `icd10index` LIKE '___' LIMIT 1000;";
+$icdResult = getDbRecords($dbLink, $icdQueryString);
+
+if ($icdResult['count'] > 0) {
+    $icdIdx = rand(0,$icdResult['count']-1);
+    $testInfo['icdName'] = $icdResult['data'][$icdIdx]['shortDescription'];
+} else {
+    $testInfo['icdName'] = 'NO DIAGNOSIS';
+}
+
+// get a date that had a visit
+$dateQueryString = "SELECT distinct DATE_FORMAT(`dateTimeIn`,'%M %d, %Y') AS `reportDate` FROM `visit` WHERE 1 order by `reportDate` desc;";
+$dateResult = getDbRecords($dbLink, $dateQueryString);
+
+if ($dateResult['count'] > 0) {
+    $dateIdx = rand(0,$dateResult['count']-1);
+    $testInfo['date'] = $dateResult['data'][$dateIdx]['reportDate'];
+} else {
+    $testInfo['date'] = 'NO DATE';
+}
+// get a new phone number for the patient
+$testInfo['phNumber'] = '504-'.str_pad(strval(rand(2001,9999)),4,'0').'-'.str_pad(strval(rand(0,9999)),4,'0');
+
+profileLogCheckpoint($profileData,'CODE_COMPLETE');
+?>
+<?= pageHtmlTag($pageLanguage) ?>
+<?= pageHeadTag('Usability Test No. 1') ?>
+<body>
+	<?= piClinicTag(); ?>
+	<div class="pageBody">
+        <h1>piClinic Online Usability Test</h1>
+
+        <p><strong>Context:</strong> You are an administrator at a small medical clinic. One of your jobs is to enter patient information into the system.</p>
+        <p>After you complete the test, if you get stuck and can't continue, or should you choose to leave early, please enter a comment that you have ended the testing.</p>
+        <p>Log in to the site at: <a href="https://dev.piclinic.org/clinicLogin.php" target="_blank">https://dev.piclinic.org/clinicLogin.php</a>
+        <blockquote>
+        <strong>User:</strong> OnlineTest<br>
+        <strong>Pass:</strong> onlineTest!
+        </blockquote>
+        <p>Click “Comment” in the top right hand corner, and add a comment with: <strong>&lt;your name&gt; - starting</strong></p>
+        <h2>Usability Test Tasks</h2>
+        <p>Complete as many of these tasks as you can.</p>
+        <ol>
+            <li>A patient has just walked in and has an appointment scheduled for today. The patient’s name is <span style="text-decoration: underline"><?= $testInfo['ptName'] ?></span>. Search for this patient on the site.</li>
+            <li>Update this patient’s primary phone number to <span style="text-decoration: underline"><?= $testInfo['phNumber'] ?></span>.</li>
+            <li>The patient claims to feel generally ill and would like to be see the doctor. Admit the patient into the clinic. This visit type will be an <strong>Outpatient</strong>. The doctor the patient will see is <span style="text-decoration: underline"><?= $testInfo['drName'] ?></span>. Go back to the dashboard.</li>
+            <li>Some time has passed and the patient you saw in step 2 has seen the doctor and is now back at your desk. Discharge the patient from the clinic. The doctor diagnosed the patient with <span style="text-decoration: underline"><?= $testInfo['icdName'] ?></span>.</li>
+            <li>One of the doctors needs to see which patients he cared for on <span style="text-decoration: underline"><?= $testInfo['date'] ?></span>. Pull up the daily outpatient log for that day. </li>
+        </ol>
+        <p>After you have finished testing, add a comment with- <strong>&lt;your name&gt; - finished.</strong>, and any feedback from your experience.</p>
+	</div>
+    <div class="noshow"></div>
+    <pre>
+        <?= $ptQueryString ?><br>
+        <?= json_encode($ptResult, JSON_PRETTY_PRINT) ?>
+        <?= $drQueryString ?><br>
+        <?= json_encode($drResult, JSON_PRETTY_PRINT) ?>
+        <?= $dateQueryString ?><br>
+        <?= json_encode($dateResult, JSON_PRETTY_PRINT) ?>
+        <?= json_encode($testInfo, JSON_PRETTY_PRINT) ?>
+    </pre>
+</body>
+<?php @mysqli_close($dbLink); ?>
+</html>
