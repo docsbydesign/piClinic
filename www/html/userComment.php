@@ -60,7 +60,8 @@ $commentOpenTime = $now->format('Y-m-d H:i:s');
 function writeTopicMenu ($lang) {
 	$returnUrl = '/clinicDash.php'.createFromLink (FIRST_FROM_LINK_QP, __FILE__, 'Cancel'); //default: return is the home page
     if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], basename(__FILE__ )) === FALSE)  {
-		$returnUrl = cleanedRefererUrl().createFromLink (FROM_LINK_QP, __FILE__, 'Cancel');
+        $returnUrl = cleanedRefererUrl();
+		$returnUrl .= createFromLink ( ((strpos($returnUrl, "?") !== FALSE) ? FROM_LINK_QP : FIRST_FROM_LINK_QP ) , __FILE__, 'Cancel');
 	}
 	$topicMenu = '<div id="topicMenuDiv">'."\n";
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";

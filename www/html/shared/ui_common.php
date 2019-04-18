@@ -349,6 +349,7 @@ function cleanTheUrl ($urlToClean, $newQpArray = null, $fromLinkValue = null) {
             $urlRoot = $urlParts[0];
         }
         if (!empty($urlParts[1])) {
+            $urlQP = array();
             parse_str($urlParts[1], $urlQP);
             $urlQP = cleanUrlQueryParams($urlQP);
         }
