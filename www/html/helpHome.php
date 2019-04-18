@@ -70,7 +70,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(HELP_PAGE, $pageLanguage,__FILE__) ?>
+	<?= piClinicAppMenu(HELP_PAGE, $sessionInfo, $pageLanguage,__FILE__) ?>
 	<div class="pageBody">
         <div style="clear: both;"></div>
         <div id="optionMenuDiv" class="noprint">

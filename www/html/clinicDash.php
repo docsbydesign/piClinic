@@ -82,7 +82,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(HOME_PAGE, $pageLanguage, __FILE__) ?>
+	<?= piClinicAppMenu(HOME_PAGE, $sessionInfo, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
 	<div id="PatientLookupDiv" class="noprint">
 		<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">

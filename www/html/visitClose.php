@@ -182,7 +182,7 @@ function writeOptionsMenu ($visitInfo) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
+	<?= piClinicAppMenu(null,$sessionInfo, $pageLanguage, __FILE__) ?>
 	<datalist id="diagData"></datalist>
 	<div class="pageBody">
 	<?= writeTopicMenu($cancelUrl) ?>

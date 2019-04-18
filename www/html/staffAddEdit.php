@@ -190,7 +190,7 @@ function writeTopicMenu ($lang, $cancelLink) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
+	<?= piClinicAppMenu(null,$sessionInfo, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu ($pageLanguage, $cancelLink) ?>
 	<div id="staffDataDiv">
