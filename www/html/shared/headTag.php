@@ -73,15 +73,24 @@ define('HELP_PAGE','/helpHome.php',false);
  * @param $pageLanguage
  * @return string
  */
-function piClinicAppMenu($thisPage, $pageLanguage, $hostFile) {
+function piClinicAppMenu($thisPage, $session, $pageLanguage, $hostFile) {
 	// $pageLanguage is used by appMenuText.php.
 	require_once dirname(__FILE__).'/../uitext/appMenuText.php';
-	$menuItems = [];
-	$menuItems[0] = array ('link' => HOME_PAGE, 'linkText' => TEXT_CLINIC_HOME, 'linkClass' => 'a_mainHome');
-	$menuItems[1] = array ('link' => REPORT_PAGE, 'linkText' => TEXT_CLINIC_REPORTS, 'linkClass' => 'a_mainReports');
-	$menuItems[2] = array ('link' => ADMIN_PAGE, 'linkText' => TEXT_CLINIC_ADMIN, 'linkClass' => 'a_mainAdmin');
-	$menuItems[3] = array ('link' => HELP_PAGE, 'linkText' => TEXT_CLINIC_HELP, 'linkClass' => 'a_mainHelp');
-	
+	$menuItems = array();
+	$menuIdx = 0;
+	if (checkUiSessionAccess (null, $session['token'], PAGE_ACCESS_READONLY)) {
+		$menuItems[$menuIdx++] = array ('link' => HOME_PAGE, 'linkText' => TEXT_CLINIC_HOME, 'linkClass' => 'a_mainHome');
+	}
+	if (checkUiSessionAccess (null, $session['token'], PAGE_ACCESS_READONLY)) {
+		$menuItems[$menuIdx++] = array ('link' => REPORT_PAGE, 'linkText' => TEXT_CLINIC_REPORTS, 'linkClass' => 'a_mainReports');
+	}
+	if (checkUiSessionAccess (null, $session['token'], PAGE_ACCESS_CLINIC)) {
+		$menuItems[$menuIdx++] = array ('link' => ADMIN_PAGE, 'linkText' => TEXT_CLINIC_ADMIN, 'linkClass' => 'a_mainAdmin');
+	}
+	if (checkUiSessionAccess (null, $session['token'], PAGE_ACCESS_READONLY)) {
+		$menuItems[$menuIdx++] = array ('link' => HELP_PAGE, 'linkText' => TEXT_CLINIC_HELP, 'linkClass' => 'a_mainHelp');
+	}
+
 	$menuDiv = "<div id=\"topLinkMenuDiv\" class=\"noprint\"><div id=\"appMenu\">\n";
 	$menuDiv .= "<ul class=\"topLinkMenuList\">\n";
 	$firstLink = true;
