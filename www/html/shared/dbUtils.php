@@ -127,16 +127,20 @@ if (!defined('DB_UTILS')) {
 			if ($dbCol == '__source') { continue; } // skip this, if present
 			isset($dbColList) ? $dbColList .= ', ' : $dbColList = '';
 			isset($dbValList) ? $dbValList .= ', ' : $dbValList = '';										
-			$dbColList .= $dbCol;
+			$dbColList .= '`'.$dbCol.'`';
 			if (empty($dbVal) && (strlen($dbVal)==0)) {
 				$dbValList .= 'NULL';
 			} else {
-				$escapedString = str_replace("'","''", $dbVal);
-				if (is_array($escapedString)) { $escapedString = json_encode($escapedString);}
+				$escapedString = '';
+				if (is_array($dbVal)) {
+				    $escapedString = json_encode($dbVal);
+				} else {
+                    $escapedString = str_replace("'","''", $dbVal);
+				}
 				$dbValList .= '\''.$escapedString.'\'';
 			}							
 		}
-		$queryString = 'INSERT INTO '.$tableName.' ('.$dbColList.') VALUES ('.$dbValList.')';
+		$queryString = 'INSERT INTO `'.$tableName.'` ('.$dbColList.') VALUES ('.$dbValList.')';
 		return $queryString;
 	}
 
