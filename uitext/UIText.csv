@@ -589,7 +589,6 @@ TEXT_REPORT_SERVICE_FILTRO,Filter,Filtro
 TEXT_REPORT_SERVICE_SPECIALTY,Specialty,Especialidad
 TEXT_REPORT_SERVICE_TYPE,Type of<br>attention,Servicio de<br>Atención
 TEXT_REPORT_STATE_LABEL,State,Departamento
-TEXT_REPORT_TOTAL,Total outpatients seen,Total pacientes atendidos
 TEXT_REPORT_TOTAL,Total,Total
 TEXT_REPORT_WEEKDAY_1,Monday,Lunes
 TEXT_REPORT_WEEKDAY_2,Tuesday,Martes

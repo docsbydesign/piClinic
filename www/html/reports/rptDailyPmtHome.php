@@ -364,7 +364,7 @@ header('Content-type: text/html; charset=utf-8');
                 $pageNo += 1;
                 // start a new page
                 echo '<div id="paymentLogHeading_page'.sprintf('%03d', ($pageNo % 1000)).'" class="reportPage'.($pageNo > 1 ? ' newPage': '').'">';
-                echo '<h1>'.TEXT_DAILY_VISIT_HEADING.'</h1>';
+                echo '<h1>'.TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE.'</h1>';
                 echo '<p><label class="close">'.TEXT_REPORT_CLINICNAME_LABEL.':</label>'.
                     (isset($clinicInfo['shortName']) ? $clinicInfo['shortName'] : $blankField ).'</p>';
                 echo '<p><label class="close">'.TEXT_DATE_LABEL.':</label>'.date(TEXT_DATE_FORMAT, strtotime($reportDate)).
