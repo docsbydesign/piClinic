@@ -38,8 +38,8 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
+	if (!defined('TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE','TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE',false); }
 	if (!defined('TEXT_DAILY_PMT_TITLE')) { define('TEXT_DAILY_PMT_TITLE','TEXT_DAILY_PMT_TITLE',false); }
-	if (!defined('TEXT_DAILY_VISIT_HEADING')) { define('TEXT_DAILY_VISIT_HEADING','TEXT_DAILY_VISIT_HEADING',false); }
 	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','TEXT_DATE_FORMAT',false); }
 	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','TEXT_DATE_LABEL',false); }
 	if (!defined('TEXT_DATE_PROMPT_LABEL')) { define('TEXT_DATE_PROMPT_LABEL','TEXT_DATE_PROMPT_LABEL',false); }
@@ -78,8 +78,8 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
+	if (!defined('TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE','Daily Payment Log',false); }
 	if (!defined('TEXT_DAILY_PMT_TITLE')) { define('TEXT_DAILY_PMT_TITLE','Daily payment log',false); }
-	if (!defined('TEXT_DAILY_VISIT_HEADING')) { define('TEXT_DAILY_VISIT_HEADING','Daily Outpatient Log',false); }
 	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','m/d/Y',false); }
 	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Date&nbsp;(mm/dd/yyyy)',false); }
 	if (!defined('TEXT_DATE_PROMPT_LABEL')) { define('TEXT_DATE_PROMPT_LABEL','Date&nbsp;(yyyy-mm-dd)',false); }
@@ -105,7 +105,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_PATIENT_NAME_LABEL')) { define('TEXT_REPORT_PATIENT_NAME_LABEL','Patient name',false); }
 	if (!defined('TEXT_REPORT_PAYMENT_LABEL')) { define('TEXT_REPORT_PAYMENT_LABEL','Payment',false); }
 	if (!defined('TEXT_REPORT_ROW_LABEL')) { define('TEXT_REPORT_ROW_LABEL','No.',false); }
-	if (!defined('TEXT_REPORT_TOTAL')) { define('TEXT_REPORT_TOTAL','Total outpatients seen',false); }
+	if (!defined('TEXT_REPORT_TOTAL')) { define('TEXT_REPORT_TOTAL','Total',false); }
 	if (!defined('TEXT_RH_TOTAL')) { define('TEXT_RH_TOTAL','Total',false); }
 	if (!defined('TEXT_RPT_DECIMAL')) { define('TEXT_RPT_DECIMAL','.',false); }
 	if (!defined('TEXT_RPT_DIGIT_SEPARATOR')) { define('TEXT_RPT_DIGIT_SEPARATOR',',',false); }
@@ -118,8 +118,8 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
+	if (!defined('TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE','Registros de Pagos del Día',false); }
 	if (!defined('TEXT_DAILY_PMT_TITLE')) { define('TEXT_DAILY_PMT_TITLE','Registro de pagos del día',false); }
-	if (!defined('TEXT_DAILY_VISIT_HEADING')) { define('TEXT_DAILY_VISIT_HEADING','Atenciones Ambulatorias',false); }
 	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','d/m/Y',false); }
 	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha&nbsp;(dd/mm/aaaa)',false); }
 	if (!defined('TEXT_DATE_PROMPT_LABEL')) { define('TEXT_DATE_PROMPT_LABEL','Fecha&nbsp;(aaaa-mm-dd)',false); }
@@ -145,7 +145,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_PATIENT_NAME_LABEL')) { define('TEXT_REPORT_PATIENT_NAME_LABEL','Nombre del paciente',false); }
 	if (!defined('TEXT_REPORT_PAYMENT_LABEL')) { define('TEXT_REPORT_PAYMENT_LABEL','Pago',false); }
 	if (!defined('TEXT_REPORT_ROW_LABEL')) { define('TEXT_REPORT_ROW_LABEL','No.',false); }
-	if (!defined('TEXT_REPORT_TOTAL')) { define('TEXT_REPORT_TOTAL','Total pacientes atendidos',false); }
+	if (!defined('TEXT_REPORT_TOTAL')) { define('TEXT_REPORT_TOTAL','Total',false); }
 	if (!defined('TEXT_RH_TOTAL')) { define('TEXT_RH_TOTAL','Total',false); }
 	if (!defined('TEXT_RPT_DECIMAL')) { define('TEXT_RPT_DECIMAL',',',false); }
 	if (!defined('TEXT_RPT_DIGIT_SEPARATOR')) { define('TEXT_RPT_DIGIT_SEPARATOR','.',false); }

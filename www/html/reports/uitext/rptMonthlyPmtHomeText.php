@@ -99,7 +99,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_MONTH_PLACEHOLDER')) { define('TEXT_REPORT_MONTH_PLACEHOLDER','Report month (MM)',false); }
 	if (!defined('TEXT_REPORT_PATIENT_COUNT_LABEL')) { define('TEXT_REPORT_PATIENT_COUNT_LABEL','Patients seen',false); }
 	if (!defined('TEXT_REPORT_PAYMENT_TOTAL_LABEL')) { define('TEXT_REPORT_PAYMENT_TOTAL_LABEL','Payment received',false); }
-	if (!defined('TEXT_REPORT_TOTAL')) { define('TEXT_REPORT_TOTAL','Total outpatients seen',false); }
+	if (!defined('TEXT_REPORT_TOTAL')) { define('TEXT_REPORT_TOTAL','Total',false); }
 	if (!defined('TEXT_REPORT_WEEKDAY_1')) { define('TEXT_REPORT_WEEKDAY_1','Monday',false); }
 	if (!defined('TEXT_REPORT_WEEKDAY_2')) { define('TEXT_REPORT_WEEKDAY_2','Tuesday',false); }
 	if (!defined('TEXT_REPORT_WEEKDAY_3')) { define('TEXT_REPORT_WEEKDAY_3','Wednesday',false); }
@@ -140,7 +140,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_MONTH_PLACEHOLDER')) { define('TEXT_REPORT_MONTH_PLACEHOLDER','Mes del informe (MM)',false); }
 	if (!defined('TEXT_REPORT_PATIENT_COUNT_LABEL')) { define('TEXT_REPORT_PATIENT_COUNT_LABEL','Paceientes atendidos',false); }
 	if (!defined('TEXT_REPORT_PAYMENT_TOTAL_LABEL')) { define('TEXT_REPORT_PAYMENT_TOTAL_LABEL','Pagos recibidos',false); }
-	if (!defined('TEXT_REPORT_TOTAL')) { define('TEXT_REPORT_TOTAL','Total pacientes atendidos',false); }
+	if (!defined('TEXT_REPORT_TOTAL')) { define('TEXT_REPORT_TOTAL','Total',false); }
 	if (!defined('TEXT_REPORT_WEEKDAY_1')) { define('TEXT_REPORT_WEEKDAY_1','Lunes',false); }
 	if (!defined('TEXT_REPORT_WEEKDAY_2')) { define('TEXT_REPORT_WEEKDAY_2','Martes',false); }
 	if (!defined('TEXT_REPORT_WEEKDAY_3')) { define('TEXT_REPORT_WEEKDAY_3','Miércoles',false); }
