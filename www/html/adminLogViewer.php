@@ -101,7 +101,7 @@ if ($logFilters['count'] > 1) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
+	<?= piClinicAppMenu(null,$sessionInfo, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
 	<h1 class="pageHeading"><?= TEXT_ADMIN_LOG_VIEWER_TITLE ?></h1>
 	<div id="logSelectorDiv" class="noprint ">

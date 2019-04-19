@@ -160,7 +160,7 @@ function writeTopicMenu ($sessionInfo) {
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('uiErrorMessage.php') ?>
-	<?= piClinicAppMenu(null, $pageLanguage, __FILE__) ?>
+	<?= piClinicAppMenu(null,$sessionInfo, $pageLanguage, __FILE__) ?>
 	<div class="pageBody">
 	<?= writeTopicMenu($sessionInfo) ?>
 	<div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">

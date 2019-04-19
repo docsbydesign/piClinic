@@ -90,11 +90,8 @@ if (!checkUiSessionAccess (null, $sessionToken, $pageAccessRequired)) {
 		} else {
 			// convert the query string into an associative array
 			$qsArray = parse_url ( $referrerQS, PHP_URL_QUERY );
-			// remove any old message values
-			if (!empty($qsArray['msg'])) {
-				unset($qsArray['msg']);
-			}
-
+            // set the correct error message
+            $qsArray['msg'] = MSG_NO_ACCESS;
 			$noAccessUrl = makeUrlWithQueryParams($referrerUrl, $qsArray);
 		}
 	}
