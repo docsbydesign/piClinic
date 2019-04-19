@@ -54,6 +54,12 @@ require_once './support/textFileUtils.php';
 $profileData = [];
 profileLogStart ($profileData);
 
+// always log the report time
+//   this is separate because profiling is usually only done on non-production builds
+$reportProfile = [];
+$reportProfile['start'] = microtime(true);
+$reportProfile['report'] = __FILE__;
+$reportProfile['count'] = -1;
 // get the current session info (if any)
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
@@ -227,6 +233,8 @@ $reportGroups = [
     ["RPT_LINE_51", TEXT_RPT_LINE_51,51,false],
     ["RPT_LINE_52", TEXT_RPT_LINE_52,52,false]
 ];
+
+define('TOTAL_VALUE_LINE', 'RPT_LINE_19', false); // identify which line has the total count value
 
 $blankField = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 $checkedField = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -478,11 +486,11 @@ if ($reportFormat == RPT_SHOW_DATA) {
         $exportData[$lastSumStat]['DH_SERVICETYPE'] = $reportTypeDisplay;
         $exportDataTotal['DH_SERVICEDATE'] =
         $exportData[$lastSumStat]['DH_SERVICEDATE'] = $sumStat['reportMonth'].'-'.$sumStat['reportYear'];
-        $exportDataTotal['DH_SERVICEPROF'] = HEADING_TOTAL;
+        $exportDataTotal['DH_SERVICEPROF'] = TEXT_HEADING_TOTAL;
         foreach ($sumStat as $key => $value) {
             switch ($key) {
                 case "staffPosition":
-                    $staffValue = NOT_SPECIFIED;
+                    $staffValue = TEXT_NOT_SPECIFIED;
                     foreach ($exportReportColumns as $staffString) {
                         if ($value == $staffString[0]) {
                             $staffValue = $staffString[1];
@@ -571,7 +579,7 @@ if ($reportFormat == RPT_SHOW_DATA) {
 function getStatsValue($summaryStats, $statGroup, $stffPos) {
     foreach ($summaryStats as $stat) {
         if ($stat['staffPosition'] == $stffPos) {
-            return $stat[$statGroup];
+            return (int)$stat[$statGroup];
         }
     }
     return ('');
@@ -607,7 +615,6 @@ function showDateSelect($dateArray, $reportYearArg, $reportMonthArg) {
 }
 
 // $summaryStats has the list of stats specified by the query parameters
-@mysqli_close($dbLink);
 // set charset header
 header('Content-type: text/html; charset=utf-8');
 ?>
@@ -721,6 +728,10 @@ header('Content-type: text/html; charset=utf-8');
                         }
                         $statString = number_format ( $groupTotal, 0 , TEXT_DECIMAL_POINT, TEXT_THOUSANDS_SEPARATOR );
                         echo '<td class="numbers'.($statRow[3] ? ' bold' : '').'">'.$statString.'</td>';
+                        if ($statRow[0] == TOTAL_VALUE_LINE) {
+                            // this is the total value
+                            $reportProfile['count'] = $groupTotal;
+                        }
                         echo '</tr>';
                     }
                     echo '</table>';
@@ -763,7 +774,13 @@ header('Content-type: text/html; charset=utf-8');
             </div>
         </div>
     </div>
-    </body>
 <?php
+if ($reportProfile['count'] >= 0) {
+    $reportProfile['end'] = microtime(true);
+    $reportProfile['date'] = date('Y-m-d H:i:s', floor($reportProfile['start']));
+    $reportProfile['elapsed'] = $reportProfile['end'] - $reportProfile['start'];
+    // only log actions that displayed a report
+    $logResult = logReportWorkflow ($sessionInfo, $reportProfile, $dbLink);
+}
 @mysqli_close($dbLink);
 ?>

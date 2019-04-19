@@ -274,6 +274,7 @@ function writeEntryToLog ($dbLink, $logData) {
  */
 define('WORKFLOW_TYPE_HOME','HF',false);
 define('WORKFLOW_TYPE_SUB','SF',false);
+define('WORKFLOW_TYPE_REPORT','RP',false);
 define('WORKFLOW_TYPE_LEN', 2, false); // the size of the type prefix
 define('WORKFLOW_QUERY_PARAM','workflow',false);
 define('WORKFLOW_SESSION_ARRAY','workflow',false);
@@ -426,31 +427,39 @@ function logSessionWorkflow ($sessionInfo, $filename, $step, $workflowID, $dblin
     return $wfSuccess;
 }
 
+function logReportWorkflow ($sessionInfo, $reportInfo, $dblink) {
+    $wfSuccess = true;
+    $wfLogEntry = [];
+    $wfLogEntry[0] = [];
+    $wfLogEntry[1] = [];
+    // values shared by start and end records
+    $wfLogEntry[0]['sourceModule'] = $wfLogEntry[1]['sourceModule'] = $reportInfo['report'];
+    $wfLogEntry[0]['logQueryString'] = $wfLogEntry[1]['logQueryString'] = $sessionInfo['parameters'];
+    $wfLogEntry[0]['prevPage'] = $wfLogEntry[1]['prevPage'] = '';
+    $wfLogEntry[0]['prevLink'] = $wfLogEntry[1]['prevLink'] = '';
+    $wfLogEntry[0]['requestId'] = $wfLogEntry[1]['requestId'] = '';
+    $wfLogEntry[0]['userToken'] = $wfLogEntry[1]['userToken'] = $sessionInfo['token'];
+    $wfLogEntry[0]['logClass'] = $wfLogEntry[1]['logClass'] = WORKFLOW_TYPE_REPORT;
+    $wfLogEntry[0]['wfName'] = $wfLogEntry[1]['wfName'] = basename($reportInfo['report'], '.php');
+    $wfLogEntry[0]['wfGuid'] = $wfLogEntry[1]['wfGuid'] =  getWorkflowID(WORKFLOW_TYPE_REPORT, strtoupper(basename($reportInfo['report'],'.php')));
+    $wfLogEntry[0]['activeWorkflows'] = $wfLogEntry[1]['activeWorkflows'] = '[]';
+    $wfLogEntry[0]['logBeforeData'] = $wfLogEntry[1]['logBeforeData'] = json_encode($reportInfo);
+    $wfLogEntry[0]['logAfterData'] = $wfLogEntry[1]['logAfterData'] = json_encode(array("count"=>$reportInfo['count']));
+        // values that differ between start and end
+    // start values
+    $wfLogEntry[0]['wfStep'] = 'Start';
+    $wfLogEntry[0]['wfMicrotime'] = $reportInfo['start'];
+    $wfLogEntry[0]['wfMicrotimeString'] = date('Y-m-d H:i:s', floor($reportInfo['start']));
+    $wfLogEntry[0]['logStatusCode'] = '';
+    $wfLogEntry[0]['logStatusMessage'] = '';
+    // end values
+    $wfLogEntry[1]['wfStep'] = 'Complete';
+    $wfLogEntry[1]['wfMicrotime'] = $reportInfo['end'];
+    $wfLogEntry[1]['wfMicrotimeString'] = date('Y-m-d H:i:s', floor($reportInfo['end']));
+    $wfLogEntry[1]['logStatusCode'] = '';
+    $wfLogEntry[1]['logStatusMessage'] = '';
 
-function logWorkflowStep ($sessionInfo, $filename, $step, $workflowID, $dbLink, $activeWorkflowArray = null) {
-    $currentTime = microtime(true);
-    $currentTimeString = sprintf("%06d",($currentTime - floor($currentTime)) * 1000000);
-    $timestamp= new DateTime( date('Y-m-d H:i:s.'.$currentTimeString, $currentTime) );
-
-    // see if there is some path data to record
-    $pathData = 'uninitialized';
-    if (!empty($sessionInfo['parameters']['fromLink'])) {
-        $fromLink = explode(FROM_LINK_SEP, $sessionInfo['parameters']['fromLink']);
-        if (count($fromLink) == 2) {
-            // then this is what we expect
-            $pathData = [
-                'prevPage' => $fromLink[0],
-                'prevLink' => $fromLink[1],
-                'thisPage' => basename($filename)
-            ];
-        } else {
-            $pathData = $sessionInfo['parameters']['fromLink'];
-        }
-    } else {
-        $pathData = $sessionInfo;
-    }
-
-    // get root workflow ID
+        // get root workflow ID
     $rootWorkflowID = '';
     $rootWorkflowName = '';
     if (!empty($activeWorkflowArray)) {
@@ -467,27 +476,22 @@ function logWorkflowStep ($sessionInfo, $filename, $step, $workflowID, $dbLink, 
             $rootWorkflowID = 'NO_ID';
         }
     }
+    $wfLogEntry[0]['wfHomeGuid'] = $wfLogEntry[1]['wfHomeGuid'] = $rootWorkflowID;
 
-    $workflowData = [
-        'requestID' => getenv('UNIQUE_ID'),
-        'workflowID' => $workflowID,
-        'workflowStep' => $step,
-        'timestamp' => $timestamp->format("Y-m-d H:i:s.u"),
-        'activeWorkflows' => $activeWorkflowArray
-    ];
-    $logData = createLogEntry (
-        'WORKFLOW',
-        $filename,
-        $rootWorkflowName,
-        $rootWorkflowID,
-        $userToken = $sessionInfo['token'],
-        $logQueryString = $_SERVER['QUERY_STRING'],
-        $logBeforeData = $pathData,
-        $logAfterData = json_encode($workflowData),
-        $logStatusCode = 200,
-        $logStatusMessage = 'Workflow logged successfully.');
-
-    return writeEntryToLog ($dbLink, $logData);
+    for ($wfIdx = 0; $wfIdx < 2; $wfIdx++) {
+        $logQueryString = format_object_for_SQL_insert(DB_TABLE_WFLOG, $wfLogEntry[$wfIdx]);
+        // $dbResult = @mysqli_query($dblink, $logQueryString);
+        // assert($dbResult, "Unable to write to workflow log with query: ".$logQueryString);
+        // if (!$dbResult) {
+        if (!@mysqli_query($dblink, $logQueryString)) {
+            // log an error?
+            $wfLogEntry[$wfIdx]['dbSuccess'] = $wfSuccess = false;
+            // $wfLogEntry[$wfIdx]['dbStatus'] = $dbResult;
+            $wfLogEntry[$wfIdx]['dbQuery'] = $logQueryString;
+            $wfLogEntry[$wfIdx]['dbMessage'] = @mysqli_error($dblink);
+        }
+    }
+    return $wfLogEntry;
 }
 
 function closeMatchingWorkflow($sessionInfo, $filename, $dbLink, $workflowsToMatch, $workflowStep = WORKFLOW_STEP_COMPLETE, $logData = null) {
@@ -580,7 +584,7 @@ function createNewSessionWorkflow ($sessionInfo, $filename, $workflowID, $dbLink
 
 function getWorkflowID($type, $name = null) {
     // only return a Workflow ID if a valid type was passed in.
-    if (($type == WORKFLOW_TYPE_HOME) || ($type == WORKFLOW_TYPE_SUB)) {
+    if (($type == WORKFLOW_TYPE_HOME) || ($type == WORKFLOW_TYPE_SUB)  || ($type == WORKFLOW_TYPE_REPORT)) {
         if (!empty($name)) {
             // limit name strings to 24 characters or less.
             return $type.'_'.substr($name,0,24).'_'.guidString('_');
