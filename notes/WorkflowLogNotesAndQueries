@@ -32,8 +32,8 @@ ORDER BY `wfName`;
 
 -- Report performance
 SELECT `wfGuid`,
---	`logClass`,
---	`wfName`,
+    `logClass`,
+	`wfName`,
 	`logAfterData`,
 	(CASE
 	    WHEN `logAfterData` REGEXP '^{"count":\s*[0-9]+}$'
