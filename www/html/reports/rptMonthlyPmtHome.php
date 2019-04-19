@@ -55,6 +55,13 @@ require_once './support/textFileUtils.php';
 $profileData = [];
 profileLogStart ($profileData);
 
+// always log the report time
+//   this is separate because profiling is usually only done on non-production builds
+$reportProfile = [];
+$reportProfile['start'] = microtime(true);
+$reportProfile['report'] = __FILE__;
+$reportProfile['count'] = -1;
+
 // get the current session info (if any)
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
@@ -289,6 +296,8 @@ $displayList[$daysInThisMonth + 1]['RH_WEEKDAY'] = TEXT_RH_TOTAL;
 $displayList[$daysInThisMonth + 1]['RH_PATIENT_COUNT'] = (int)$dailyPtTotal;
 $displayList[$daysInThisMonth + 1]['RH_PAYMENT_TOTAL'] = (float)$dailyPmtTotal;
 
+$reportProfile['count'] = (int)$dailyPtTotal;
+
 $displayHeader = [
     TEXT_DH_VISIT_DATE,
     TEXT_DH_VISIT_WEEKDAY,
@@ -467,6 +476,13 @@ header('Content-type: text/html; charset=utf-8');
 </div>
 </body>
 <?php
+if ($reportProfile['count'] >= 0) {
+    $reportProfile['end'] = microtime(true);
+    $reportProfile['date'] = date('Y-m-d H:i:s', floor($reportProfile['start']));
+    $reportProfile['elapsed'] = $reportProfile['end'] - $reportProfile['start'];
+    // only log actions that displayed a report
+    $logResult = logReportWorkflow ($sessionInfo, $reportProfile, $dbLink);
+}
 @mysqli_close($dbLink);
 ?>
 </html>
