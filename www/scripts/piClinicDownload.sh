@@ -122,7 +122,7 @@ then
 	if [ "$TEMP_DB_PATH" = "" ]
 	then
 		mysqldump -uCTS-user -p$PASSWORD piclinic wflog log comment session > $TEMP_LOG_PATH 
-		if [ -f $TEMP_LOG_PATH ]
+		if [  $? -eq 0  ]
 		then
 			# add it to the log archive, if it exists, otherwise create a new archive
 			if [ ! -f $TEMP_ARCHIVE ]
@@ -151,7 +151,7 @@ then
 		set -x #echo on
 	fi
 	mysqldump -uCTS-user -p$PASSWORD piclinic clinic patient textmsg visit > $TEMP_PT_PATH 
-	if [ -f $TEMP_PT_PATH ]
+	if [  $? -eq 0  ]
 	then
 		tar -cvf $TEMP_ARCHIVE -C $TEMPDIR $TEMP_DBFILE
 	else
@@ -173,7 +173,7 @@ then
 		set -x #echo on
 	fi
 	mysqldump -uCTS-user -p$PASSWORD piclinic > $TEMP_DB_PATH 
-	# archive the dump if it worked/
+	# archive the dump if it worked
 	if [ $? -eq 0 ]
 	then
 		# add it to the log archive, if it exists, otherwise create a new archive
