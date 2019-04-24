@@ -50,7 +50,7 @@
 #			hdmi_group=1
 #			hdmi_mode=16
 #			hdmi_blanking=1
-#     hdmi_drive=2
+#     		hdmi_drive=2
 #
 #		sudo shutdown -r 0
 #
@@ -264,19 +264,20 @@ sudo chown clinic /home/clinic
 #	Install the software from GitHub
 #
 cd ~
-git clone https://github.com/MercerU-TCO/piClinic piClinic
+git clone https://github.com/docsbydesign/piClinic piClinic
 #
 # create app folders
 sudo mkdir /var/local
 sudo mkdir /var/local/piclinic
-sudo mkdir /var/local/piclinic/images
+sudo mkdir /var/local/piclinic/image
 sudo mkdir /var/local/piclinic/deleted
+sudo mkdir /var/local/piclinic/downloads
 sudo chown -R www-data:www-data /var/local/piclinic
 sudo chmod -R 750 /var/local/piclinic
 #
-# DONT DO: sudo mkdir /var/log/piclinic
-# DONT DO: sudo chown -R www-data:www-data /var/log/piclinic
-# DONT DO: sudo chmod -R 750 /var/log/piclinic
+sudo mkdir /var/log/piclinic
+sudo chown -R www-data:www-data /var/log/piclinic
+sudo chmod -R 750 /var/log/piclinic
 #
 #
 echo 'Test your web server now by opening http://localhost in a browser.'
@@ -299,11 +300,12 @@ sudo mysql -uroot -pYOURPASSWORD < piclinc.sql
 sudo mysql -uroot -pYOURPASSWORD < TestUsers.sql
 #
 # copy the app files to create the web site
-sudo cp -R ~/piClinic/web/. /var/www/html
-sudo chown -R www-data:www-data /var/www/html/.
-sudo chmod -R 750 /var/www/html/.
+sudo cp -R ~/piClinic/www/* /var/www/.
+sudo chown -R www-data:www-data /var/www/*
+sudo chmod -R 750 /var/www/*
+sudo chmod -R 755 /var/www/scripts/*
 #
-# edit password(s) in dbPass.php to match the password you
+# edit password(s) in /var/www/pass/dbPass.php to match the password you
 #   put in in the create_dbuser.sql script
 #
 echo 'Edit the database password in /var/www/html/dbPass.php before running app.'
@@ -315,17 +317,17 @@ exit
 #------------------------------------
 #
 # load test patients into the database
-cd ~/piClinic/tools
+# cd ~/piClinic/tools
 # change GEN-PAT-1- to your patient ID prefix. Patients will be numbered squentially.
 #  change 100 to however many patient records you want to create
 #  the script takes about 15 minutes to add 10,000 patients and their photos
-python3 create-patients.py GEN-PAT-1- 100
+# python3 create-patients.py GEN-PAT-1- 100
 #
 # load test visits into the database
 #   change 100 to the number of days worth of data you want to create
 #   change 50 to the number of visits per day you want to create
 #
-python3 create-visits.py 100  50
+# python3 create-visits.py 100  50
 #
 # ------------------------------------------------
 #
