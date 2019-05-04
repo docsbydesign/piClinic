@@ -70,6 +70,8 @@ TEXT_CLINIC_HISTORY_ID_LABEL,Family ID,Número de historia clínica
 TEXT_CLINIC_HOME,Dashboard,Página principal
 TEXT_CLINIC_LOGIN_PAGE_TITLE,Clinic login,Iniciar sesión
 TEXT_CLINIC_REPORTS,Reports,Informes
+TEXT_CLINIC_VISIT_RETURN,Return to Visit Info,Volver al información de la visita
+TEXT_CLINIC_VISIT_RETURN_LINK,Return,Volver
 TEXT_CLOSE_VISIT,Discharge this patient,Dar de alta este paciente
 TEXT_CLOSE_VISIT_LINK,Discharge this patient,Dar de alta el paciente
 TEXT_CLOSE_VISIT_PAGE_TITLE,Discharge patient,Cerrar la visita
@@ -771,6 +773,7 @@ TEXT_VISIT_DISCHARGE_HEADING,Discharge,Dar de alta
 TEXT_VISIT_EDIT_ALL_FIELDS,Edit all fields,Actualizar todos los dato de la visita
 TEXT_VISIT_FORM_HEADING,Patient form images,Imagines de formularios del paciente
 TEXT_VISIT_ID_LABEL,ID,ID
+TEXT_VISIT_ID_PRINT_LABEL,Visit ID,ID de la visita
 TEXT_VISIT_LIST_ACTIONS,Visit actions,Acciones de la visita
 TEXT_VISIT_LIST_ACTION_DISCHARGE,Discharge,Dar de alta
 TEXT_VISIT_LIST_ACTION_EDIT,Edit,Actualizar

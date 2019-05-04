@@ -777,7 +777,15 @@ td.DiagList {
 	vertical-align: top;
 }
 
+.printOnly {
+	display: none;
+}
+
+
 @media print {
+	.printOnly {
+		display: inline;
+	}
 	.noprint {
 		display:none;
 	}
