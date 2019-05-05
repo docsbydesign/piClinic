@@ -192,10 +192,13 @@ function makePatientQueryStringFromRequestParameters ($requestParameters) {
 		,'homeCity'
 		,'homeCounty'
 		,'homeState'
-		,'ContactPhone'
-		,'ContactAltPhone'
-		,'KnownAllergies'
-		,'CurrentMedications'
+		,'contactPhone'
+		,'contactAltPhone'
+		,'knownAllergies'
+		,'currentMedications'
+        ,'responsibleParty'
+        ,'maritalStatus'
+        ,'profession'
 	);
 	foreach ($stringFields as $fieldName) {
 		if (isset($patientIn[$fieldName])) {

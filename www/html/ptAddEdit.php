@@ -133,7 +133,10 @@ if (empty($patientData)){
 		,'contactAltPhone'
 		,'knownAllergies'
 		,'currentMedications'
-	);
+        ,'responsibleParty'
+        ,'maritalStatus'
+        ,'profession'
+    );
 	foreach ($queryParamFields as $fieldName) {
 		if (isset($requestData[$fieldName])) {
 			$patientData[$fieldName] = $requestData[$fieldName];
@@ -234,6 +237,20 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 					<input type="text" id="newpreferredLanguage" name="preferredLanguage" 
 						value="<?php if (!empty($patientData['preferredLanguage'])) {echo $patientData['preferredLanguage'];} ?>" placeholder="<?= TEXT_PATIENT_NEW_PREFERREDLANGUAGE_PLACEHOLDER ?>" maxlength="255">
 			</p>
+            <p>
+                <label class="close"><?= TEXT_PATIENT_NEW_MARITAL_STATUS_LABEL ?>:</label>
+                <select id="newMaritalStatus" name="maritalStatus">
+                    <option value="" <?= (empty($patientData['maritalStatus']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
+                    <option value="Married" <?= ((!empty($patientData['maritalStatus']) && $patientData['maritalStatus'] == 'Married') ? 'selected' : '' ) ?>><?= TEXT_MARRIED_OPTION ?></option>
+                    <option value="NotMarried" <?= ((!empty($patientData['maritalStatus']) && $patientData['maritalStatus'] == 'NotMarried') ? 'selected' : '' ) ?>><?= TEXT_NOT_MARRIED_OPTION ?></option>
+                </select>&nbsp;&nbsp;
+                <label class="close"><?= TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_LABEL ?>:</label>
+                <input type="text" id="newresponsibleParty" name="responsibleParty"
+                       value="<?php if (!empty($patientData['responsibleParty'])) {echo $patientData['responsibleParty'];} ?>" placeholder="<?= TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_PLACEHOLDER ?>" maxlength="255">
+                <label class="close"><?= TEXT_PATIENT_NEW_PROFESSION_LABEL ?>:</label>
+                <input type="text" id="newprofession" name="profession"
+                       value="<?php if (!empty($patientData['profession'])) {echo $patientData['profession'];} ?>" placeholder="<?= TEXT_PATIENT_NEW_PROFESSION_PLACEHOLDER ?>" maxlength="255">
+            </p>
 			<p>
 				<label><?= TEXT_PATIENT_KNOWN_ALLERGIES_LABEL ?>:</label><br>
 				<?php 

@@ -328,6 +328,9 @@ TEXT_LOOKUP_PATIENT_LINK,Search for patient,Buscar el paciente
 TEXT_LT_1MO_N,Less than 1 mon.-1st visit,Menores de 1 mes de la primera vez
 TEXT_LT_1MO_S,Less than 1 mon.-subsequent,Menores de 1 mes subsiguiente 
 TEXT_LT_5YR,Less than 5 years,Menores de 5 años
+TEXT_MARITAL_STATUS_LABEL,Marital status,Estado civil
+TEXT_MARITAL_STATUS_NOT_SPECIFIED,(Not specified),(No especificado)
+TEXT_MARRIED_OPTION,Married,Casado/a
 TEXT_MESSAGE_ACCESS_FAILURE,"You do not have access to the last page.<br>To view that page, log in with a different username.","No tiene permiso para ver la última página. Para verla, iniciar una sesión con otro usuario."
 TEXT_MESSAGE_BACKUP_FAIL,Unable to create backup file,No pudo crear archivo para descargar
 TEXT_MESSAGE_DATABASE_OPEN_ERROR,Server Error - Database not opened.,Error con el servidor. El base de datos no abrió.
@@ -369,6 +372,7 @@ TEXT_NEIGHBORHOOD_LABEL,Neighborhood,Localidad
 TEXT_NEW_PATIENT_HEADING,Add new patient,Agregar paciente nuevo
 TEXT_NEW_STAFF_HEADING,Add new staff member to piClinic,Agrega una persona nueva al sistema piClinic
 TEXT_NEW_VISIT_PAGE_TITLE,Admit patient,Abre una visita nueva para el paciente
+TEXT_NOT_MARRIED_OPTION,Not married,Soltero/a
 TEXT_NOT_SPECIFIED,Not specified,No especificada
 TEXT_NO_COMMENT_RECORDS,No comments,No hay comentarios
 TEXT_NO_LOG_DATA,No data in this log file.,Este registro no tiene datos.
@@ -449,6 +453,7 @@ TEXT_PATIENT_NEW_COUNTY_PLACEHOLDER,County,Condado
 TEXT_PATIENT_NEW_FAMILYID_PLACEHOLDER,Family ID,ID de la carpeta familiar
 TEXT_PATIENT_NEW_HOMEADDRESS1_PLACEHOLDER,Home address,Dirección de la casa
 TEXT_PATIENT_NEW_HOMEADDRESS2_PLACEHOLDER,Optional address info,Dirección adicional
+TEXT_PATIENT_NEW_MARITAL_STATUS_LABEL,Marital status,Estado civil
 TEXT_PATIENT_NEW_NAMEFIRST_PLACEHOLDER,First name,Primer nombre
 TEXT_PATIENT_NEW_NAMELAST2_PLACEHOLDER,Second last name,Segundo apellido
 TEXT_PATIENT_NEW_NAMELAST_PLACEHOLDER,Last name,Apellido
@@ -458,6 +463,10 @@ TEXT_PATIENT_NEW_ORGAN_DONOR_LABEL,Organ donor?,¿Donante de órganos?
 TEXT_PATIENT_NEW_PAGE_TITLE,New Patient,Nuevo Paciente
 TEXT_PATIENT_NEW_PREFERREDLANGUAGE_LABEL,Preferred language,Idioma preferido
 TEXT_PATIENT_NEW_PREFERREDLANGUAGE_PLACEHOLDER,Preferred language,Idioma preferido
+TEXT_PATIENT_NEW_PROFESSION_LABEL,Profession,Profesión
+TEXT_PATIENT_NEW_PROFESSION_PLACEHOLDER,Enter the patient\'s profession,Entrar la profesión del paciente
+TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_LABEL,Responsible person,Encargado/a
+TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_PLACEHOLDER,Enter the name of the person responsbile for the patient,Entrar el nombre del encargado
 TEXT_PATIENT_NEW_STATE_PLACEHOLDER,State,Departamento
 TEXT_PATIENT_NEW_SUBMIT_BUTTON,Add new patient,Agregar paciente nuevo
 TEXT_PATIENT_NOT_FOUND,The specified patient was not found,No encontró el paciente especificada
@@ -505,6 +514,7 @@ TEXT_POS_NURSE_AID,Nurse: Aid,Enfermera: Auxiliar
 TEXT_POS_NURSE_PRO,Nurse: Professional,Enfermera: Profesional
 TEXT_PREFERREDLANGUAGE_LABEL,Preferred language,Idioma preferido
 TEXT_PREFERREDLANGUAGE_NOT_SPECIFIED,(not specified),(no está especificado)
+TEXT_PROFESSION_LABEL,Profession,Profesión
 TEXT_PROFILE_TABLE_EVENT_DURATION,Event duration (mS),duración del evento (mS)
 TEXT_PROFILE_TABLE_EVENT_TIMESTAMP,Event time (UNIX),Tiempo del evento (UNIX)
 TEXT_PROFILE_TABLE_FILENAME,File,Archivo
@@ -602,6 +612,8 @@ TEXT_REPORT_WEEKDAY_7,Sunday,Domingo
 TEXT_REPORT_WEEKDAY_LABEL,Day of the week,Día de la semana
 TEXT_REPORT_YEAR_LABEL,Year,Año
 TEXT_REPORT_YEAR_PLACEHOLDER,Report year (YYYY),Año del informe(AAAA)
+TEXT_RESPONSIBLE_PARTY_LABEL,Responsbile Person,Encargado/a
+TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED,(Not specified),(No especificado)
 TEXT_RETURN_TO_SEARCH_LINK,Search again,Buscar de nuevo
 TEXT_RETURN_VISIT_SELECT,No,Subsiguiente
 TEXT_RETURN_VISIT_TEXT,No,Subsiguiente
@@ -747,6 +759,7 @@ TEXT_STAFF_USERNAME_LABEL,Username/Password,Usuario/Contraseña
 TEXT_STAFF_USERNAME_PLACEHOLDER,A unique username,Un usuario unico
 TEXT_STATE_LABEL,State,Departamento
 TEXT_TABLE_REPORT_DOM_HEADER,Day of month,Día del mes
+TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED,(Not specified),(No especificado)
 TEXT_THOUSANDS_SEPARATOR,",","."
 TEXT_TYPE_LABEL,Service type,Servicio de atención
 TEXT_USERNAME_NOT_ACTIVE,Inactive username,Usuario inactivo

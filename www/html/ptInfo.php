@@ -269,6 +269,18 @@ function writeTopicMenu ($sessionInfo) {
 						<p><label><?= TEXT_BIRTHDATE_LABEL ?>:</label> <?= date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($patientData['birthDate'])) ?>&nbsp;(<?= formatAgeFromBirthdate ($patientData['birthDate'], time(), TEXT_YMD_AGE_YEARS, TEXT_YMD_AGE_MONTHS, TEXT_YMD_AGE_DAYS) ?>) &nbsp;&nbsp;
 						</p>
 					</div>
+                    <div class="dataBlock">
+                        <p><label><?= TEXT_MARITAL_STATUS_LABEL ?>:</label><span<?= (empty($patientData['maritalStatus']) ? ' class="inactive"' : '') ?>>
+							<?= (!empty($patientData['maritalStatus']) ? $patientData['maritalStatus'] : TEXT_MARITAL_STATUS_NOT_SPECIFIED )?></span></p>
+                    </div>
+                    <div class="dataBlock">
+                        <p><label><?= TEXT_RESPONSIBLE_PARTY_LABEL ?>:</label><span<?= (empty($patientData['responsibleParty']) ? ' class="inactive"' : '') ?>>
+							<?= (!empty($patientData['responsibleParty']) ? $patientData['responsibleParty'] : TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED )?></span></p>
+                    </div>
+                    <div class="dataBlock">
+                        <p><label><?= TEXT_PROFESSION_LABEL ?>:</label><span<?= (empty($patientData['profession']) ? ' class="inactive"' : '') ?>>
+							<?= (!empty($patientData['profession']) ? $patientData['profession'] : TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED )?></span></p>
+                    </div>
 					<div class="dataBlock">
 						<label><?= TEXT_PATIENT_ALLERGY_LIST_HEAD ?>:</label>
 						<?php

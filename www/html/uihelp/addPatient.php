@@ -135,9 +135,12 @@ $ptFields = [
   'contactAltPhone',
   'bloodType',
   'organDonor',
-  'PreferredLanguage'
+  'preferredLanguage'
 //  'knownAllergies',	// formatted below
 //  'currentMedications'	// formatted below
+  ,'responsibleParty'
+  ,'maritalStatus'
+  ,'profession'
 ];
 
 foreach ($ptFields as $field) {
