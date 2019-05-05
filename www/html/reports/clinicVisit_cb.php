@@ -157,40 +157,49 @@ function writeTopicMenu ($sessionInfo) {
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 	<?php require ('../uiErrorMessage.php') ?>
     <?= piClinicAppMenu(null,$sessionInfo,  $pageLanguage, __FILE__) ?>
-	<div class="pageBody">
+	<div class="pageBody portraitReport">
 	<?= writeTopicMenu($sessionInfo) ?>
     <div class="logoBlock printOnly"><p>Logo Here</p></div>
 	<div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
-        <div class="infoBlock">
-            <img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="../code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44">
+        <div class="infoBlock" style="width: 100%;">
+            <div style="float: left;">
+                <img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="../code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44">
+            </div>
+            <div style="float: right;">
+                <label class="close"><?= TEXT_VISIT_ID_PRINT_LABEL ?>:</label><span class="idInHeading"><?= $visitInfo['patientVisitID'] ?></span><br>
+                <label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?>
+            </div>
         </div>
-        <div class="infoBlock">
-            <p><label class="close"><?= TEXT_VISIT_ID_PRINT_LABEL ?>:</label><span class="idInHeading"><?= $visitInfo['patientVisitID'] ?></span></p>
-            <p><label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?></p>
-        </div>
-		<div class="infoBlock">
-			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
-				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span>
-                <span class="idInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span>
-            </h1>
-            <p><label><?= TEXT_BIRTHDATE_LABEL ?>:</label>&nbsp;<?= date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($visitInfo['birthDate'])) ?>&nbsp;(<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>)&nbsp;&nbsp;&nbsp;
-			</p>
+        <div style="float: left; width: 100%; height: 1px; margin-right: 2.0em; border-top: 1px solid #ddd; padding-top: 4px;"></div>
+		<div class="infoBlock" style="width: 100%;">
+            <div style="float: left;"
+                <h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
+                    <span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span>
+                    <span class="idInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span><br>
+                </h1>
+                <label class="close"><?= TEXT_FIRST_VISIT_LABEL ?>:</label>
+                <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'YES') ? TEXT_FIRST_VISIT_TEXT : "" ) ?>
+                <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'NO') ? TEXT_RETURN_VISIT_TEXT : "" ) ?>
+            </div>
+            <div style="float: right;">
+                <label class="close"><?= TEXT_BIRTHDATE_LABEL ?>:</label><?= date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($visitInfo['birthDate'])) ?>&nbsp;(<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>)
+            </div>
 		</div>
+        <div class="infoBlock" style="width: 100%; border-top: 1px solid #ddd; padding-top: 4px;">
+            <div style="float: left;">
+            <label class="close">Address:</label><br>
+            <p style="margin-left: 1.0em;"><?= (!empty($visitInfo['patientHomeAddress1']) ? $visitInfo['patientHomeAddress1'].'<br>' : '') ?>
+            <?= (!empty($visitInfo['patientHomeAddress2']) ? $visitInfo['patientHomeAddress2'].'<br>' : '') ?>
+            <?= (!empty($visitInfo['patientHomeNeighborhood']) ? $visitInfo['patientHomeNeighborhood'].'<br>' : '') ?>
+            <?= (!empty($visitInfo['patientHomeCity']) ? $visitInfo['patientHomeCity'].'<br>' : '') ?>
+            <?= (!empty($visitInfo['patientHomeState']) ? $visitInfo['patientHomeState'].'<br>' : '') ?>
+            </p>
+        </div>
 	</div>
 	<div style="clear: both;"></div>
 	<div id="PatientVisitView" class="<?= (empty($visitRecord) ? 'hideDiv' : '') ?>">
 		<div id="PatientVisitDataView">
 			<div id="PatientVisitDetails">
-				<h2><?= TEXT_VISIT_VISIT_HEADING ?></h2>
-				<div class="indent1">
-					<p><label class="close"><?= TEXT_FIRST_VISIT_LABEL ?>:</label>
-							<?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'YES') ? TEXT_FIRST_VISIT_TEXT : "" ) ?>
-							<?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'NO') ? TEXT_RETURN_VISIT_TEXT : "" ) ?>
-					</p>
-					</div>
-					<div <?= ($visitInfo['visitStatus'] == 'Open' ? 'class="currentVisitList"' : '') ?>>
-						<p><label class="close"><?= TEXT_VISIT_STATUS_LABEL ?>:</label>&nbsp;<?= ($visitInfo['visitStatus'] == 'Open' ? TEXT_VISIT_STATUS_OPEN : ($visitInfo['visitStatus'] == 'Closed' ? TEXT_VISIT_STATUS_CLOSED : $visitInfo['visitStatus'] )) ?></p>
-					</div>
 				</div>
 				<div style="clear: both;"></div>
 				<div class="infoBlock">
