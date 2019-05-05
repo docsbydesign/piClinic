@@ -207,6 +207,12 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 					(!empty($patientData['birthDate']) ? date(TEXT_BIRTHDAY_DAY_FORMAT, strtotime($patientData['birthDate'])) : ''),
 					(!empty($patientData['birthDate']) ? date(TEXT_BIRTHDAY_YEAR_FORMAT, strtotime($patientData['birthDate'])) : '' )
 				) ?>
+                <label class="close"><?= TEXT_NEXT_VAX_DATE_INPUT_LABEL.' '.TEXT_NEXT_VAX_DATE_FORMAT_LABEL ?>:</label>&nbsp;
+                <?= outputDateInputFields (TEXT_NEXT_VAX_DATE_FORMAT, 'nextVaccinationDate',
+                    (!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_MONTH_FORMAT, strtotime($patientData['nextVaccinationDate'])) : ''),
+                    (!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_DAY_FORMAT, strtotime($patientData['nextVaccinationDate'])) : ''),
+                    (!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_YEAR_FORMAT, strtotime($patientData['nextVaccinationDate'])) : '' )
+                ) ?>
 			</p>
 			<p><label class="close"><?= TEXT_PATIENT_NEW_BLOODTYPE_LABEL ?>:</label>&nbsp;
 				<select id="newbloodType" name="bloodType">
