@@ -68,6 +68,13 @@ function getUiSessionInfo() {
     if (!empty($_SESSION)) {
         $sessionInfo = $_SESSION;
     }
+    // make sure we still have the required values
+    if(empty($sessionInfo['sessionLanguage'])) {
+        $sessionInfo['sessionLanguage'] = UI_DEFAULT_LANGUAGE;
+    }
+    if(empty($sessionInfo['pageLanguage'])) {
+        $sessionInfo['pageLanguage'] = UI_DEFAULT_LANGUAGE;
+    }
     $sessionInfo['parameters'] = readRequestData();
     $sessionInfo['pageLanguage'] = getUiLanguage($sessionInfo['parameters']);
     return $sessionInfo;

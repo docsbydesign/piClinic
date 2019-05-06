@@ -324,7 +324,7 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 					</div>
 				</div>
 				<div style="clear: both;"></div>
-				<div class="infoBlock fullWidth">
+				<div class="infoBlock ninetyWidth">
 					<p class="textAlignRight"><label class="close"><?= TEXT_VISIT_DELETED_SELECT_LABEL ?>:</label>
 						<select id="DeletedSelect" name="deleted">
 							<option value="0" <?= ($visitInfo['deleted'] == 0 ? "selected" : "" ) ?>><?= TEXT_NO_OPTION ?></option>

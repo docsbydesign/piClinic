@@ -35,6 +35,7 @@ TEXT_ADMIN_SHOW_COMMENTS_TITLE,User comments,Comentarios de los usuarios
 TEXT_AGE_DAYS_LABEL,Days,Días
 TEXT_AGE_MONTHS_LABEL,Mos,Meses
 TEXT_AGE_YEARS_LABEL,Yrs,Años
+TEXT_ASSESSMENT_NOTES_LABEL,Assessment,Recetario
 TEXT_ASSIGNED_LABEL,Doctor,Doctor(a)
 TEXT_ATA_LEFT_TITLE,"Secretary of Health<br>Department of Statistics<br>Honduras, Central America","Secretaría de Salud<br>Departamento de Estadística<br>Honduras, Centro América"
 TEXT_BIRTHDATE_FORMAT,M-D-Y,D-M-Y
@@ -170,6 +171,7 @@ TEXT_EDIT_PATIENT_HEADING,Update patient info,Actualizar la información del pac
 TEXT_EDIT_STAFF_HEADING,Update staff information,Actualizar los datos personal
 TEXT_EDIT_VISIT_IMAGE,Edit,Actualizar
 TEXT_EDIT_VISIT_INFO,Edit this visit,Actualizar esta visita
+TEXT_EXAM_NOTES_LABEL,Physical Examination,Examen Fisico
 TEXT_EXPORT_CSV_BUTTON,Export as CSV,Descargar como CSV
 TEXT_EXPORT_CSV_BUTTON_TEXT,"Export the report to a CSV file to open as a spreadsheet. This format opens in Excel automatically, but some letters might not appear correctly.","Descarga el informe como un archivo CSV para abrirlo como una hoja de cálculo. Excel puede abrir este formato automáticamente, pero no muestra todas las letras correctamente."
 TEXT_EXPORT_TSV_BUTTON,Export as TSV,Descargar como TSV
@@ -791,7 +793,14 @@ TEXT_VISIT_DELETED_TEXT,Deleted,Borrada
 TEXT_VISIT_DETAILS_PAGE_TITLE,Patient Visit Details,Detalles de la visita
 TEXT_VISIT_DISCHARGE_HEADING,Discharge,Dar de alta
 TEXT_VISIT_EDIT_ALL_FIELDS,Edit all fields,Actualizar todos los dato de la visita
+TEXT_VISIT_FORM_BP_LABEL,B.P.,P.A.
+TEXT_VISIT_FORM_BS_LABEL,RBS/FBS,RBS/FBS
+TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL,N&nbsp;|&nbsp;S&nbsp;,N&nbsp;|&nbsp;S&nbsp;
 TEXT_VISIT_FORM_HEADING,Patient form images,Imagines de formularios del paciente
+TEXT_VISIT_FORM_HEIGHT_LABEL,Height,Estatura
+TEXT_VISIT_FORM_PULSE_LABEL,Pulse,Pulso
+TEXT_VISIT_FORM_TEMP_LABEL,Temp.,Temp.
+TEXT_VISIT_FORM_WEIGHT_LABEL,Weight,Peso
 TEXT_VISIT_ID_LABEL,ID,ID
 TEXT_VISIT_ID_PRINT_LABEL,Visit ID,ID de la visita
 TEXT_VISIT_LIST_ACTIONS,Visit actions,Acciones de la visita

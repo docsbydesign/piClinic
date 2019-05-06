@@ -56,7 +56,7 @@ h2 {
 	font-weight: normal;	
 }
 .indent1 {
-	margin-left: 1.0em;
+	margin-left: 1.0em !important;
 }
 ul.optionList {
 	font-size: 100%;
@@ -362,6 +362,13 @@ div.infoBlock {
 	float: left;
 	padding: 0 2.0em 0 0;
 }
+div.infoBlockRight {
+	float: right;
+	padding: 0 2.0em 0 0;
+}
+div.clearFloat {
+	clear: both;
+}
 div.oneLineTopSpace {
 	margin-top: 14pt;
 }
@@ -382,7 +389,15 @@ div.nameBlock {
 div.nameBlock h1 {
 	margin-top: 0;
 }
-
+div.threeCm {
+	min-height: 3.0cm;
+}
+div.fiveCm {
+	min-height: 5.0cm;
+}
+div.sixCm {
+	min-height: 6.0cm;
+}
 div.showDiv {
 	display: block;	
 	width: 20.0em;
@@ -450,8 +465,11 @@ input.diagnostic {
 input.paymentEdit {
 	text-align: right;
 }
+.ninetyWidth {
+	width: 90%;
+}
 .fullWidth {
-	width: 90%
+	width: 100%;
 }
 input.wide {
 	width: 30.0em;
@@ -496,11 +514,24 @@ div.legalReport {
 div.ledgerLandscapeReport {
 	width: 2250px;
 }
-
+div.leftDiv {
+	float: left;
+}
+div.rightDiv {
+	float: right;
+}
 div.newPage {
 	page-break-before: always;
 }
 
+div.hrDiv {
+	float: left;
+	width: 100%;
+	height: 1px;
+	margin-right: 2.0em;
+	border-top: 1px solid #ddd;
+	padding-top: 4px;
+}
 table.report {
 	border-collapse: collapse;
     border-spacing: 0;
@@ -781,6 +812,21 @@ td.DiagList {
 	display: none;
 }
 
+table.fullPortrait {
+	width: 800px;
+}
+
+th.sixCol,
+td.sixCol {
+	width: 16%;
+	text-align: left;
+}
+
+th.threeCol,
+td.threeCol {
+	width: 33%;
+	text-align: left;
+}
 
 @media print {
 	.printOnly {
