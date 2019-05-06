@@ -223,10 +223,12 @@ function writeTopicMenu ($sessionInfo) {
                         if (empty($visitInfo['patientKnownAllergies'])) {
                             $allergyList = array(TEXT_PATIENT_NO_KNOWN_ALLERGIES);
                         } else {
+                            // there's a list so explode it into the array
                             $allergyList = explode( '|', $visitInfo['patientKnownAllergies']);
                         }
                         foreach ($allergyList as $allergy) {
-                            echo ('<li>'.$allergy.'</li>');                        }
+                            echo ('<li>'.$allergy.'</li>');
+                        }
                         ?>
                     </ul>
                 </div>
@@ -237,6 +239,7 @@ function writeTopicMenu ($sessionInfo) {
                         if (empty($visitInfo['patientCurrentMedications'])) {
                             $medList = array(TEXT_PATIENT_NO_CURRENT_MEDS);
                         } else {
+                            // there's a list so explode it into the array
                             $medList = explode( '|', $visitInfo['patientCurrentMedications']);
                         }
                         foreach ($medList as $med) {
@@ -297,106 +300,7 @@ function writeTopicMenu ($sessionInfo) {
                 <label><?= TEXT_ASSESSMENT_NOTES_LABEL ?>:</label>
             </div>
         </div>
-        <div class="hideDiv">
-            <div class="infoBlock">
-                    <p class="indent1"><?= $visitInfo['patient'] ?></p>
-					<div class="indent1">
-						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_DATE_TIME_IN_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?>
-							&nbsp;&nbsp;&nbsp;<label class="close"><?= TEXT_VISIT_TYPE_LABEL ?>:</label>&nbsp;<?= showVisitTypeString($visitInfo['visitType'], $visitTypes) ?></p>
-						</div>
-						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_REFERRED_FROM_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['referredFrom']) ? $visitInfo['referredFrom'] : '<span class="inactive">'.TEXT_REFERRAL_BLANK.'</span>') ?></p>
-						</div>
-						<div class="dataBlock">							
-							<p><label class="close"><?= TEXT_COMPLAINT_PRIMARY_LABEL ?>:</label>&nbsp;<?= (isset($visitInfo['primaryComplaint']) ? $visitInfo['primaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
-						</div>
-						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?>:</label>&nbsp;<?= (isset($visitInfo['secondaryComplaint']) ? $visitInfo['secondaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
-						</div>
-                        <div class="dataBlock">
-                            <p><label class="close"><?= TEXT_PAYMENT_LABEL ?>:</label>
-                                <?= (!empty($visitInfo['payment']) ? $visitInfo['payment'] : '<span class="inactive">0</span>' ) ?>&nbsp;<?= TEXT_PAYMENT_CURRENCY ?>
-                            </p>
-                        </div>
-						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label>&nbsp;<?= $visitInfo['staffName'] ?></p>
-						</div>
-					</div>
-				</div>
-				<div class="infoBlock">
-					<h2><?= TEXT_VISIT_DISCHARGE_HEADING ?></h2>
-					<div class="indent1">
-						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_DATE_TIME_OUT_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['dateTimeOut']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeOut'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?></p>
-						</div>
-						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_DIAGNOSIS1_LABEL ?>:</label>&nbsp;<?= conditionText($visitInfo['condition1']) ?>
-                                &nbsp;&nbsp;&nbsp;&nbsp;<a class="moreInfo" href="http://192.169.15.134/helpHome.php?topic=icd" title="<?= TEXT_ICD_LINK_TITLE ?>"><?= TEXT_ICD_LINK_TEXT ?></a>
-							<br>
-								<?php
-									$displayText = '';
-									$displayClass = '';
-									if (!empty($visitInfo['diagnosis1'])) {
-										$displayText = getIcdDescription ($dbLink, $visitInfo['diagnosis1'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT);
-										if ($displayText == $visitInfo['diagnosis1']) {
-											$displayClass = 'rawcodevalue';
-										}
-									} else {
-										$displayText = TEXT_DIAGNOSIS_BLANK;
-										$displayClass = 'inactive';
-									}
-									echo ('<span class="'.$displayClass.'">'.$displayText.'</span>');
-								?>
-							</p>
-						</div>
-						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_DIAGNOSIS2_LABEL ?>:</label>&nbsp;<?= conditionText($visitInfo['condition2']) ?>
-                                &nbsp;&nbsp;&nbsp;&nbsp;<a class="moreInfo" href="http://192.169.15.134/helpHome.php?topic=icd" title="<?= TEXT_ICD_LINK_TITLE ?>"><?= TEXT_ICD_LINK_TEXT ?></a>
-							<br>
-								<?php
-									$displayText = '';
-									$displayClass = '';
-									if (!empty($visitInfo['diagnosis2'])) {
-										$displayText = getIcdDescription ($dbLink, $visitInfo['diagnosis2'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT);
-										if ($displayText == $visitInfo['diagnosis2']) {
-											$displayClass = 'rawcodevalue';
-										}
-									} else {
-										$displayText = TEXT_DIAGNOSIS_BLANK;
-										$displayClass = 'inactive';
-									}
-									echo ('<span class="'.$displayClass.'">'.$displayText.'</span>');
-								?>
-							</p>
-						</div>
-						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_DIAGNOSIS3_LABEL ?>:</label>&nbsp;<?= conditionText($visitInfo['condition3']) ?>
-                                &nbsp;&nbsp;&nbsp;&nbsp;<a class="moreInfo" href="http://192.169.15.134/helpHome.php?topic=icd" title="<?= TEXT_ICD_LINK_TITLE ?>"><?= TEXT_ICD_LINK_TEXT ?></a>
-							<br>
-								<?php
-									$displayText = 'text';
-									$displayClass = '';
-									if (!empty($visitInfo['diagnosis3'])) {
-										$displayText = getIcdDescription ($dbLink, $visitInfo['diagnosis3'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT);
-										if ($displayText == $visitInfo['diagnosis3']) {
-											$displayClass = 'rawcodevalue';
-										}
-									} else {
-										$displayText = TEXT_DIAGNOSIS_BLANK;
-										$displayClass = 'inactive';
-									}
-									echo ('<span class="'.$displayClass.'">'.$displayText.'</span>');
-								?>
-							</p>
-						</div>
-						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_REFERRED_TO_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['referredTo']) ? $visitInfo['referredTo'] : '<span class="inactive">'.TEXT_REFERRAL_BLANK.'</span>') ?></p>
-						</div>
-					</div>
-				</div>
-			</div>
-            <div class="clearFloat"></div>
-        </div>
+        <div class="clearFloat"></div>
+    </div>
 </body>
 <?php @mysqli_close($dbLink); ?>
