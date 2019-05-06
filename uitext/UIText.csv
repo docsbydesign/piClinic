@@ -373,6 +373,7 @@ TEXT_NEW_PATIENT_HEADING,Add new patient,Agregar paciente nuevo
 TEXT_NEW_STAFF_HEADING,Add new staff member to piClinic,Agrega una persona nueva al sistema piClinic
 TEXT_NEW_VISIT_PAGE_TITLE,Admit patient,Abre una visita nueva para el paciente
 TEXT_NEXT_VAX_DATE_DAY_FORMAT,d,d
+TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT,m/d/Y,d-m-Y
 TEXT_NEXT_VAX_DATE_FORMAT,M-D-Y,D-M-Y
 TEXT_NEXT_VAX_DATE_FORMAT_LABEL,(M-D-Y),(D-M-A)
 TEXT_NEXT_VAX_DATE_INPUT_LABEL,Next vaccination date,La próxima fecha de vacunación
