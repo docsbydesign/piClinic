@@ -47,6 +47,7 @@ $requestData = $sessionInfo['parameters'];
 // load the strings for the page language
 //	assumes $pageLanguage contains a valid language
 require_once ('./uitext/ptInfoText.php');
+require_once ('./patientUiStrings.php');
 
 // open session variables and check for access to this page
 $pageAccessRequired = PAGE_ACCESS_STAFF;
@@ -270,12 +271,12 @@ function writeTopicMenu ($sessionInfo) {
 						</p>
 					</div>
                     <div class="dataBlock">
-                        <p><label><?= TEXT_NEXT_VAX_DATE_INPUT_LABEL ?>:</label> <span<?= (strtotime($patientData['nextVaccinationDate']) <= time() ? ' style="color:white; background-color: #F00;"' : '') ?>><?= date(TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT, strtotime($patientData['nextVaccinationDate'])) ?></span>
+                        <p><label><?= TEXT_NEXT_VAX_DATE_INPUT_LABEL ?>:</label> <span <?= (!empty($patientData['nextVaccinationDate']) && (strtotime($patientData['nextVaccinationDate']) <= time()) ? ' style="color:white; background-color: #F00;"' : '') ?>><?= (!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT, strtotime($patientData['nextVaccinationDate'])) : TEXT_NOT_SPECIFIED )?></span>
                         </p>
                     </div>
                     <div class="dataBlock">
                         <p><label><?= TEXT_MARITAL_STATUS_LABEL ?>:</label><span<?= (empty($patientData['maritalStatus']) ? ' class="inactive"' : '') ?>>
-							<?= (!empty($patientData['maritalStatus']) ? $patientData['maritalStatus'] : TEXT_MARITAL_STATUS_NOT_SPECIFIED )?></span></p>
+							<?= (!empty($patientData['maritalStatus']) ? $maritalStatusString[$patientData['maritalStatus']] : TEXT_MARITAL_STATUS_NOT_SPECIFIED )?></span></p>
                     </div>
                     <div class="dataBlock">
                         <p><label><?= TEXT_RESPONSIBLE_PARTY_LABEL ?>:</label><span<?= (empty($patientData['responsibleParty']) ? ' class="inactive"' : '') ?>>

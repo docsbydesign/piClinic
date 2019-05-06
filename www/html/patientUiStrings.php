@@ -20,18 +20,10 @@
  *
  */
 /* These strings are used in the UI and must be included after the language specific strings */
-/* Define staff position values */
-require_once dirname(__FILE__).'/./uitext/staffUiStringsText.php';
-define('MEDICALSTAFF',1,false);
-define('NONMEDICALSTAFF',0,false);
-$staffPositions = [
-    ["Nurse", TEXT_STAFF_POSITION_OPTION_NURSE,MEDICALSTAFF],
-    ["NursesAid", TEXT_STAFF_POSITION_OPTION_NURSESAID,MEDICALSTAFF],
-    ["DoctorGeneral", TEXT_STAFF_POSITION_OPTION_DOCTORGENERAL,MEDICALSTAFF],
-    ["DoctorSpecialist", TEXT_STAFF_POSITION_OPTION_DOCTORSPECIALIST,MEDICALSTAFF],
-    ["NursingStudent", TEXT_STAFF_POSITION_OPTION_NURSINGSTUDENT,MEDICALSTAFF],
-    ["MedicalStudent", TEXT_STAFF_POSITION_OPTION_MEDICALSTUDENT,MEDICALSTAFF],
-    ["ClinicStaff", TEXT_STAFF_POSITION_OPTION_CLINICSTAFF,NONMEDICALSTAFF],
-    ["Other", TEXT_STAFF_POSITION_OPTION_OTHER,NONMEDICALSTAFF]
+/* Define localized marital status values */
+require_once dirname(__FILE__).'/./uitext/patientUiStringsText.php';
+$maritalStatusString = [
+    "Married" => TEXT_MARRIED_OPTION,
+    "NotMarried" => TEXT_NOT_MARRIED_OPTION
 ];
 ?>
