@@ -211,7 +211,8 @@ function writeTopicMenu ($cancelLink, $ata=false) {
                 <?= outputDateInputFields (TEXT_NEXT_VAX_DATE_FORMAT, 'nextVaccinationDate',
                     (!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_MONTH_FORMAT, strtotime($patientData['nextVaccinationDate'])) : ''),
                     (!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_DAY_FORMAT, strtotime($patientData['nextVaccinationDate'])) : ''),
-                    (!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_YEAR_FORMAT, strtotime($patientData['nextVaccinationDate'])) : '' )
+                    (!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_YEAR_FORMAT, strtotime($patientData['nextVaccinationDate'])) : '' ),
+                    null, false, false
                 ) ?>
 			</p>
 			<p><label class="close"><?= TEXT_PATIENT_NEW_BLOODTYPE_LABEL ?>:</label>&nbsp;
