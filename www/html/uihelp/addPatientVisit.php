@@ -266,7 +266,11 @@ if ($retVal['httpResponse'] == 201) {
         $formData['ata'] = true;
         $redirectUrl = makeUrlWithQueryParams('/ataVisitEdit.php', $formData);
 	} else{
-		$redirectUrl = makeUrlWithQueryParams('/ptInfo.php', ['clinicPatientID' => $retVal['data']['clinicPatientID']]);
+	    $successArgs = array(
+            'clinicPatientID' => $retVal['data']['clinicPatientID'],
+            'patientVisitID' => $retVal['data']['patientVisitID']
+        );
+		$redirectUrl = makeUrlWithQueryParams('/clinicVisitBase.php', $successArgs);
 	}
     // close any of the workflows that this completes
     closeMatchingWorkflow($sessionInfo, __FILE__, $dbLink,

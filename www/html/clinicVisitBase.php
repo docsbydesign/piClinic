@@ -33,15 +33,15 @@
 // set charset header
 header('Content-type: text/html; charset=utf-8');
 // include files
-require_once '../shared/piClinicConfig.php';
-require_once '../shared/headTag.php';
-require_once '../shared/dbUtils.php';
-require_once '../api/api_common.php';
-require_once '../shared/profile.php';
-require_once '../shared/security.php';
-require_once '../shared/ui_common.php';
-require_once '../api/patient_common.php';
-require_once '../api/visit_common.php';
+require_once './shared/piClinicConfig.php';
+require_once './shared/headTag.php';
+require_once './shared/dbUtils.php';
+require_once './api/api_common.php';
+require_once './shared/profile.php';
+require_once './shared/security.php';
+require_once './shared/ui_common.php';
+require_once './api/patient_common.php';
+require_once './api/visit_common.php';
 
 // get the current session info (if any)
 $sessionInfo = getUiSessionInfo();
@@ -50,15 +50,15 @@ $requestData = $sessionInfo['parameters'];
 $pageLanguage = $sessionInfo['pageLanguage'];
 // load the strings for the page language
 //	assumes $pageLanguage contains a valid language
-require_once ('./uitext/clinicVisitBaseText.php');
+require_once('./uitext/clinicVisitBaseText.php');
 // functions to translate Enums to localized text
-require_once ('../visitUiStrings.php');
-require_once ('../patientUiStrings.php');
+require_once('./visitUiStrings.php');
+require_once('./patientUiStrings.php');
 
 // open DB
 // open session variables and check for access to this page
 $pageAccessRequired = PAGE_ACCESS_STAFF;
-require('../uiSessionInfo.php');
+require('./uiSessionInfo.php');
 
 // open DB
 $errorUrl = makeUrlWithQueryParams('/clinicDash.php', ['msg'=>MSG_DB_OPEN_ERROR]);
@@ -156,7 +156,7 @@ function writeTopicMenu ($sessionInfo) {
 <body>
 	<?= piClinicTag(); ?>
 	<?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
-	<?php require ('../uiErrorMessage.php') ?>
+	<?php require('./uiErrorMessage.php') ?>
     <?= piClinicAppMenu(null,$sessionInfo,  $pageLanguage, __FILE__) ?>
 	<div class="pageBody portraitReport<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
         <?= writeTopicMenu($sessionInfo) ?>
