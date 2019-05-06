@@ -201,6 +201,8 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 		,['homeCity', 'patientHomeCity']
 		,['homeCounty', 'patientHomeCounty']
 		,['homeState', 'patientHomeState']
+        ,['contactPhone','patientContactPhone']
+        ,['contactAltPhone','patientContactAltPhone']
 		,['knownAllergies','patientKnownAllergies']
 		,['currentMedications', 'patientCurrentMedications']
         ,['nextVaccinationDate', 'patientNextVaccinationDate']

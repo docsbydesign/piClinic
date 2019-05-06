@@ -179,28 +179,34 @@ function writeTopicMenu ($sessionInfo) {
                     <span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span>
                     <span class="idInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span><br>
                 </h1>
-                <label class="close"><?= TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_LABEL ?></label>: <?= (!empty($visitInfo['patientResponsibleParty']) ? $visitInfo['patientResponsibleParty'] : str_repeat("_",22))  ?><br>
+                <label class="close"><?= TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_LABEL ?>:</label> <?= (!empty($visitInfo['patientResponsibleParty']) ? $visitInfo['patientResponsibleParty'] : str_repeat("_",22))  ?><br>
                 <label class="close"><?= TEXT_FIRST_VISIT_LABEL ?>:</label>
                 <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'YES') ? TEXT_FIRST_VISIT_TEXT : "" ) ?>
                 <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'NO') ? TEXT_RETURN_VISIT_TEXT : "" ) ?>
             </div>
             <div style="float: right;">
                 <label class="close"><?= TEXT_BIRTHDATE_LABEL ?>:</label><?= date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($visitInfo['birthDate'])) ?>&nbsp;(<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>)<br>
-                <label class="close"><?= TEXT_MARITAL_STATUS_LABEL ?></label>: <?= (!empty($visitInfo['patientMaritalStatus']) ? $maritalStatusString[$visitInfo['patientMaritalStatus']] : str_repeat("_",22))  ?><br>
-                <label class="close"><?= TEXT_PATIENT_NEW_PROFESSION_LABEL ?></label>: <?= (!empty($visitInfo['patientProfession']) ? $visitInfo['patientProfession'] : str_repeat("_",22))  ?>
+                <label class="close"><?= TEXT_MARITAL_STATUS_LABEL ?>:</label> <?= (!empty($visitInfo['patientMaritalStatus']) ? $maritalStatusString[$visitInfo['patientMaritalStatus']] : str_repeat("_",22))  ?><br>
+                <label class="close"><?= TEXT_PATIENT_NEW_PROFESSION_LABEL ?>:</label> <?= (!empty($visitInfo['patientProfession']) ? $visitInfo['patientProfession'] : str_repeat("_",22))  ?>
             </div>
 		</div>
         <div class="infoBlock" style="width: 100%; border-top: 1px solid #ddd; padding-top: 4px;">
             <div style="float: left;">
-            <label class="close">Address:</label><br>
-            <p style="margin-left: 1.0em;"><?= (!empty($visitInfo['patientHomeAddress1']) ? $visitInfo['patientHomeAddress1'].'<br>' : '') ?>
-            <?= (!empty($visitInfo['patientHomeAddress2']) ? $visitInfo['patientHomeAddress2'].'<br>' : '') ?>
-            <?= (!empty($visitInfo['patientHomeNeighborhood']) ? $visitInfo['patientHomeNeighborhood'].'<br>' : '') ?>
-            <?= (!empty($visitInfo['patientHomeCity']) ? $visitInfo['patientHomeCity'].'<br>' : '') ?>
-            <?= (!empty($visitInfo['patientHomeState']) ? $visitInfo['patientHomeState'].'<br>' : '') ?>
-            </p>
+                <label class="close"><?= TEXT_PATIENT_NEW_ADDRESS_LABEL ?>:</label><br>
+                <p style="margin-left: 1.0em;"><?= (!empty($visitInfo['patientHomeAddress1']) ? $visitInfo['patientHomeAddress1'].'<br>' : '') ?>
+                <?= (!empty($visitInfo['patientHomeAddress2']) ? $visitInfo['patientHomeAddress2'].'<br>' : '') ?>
+                <?= (!empty($visitInfo['patientHomeNeighborhood']) ? $visitInfo['patientHomeNeighborhood'].'<br>' : '') ?>
+                <?= (!empty($visitInfo['patientHomeCity']) ? $visitInfo['patientHomeCity'].'<br>' : '') ?>
+                <?= (!empty($visitInfo['patientHomeState']) ? $visitInfo['patientHomeState'].'<br>' : '') ?>
+                </p>
+            </div>
+            <div style="float: right;">
+                <label class="close"><?= TEXT_PATIENT_NEW_CONTACT_LABEL ?>:</label><br>
+                <p style="margin-left: 1.0em;"><?= (!empty($visitInfo['patientContactPhone']) ? $visitInfo['patientContactPhone'].'<br>' : '') ?>
+                    <?= (!empty($visitInfo['patientContactAltPhone']) ? $visitInfo['patientContactAltPhone'].'<br>' : '') ?>
+                </p>
+            </div>
         </div>
-	</div>
 	<div style="clear: both;"></div>
 	<div id="PatientVisitView" class="<?= (empty($visitRecord) ? 'hideDiv' : '') ?>">
 		<div id="PatientVisitDataView">
