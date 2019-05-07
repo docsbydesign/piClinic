@@ -222,10 +222,10 @@ function icdLookupJavaScript () {
 	 } 
 	switch ($conditionValue) {
 		case "NEWDIAG":
-			$conditionText = TEXT_CONDITION_NEW_SELECT;
+			$conditionText = TEXT_CONDITION_NEW_REPORT;
 			break;
 		case "SUBSDIAG":
-			$conditionText = TEXT_CONDITION_SUBSEQUENT_SELECT;
+			$conditionText = TEXT_CONDITION_SUBSEQUENT_REPORT;
 			break;
 		default:
 			// leave as blank placeholder

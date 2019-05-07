@@ -154,7 +154,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Date&nbsp;(mm/dd/yyyy)',false); }
+	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Report date (YYYY-MM)',false); }
 	if (!defined('TEXT_DECIMAL_POINT')) { define('TEXT_DECIMAL_POINT','.',false); }
 	if (!defined('TEXT_DIAGDATA_AGE_GROUP')) { define('TEXT_DIAGDATA_AGE_GROUP',' only for patients aged ',false); }
 	if (!defined('TEXT_DIAGDATA_COUNT_HEADING')) { define('TEXT_DIAGDATA_COUNT_HEADING','Counts these diagnoses',false); }
@@ -270,7 +270,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha&nbsp;(dd/mm/aaaa)',false); }
+	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha del informe (AAAA-MM)',false); }
 	if (!defined('TEXT_DECIMAL_POINT')) { define('TEXT_DECIMAL_POINT',',',false); }
 	if (!defined('TEXT_DIAGDATA_AGE_GROUP')) { define('TEXT_DIAGDATA_AGE_GROUP',' solo para los pacientes con edades ',false); }
 	if (!defined('TEXT_DIAGDATA_COUNT_HEADING')) { define('TEXT_DIAGDATA_COUNT_HEADING','Cuenta estos diagnosticos',false); }

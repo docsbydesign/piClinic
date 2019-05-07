@@ -175,12 +175,12 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 		<h2><?= ($pageMode == 'add' ? TEXT_NEW_PATIENT_HEADING  : TEXT_EDIT_PATIENT_HEADING  ) ?></h2>
 		<form enctype="multipart/form-data" action="/uihelp/addPatient.php" method="post">
 			<p>
-				<label class="close"><?= TEXT_PATIENT_ID_LABEL ?>:</label>&nbsp;
+				<label class="close"><?= TEXT_PATIENT_ADD_EDIT_ID_LABEL ?>:</label>&nbsp;
 					<span style="display:<?= ($pageMode == 'edit' ?  'inline' : 'none' ) ?>">
 					<?= ($pageMode == 'edit' ? $patientData['clinicPatientID'] : '') ?></span>
 				<input type="<?= ($pageMode == 'add' ? 'text' : 'hidden' ) ?>" id="clinicPatientIDfield" name="clinicPatientID" 
 					value="<?php if (!empty($requestData['clinicPatientID'])) {echo $requestData['clinicPatientID'];} ?>" 
-					class="requiredField" <?= ($pageMode == 'add' ? 'placeholder="'.TEXT_PATIENT_ID_PLACEHOLDER.'"' :'') ?>>&nbsp;&nbsp;
+					class="requiredField" <?= ($pageMode == 'add' ? 'placeholder="'.TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER.'"' :'') ?>>&nbsp;&nbsp;
 				<label class="close"><?= TEXT_FAMILYID_LABEL ?>:</label>&nbsp;
 					<?= dbFieldTextInput ($patientData, 'familyID', TEXT_PATIENT_NEW_FAMILYID_PLACEHOLDER, true) ?>
 

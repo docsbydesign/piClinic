@@ -39,8 +39,10 @@ exitIfCalledFromBrowser(__FILE__);
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_CONDITION_BLANK')) { define('TEXT_CONDITION_BLANK','TEXT_CONDITION_BLANK',false); }
+	if (!defined('TEXT_CONDITION_NEW_REPORT')) { define('TEXT_CONDITION_NEW_REPORT','TEXT_CONDITION_NEW_REPORT',false); }
 	if (!defined('TEXT_CONDITION_NEW_SELECT')) { define('TEXT_CONDITION_NEW_SELECT','TEXT_CONDITION_NEW_SELECT',false); }
 	if (!defined('TEXT_CONDITION_SELECT')) { define('TEXT_CONDITION_SELECT','TEXT_CONDITION_SELECT',false); }
+	if (!defined('TEXT_CONDITION_SUBSEQUENT_REPORT')) { define('TEXT_CONDITION_SUBSEQUENT_REPORT','TEXT_CONDITION_SUBSEQUENT_REPORT',false); }
 	if (!defined('TEXT_CONDITION_SUBSEQUENT_SELECT')) { define('TEXT_CONDITION_SUBSEQUENT_SELECT','TEXT_CONDITION_SUBSEQUENT_SELECT',false); }
 	if (!defined('TEXT_DIAGNOSIS_LOADING')) { define('TEXT_DIAGNOSIS_LOADING','TEXT_DIAGNOSIS_LOADING',false); }
 	if (!defined('TEXT_ICD_LINK_TEXT')) { define('TEXT_ICD_LINK_TEXT','TEXT_ICD_LINK_TEXT',false); }
@@ -55,9 +57,11 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_CONDITION_BLANK')) { define('TEXT_CONDITION_BLANK','(None)',false); }
-	if (!defined('TEXT_CONDITION_NEW_SELECT')) { define('TEXT_CONDITION_NEW_SELECT','N',false); }
+	if (!defined('TEXT_CONDITION_NEW_REPORT')) { define('TEXT_CONDITION_NEW_REPORT','N',false); }
+	if (!defined('TEXT_CONDITION_NEW_SELECT')) { define('TEXT_CONDITION_NEW_SELECT','New diagnosis',false); }
 	if (!defined('TEXT_CONDITION_SELECT')) { define('TEXT_CONDITION_SELECT','(Select new or subsequent)',false); }
-	if (!defined('TEXT_CONDITION_SUBSEQUENT_SELECT')) { define('TEXT_CONDITION_SUBSEQUENT_SELECT','S',false); }
+	if (!defined('TEXT_CONDITION_SUBSEQUENT_REPORT')) { define('TEXT_CONDITION_SUBSEQUENT_REPORT','S',false); }
+	if (!defined('TEXT_CONDITION_SUBSEQUENT_SELECT')) { define('TEXT_CONDITION_SUBSEQUENT_SELECT','Subsequent diagnosis',false); }
 	if (!defined('TEXT_DIAGNOSIS_LOADING')) { define('TEXT_DIAGNOSIS_LOADING','Loading...',false); }
 	if (!defined('TEXT_ICD_LINK_TEXT')) { define('TEXT_ICD_LINK_TEXT','Lookup code',false); }
 	if (!defined('TEXT_ICD_LINK_TITLE')) { define('TEXT_ICD_LINK_TITLE','Lookup an ICD-10 code in the Spanish reference book',false); }
@@ -71,9 +75,11 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_CONDITION_BLANK')) { define('TEXT_CONDITION_BLANK','(Ninguno)',false); }
-	if (!defined('TEXT_CONDITION_NEW_SELECT')) { define('TEXT_CONDITION_NEW_SELECT','N',false); }
+	if (!defined('TEXT_CONDITION_NEW_REPORT')) { define('TEXT_CONDITION_NEW_REPORT','N',false); }
+	if (!defined('TEXT_CONDITION_NEW_SELECT')) { define('TEXT_CONDITION_NEW_SELECT','Nuevo diagnóstico',false); }
 	if (!defined('TEXT_CONDITION_SELECT')) { define('TEXT_CONDITION_SELECT','(Escoge nuevo o subsiguiente)',false); }
-	if (!defined('TEXT_CONDITION_SUBSEQUENT_SELECT')) { define('TEXT_CONDITION_SUBSEQUENT_SELECT','S',false); }
+	if (!defined('TEXT_CONDITION_SUBSEQUENT_REPORT')) { define('TEXT_CONDITION_SUBSEQUENT_REPORT','S',false); }
+	if (!defined('TEXT_CONDITION_SUBSEQUENT_SELECT')) { define('TEXT_CONDITION_SUBSEQUENT_SELECT','Subsiguiente diagnóstico',false); }
 	if (!defined('TEXT_DIAGNOSIS_LOADING')) { define('TEXT_DIAGNOSIS_LOADING','Cargando...',false); }
 	if (!defined('TEXT_ICD_LINK_TEXT')) { define('TEXT_ICD_LINK_TEXT','Buscar codigo',false); }
 	if (!defined('TEXT_ICD_LINK_TITLE')) { define('TEXT_ICD_LINK_TITLE','Buscar un codigo CIE-10 en el libro de referencia',false); }

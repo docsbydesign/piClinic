@@ -59,13 +59,13 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_NO_OPTION')) { define('TEXT_NO_OPTION','TEXT_NO_OPTION',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_LABEL')) { define('TEXT_PATIENTNATIONALID_LABEL','TEXT_PATIENTNATIONALID_LABEL',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_PLACEHOLDER')) { define('TEXT_PATIENTNATIONALID_PLACEHOLDER','TEXT_PATIENTNATIONALID_PLACEHOLDER',false); }
+	if (!defined('TEXT_PATIENT_ADD_EDIT_ID_LABEL')) { define('TEXT_PATIENT_ADD_EDIT_ID_LABEL','TEXT_PATIENT_ADD_EDIT_ID_LABEL',false); }
+	if (!defined('TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER','TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER',false); }
 	if (!defined('TEXT_PATIENT_CANCEL_ADD')) { define('TEXT_PATIENT_CANCEL_ADD','TEXT_PATIENT_CANCEL_ADD',false); }
 	if (!defined('TEXT_PATIENT_CURRENT_MEDICATIONS_LABEL')) { define('TEXT_PATIENT_CURRENT_MEDICATIONS_LABEL','TEXT_PATIENT_CURRENT_MEDICATIONS_LABEL',false); }
 	if (!defined('TEXT_PATIENT_CURRENT_MEDICATIONS_PLACEHOLDER')) { define('TEXT_PATIENT_CURRENT_MEDICATIONS_PLACEHOLDER','TEXT_PATIENT_CURRENT_MEDICATIONS_PLACEHOLDER',false); }
 	if (!defined('TEXT_PATIENT_EDIT_PAGE_TITLE')) { define('TEXT_PATIENT_EDIT_PAGE_TITLE','TEXT_PATIENT_EDIT_PAGE_TITLE',false); }
 	if (!defined('TEXT_PATIENT_EDIT_SUBMIT_BUTTON')) { define('TEXT_PATIENT_EDIT_SUBMIT_BUTTON','TEXT_PATIENT_EDIT_SUBMIT_BUTTON',false); }
-	if (!defined('TEXT_PATIENT_ID_LABEL')) { define('TEXT_PATIENT_ID_LABEL','TEXT_PATIENT_ID_LABEL',false); }
-	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','TEXT_PATIENT_ID_PLACEHOLDER',false); }
 	if (!defined('TEXT_PATIENT_KNOWN_ALLERGIES_LABEL')) { define('TEXT_PATIENT_KNOWN_ALLERGIES_LABEL','TEXT_PATIENT_KNOWN_ALLERGIES_LABEL',false); }
 	if (!defined('TEXT_PATIENT_KNOWN_ALLERGIES_PLACEHOLDER')) { define('TEXT_PATIENT_KNOWN_ALLERGIES_PLACEHOLDER','TEXT_PATIENT_KNOWN_ALLERGIES_PLACEHOLDER',false); }
 	if (!defined('TEXT_PATIENT_NAME_LABEL')) { define('TEXT_PATIENT_NAME_LABEL','TEXT_PATIENT_NAME_LABEL',false); }
@@ -125,13 +125,13 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_NO_OPTION')) { define('TEXT_NO_OPTION','No',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_LABEL')) { define('TEXT_PATIENTNATIONALID_LABEL','National ID',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_PLACEHOLDER')) { define('TEXT_PATIENTNATIONALID_PLACEHOLDER','Patient\'s National ID number',false); }
+	if (!defined('TEXT_PATIENT_ADD_EDIT_ID_LABEL')) { define('TEXT_PATIENT_ADD_EDIT_ID_LABEL','Patient ID',false); }
+	if (!defined('TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER','The patient\'s clinic ID',false); }
 	if (!defined('TEXT_PATIENT_CANCEL_ADD')) { define('TEXT_PATIENT_CANCEL_ADD','Cancel',false); }
 	if (!defined('TEXT_PATIENT_CURRENT_MEDICATIONS_LABEL')) { define('TEXT_PATIENT_CURRENT_MEDICATIONS_LABEL','Current medications',false); }
 	if (!defined('TEXT_PATIENT_CURRENT_MEDICATIONS_PLACEHOLDER')) { define('TEXT_PATIENT_CURRENT_MEDICATIONS_PLACEHOLDER','Enter each medication, one medication and dose per line',false); }
 	if (!defined('TEXT_PATIENT_EDIT_PAGE_TITLE')) { define('TEXT_PATIENT_EDIT_PAGE_TITLE','Update Patient',false); }
 	if (!defined('TEXT_PATIENT_EDIT_SUBMIT_BUTTON')) { define('TEXT_PATIENT_EDIT_SUBMIT_BUTTON','Update patient info',false); }
-	if (!defined('TEXT_PATIENT_ID_LABEL')) { define('TEXT_PATIENT_ID_LABEL','Patient, Visit, or Family ID',false); }
-	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','Patient\'s name or ID',false); }
 	if (!defined('TEXT_PATIENT_KNOWN_ALLERGIES_LABEL')) { define('TEXT_PATIENT_KNOWN_ALLERGIES_LABEL','Known allergies',false); }
 	if (!defined('TEXT_PATIENT_KNOWN_ALLERGIES_PLACEHOLDER')) { define('TEXT_PATIENT_KNOWN_ALLERGIES_PLACEHOLDER','Enter each known allergy, one allergy per line',false); }
 	if (!defined('TEXT_PATIENT_NAME_LABEL')) { define('TEXT_PATIENT_NAME_LABEL','Patient name',false); }
@@ -191,13 +191,13 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_NO_OPTION')) { define('TEXT_NO_OPTION','No',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_LABEL')) { define('TEXT_PATIENTNATIONALID_LABEL','Cedula',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_PLACEHOLDER')) { define('TEXT_PATIENTNATIONALID_PLACEHOLDER','Numero de la cedula del paciente',false); }
+	if (!defined('TEXT_PATIENT_ADD_EDIT_ID_LABEL')) { define('TEXT_PATIENT_ADD_EDIT_ID_LABEL','Identidad del paciente',false); }
+	if (!defined('TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER','El número del paciente',false); }
 	if (!defined('TEXT_PATIENT_CANCEL_ADD')) { define('TEXT_PATIENT_CANCEL_ADD','Cancelar',false); }
 	if (!defined('TEXT_PATIENT_CURRENT_MEDICATIONS_LABEL')) { define('TEXT_PATIENT_CURRENT_MEDICATIONS_LABEL','Medicamentos actuales',false); }
 	if (!defined('TEXT_PATIENT_CURRENT_MEDICATIONS_PLACEHOLDER')) { define('TEXT_PATIENT_CURRENT_MEDICATIONS_PLACEHOLDER','Ingrese cada medicamento actual, un medicamento y dosis por línea',false); }
 	if (!defined('TEXT_PATIENT_EDIT_PAGE_TITLE')) { define('TEXT_PATIENT_EDIT_PAGE_TITLE','Editar Paciente',false); }
 	if (!defined('TEXT_PATIENT_EDIT_SUBMIT_BUTTON')) { define('TEXT_PATIENT_EDIT_SUBMIT_BUTTON','Actualizar información del paciente',false); }
-	if (!defined('TEXT_PATIENT_ID_LABEL')) { define('TEXT_PATIENT_ID_LABEL','Número del paciente, visita, o familia',false); }
-	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','Identidad o nombre del paciente',false); }
 	if (!defined('TEXT_PATIENT_KNOWN_ALLERGIES_LABEL')) { define('TEXT_PATIENT_KNOWN_ALLERGIES_LABEL','Alergias conocidas',false); }
 	if (!defined('TEXT_PATIENT_KNOWN_ALLERGIES_PLACEHOLDER')) { define('TEXT_PATIENT_KNOWN_ALLERGIES_PLACEHOLDER','Ingrese cada alergia conocida, una alergia por línea',false); }
 	if (!defined('TEXT_PATIENT_NAME_LABEL')) { define('TEXT_PATIENT_NAME_LABEL','Nombre del paciente',false); }

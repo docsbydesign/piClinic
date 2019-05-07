@@ -520,7 +520,7 @@ header('Content-type: text/html; charset=utf-8');
     </div>
     <?= $debugErrorInfo ?>
     <div id="NoDataMessage" class="<?= (!$noData ? 'hideDiv' : '') ?>">
-        <p><?= TEXT_NO_REPORT_PROMPT ?></p>
+        <p><?= TEXT_NO_REPORT_PROF_PROMPT ?></p>
     </div>
     <div id="DailyVisitList"  class="legalPortraitReport <?= ($noData ? ' hideDiv' : '') ?>">
         <div id="ATA-ReportHeading">
@@ -699,11 +699,11 @@ header('Content-type: text/html; charset=utf-8');
                         }
                     } else {
                         $displayText = TEXT_DIAGNOSIS_BLANK;
-                        $displayClass = 'inactive';
+                        $displayClass = 'inactive noprint';
                     }
                     echo ('<span class="'.$displayClass.'">'.$displayText.'</span>');
                     echo '</td>';
-                    echo '<td class="center nowrap">'.conditionText($visit['condition1']).'</td>';
+                    echo '<td class="center nowrap'.(empty($visit['condition1']) ? ' noprint' : '').'">'.conditionText($visit['condition1']).'</td>';
                     echo '<td class="wide">';
                     $displayText = '';
                     $displayClass = '';
@@ -714,11 +714,11 @@ header('Content-type: text/html; charset=utf-8');
                         }
                     } else {
                         $displayText = TEXT_DIAGNOSIS_BLANK;
-                        $displayClass = 'inactive';
+                        $displayClass = 'inactive noprint';
                     }
                     echo ('<span class="'.$displayClass.'">'.$displayText.'</span>');
                     echo '</td>';
-                    echo '<td class="center nowrap">'.conditionText($visit['condition2']).'</td>';
+                    echo '<td class="center nowrap'.(empty($visit['condition1']) ? ' noprint' : '').'">'.conditionText($visit['condition2']).'</td>';
                     echo '<td class="wide">';
                     $displayText = '';
                     $displayClass = '';
@@ -729,11 +729,11 @@ header('Content-type: text/html; charset=utf-8');
                         }
                     } else {
                         $displayText = TEXT_DIAGNOSIS_BLANK;
-                        $displayClass = 'inactive';
+                        $displayClass = 'inactive noprint';
                     }
                     echo ('<span class="'.$displayClass.'">'.$displayText.'</span>');
                     echo '</td>';
-                    echo '<td class="center nowrap">'.conditionText($visit['condition3']).'</td>';
+                    echo '<td class="center nowrap'.(empty($visit['condition1']) ? ' noprint' : '').'">'.conditionText($visit['condition3']).'</td>';
                     echo '<td class="nowrap">'.$visit['referredTo'].'</td>';
                     echo '<td class="nowrap">'.$visit['referredFrom'].'</td>';
                 }

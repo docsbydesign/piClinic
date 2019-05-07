@@ -753,7 +753,7 @@ header('Content-type: text/html; charset=utf-8');
     </div>
     <?= $debugErrorInfo ?>
     <div id="NoDataMessage" class="<?= ( (!$noData || ($reportFormat == RPT_SHOW_DATA)) ? 'hideDiv' : '') ?>">
-        <p><?= TEXT_NO_REPORT_PROMPT ?></p>
+        <p><?= TEXT_NO_REPORT_PROF_PROMPT ?></p>
     </div>
     <div id="MonthlySummaryList" class="ledgerLandscapeReport <?= ( ($noData && ($reportFormat == RPT_SHOW_REPORT)) ? ' hideDiv' : '') ?>">
         <div id="AT2-ReportHeading">

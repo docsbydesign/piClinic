@@ -58,9 +58,7 @@ TEXT_CANCEL_NEW_VISIT,Cancel,Cancelar
 TEXT_CANCEL_SEARCH,Cancel,Cancelar
 TEXT_CANCEL_VISIT_EDIT,Cancel,Cancelar
 TEXT_CITY_LABEL,City,Municipio
-TEXT_CLINICPATIENTID_LABEL,Patient ID,Identidad del paciente
-TEXT_CLINICPATIENTID_LABEL,Patient&nbsp;ID&nbsp;number,Número&nbsp;de identidad&nbsp;del&nbsp;paciente
-TEXT_CLINICPATIENTID_LABEL,Patient,Paciente
+TEXT_CLINICPATIENTID_LABEL,Patient&nbsp;ID,Identidad&nbsp;del&nbsp;paciente
 TEXT_CLINICVISITID_LABEL,Clinic visit number,Número de historia clínica
 TEXT_CLINIC_ADMIN,Admin,Admin
 TEXT_CLINIC_COMMENT,Comment,Comentario
@@ -101,10 +99,10 @@ TEXT_CONDITION_1_LABEL,Condition,Condición
 TEXT_CONDITION_2_LABEL,Condition,Condición
 TEXT_CONDITION_3_LABEL,Condition,Condición
 TEXT_CONDITION_BLANK,(None),(Ninguno)
-TEXT_CONDITION_NEW_SELECT,N,N
+TEXT_CONDITION_NEW_REPORT,N,N
 TEXT_CONDITION_NEW_SELECT,New diagnosis,Nuevo diagnóstico
 TEXT_CONDITION_SELECT,(Select new or subsequent),(Escoge nuevo o subsiguiente)
-TEXT_CONDITION_SUBSEQUENT_SELECT,S,S
+TEXT_CONDITION_SUBSEQUENT_REPORT,S,S
 TEXT_CONDITION_SUBSEQUENT_SELECT,Subsequent diagnosis,Subsiguiente diagnóstico
 TEXT_CONFIRM_IMAGE_DELETE,Are you sure you want to delete this image?,¿Está seguro que quiería borrar este imagen?
 TEXT_CONTACTALTPHONE_LABEL,Alternate phone,Otro número telefónico
@@ -120,16 +118,13 @@ TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE,Daily Payment Log,Registros de Pagos del Día
 TEXT_DAILY_PMT_DESC,List of payments received from patients on a specified date,Registro de pagos recibidos por los pacientes durante la fecha especificada
 TEXT_DAILY_PMT_TITLE,Daily payment log,Registro de pagos del día
 TEXT_DAILY_VISIT_HEADING,Daily Outpatient Log,Atenciones Ambulatorias
-TEXT_DAILY_VISIT_HEADING,Daily Payment Log,Registro de Pagos del Día
 TEXT_DATE_BLANK,(Not specified),(No especificada)
 TEXT_DATE_DAY_PLACEHOLDER,Day,Día
 TEXT_DATE_FORMAT,m/d/Y,d/m/Y
-TEXT_DATE_LABEL,Date&nbsp;(mm/dd/yyyy),Fecha&nbsp;(dd/mm/aaaa)
 TEXT_DATE_LABEL,Report date (YYYY-MM),Fecha del informe (AAAA-MM)
 TEXT_DATE_MONTH_PLACEHOLDER,Month,Mes
 TEXT_DATE_PROMPT_LABEL,Date&nbsp;(yyyy-mm-dd),Fecha&nbsp;(aaaa-mm-dd)
 TEXT_DATE_TIME_IN_LABEL,Admitted to clinic,Llegó a la clínica
-TEXT_DATE_TIME_OUT_LABEL,Departed clinic,Salió de la clínica
 TEXT_DATE_TIME_OUT_LABEL,Discharged from clinic,Salió de la clínica
 TEXT_DATE_TIME_PLACEHOLDER,Time,Hora
 TEXT_DATE_YEAR_PLACEHOLDER,Year,Año
@@ -362,9 +357,7 @@ TEXT_MONTHLY_SUMMARY_BY_POS_DATA_TITLE,List of diagnostic codes tabulated in the
 TEXT_MONTHLY_SUMMARY_BY_POS_DESC,Summary of patients seen by medical professional,Resumen de pacientes atendidos por clase de profesional
 TEXT_MONTHLY_SUMMARY_BY_POS_TITLE,Monthly Report of Outpatient Care,Informe Mensual de Atenciones Ambulatorias (AT2-R)
 TEXT_MONTHLY_SUMMARY_DATA_LINK,Diagnoses tabulated in the Daily Report of Outpatient Care,Diagnosticos tabulados en el Informe Diario de Atenciones Ambulatorias
-TEXT_MONTHLY_SUMMARY_DATA_LINK,Show the diagnoses,Muestra los diagnosticos
 TEXT_MONTHLY_SUMMARY_DATA_TITLE,List of diagnosic codes tabulated in the Daily Report of Outpatient Care,Lista de los codigos diagnosticos tabulado en el Informe Diario de Atenciones Ambulatorias
-TEXT_MONTHLY_SUMMARY_DATA_TITLE,List of diagnosic codes tabulated in this report,Lista de los codigos diagnosticos tabulado en este informe
 TEXT_MONTHLY_SUMMARY_DESC,Summary of patients seen by day and age group,Resumen de pacientes atendidos por día y grupo de edad
 TEXT_MONTHLY_SUMMARY_TITLE,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
 TEXT_MONTHLY_VISIT_HEADING,Monthly Payment Log,Registro de Pagos del Mes
@@ -388,12 +381,9 @@ TEXT_NO_LOG_DATA,No data in this log file.,Este registro no tiene datos.
 TEXT_NO_OPEN_VISITS,No patients admitted to the clinic.,No hay pacientes admitidos a la clínica.
 TEXT_NO_OPTION,No,No
 TEXT_NO_PATIENT_IMAGE,No image found.,No encontró un imagen.
-TEXT_NO_PATIENT_PHOTO,No photo found.,No encontr una foto.
-TEXT_NO_PATIENT_PHOTO,This patient doesn\'t have a photo.,Este paciente no tiene foto.
-TEXT_NO_PATIENT_PHOTO,You can add a photo after you add the new patient.,Se puede agregar una foto del paciente despues agregue el paciente nuevo.
 TEXT_NO_PREVIOUS_VISITS,No previous admission records,No hay archivos de admisiónes anteriores
 TEXT_NO_REPORT_PROMPT,Select a date.,Escoge una fecha.
-TEXT_NO_REPORT_PROMPT,Select a health professional and date.,Escoge un profesional de salud y una fecha.
+TEXT_NO_REPORT_PROF_PROMPT,Select a health professional and date.,Escoge un profesional de salud y una fecha.
 TEXT_NO_STAFF_RECORDS,No users or staff members found,No hay usuarios o personal de la clínica
 TEXT_NO_SUMMARY_REPORT_PROMPT,Select a service type and date.,Escoge un servicio de atención y una fecha.
 TEXT_NO_VISITS_FOUND_DAY,No visits found for this date.,No visitas encontradas en este fecha.
@@ -424,6 +414,8 @@ TEXT_PATIENTS_FOUND_PAGE_TITLE,Matching patients found,Pacientes encontrados
 TEXT_PATIENTVISITDATE_LABEL,Visit date,Fecha de la visita
 TEXT_PATIENTVISITID_LABEL,Clinical history number,Número de historia clínica
 TEXT_PATIENTVISITID_LABEL,ID,ID
+TEXT_PATIENT_ADD_EDIT_ID_LABEL,Patient ID,Identidad del paciente
+TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER,The patient\'s clinic ID,El número del paciente
 TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON,Add a new patient,Agregar un paciente nuevo
 TEXT_PATIENT_ALLERGY_LIST_HEAD,Known allergies,Alergias conocidas
 TEXT_PATIENT_CANCEL_ADD,Cancel,Cancelar
@@ -438,13 +430,11 @@ TEXT_PATIENT_EDIT_PAGE_TITLE,Update Patient,Editar Paciente
 TEXT_PATIENT_EDIT_PATIENT_BUTTON,Update this patient\'s info,Actualizar la información del paciente
 TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON,Update visit info,Actualizar la información de esta visita
 TEXT_PATIENT_EDIT_SUBMIT_BUTTON,Update patient info,Actualizar información del paciente
-TEXT_PATIENT_ID_LABEL,"Patient, Visit, or Family ID","Número del paciente, visita, o familia"
+TEXT_SEARCH_PATIENT_ID_LABEL,"Patient, Visit, or Family ID","Número del paciente, visita, o familia"
 TEXT_PATIENT_ID_LABEL,Clinical History Number,Número de historia clínica
 TEXT_PATIENT_ID_LABEL,Lookup patient or visit,Buscar paciente o visita
-TEXT_PATIENT_ID_LABEL,Patient ID,Identidad del paciente
 TEXT_PATIENT_ID_PLACEHOLDER,Patient\'s name or ID,Identidad o nombre del paciente
 TEXT_PATIENT_ID_PLACEHOLDER,The ID number to search,El número para buscar
-TEXT_PATIENT_ID_PLACEHOLDER,The patient\'s name or clinic ID,El nombre o número del paciente
 TEXT_PATIENT_IMAGE_NOT_SPECIFIED,Image to delete was not specified,El imagen para borrar no estuvo especificado
 TEXT_PATIENT_IMAGE_TYPE_NOT_SUPPORTED,The specified image type is not recognized,El tipo de imagen especificada no está reconocido
 TEXT_PATIENT_INFO_PAGE_TITLE,Patient Information,Información del paciente

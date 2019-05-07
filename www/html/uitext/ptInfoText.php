@@ -114,7 +114,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_BIRTHDATE_LABEL')) { define('TEXT_BIRTHDATE_LABEL','Birthdate',false); }
 	if (!defined('TEXT_BIRTHDAY_DATE_FORMAT')) { define('TEXT_BIRTHDAY_DATE_FORMAT','m/d/Y',false); }
 	if (!defined('TEXT_BLOODTYPE_LABEL')) { define('TEXT_BLOODTYPE_LABEL','Blood Type',false); }
-	if (!defined('TEXT_CLINICPATIENTID_LABEL')) { define('TEXT_CLINICPATIENTID_LABEL','Patient ID',false); }
+	if (!defined('TEXT_CLINICPATIENTID_LABEL')) { define('TEXT_CLINICPATIENTID_LABEL','Patient&nbsp;ID',false); }
 	if (!defined('TEXT_CONTACTALTPHONE_LABEL')) { define('TEXT_CONTACTALTPHONE_LABEL','Alternate phone',false); }
 	if (!defined('TEXT_CONTACTALTPHONE_MISSING')) { define('TEXT_CONTACTALTPHONE_MISSING','(alternate phone number not provided)',false); }
 	if (!defined('TEXT_CONTACTPHONE_LABEL')) { define('TEXT_CONTACTPHONE_LABEL','Primary phone',false); }
@@ -187,7 +187,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_BIRTHDATE_LABEL')) { define('TEXT_BIRTHDATE_LABEL','Fecha de nacimiento',false); }
 	if (!defined('TEXT_BIRTHDAY_DATE_FORMAT')) { define('TEXT_BIRTHDAY_DATE_FORMAT','d-m-Y',false); }
 	if (!defined('TEXT_BLOODTYPE_LABEL')) { define('TEXT_BLOODTYPE_LABEL','Tipo de Sangre',false); }
-	if (!defined('TEXT_CLINICPATIENTID_LABEL')) { define('TEXT_CLINICPATIENTID_LABEL','Identidad del paciente',false); }
+	if (!defined('TEXT_CLINICPATIENTID_LABEL')) { define('TEXT_CLINICPATIENTID_LABEL','Identidad&nbsp;del&nbsp;paciente',false); }
 	if (!defined('TEXT_CONTACTALTPHONE_LABEL')) { define('TEXT_CONTACTALTPHONE_LABEL','Otro número telefónico',false); }
 	if (!defined('TEXT_CONTACTALTPHONE_MISSING')) { define('TEXT_CONTACTALTPHONE_MISSING','(Otro número telefónico no especificado)',false); }
 	if (!defined('TEXT_CONTACTPHONE_LABEL')) { define('TEXT_CONTACTPHONE_LABEL','Primer número telefónico',false); }

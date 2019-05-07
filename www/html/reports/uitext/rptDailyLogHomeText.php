@@ -75,7 +75,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_LABEL_STAFF')) { define('TEXT_LABEL_STAFF','TEXT_LABEL_STAFF',false); }
 	if (!defined('TEXT_NEIGHBORHOOD_LABEL')) { define('TEXT_NEIGHBORHOOD_LABEL','TEXT_NEIGHBORHOOD_LABEL',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','TEXT_NOT_SPECIFIED',false); }
-	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','TEXT_NO_REPORT_PROMPT',false); }
+	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','TEXT_NO_REPORT_PROF_PROMPT',false); }
 	if (!defined('TEXT_NO_VISITS_FOUND_DAY')) { define('TEXT_NO_VISITS_FOUND_DAY','TEXT_NO_VISITS_FOUND_DAY',false); }
 	if (!defined('TEXT_PATIENTVISITID_LABEL')) { define('TEXT_PATIENTVISITID_LABEL','TEXT_PATIENTVISITID_LABEL',false); }
 	if (!defined('TEXT_PATIENT_LABEL')) { define('TEXT_PATIENT_LABEL','TEXT_PATIENT_LABEL',false); }
@@ -120,14 +120,14 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_ATA_LEFT_TITLE')) { define('TEXT_ATA_LEFT_TITLE','Secretary of Health<br>Department of Statistics<br>Honduras, Central America',false); }
 	if (!defined('TEXT_BIRTHDAY_DATE_LABEL')) { define('TEXT_BIRTHDAY_DATE_LABEL','Birth date (M/D/Y)',false); }
 	if (!defined('TEXT_CITY_LABEL')) { define('TEXT_CITY_LABEL','City',false); }
-	if (!defined('TEXT_CLINICPATIENTID_LABEL')) { define('TEXT_CLINICPATIENTID_LABEL','Patient ID',false); }
+	if (!defined('TEXT_CLINICPATIENTID_LABEL')) { define('TEXT_CLINICPATIENTID_LABEL','Patient&nbsp;ID',false); }
 	if (!defined('TEXT_CONDITION_1_LABEL')) { define('TEXT_CONDITION_1_LABEL','Condition',false); }
 	if (!defined('TEXT_CONDITION_2_LABEL')) { define('TEXT_CONDITION_2_LABEL','Condition',false); }
 	if (!defined('TEXT_CONDITION_3_LABEL')) { define('TEXT_CONDITION_3_LABEL','Condition',false); }
 	if (!defined('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE','Daily Report of Outpatient Care',false); }
 	if (!defined('TEXT_DAILY_VISIT_HEADING')) { define('TEXT_DAILY_VISIT_HEADING','Daily Outpatient Log',false); }
 	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','m/d/Y',false); }
-	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Date&nbsp;(mm/dd/yyyy)',false); }
+	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Report date (YYYY-MM)',false); }
 	if (!defined('TEXT_DATE_PROMPT_LABEL')) { define('TEXT_DATE_PROMPT_LABEL','Date&nbsp;(yyyy-mm-dd)',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_ICD_LABEL')) { define('TEXT_DIAGNOSIS_1_ICD_LABEL','Diagnosis 1 (ICD-10)',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_LABEL')) { define('TEXT_DIAGNOSIS_1_LABEL','Diagnosis 1',false); }
@@ -151,7 +151,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_LABEL_STAFF')) { define('TEXT_LABEL_STAFF','Clinic staff',false); }
 	if (!defined('TEXT_NEIGHBORHOOD_LABEL')) { define('TEXT_NEIGHBORHOOD_LABEL','Neighborhood',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','Not specified',false); }
-	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','Select a date.',false); }
+	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','Select a health professional and date.',false); }
 	if (!defined('TEXT_NO_VISITS_FOUND_DAY')) { define('TEXT_NO_VISITS_FOUND_DAY','No visits found for this date.',false); }
 	if (!defined('TEXT_PATIENTVISITID_LABEL')) { define('TEXT_PATIENTVISITID_LABEL','Clinical history number',false); }
 	if (!defined('TEXT_PATIENT_LABEL')) { define('TEXT_PATIENT_LABEL','Patient',false); }
@@ -196,14 +196,14 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_ATA_LEFT_TITLE')) { define('TEXT_ATA_LEFT_TITLE','Secretaría de Salud<br>Departamento de Estadística<br>Honduras, Centro América',false); }
 	if (!defined('TEXT_BIRTHDAY_DATE_LABEL')) { define('TEXT_BIRTHDAY_DATE_LABEL','Fecha de nacimiento (dd/mm/aa)',false); }
 	if (!defined('TEXT_CITY_LABEL')) { define('TEXT_CITY_LABEL','Municipio',false); }
-	if (!defined('TEXT_CLINICPATIENTID_LABEL')) { define('TEXT_CLINICPATIENTID_LABEL','Identidad del paciente',false); }
+	if (!defined('TEXT_CLINICPATIENTID_LABEL')) { define('TEXT_CLINICPATIENTID_LABEL','Identidad&nbsp;del&nbsp;paciente',false); }
 	if (!defined('TEXT_CONDITION_1_LABEL')) { define('TEXT_CONDITION_1_LABEL','Condición',false); }
 	if (!defined('TEXT_CONDITION_2_LABEL')) { define('TEXT_CONDITION_2_LABEL','Condición',false); }
 	if (!defined('TEXT_CONDITION_3_LABEL')) { define('TEXT_CONDITION_3_LABEL','Condición',false); }
 	if (!defined('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE','Informe Diario de Atenciones Ambulatorias',false); }
 	if (!defined('TEXT_DAILY_VISIT_HEADING')) { define('TEXT_DAILY_VISIT_HEADING','Atenciones Ambulatorias',false); }
 	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','d/m/Y',false); }
-	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha&nbsp;(dd/mm/aaaa)',false); }
+	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha del informe (AAAA-MM)',false); }
 	if (!defined('TEXT_DATE_PROMPT_LABEL')) { define('TEXT_DATE_PROMPT_LABEL','Fecha&nbsp;(aaaa-mm-dd)',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_ICD_LABEL')) { define('TEXT_DIAGNOSIS_1_ICD_LABEL','Diagnóstico 1 (CIE-10)',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_LABEL')) { define('TEXT_DIAGNOSIS_1_LABEL','Diagnóstico 1',false); }
@@ -227,7 +227,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_LABEL_STAFF')) { define('TEXT_LABEL_STAFF','Personal de la clínica',false); }
 	if (!defined('TEXT_NEIGHBORHOOD_LABEL')) { define('TEXT_NEIGHBORHOOD_LABEL','Localidad',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
-	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','Escoge una fecha.',false); }
+	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','Escoge un profesional de salud y una fecha.',false); }
 	if (!defined('TEXT_NO_VISITS_FOUND_DAY')) { define('TEXT_NO_VISITS_FOUND_DAY','No visitas encontradas en este fecha.',false); }
 	if (!defined('TEXT_PATIENTVISITID_LABEL')) { define('TEXT_PATIENTVISITID_LABEL','Número de historia clínica',false); }
 	if (!defined('TEXT_PATIENT_LABEL')) { define('TEXT_PATIENT_LABEL','Paciente',false); }

@@ -86,7 +86,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	<div class="pageBody">
 	<div id="PatientLookupDiv" class="noprint">
 		<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">
-			<p><label><?= TEXT_PATIENT_ID_LABEL ?>:</label><br>
+			<p><label class="close"><?= TEXT_SEARCH_PATIENT_ID_LABEL ?>:</label>
 				<?= dbFieldTextInput ($requestData, "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true) ?>
 			<button class="btn_ptSearch" type="submit"><?= TEXT_SHOW_PATIENT_SUBMIT_BUTTON ?></button>
 			</p>
