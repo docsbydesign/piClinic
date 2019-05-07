@@ -200,7 +200,7 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 			<p><label class="close"><?= TEXT_VISIT_DELETED_LABEL ?>:</label><?= ($visitInfo['deleted'] ?  TEXT_VISIT_DELETED_TEXT : TEXT_VISIT_NOT_DELETED_TEXT ) ?></p>
 		</div>
 	</div>
-    <div style="clear: both;"></div>
+    <div class="clearFloat"></div>
 	<div id="PatientVisitView" class="<?= (empty($visitRecord) ? 'hideDiv' : '') ?>">
 		<div id="PatientVisitDetails">
 			<form enctype="multipart/form-data" action="/uihelp/updatePatientVisit.php" method="post">
@@ -323,7 +323,7 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 						</div>
 					</div>
 				</div>
-				<div style="clear: both;"></div>
+				<div class="clearFloat"></div>
 				<div class="infoBlock ninetyWidth">
 					<p class="textAlignRight"><label class="close"><?= TEXT_VISIT_DELETED_SELECT_LABEL ?>:</label>
 						<select id="DeletedSelect" name="deleted">
@@ -332,7 +332,7 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 						</select>
 					</p>
 				</div>
-				<div style="clear: both;"></div>
+				<div class="clearFloat"></div>
 				<input type="hidden" id="PatientVisitIDField" name="patientVisitID" value="<?= $visitInfo['patientVisitID'] ?>" >
 				<input type="hidden" id="returnUrlField" name="returnUrl" value="<?= $referringPageUrl ?>">
                 <input type="hidden" id="SubmitBtnTag" name="<?= FROM_LINK ?>" value="<?= createFromLink (null, __FILE__, 'btn_submit') ?>">

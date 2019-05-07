@@ -510,6 +510,10 @@ div.portraitReport {
 div.legalReport {
 	width: 800px;
 }
+.alert {
+	color:white;
+	background-color: #F00;
+}
 
 div.ledgerLandscapeReport {
 	width: 2250px;

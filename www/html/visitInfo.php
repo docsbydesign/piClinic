@@ -178,7 +178,7 @@ function writeTopicMenu ($sessionInfo) {
 			<img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44">
 		</div>
 	</div>
-	<div style="clear: both;"></div>
+	<div class="clearFloat"></div>
 	<div id="optionMenuDiv" class="noprint<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
 		<ul class="topLinkMenuList">
 			<?php
@@ -230,7 +230,7 @@ function writeTopicMenu ($sessionInfo) {
 						<p><label class="close"><?= TEXT_VISIT_STATUS_LABEL ?>:</label>&nbsp;<?= ($visitInfo['visitStatus'] == 'Open' ? TEXT_VISIT_STATUS_OPEN : ($visitInfo['visitStatus'] == 'Closed' ? TEXT_VISIT_STATUS_CLOSED : $visitInfo['visitStatus'] )) ?></p>
 					</div>
 				</div>
-				<div style="clear: both;"></div>
+				<div class="clearFloat"></div>
 				<div class="infoBlock">
 					<h2><?= TEXT_VISIT_ARRIVAL_HEADING ?></h2>
 					<div class="indent1">
@@ -329,7 +329,7 @@ function writeTopicMenu ($sessionInfo) {
 					</div>
 				</div>
 			</div>
-			<div style="clear: both;"></div>
+			<div class="clearFloat"></div>
 		</div>
 	</div>
 </body>

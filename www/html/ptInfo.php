@@ -271,7 +271,7 @@ function writeTopicMenu ($sessionInfo) {
 						</p>
 					</div>
                     <div class="dataBlock">
-                        <p><label><?= TEXT_NEXT_VAX_DATE_INPUT_LABEL ?>:</label> <span <?= (!empty($patientData['nextVaccinationDate']) && (strtotime($patientData['nextVaccinationDate']) <= time()) ? ' style="color:white; background-color: #F00;"' : '') ?>><?= '&nbsp;'.(!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT, strtotime($patientData['nextVaccinationDate'])).'&nbsp;' : TEXT_NOT_SPECIFIED )?></span>
+                        <p><label><?= TEXT_NEXT_VAX_DATE_INPUT_LABEL ?>:</label> <span <?= (!empty($patientData['nextVaccinationDate']) && (strtotime($patientData['nextVaccinationDate']) <= time()) ? ' class="alert"' : '') ?>><?= '&nbsp;'.(!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT, strtotime($patientData['nextVaccinationDate'])).'&nbsp;' : TEXT_NOT_SPECIFIED )?></span>
                         </p>
                     </div>
                     <div class="dataBlock">

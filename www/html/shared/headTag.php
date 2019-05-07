@@ -115,7 +115,7 @@ function piClinicAppMenu($thisPage, $session, $pageLanguage, $hostFile) {
 	$menuDiv .= "<div id=\"commentMenu\">\n";
 	$menuDiv .= "<a class=\"a_mainComment\" href=\"/userComment.php".createFromLink(FIRST_FROM_LINK_QP,$hostFile, 'a_mainComment')."\" title=\"".
 		TEXT_CLINIC_COMMENT_TITLE. "\">".TEXT_CLINIC_COMMENT."</a>\n";
-	$menuDiv .= "</div></div><div style=\"clear: both;\"></div>";
+	$menuDiv .= "</div></div><div class=\"clearFloat\"></div>";
 	return $menuDiv;
 }
 ?>

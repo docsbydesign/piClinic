@@ -172,7 +172,7 @@ if (empty($dbStatus) & !$noData) {
         if ((API_DEBUG_MODE)  &&  $visitRecord['httpResponse'] != 404){
             $report['visitRecord'] = $visitRecord;
             $report['query'] = $getQueryString;
-            $debugErrorInfo .= '<div id="Debug" style="display:none;"';
+            $debugErrorInfo .= '<div id="Debug" class="noshow"';
             $debugErrorInfo .= '<pre>'.json_encode($visitRecord, JSON_PRETTY_PRINT).'</pre>';
             $debugErrorInfo .= '</div>';
         }
@@ -192,7 +192,7 @@ if (empty($dbStatus) & !$noData) {
     if ($clinicRecord['httpResponse'] != 200) {
         // unable to get info on this clinic
         if (API_DEBUG_MODE) {
-            $debugErrorInfo .= '<div id="Debug" style="display:none;"';
+            $debugErrorInfo .= '<div id="Debug" class="noshow"';
             $debugErrorInfo .= '<pre>'.json_encode($clinicInfo, JSON_PRETTY_PRINT).'</pre>';
             $debugErrorInfo .= '</div>';
         }

@@ -72,7 +72,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	<?php require ('uiErrorMessage.php') ?>
 	<?= piClinicAppMenu(HELP_PAGE, $sessionInfo, $pageLanguage,__FILE__) ?>
 	<div class="pageBody">
-        <div style="clear: both;"></div>
+        <div class="clearFloat"></div>
         <div id="optionMenuDiv" class="noprint">
             <ul class="topLinkMenuList">
             <?php

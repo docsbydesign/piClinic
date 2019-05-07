@@ -198,7 +198,7 @@ function writeOptionsMenu ($visitInfo) {
 			<p><label class="close"><?= TEXT_VISIT_ID_LABEL ?>:</label><span class="idInHeading"><?= $visitInfo['patientVisitID'] ?></span></p>
 		</div>
 	</div>
-	<div style="clear: both;"></div>
+	<div class="clearFloat"></div>
 	<div id="PatientVisitView" class="<?= (empty($visitRecord) ? 'hideDiv' : '') ?>">
 		<?= writeOptionsMenu($visitInfo) ?>
 		<div id="PatientVisitDataView">
@@ -265,7 +265,7 @@ function writeOptionsMenu ($visitInfo) {
 							</div>
 						</div>
 					</div>
-					<div style="clear: both;"></div>
+					<div class="clearFloat"></div>
 					<input type="hidden" id="PatientVisitIDField" name="patientVisitID" value="<?= $visitInfo['patientVisitID'] ?>" >
 					<input type="hidden" id="returnUrlField" name="returnUrl" value="<?= $referringPageUrl ?>">
                     <input type="hidden" class="btn_submit" id="SubmitBtnTag" name="<?= FROM_LINK ?>" value="<?= createFromLink (null, __FILE__, 'btn_submit') ?>">

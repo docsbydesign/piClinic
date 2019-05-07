@@ -184,7 +184,7 @@ function writeTopicMenu ($cancel) {
 			<p><label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?></p>
 		</div>
 	</div>
-	<div style="clear: both;"></div>
+	<div class="clearFloat"></div>
 	<div id="PatientVisitView">
         <div id="PatientVisitDetails" class="dataBlock">
             <form enctype="multipart/form-data" action="/uihelp/addPatientVisit.php" method="post">
@@ -286,7 +286,7 @@ function writeTopicMenu ($cancel) {
                         </div>
                     </div>
                 </div>
-                <div style="clear: both;"></div>
+                <div class="clearFloat"></div>
                 <input type="hidden" id="SubmitBtnTag" name="<?= FROM_LINK ?>" value="<?= createFromLink (null, __FILE__, 'btn_submit') ?>">
                 <p><button class="btn_submit" type="submit"><?= TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON ?></button></p>
             </form>

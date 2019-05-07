@@ -197,11 +197,11 @@ function writeTopicMenu ($lang, $cancelLink) {
 		<div class="nameBlock">
 			<h1 class="pageHeading noBottomPad"><?= ($pageMode == 'add' ? TEXT_NEW_STAFF_HEADING  : TEXT_EDIT_STAFF_HEADING  ) ?></h1>
 		</div>
-		<div style="clear: both;"></div>
+		<div class="clearFloat"></div>
 		<form enctype="multipart/form-data" action="/uihelp/addStaff.php" method="post">
 			<h2><?= TEXT_STAFF_ACCOUNT_INFO_LABEL ?></h2>
 			<div id="accountInfo" class="indent1">
-				<p <?= ($userEdit ? 'style="display: none;"' : '') ?>><label class="close"><?= TEXT_STAFF_ACTIVE_LABEL ?>:</label>&nbsp;
+				<p <?= ($userEdit ? 'class="noshow"' : '') ?>><label class="close"><?= TEXT_STAFF_ACTIVE_LABEL ?>:</label>&nbsp;
 						<select id="activeField" name="active" class="requiredField">
 							<option value="" <?= (!isset($staffData['active']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
 							<option value="1" <?= ((isset($staffData['active']) && $staffData['active'] == 1) ? 'selected' : '' ) ?>><?= TEXT_STAFF_ACTIVE_OPTION_ACTIVE ?></option>
@@ -236,8 +236,8 @@ function writeTopicMenu ($lang, $cancelLink) {
                     </select>
                 </p>
 			</div>
-			<h2 <?= ($userEdit ? 'style="display: none;"' : '') ?>><?= TEXT_STAFF_CLINIC_INFO_LABEL ?></h2>
-			<div id="clinicInfo" class="indent1" <?= ($userEdit ? 'style="display: none;"' : '') ?>>
+			<h2 <?= ($userEdit ? 'class="noshow"' : '') ?>><?= TEXT_STAFF_CLINIC_INFO_LABEL ?></h2>
+			<div id="clinicInfo" class="indent1 <?= ($userEdit ? 'noshow' : '') ?>">
 				<p><label><?= TEXT_STAFF_MEMBERID_LABEL ?>:</label><br>
 					<?= dbFieldTextInput ($staffData, 'memberID', TEXT_STAFF_MEMBERID_PLACEHOLDER, false, false,
 					'text', 'piClinicEdit', 32) ?>

@@ -139,7 +139,7 @@ function writeTopicMenu ($returnUrl, $lang) {
                 echo '<input type="hidden" name="topic[errorUrl]" value="/adminHelpAddEdit.php">';
                 echo '<input type="hidden" name="topic[successUrl]" value="/adminHome.php">';
                 echo '</div>';
-        	    echo '<div style="clear: both;"></div>';
+        	    echo '<div class="clearFloat"></div>';
                 echo '<div class="infoBlock">';
                 echo '<hr>';
                 foreach ($supportedLanguages as $thisLanguage => $langName) {
@@ -151,7 +151,7 @@ function writeTopicMenu ($returnUrl, $lang) {
                     echo '</div>';
                 }
                 echo '</div>';
-                echo '<div style="clear: both;"></div>';
+                echo '<div class="clearFloat"></div>';
                 echo '<hr>';
             ?>
 			<p><button class="btn_submit" type="submit"><?= TEXT_HELP_SUBMIT_BUTTON ?></button></p>

@@ -185,13 +185,13 @@ if ($logFilters['count'] > 1) {
                 ?>
             </select>
             </div>
-            <div style="clear: both;"></div>
+            <div class="clearFloat"></div>
             <div class="infoBlock">
                 <p><button type="submit"><?= TEXT_LOG_FILE_SUBMIT_BUTTON ?></button></p>
             </div>
         </form>
     </div>
-    <div style="clear: both;"></div>
+    <div class="clearFloat"></div>
     <hr>
     <div class="infoBlock">
         <table>
@@ -233,7 +233,7 @@ if ($logFilters['count'] > 1) {
             ?>
         </table>
     </div>
-    <div style="clear: both;"></div>
+    <div class="clearFloat"></div>
 
 	</div>
 </body>

@@ -104,7 +104,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 		if (API_DEBUG_MODE) {
 			$report['visitRecord'] = $visitRecord;
 			$report['query'] = $visitQueryString;
-			echo ('<div id="Debug" style="display:none;"> ');
+			echo ('<div id="Debug" class="noshow"> ');
 			echo ('<pre>'.json_encode($visitRecord, JSON_PRETTY_PRINT).'</pre>');
 			echo ('</div>');
 		}
