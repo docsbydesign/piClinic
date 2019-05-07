@@ -189,7 +189,9 @@ function writeTopicMenu ($sessionInfo) {
                     <label class="close"><?= TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_LABEL ?>:</label> <?= (!empty($visitInfo['patientResponsibleParty']) ? $visitInfo['patientResponsibleParty'] : str_repeat("_",22))  ?><br>
                     <label class="close"><?= TEXT_FIRST_VISIT_LABEL ?>:</label>
                     <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'YES') ? TEXT_FIRST_VISIT_TEXT : "" ) ?>
-                    <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'NO') ? TEXT_RETURN_VISIT_TEXT : "" ) ?>
+                    <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'NO') ? TEXT_RETURN_VISIT_TEXT : "" ) ?><br>
+                    <label class="close"><?= TEXT_NEXT_VAX_DATE_INPUT_LABEL ?>:</label>
+                    <span <?= (!empty($visitInfo['patientNextVaccinationDate']) && (strtotime($visitInfo['patientNextVaccinationDate']) <= time()) ? ' style="color:white; background-color: #F00;"' : '') ?>><?= (!empty($visitInfo['patientNextVaccinationDate']) ? '&nbsp;'.date(TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT, strtotime($visitInfo['patientNextVaccinationDate'])).'&nbsp;' : TEXT_NOT_SPECIFIED )?></span>
                 </div>
                 <div class="rightDiv">
                     <label class="close"><?= TEXT_BIRTHDATE_LABEL ?>:</label><?= date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($visitInfo['birthDate'])) ?>&nbsp;(<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>)<br>
