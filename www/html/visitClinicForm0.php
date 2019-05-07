@@ -196,6 +196,7 @@ function writeTopicMenu ($sessionInfo) {
                     <label class="close"><?= TEXT_MARITAL_STATUS_LABEL ?>:</label> <?= (!empty($visitInfo['patientMaritalStatus']) ? $maritalStatusString[$visitInfo['patientMaritalStatus']] : str_repeat("_",22))  ?><br>
                     <label class="close"><?= TEXT_PATIENT_NEW_PROFESSION_LABEL ?>:</label> <?= (!empty($visitInfo['patientProfession']) ? $visitInfo['patientProfession'] : str_repeat("_",22))  ?>
                 </div>
+            </div>
             <div class="hrDiv"></div>
             <div class="infoBlock fullWidth">
                 <div class="leftDiv">

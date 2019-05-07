@@ -68,7 +68,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 		<ul>
             <li><a href="/adminShowUsers.php" title="<?= TEXT_ADMIN_MANAGE_USERS_TITLE ?>"><?= TEXT_ADMIN_MANAGE_USERS_LINK ?></a>:&nbsp;<?= TEXT_ADMIN_MANAGE_USERS_DESCRIPTION ?></li>
             <li class="separated <?= $showAdmin ?>"><a href="/adminLogViewer.php" title="<?= TEXT_ADMIN_LOG_VIEWER_TITLE ?>"><?= TEXT_ADMIN_LOG_VIEWER_LINK ?></a>:&nbsp;<?= TEXT_ADMIN_LOG_VIEWER_DESCRIPTION ?></li>
-            <li <?= 'class="'.$showAdmin.'"' ?>><a href="/adminShowComments.php" title="<?= TEXT_ADMIN_SHOW_COMMENTS_TITLE ?>"><?= TEXT_ADMIN_SHOW_COMMENTS_LINK ?></a>:&nbsp;<?= TEXT_ADMIN_SHOW_COMMENTS_DESCRIPTION ?></li <?= 'class="'.$showAdmin.'"' ?>>
+            <li <?= 'class="'.$showAdmin.'"' ?>><a href="/adminShowComments.php" title="<?= TEXT_ADMIN_SHOW_COMMENTS_TITLE ?>"><?= TEXT_ADMIN_SHOW_COMMENTS_LINK ?></a>:&nbsp;<?= TEXT_ADMIN_SHOW_COMMENTS_DESCRIPTION ?></li>
             <li class="separated <?= $showAdmin ?>"><a href="/adminBackup.php?type=patient" title="<?= TEXT_ADMIN_BACKUP_PATIENT_TITLE ?>"><?= TEXT_ADMIN_BACKUP_PATIENT_LINK ?></a>: <?= TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION ?></li>
             <li <?= 'class="'.$showAdmin.'"' ?>><a href="/adminBackup.php?type=log" title="<?= TEXT_ADMIN_BACKUP_LOG_TITLE ?>"><?= TEXT_ADMIN_BACKUP_LOG_LINK ?></a>: <?= TEXT_ADMIN_BACKUP_LOG_DESCRIPTION ?></li>
             <li <?= 'class="'.$showAdmin.'"' ?>><a href="/adminBackup.php?type=db" title="<?= TEXT_ADMIN_BACKUP_DB_TITLE ?>"><?= TEXT_ADMIN_BACKUP_DB_LINK ?></a>: <?= TEXT_ADMIN_BACKUP_DB_DESCRIPTION ?></li>

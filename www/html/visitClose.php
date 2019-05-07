@@ -259,6 +259,7 @@ function writeOptionsMenu ($visitInfo) {
                                 <?= writeDiagnosisDataBlock ($sessionInfo, $dbLink, $visitInfo, 1, TEXT_DIAGNOSIS1_LABEL, TEXT_DIAGNOSIS1_PLACEHOLDER ) ?>
                                 <?= writeDiagnosisDataBlock ($sessionInfo, $dbLink, $visitInfo, 2, TEXT_DIAGNOSIS2_LABEL, TEXT_DIAGNOSIS2_PLACEHOLDER ) ?>
                                 <?= writeDiagnosisDataBlock ($sessionInfo, $dbLink, $visitInfo, 3, TEXT_DIAGNOSIS3_LABEL, TEXT_DIAGNOSIS3_PLACEHOLDER ) ?>
+                            </div>
 							<div class="dataBlock">
 								<p><label class="close"><?= TEXT_REFERRED_TO_LABEL ?>:</label><?= dbFieldTextInput ($visitInfo, "referredTo", TEXT_REFERRAL_PLACEHOLDER, false) ?></p>
 							</div>
@@ -273,7 +274,7 @@ function writeOptionsMenu ($visitInfo) {
 			</div>
 		</div>
 	</div>
-	</div>
 	<?= icdLookupJavaScript() ?>
+    </div>
 </body>
 <?php @mysqli_close($dbLink); ?>
