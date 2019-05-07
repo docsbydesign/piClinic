@@ -50,7 +50,7 @@ $requestData = $sessionInfo['parameters'];
 $pageLanguage = $sessionInfo['pageLanguage'];
 // load the strings for the page language
 //	assumes $pageLanguage contains a valid language
-require_once('./uitext/clinicVisitBaseText.php');
+require_once('./uitext/visitClinicForm0Text.php');
 // functions to translate Enums to localized text
 require_once('./visitUiStrings.php');
 require_once('./patientUiStrings.php');
@@ -161,6 +161,9 @@ function writeTopicMenu ($sessionInfo) {
 	<div class="pageBody portraitReport<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
         <?= writeTopicMenu($sessionInfo) ?>
         <div class="logoBlock printOnly"><p>Logo Here</p></div>
+        <div class="infoBlock <?= $visitInfo['visitStatus'] == 'Open' ? ' hideDiv' : '' ?>">
+            <h2><?= TEXT_REPRINT_HEADING ?></h2>
+        </div>
         <div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
             <div class="infoBlock fullWidth">
                 <div class="leftDiv">
@@ -256,32 +259,52 @@ function writeTopicMenu ($sessionInfo) {
                 <?= (!empty($visitInfo['secondaryComplaint']) ? '<p class="indent1">'.$visitInfo['secondaryComplaint'].'</p>' : '') ?>
             </div>
             <div class="hrDiv"></div>
-            <div class="infoBlock">
-                <table class="fullPortrait">
-                    <tr>
-                        <th class="sixCol"><label><?= TEXT_VISIT_FORM_HEIGHT_LABEL ?></label></th>
-                        <th class="sixCol"><label><?= TEXT_VISIT_FORM_WEIGHT_LABEL ?></label></th>
-                        <th class="sixCol"><label><?= TEXT_VISIT_FORM_TEMP_LABEL ?></label></th>
-                        <th class="sixCol"><label><?= TEXT_VISIT_FORM_BP_LABEL ?></label></th>
-                        <th class="sixCol"><label><?= TEXT_VISIT_FORM_PULSE_LABEL ?></label></th>
-                        <th class="sixCol"><label><?= TEXT_VISIT_FORM_BS_LABEL ?></label></th>
-                    </tr>
-                    <tr>
-                        <td class="sixCol">&nbsp;</td>
-                        <td class="sixCol">&nbsp;</td>
-                        <td class="sixCol">&nbsp;</td>
-                        <td class="sixCol">&nbsp;</td>
-                        <td class="sixCol">&nbsp;</td>
-                        <td class="sixCol">&nbsp;</td>
-                    </tr>
-                </table>
+            <div class="infoBlock<?= $visitInfo['visitStatus'] == 'Closed' ? ' hideDiv' : '' ?>">
+                <div class="infoBlock">
+                    <table class="fullPortrait">
+                        <tr>
+                            <th class="sixCol"><label><?= TEXT_VISIT_FORM_HEIGHT_LABEL ?></label></th>
+                            <th class="sixCol"><label><?= TEXT_VISIT_FORM_WEIGHT_LABEL ?></label></th>
+                            <th class="sixCol"><label><?= TEXT_VISIT_FORM_TEMP_LABEL ?></label></th>
+                            <th class="sixCol"><label><?= TEXT_VISIT_FORM_BP_LABEL ?></label></th>
+                            <th class="sixCol"><label><?= TEXT_VISIT_FORM_PULSE_LABEL ?></label></th>
+                            <th class="sixCol"><label><?= TEXT_VISIT_FORM_BS_LABEL ?></label></th>
+                        </tr>
+                        <tr>
+                            <td class="sixCol">&nbsp;</td>
+                            <td class="sixCol">&nbsp;</td>
+                            <td class="sixCol">&nbsp;</td>
+                            <td class="sixCol">&nbsp;</td>
+                            <td class="sixCol">&nbsp;</td>
+                            <td class="sixCol">&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="hrDiv"></div>
+                <div class="infoBlock fiveCm">
+                    <label><?= TEXT_EXAM_NOTES_LABEL ?>:</label>
+                </div>
+                <div class="hrDiv"></div>
+                <div class="infoBlock">
+                    <table class="fullPortrait">
+                        <tr>
+                            <th class="threeCol"><label><?= TEXT_DIAGNOSIS_1_LABEL ?></label></th>
+                            <th class="threeCol"><label><?= TEXT_DIAGNOSIS_2_LABEL ?></label></th>
+                            <th class="threeCol"><label><?= TEXT_DIAGNOSIS_3_LABEL ?></label></th>
+                        </tr>
+                        <tr>
+                            <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
+                            <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
+                            <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="hrDiv"></div>
+                <div class="infoBlock fiveCm">
+                    <label><?= TEXT_ASSESSMENT_NOTES_LABEL ?>:</label>
+                </div>
             </div>
-            <div class="hrDiv"></div>
-            <div class="infoBlock fiveCm">
-                <label><?= TEXT_EXAM_NOTES_LABEL ?>:</label>
-            </div>
-            <div class="hrDiv"></div>
-            <div class="infoBlock">
+            <div class="infoBlock<?= $visitInfo['visitStatus'] == 'Open' ? ' hideDiv' : '' ?>">
                 <table class="fullPortrait">
                     <tr>
                         <th class="threeCol"><label><?= TEXT_DIAGNOSIS_1_LABEL ?></label></th>
@@ -289,15 +312,11 @@ function writeTopicMenu ($sessionInfo) {
                         <th class="threeCol"><label><?= TEXT_DIAGNOSIS_3_LABEL ?></label></th>
                     </tr>
                     <tr>
-                        <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
-                        <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
-                        <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
+                        <td class="threeCol"><?= empty($visitInfo['condition1']) ? TEXT_NOT_SPECIFIED :  '['.conditionText($visitInfo['condition1']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis1'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
+                        <td class="threeCol"><?= empty($visitInfo['condition2']) ? TEXT_NOT_SPECIFIED :  '['.conditionText($visitInfo['condition2']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis2'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
+                        <td class="threeCol"><?= empty($visitInfo['condition3']) ? TEXT_NOT_SPECIFIED :  '['.conditionText($visitInfo['condition3']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis3'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
                     </tr>
                 </table>
-            </div>
-            <div class="hrDiv"></div>
-            <div class="infoBlock fiveCm">
-                <label><?= TEXT_ASSESSMENT_NOTES_LABEL ?>:</label>
             </div>
         </div>
         <div class="clearFloat"></div>

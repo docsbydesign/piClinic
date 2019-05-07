@@ -484,6 +484,7 @@ TEXT_PATIENT_NO_CURRENT_MEDS,No medications on file,No hay medicamentos en el ar
 TEXT_PATIENT_NO_KNOWN_ALLERGIES,No known allergies,Sin alergias conocidas
 TEXT_PATIENT_OPEN_NEW_VISIT,Admit this patient to the clinic,Abra una visita nueva para este paciente
 TEXT_PATIENT_PERSONAL_LABEL,Personal info,Información personal
+TEXT_PATIENT_PRINT_PATIENT_VISIT_BUTTON,Print clinic form,Imprimir formulario de la visita
 TEXT_PATIENT_RESET_NEW_BUTTON,Clear fields and start over,Borrar todo y empezar de nuevo
 TEXT_PATIENT_RESET_SEARCH_BUTTON,Start a new search,Buscar de nuevo
 TEXT_PATIENT_SEARCH_ADDRESS_LABEL,Home address,Dirección de la casa
@@ -621,6 +622,7 @@ TEXT_REPORT_WEEKDAY_7,Sunday,Domingo
 TEXT_REPORT_WEEKDAY_LABEL,Day of the week,Día de la semana
 TEXT_REPORT_YEAR_LABEL,Year,Año
 TEXT_REPORT_YEAR_PLACEHOLDER,Report year (YYYY),Año del informe(AAAA)
+TEXT_REPRINT_HEADING,This is a reprint of the visit form. See the patient record for details.,Este es un reimpreso del formulario de la visita. Revisar el expediente para los detalles de la visita.
 TEXT_RESPONSIBLE_PARTY_LABEL,Responsbile Person,Encargado/a
 TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED,(Not specified),(No especificado)
 TEXT_RETURN_TO_SEARCH_LINK,Search again,Buscar de nuevo

@@ -203,10 +203,15 @@ function writeTopicMenu ($sessionInfo) {
 						echo('<li class="firstLink">');
 						$firstLinkDefined = true;
 					}
-					echo ('<a class="a_visitEdit" href="/visitEdit.php?patientVisitID='. $visitInfo['patientVisitID'] .
-						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitEdit').
+					echo ('<a class="a_visitPrint" href="/visitClinicForm0.php?patientVisitID='. $visitInfo['patientVisitID'] .
+						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitPrint').
                         '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_EDIT').'" '.
-						'title="'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'">'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'</a></li>');
+						'title="'.TEXT_PATIENT_PRINT_PATIENT_VISIT_BUTTON.'">'.TEXT_PATIENT_PRINT_PATIENT_VISIT_BUTTON.'</a></li>');
+                    echo('<li>');
+                    echo ('<a class="a_visitEdit" href="/visitEdit.php?patientVisitID='. $visitInfo['patientVisitID'] .
+                        '&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitEdit').
+                        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_EDIT').'" '.
+                        'title="'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'">'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'</a></li>');
 				}
 			?>	
 			</ul>

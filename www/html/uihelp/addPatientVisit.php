@@ -182,6 +182,7 @@ $dbOptionalFields = [
 	// 'visitID' filled by DB
 	'staffUsername'  		
 	,'staffName'	// 	TODO: coming soon
+    ,'firstVisit'
 	// 'visitType' required (see above)
 	,'visitStatus'		// assign if present, otherwise, use default
 	,'primaryComplaint'
@@ -270,7 +271,7 @@ if ($retVal['httpResponse'] == 201) {
             'clinicPatientID' => $retVal['data']['clinicPatientID'],
             'patientVisitID' => $retVal['data']['patientVisitID']
         );
-		$redirectUrl = makeUrlWithQueryParams('/clinicVisitBase.php', $successArgs);
+		$redirectUrl = makeUrlWithQueryParams('/visitClinicForm0.php', $successArgs);
 	}
     // close any of the workflows that this completes
     closeMatchingWorkflow($sessionInfo, __FILE__, $dbLink,
