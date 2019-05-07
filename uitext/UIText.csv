@@ -413,7 +413,6 @@ TEXT_PATIENTNATIONALID_PLACEHOLDER,Patient\'s National ID number,Numero de la ce
 TEXT_PATIENTS_FOUND_PAGE_TITLE,Matching patients found,Pacientes encontrados
 TEXT_PATIENTVISITDATE_LABEL,Visit date,Fecha de la visita
 TEXT_PATIENTVISITID_LABEL,Clinical history number,Número de historia clínica
-TEXT_PATIENTVISITID_LABEL,ID,ID
 TEXT_PATIENT_ADD_EDIT_ID_LABEL,Patient ID,Identidad del paciente
 TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER,The patient\'s clinic ID,El número del paciente
 TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON,Add a new patient,Agregar un paciente nuevo
@@ -431,10 +430,7 @@ TEXT_PATIENT_EDIT_PATIENT_BUTTON,Update this patient\'s info,Actualizar la infor
 TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON,Update visit info,Actualizar la información de esta visita
 TEXT_PATIENT_EDIT_SUBMIT_BUTTON,Update patient info,Actualizar información del paciente
 TEXT_SEARCH_PATIENT_ID_LABEL,"Patient, Visit, or Family ID","Número del paciente, visita, o familia"
-TEXT_PATIENT_ID_LABEL,Clinical History Number,Número de historia clínica
-TEXT_PATIENT_ID_LABEL,Lookup patient or visit,Buscar paciente o visita
-TEXT_PATIENT_ID_PLACEHOLDER,Patient\'s name or ID,Identidad o nombre del paciente
-TEXT_PATIENT_ID_PLACEHOLDER,The ID number to search,El número para buscar
+TEXT_PATIENT_ID_PLACEHOLDER,The name or ID to find,El nombre o número para encontrar
 TEXT_PATIENT_IMAGE_NOT_SPECIFIED,Image to delete was not specified,El imagen para borrar no estuvo especificado
 TEXT_PATIENT_IMAGE_TYPE_NOT_SUPPORTED,The specified image type is not recognized,El tipo de imagen especificada no está reconocido
 TEXT_PATIENT_INFO_PAGE_TITLE,Patient Information,Información del paciente
@@ -542,12 +538,11 @@ TEXT_REPORT_CLINIC_CISUAPS_LABEL,CIS/UAPS,CIS/UAPS
 TEXT_REPORT_CLINIC_CODE_LABEL,Code,Código
 TEXT_REPORT_CLINIC_LEVEL_LABEL,Level,Nivel
 TEXT_REPORT_CLINIC_TYPE_LABEL,Clinic type,Tipo de establecimiento
-TEXT_REPORT_CLINIC_TYPE_LABEL,Type,Tipo
+TEXT_REPORT_CLINIC_TYPE_SHORT_LABEL,Type,Tipo
 TEXT_REPORT_COLUMN_TOTAL,TOTAL,TOTAL
 TEXT_REPORT_CONTINUED,Continued on next page,Continua en la próxima página
-TEXT_REPORT_DATE_LABEL,Last date reported&nbsp;(mm/dd/yyyy),Última fecha reportada&nbsp;(dd/mm/aaaa)
+TEXT_REPORT_LAST_DATE_LABEL,Last date reported&nbsp;(mm/dd/yyyy),Última fecha reportada&nbsp;(dd/mm/aaaa)
 TEXT_REPORT_DATE_LABEL,Report date (YYYY-MM),Fecha del informe (AAAA-MM)
-TEXT_REPORT_DATE_PLACEHOLDER,Report date (YYYY-MM-DD),Report date (AAAA-MM-DD)
 TEXT_REPORT_DATE_PLACEHOLDER,Report date (YYYY-MM-DD),Report date (AAAA-MM-DD)
 TEXT_REPORT_DATE_TIME_IN,Visit time,Hora de la visita
 TEXT_REPORT_DAY,Day of month,Día del mes
@@ -579,7 +574,6 @@ TEXT_REPORT_LINK_URI_MONTHLY_PATIENT_BY_DAY_LOG,,
 TEXT_REPORT_LINK_URI_MONTHLY_PATIENT_BY_POS_LOG,,
 TEXT_REPORT_LINK_URI_MONTHLY_PAYMENT_LOG,,
 TEXT_REPORT_MONTH_LABEL,Month,Mes
-TEXT_REPORT_MONTH_LABEL,Month,Mes
 TEXT_REPORT_MONTH_PLACEHOLDER,Report month (MM),Mes del informe (MM)
 TEXT_REPORT_NO_DATA,No data for this month,No hay datos para este mes
 TEXT_REPORT_PAGE_TITLE,Clinic reports,Informes de la Clínica
@@ -591,12 +585,10 @@ TEXT_REPORT_PAYMENT_TOTAL_LABEL,Payment received,Pagos recibidos
 TEXT_REPORT_REFERRAL_LABEL,Referrals,Referencia
 TEXT_REPORT_REGION_LABEL,Health district,Región de Salud
 TEXT_REPORT_ROW_LABEL,No.,No.
-TEXT_REPORT_ROW_LABEL,No.,No.
 TEXT_REPORT_RSMDC,"Health District: Metropolitan, D.C.",Región Sanitaria Metropolitana DC
 TEXT_REPORT_SDS,Secretary of Health,Secretaría de Salud
 TEXT_REPORT_SERVICE_EMERGENCY,Emergency,Emergencia
 TEXT_REPORT_SERVICE_EXTERNAL,Outpatient,Consulta externa
-TEXT_REPORT_SERVICE_EXTERNAL,Service: Outpatient,Servicio: Consulta Externa
 TEXT_REPORT_SERVICE_FILTRO,Filter,Filtro
 TEXT_REPORT_SERVICE_SPECIALTY,Specialty,Especialidad
 TEXT_REPORT_SERVICE_TYPE,Type of<br>attention,Servicio de<br>Atención
@@ -740,8 +732,6 @@ TEXT_STAFF_MEMBERID_PLACEHOLDER,ID provided by clinic,ID de la clínica
 TEXT_STAFF_NAMEFIRST_PLACEHOLDER,First name,Nombre
 TEXT_STAFF_NAMELAST_PLACEHOLDER,Last name,Apellido
 TEXT_STAFF_NAME_LABEL,Name,Nombre
-TEXT_STAFF_NAME_PLACEHOLDER,Assigned physician,Medico asignado
-TEXT_STAFF_NAME_PLACEHOLDER,Name (blank for all),Nombre (vacio para todos)
 TEXT_STAFF_NEW_SUBMIT_BUTTON,Add new staff member or user,Agrega una persona o usuario nuevo
 TEXT_STAFF_PASSWORD_PLACEHOLDER,Your new password,Su contraseña nueva
 TEXT_STAFF_POSITION_LABEL,Position in the clinic,Puesto en la clínica
@@ -767,7 +757,6 @@ TEXT_USERNAME_NOT_ACTIVE,Inactive username,Usuario inactivo
 TEXT_USER_COMMENTS_PAGE_TITLE,User comments,Comentarios de los usuarios
 TEXT_USER_TOKEN_FIELD_NAME_SELECT,Token,Token
 TEXT_VALUE_NOT_SET,(not set),(vacio)
-TEXT_VALUE_NOT_SET,No data,No hay datos
 TEXT_VIEW_PATIENT,Show patient information,Mostrar información del paciente
 TEXT_VISIT_ARRIVAL_HEADING,Arrival,Llegada
 TEXT_VISIT_DATE_FORMAT,m/d/Y H:i,d-m-Y H:i
@@ -801,7 +790,7 @@ TEXT_VISIT_LIST_ACTION_EDIT,Edit,Actualizar
 TEXT_VISIT_LIST_ACTION_MORE,more...,más...
 TEXT_VISIT_LIST_ACTION_VIEW,View,Ver
 TEXT_VISIT_LIST_HEAD_COMPLAINT,Reason for visit,Motivo de la visita
-TEXT_VISIT_LIST_HEAD_DATE,Arrived,Llegó
+TEXT_VISIT_LIST_ARRIVED_DATE,Arrived,Llegó
 TEXT_VISIT_LIST_HEAD_DATE,Visit date,Fecha de la visita
 TEXT_VISIT_LIST_HEAD_DIAGNOSIS1,Diagnosis 1,Diagnóstico 1
 TEXT_VISIT_LIST_HEAD_DIAGNOSIS2,Diagnosis 2,Diagnóstico 2

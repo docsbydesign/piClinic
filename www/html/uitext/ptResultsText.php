@@ -65,7 +65,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_HOMECITY_LABEL')) { define('TEXT_HOMECITY_LABEL','City',false); }
 	if (!defined('TEXT_PATIENTS_FOUND_PAGE_TITLE')) { define('TEXT_PATIENTS_FOUND_PAGE_TITLE','Matching patients found',false); }
 	if (!defined('TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON')) { define('TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON','Add a new patient',false); }
-	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','Patient\'s name or ID',false); }
+	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','The name or ID to find',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_FOUND_ATA')) { define('TEXT_PATIENT_SEARCH_FOUND_ATA','Found these patients. Select one to enter their visit info or add a new patient above.',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_FOUND_NOT_ATA')) { define('TEXT_PATIENT_SEARCH_FOUND_NOT_ATA','Found these patients. Select one to view thier info.',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA')) { define('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA','No matching patients found. Retry your search or add a new patient above.',false); }
@@ -85,7 +85,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_HOMECITY_LABEL')) { define('TEXT_HOMECITY_LABEL','Municipio',false); }
 	if (!defined('TEXT_PATIENTS_FOUND_PAGE_TITLE')) { define('TEXT_PATIENTS_FOUND_PAGE_TITLE','Pacientes encontrados',false); }
 	if (!defined('TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON')) { define('TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON','Agregar un paciente nuevo',false); }
-	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','Identidad o nombre del paciente',false); }
+	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','El nombre o número para encontrar',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_FOUND_ATA')) { define('TEXT_PATIENT_SEARCH_FOUND_ATA','Encontró estos pacientes. Haz clik para agregar su visita o agregue un paciente nuevo.',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_FOUND_NOT_ATA')) { define('TEXT_PATIENT_SEARCH_FOUND_NOT_ATA','Encontró estos pacientes. Haz clik para ver sus detalles.',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA')) { define('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA','No hay pacientes con este ID o nombre. Buscar de nuevo o agregar un paciente nuevo.',false); }

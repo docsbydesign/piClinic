@@ -680,7 +680,7 @@ header('Content-type: text/html; charset=utf-8');
                 <div id="AT2R-ReportClinicInfo">
                     <p>
                         <label class="close"><?= TEXT_REPORT_REGION_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['ClinicRegion']) ? $clinicInfo['ClinicRegion'] : $blankField ) ?></span>&nbsp;&nbsp;
-                        <label class="close"><?= TEXT_REPORT_CLINIC_TYPE_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['TypeCode']) ? $clinicInfo['TypeCode'] : $blankField ) ?></span>
+                        <label class="close"><?= TEXT_REPORT_CLINIC_TYPE_SHORT_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['TypeCode']) ? $clinicInfo['TypeCode'] : $blankField ) ?></span>
                         <label class="close"><?= TEXT_REPORT_CLINIC_CISUAPS_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['TypeCode']) ? $clinicInfo['TypeCode'] : $blankField ) ?></span>&nbsp;&nbsp;
                         <label class="close"><?= TEXT_REPORT_CLINIC_CODE_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['PublicID']) ? $clinicInfo['PublicID'] : $blankField ) ?></span>
                     </p>

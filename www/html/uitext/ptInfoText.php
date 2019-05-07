@@ -148,7 +148,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_PATIENT_CURRENT_VISIT_LIST_HEAD')) { define('TEXT_PATIENT_CURRENT_VISIT_LIST_HEAD','Patient is currently in the clinic',false); }
 	if (!defined('TEXT_PATIENT_DATA_HEAD')) { define('TEXT_PATIENT_DATA_HEAD','Patient data',false); }
 	if (!defined('TEXT_PATIENT_EDIT_PATIENT_BUTTON')) { define('TEXT_PATIENT_EDIT_PATIENT_BUTTON','Update this patient\'s info',false); }
-	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','Patient\'s name or ID',false); }
+	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','The name or ID to find',false); }
 	if (!defined('TEXT_PATIENT_INFO_PAGE_TITLE')) { define('TEXT_PATIENT_INFO_PAGE_TITLE','Patient Information',false); }
 	if (!defined('TEXT_PATIENT_NO_CURRENT_MEDS')) { define('TEXT_PATIENT_NO_CURRENT_MEDS','No medications on file',false); }
 	if (!defined('TEXT_PATIENT_NO_KNOWN_ALLERGIES')) { define('TEXT_PATIENT_NO_KNOWN_ALLERGIES','No known allergies',false); }
@@ -173,7 +173,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_LIST_ACTION_MORE')) { define('TEXT_VISIT_LIST_ACTION_MORE','more...',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_VIEW')) { define('TEXT_VISIT_LIST_ACTION_VIEW','View',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_COMPLAINT')) { define('TEXT_VISIT_LIST_HEAD_COMPLAINT','Reason for visit',false); }
-	if (!defined('TEXT_VISIT_LIST_HEAD_DATE')) { define('TEXT_VISIT_LIST_HEAD_DATE','Arrived',false); }
+	if (!defined('TEXT_VISIT_LIST_HEAD_DATE')) { define('TEXT_VISIT_LIST_HEAD_DATE','Visit date',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_DIAGNOSIS1')) { define('TEXT_VISIT_LIST_HEAD_DIAGNOSIS1','Diagnosis 1',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_DOCTOR')) { define('TEXT_VISIT_LIST_HEAD_DOCTOR','Doctor',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_TIME')) { define('TEXT_VISIT_LIST_HEAD_TIME','Arrived',false); }
@@ -221,7 +221,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_PATIENT_CURRENT_VISIT_LIST_HEAD')) { define('TEXT_PATIENT_CURRENT_VISIT_LIST_HEAD','El paciente está en la clínica ahora',false); }
 	if (!defined('TEXT_PATIENT_DATA_HEAD')) { define('TEXT_PATIENT_DATA_HEAD','Datos del paciente',false); }
 	if (!defined('TEXT_PATIENT_EDIT_PATIENT_BUTTON')) { define('TEXT_PATIENT_EDIT_PATIENT_BUTTON','Actualizar la información del paciente',false); }
-	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','Identidad o nombre del paciente',false); }
+	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','El nombre o número para encontrar',false); }
 	if (!defined('TEXT_PATIENT_INFO_PAGE_TITLE')) { define('TEXT_PATIENT_INFO_PAGE_TITLE','Información del paciente',false); }
 	if (!defined('TEXT_PATIENT_NO_CURRENT_MEDS')) { define('TEXT_PATIENT_NO_CURRENT_MEDS','No hay medicamentos en el archivo',false); }
 	if (!defined('TEXT_PATIENT_NO_KNOWN_ALLERGIES')) { define('TEXT_PATIENT_NO_KNOWN_ALLERGIES','Sin alergias conocidas',false); }
@@ -246,7 +246,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_LIST_ACTION_MORE')) { define('TEXT_VISIT_LIST_ACTION_MORE','más...',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_VIEW')) { define('TEXT_VISIT_LIST_ACTION_VIEW','Ver',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_COMPLAINT')) { define('TEXT_VISIT_LIST_HEAD_COMPLAINT','Motivo de la visita',false); }
-	if (!defined('TEXT_VISIT_LIST_HEAD_DATE')) { define('TEXT_VISIT_LIST_HEAD_DATE','Llegó',false); }
+	if (!defined('TEXT_VISIT_LIST_HEAD_DATE')) { define('TEXT_VISIT_LIST_HEAD_DATE','Fecha de la visita',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_DIAGNOSIS1')) { define('TEXT_VISIT_LIST_HEAD_DIAGNOSIS1','Diagnóstico 1',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_DOCTOR')) { define('TEXT_VISIT_LIST_HEAD_DOCTOR','Medico',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_TIME')) { define('TEXT_VISIT_LIST_HEAD_TIME','Llegó',false); }

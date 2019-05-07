@@ -127,7 +127,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 					if (!$headerShown) {
 						echo ('<table class="piClinicList"><tr>');
 						echo ('<th>'.TEXT_VISIT_LIST_HEAD_NAME.'</th>');
-						echo ('<th>'.TEXT_VISIT_LIST_HEAD_DATE.'</th>');
+						echo ('<th>'.TEXT_VISIT_LIST_ARRIVED_DATE.'</th>');
 						echo ('<th>'.TEXT_VISIT_LIST_HEAD_DOCTOR.'</th>');
 						echo ('<th>'.TEXT_VISIT_LIST_HEAD_COMPLAINT.'</th>');
 						echo ('<th>'.TEXT_VISIT_LIST_ACTIONS.'</th>');

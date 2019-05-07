@@ -440,7 +440,7 @@ header('Content-type: text/html; charset=utf-8');
         echo '<h1>'.TEXT_MONTHLY_VISIT_HEADING.'</h1>';
         echo '<p><label class="close">'.TEXT_REPORT_CLINICNAME_LABEL.':</label>'.
             (isset($clinicInfo['shortName']) ? $clinicInfo['shortName'] : $blankField ).'</p>';
-        echo '<p><label class="close">'.TEXT_REPORT_DATE_LABEL.':</label>'.date(TEXT_DATE_FORMAT, strtotime($lastReportDate)).'</p>';
+        echo '<p><label class="close">'.TEXT_REPORT_LAST_DATE_LABEL.':</label>'.date(TEXT_DATE_FORMAT, strtotime($lastReportDate)).'</p>';
         echo '</div>';
         echo '<div id="PaymentLogBody">';
         echo '<table class="report" id="dailyVisitTable">';

@@ -59,8 +59,8 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_VISIT_LIST_ACTION_EDIT')) { define('TEXT_VISIT_LIST_ACTION_EDIT','TEXT_VISIT_LIST_ACTION_EDIT',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_MORE')) { define('TEXT_VISIT_LIST_ACTION_MORE','TEXT_VISIT_LIST_ACTION_MORE',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_VIEW')) { define('TEXT_VISIT_LIST_ACTION_VIEW','TEXT_VISIT_LIST_ACTION_VIEW',false); }
+	if (!defined('TEXT_VISIT_LIST_ARRIVED_DATE')) { define('TEXT_VISIT_LIST_ARRIVED_DATE','TEXT_VISIT_LIST_ARRIVED_DATE',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_COMPLAINT')) { define('TEXT_VISIT_LIST_HEAD_COMPLAINT','TEXT_VISIT_LIST_HEAD_COMPLAINT',false); }
-	if (!defined('TEXT_VISIT_LIST_HEAD_DATE')) { define('TEXT_VISIT_LIST_HEAD_DATE','TEXT_VISIT_LIST_HEAD_DATE',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_DOCTOR')) { define('TEXT_VISIT_LIST_HEAD_DOCTOR','TEXT_VISIT_LIST_HEAD_DOCTOR',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_NAME')) { define('TEXT_VISIT_LIST_HEAD_NAME','TEXT_VISIT_LIST_HEAD_NAME',false); }
 	if (!defined('TEXT_VISIT_LIST_MISSING')) { define('TEXT_VISIT_LIST_MISSING','TEXT_VISIT_LIST_MISSING',false); }
@@ -75,7 +75,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_MORE_VISIT_INFO')) { define('TEXT_MORE_VISIT_INFO','See the complete complaint in the visit description',false); }
 	if (!defined('TEXT_NO_OPEN_VISITS')) { define('TEXT_NO_OPEN_VISITS','No patients admitted to the clinic.',false); }
 	if (!defined('TEXT_OPEN_VISIT_LIST_HEAD')) { define('TEXT_OPEN_VISIT_LIST_HEAD','Patients admitted to the clinic',false); }
-	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','Patient\'s name or ID',false); }
+	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','The name or ID to find',false); }
 	if (!defined('TEXT_SEARCH_PATIENT_ID_LABEL')) { define('TEXT_SEARCH_PATIENT_ID_LABEL','Patient, Visit, or Family ID',false); }
 	if (!defined('TEXT_SEX_OPTION_F')) { define('TEXT_SEX_OPTION_F','F',false); }
 	if (!defined('TEXT_SEX_OPTION_M')) { define('TEXT_SEX_OPTION_M','M',false); }
@@ -89,8 +89,8 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_LIST_ACTION_EDIT')) { define('TEXT_VISIT_LIST_ACTION_EDIT','Edit',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_MORE')) { define('TEXT_VISIT_LIST_ACTION_MORE','more...',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_VIEW')) { define('TEXT_VISIT_LIST_ACTION_VIEW','View',false); }
+	if (!defined('TEXT_VISIT_LIST_ARRIVED_DATE')) { define('TEXT_VISIT_LIST_ARRIVED_DATE','Arrived',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_COMPLAINT')) { define('TEXT_VISIT_LIST_HEAD_COMPLAINT','Reason for visit',false); }
-	if (!defined('TEXT_VISIT_LIST_HEAD_DATE')) { define('TEXT_VISIT_LIST_HEAD_DATE','Arrived',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_DOCTOR')) { define('TEXT_VISIT_LIST_HEAD_DOCTOR','Doctor',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_NAME')) { define('TEXT_VISIT_LIST_HEAD_NAME','Name',false); }
 	if (!defined('TEXT_VISIT_LIST_MISSING')) { define('TEXT_VISIT_LIST_MISSING','(missing)',false); }
@@ -105,7 +105,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MORE_VISIT_INFO')) { define('TEXT_MORE_VISIT_INFO','Ver la descripcción completa',false); }
 	if (!defined('TEXT_NO_OPEN_VISITS')) { define('TEXT_NO_OPEN_VISITS','No hay pacientes admitidos a la clínica.',false); }
 	if (!defined('TEXT_OPEN_VISIT_LIST_HEAD')) { define('TEXT_OPEN_VISIT_LIST_HEAD','Pacientes admitidos a la clínica',false); }
-	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','Identidad o nombre del paciente',false); }
+	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','El nombre o número para encontrar',false); }
 	if (!defined('TEXT_SEARCH_PATIENT_ID_LABEL')) { define('TEXT_SEARCH_PATIENT_ID_LABEL','Número del paciente, visita, o familia',false); }
 	if (!defined('TEXT_SEX_OPTION_F')) { define('TEXT_SEX_OPTION_F','M',false); }
 	if (!defined('TEXT_SEX_OPTION_M')) { define('TEXT_SEX_OPTION_M','H',false); }
@@ -119,8 +119,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_LIST_ACTION_EDIT')) { define('TEXT_VISIT_LIST_ACTION_EDIT','Actualizar',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_MORE')) { define('TEXT_VISIT_LIST_ACTION_MORE','más...',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_VIEW')) { define('TEXT_VISIT_LIST_ACTION_VIEW','Ver',false); }
+	if (!defined('TEXT_VISIT_LIST_ARRIVED_DATE')) { define('TEXT_VISIT_LIST_ARRIVED_DATE','Llegó',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_COMPLAINT')) { define('TEXT_VISIT_LIST_HEAD_COMPLAINT','Motivo de la visita',false); }
-	if (!defined('TEXT_VISIT_LIST_HEAD_DATE')) { define('TEXT_VISIT_LIST_HEAD_DATE','Llegó',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_DOCTOR')) { define('TEXT_VISIT_LIST_HEAD_DOCTOR','Medico',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_NAME')) { define('TEXT_VISIT_LIST_HEAD_NAME','Nombre',false); }
 	if (!defined('TEXT_VISIT_LIST_MISSING')) { define('TEXT_VISIT_LIST_MISSING','(no especificado)',false); }
