@@ -84,11 +84,11 @@ TEXT_COMMENT_LIST_HEAD_USERNAME,Username,Usuario
 TEXT_COMMENT_PAGE_TITLE,piClinic Comment,Comentario de piClinic
 TEXT_COMMENT_PLACEHOLDER,Enter your comment about the piClinic here,Entrar su comentario del piClinic aquí
 TEXT_COMMENT_SUBMIT_BUTTON,Submit,Entregar
-TEXT_COMPLAINT_ADDITIONAL_LABEL,Additional complaint,Adicional motivo de la visita
-TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER,Additional complaint,Adicional motivo de la visita
+TEXT_COMPLAINT_ADDITIONAL_LABEL,Additional reason for visit,Adicional motivo de la visita
+TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER,Additional reason for visit,Adicional motivo de la visita
 TEXT_COMPLAINT_NOT_SPECIFIED,(Not specified),(No especificado)
-TEXT_COMPLAINT_PRIMARY_LABEL,Primary complaint,Primero motivo de la visita
-TEXT_COMPLAINT_PRIMARY_PLACEHOLDER,Primary complaint,Primero motivo de la visita
+TEXT_COMPLAINT_PRIMARY_LABEL,Primary reason for visit,Primero motivo de la visita
+TEXT_COMPLAINT_PRIMARY_PLACEHOLDER,Primary reason for visit,Primero motivo de la visita
 TEXT_CONDITION1_LABEL,Condition 1 code,Condición 1 codigo
 TEXT_CONDITION1_PLACEHOLDER,Code,Codigo
 TEXT_CONDITION2_LABEL,Condition 2 code,Condición 2 codigo
@@ -361,7 +361,7 @@ TEXT_MONTHLY_SUMMARY_DATA_TITLE,List of diagnosic codes tabulated in the Daily R
 TEXT_MONTHLY_SUMMARY_DESC,Summary of patients seen by day and age group,Resumen de pacientes atendidos por día y grupo de edad
 TEXT_MONTHLY_SUMMARY_TITLE,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
 TEXT_MONTHLY_VISIT_HEADING,Monthly Payment Log,Registro de Pagos del Mes
-TEXT_MORE_VISIT_INFO,See the complete complaint in the visit description,Ver la descripcción completa
+TEXT_MORE_VISIT_INFO,See all of the information about the visit description,Ver la descripcción completa
 TEXT_MO_DATE_PROMPT_LABEL,Date&nbsp;(yyyy-mm),Fecha&nbsp;(aaaa-mm)
 TEXT_NEIGHBORHOOD_LABEL,Neighborhood,Localidad
 TEXT_NEW_PATIENT_HEADING,Add new patient,Agregar paciente nuevo

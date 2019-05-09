@@ -135,7 +135,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_MARITAL_STATUS_LABEL')) { define('TEXT_MARITAL_STATUS_LABEL','Marital status',false); }
 	if (!defined('TEXT_MARITAL_STATUS_NOT_SPECIFIED')) { define('TEXT_MARITAL_STATUS_NOT_SPECIFIED','(Not specified)',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_NOT_FOUND')) { define('TEXT_MESSAGE_PATIENT_ID_NOT_FOUND','The patient with that ID was not found.',false); }
-	if (!defined('TEXT_MORE_VISIT_INFO')) { define('TEXT_MORE_VISIT_INFO','See the complete complaint in the visit description',false); }
+	if (!defined('TEXT_MORE_VISIT_INFO')) { define('TEXT_MORE_VISIT_INFO','See all of the information about the visit description',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT')) { define('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT','m/d/Y',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','Next vaccination date',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','Not specified',false); }
