@@ -282,13 +282,13 @@ function writeTopicMenu ($sessionInfo) {
                             <td class="sixCol">&nbsp;</td>
                         </tr>
                     </table>
+                    <div class="hrDiv"></div>
                 </div>
-                <div class="hrDiv"></div>
                 <div class="infoBlock fiveCm">
                     <label><?= TEXT_EXAM_NOTES_LABEL ?>:</label>
                 </div>
-                <div class="hrDiv"></div>
                 <div class="infoBlock">
+                    <div class="hrDiv"></div>
                     <table class="fullPortrait">
                         <tr>
                             <th class="threeCol"><label><?= TEXT_DIAGNOSIS_1_LABEL ?></label></th>
@@ -301,8 +301,8 @@ function writeTopicMenu ($sessionInfo) {
                             <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
                         </tr>
                     </table>
+                    <div class="hrDiv"></div>
                 </div>
-                <div class="hrDiv"></div>
                 <div class="infoBlock fiveCm">
                     <label><?= TEXT_ASSESSMENT_NOTES_LABEL ?>:</label>
                 </div>
