@@ -72,7 +72,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_DISCHARGE_VISIT_INFO')) { define('TEXT_DISCHARGE_VISIT_INFO','Discharge this patient',false); }
 	if (!defined('TEXT_EARLIER_VISIT_NOTE')) { define('TEXT_EARLIER_VISIT_NOTE','Visits from an earlier date',false); }
 	if (!defined('TEXT_EDIT_VISIT_INFO')) { define('TEXT_EDIT_VISIT_INFO','Edit this visit',false); }
-	if (!defined('TEXT_MORE_VISIT_INFO')) { define('TEXT_MORE_VISIT_INFO','See the complete complaint in the visit description',false); }
+	if (!defined('TEXT_MORE_VISIT_INFO')) { define('TEXT_MORE_VISIT_INFO','See all of the information about the visit description',false); }
 	if (!defined('TEXT_NO_OPEN_VISITS')) { define('TEXT_NO_OPEN_VISITS','No patients admitted to the clinic.',false); }
 	if (!defined('TEXT_OPEN_VISIT_LIST_HEAD')) { define('TEXT_OPEN_VISIT_LIST_HEAD','Patients admitted to the clinic',false); }
 	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','The name or ID to find',false); }

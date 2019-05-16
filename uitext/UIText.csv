@@ -522,6 +522,7 @@ TEXT_PT_MALE,Patients (Men),Atenciones de hombres
 TEXT_PT_REFERRED_IN,Referred patients,Consultas referidas
 TEXT_PT_WALK_IN,Outpatients,Consultas espontaneas
 TEXT_RECEIVED_FROM_LABEL,Received from,Recibida de
+TEXT_REFER_TO_LABEL,Refer to,Envia a
 TEXT_REFERRAL_BLANK,(Not specified),(No especificada)
 TEXT_REFERRAL_HEADING,Referral info,Referencia
 TEXT_REFERRAL_PLACEHOLDER,Clinic name,Nombre de la clínica

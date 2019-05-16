@@ -258,6 +258,7 @@ function writeTopicMenu ($sessionInfo) {
             <div class="hrDiv"></div>
             <div class="infoBlock threeCm">
                 <label><?= TEXT_VISIT_LIST_HEAD_COMPLAINT ?>:</label>
+                <?= (!empty($visitInfo['referredFrom']) ? '<p class="indent1"><label class="close">'.TEXT_REFERRED_FROM_LABEL.':</label>'.$visitInfo['referredFrom'].'</p>' : '') ?>
                 <?= (!empty($visitInfo['primaryComplaint']) ? '<p class="indent1">'.$visitInfo['primaryComplaint'].'</p>' : '') ?>
                 <?= (!empty($visitInfo['secondaryComplaint']) ? '<p class="indent1">'.$visitInfo['secondaryComplaint'].'</p>' : '') ?>
             </div>
@@ -299,6 +300,9 @@ function writeTopicMenu ($sessionInfo) {
                             <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
                             <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
                             <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="border-top: 1px solid #DDD"><label><?= TEXT_REFER_TO_LABEL ?>:</label></td>
                         </tr>
                     </table>
                     <div class="hrDiv"></div>
