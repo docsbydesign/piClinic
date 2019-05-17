@@ -74,6 +74,7 @@ if (!defined('REST_CONSTANTS')) {
     define('FROM_LINK_QP','&fromLink', false); // use in query paramter string after first QP
     define('FROM_LINK','fromLink',false); // used in form Values
     define('FROM_LINK_SEP','-',false); // character used to separate elements in From link
+    define('AUTOINCREMENT_CLINICPATIENTID', true, false); // used to suggest the next clinicPatientID
 
 	// languages
 	define('UI_DEFAULT_LANGUAGE','en', false);
