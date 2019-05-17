@@ -35,7 +35,7 @@ TEXT_ADMIN_SHOW_COMMENTS_TITLE,User comments,Comentarios de los usuarios
 TEXT_AGE_DAYS_LABEL,Days,Días
 TEXT_AGE_MONTHS_LABEL,Mos,Meses
 TEXT_AGE_YEARS_LABEL,Yrs,Años
-TEXT_ASSESSMENT_NOTES_LABEL,Assessment,Recetario
+TEXT_ASSESSMENT_NOTES_LABEL,Assessment,Tratamiento
 TEXT_ASSIGNED_LABEL,Doctor,Doctor(a)
 TEXT_ATA_LEFT_TITLE,"Secretary of Health<br>Department of Statistics<br>Honduras, Central America","Secretaría de Salud<br>Departamento de Estadística<br>Honduras, Centro América"
 TEXT_BIRTHDATE_FORMAT,M-D-Y,D-M-Y
@@ -522,7 +522,7 @@ TEXT_PT_MALE,Patients (Men),Atenciones de hombres
 TEXT_PT_REFERRED_IN,Referred patients,Consultas referidas
 TEXT_PT_WALK_IN,Outpatients,Consultas espontaneas
 TEXT_RECEIVED_FROM_LABEL,Received from,Recibida de
-TEXT_REFER_TO_LABEL,Refer to,Envia a
+TEXT_REFER_TO_LABEL,Refer to,Se remite a
 TEXT_REFERRAL_BLANK,(Not specified),(No especificada)
 TEXT_REFERRAL_HEADING,Referral info,Referencia
 TEXT_REFERRAL_PLACEHOLDER,Clinic name,Nombre de la clínica

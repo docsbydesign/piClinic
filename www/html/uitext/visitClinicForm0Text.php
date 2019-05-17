@@ -140,7 +140,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	if (!defined('TEXT_ASSESSMENT_NOTES_LABEL')) { define('TEXT_ASSESSMENT_NOTES_LABEL','Recetario',false); }
+	if (!defined('TEXT_ASSESSMENT_NOTES_LABEL')) { define('TEXT_ASSESSMENT_NOTES_LABEL','Tratamiento',false); }
 	if (!defined('TEXT_ASSIGNED_LABEL')) { define('TEXT_ASSIGNED_LABEL','Doctor(a)',false); }
 	if (!defined('TEXT_BIRTHDATE_LABEL')) { define('TEXT_BIRTHDATE_LABEL','Fecha de nacimiento',false); }
 	if (!defined('TEXT_BIRTHDAY_DATE_FORMAT')) { define('TEXT_BIRTHDAY_DATE_FORMAT','d-m-Y',false); }
@@ -169,7 +169,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_PATIENT_NO_CURRENT_MEDS')) { define('TEXT_PATIENT_NO_CURRENT_MEDS','No hay medicamentos en el archivo',false); }
 	if (!defined('TEXT_PATIENT_NO_KNOWN_ALLERGIES')) { define('TEXT_PATIENT_NO_KNOWN_ALLERGIES','Sin alergias conocidas',false); }
 	if (!defined('TEXT_REFERRED_FROM_LABEL')) { define('TEXT_REFERRED_FROM_LABEL','Recibida de',false); }
-	if (!defined('TEXT_REFER_TO_LABEL')) { define('TEXT_REFER_TO_LABEL','Envia a',false); }
+	if (!defined('TEXT_REFER_TO_LABEL')) { define('TEXT_REFER_TO_LABEL','Se remite a',false); }
 	if (!defined('TEXT_REPRINT_HEADING')) { define('TEXT_REPRINT_HEADING','Este es un reimpreso del formulario de la visita. Revisar el expediente para los detalles de la visita.',false); }
 	if (!defined('TEXT_RETURN_VISIT_TEXT')) { define('TEXT_RETURN_VISIT_TEXT','Subsiguiente',false); }
 	if (!defined('TEXT_SHOW_PATIENT_INFO')) { define('TEXT_SHOW_PATIENT_INFO','Mostrar los detalles del paciente',false); }
