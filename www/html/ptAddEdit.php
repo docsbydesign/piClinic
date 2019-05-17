@@ -154,10 +154,16 @@ if (empty($patientData)){
 		$patientData['birthDate'] = date_format ($tempDateTime, 'Y-m-d H:i:s');	
 	}
 }
+
 if (($pageMode == 'add') && AUTOINCREMENT_CLINICPATIENTID) {
+    // get next clinicPatientID by reading the largest one from the patient database,
+    //      converting it to an integer,
+    //      adding 1 to it
+    //      then padding it back out to a string to match the ID format
+    //   and this is all done in the MySQL query
     $nextIdQuery = "SELECT LPAD(CONVERT((CAST(max(`clinicPatientID`) AS INT) + 1),char),5,'0') as `nextId` from `patient` WHERE 1;";
     $nextIdInfo = getDbRecords($dbLink, $nextIdQuery);
-    // if the patient record was not returned, exit in error
+    // if the ID was returned, use it, otherwise, just leave it blank.
     if ($nextIdInfo['httpResponse'] == 200) {
         $nextIdData = $nextIdInfo['data'];
         $patientData['clinicPatientID'] = $nextIdData['nextId'];
