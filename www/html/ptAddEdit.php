@@ -142,6 +142,7 @@ if (empty($patientData)){
 			$patientData[$fieldName] = $requestData[$fieldName];
 		}
 	}
+
 	// recreate the birthdate if the parameters are present
 	if (!empty($requestData['birthDateMonth']) &&
 		!empty($requestData['birthDateDay']) &&
@@ -152,6 +153,21 @@ if (empty($patientData)){
 		$tempDateTime = date_create_from_format('Y-m-d H:i:s', $tempDateString );
 		$patientData['birthDate'] = date_format ($tempDateTime, 'Y-m-d H:i:s');	
 	}
+}
+
+if (($pageMode == 'add') && AUTOINCREMENT_CLINICPATIENTID) {
+    // get next clinicPatientID by reading the largest one from the patient database,
+    //      converting it to an integer,
+    //      adding 1 to it
+    //      then padding it back out to a string to match the ID format
+    //   and this is all done in the MySQL query
+    $nextIdQuery = "SELECT LPAD(CONVERT((CAST(max(`clinicPatientID`) AS INT) + 1),char),5,'0') as `nextId` from `patient` WHERE 1;";
+    $nextIdInfo = getDbRecords($dbLink, $nextIdQuery);
+    // if the ID was returned, use it, otherwise, just leave it blank.
+    if ($nextIdInfo['httpResponse'] == 200) {
+        $nextIdData = $nextIdInfo['data'];
+        $patientData['clinicPatientID'] = $nextIdData['nextId'];
+    }
 }
 
 function writeTopicMenu ($cancelLink, $ata=false) {
@@ -179,13 +195,13 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 					<span style="display:<?= ($pageMode == 'edit' ?  'inline' : 'none' ) ?>">
 					<?= ($pageMode == 'edit' ? $patientData['clinicPatientID'] : '') ?></span>
 				<input type="<?= ($pageMode == 'add' ? 'text' : 'hidden' ) ?>" id="clinicPatientIDfield" name="clinicPatientID" 
-					value="<?php if (!empty($requestData['clinicPatientID'])) {echo $requestData['clinicPatientID'];} ?>" 
+					value="<?php if (!empty($patientData['clinicPatientID'])) {echo $patientData['clinicPatientID'];} ?>"
 					class="requiredField" <?= ($pageMode == 'add' ? 'placeholder="'.TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER.'"' :'') ?>>&nbsp;&nbsp;
 				<label class="close"><?= TEXT_FAMILYID_LABEL ?>:</label>&nbsp;
-					<?= dbFieldTextInput ($patientData, 'familyID', TEXT_PATIENT_NEW_FAMILYID_PLACEHOLDER, true) ?>
+					<?= dbFieldTextInput ($patientData, 'familyID', TEXT_PATIENT_NEW_FAMILYID_PLACEHOLDER, false) ?>
 
 				<label class="close"><?= TEXT_PATIENTNATIONALID_LABEL ?>:</label>&nbsp;
-					<?= dbFieldTextInput ($patientData, 'patientNationalID', TEXT_PATIENTNATIONALID_PLACEHOLDER, true) ?>
+					<?= dbFieldTextInput ($patientData, 'patientNationalID', TEXT_PATIENTNATIONALID_PLACEHOLDER, false) ?>
 			</p>
 			<p><label><?= TEXT_PATIENT_NAME_LABEL ?>:</label><br>
 				<?= dbFieldTextInput ($patientData, 'lastName', TEXT_PATIENT_NEW_NAMELAST_PLACEHOLDER, true) ?>
