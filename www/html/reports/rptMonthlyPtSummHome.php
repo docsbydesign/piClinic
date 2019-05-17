@@ -434,7 +434,7 @@ if (empty($dbStatus) && !$noData) {
         if ((API_DEBUG_MODE) && ($dataRecord['httpResponse'] != 404)) {
             $report['dataRecord'] = $dataRecord;
             $report['query'] = $getQueryString;
-            $debugErrorInfo .= '<div id="Debug" style="display:none;">';
+            $debugErrorInfo .= '<div id="Debug"  class="noshow">';
             $debugErrorInfo .= '<pre>'.json_encode($dataRecord, JSON_PRETTY_PRINT).'</pre>';
             $debugErrorInfo .= '</div>';
         }
@@ -456,7 +456,7 @@ if (empty($dbStatus) && !$noData) {
     if ($clinicRecord['httpResponse'] != 200) {
         // unable to get info on this clinic
         if (API_DEBUG_MODE) {
-            $debugErrorInfo .= '<div id="Debug" style="display:none;"';
+            $debugErrorInfo .= '<div id="Debug"  class="noshow">';
             $debugErrorInfo .= '<pre>'.json_encode($clinicInfo, JSON_PRETTY_PRINT).'</pre>';
             $debugErrorInfo .= '</div>';
         }
@@ -753,7 +753,7 @@ header('Content-type: text/html; charset=utf-8');
     </div>
     <?= $debugErrorInfo ?>
     <div id="NoDataMessage" class="<?= ( (!$noData || ($reportFormat == RPT_SHOW_DATA)) ? 'hideDiv' : '') ?>">
-        <p><?= TEXT_NO_REPORT_PROMPT ?></p>
+        <p><?= TEXT_NO_REPORT_PROF_PROMPT ?></p>
     </div>
     <div id="MonthlySummaryList" class="ledgerLandscapeReport <?= ( ($noData && ($reportFormat == RPT_SHOW_REPORT)) ? ' hideDiv' : '') ?>">
         <div id="AT2-ReportHeading">

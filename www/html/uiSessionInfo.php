@@ -152,10 +152,10 @@ if (isset($sessionToken) || isset($sessionUser)) {
 	// build session page language
     $sessionDiv .= '<div id="sessionPageMenu" class="noprint"><p>'.TEXT_SHOW_LANGUAGE_PROMPT.': '.$langLinkText.'</p></div>';
     $sessionDiv .= '</div>';
-    $sessionDiv .= '<div style="clear: both;"></div>';
+    $sessionDiv .= '<div class="clearFloat"></div>';
 } else {
 	// need to define this variable, even if it's empty
-	$sessionDiv = '<div id="sessionMenu" style="display:none; ">&nbsp;</div>';
-    $sessionDiv .= '<div style="clear: both;"></div>';
+	$sessionDiv = '<div id="sessionMenu" class="noshow">&nbsp;</div>';
+    $sessionDiv .= '<div class="clearFloat"></div>';
 }
 //EOF

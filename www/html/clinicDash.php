@@ -86,7 +86,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 	<div class="pageBody">
 	<div id="PatientLookupDiv" class="noprint">
 		<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">
-			<p><label><?= TEXT_PATIENT_ID_LABEL ?>:</label><br>
+			<p><label class="close"><?= TEXT_SEARCH_PATIENT_ID_LABEL ?>:</label>
 				<?= dbFieldTextInput ($requestData, "q", TEXT_PATIENT_ID_PLACEHOLDER, false, true) ?>
 			<button class="btn_ptSearch" type="submit"><?= TEXT_SHOW_PATIENT_SUBMIT_BUTTON ?></button>
 			</p>
@@ -104,7 +104,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 		if (API_DEBUG_MODE) {
 			$report['visitRecord'] = $visitRecord;
 			$report['query'] = $visitQueryString;
-			echo ('<div id="Debug" style="display:none;"> ');
+			echo ('<div id="Debug" class="noshow"> ');
 			echo ('<pre>'.json_encode($visitRecord, JSON_PRETTY_PRINT).'</pre>');
 			echo ('</div>');
 		}
@@ -127,7 +127,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 					if (!$headerShown) {
 						echo ('<table class="piClinicList"><tr>');
 						echo ('<th>'.TEXT_VISIT_LIST_HEAD_NAME.'</th>');
-						echo ('<th>'.TEXT_VISIT_LIST_HEAD_DATE.'</th>');
+						echo ('<th>'.TEXT_VISIT_LIST_ARRIVED_DATE.'</th>');
 						echo ('<th>'.TEXT_VISIT_LIST_HEAD_DOCTOR.'</th>');
 						echo ('<th>'.TEXT_VISIT_LIST_HEAD_COMPLAINT.'</th>');
 						echo ('<th>'.TEXT_VISIT_LIST_ACTIONS.'</th>');

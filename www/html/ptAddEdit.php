@@ -133,7 +133,10 @@ if (empty($patientData)){
 		,'contactAltPhone'
 		,'knownAllergies'
 		,'currentMedications'
-	);
+        ,'responsibleParty'
+        ,'maritalStatus'
+        ,'profession'
+    );
 	foreach ($queryParamFields as $fieldName) {
 		if (isset($requestData[$fieldName])) {
 			$patientData[$fieldName] = $requestData[$fieldName];
@@ -172,12 +175,12 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 		<h2><?= ($pageMode == 'add' ? TEXT_NEW_PATIENT_HEADING  : TEXT_EDIT_PATIENT_HEADING  ) ?></h2>
 		<form enctype="multipart/form-data" action="/uihelp/addPatient.php" method="post">
 			<p>
-				<label class="close"><?= TEXT_PATIENT_ID_LABEL ?>:</label>&nbsp;
+				<label class="close"><?= TEXT_PATIENT_ADD_EDIT_ID_LABEL ?>:</label>&nbsp;
 					<span style="display:<?= ($pageMode == 'edit' ?  'inline' : 'none' ) ?>">
 					<?= ($pageMode == 'edit' ? $patientData['clinicPatientID'] : '') ?></span>
 				<input type="<?= ($pageMode == 'add' ? 'text' : 'hidden' ) ?>" id="clinicPatientIDfield" name="clinicPatientID" 
 					value="<?php if (!empty($requestData['clinicPatientID'])) {echo $requestData['clinicPatientID'];} ?>" 
-					class="requiredField" <?= ($pageMode == 'add' ? 'placeholder="'.TEXT_PATIENT_ID_PLACEHOLDER.'"' :'') ?>>&nbsp;&nbsp;
+					class="requiredField" <?= ($pageMode == 'add' ? 'placeholder="'.TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER.'"' :'') ?>>&nbsp;&nbsp;
 				<label class="close"><?= TEXT_FAMILYID_LABEL ?>:</label>&nbsp;
 					<?= dbFieldTextInput ($patientData, 'familyID', TEXT_PATIENT_NEW_FAMILYID_PLACEHOLDER, true) ?>
 
@@ -204,6 +207,13 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 					(!empty($patientData['birthDate']) ? date(TEXT_BIRTHDAY_DAY_FORMAT, strtotime($patientData['birthDate'])) : ''),
 					(!empty($patientData['birthDate']) ? date(TEXT_BIRTHDAY_YEAR_FORMAT, strtotime($patientData['birthDate'])) : '' )
 				) ?>
+                <label class="close"><?= TEXT_NEXT_VAX_DATE_INPUT_LABEL.' '.TEXT_NEXT_VAX_DATE_FORMAT_LABEL ?>:</label>&nbsp;
+                <?= outputDateInputFields (TEXT_NEXT_VAX_DATE_FORMAT, 'nextVaccinationDate',
+                    (!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_MONTH_FORMAT, strtotime($patientData['nextVaccinationDate'])) : ''),
+                    (!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_DAY_FORMAT, strtotime($patientData['nextVaccinationDate'])) : ''),
+                    (!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_YEAR_FORMAT, strtotime($patientData['nextVaccinationDate'])) : '' ),
+                    null, false, false
+                ) ?>
 			</p>
 			<p><label class="close"><?= TEXT_PATIENT_NEW_BLOODTYPE_LABEL ?>:</label>&nbsp;
 				<select id="newbloodType" name="bloodType">
@@ -234,6 +244,20 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 					<input type="text" id="newpreferredLanguage" name="preferredLanguage" 
 						value="<?php if (!empty($patientData['preferredLanguage'])) {echo $patientData['preferredLanguage'];} ?>" placeholder="<?= TEXT_PATIENT_NEW_PREFERREDLANGUAGE_PLACEHOLDER ?>" maxlength="255">
 			</p>
+            <p>
+                <label class="close"><?= TEXT_PATIENT_NEW_MARITAL_STATUS_LABEL ?>:</label>
+                <select id="newMaritalStatus" name="maritalStatus">
+                    <option value="" <?= (empty($patientData['maritalStatus']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
+                    <option value="Married" <?= ((!empty($patientData['maritalStatus']) && $patientData['maritalStatus'] == 'Married') ? 'selected' : '' ) ?>><?= TEXT_MARRIED_OPTION ?></option>
+                    <option value="NotMarried" <?= ((!empty($patientData['maritalStatus']) && $patientData['maritalStatus'] == 'NotMarried') ? 'selected' : '' ) ?>><?= TEXT_NOT_MARRIED_OPTION ?></option>
+                </select>&nbsp;&nbsp;
+                <label class="close"><?= TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_LABEL ?>:</label>
+                <input type="text" id="newresponsibleParty" name="responsibleParty"
+                       value="<?php if (!empty($patientData['responsibleParty'])) {echo $patientData['responsibleParty'];} ?>" placeholder="<?= TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_PLACEHOLDER ?>" maxlength="255">
+                <label class="close"><?= TEXT_PATIENT_NEW_PROFESSION_LABEL ?>:</label>
+                <input type="text" id="newprofession" name="profession"
+                       value="<?php if (!empty($patientData['profession'])) {echo $patientData['profession'];} ?>" placeholder="<?= TEXT_PATIENT_NEW_PROFESSION_PLACEHOLDER ?>" maxlength="255">
+            </p>
 			<p>
 				<label><?= TEXT_PATIENT_KNOWN_ALLERGIES_LABEL ?>:</label><br>
 				<?php 

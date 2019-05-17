@@ -68,6 +68,13 @@ function getUiSessionInfo() {
     if (!empty($_SESSION)) {
         $sessionInfo = $_SESSION;
     }
+    // make sure we still have the required values
+    if(empty($sessionInfo['sessionLanguage'])) {
+        $sessionInfo['sessionLanguage'] = UI_DEFAULT_LANGUAGE;
+    }
+    if(empty($sessionInfo['pageLanguage'])) {
+        $sessionInfo['pageLanguage'] = UI_DEFAULT_LANGUAGE;
+    }
     $sessionInfo['parameters'] = readRequestData();
     $sessionInfo['pageLanguage'] = getUiLanguage($sessionInfo['parameters']);
     return $sessionInfo;
@@ -151,14 +158,14 @@ function getUiLanguage ($requestData){
 *			T must be specified if $defaultTime is provided.
 *
 */
-function outputDateInputFields ($format, $dateFieldName, $defaultMonth, $defaultDay, $defaultYear, $defaultTime=null, $requiredField=false) {
+function outputDateInputFields ($format, $dateFieldName, $defaultMonth, $defaultDay, $defaultYear, $defaultTime=null, $requiredField=false, $limitYear=true) {
 	$htmlString = '';
 	$dateSep = '&nbsp;-&nbsp;';
 	$timeSep = '&nbsp;&nbsp;';
 	// HTML strings
 	$monthInput = '<input class="twoDigitNumeric" type="number" '.($requiredField ? 'required ' : '').' id="new'.$dateFieldName.'Month" name="'.$dateFieldName.'Month" placeholder="'.TEXT_DATE_MONTH_PLACEHOLDER.'" min="1" max="12" value="'.$defaultMonth.'">';
 	$dayInput = '<input class="twoDigitNumeric" type="number" '.($requiredField ? 'required ' : '').' id="new'.$dateFieldName.'Day" name="'.$dateFieldName.'Day" placeholder="'.TEXT_DATE_DAY_PLACEHOLDER.'" min="1" max="31" value="'.$defaultDay.'">';
-	$yearInput = '<input class="fourDigitNumeric" type="number" '.($requiredField ? 'required ' : '').' id="new'.$dateFieldName.'Year" name="'.$dateFieldName.'Year" placeholder="'.TEXT_DATE_YEAR_PLACEHOLDER.'" min="1900" max="'.date("Y").'" value="'.$defaultYear.'">';
+	$yearInput = '<input class="fourDigitNumeric" type="number" '.($requiredField ? 'required ' : '').' id="new'.$dateFieldName.'Year" name="'.$dateFieldName.'Year" placeholder="'.TEXT_DATE_YEAR_PLACEHOLDER.'" min="1900" '.($limitYear ? 'max="'.date("Y").'" ' : '').'value="'.$defaultYear.'">';
 	if (isset($defaultTime)) {
 		$timeInput = '<input class="timeNumeric" type="time" '.($requiredField ? 'required ' : '').' id="new'.$dateFieldName.'Time" name="'.$dateFieldName.'Time" value="'.$defaultTime.'">';
 	}

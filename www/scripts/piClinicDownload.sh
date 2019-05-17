@@ -1,5 +1,6 @@
 #!/bin/bash
 #
+#
 # constants
 TEMPDIR="/var/local/piclinic/downloads/"
 TEMP_DBFILE="piclinic_db.sql"

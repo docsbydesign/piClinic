@@ -355,7 +355,7 @@ if (empty($dbStatus)) {
             if ((API_DEBUG_MODE) && ($dataRecord['httpResponse'] != 404)){
                 $report['dataRecord'] = $dataRecord;
                 $report['query'] = $getQueryString;
-                $debugErrorInfo .= '<div id="Debug" style="display:none;"';
+                $debugErrorInfo .= '<div id="Debug" class="noshow"';
                 $debugErrorInfo .= '<pre>'.json_encode($dataRecord, JSON_PRETTY_PRINT).'</pre>';
                 $debugErrorInfo .= '</div>';
             }
@@ -375,7 +375,7 @@ if (empty($dbStatus)) {
         if ($clinicRecord['httpResponse'] != 200) {
             // unable to get info on this clinic
             if (API_DEBUG_MODE) {
-                $debugErrorInfo .= '<div id="Debug" style="display:none;"';
+                $debugErrorInfo .= '<div id="Debug" class="noshow"';
                 $debugErrorInfo .= '<pre>'.json_encode($clinicInfo, JSON_PRETTY_PRINT).'</pre>';
                 $debugErrorInfo .= '</div>';
             }
@@ -680,7 +680,7 @@ header('Content-type: text/html; charset=utf-8');
                 <div id="AT2R-ReportClinicInfo">
                     <p>
                         <label class="close"><?= TEXT_REPORT_REGION_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['ClinicRegion']) ? $clinicInfo['ClinicRegion'] : $blankField ) ?></span>&nbsp;&nbsp;
-                        <label class="close"><?= TEXT_REPORT_CLINIC_TYPE_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['TypeCode']) ? $clinicInfo['TypeCode'] : $blankField ) ?></span>
+                        <label class="close"><?= TEXT_REPORT_CLINIC_TYPE_SHORT_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['TypeCode']) ? $clinicInfo['TypeCode'] : $blankField ) ?></span>
                         <label class="close"><?= TEXT_REPORT_CLINIC_CISUAPS_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['TypeCode']) ? $clinicInfo['TypeCode'] : $blankField ) ?></span>&nbsp;&nbsp;
                         <label class="close"><?= TEXT_REPORT_CLINIC_CODE_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['PublicID']) ? $clinicInfo['PublicID'] : $blankField ) ?></span>
                     </p>

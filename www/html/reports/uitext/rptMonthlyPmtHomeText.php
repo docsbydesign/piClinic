@@ -53,8 +53,8 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','TEXT_NO_REPORT_PROMPT',false); }
 	if (!defined('TEXT_NO_VISITS_FOUND_MONTH')) { define('TEXT_NO_VISITS_FOUND_MONTH','TEXT_NO_VISITS_FOUND_MONTH',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','TEXT_REPORT_CLINICNAME_LABEL',false); }
-	if (!defined('TEXT_REPORT_DATE_LABEL')) { define('TEXT_REPORT_DATE_LABEL','TEXT_REPORT_DATE_LABEL',false); }
 	if (!defined('TEXT_REPORT_DAY_OF_MONTH_LABEL')) { define('TEXT_REPORT_DAY_OF_MONTH_LABEL','TEXT_REPORT_DAY_OF_MONTH_LABEL',false); }
+	if (!defined('TEXT_REPORT_LAST_DATE_LABEL')) { define('TEXT_REPORT_LAST_DATE_LABEL','TEXT_REPORT_LAST_DATE_LABEL',false); }
 	if (!defined('TEXT_REPORT_MONTH_PLACEHOLDER')) { define('TEXT_REPORT_MONTH_PLACEHOLDER','TEXT_REPORT_MONTH_PLACEHOLDER',false); }
 	if (!defined('TEXT_REPORT_PATIENT_COUNT_LABEL')) { define('TEXT_REPORT_PATIENT_COUNT_LABEL','TEXT_REPORT_PATIENT_COUNT_LABEL',false); }
 	if (!defined('TEXT_REPORT_PAYMENT_TOTAL_LABEL')) { define('TEXT_REPORT_PAYMENT_TOTAL_LABEL','TEXT_REPORT_PAYMENT_TOTAL_LABEL',false); }
@@ -94,8 +94,8 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','Select a date.',false); }
 	if (!defined('TEXT_NO_VISITS_FOUND_MONTH')) { define('TEXT_NO_VISITS_FOUND_MONTH','No visits found for this month.',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Clinic',false); }
-	if (!defined('TEXT_REPORT_DATE_LABEL')) { define('TEXT_REPORT_DATE_LABEL','Last date reported&nbsp;(mm/dd/yyyy)',false); }
 	if (!defined('TEXT_REPORT_DAY_OF_MONTH_LABEL')) { define('TEXT_REPORT_DAY_OF_MONTH_LABEL','Day of the month',false); }
+	if (!defined('TEXT_REPORT_LAST_DATE_LABEL')) { define('TEXT_REPORT_LAST_DATE_LABEL','Last date reported&nbsp;(mm/dd/yyyy)',false); }
 	if (!defined('TEXT_REPORT_MONTH_PLACEHOLDER')) { define('TEXT_REPORT_MONTH_PLACEHOLDER','Report month (MM)',false); }
 	if (!defined('TEXT_REPORT_PATIENT_COUNT_LABEL')) { define('TEXT_REPORT_PATIENT_COUNT_LABEL','Patients seen',false); }
 	if (!defined('TEXT_REPORT_PAYMENT_TOTAL_LABEL')) { define('TEXT_REPORT_PAYMENT_TOTAL_LABEL','Payment received',false); }
@@ -135,8 +135,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','Escoge una fecha.',false); }
 	if (!defined('TEXT_NO_VISITS_FOUND_MONTH')) { define('TEXT_NO_VISITS_FOUND_MONTH','No visitas encontradas en este mes.',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Establecimiento',false); }
-	if (!defined('TEXT_REPORT_DATE_LABEL')) { define('TEXT_REPORT_DATE_LABEL','Última fecha reportada&nbsp;(dd/mm/aaaa)',false); }
 	if (!defined('TEXT_REPORT_DAY_OF_MONTH_LABEL')) { define('TEXT_REPORT_DAY_OF_MONTH_LABEL','Día del mes',false); }
+	if (!defined('TEXT_REPORT_LAST_DATE_LABEL')) { define('TEXT_REPORT_LAST_DATE_LABEL','Última fecha reportada&nbsp;(dd/mm/aaaa)',false); }
 	if (!defined('TEXT_REPORT_MONTH_PLACEHOLDER')) { define('TEXT_REPORT_MONTH_PLACEHOLDER','Mes del informe (MM)',false); }
 	if (!defined('TEXT_REPORT_PATIENT_COUNT_LABEL')) { define('TEXT_REPORT_PATIENT_COUNT_LABEL','Paceientes atendidos',false); }
 	if (!defined('TEXT_REPORT_PAYMENT_TOTAL_LABEL')) { define('TEXT_REPORT_PAYMENT_TOTAL_LABEL','Pagos recibidos',false); }

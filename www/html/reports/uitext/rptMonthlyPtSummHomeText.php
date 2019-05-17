@@ -71,7 +71,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_LABEL_STAFF')) { define('TEXT_LABEL_STAFF','TEXT_LABEL_STAFF',false); }
 	if (!defined('TEXT_MO_DATE_PROMPT_LABEL')) { define('TEXT_MO_DATE_PROMPT_LABEL','TEXT_MO_DATE_PROMPT_LABEL',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','TEXT_NOT_SPECIFIED',false); }
-	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','TEXT_NO_REPORT_PROMPT',false); }
+	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','TEXT_NO_REPORT_PROF_PROMPT',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','TEXT_REPORT_CLINICNAME_LABEL',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CISUAPS_LABEL')) { define('TEXT_REPORT_CLINIC_CISUAPS_LABEL','TEXT_REPORT_CLINIC_CISUAPS_LABEL',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CODE_LABEL')) { define('TEXT_REPORT_CLINIC_CODE_LABEL','TEXT_REPORT_CLINIC_CODE_LABEL',false); }
@@ -165,7 +165,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE','Daily Report of Outpatient Care',false); }
-	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Date&nbsp;(mm/dd/yyyy)',false); }
+	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Report date (YYYY-MM)',false); }
 	if (!defined('TEXT_DECIMAL_POINT')) { define('TEXT_DECIMAL_POINT','.',false); }
 	if (!defined('TEXT_DIAGDATA_AGE_GROUP')) { define('TEXT_DIAGDATA_AGE_GROUP',' only for patients aged ',false); }
 	if (!defined('TEXT_DIAGDATA_COUNT_HEADING')) { define('TEXT_DIAGDATA_COUNT_HEADING','Counts these diagnoses',false); }
@@ -197,7 +197,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_LABEL_STAFF')) { define('TEXT_LABEL_STAFF','Clinic staff',false); }
 	if (!defined('TEXT_MO_DATE_PROMPT_LABEL')) { define('TEXT_MO_DATE_PROMPT_LABEL','Date&nbsp;(yyyy-mm)',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','Not specified',false); }
-	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','Select a date.',false); }
+	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','Select a health professional and date.',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Clinic',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CISUAPS_LABEL')) { define('TEXT_REPORT_CLINIC_CISUAPS_LABEL','CIS/UAPS',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CODE_LABEL')) { define('TEXT_REPORT_CLINIC_CODE_LABEL','Code',false); }
@@ -291,7 +291,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE','Informe Diario de Atenciones Ambulatorias',false); }
-	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha&nbsp;(dd/mm/aaaa)',false); }
+	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha del informe (AAAA-MM)',false); }
 	if (!defined('TEXT_DECIMAL_POINT')) { define('TEXT_DECIMAL_POINT',',',false); }
 	if (!defined('TEXT_DIAGDATA_AGE_GROUP')) { define('TEXT_DIAGDATA_AGE_GROUP',' solo para los pacientes con edades ',false); }
 	if (!defined('TEXT_DIAGDATA_COUNT_HEADING')) { define('TEXT_DIAGDATA_COUNT_HEADING','Cuenta estos diagnosticos',false); }
@@ -323,7 +323,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_LABEL_STAFF')) { define('TEXT_LABEL_STAFF','Personal de la clínica',false); }
 	if (!defined('TEXT_MO_DATE_PROMPT_LABEL')) { define('TEXT_MO_DATE_PROMPT_LABEL','Fecha&nbsp;(aaaa-mm)',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
-	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','Escoge una fecha.',false); }
+	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','Escoge un profesional de salud y una fecha.',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Establecimiento',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CISUAPS_LABEL')) { define('TEXT_REPORT_CLINIC_CISUAPS_LABEL','CIS/UAPS',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CODE_LABEL')) { define('TEXT_REPORT_CLINIC_CODE_LABEL','Código',false); }

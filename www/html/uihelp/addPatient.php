@@ -124,7 +124,8 @@ $ptFields = [
   'firstName',
   'middleInitial',
   'sex',
-//  'birthDate',	// this is created form the Y-m-d fields
+//  'birthDate',	// this is created from the Y-m-d fields
+//  'nextVaccinationDate // created from the Y-m-d fields
   'homeAddress1',
   'homeAddress2',
   'homeNeighborhood',
@@ -135,9 +136,12 @@ $ptFields = [
   'contactAltPhone',
   'bloodType',
   'organDonor',
-  'PreferredLanguage'
+  'preferredLanguage'
 //  'knownAllergies',	// formatted below
 //  'currentMedications'	// formatted below
+  ,'responsibleParty'
+  ,'maritalStatus'
+  ,'profession'
 ];
 
 foreach ($ptFields as $field) {
@@ -156,6 +160,18 @@ if (!empty($formData['birthDateMonth']) &&
 		$formData['birthDateDay'].' 00:00:00';
 	$birthDateTime = date_create_from_format('Y-m-d G:i:s', $dateString );
 	$requestData['birthDate'] = date_format ($birthDateTime, 'Y-m-d G:i:s');
+}
+
+// update the exceptions
+if (!empty($formData['nextVaccinationDateMonth']) &&
+    !empty($formData['nextVaccinationDateDay']) &&
+    !empty($formData['nextVaccinationDateYear'])) {
+    // create a valid date string
+    $dateString = $formData['nextVaccinationDateYear'].'-'.
+        $formData['nextVaccinationDateMonth'].'-'.
+        $formData['nextVaccinationDateDay'].' 00:00:00';
+    $nextVaccinationDateTime = date_create_from_format('Y-m-d G:i:s', $dateString );
+    $requestData['nextVaccinationDate'] = date_format ($nextVaccinationDateTime, 'Y-m-d G:i:s');
 }
 
 // clear the query parameters that shouldn't be repeated

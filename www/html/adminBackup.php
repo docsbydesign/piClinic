@@ -56,7 +56,6 @@ $sessionInfo = getUiSessionInfo();
 $pageLanguage = $sessionInfo['pageLanguage'];
 // requierd for error messages
 $requestData = $sessionInfo['parameters'];
-require_once './uitext/adminBackupText.php';
 
 // open session variables and check for access to this page
 $pageAccessRequired = PAGE_ACCESS_CLINIC;

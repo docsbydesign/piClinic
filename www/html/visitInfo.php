@@ -178,7 +178,7 @@ function writeTopicMenu ($sessionInfo) {
 			<img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44">
 		</div>
 	</div>
-	<div style="clear: both;"></div>
+	<div class="clearFloat"></div>
 	<div id="optionMenuDiv" class="noprint<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
 		<ul class="topLinkMenuList">
 			<?php
@@ -203,10 +203,15 @@ function writeTopicMenu ($sessionInfo) {
 						echo('<li class="firstLink">');
 						$firstLinkDefined = true;
 					}
-					echo ('<a class="a_visitEdit" href="/visitEdit.php?patientVisitID='. $visitInfo['patientVisitID'] .
-						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitEdit').
+					echo ('<a class="a_visitPrint" href="/visitClinicForm0.php?patientVisitID='. $visitInfo['patientVisitID'] .
+						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitPrint').
                         '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_EDIT').'" '.
-						'title="'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'">'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'</a></li>');
+						'title="'.TEXT_PATIENT_PRINT_PATIENT_VISIT_BUTTON.'">'.TEXT_PATIENT_PRINT_PATIENT_VISIT_BUTTON.'</a></li>');
+                    echo('<li>');
+                    echo ('<a class="a_visitEdit" href="/visitEdit.php?patientVisitID='. $visitInfo['patientVisitID'] .
+                        '&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitEdit').
+                        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_EDIT').'" '.
+                        'title="'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'">'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'</a></li>');
 				}
 			?>	
 			</ul>
@@ -225,7 +230,7 @@ function writeTopicMenu ($sessionInfo) {
 						<p><label class="close"><?= TEXT_VISIT_STATUS_LABEL ?>:</label>&nbsp;<?= ($visitInfo['visitStatus'] == 'Open' ? TEXT_VISIT_STATUS_OPEN : ($visitInfo['visitStatus'] == 'Closed' ? TEXT_VISIT_STATUS_CLOSED : $visitInfo['visitStatus'] )) ?></p>
 					</div>
 				</div>
-				<div style="clear: both;"></div>
+				<div class="clearFloat"></div>
 				<div class="infoBlock">
 					<h2><?= TEXT_VISIT_ARRIVAL_HEADING ?></h2>
 					<div class="indent1">
@@ -324,7 +329,7 @@ function writeTopicMenu ($sessionInfo) {
 					</div>
 				</div>
 			</div>
-			<div style="clear: both;"></div>
+			<div class="clearFloat"></div>
 		</div>
 	</div>
 </body>

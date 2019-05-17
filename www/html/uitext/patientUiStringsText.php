@@ -27,31 +27,28 @@
 $apiCommonInclude = dirname(__FILE__).'/../api/api_common.php';
 if (!file_exists($apiCommonInclude)) {
     // if not over one, try up one more directory and then over.
-    // it should be in one of these two locations.
     $apiCommonInclude = dirname(__FILE__).'/../../api/api_common.php';
+    if (!file_exists($apiCommonInclude)) {
+        // if not over one, try up one more directory and then over.
+        $apiCommonInclude = dirname(__FILE__).'/../../../api/api_common.php';
+    }
 }
 require_once $apiCommonInclude;
 exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
-	if (!defined('TEXT_CLINIC_DASH_PAGE_TITLE')) { define('TEXT_CLINIC_DASH_PAGE_TITLE','TEXT_CLINIC_DASH_PAGE_TITLE',false); }
-	if (!defined('TEXT_PATIENT_ID_LABEL')) { define('TEXT_PATIENT_ID_LABEL','TEXT_PATIENT_ID_LABEL',false); }
-	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','TEXT_PATIENT_ID_PLACEHOLDER',false); }
-	if (!defined('TEXT_SHOW_PATIENT_SUBMIT_BUTTON')) { define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','TEXT_SHOW_PATIENT_SUBMIT_BUTTON',false); }
+	if (!defined('TEXT_MARRIED_OPTION')) { define('TEXT_MARRIED_OPTION','TEXT_MARRIED_OPTION',false); }
+	if (!defined('TEXT_NOT_MARRIED_OPTION')) { define('TEXT_NOT_MARRIED_OPTION','TEXT_NOT_MARRIED_OPTION',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	if (!defined('TEXT_CLINIC_DASH_PAGE_TITLE')) { define('TEXT_CLINIC_DASH_PAGE_TITLE','Clinic information',false); }
-	if (!defined('TEXT_PATIENT_ID_LABEL')) { define('TEXT_PATIENT_ID_LABEL','Patient, Visit, or Family ID',false); }
-	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','Patient\'s name or ID',false); }
-	if (!defined('TEXT_SHOW_PATIENT_SUBMIT_BUTTON')) { define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','Search',false); }
+	if (!defined('TEXT_MARRIED_OPTION')) { define('TEXT_MARRIED_OPTION','Married',false); }
+	if (!defined('TEXT_NOT_MARRIED_OPTION')) { define('TEXT_NOT_MARRIED_OPTION','Not married',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	if (!defined('TEXT_CLINIC_DASH_PAGE_TITLE')) { define('TEXT_CLINIC_DASH_PAGE_TITLE','Información de la clínica',false); }
-	if (!defined('TEXT_PATIENT_ID_LABEL')) { define('TEXT_PATIENT_ID_LABEL','Número del paciente, visita, o familia',false); }
-	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','Identidad o nombre del paciente',false); }
-	if (!defined('TEXT_SHOW_PATIENT_SUBMIT_BUTTON')) { define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','Buscar',false); }
+	if (!defined('TEXT_MARRIED_OPTION')) { define('TEXT_MARRIED_OPTION','Casado/a',false); }
+	if (!defined('TEXT_NOT_MARRIED_OPTION')) { define('TEXT_NOT_MARRIED_OPTION','Soltero/a',false); }
 }
 //EOF

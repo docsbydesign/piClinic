@@ -198,7 +198,7 @@ function writeOptionsMenu ($visitInfo) {
 			<p><label class="close"><?= TEXT_VISIT_ID_LABEL ?>:</label><span class="idInHeading"><?= $visitInfo['patientVisitID'] ?></span></p>
 		</div>
 	</div>
-	<div style="clear: both;"></div>
+	<div class="clearFloat"></div>
 	<div id="PatientVisitView" class="<?= (empty($visitRecord) ? 'hideDiv' : '') ?>">
 		<?= writeOptionsMenu($visitInfo) ?>
 		<div id="PatientVisitDataView">
@@ -259,12 +259,13 @@ function writeOptionsMenu ($visitInfo) {
                                 <?= writeDiagnosisDataBlock ($sessionInfo, $dbLink, $visitInfo, 1, TEXT_DIAGNOSIS1_LABEL, TEXT_DIAGNOSIS1_PLACEHOLDER ) ?>
                                 <?= writeDiagnosisDataBlock ($sessionInfo, $dbLink, $visitInfo, 2, TEXT_DIAGNOSIS2_LABEL, TEXT_DIAGNOSIS2_PLACEHOLDER ) ?>
                                 <?= writeDiagnosisDataBlock ($sessionInfo, $dbLink, $visitInfo, 3, TEXT_DIAGNOSIS3_LABEL, TEXT_DIAGNOSIS3_PLACEHOLDER ) ?>
+                            </div>
 							<div class="dataBlock">
 								<p><label class="close"><?= TEXT_REFERRED_TO_LABEL ?>:</label><?= dbFieldTextInput ($visitInfo, "referredTo", TEXT_REFERRAL_PLACEHOLDER, false) ?></p>
 							</div>
 						</div>
 					</div>
-					<div style="clear: both;"></div>
+					<div class="clearFloat"></div>
 					<input type="hidden" id="PatientVisitIDField" name="patientVisitID" value="<?= $visitInfo['patientVisitID'] ?>" >
 					<input type="hidden" id="returnUrlField" name="returnUrl" value="<?= $referringPageUrl ?>">
                     <input type="hidden" class="btn_submit" id="SubmitBtnTag" name="<?= FROM_LINK ?>" value="<?= createFromLink (null, __FILE__, 'btn_submit') ?>">
@@ -273,7 +274,7 @@ function writeOptionsMenu ($visitInfo) {
 			</div>
 		</div>
 	</div>
-	</div>
 	<?= icdLookupJavaScript() ?>
+    </div>
 </body>
 <?php @mysqli_close($dbLink); ?>

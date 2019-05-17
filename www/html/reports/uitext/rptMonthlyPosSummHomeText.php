@@ -66,7 +66,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','TEXT_REPORT_CLINICNAME_LABEL',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CISUAPS_LABEL')) { define('TEXT_REPORT_CLINIC_CISUAPS_LABEL','TEXT_REPORT_CLINIC_CISUAPS_LABEL',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CODE_LABEL')) { define('TEXT_REPORT_CLINIC_CODE_LABEL','TEXT_REPORT_CLINIC_CODE_LABEL',false); }
-	if (!defined('TEXT_REPORT_CLINIC_TYPE_LABEL')) { define('TEXT_REPORT_CLINIC_TYPE_LABEL','TEXT_REPORT_CLINIC_TYPE_LABEL',false); }
+	if (!defined('TEXT_REPORT_CLINIC_TYPE_SHORT_LABEL')) { define('TEXT_REPORT_CLINIC_TYPE_SHORT_LABEL','TEXT_REPORT_CLINIC_TYPE_SHORT_LABEL',false); }
 	if (!defined('TEXT_REPORT_DIRECTOR_LABEL')) { define('TEXT_REPORT_DIRECTOR_LABEL','TEXT_REPORT_DIRECTOR_LABEL',false); }
 	if (!defined('TEXT_REPORT_HEADING_BY_POS')) { define('TEXT_REPORT_HEADING_BY_POS','TEXT_REPORT_HEADING_BY_POS',false); }
 	if (!defined('TEXT_REPORT_MONTH_LABEL')) { define('TEXT_REPORT_MONTH_LABEL','TEXT_REPORT_MONTH_LABEL',false); }
@@ -154,7 +154,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Date&nbsp;(mm/dd/yyyy)',false); }
+	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Report date (YYYY-MM)',false); }
 	if (!defined('TEXT_DECIMAL_POINT')) { define('TEXT_DECIMAL_POINT','.',false); }
 	if (!defined('TEXT_DIAGDATA_AGE_GROUP')) { define('TEXT_DIAGDATA_AGE_GROUP',' only for patients aged ',false); }
 	if (!defined('TEXT_DIAGDATA_COUNT_HEADING')) { define('TEXT_DIAGDATA_COUNT_HEADING','Counts these diagnoses',false); }
@@ -182,7 +182,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Clinic',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CISUAPS_LABEL')) { define('TEXT_REPORT_CLINIC_CISUAPS_LABEL','CIS/UAPS',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CODE_LABEL')) { define('TEXT_REPORT_CLINIC_CODE_LABEL','Code',false); }
-	if (!defined('TEXT_REPORT_CLINIC_TYPE_LABEL')) { define('TEXT_REPORT_CLINIC_TYPE_LABEL','Clinic type',false); }
+	if (!defined('TEXT_REPORT_CLINIC_TYPE_SHORT_LABEL')) { define('TEXT_REPORT_CLINIC_TYPE_SHORT_LABEL','Type',false); }
 	if (!defined('TEXT_REPORT_DIRECTOR_LABEL')) { define('TEXT_REPORT_DIRECTOR_LABEL','Clinic Director',false); }
 	if (!defined('TEXT_REPORT_HEADING_BY_POS')) { define('TEXT_REPORT_HEADING_BY_POS','Monthly Report of Outpatient Care',false); }
 	if (!defined('TEXT_REPORT_MONTH_LABEL')) { define('TEXT_REPORT_MONTH_LABEL','Month',false); }
@@ -270,7 +270,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha&nbsp;(dd/mm/aaaa)',false); }
+	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha del informe (AAAA-MM)',false); }
 	if (!defined('TEXT_DECIMAL_POINT')) { define('TEXT_DECIMAL_POINT',',',false); }
 	if (!defined('TEXT_DIAGDATA_AGE_GROUP')) { define('TEXT_DIAGDATA_AGE_GROUP',' solo para los pacientes con edades ',false); }
 	if (!defined('TEXT_DIAGDATA_COUNT_HEADING')) { define('TEXT_DIAGDATA_COUNT_HEADING','Cuenta estos diagnosticos',false); }
@@ -298,7 +298,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Establecimiento',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CISUAPS_LABEL')) { define('TEXT_REPORT_CLINIC_CISUAPS_LABEL','CIS/UAPS',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CODE_LABEL')) { define('TEXT_REPORT_CLINIC_CODE_LABEL','Código',false); }
-	if (!defined('TEXT_REPORT_CLINIC_TYPE_LABEL')) { define('TEXT_REPORT_CLINIC_TYPE_LABEL','Tipo de establecimiento',false); }
+	if (!defined('TEXT_REPORT_CLINIC_TYPE_SHORT_LABEL')) { define('TEXT_REPORT_CLINIC_TYPE_SHORT_LABEL','Tipo',false); }
 	if (!defined('TEXT_REPORT_DIRECTOR_LABEL')) { define('TEXT_REPORT_DIRECTOR_LABEL','Director del Establecimiento',false); }
 	if (!defined('TEXT_REPORT_HEADING_BY_POS')) { define('TEXT_REPORT_HEADING_BY_POS','Informe Mensual de Atenciones Ambulatorias',false); }
 	if (!defined('TEXT_REPORT_MONTH_LABEL')) { define('TEXT_REPORT_MONTH_LABEL','Mes',false); }

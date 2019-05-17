@@ -172,7 +172,7 @@ if (empty($dbStatus) & !$noData) {
         if ((API_DEBUG_MODE)  &&  $visitRecord['httpResponse'] != 404){
             $report['visitRecord'] = $visitRecord;
             $report['query'] = $getQueryString;
-            $debugErrorInfo .= '<div id="Debug" style="display:none;"';
+            $debugErrorInfo .= '<div id="Debug" class="noshow"';
             $debugErrorInfo .= '<pre>'.json_encode($visitRecord, JSON_PRETTY_PRINT).'</pre>';
             $debugErrorInfo .= '</div>';
         }
@@ -192,7 +192,7 @@ if (empty($dbStatus) & !$noData) {
     if ($clinicRecord['httpResponse'] != 200) {
         // unable to get info on this clinic
         if (API_DEBUG_MODE) {
-            $debugErrorInfo .= '<div id="Debug" style="display:none;"';
+            $debugErrorInfo .= '<div id="Debug" class="noshow"';
             $debugErrorInfo .= '<pre>'.json_encode($clinicInfo, JSON_PRETTY_PRINT).'</pre>';
             $debugErrorInfo .= '</div>';
         }
@@ -440,7 +440,7 @@ header('Content-type: text/html; charset=utf-8');
         echo '<h1>'.TEXT_MONTHLY_VISIT_HEADING.'</h1>';
         echo '<p><label class="close">'.TEXT_REPORT_CLINICNAME_LABEL.':</label>'.
             (isset($clinicInfo['shortName']) ? $clinicInfo['shortName'] : $blankField ).'</p>';
-        echo '<p><label class="close">'.TEXT_REPORT_DATE_LABEL.':</label>'.date(TEXT_DATE_FORMAT, strtotime($lastReportDate)).'</p>';
+        echo '<p><label class="close">'.TEXT_REPORT_LAST_DATE_LABEL.':</label>'.date(TEXT_DATE_FORMAT, strtotime($lastReportDate)).'</p>';
         echo '</div>';
         echo '<div id="PaymentLogBody">';
         echo '<table class="report" id="dailyVisitTable">';
