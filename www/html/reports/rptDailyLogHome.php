@@ -577,7 +577,7 @@ header('Content-type: text/html; charset=utf-8');
                                 <label class="close"><?= TEXT_REPORT_CLINIC_TYPE_LABEL ?>:</label>
                             </div>
                             <div class="headingValue">
-                                <?= (isset($clinicInfo['TypeCode']) ? $clinicInfo['TypeCode'] : $blankField ) ?>
+                                <?= (isset($clinicInfo['typeCode']) ? $clinicInfo['typeCode'] : $blankField ) ?>
                             </div>
                         </div>
                         <div class="headingField24">
@@ -585,7 +585,7 @@ header('Content-type: text/html; charset=utf-8');
                                 <label class="close"><?= TEXT_REPORT_STATE_LABEL ?>:</label>
                             </div>
                             <div class="headingValue">
-                                <?= (isset($clinicInfo['ClinicState']) ? $clinicInfo['ClinicState'] : $blankField ) ?>
+                                <?= (isset($clinicInfo['clinicState']) ? $clinicInfo['clinicState'] : $blankField ) ?>
                             </div>
                         </div>
                         <div class="headingField24">
@@ -593,7 +593,7 @@ header('Content-type: text/html; charset=utf-8');
                                 <label class="close"><?= TEXT_REPORT_CITY_LABEL ?>:</label>
                             </div>
                             <div class="headingValue">
-                                <?= (isset($clinicInfo['ClinicCity']) ? $clinicInfo['ClinicCity'] : $blankField ) ?>
+                                <?= (isset($clinicInfo['clinicCity']) ? $clinicInfo['clinicCity'] : $blankField ) ?>
                             </div>
                         </div>
                         <div class="clearFloat"></div>

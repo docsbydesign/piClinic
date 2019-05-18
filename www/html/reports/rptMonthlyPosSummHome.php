@@ -481,7 +481,7 @@ if ($reportFormat == RPT_SHOW_DATA) {
         $exportDataTotal['DH_CLINICNAME'] =
         $exportData[$lastSumStat]['DH_CLINICNAME'] = (isset($clinicInfo['shortName']) ? $clinicInfo['shortName'] : '' );
         $exportDataTotal['DH_CLINICCODE'] =
-        $exportData[$lastSumStat]['DH_CLINICCODE'] = (isset($clinicInfo['PublicID']) ? $clinicInfo['PublicID'] : '');
+        $exportData[$lastSumStat]['DH_CLINICCODE'] = (isset($clinicInfo['publicID']) ? $clinicInfo['publicID'] : '');
         $exportDataTotal['DH_SERVICETYPE'] =
         $exportData[$lastSumStat]['DH_SERVICETYPE'] = $reportTypeDisplay;
         $exportDataTotal['DH_SERVICEDATE'] =
@@ -679,15 +679,15 @@ header('Content-type: text/html; charset=utf-8');
                 </div>
                 <div id="AT2R-ReportClinicInfo">
                     <p>
-                        <label class="close"><?= TEXT_REPORT_REGION_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['ClinicRegion']) ? $clinicInfo['ClinicRegion'] : $blankField ) ?></span>&nbsp;&nbsp;
-                        <label class="close"><?= TEXT_REPORT_CLINIC_TYPE_SHORT_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['TypeCode']) ? $clinicInfo['TypeCode'] : $blankField ) ?></span>
-                        <label class="close"><?= TEXT_REPORT_CLINIC_CISUAPS_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['TypeCode']) ? $clinicInfo['TypeCode'] : $blankField ) ?></span>&nbsp;&nbsp;
-                        <label class="close"><?= TEXT_REPORT_CLINIC_CODE_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['PublicID']) ? $clinicInfo['PublicID'] : $blankField ) ?></span>
+                        <label class="close"><?= TEXT_REPORT_REGION_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['clinicRegion']) ? $clinicInfo['clinicRegion'] : $blankField ) ?></span>&nbsp;&nbsp;
+                        <label class="close"><?= TEXT_REPORT_CLINIC_TYPE_SHORT_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['typeCode']) ? $clinicInfo['typeCode'] : $blankField ) ?></span>
+                        <label class="close"><?= TEXT_REPORT_CLINIC_CISUAPS_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['typeCode']) ? $clinicInfo['typeCode'] : $blankField ) ?></span>&nbsp;&nbsp;
+                        <label class="close"><?= TEXT_REPORT_CLINIC_CODE_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['publicID']) ? $clinicInfo['publicID'] : $blankField ) ?></span>
                     </p>
                     <p>
                         <label class="close"><?= TEXT_REPORT_MONTH_LABEL ?>:</label><span class="underline"><?= (isset($reportMonthArg) ? $reportMonthName[intval($reportMonthArg)-1] : $blankField ) ?></span>&nbsp;&nbsp;
                         <label class="close"><?= TEXT_REPORT_YEAR_LABEL ?>:</label><span class="underline"><?= (isset($reportYearArg) ? $reportYearArg : $blankField ) ?></span>&nbsp;&nbsp;
-                        <label class="close"><?= TEXT_REPORT_DIRECTOR_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['ClinicDirector']) ? $clinicInfo['ClinicDirector'] : $blankField ) ?></span>
+                        <label class="close"><?= TEXT_REPORT_DIRECTOR_LABEL ?>:</label><span class="underline"><?= (isset($clinicInfo['clinicDirector']) ? $clinicInfo['clinicDirector'] : $blankField ) ?></span>
                     </p>
                     <p>
                         <label class="close"><?= TEXT_REPORT_SERVICE_EXTERNAL ?>:</label><span class="underline"><?= ($reportTypeName == 'Outpatient' ? $checkedField : $blankField ) ?></span>&nbsp;&nbsp;&nbsp;

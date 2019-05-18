@@ -98,7 +98,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED')) { define('TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED','The patient ID was not specified.',false); }
 	if (!defined('TEXT_NEW_VISIT_PAGE_TITLE')) { define('TEXT_NEW_VISIT_PAGE_TITLE','Admit patient',false); }
 	if (!defined('TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON')) { define('TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON','Admit',false); }
-	if (!defined('TEXT_PAYMENT_CURRENCY')) { define('TEXT_PAYMENT_CURRENCY','TBD',false); }
+	if (!defined('TEXT_PAYMENT_CURRENCY')) { define('TEXT_PAYMENT_CURRENCY','HNL',false); }
 	if (!defined('TEXT_PAYMENT_LABEL')) { define('TEXT_PAYMENT_LABEL','Payment',false); }
 	if (!defined('TEXT_PAYMENT_PLACEHOLDER')) { define('TEXT_PAYMENT_PLACEHOLDER','Payment amount',false); }
 	if (!defined('TEXT_REFERRAL_PLACEHOLDER')) { define('TEXT_REFERRAL_PLACEHOLDER','Clinic name',false); }
@@ -140,7 +140,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED')) { define('TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED','No estuvo especificado el ID del paciente.',false); }
 	if (!defined('TEXT_NEW_VISIT_PAGE_TITLE')) { define('TEXT_NEW_VISIT_PAGE_TITLE','Abre una visita nueva para el paciente',false); }
 	if (!defined('TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON')) { define('TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON','Abra esta visita',false); }
-	if (!defined('TEXT_PAYMENT_CURRENCY')) { define('TEXT_PAYMENT_CURRENCY','TBD',false); }
+	if (!defined('TEXT_PAYMENT_CURRENCY')) { define('TEXT_PAYMENT_CURRENCY','HNL',false); }
 	if (!defined('TEXT_PAYMENT_LABEL')) { define('TEXT_PAYMENT_LABEL','Pago',false); }
 	if (!defined('TEXT_PAYMENT_PLACEHOLDER')) { define('TEXT_PAYMENT_PLACEHOLDER','Pago',false); }
 	if (!defined('TEXT_REFERRAL_PLACEHOLDER')) { define('TEXT_REFERRAL_PLACEHOLDER','Nombre de la clínica',false); }

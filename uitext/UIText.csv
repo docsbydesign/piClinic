@@ -495,7 +495,7 @@ TEXT_PATIENT_SUBMIT_PATIENT_VISIT_BUTTON,Update visit info,Actualizar la informa
 TEXT_PATIENT_VISIT_LIST_HEAD,Earlier visits to this clinic,Visitas anteriores a esta clínica
 TEXT_PATIENT_VISIT_NOT_FOUND,The specified patient visit was not found,No encontró la visita especificada
 TEXT_PATIENT_VISIT_NOT_SPECIFIED,The required patient visit ID was not specified,El ID del la visita no estuvo especificada
-TEXT_PAYMENT_CURRENCY,TBD,TBD
+TEXT_PAYMENT_CURRENCY,HNL,HNL
 TEXT_PAYMENT_LABEL,Payment,Pago
 TEXT_PAYMENT_PLACEHOLDER,Payment amount,Pago
 TEXT_PHONE_LABEL,Contact info,Información del contacto
