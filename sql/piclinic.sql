@@ -199,7 +199,7 @@ DROP TABLE IF EXISTS `clinic`;
 CREATE TABLE IF NOT EXISTS `clinic` (
   `clinicID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique record ID for clinic records',
   `thisClinic` tinyint(1) NOT NULL DEFAULT '0' COMMENT '(Required) Set to 1 to indicate the clinic in which the system is installed.',
-  `publicID` varchar(127) COLLATE utf8_unicode_ci NOT NULL COMMENT '(Required) Clinic ID/code as assigned by controlling agency.',
+  `publicID` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Clinic ID/code as assigned by controlling agency.',
   `typeCode` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Cinic Type designator',
   `careLevel` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Not Required) Cinic care level designator',
   `longName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Require) Full, official clinic name',
@@ -217,8 +217,8 @@ CREATE TABLE IF NOT EXISTS `clinic` (
   `createdDate` datetime NOT NULL COMMENT '(Auto Fill) The time the record was created'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Information about the clinic';
 
-ALTER TABLE `clinic`
- ADD UNIQUE KEY `publicID` (`publicID`);
+-- ALTER TABLE `clinic`
+--  ADD UNIQUE KEY `publicID` (`publicID`);
 
 
 -- --------------------------------------------------------
