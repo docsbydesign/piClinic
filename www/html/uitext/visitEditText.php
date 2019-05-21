@@ -169,22 +169,22 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_CANCEL_VISIT_EDIT')) { define('TEXT_CANCEL_VISIT_EDIT','Cancelar',false); }
 	if (!defined('TEXT_COMPLAINT_ADDITIONAL_LABEL')) { define('TEXT_COMPLAINT_ADDITIONAL_LABEL','Adicional motivo de la visita',false); }
 	if (!defined('TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER')) { define('TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER','Adicional motivo de la visita',false); }
-	if (!defined('TEXT_COMPLAINT_PRIMARY_LABEL')) { define('TEXT_COMPLAINT_PRIMARY_LABEL','Primero motivo de la visita',false); }
+	if (!defined('TEXT_COMPLAINT_PRIMARY_LABEL')) { define('TEXT_COMPLAINT_PRIMARY_LABEL','Primer motivo de la visita',false); }
 	if (!defined('TEXT_COMPLAINT_PRIMARY_PLACEHOLDER')) { define('TEXT_COMPLAINT_PRIMARY_PLACEHOLDER','Primero motivo de la visita',false); }
 	if (!defined('TEXT_DATE_BLANK')) { define('TEXT_DATE_BLANK','(No especificada)',false); }
 	if (!defined('TEXT_DATE_TIME_IN_LABEL')) { define('TEXT_DATE_TIME_IN_LABEL','Llegó a la clínica',false); }
 	if (!defined('TEXT_DATE_TIME_OUT_LABEL')) { define('TEXT_DATE_TIME_OUT_LABEL','Salió de la clínica',false); }
 	if (!defined('TEXT_DIAGNOSIS1_LABEL')) { define('TEXT_DIAGNOSIS1_LABEL','Diagnóstico 1',false); }
-	if (!defined('TEXT_DIAGNOSIS1_PLACEHOLDER')) { define('TEXT_DIAGNOSIS1_PLACEHOLDER','Ingrese el diagnóstico o el codigo CIE-10',false); }
+	if (!defined('TEXT_DIAGNOSIS1_PLACEHOLDER')) { define('TEXT_DIAGNOSIS1_PLACEHOLDER','Ingrese el diagnóstico o el código CIE-10',false); }
 	if (!defined('TEXT_DIAGNOSIS2_LABEL')) { define('TEXT_DIAGNOSIS2_LABEL','Diagnóstico 2',false); }
-	if (!defined('TEXT_DIAGNOSIS2_PLACEHOLDER')) { define('TEXT_DIAGNOSIS2_PLACEHOLDER','Ingrese el diagnóstico o el codigo CIE-10',false); }
+	if (!defined('TEXT_DIAGNOSIS2_PLACEHOLDER')) { define('TEXT_DIAGNOSIS2_PLACEHOLDER','Ingrese el diagnóstico o el código CIE-10',false); }
 	if (!defined('TEXT_DIAGNOSIS3_LABEL')) { define('TEXT_DIAGNOSIS3_LABEL','Diagnóstico 3',false); }
-	if (!defined('TEXT_DIAGNOSIS3_PLACEHOLDER')) { define('TEXT_DIAGNOSIS3_PLACEHOLDER','Ingrese el diagnóstico o el codigo CIE-10',false); }
+	if (!defined('TEXT_DIAGNOSIS3_PLACEHOLDER')) { define('TEXT_DIAGNOSIS3_PLACEHOLDER','Ingrese el diagnóstico o el código CIE-10',false); }
 	if (!defined('TEXT_EDIT_PAGE_TITLE')) { define('TEXT_EDIT_PAGE_TITLE','Actualizar detalles de la visita',false); }
 	if (!defined('TEXT_FIRST_VISIT_LABEL')) { define('TEXT_FIRST_VISIT_LABEL','Nuevo o Subsiguiente?',false); }
 	if (!defined('TEXT_FIRST_VISIT_SELECT')) { define('TEXT_FIRST_VISIT_SELECT','Nuevo',false); }
 	if (!defined('TEXT_LAST_VISIT_DATE_LABEL')) { define('TEXT_LAST_VISIT_DATE_LABEL','Úlitma visita',false); }
-	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND','No se encontro la visita del paciente.',false); }
+	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND','No se encontró la visita del paciente.',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED','ID de la visita no está especificada.',false); }
 	if (!defined('TEXT_NO_OPTION')) { define('TEXT_NO_OPTION','No',false); }
 	if (!defined('TEXT_PATIENT_SUBMIT_PATIENT_VISIT_BUTTON')) { define('TEXT_PATIENT_SUBMIT_PATIENT_VISIT_BUTTON','Actualizar la información de esta visita',false); }

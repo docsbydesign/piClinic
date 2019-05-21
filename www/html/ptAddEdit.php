@@ -264,8 +264,11 @@ function writeTopicMenu ($cancelLink, $ata=false) {
                 <label class="close"><?= TEXT_PATIENT_NEW_MARITAL_STATUS_LABEL ?>:</label>
                 <select id="newMaritalStatus" name="maritalStatus">
                     <option value="" <?= (empty($patientData['maritalStatus']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
-                    <option value="Married" <?= ((!empty($patientData['maritalStatus']) && $patientData['maritalStatus'] == 'Married') ? 'selected' : '' ) ?>><?= TEXT_MARRIED_OPTION ?></option>
-                    <option value="NotMarried" <?= ((!empty($patientData['maritalStatus']) && $patientData['maritalStatus'] == 'NotMarried') ? 'selected' : '' ) ?>><?= TEXT_NOT_MARRIED_OPTION ?></option>
+                    <?php
+                        foreach ($maritalStatus as $status => $statusText) {
+                            echo ('<option value="'.$status.'" '.((!empty($patientData['maritalStatus']) && $patientData['maritalStatus'] == $status) ? 'selected' : '' ).'">'.$statusText.'</option>');
+                        }
+                    ?>
                 </select>&nbsp;&nbsp;
                 <label class="close"><?= TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_LABEL ?>:</label>
                 <input type="text" id="newresponsibleParty" name="responsibleParty"

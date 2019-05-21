@@ -47,7 +47,6 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_BLANK_OPTION_SELECT')) { define('TEXT_BLANK_OPTION_SELECT','TEXT_BLANK_OPTION_SELECT',false); }
 	if (!defined('TEXT_EDIT_PATIENT_HEADING')) { define('TEXT_EDIT_PATIENT_HEADING','TEXT_EDIT_PATIENT_HEADING',false); }
 	if (!defined('TEXT_FAMILYID_LABEL')) { define('TEXT_FAMILYID_LABEL','TEXT_FAMILYID_LABEL',false); }
-	if (!defined('TEXT_MARRIED_OPTION')) { define('TEXT_MARRIED_OPTION','TEXT_MARRIED_OPTION',false); }
 	if (!defined('TEXT_NEW_PATIENT_HEADING')) { define('TEXT_NEW_PATIENT_HEADING','TEXT_NEW_PATIENT_HEADING',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_DAY_FORMAT')) { define('TEXT_NEXT_VAX_DATE_DAY_FORMAT','TEXT_NEXT_VAX_DATE_DAY_FORMAT',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_FORMAT')) { define('TEXT_NEXT_VAX_DATE_FORMAT','TEXT_NEXT_VAX_DATE_FORMAT',false); }
@@ -55,7 +54,6 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','TEXT_NEXT_VAX_DATE_INPUT_LABEL',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_MONTH_FORMAT')) { define('TEXT_NEXT_VAX_DATE_MONTH_FORMAT','TEXT_NEXT_VAX_DATE_MONTH_FORMAT',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_YEAR_FORMAT')) { define('TEXT_NEXT_VAX_DATE_YEAR_FORMAT','TEXT_NEXT_VAX_DATE_YEAR_FORMAT',false); }
-	if (!defined('TEXT_NOT_MARRIED_OPTION')) { define('TEXT_NOT_MARRIED_OPTION','TEXT_NOT_MARRIED_OPTION',false); }
 	if (!defined('TEXT_NO_OPTION')) { define('TEXT_NO_OPTION','TEXT_NO_OPTION',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_LABEL')) { define('TEXT_PATIENTNATIONALID_LABEL','TEXT_PATIENTNATIONALID_LABEL',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_PLACEHOLDER')) { define('TEXT_PATIENTNATIONALID_PLACEHOLDER','TEXT_PATIENTNATIONALID_PLACEHOLDER',false); }
@@ -113,7 +111,6 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_BLANK_OPTION_SELECT')) { define('TEXT_BLANK_OPTION_SELECT','Choose',false); }
 	if (!defined('TEXT_EDIT_PATIENT_HEADING')) { define('TEXT_EDIT_PATIENT_HEADING','Update patient info',false); }
 	if (!defined('TEXT_FAMILYID_LABEL')) { define('TEXT_FAMILYID_LABEL','Family ID',false); }
-	if (!defined('TEXT_MARRIED_OPTION')) { define('TEXT_MARRIED_OPTION','Married',false); }
 	if (!defined('TEXT_NEW_PATIENT_HEADING')) { define('TEXT_NEW_PATIENT_HEADING','Add new patient',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_DAY_FORMAT')) { define('TEXT_NEXT_VAX_DATE_DAY_FORMAT','d',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_FORMAT')) { define('TEXT_NEXT_VAX_DATE_FORMAT','M-D-Y',false); }
@@ -121,7 +118,6 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','Next vaccination date',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_MONTH_FORMAT')) { define('TEXT_NEXT_VAX_DATE_MONTH_FORMAT','m',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_YEAR_FORMAT')) { define('TEXT_NEXT_VAX_DATE_YEAR_FORMAT','Y',false); }
-	if (!defined('TEXT_NOT_MARRIED_OPTION')) { define('TEXT_NOT_MARRIED_OPTION','Not married',false); }
 	if (!defined('TEXT_NO_OPTION')) { define('TEXT_NO_OPTION','No',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_LABEL')) { define('TEXT_PATIENTNATIONALID_LABEL','National ID',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_PLACEHOLDER')) { define('TEXT_PATIENTNATIONALID_PLACEHOLDER','Patient\'s National ID number',false); }
@@ -179,7 +175,6 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_BLANK_OPTION_SELECT')) { define('TEXT_BLANK_OPTION_SELECT','Escoge',false); }
 	if (!defined('TEXT_EDIT_PATIENT_HEADING')) { define('TEXT_EDIT_PATIENT_HEADING','Actualizar la información del paciente',false); }
 	if (!defined('TEXT_FAMILYID_LABEL')) { define('TEXT_FAMILYID_LABEL','Carpeta (familia)',false); }
-	if (!defined('TEXT_MARRIED_OPTION')) { define('TEXT_MARRIED_OPTION','Casado/a',false); }
 	if (!defined('TEXT_NEW_PATIENT_HEADING')) { define('TEXT_NEW_PATIENT_HEADING','Agregar paciente nuevo',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_DAY_FORMAT')) { define('TEXT_NEXT_VAX_DATE_DAY_FORMAT','d',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_FORMAT')) { define('TEXT_NEXT_VAX_DATE_FORMAT','D-M-Y',false); }
@@ -187,10 +182,9 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','La próxima fecha de vacunación',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_MONTH_FORMAT')) { define('TEXT_NEXT_VAX_DATE_MONTH_FORMAT','m',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_YEAR_FORMAT')) { define('TEXT_NEXT_VAX_DATE_YEAR_FORMAT','Y',false); }
-	if (!defined('TEXT_NOT_MARRIED_OPTION')) { define('TEXT_NOT_MARRIED_OPTION','Soltero/a',false); }
 	if (!defined('TEXT_NO_OPTION')) { define('TEXT_NO_OPTION','No',false); }
-	if (!defined('TEXT_PATIENTNATIONALID_LABEL')) { define('TEXT_PATIENTNATIONALID_LABEL','Cedula',false); }
-	if (!defined('TEXT_PATIENTNATIONALID_PLACEHOLDER')) { define('TEXT_PATIENTNATIONALID_PLACEHOLDER','Numero de la cedula del paciente',false); }
+	if (!defined('TEXT_PATIENTNATIONALID_LABEL')) { define('TEXT_PATIENTNATIONALID_LABEL','Cédula',false); }
+	if (!defined('TEXT_PATIENTNATIONALID_PLACEHOLDER')) { define('TEXT_PATIENTNATIONALID_PLACEHOLDER','Número de la cédula del paciente',false); }
 	if (!defined('TEXT_PATIENT_ADD_EDIT_ID_LABEL')) { define('TEXT_PATIENT_ADD_EDIT_ID_LABEL','Identidad del paciente',false); }
 	if (!defined('TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER','El número del paciente',false); }
 	if (!defined('TEXT_PATIENT_CANCEL_ADD')) { define('TEXT_PATIENT_CANCEL_ADD','Cancelar',false); }
@@ -221,8 +215,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_PATIENT_NEW_PAGE_TITLE')) { define('TEXT_PATIENT_NEW_PAGE_TITLE','Nuevo Paciente',false); }
 	if (!defined('TEXT_PATIENT_NEW_PREFERREDLANGUAGE_LABEL')) { define('TEXT_PATIENT_NEW_PREFERREDLANGUAGE_LABEL','Idioma preferido',false); }
 	if (!defined('TEXT_PATIENT_NEW_PREFERREDLANGUAGE_PLACEHOLDER')) { define('TEXT_PATIENT_NEW_PREFERREDLANGUAGE_PLACEHOLDER','Idioma preferido',false); }
-	if (!defined('TEXT_PATIENT_NEW_PROFESSION_LABEL')) { define('TEXT_PATIENT_NEW_PROFESSION_LABEL','Profesión',false); }
-	if (!defined('TEXT_PATIENT_NEW_PROFESSION_PLACEHOLDER')) { define('TEXT_PATIENT_NEW_PROFESSION_PLACEHOLDER','Entrar la profesión del paciente',false); }
+	if (!defined('TEXT_PATIENT_NEW_PROFESSION_LABEL')) { define('TEXT_PATIENT_NEW_PROFESSION_LABEL','Ocupación',false); }
+	if (!defined('TEXT_PATIENT_NEW_PROFESSION_PLACEHOLDER')) { define('TEXT_PATIENT_NEW_PROFESSION_PLACEHOLDER','Entrar la ocupación del paciente',false); }
 	if (!defined('TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_LABEL')) { define('TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_LABEL','Encargado/a',false); }
 	if (!defined('TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_PLACEHOLDER')) { define('TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_PLACEHOLDER','Entrar el nombre del encargado',false); }
 	if (!defined('TEXT_PATIENT_NEW_STATE_PLACEHOLDER')) { define('TEXT_PATIENT_NEW_STATE_PLACEHOLDER','Departamento',false); }

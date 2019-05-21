@@ -138,7 +138,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_DAY_OF_MONTH_LABEL')) { define('TEXT_REPORT_DAY_OF_MONTH_LABEL','Día del mes',false); }
 	if (!defined('TEXT_REPORT_LAST_DATE_LABEL')) { define('TEXT_REPORT_LAST_DATE_LABEL','Última fecha reportada&nbsp;(dd/mm/aaaa)',false); }
 	if (!defined('TEXT_REPORT_MONTH_PLACEHOLDER')) { define('TEXT_REPORT_MONTH_PLACEHOLDER','Mes del informe (MM)',false); }
-	if (!defined('TEXT_REPORT_PATIENT_COUNT_LABEL')) { define('TEXT_REPORT_PATIENT_COUNT_LABEL','Paceientes atendidos',false); }
+	if (!defined('TEXT_REPORT_PATIENT_COUNT_LABEL')) { define('TEXT_REPORT_PATIENT_COUNT_LABEL','Pacientes atendidos',false); }
 	if (!defined('TEXT_REPORT_PAYMENT_TOTAL_LABEL')) { define('TEXT_REPORT_PAYMENT_TOTAL_LABEL','Pagos recibidos',false); }
 	if (!defined('TEXT_REPORT_TOTAL')) { define('TEXT_REPORT_TOTAL','Total',false); }
 	if (!defined('TEXT_REPORT_WEEKDAY_1')) { define('TEXT_REPORT_WEEKDAY_1','Lunes',false); }

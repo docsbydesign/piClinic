@@ -129,14 +129,14 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_CANCEL_NEW_VISIT')) { define('TEXT_CANCEL_NEW_VISIT','Cancelar',false); }
 	if (!defined('TEXT_COMPLAINT_ADDITIONAL_LABEL')) { define('TEXT_COMPLAINT_ADDITIONAL_LABEL','Adicional motivo de la visita',false); }
 	if (!defined('TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER')) { define('TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER','Adicional motivo de la visita',false); }
-	if (!defined('TEXT_COMPLAINT_PRIMARY_LABEL')) { define('TEXT_COMPLAINT_PRIMARY_LABEL','Primero motivo de la visita',false); }
+	if (!defined('TEXT_COMPLAINT_PRIMARY_LABEL')) { define('TEXT_COMPLAINT_PRIMARY_LABEL','Primer motivo de la visita',false); }
 	if (!defined('TEXT_COMPLAINT_PRIMARY_PLACEHOLDER')) { define('TEXT_COMPLAINT_PRIMARY_PLACEHOLDER','Primero motivo de la visita',false); }
 	if (!defined('TEXT_DATE_BLANK')) { define('TEXT_DATE_BLANK','(No especificada)',false); }
 	if (!defined('TEXT_DATE_TIME_IN_LABEL')) { define('TEXT_DATE_TIME_IN_LABEL','Llegó a la clínica',false); }
 	if (!defined('TEXT_FIRST_VISIT_LABEL')) { define('TEXT_FIRST_VISIT_LABEL','Nuevo o Subsiguiente?',false); }
 	if (!defined('TEXT_FIRST_VISIT_SELECT')) { define('TEXT_FIRST_VISIT_SELECT','Nuevo',false); }
 	if (!defined('TEXT_LAST_VISIT_DATE_LABEL')) { define('TEXT_LAST_VISIT_DATE_LABEL','Úlitma visita',false); }
-	if (!defined('TEXT_MESSAGE_NO_PATIENT_FOUND')) { define('TEXT_MESSAGE_NO_PATIENT_FOUND','No se encontró ninguna paciente que coincide.',false); }
+	if (!defined('TEXT_MESSAGE_NO_PATIENT_FOUND')) { define('TEXT_MESSAGE_NO_PATIENT_FOUND','No se encontró ningún paciente que coincide.',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED')) { define('TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED','No estuvo especificado el ID del paciente.',false); }
 	if (!defined('TEXT_NEW_VISIT_PAGE_TITLE')) { define('TEXT_NEW_VISIT_PAGE_TITLE','Abre una visita nueva para el paciente',false); }
 	if (!defined('TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON')) { define('TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON','Abra esta visita',false); }

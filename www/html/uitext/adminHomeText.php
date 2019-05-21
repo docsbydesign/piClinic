@@ -99,28 +99,28 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_ALL_DESCRIPTION','Guardar todo el sistema de la consola piClinic (Se puede demorar unos minutos)',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_ALL_LINK')) { define('TEXT_ADMIN_BACKUP_ALL_LINK','Guardar el sistema',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_ALL_TITLE')) { define('TEXT_ADMIN_BACKUP_ALL_TITLE','Guardar todo el sistema de la consola piClinic',false); }
-	if (!defined('TEXT_ADMIN_BACKUP_DB_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_DB_DESCRIPTION','Guardar el base de datos de la consola piClinic (Se puede demorar hasta un minuto)',false); }
-	if (!defined('TEXT_ADMIN_BACKUP_DB_LINK')) { define('TEXT_ADMIN_BACKUP_DB_LINK','Guardar el base de datos',false); }
-	if (!defined('TEXT_ADMIN_BACKUP_DB_TITLE')) { define('TEXT_ADMIN_BACKUP_DB_TITLE','Guardar el base de datos de la consola piClinic',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_DB_DESCRIPTION','Guardar la base de datos de la consola piClinic (Se puede demorar hasta un minuto)',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_LINK')) { define('TEXT_ADMIN_BACKUP_DB_LINK','Guardar la base de datos',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_DB_TITLE')) { define('TEXT_ADMIN_BACKUP_DB_TITLE','Guardar la base de datos de la consola piClinic',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_LOG_DESCRIPTION','Guardar los registros de la actividad de la consola piClinic (Se puede demorar unos minutos)',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_LOG_LINK')) { define('TEXT_ADMIN_BACKUP_LOG_LINK','Guardar los registros de la consola',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_LOG_TITLE')) { define('TEXT_ADMIN_BACKUP_LOG_TITLE','Guardar los registros de la actividad de la consola piClinic',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION')) { define('TEXT_ADMIN_BACKUP_PATIENT_DESCRIPTION','Guardar los datos de todos los pacientes',false); }
-	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_LINK')) { define('TEXT_ADMIN_BACKUP_PATIENT_LINK','Guardar los datos del los pacientes',false); }
+	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_LINK')) { define('TEXT_ADMIN_BACKUP_PATIENT_LINK','Guardar los datos del paciente',false); }
 	if (!defined('TEXT_ADMIN_BACKUP_PATIENT_TITLE')) { define('TEXT_ADMIN_BACKUP_PATIENT_TITLE','Guardar los datos de todos los pacientes',false); }
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_DESCRIPTION')) { define('TEXT_ADMIN_LOG_VIEWER_DESCRIPTION','Mostrar los errores y eventos del sistema',false); }
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_LINK')) { define('TEXT_ADMIN_LOG_VIEWER_LINK','Registro del sistema piClinic',false); }
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_TITLE')) { define('TEXT_ADMIN_LOG_VIEWER_TITLE','Mostrar los errores y eventos del sistema',false); }
-	if (!defined('TEXT_ADMIN_MANAGE_USERS_DESCRIPTION')) { define('TEXT_ADMIN_MANAGE_USERS_DESCRIPTION','Maneja las configuracións de los usuarios',false); }
+	if (!defined('TEXT_ADMIN_MANAGE_USERS_DESCRIPTION')) { define('TEXT_ADMIN_MANAGE_USERS_DESCRIPTION','Maneja las configuración de los usuarios',false); }
 	if (!defined('TEXT_ADMIN_MANAGE_USERS_LINK')) { define('TEXT_ADMIN_MANAGE_USERS_LINK','Usuarios del piClinic',false); }
 	if (!defined('TEXT_ADMIN_MANAGE_USERS_TITLE')) { define('TEXT_ADMIN_MANAGE_USERS_TITLE','Maneja la configuración de los usuarios del sistema piClinic',false); }
 	if (!defined('TEXT_ADMIN_SHOW_COMMENTS_DESCRIPTION')) { define('TEXT_ADMIN_SHOW_COMMENTS_DESCRIPTION','Mostrar los comentarios del piClinic más recientes',false); }
 	if (!defined('TEXT_ADMIN_SHOW_COMMENTS_LINK')) { define('TEXT_ADMIN_SHOW_COMMENTS_LINK','Comentarios de los usuarios',false); }
 	if (!defined('TEXT_ADMIN_SHOW_COMMENTS_TITLE')) { define('TEXT_ADMIN_SHOW_COMMENTS_TITLE','Comentarios de los usuarios',false); }
-	if (!defined('TEXT_MONTHLY_SUMMARY_BY_POS_DATA_LINK')) { define('TEXT_MONTHLY_SUMMARY_BY_POS_DATA_LINK','Diagnosticos tabulados en el Informe Mensual de Atenciones Ambulatorias (AT2-R)',false); }
-	if (!defined('TEXT_MONTHLY_SUMMARY_BY_POS_DATA_TITLE')) { define('TEXT_MONTHLY_SUMMARY_BY_POS_DATA_TITLE','Lista de los codigos diagnosticos tabulados en el Informe Mensual de Atenciones Ambulatorias (AT2-R)',false); }
-	if (!defined('TEXT_MONTHLY_SUMMARY_DATA_LINK')) { define('TEXT_MONTHLY_SUMMARY_DATA_LINK','Diagnosticos tabulados en el Informe Diario de Atenciones Ambulatorias',false); }
-	if (!defined('TEXT_MONTHLY_SUMMARY_DATA_TITLE')) { define('TEXT_MONTHLY_SUMMARY_DATA_TITLE','Lista de los codigos diagnosticos tabulado en el Informe Diario de Atenciones Ambulatorias',false); }
+	if (!defined('TEXT_MONTHLY_SUMMARY_BY_POS_DATA_LINK')) { define('TEXT_MONTHLY_SUMMARY_BY_POS_DATA_LINK','Diagnósticos tabulados en el Informe Mensual de Atenciones Ambulatorias (AT2-R)',false); }
+	if (!defined('TEXT_MONTHLY_SUMMARY_BY_POS_DATA_TITLE')) { define('TEXT_MONTHLY_SUMMARY_BY_POS_DATA_TITLE','Lista de los códigos de diagnósticos tabulados en el Informe Mensual de Atenciones Ambulatorias (AT2-R)',false); }
+	if (!defined('TEXT_MONTHLY_SUMMARY_DATA_LINK')) { define('TEXT_MONTHLY_SUMMARY_DATA_LINK','Diagnósticos tabulados en el Informe Diario de Atenciones Ambulatorias',false); }
+	if (!defined('TEXT_MONTHLY_SUMMARY_DATA_TITLE')) { define('TEXT_MONTHLY_SUMMARY_DATA_TITLE','Lista de los códigos de diagnósticos tabulado en el Informe Diario de Atenciones Ambulatorias',false); }
 	if (!defined('TEXT_PICLINIC_SYSTEM_PAGE_TITLE')) { define('TEXT_PICLINIC_SYSTEM_PAGE_TITLE','Administración del sistema piClinic',false); }
 }
 //EOF

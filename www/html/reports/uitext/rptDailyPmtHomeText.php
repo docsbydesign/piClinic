@@ -133,12 +133,12 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_EXPORT_TSV_BUTTON')) { define('TEXT_EXPORT_TSV_BUTTON','Descargar como TSV',false); }
 	if (!defined('TEXT_EXPORT_TSV_BUTTON_TEXT')) { define('TEXT_EXPORT_TSV_BUTTON_TEXT','Descarga el informe como un archivo TSV para importarlo como una hoja de cálculo. Excel puede importar este formato manualmente y muestra todas las letras correctamente.',false); }
 	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','Escoge una fecha.',false); }
-	if (!defined('TEXT_NO_VISITS_FOUND_DAY')) { define('TEXT_NO_VISITS_FOUND_DAY','No visitas encontradas en este fecha.',false); }
+	if (!defined('TEXT_NO_VISITS_FOUND_DAY')) { define('TEXT_NO_VISITS_FOUND_DAY','No visitas encontradas en esta fecha.',false); }
 	if (!defined('TEXT_OF_PAGES')) { define('TEXT_OF_PAGES','de',false); }
 	if (!defined('TEXT_PAGE_LABEL')) { define('TEXT_PAGE_LABEL','Página',false); }
 	if (!defined('TEXT_PATIENT_COUNT_LABEL')) { define('TEXT_PATIENT_COUNT_LABEL','Pacientes atendidos',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Establecimiento',false); }
-	if (!defined('TEXT_REPORT_CONTINUED')) { define('TEXT_REPORT_CONTINUED','Continua en la próxima página',false); }
+	if (!defined('TEXT_REPORT_CONTINUED')) { define('TEXT_REPORT_CONTINUED','Continúa en la próxima página',false); }
 	if (!defined('TEXT_REPORT_DATE_PLACEHOLDER')) { define('TEXT_REPORT_DATE_PLACEHOLDER','Report date (AAAA-MM-DD)',false); }
 	if (!defined('TEXT_REPORT_DATE_TIME_IN')) { define('TEXT_REPORT_DATE_TIME_IN','Hora de la visita',false); }
 	if (!defined('TEXT_REPORT_PATIENT_ID_LABEL')) { define('TEXT_REPORT_PATIENT_ID_LABEL','Número de identidad del paciente',false); }

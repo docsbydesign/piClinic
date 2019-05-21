@@ -39,16 +39,13 @@ exitIfCalledFromBrowser(__FILE__);
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_MARRIED_OPTION')) { define('TEXT_MARRIED_OPTION','TEXT_MARRIED_OPTION',false); }
-	if (!defined('TEXT_NOT_MARRIED_OPTION')) { define('TEXT_NOT_MARRIED_OPTION','TEXT_NOT_MARRIED_OPTION',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_MARRIED_OPTION')) { define('TEXT_MARRIED_OPTION','Married',false); }
-	if (!defined('TEXT_NOT_MARRIED_OPTION')) { define('TEXT_NOT_MARRIED_OPTION','Not married',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MARRIED_OPTION')) { define('TEXT_MARRIED_OPTION','Casado/a',false); }
-	if (!defined('TEXT_NOT_MARRIED_OPTION')) { define('TEXT_NOT_MARRIED_OPTION','Soltero/a',false); }
 }
 //EOF

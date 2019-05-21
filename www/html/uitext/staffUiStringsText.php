@@ -60,13 +60,13 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	if (!defined('TEXT_STAFF_POSITION_OPTION_CLINICSTAFF')) { define('TEXT_STAFF_POSITION_OPTION_CLINICSTAFF','Personal clínica',false); }
-	if (!defined('TEXT_STAFF_POSITION_OPTION_DOCTORGENERAL')) { define('TEXT_STAFF_POSITION_OPTION_DOCTORGENERAL','Medico-general',false); }
-	if (!defined('TEXT_STAFF_POSITION_OPTION_DOCTORSPECIALIST')) { define('TEXT_STAFF_POSITION_OPTION_DOCTORSPECIALIST','Medico-especialista',false); }
+	if (!defined('TEXT_STAFF_POSITION_OPTION_CLINICSTAFF')) { define('TEXT_STAFF_POSITION_OPTION_CLINICSTAFF','Personal clínico',false); }
+	if (!defined('TEXT_STAFF_POSITION_OPTION_DOCTORGENERAL')) { define('TEXT_STAFF_POSITION_OPTION_DOCTORGENERAL','Médico-general',false); }
+	if (!defined('TEXT_STAFF_POSITION_OPTION_DOCTORSPECIALIST')) { define('TEXT_STAFF_POSITION_OPTION_DOCTORSPECIALIST','Médico-especialista',false); }
 	if (!defined('TEXT_STAFF_POSITION_OPTION_MEDICALSTUDENT')) { define('TEXT_STAFF_POSITION_OPTION_MEDICALSTUDENT','Estudiante de medicina',false); }
 	if (!defined('TEXT_STAFF_POSITION_OPTION_NURSE')) { define('TEXT_STAFF_POSITION_OPTION_NURSE','Enfermera-profesional',false); }
-	if (!defined('TEXT_STAFF_POSITION_OPTION_NURSESAID')) { define('TEXT_STAFF_POSITION_OPTION_NURSESAID','Enefermera-auxiliar',false); }
-	if (!defined('TEXT_STAFF_POSITION_OPTION_NURSINGSTUDENT')) { define('TEXT_STAFF_POSITION_OPTION_NURSINGSTUDENT','Estudiante de enfermeria',false); }
+	if (!defined('TEXT_STAFF_POSITION_OPTION_NURSESAID')) { define('TEXT_STAFF_POSITION_OPTION_NURSESAID','Enfermera-auxiliar',false); }
+	if (!defined('TEXT_STAFF_POSITION_OPTION_NURSINGSTUDENT')) { define('TEXT_STAFF_POSITION_OPTION_NURSINGSTUDENT','Estudiante de enfermería',false); }
 	if (!defined('TEXT_STAFF_POSITION_OPTION_OTHER')) { define('TEXT_STAFF_POSITION_OPTION_OTHER','Otro personal',false); }
 }
 //EOF

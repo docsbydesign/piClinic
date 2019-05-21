@@ -60,10 +60,10 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	if (!defined('TEXT_HELP_ICD')) { define('TEXT_HELP_ICD','Referencias del codigo CIE-10',false); }
+	if (!defined('TEXT_HELP_ICD')) { define('TEXT_HELP_ICD','Referencias del código CIE-10',false); }
 	if (!defined('TEXT_HELP_INTRODUCTION')) { define('TEXT_HELP_INTRODUCTION','Mapa de las pantallas de la consola piClinic',false); }
 	if (!defined('TEXT_HELP_MENU_HOME')) { define('TEXT_HELP_MENU_HOME','Pantallas de la consola',false); }
-	if (!defined('TEXT_HELP_MENU_ICD')) { define('TEXT_HELP_MENU_ICD','Codigos del CIE-10',false); }
+	if (!defined('TEXT_HELP_MENU_ICD')) { define('TEXT_HELP_MENU_ICD','Códigos del CIE-10',false); }
 	if (!defined('TEXT_HELP_MENU_PROMPT')) { define('TEXT_HELP_MENU_PROMPT','Ayuda con',false); }
 	if (!defined('TEXT_HELP_MENU_WORKFLOW')) { define('TEXT_HELP_MENU_WORKFLOW','Tareas en la consola',false); }
 	if (!defined('TEXT_HELP_WORKFLOW')) { define('TEXT_HELP_WORKFLOW','Tareas de la consola piClinic',false); }

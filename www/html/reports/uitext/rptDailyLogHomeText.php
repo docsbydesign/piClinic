@@ -228,7 +228,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_NEIGHBORHOOD_LABEL')) { define('TEXT_NEIGHBORHOOD_LABEL','Localidad',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
 	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','Escoge un profesional de salud y una fecha.',false); }
-	if (!defined('TEXT_NO_VISITS_FOUND_DAY')) { define('TEXT_NO_VISITS_FOUND_DAY','No visitas encontradas en este fecha.',false); }
+	if (!defined('TEXT_NO_VISITS_FOUND_DAY')) { define('TEXT_NO_VISITS_FOUND_DAY','No visitas encontradas en esta fecha.',false); }
 	if (!defined('TEXT_PATIENTVISITID_LABEL')) { define('TEXT_PATIENTVISITID_LABEL','Número de historia clínica',false); }
 	if (!defined('TEXT_PATIENT_LABEL')) { define('TEXT_PATIENT_LABEL','Paciente',false); }
 	if (!defined('TEXT_RECEIVED_FROM_LABEL')) { define('TEXT_RECEIVED_FROM_LABEL','Recibida de',false); }
@@ -240,8 +240,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_CLINIC_CODE_LABEL')) { define('TEXT_REPORT_CLINIC_CODE_LABEL','Código',false); }
 	if (!defined('TEXT_REPORT_CLINIC_TYPE_LABEL')) { define('TEXT_REPORT_CLINIC_TYPE_LABEL','Tipo de establecimiento',false); }
 	if (!defined('TEXT_REPORT_DATE_PLACEHOLDER')) { define('TEXT_REPORT_DATE_PLACEHOLDER','Report date (AAAA-MM-DD)',false); }
-	if (!defined('TEXT_REPORT_DIAGNOSIS_LABEL')) { define('TEXT_REPORT_DIAGNOSIS_LABEL','Diagnostico/Actividad',false); }
-	if (!defined('TEXT_REPORT_REFERRAL_LABEL')) { define('TEXT_REPORT_REFERRAL_LABEL','Referencia',false); }
+	if (!defined('TEXT_REPORT_DIAGNOSIS_LABEL')) { define('TEXT_REPORT_DIAGNOSIS_LABEL','Diagnóstico/Actividad',false); }
+	if (!defined('TEXT_REPORT_REFERRAL_LABEL')) { define('TEXT_REPORT_REFERRAL_LABEL','Remisiones',false); }
 	if (!defined('TEXT_REPORT_ROW_LABEL')) { define('TEXT_REPORT_ROW_LABEL','No.',false); }
 	if (!defined('TEXT_REPORT_SERVICE_EMERGENCY')) { define('TEXT_REPORT_SERVICE_EMERGENCY','Emergencia',false); }
 	if (!defined('TEXT_REPORT_SERVICE_EXTERNAL')) { define('TEXT_REPORT_SERVICE_EXTERNAL','Consulta externa',false); }

@@ -92,14 +92,14 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_ACCESS_GRANTED_OPTION_ADMIN')) { define('TEXT_ACCESS_GRANTED_OPTION_ADMIN','Administrador del sistema',false); }
 	if (!defined('TEXT_ACCESS_GRANTED_OPTION_CLINIC')) { define('TEXT_ACCESS_GRANTED_OPTION_CLINIC','Administrador de la clínica',false); }
-	if (!defined('TEXT_ACCESS_GRANTED_OPTION_RO')) { define('TEXT_ACCESS_GRANTED_OPTION_RO','Usuario atorizado',false); }
+	if (!defined('TEXT_ACCESS_GRANTED_OPTION_RO')) { define('TEXT_ACCESS_GRANTED_OPTION_RO','Usuario autorizado',false); }
 	if (!defined('TEXT_ACCESS_GRANTED_OPTION_STAFF')) { define('TEXT_ACCESS_GRANTED_OPTION_STAFF','Personal de la clínica',false); }
 	if (!defined('TEXT_ACCESS_GRANTED_OPTION_UNKNOWN')) { define('TEXT_ACCESS_GRANTED_OPTION_UNKNOWN','Desconocido',false); }
-	if (!defined('TEXT_ADD_NEW_USER')) { define('TEXT_ADD_NEW_USER','Agrega una persona o usario nuevo',false); }
+	if (!defined('TEXT_ADD_NEW_USER')) { define('TEXT_ADD_NEW_USER','Agrega una persona o usuario nuevo',false); }
 	if (!defined('TEXT_NO_STAFF_RECORDS')) { define('TEXT_NO_STAFF_RECORDS','No hay usuarios o personal de la clínica',false); }
 	if (!defined('TEXT_PICLINIC_USERS_PAGE_TITLE')) { define('TEXT_PICLINIC_USERS_PAGE_TITLE','Usuarios del sistema piClinic y personal de la clínica',false); }
 	if (!defined('TEXT_STAFF_DATE_FORMAT')) { define('TEXT_STAFF_DATE_FORMAT','d-m-Y H:i',false); }
-	if (!defined('TEXT_STAFF_EDIT_USERNAME_TITLE')) { define('TEXT_STAFF_EDIT_USERNAME_TITLE','Actualizar los propedades del usuario',false); }
+	if (!defined('TEXT_STAFF_EDIT_USERNAME_TITLE')) { define('TEXT_STAFF_EDIT_USERNAME_TITLE','Actualizar los propiedades del usuario',false); }
 	if (!defined('TEXT_STAFF_LIST_HEAD')) { define('TEXT_STAFF_LIST_HEAD','Usuarios del sistema piClinic y personal de la clínica',false); }
 	if (!defined('TEXT_STAFF_LIST_HEAD_ACCESSGRANTED')) { define('TEXT_STAFF_LIST_HEAD_ACCESSGRANTED','Permiso',false); }
 	if (!defined('TEXT_STAFF_LIST_HEAD_CONTACTINFO')) { define('TEXT_STAFF_LIST_HEAD_CONTACTINFO','Como contactar',false); }

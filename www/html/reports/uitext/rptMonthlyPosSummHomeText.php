@@ -273,8 +273,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha del informe (AAAA-MM)',false); }
 	if (!defined('TEXT_DECIMAL_POINT')) { define('TEXT_DECIMAL_POINT',',',false); }
 	if (!defined('TEXT_DIAGDATA_AGE_GROUP')) { define('TEXT_DIAGDATA_AGE_GROUP',' solo para los pacientes con edades ',false); }
-	if (!defined('TEXT_DIAGDATA_COUNT_HEADING')) { define('TEXT_DIAGDATA_COUNT_HEADING','Cuenta estos diagnosticos',false); }
-	if (!defined('TEXT_DIAGDATA_HEADING')) { define('TEXT_DIAGDATA_HEADING','Diagnosticos reportados en este informe',false); }
+	if (!defined('TEXT_DIAGDATA_COUNT_HEADING')) { define('TEXT_DIAGDATA_COUNT_HEADING','Cuenta estos diagnósticos',false); }
+	if (!defined('TEXT_DIAGDATA_HEADING')) { define('TEXT_DIAGDATA_HEADING','Diagnósticos reportados en este informe',false); }
 	if (!defined('TEXT_DIAGDATA_MISSING_TEXT')) { define('TEXT_DIAGDATA_MISSING_TEXT','Texto no presente',false); }
 	if (!defined('TEXT_DIAGDATA_REPORT_LINE')) { define('TEXT_DIAGDATA_REPORT_LINE','Fila del informe',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON')) { define('TEXT_EXPORT_CSV_BUTTON','Descargar como CSV',false); }
@@ -331,10 +331,10 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_RPT_LINE_19')) { define('TEXT_RPT_LINE_19','Total pacientes atendidos',false); }
 	if (!defined('TEXT_RPT_LINE_20')) { define('TEXT_RPT_LINE_20','No. atenciones de mujeres',false); }
 	if (!defined('TEXT_RPT_LINE_21')) { define('TEXT_RPT_LINE_21','No. Atenciones de hombres',false); }
-	if (!defined('TEXT_RPT_LINE_22')) { define('TEXT_RPT_LINE_22','No. consultas espontaneas',false); }
+	if (!defined('TEXT_RPT_LINE_22')) { define('TEXT_RPT_LINE_22','No. consultas espontáneas',false); }
 	if (!defined('TEXT_RPT_LINE_23')) { define('TEXT_RPT_LINE_23','No. consultas referidas',false); }
-	if (!defined('TEXT_RPT_LINE_24')) { define('TEXT_RPT_LINE_24','Detección de sintomaticos respiratorios',false); }
-	if (!defined('TEXT_RPT_LINE_25')) { define('TEXT_RPT_LINE_25','Detección de cancer cervico uterino',false); }
+	if (!defined('TEXT_RPT_LINE_24')) { define('TEXT_RPT_LINE_24','Detección de síntomas respiratorios',false); }
+	if (!defined('TEXT_RPT_LINE_25')) { define('TEXT_RPT_LINE_25','Detección de cáncer cervicouterino',false); }
 	if (!defined('TEXT_RPT_LINE_26')) { define('TEXT_RPT_LINE_26','Embarazadas Nueavas',false); }
 	if (!defined('TEXT_RPT_LINE_27')) { define('TEXT_RPT_LINE_27','Embarazadas en Control',false); }
 	if (!defined('TEXT_RPT_LINE_28')) { define('TEXT_RPT_LINE_28','Controles puerperales',false); }
@@ -346,18 +346,18 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_RPT_LINE_34')) { define('TEXT_RPT_LINE_34','Depo porvera Aplicadas',false); }
 	if (!defined('TEXT_RPT_LINE_35')) { define('TEXT_RPT_LINE_35','DIU insertados',false); }
 	if (!defined('TEXT_RPT_LINE_36')) { define('TEXT_RPT_LINE_36','(Collar)',false); }
-	if (!defined('TEXT_RPT_LINE_37')) { define('TEXT_RPT_LINE_37','Implante Sub Dermico',false); }
+	if (!defined('TEXT_RPT_LINE_37')) { define('TEXT_RPT_LINE_37','Implante Sub Dérmico',false); }
 	if (!defined('TEXT_RPT_LINE_38')) { define('TEXT_RPT_LINE_38','No. niños/as menores de 5 años con Diarrea',false); }
 	if (!defined('TEXT_RPT_LINE_39')) { define('TEXT_RPT_LINE_39','No. niños/as menores de 5 años con Diarrea que acuden a cita de seguimiento',false); }
 	if (!defined('TEXT_RPT_LINE_40')) { define('TEXT_RPT_LINE_40','No. niños/as menores de 5 años con Deshidratación Rehidratados en la US',false); }
-	if (!defined('TEXT_RPT_LINE_41')) { define('TEXT_RPT_LINE_41','No. niños/as menores de 5 años con neumonia (nueva en el año)',false); }
-	if (!defined('TEXT_RPT_LINE_42')) { define('TEXT_RPT_LINE_42','No. niños/as menores de 5 años con neumonia  que acuden a su cita de Seguimiento',false); }
-	if (!defined('TEXT_RPT_LINE_43')) { define('TEXT_RPT_LINE_43','No. niños/as menores de 5 años con algun grado de sindrome anémico diagnosticado por laboratorio',false); }
+	if (!defined('TEXT_RPT_LINE_41')) { define('TEXT_RPT_LINE_41','No. niños/as menores de 5 años con neumonía (nueva en el año)',false); }
+	if (!defined('TEXT_RPT_LINE_42')) { define('TEXT_RPT_LINE_42','No. niños/as menores de 5 años con neumonía  que acuden a su cita de Seguimiento',false); }
+	if (!defined('TEXT_RPT_LINE_43')) { define('TEXT_RPT_LINE_43','No. niños/as menores de 5 años con algun grado de síndrome anémico diagnosticado por laboratorio',false); }
 	if (!defined('TEXT_RPT_LINE_44')) { define('TEXT_RPT_LINE_44','Total no. niños/as menores de 5 años atendidos',false); }
 	if (!defined('TEXT_RPT_LINE_45')) { define('TEXT_RPT_LINE_45','No. niños/as menores de 5 años con crecimiento adecuado',false); }
 	if (!defined('TEXT_RPT_LINE_46')) { define('TEXT_RPT_LINE_46','No. niños/as menores de 5 años con crecimiento inadecuado',false); }
 	if (!defined('TEXT_RPT_LINE_47')) { define('TEXT_RPT_LINE_47','No. niños/as menores de 5 años bajo percentil 3',false); }
-	if (!defined('TEXT_RPT_LINE_48')) { define('TEXT_RPT_LINE_48','No. niños/as menores de 5 años con daño nutricional servero',false); }
+	if (!defined('TEXT_RPT_LINE_48')) { define('TEXT_RPT_LINE_48','No. niños/as menores de 5 años con daño nutricional severo',false); }
 	if (!defined('TEXT_RPT_LINE_49')) { define('TEXT_RPT_LINE_49','No. niños/as menores de 5 años con discapacidad nuevos en el año',false); }
 	if (!defined('TEXT_RPT_LINE_50')) { define('TEXT_RPT_LINE_50','No. niños/as menores de 5 años con probable alteracion del desarrollo',false); }
 	if (!defined('TEXT_RPT_LINE_51')) { define('TEXT_RPT_LINE_51','Atención prenatal nueva en las primeras 12 SG',false); }
@@ -373,7 +373,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_RPT_MONTH_09')) { define('TEXT_RPT_MONTH_09','Septiembre',false); }
 	if (!defined('TEXT_RPT_MONTH_10')) { define('TEXT_RPT_MONTH_10','Octubre',false); }
 	if (!defined('TEXT_RPT_MONTH_11')) { define('TEXT_RPT_MONTH_11','Noviembre',false); }
-	if (!defined('TEXT_RPT_MONTH_12')) { define('TEXT_RPT_MONTH_12','Deciembre',false); }
+	if (!defined('TEXT_RPT_MONTH_12')) { define('TEXT_RPT_MONTH_12','Diciembre',false); }
 	if (!defined('TEXT_SHOW_REPORT_BUTTON')) { define('TEXT_SHOW_REPORT_BUTTON','Mostrar informe',false); }
 	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_LINK')) { define('TEXT_SHOW_REPORT_DATE_FIELD_LINK','Muestra el campo para la fecha',false); }
 	if (!defined('TEXT_SHOW_REPORT_DATE_FIELD_TITLE')) { define('TEXT_SHOW_REPORT_DATE_FIELD_TITLE','Muestra el campo para entrar la fecha directamente',false); }

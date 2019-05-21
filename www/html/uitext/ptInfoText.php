@@ -201,20 +201,20 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_HOMEADDRESS1_MISSING')) { define('TEXT_HOMEADDRESS1_MISSING','(Dirección no especificada)',false); }
 	if (!defined('TEXT_HOMEADDRESS2_MISSING')) { define('TEXT_HOMEADDRESS2_MISSING','(Dirección adicional no especificada)',false); }
 	if (!defined('TEXT_HOMEADDRESS_LABEL')) { define('TEXT_HOMEADDRESS_LABEL','Dirección de la casa',false); }
-	if (!defined('TEXT_HOMECITY_MISSING')) { define('TEXT_HOMECITY_MISSING','(Municipio no especificada)',false); }
-	if (!defined('TEXT_HOMECOUNTY_MISSING')) { define('TEXT_HOMECOUNTY_MISSING','(Condado no especificada)',false); }
+	if (!defined('TEXT_HOMECITY_MISSING')) { define('TEXT_HOMECITY_MISSING','(Municipio no especificado)',false); }
+	if (!defined('TEXT_HOMECOUNTY_MISSING')) { define('TEXT_HOMECOUNTY_MISSING','(Condado no especificado)',false); }
 	if (!defined('TEXT_HOMENEIGHBORHOOD_MISSING')) { define('TEXT_HOMENEIGHBORHOOD_MISSING','(Localidad no especificada)',false); }
-	if (!defined('TEXT_HOMESTATE_MISSING')) { define('TEXT_HOMESTATE_MISSING','(Departamento no especificada)',false); }
+	if (!defined('TEXT_HOMESTATE_MISSING')) { define('TEXT_HOMESTATE_MISSING','(Departamento no especificado)',false); }
 	if (!defined('TEXT_MARITAL_STATUS_LABEL')) { define('TEXT_MARITAL_STATUS_LABEL','Estado civil',false); }
 	if (!defined('TEXT_MARITAL_STATUS_NOT_SPECIFIED')) { define('TEXT_MARITAL_STATUS_NOT_SPECIFIED','(No especificado)',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_NOT_FOUND')) { define('TEXT_MESSAGE_PATIENT_ID_NOT_FOUND','No se encontró el paciente con ese ID.',false); }
-	if (!defined('TEXT_MORE_VISIT_INFO')) { define('TEXT_MORE_VISIT_INFO','Ver la descripcción completa',false); }
+	if (!defined('TEXT_MORE_VISIT_INFO')) { define('TEXT_MORE_VISIT_INFO','Ver la descripción completa',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT')) { define('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT','d-m-Y',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','La próxima fecha de vacunación',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
 	if (!defined('TEXT_NO_PREVIOUS_VISITS')) { define('TEXT_NO_PREVIOUS_VISITS','No hay archivos de admisiónes anteriores',false); }
 	if (!defined('TEXT_ORGAN_DONOR')) { define('TEXT_ORGAN_DONOR','[Donante de órganos]',false); }
-	if (!defined('TEXT_PATIENTNATIONALID_LABEL')) { define('TEXT_PATIENTNATIONALID_LABEL','Cedula',false); }
+	if (!defined('TEXT_PATIENTNATIONALID_LABEL')) { define('TEXT_PATIENTNATIONALID_LABEL','Cédula',false); }
 	if (!defined('TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON')) { define('TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON','Agregar un paciente nuevo',false); }
 	if (!defined('TEXT_PATIENT_ALLERGY_LIST_HEAD')) { define('TEXT_PATIENT_ALLERGY_LIST_HEAD','Alergias conocidas',false); }
 	if (!defined('TEXT_PATIENT_CURRENT_MEDS_LIST_HEAD')) { define('TEXT_PATIENT_CURRENT_MEDS_LIST_HEAD','Medicamentos actuales',false); }
@@ -248,7 +248,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_LIST_HEAD_COMPLAINT')) { define('TEXT_VISIT_LIST_HEAD_COMPLAINT','Motivo de la visita',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_DATE')) { define('TEXT_VISIT_LIST_HEAD_DATE','Fecha de la visita',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_DIAGNOSIS1')) { define('TEXT_VISIT_LIST_HEAD_DIAGNOSIS1','Diagnóstico 1',false); }
-	if (!defined('TEXT_VISIT_LIST_HEAD_DOCTOR')) { define('TEXT_VISIT_LIST_HEAD_DOCTOR','Medico',false); }
+	if (!defined('TEXT_VISIT_LIST_HEAD_DOCTOR')) { define('TEXT_VISIT_LIST_HEAD_DOCTOR','Médico',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_TIME')) { define('TEXT_VISIT_LIST_HEAD_TIME','Llegó',false); }
 	if (!defined('TEXT_VISIT_LIST_MISSING')) { define('TEXT_VISIT_LIST_MISSING','(no especificado)',false); }
 	if (!defined('TEXT_YMD_AGE_DAYS')) { define('TEXT_YMD_AGE_DAYS','d',false); }

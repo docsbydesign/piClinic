@@ -112,15 +112,15 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_ACCESS_GRANTED_OPTION_ADMIN')) { define('TEXT_ACCESS_GRANTED_OPTION_ADMIN','Administrador del sistema',false); }
 	if (!defined('TEXT_ACCESS_GRANTED_OPTION_CLINIC')) { define('TEXT_ACCESS_GRANTED_OPTION_CLINIC','Administrador de la clínica',false); }
-	if (!defined('TEXT_ACCESS_GRANTED_OPTION_RO')) { define('TEXT_ACCESS_GRANTED_OPTION_RO','Usuario atorizado',false); }
+	if (!defined('TEXT_ACCESS_GRANTED_OPTION_RO')) { define('TEXT_ACCESS_GRANTED_OPTION_RO','Usuario autorizado',false); }
 	if (!defined('TEXT_ACCESS_GRANTED_OPTION_STAFF')) { define('TEXT_ACCESS_GRANTED_OPTION_STAFF','Personal de la clínica',false); }
 	if (!defined('TEXT_BLANK_OPTION_SELECT')) { define('TEXT_BLANK_OPTION_SELECT','Escoge',false); }
 	if (!defined('TEXT_CANCEL_EDIT')) { define('TEXT_CANCEL_EDIT','Cancelar',false); }
-	if (!defined('TEXT_EDIT_STAFF_HEADING')) { define('TEXT_EDIT_STAFF_HEADING','Actualizar los datos personal',false); }
-	if (!defined('TEXT_NEW_STAFF_HEADING')) { define('TEXT_NEW_STAFF_HEADING','Agrega una persona nueva al sistema piClinic',false); }
-	if (!defined('TEXT_PAGE_EDIT_STAFF_TITLE')) { define('TEXT_PAGE_EDIT_STAFF_TITLE','Actualizar los datos personal',false); }
-	if (!defined('TEXT_PAGE_NEW_STAFF_TITLE')) { define('TEXT_PAGE_NEW_STAFF_TITLE','Agrega una persona nueva al sistema piClinic',false); }
-	if (!defined('TEXT_STAFF_ACCESS_LABEL')) { define('TEXT_STAFF_ACCESS_LABEL','Permisso para acessar los datos del sistema piClinic',false); }
+	if (!defined('TEXT_EDIT_STAFF_HEADING')) { define('TEXT_EDIT_STAFF_HEADING','Actualizar los datos personales',false); }
+	if (!defined('TEXT_NEW_STAFF_HEADING')) { define('TEXT_NEW_STAFF_HEADING','Agregar una persona nueva al sistema piClinic',false); }
+	if (!defined('TEXT_PAGE_EDIT_STAFF_TITLE')) { define('TEXT_PAGE_EDIT_STAFF_TITLE','Actualizar los datos personales',false); }
+	if (!defined('TEXT_PAGE_NEW_STAFF_TITLE')) { define('TEXT_PAGE_NEW_STAFF_TITLE','Agregar una persona nueva al sistema piClinic',false); }
+	if (!defined('TEXT_STAFF_ACCESS_LABEL')) { define('TEXT_STAFF_ACCESS_LABEL','Permiso para ingresar a los datos del sistema piClinic',false); }
 	if (!defined('TEXT_STAFF_ACCOUNT_INFO_LABEL')) { define('TEXT_STAFF_ACCOUNT_INFO_LABEL','Información del usuario',false); }
 	if (!defined('TEXT_STAFF_ACTIVE_LABEL')) { define('TEXT_STAFF_ACTIVE_LABEL','Estado de la cuenta',false); }
 	if (!defined('TEXT_STAFF_ACTIVE_OPTION_ACTIVE')) { define('TEXT_STAFF_ACTIVE_OPTION_ACTIVE','Activo',false); }
@@ -142,6 +142,6 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_STAFF_POSITION_LABEL')) { define('TEXT_STAFF_POSITION_LABEL','Puesto en la clínica',false); }
 	if (!defined('TEXT_STAFF_PREFERRED_LANGUAGE_LABEL')) { define('TEXT_STAFF_PREFERRED_LANGUAGE_LABEL','Idioma de la pantalla',false); }
 	if (!defined('TEXT_STAFF_USERNAME_LABEL')) { define('TEXT_STAFF_USERNAME_LABEL','Usuario/Contraseña',false); }
-	if (!defined('TEXT_STAFF_USERNAME_PLACEHOLDER')) { define('TEXT_STAFF_USERNAME_PLACEHOLDER','Un usuario unico',false); }
+	if (!defined('TEXT_STAFF_USERNAME_PLACEHOLDER')) { define('TEXT_STAFF_USERNAME_PLACEHOLDER','Un usuario único',false); }
 }
 //EOF

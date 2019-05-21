@@ -90,13 +90,13 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_TITLE')) { define('TEXT_ADMIN_LOG_VIEWER_TITLE','Mostrar los errores y eventos del sistema',false); }
 	if (!defined('TEXT_BLANK_OPTION_SELECT')) { define('TEXT_BLANK_OPTION_SELECT','Escoge',false); }
-	if (!defined('TEXT_LOG_ACTION_FIELD_NAME_SELECT')) { define('TEXT_LOG_ACTION_FIELD_NAME_SELECT','Action',false); }
-	if (!defined('TEXT_LOG_CLASS_FIELD_NAME_SELECT')) { define('TEXT_LOG_CLASS_FIELD_NAME_SELECT','Class',false); }
-	if (!defined('TEXT_LOG_DISPLAY_ACTION')) { define('TEXT_LOG_DISPLAY_ACTION','Action',false); }
+	if (!defined('TEXT_LOG_ACTION_FIELD_NAME_SELECT')) { define('TEXT_LOG_ACTION_FIELD_NAME_SELECT','Acción',false); }
+	if (!defined('TEXT_LOG_CLASS_FIELD_NAME_SELECT')) { define('TEXT_LOG_CLASS_FIELD_NAME_SELECT','Clase',false); }
+	if (!defined('TEXT_LOG_DISPLAY_ACTION')) { define('TEXT_LOG_DISPLAY_ACTION','Acción',false); }
 	if (!defined('TEXT_LOG_DISPLAY_AFTER_DATA')) { define('TEXT_LOG_DISPLAY_AFTER_DATA','After data',false); }
 	if (!defined('TEXT_LOG_DISPLAY_BEFORE_DATA')) { define('TEXT_LOG_DISPLAY_BEFORE_DATA','Before data',false); }
 	if (!defined('TEXT_LOG_DISPLAY_CLASS')) { define('TEXT_LOG_DISPLAY_CLASS','Class',false); }
-	if (!defined('TEXT_LOG_DISPLAY_CREATED_DATE')) { define('TEXT_LOG_DISPLAY_CREATED_DATE','Date',false); }
+	if (!defined('TEXT_LOG_DISPLAY_CREATED_DATE')) { define('TEXT_LOG_DISPLAY_CREATED_DATE','Fecha',false); }
 	if (!defined('TEXT_LOG_DISPLAY_ID')) { define('TEXT_LOG_DISPLAY_ID','ID',false); }
 	if (!defined('TEXT_LOG_DISPLAY_QUERY_STRING')) { define('TEXT_LOG_DISPLAY_QUERY_STRING','QUery string',false); }
 	if (!defined('TEXT_LOG_DISPLAY_SOURCE')) { define('TEXT_LOG_DISPLAY_SOURCE','Source',false); }

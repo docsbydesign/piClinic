@@ -23,7 +23,13 @@
 /* Define localized marital status values */
 require_once dirname(__FILE__).'/./uitext/patientUiStringsText.php';
 $maritalStatusString = [
-    "Married" => TEXT_MARRIED_OPTION,
-    "NotMarried" => TEXT_NOT_MARRIED_OPTION
+    'Single' => TEXT_SINGLE_OPTION,
+    'Married' => TEXT_MARRIED_OPTION,
+    'LivingTogether' => TEXT_LIVINGTOGETHER_OPTION,
+    'Engaged' => TEXT_ENGAGED_OPTION,
+    'Divorced' => TEXT_DIVORCED_OPTION,
+    'Separated' => TEXT_SEPARATED_OPTION,
+    'Widowed' => TEXT_WIDOWED_OPTION,
+    'Other' => TEXT_OTHER_STATUS_OPTION
 ];
 ?>

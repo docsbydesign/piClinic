@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `textmsg` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Information about text messages';
 
 --
--- Indexes for table `patient`
+-- Indexes for table `textmsg`
 --
 ALTER TABLE `textmsg`
  ADD INDEX `destNumber` (`destNumber`);
@@ -288,7 +288,7 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `knownAllergies` varchar(4095) DEFAULT NULL COMMENT '(Not Required) Known Allergies stored as |-separated list',
   `currentMedications` varchar(4095) DEFAULT NULL COMMENT '(Not Required) Current medications stored as |-separated list',
   `responsibleParty` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Name of responsible party, e.g. for minors.',
-  `maritalStatus` enum('NotMarried','Married','','') COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Marital status',
+  `maritalStatus` enum('Single','Married','LivingTogether','Engaged','Divorced','Separated','Widowed','Other') COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) Marital status',
   `profession` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(optional) profession',
   `modifiedDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '(Auto Fill) The last time this record was modified',
   `createdDate` datetime NOT NULL COMMENT '(Auto Fill) the date the patient record was created'

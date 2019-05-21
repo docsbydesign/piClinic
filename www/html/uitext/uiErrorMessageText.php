@@ -76,18 +76,18 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_ACCESS_FAILURE')) { define('TEXT_MESSAGE_ACCESS_FAILURE','No tiene permiso para ver la última página. Para verla, iniciar una sesión con otro usuario.',false); }
 	if (!defined('TEXT_MESSAGE_BACKUP_FAIL')) { define('TEXT_MESSAGE_BACKUP_FAIL','No pudo crear archivo para descargar',false); }
-	if (!defined('TEXT_MESSAGE_DATABASE_OPEN_ERROR')) { define('TEXT_MESSAGE_DATABASE_OPEN_ERROR','Error con el servidor. El base de datos no abrió.',false); }
-	if (!defined('TEXT_MESSAGE_GENERIC')) { define('TEXT_MESSAGE_GENERIC','Hubo un problema con el último cambio. Revisa los datos y intenta de nuevo.',false); }
+	if (!defined('TEXT_MESSAGE_DATABASE_OPEN_ERROR')) { define('TEXT_MESSAGE_DATABASE_OPEN_ERROR','Error con el servidor. La base de datos no abrió.',false); }
+	if (!defined('TEXT_MESSAGE_GENERIC')) { define('TEXT_MESSAGE_GENERIC','Hubo un problema con el último cambio. Revisa los datos e intenta de nuevo.',false); }
 	if (!defined('TEXT_MESSAGE_INTERNAL_ERROR')) { define('TEXT_MESSAGE_INTERNAL_ERROR','El sistema encontró un error grave.',false); }
 	if (!defined('TEXT_MESSAGE_LOGIN_FAILURE')) { define('TEXT_MESSAGE_LOGIN_FAILURE','Usuario o contraseña no está correcto.',false); }
-	if (!defined('TEXT_MESSAGE_NO_PATIENT_CREATED')) { define('TEXT_MESSAGE_NO_PATIENT_CREATED','No pude crear un expediente del paciente nuevo. Revisa los datos y intenta de nuevo.',false); }
-	if (!defined('TEXT_MESSAGE_NO_PATIENT_FOUND')) { define('TEXT_MESSAGE_NO_PATIENT_FOUND','No se encontró ninguna paciente que coincide.',false); }
-	if (!defined('TEXT_MESSAGE_NO_PATIENT_UPDATED')) { define('TEXT_MESSAGE_NO_PATIENT_UPDATED','No pude editar el expediente del paciente. Revisa los datos y intenta de nuevo.',false); }
-	if (!defined('TEXT_MESSAGE_PATIENT_ID_IN_USE')) { define('TEXT_MESSAGE_PATIENT_ID_IN_USE','No pude crear un expediente del paciente nuevo. El ID del paciente esta usado por otro paciente.',false); }
+	if (!defined('TEXT_MESSAGE_NO_PATIENT_CREATED')) { define('TEXT_MESSAGE_NO_PATIENT_CREATED','No se puede crear un expediente del paciente nuevo. Revisa los datos e intenta de nuevo.',false); }
+	if (!defined('TEXT_MESSAGE_NO_PATIENT_FOUND')) { define('TEXT_MESSAGE_NO_PATIENT_FOUND','No se encontró ningún paciente que coincide.',false); }
+	if (!defined('TEXT_MESSAGE_NO_PATIENT_UPDATED')) { define('TEXT_MESSAGE_NO_PATIENT_UPDATED','No se puede editar el expediente del paciente. Revisa los datos e intenta de nuevo.',false); }
+	if (!defined('TEXT_MESSAGE_PATIENT_ID_IN_USE')) { define('TEXT_MESSAGE_PATIENT_ID_IN_USE','No se puede crear un expediente del paciente nuevo. El ID del paciente está usado por otro paciente.',false); }
 	if (!defined('TEXT_MESSAGE_REQUIRED_FIELD_MISSING')) { define('TEXT_MESSAGE_REQUIRED_FIELD_MISSING','Un campo requirido no tiene datos.',false); }
 	if (!defined('TEXT_MESSAGE_SESSION_TIMEOUT')) { define('TEXT_MESSAGE_SESSION_TIMEOUT','',false); }
-	if (!defined('TEXT_MESSAGE_TOPIC_NOT_FOUND')) { define('TEXT_MESSAGE_TOPIC_NOT_FOUND','Contendio no encontrado',false); }
-	if (!defined('TEXT_MESSAGE_UNSUPPORTED_ERROR')) { define('TEXT_MESSAGE_UNSUPPORTED_ERROR','No puede hacer la acción pedido.',false); }
-	if (!defined('TEXT_MESSAGE_USER_NOT_FOUND')) { define('TEXT_MESSAGE_USER_NOT_FOUND','La persona no estuvo encontrado.',false); }
+	if (!defined('TEXT_MESSAGE_TOPIC_NOT_FOUND')) { define('TEXT_MESSAGE_TOPIC_NOT_FOUND','Contenido no encontrado',false); }
+	if (!defined('TEXT_MESSAGE_UNSUPPORTED_ERROR')) { define('TEXT_MESSAGE_UNSUPPORTED_ERROR','No se puede hacer la acción pedida.',false); }
+	if (!defined('TEXT_MESSAGE_USER_NOT_FOUND')) { define('TEXT_MESSAGE_USER_NOT_FOUND','La persona no fue encontrado.',false); }
 }
 //EOF

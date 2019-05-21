@@ -64,7 +64,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_SESSION_LOGOUT_TITLE')) { define('TEXT_SESSION_LOGOUT_TITLE','Cerrar sesión',false); }
 	if (!defined('TEXT_SESSION_NAME_PROMPT')) { define('TEXT_SESSION_NAME_PROMPT','Inscrito como',false); }
 	if (!defined('TEXT_SESSION_SETTINGS_LABEL')) { define('TEXT_SESSION_SETTINGS_LABEL','Configuración del usuario',false); }
-	if (!defined('TEXT_SESSION_SETTINGS_TITLE')) { define('TEXT_SESSION_SETTINGS_TITLE','Actualizar la configuración y la contraseña de la cuenta de usuario ',false); }
+	if (!defined('TEXT_SESSION_SETTINGS_TITLE')) { define('TEXT_SESSION_SETTINGS_TITLE','Actualizar la configuración y la contraseña de la cuenta del usuario ',false); }
 	if (!defined('TEXT_SHOW_LANGUAGE_PROMPT')) { define('TEXT_SHOW_LANGUAGE_PROMPT','Mostrar esta pantalla en',false); }
 	if (!defined('TEXT_STAFF_LANGUAGE_OPTION_ENGLISH')) { define('TEXT_STAFF_LANGUAGE_OPTION_ENGLISH','Inglés',false); }
 	if (!defined('TEXT_STAFF_LANGUAGE_OPTION_SPANISH')) { define('TEXT_STAFF_LANGUAGE_OPTION_SPANISH','Español',false); }
