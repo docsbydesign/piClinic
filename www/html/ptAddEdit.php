@@ -46,6 +46,7 @@ $requestData = $sessionInfo['parameters'];
 // load the strings for the page language
 //	assumes $pageLanguage contains a valid language
 require_once ('./uitext/ptAddEditText.php');
+require_once ('./patientUiStrings.php');
 
 // open session variables and check for access to this page
 $pageAccessRequired = PAGE_ACCESS_CLINIC;
@@ -265,7 +266,7 @@ function writeTopicMenu ($cancelLink, $ata=false) {
                 <select id="newMaritalStatus" name="maritalStatus">
                     <option value="" <?= (empty($patientData['maritalStatus']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
                     <?php
-                        foreach ($maritalStatus as $status => $statusText) {
+                        foreach ($maritalStatusString as $status => $statusText) {
                             echo ('<option value="'.$status.'" '.((!empty($patientData['maritalStatus']) && $patientData['maritalStatus'] == $status) ? 'selected' : '' ).'">'.$statusText.'</option>');
                         }
                     ?>
