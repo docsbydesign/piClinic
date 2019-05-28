@@ -157,12 +157,12 @@ if (empty($patientData)){
 }
 
 if (($pageMode == 'add') && AUTOINCREMENT_CLINICPATIENTID) {
-    // get next clinicPatientID by reading the largest one from the patient database,
-    //      converting it to an integer,
+    // get next clinicPatientID by
+    //      reading the largest id (as an integer) from the patient database,
     //      adding 1 to it
-    //      then padding it back out to a string to match the ID format
+    //      then converting it to a string to match the ID format
     //   and this is all done in the MySQL query
-    $nextIdQuery = "SELECT LPAD(CONVERT((CAST(max(`clinicPatientID`) AS INT) + 1),char),5,'0') as `nextId` from `patient` WHERE 1;";
+    $nextIdQuery = "SELECT CONVERT((max(cast(`clinicPatientID` AS INT)) + 1),char) as `nextId` from `patient` WHERE 1;";
     $nextIdInfo = getDbRecords($dbLink, $nextIdQuery);
     // if the ID was returned, use it, otherwise, just leave it blank.
     if ($nextIdInfo['httpResponse'] == 200) {
