@@ -397,5 +397,17 @@ function createFromLink ($queryParamName, $filePath, $linkData) {
     // return the result
     return $linkQP;
 }
+
+function formatDbDate ($dateValue, $dateFormatString, $emptyDateString){
+    /*
+     * $date value = SQL date string (YYYY-MM-DD HH:MM:SS)
+     * $dateFormatSrring = PHP date format string
+     */
+    if (! empty($dateValue) && $dateValue != '0000-00-00 00:00:00') {
+        return date($dateFormatString, strtotime($dateValue));
+    } else {
+        return $emptyDateString;
+    }
+}
 //EOF
 

@@ -239,7 +239,8 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 			}
 			echo '</p></td>';
 			echo '<td class="birthDateCell">';
-			echo date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($pt['birthDate']));
+//			echo date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime());
+            echo formatDbDate ($pt['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, '');
 			echo '</td>';
 			echo '<td class="homeCityCell">';
 			echo $pt['homeCity'];
