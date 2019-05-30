@@ -194,7 +194,7 @@ function writeTopicMenu ($sessionInfo) {
                     <span <?= (!empty($visitInfo['patientNextVaccinationDate']) && (strtotime($visitInfo['patientNextVaccinationDate']) <= time()) ? ' class="alert"' : '') ?>><?= (!empty($visitInfo['patientNextVaccinationDate']) ? '&nbsp;'.date(TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT, strtotime($visitInfo['patientNextVaccinationDate'])).'&nbsp;' : TEXT_NOT_SPECIFIED )?></span>
                 </div>
                 <div class="rightDiv">
-                    <label class="close"><?= TEXT_BIRTHDATE_LABEL ?>:</label><?= date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($visitInfo['birthDate'])) ?>&nbsp;(<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>)<br>
+                    <label class="close"><?= TEXT_BIRTHDATE_LABEL ?>:</label><?= formatDbDate ($visitInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED ) ?>&nbsp;<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?><br>
                     <label class="close"><?= TEXT_MARITAL_STATUS_LABEL ?>:</label> <?= (!empty($visitInfo['patientMaritalStatus']) ? $maritalStatusString[$visitInfo['patientMaritalStatus']] : str_repeat("_",22))  ?><br>
                     <label class="close"><?= TEXT_PATIENT_NEW_PROFESSION_LABEL ?>:</label> <?= (!empty($visitInfo['patientProfession']) ? $visitInfo['patientProfession'] : str_repeat("_",22))  ?>
                 </div>

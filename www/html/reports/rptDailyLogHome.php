@@ -304,7 +304,7 @@ foreach ($visitList as $visit) {
     $displayList[$displayRecord]['DR_PTNAME'] = $visit['patientLastName'].', '.$visit['patientFirstName'];
     $displayList[$displayRecord]['DR_PTID'] = $visit['clinicPatientID'];
     $displayList[$displayRecord]['DR_PTSEX'] = ($visit['patientSex'] == 'M' ? TEXT_SEX_OPTION_M : ($visit['patientSex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X));
-    $displayList[$displayRecord]['DR_PTDOB'] = date($dataDateFormat, strtotime($visit['patientBirthDate']));
+    $displayList[$displayRecord]['DR_PTDOB'] = formatDbDate ($visit['patientBirthDate'], $dataDateFormat, '');
     $ageYMD = dateDiffYMD (strtotime($visit['patientBirthDate']),  strtotime($reportDate));
     $displayList[$displayRecord]['DR_AGEYR'] = ($ageYMD['years'] > 0 ? $ageYMD['years'] : '');
     $displayList[$displayRecord]['DR_AGEMO'] = ((($ageYMD['years'] == 0) && ($ageYMD['months'] > 0)) ? $ageYMD['months'] : '');

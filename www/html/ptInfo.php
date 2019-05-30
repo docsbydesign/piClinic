@@ -267,7 +267,7 @@ function writeTopicMenu ($sessionInfo) {
 						<p><label><?= TEXT_PATIENTNATIONALID_LABEL ?>:</label> <?= $patientData['patientNationalID'] ?></p>
 					</div>
 					<div class="dataBlock">
-						<p><label><?= TEXT_BIRTHDATE_LABEL ?>:</label> <?= date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($patientData['birthDate'])) ?>&nbsp;(<?= formatAgeFromBirthdate ($patientData['birthDate'], time(), TEXT_YMD_AGE_YEARS, TEXT_YMD_AGE_MONTHS, TEXT_YMD_AGE_DAYS) ?>) &nbsp;&nbsp;
+						<p><label><?= TEXT_BIRTHDATE_LABEL ?>:</label> <?= formatDbDate ($patientData['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED )  ?>&nbsp;<?= formatAgeFromBirthdate ($patientData['birthDate'], time(), TEXT_YMD_AGE_YEARS, TEXT_YMD_AGE_MONTHS, TEXT_YMD_AGE_DAYS) ?>&nbsp;&nbsp;
 						</p>
 					</div>
                     <div class="dataBlock">

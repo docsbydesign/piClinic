@@ -247,12 +247,18 @@ function dbFieldTextInput ($requestData, $dbFieldName, $placeholderText, $requir
 */
 function dateDiffYMD ($earlyDateArg, $lateDateArg) {
 	$dateDiffValue = [];
-	
+	// check for invalid parameters and return an empty result if one is not valid
+	if (empty($earlyDateArg)) return $dateDiffValue;
+    if ($earlyDateArg == '0000-00-00 00:00:00') return $dateDiffValue;
+    if (empty($lateDateArg)) return $dateDiffValue;
+    if ($lateDateArg == '0000-00-00 00:00:00') return $dateDiffValue;
+
 	// if the dates are the same, bail out here
+    $dateDiffValue['years'] = 0;
+    $dateDiffValue['months'] = 0;
+    $dateDiffValue['days'] = 0;
+
 	if ($lateDateArg == $earlyDateArg) {
-		$dateDiffValue['years'] = 0;
-		$dateDiffValue['months'] = 0;
-		$dateDiffValue['days'] = 0;
 		return $dateDiffValue;
 	}
 	// make sure the dates are such that late > early
@@ -309,19 +315,31 @@ function dateDiffYMD ($earlyDateArg, $lateDateArg) {
 	return $dateDiffValue;	
 }
 
-function formatAgeFromBirthdate ($birthdate, $today=null, $yrText='y', $moText='m', $dyText='d') {
+function formatAgeFromBirthdate ($birthdate, $today=null, $yrText='y', $moText='m', $dyText='d', $parens=true) {
 	if (empty($today)) {
 		$today = time();
 	}
+
+    $lParen = '';
+    $rParen = '';
+	if ($parens) {
+	    $lParen = '(';
+	    $rParen = ')';
+    }
+
 	// formats the birthdate display based on specified date					
 	$ageYMD = dateDiffYMD (strtotime($birthdate), $today);
-	if ($ageYMD['years'] >= 1) {
-		return ($ageYMD['years'].$yrText);
-	}
-	if ($ageYMD['months'] >= 1) {
-		return ($ageYMD['months'].$moText);
-	}
-	return ($ageYMD['days'].$dyText);
+	if (!empty($ageYMD)) {
+        if ($ageYMD['years'] >= 1) {
+            return ($lParen.$ageYMD['years'].$yrText.$rParen);
+        }
+        if ($ageYMD['months'] >= 1) {
+            return ($lParen.$ageYMD['months'].$moText.$rParen);
+        }
+        return ($lParen.$ageYMD['days'].$dyText.$rParen);
+    } else {
+        return '';
+    }
 }
 
 function makeUrlWithQueryParams ($url, $qParams) {
@@ -398,7 +416,7 @@ function createFromLink ($queryParamName, $filePath, $linkData) {
     return $linkQP;
 }
 
-function formatDbDate ($dateValue, $dateFormatString, $emptyDateString){
+function formatDbDate ($dateValue, $dateFormatString, $emptyDateString) {
     /*
      * $date value = SQL date string (YYYY-MM-DD HH:MM:SS)
      * $dateFormatSrring = PHP date format string
