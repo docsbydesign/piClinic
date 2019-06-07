@@ -246,18 +246,19 @@ function dbFieldTextInput ($requestData, $dbFieldName, $placeholderText, $requir
 *		earlyDate and lateDate are PHP timestamps
 */
 function dateDiffYMD ($earlyDateArg, $lateDateArg) {
+    // initialize the default return value
 	$dateDiffValue = [];
+    $dateDiffValue['years'] = 0;
+    $dateDiffValue['months'] = 0;
+    $dateDiffValue['days'] = 0;
+
 	// check for invalid parameters and return an empty result if one is not valid
 	if (empty($earlyDateArg)) return $dateDiffValue;
     if ($earlyDateArg == '0000-00-00 00:00:00') return $dateDiffValue;
     if (empty($lateDateArg)) return $dateDiffValue;
     if ($lateDateArg == '0000-00-00 00:00:00') return $dateDiffValue;
 
-	// if the dates are the same, bail out here
-    $dateDiffValue['years'] = 0;
-    $dateDiffValue['months'] = 0;
-    $dateDiffValue['days'] = 0;
-
+    // if the dates are the same, bail out here
 	if ($lateDateArg == $earlyDateArg) {
 		return $dateDiffValue;
 	}
@@ -336,7 +337,11 @@ function formatAgeFromBirthdate ($birthdate, $today=null, $yrText='y', $moText='
         if ($ageYMD['months'] >= 1) {
             return ($lParen.$ageYMD['months'].$moText.$rParen);
         }
-        return ($lParen.$ageYMD['days'].$dyText.$rParen);
+        if ($ageYMD['days'] > 0) {
+            return ($lParen.$ageYMD['days'].$dyText.$rParen);
+        }
+        // else return a blank string
+        return '';
     } else {
         return '';
     }
