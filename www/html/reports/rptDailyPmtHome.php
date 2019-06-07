@@ -367,7 +367,7 @@ header('Content-type: text/html; charset=utf-8');
                 echo '<h1>'.TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE.'</h1>';
                 echo '<p><label class="close">'.TEXT_REPORT_CLINICNAME_LABEL.':</label>'.
                     (isset($clinicInfo['shortName']) ? $clinicInfo['shortName'] : $blankField ).'</p>';
-                echo '<p><label class="close">'.TEXT_DATE_LABEL.':</label>'.date(TEXT_DATE_FORMAT, strtotime($reportDate)).
+                echo '<p><label class="close">'.TEXT_DAILY_DATE_LABEL.':</label>'.date(TEXT_DATE_FORMAT, strtotime($reportDate)).
                     '&nbsp;&nbsp;&nbsp;&nbsp;<label class="close">'.TEXT_PATIENT_COUNT_LABEL.':</label>'.$reportRows.
                     '&nbsp;&nbsp;&nbsp;&nbsp;<label class="close">'.TEXT_PAGE_LABEL.':</label>'.$pageNo.' '.TEXT_OF_PAGES.' '.$pageCount.
                     '</p>';

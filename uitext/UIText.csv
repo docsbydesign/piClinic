@@ -110,6 +110,7 @@ TEXT_CONTACTALTPHONE_MISSING,(alternate phone number not provided),(Otro número
 TEXT_CONTACTPHONE_LABEL,Primary phone,Primer número telefónico
 TEXT_CONTACTPHONE_MISSING,(primary phone number not provided),(Primer número telefónico no especificado)
 TEXT_CURRENT_PATIENT_PHOTO,"Current patient photo.<br>To change, delete this photo and add the new photo.","La foto del paciente.<br>Para cambiarla, borre esta foto y agregue la nueva."
+TEXT_DAILY_DATE_LABEL,Report date (MM/DD/YYYY),Fecha del informe (DD-MM-YYYY)
 TEXT_DAILY_LOG_DESC,Lists the patients seen in the clinic by a doctor on a specific date,Muestra los pacientes examinados por un/a médico/a en una fecha especificada
 TEXT_DAILY_LOG_TITLE,Daily Outpatient Log,Atenciones Ambulatorias
 TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
@@ -120,7 +121,7 @@ TEXT_DAILY_PMT_TITLE,Daily payment log,Registro de pagos del día
 TEXT_DAILY_VISIT_HEADING,Daily Outpatient Log,Atenciones Ambulatorias
 TEXT_DATE_BLANK,(Not specified),(No especificada)
 TEXT_DATE_DAY_PLACEHOLDER,Day,Día
-TEXT_DATE_FORMAT,m/d/Y,d/m/Y
+TEXT_DATE_FORMAT,m/d/Y,d-m-Y
 TEXT_DATE_LABEL,Report date (YYYY-MM),Fecha del informe (AAAA-MM)
 TEXT_DATE_MONTH_PLACEHOLDER,Month,Mes
 TEXT_DATE_PROMPT_LABEL,Date&nbsp;(yyyy-mm-dd),Fecha&nbsp;(aaaa-mm-dd)
