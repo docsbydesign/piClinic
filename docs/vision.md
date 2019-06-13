@@ -28,6 +28,3 @@ As a clinic begins to track their patients in the Clinic's Patient Master Index,
 
 By coding the diagnoses at the time of the patient's visit, _**piClinic**_ systems can provide accurate and timely summaries of clinic activities. Periodic reports and statistical summaries of clinic activity can be prepared in seconds instead of days.
 
-### Photocopy of Patient Records
-
-Advanced users can save photos of patient records and related patient information and attached to patient visit information.

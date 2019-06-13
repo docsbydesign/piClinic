@@ -6,6 +6,8 @@ permalink: /piclinic-console-parts/
 
 # _piClinic Console_ Parts
 
+This parts list was valid as of September 2018. Parts availability can change without notice. If a link is no longer valid or a part is no longer available, refer to the descriptions below to determine a suitable replacement.
+
 | -------- | -------- | -------- |
 | Item Name | Item Description and link | Qty | 
 | -------- | -------- | --------:|
@@ -40,7 +42,7 @@ The Raspberry Pi should work with any LCD monitor with an HDMI input. If the par
 
 The **Raspberry Pi 3 (Model B)** is required for this configuration. The software is not supported on other systems; however, you are certainly welcome to experiment, if that's your interest. 
 
-**NOTE:** Do not substitute this part with earlier models of the Raspberry Pi. Earlier models do not have the performance to support this software.
+**NOTE:** Do not substitute this part with earlier models of the Raspberry Pi. Earlier models do not have the performance to support this software. Later models will likely work, but might require more power.
 
 ### CPU case
 
@@ -54,7 +56,7 @@ These are generic parts and may be substituted with any other USB mouse and/or k
 
 This is optional, but it provides a neat way to secure the cables while providing a single on/off switch for the user.
 
-### CPU Cable
+### CPU power cable
 
 This is a generic USB-A male to USB-micro B cable. It may be substituted with any similar cable.
 
@@ -73,6 +75,8 @@ Use of this part is recommended to ensure longer, reliable service from the Rasp
 ### CPU clock module
 
 This is required when using the Raspberry Pi to keep the correct time. The Raspberry Pi system requires this component or a connection to the Internet in order to maintain accurate time keeping. For systems that are not connected to the Internet continuously, this component must be used to maintain accurate system time.
+
+Note, field testing suggests that modules with replaceable backup batteries might provide a more sustainable design.
 
 ### UPS battery backup
 
