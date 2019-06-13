@@ -1,4 +1,4 @@
-<?php
+    <?php
 /*
  *	Copyright (c) 2019, Robert B. Watson
  *
@@ -27,7 +27,7 @@
  *	PATCH: Modify an existing session
  * 		input data:
  *          'token' - current token of session to modify
- *			'sessionLangauge' - the new session language (sessionLangauge)
+ *			'sessionLanguage' - the new session language (sessionLangauge)
  *			'sessionClinicPublicID' - the new default clinic (sessionClinicPublicID)
  *
  *      note that this method can only change these values (sessionLangauge, sessionClinicPublicID)

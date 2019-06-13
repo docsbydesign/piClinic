@@ -18,7 +18,7 @@ piClinic API users must be authenticated by a username and password and some res
 
 ## Request format
 
-GET method requests pass parameters as query parameters and POST method requests can pass data as URL-form-encoded data or as query parameters. API requests that require authorization, must also include an **X-piClinic-token** header with a valid session token returned by the session API.
+GET method requests pass parameters as query parameters and POST method requests can pass data as `application/json` data or as query parameters. API requests that require authorization, must also include an **X-piClinic-token** header with a valid session token returned by the session API.
 
 ### Sample header
 
@@ -103,18 +103,18 @@ Error responses usually contain:
 
 ## icd
 
-The **icd** resource provides a list of ICD-10 (CIE-10) diagnostic codes in English and Spanish.
+The **icd** resource contains ICD-10 (CIE-10) diagnostic codes in English and Spanish.
 
 ### Supported methods
 
 | ------ | ------ |
 | Method | Action |
 | ------ | ------ |
-| GET | Look up a code and its description || PATCH | Update the last-used date of a specific code |
+| GET | Look up a code and its description |
 
 This resource required a valid session token to access.
 
-### Supported GET query parameters
+### Supported GET request parameters
 
 A GET request must include one, and only one, of **q**, **t**, or **c**.
 
@@ -127,7 +127,7 @@ A GET request must include one, and only one, of **q**, **t**, or **c**.
 | **language** | `en` or `es` | filter results to return only the specified language | `language=en` |
 | **sort** | `c`, `t`, or `d` | sort the returned data by ascending **c**_ode_, **t**_ext_, or _last-used_ **d**_ate_)
 
-### GET query example
+#### GET request example
 
 ```
 https://piclinic_host/api/icd.php?c=R51&language=en
@@ -153,5 +153,89 @@ where _**piclinic_host**_ is the host address.
 }
 ```
 
-
 ## session
+
+The **session** resource contains the valid user sessions that can access the piClinic API.
+
+The normal sequence of session interaction is to:
+
+1. POST a session to create a new session and receive its token
+2. GET a session using the token to test its access (this usually done by the API and is not commonly used by an application)
+3. PATCH a session to change its default settings
+4. DELETE a session to close it and invalidate its token so it cannot by used again
+
+
+### Supported methods
+
+| ------ | ------ | ------ |
+| Method | Token required? | Action |
+| ------ | ------ | ------ |
+| GET | Yes | Look up a token to get its validity and access authorizations |
+| POST | No | Create a new session |
+| PATCH | Yes | Update the settings of a current sesion |
+| DELETE | Yes | Close a session and invalidate its token |
+
+### Supported GET request parameters
+
+For administrator-level access, the **X-piClinic-token** header value is used to identify the session and the query parameter is ignored. System administrators can request information about another valid token by passing it as a query parameter.
+
+| ------ | ------ | ------ | ------ |
+| Parameter | Supported values | Function | Example |
+| ------ | ------ | ------ | ------ |
+| **token** | a valid session token | tests token for validity and returns access information (System admin access only) | token=c1cbed0e_082f_4c85_afaa_3e4286b840fd | 
+
+### Supported POST request parameters
+
+The **X-piClinic-token** header value is not required for POST requests
+
+| ------ | ------ | ------ | ------ |
+| Parameter | Supported values | Function | Example |
+| ------ | ------ | ------ | ------ |
+| **username** | a valid username (not case sensitive) | identify the user for whom to create a new session | (see example below) |
+| **password** | the password for the user (case sensitive) | authenticate the user creating a new session | (see example below) |
+
+#### Sample POST data object 
+
+```
+{
+	"username": "TestUser",
+	"password": "MyPassword"
+}
+```
+
+#### Sample POST data response
+
+```
+{
+    "count": 1,
+    "data": {
+        "token": "8c7300aa_bb77_4dd3_9126_93eb72645876",
+        "sessionIP": "66.115.183.147",
+        "sessionUA": "PostmanRuntime/7.13.0",
+        "username": "TestUser",
+        "loggedIn": 1,
+        "accessGranted": "SystemAdmin",
+        "sessionLanguage": "en",
+        "sessionClinicPublicID": null,
+        "createdDate": "2019-06-13 13:17:17",
+        "expiresOnDate": "2019-06-14 13:17:17"
+    },
+    "status": {
+        "httpResponse": 201,
+        "httpReason": "New session created."
+    }
+}
+```
+
+
+### Supported PATCH request parameters
+
+| ------ | ------ | ------ | ------ |
+| Parameter | Supported values | Function | Example |
+| ------ | ------ | ------ | ------ |
+
+### Supported DELETE request parameters
+
+| ------ | ------ | ------ | ------ |
+| Parameter | Supported values | Function | Example |
+| ------ | ------ | ------ | ------ |
