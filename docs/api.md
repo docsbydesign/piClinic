@@ -108,11 +108,10 @@ The **icd** resource contains ICD-10 (CIE-10) diagnostic codes in English and Sp
 ### Supported methods
 
 | ------ | ------ |
-| Method | Action |
+| Method | Token required? | Action |
 | ------ | ------ |
-| GET | Look up a code and its description |
+| GET | Yes | Look up a code and its description |
 
-This resource required a valid session token to access.
 
 ### Supported GET request parameters
 
@@ -184,6 +183,36 @@ For administrator-level access, the **X-piClinic-token** header value is used to
 | ------ | ------ | ------ | ------ |
 | **token** | a valid session token | tests token for validity and returns access information (System admin access only) | token=c1cbed0e_082f_4c85_afaa_3e4286b840fd | 
 
+#### Sample GET request
+```
+https://piclinic_host/session.php
+```
+
+where _**piclinic_host**_ is the host address.
+
+#### Sample GET Response
+```
+{
+    "count": 1,
+    "data": {
+        "token": "dd710b65_2434_4326_927a_823596170770",
+        "sessionIP": "66.115.183.147",
+        "sessionUA": "PostmanRuntime/7.13.0",
+        "username": "SystemAdmin",
+        "loggedIn": 1,
+        "accessGranted": "SystemAdmin",
+        "sessionLanguage": "en",
+        "sessionClinicPublicID": null,
+        "createdDate": "2019-06-13 13:32:31",
+        "expiresOnDate": "2019-06-14 13:32:31"
+    },
+    "status": {
+        "httpResponse": 201,
+        "httpReason": "New session created."
+    }
+}
+```
+
 ### Supported POST request parameters
 
 The **X-piClinic-token** header value is not required for POST requests
@@ -193,6 +222,15 @@ The **X-piClinic-token** header value is not required for POST requests
 | ------ | ------ | ------ | ------ |
 | **username** | a valid username (not case sensitive) | identify the user for whom to create a new session | (see example below) |
 | **password** | the password for the user (case sensitive) | authenticate the user creating a new session | (see example below) |
+
+#### Sample POST request
+```
+https://piclinic_host/session.php
+```
+
+where _**piclinic_host**_ is the host address.
+
+Note, a valid **X-piClinic-token** header is not required.
 
 #### Sample POST data object 
 
@@ -227,15 +265,59 @@ The **X-piClinic-token** header value is not required for POST requests
 }
 ```
 
-
 ### Supported PATCH request parameters
 
 | ------ | ------ | ------ | ------ |
 | Parameter | Supported values | Function | Example |
 | ------ | ------ | ------ | ------ |
+| **sessionLanguage** | `en` or `es` | Sets the session's default language | `sessionLanguage=es` |
+
+#### Sample PATCH request
+```
+https://piclinic_host/session.php&sessionLanguage=es
+```
+
+where _**piclinic_host**_ is the host address.
+
+
+#### Sample PATCH data response
+
+```
+{
+    "count": 1,
+    "data": {
+        "token": "8c7300aa_bb77_4dd3_9126_93eb72645876",
+        "username": "TestSA",
+        "accessGranted": "SystemAdmin",
+        "sessionLanguage": "es",
+        "sessionClinicPublicID": null
+    },
+    "status": {
+        "httpResponse": 200,
+        "httpReason": "Success"
+    }
+}
+```
+
 
 ### Supported DELETE request parameters
 
-| ------ | ------ | ------ | ------ |
-| Parameter | Supported values | Function | Example |
-| ------ | ------ | ------ | ------ |
+The DELETE request requires only a valid **X-piClinic-token** header.
+
+#### Sample DELETE request
+```
+https://piclinic_host/session.php
+```
+
+#### Sample DELETE data response
+
+```
+{
+    "count": 0,
+    "data": "",
+    "status": {
+        "httpResponse": 200,
+        "httpReason": "User session deleted."
+    }
+}
+```
