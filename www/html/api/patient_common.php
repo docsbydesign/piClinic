@@ -74,14 +74,14 @@ function makeOneQueryTermString ($searchTerm) {
 	$termString = '(';
 	$termString .= "`clinicPatientID` LIKE '".$searchTerm."' OR ";
 	$termString .= "`familyID` LIKE '".$searchTerm."' OR ";
-	$termString .= "`lastName` LIKE '".$searchTerm."' OR ";
-	$termString .= "`lastName2` LIKE '".$searchTerm."' OR ";
-	$termString .= "`firstName` LIKE '".$searchTerm."' OR ";
-	$termString .= "`middleInitial` LIKE '".$searchTerm."' OR ";
-	$termString .= "`homeNeighborhood` LIKE '".$searchTerm."' OR ";
-	$termString .= "`homeCity` LIKE '".$searchTerm."' OR ";
-	$termString .= "`homeCounty` LIKE '".$searchTerm."' OR ";
-	$termString .= "`homeState` LIKE '".$searchTerm."' ";
+	$termString .= "`lastName` LIKE '%".$searchTerm."%' OR ";
+	$termString .= "`lastName2` LIKE '%".$searchTerm."%' OR ";
+	$termString .= "`firstName` LIKE '%".$searchTerm."%' OR ";
+	$termString .= "`middleInitial` LIKE '%".$searchTerm."%' OR ";
+	$termString .= "`homeNeighborhood` LIKE '".$searchTerm."%' OR ";
+	$termString .= "`homeCity` LIKE '".$searchTerm."%' OR ";
+	$termString .= "`homeCounty` LIKE '".$searchTerm."%' OR ";
+	$termString .= "`homeState` LIKE '".$searchTerm."%' ";
 	$termString .= ') ';
 	return $termString;
 	 
@@ -127,19 +127,19 @@ function makePatientQueryStringFromRequestParameters ($requestParameters) {
 		$paramCount += 1;
 	}
 	if (!empty($requestParameters['lastName'])) {
-		$queryString .= "`lastName` LIKE '".$requestParameters['lastName']."' AND ";
+		$queryString .= "`lastName` LIKE '%".$requestParameters['lastName']."%' AND ";
 		$paramCount += 1;
 	}
 	if (!empty($requestParameters['lastName2'])) {
-		$queryString .= "`lastName2` LIKE '".$requestParameters['lastName2']."' AND ";
+		$queryString .= "`lastName2` LIKE '%".$requestParameters['lastName2']."%' AND ";
 		$paramCount += 1;
 	}
 	if (!empty($requestParameters['firstName'])) {
-		$queryString .= "`firstName` LIKE '".$requestParameters['firstName']."' AND ";
+		$queryString .= "`firstName` LIKE '%".$requestParameters['firstName']."%' AND ";
 		$paramCount += 1;
 	}
 	if (!empty($requestParameters['middleInitial'])) {
-		$queryString .= "`middleInitial` LIKE '".$requestParameters['middleInitial']."' AND ";
+		$queryString .= "`middleInitial` LIKE '%".$requestParameters['middleInitial']."%' AND ";
 		$paramCount += 1;
 	}
 	if (!empty($requestParameters['sex'])) {
@@ -151,19 +151,19 @@ function makePatientQueryStringFromRequestParameters ($requestParameters) {
 		$paramCount += 1;
 	}
 	if (!empty($requestParameters['homeNeighborhood'])) {
-		$queryString .= "`homeNeighborhood` = '".$requestParameters['homeNeighborhood']."' AND ";
+		$queryString .= "`homeNeighborhood` = '".$requestParameters['homeNeighborhood']."%' AND ";
 		$paramCount += 1;
 	}
 	if (!empty($requestParameters['homeCity'])) {
-		$queryString .= "`homeCity` = '".$requestParameters['homeCity']."' AND ";
+		$queryString .= "`homeCity` = '".$requestParameters['homeCity']."%' AND ";
 		$paramCount += 1;
 	}
 	if (!empty($requestParameters['homeCounty'])) {
-		$queryString .= "`homeCounty` = '".$requestParameters['homeCounty']."' AND ";
+		$queryString .= "`homeCounty` = '".$requestParameters['homeCounty']."%' AND ";
 		$paramCount += 1;
 	}
 	if (!empty($requestParameters['homeState'])) {
-		$queryString .= "`homeState` = '".$requestParameters['homeState']."' AND ";
+		$queryString .= "`homeState` = '".$requestParameters['homeState']."%' AND ";
 		$paramCount += 1;
 	}
 	$queryString .= "TRUE ORDER BY `lastName`".DB_QUERY_LIMIT.";";
