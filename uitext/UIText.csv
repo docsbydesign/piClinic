@@ -708,6 +708,7 @@ TEXT_SHOW_REPORT_DATE_LIST_LINK,Show report date list,Muestra la lista de fechas
 TEXT_SHOW_REPORT_DATE_LIST_TITLE,Display the list of available report dates,Muestra la lista de fechas que tengan informes
 TEXT_SHOW_VISIT_INFO,Show visit details,Mostrar los detalles de la visita
 TEXT_SINGLE_OPTION,Single,Soltero/a
+TEXT_SORT_THIS_COLUMN,Sort by this column,Ordenar por esta columna
 TEXT_SOURCE_MODULE_FIELD_NAME_SELECT,Source,Source
 TEXT_STAFF_ACCESS_LABEL,piClinic system permission,Permiso para ingresar a los datos del sistema piClinic
 TEXT_STAFF_ACCOUNT_INFO_LABEL,User information,Información del usuario

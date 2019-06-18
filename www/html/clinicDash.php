@@ -147,19 +147,19 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 						echo ('<table class="piClinicList"><tr>');
                        $linkUrl = cleanTheUrl ($_SERVER['REQUEST_URI'], ["sort" => "name"], (empty($requestData['fromLink']) ? null : $requestData['fromLink']));
 						echo ('<th>'.
-                            ($visitSortField != 'patientLastName' ? '<a href="'.$linkUrl.'">' : '').
+                            ($visitSortField != 'patientLastName' ? '<a href="'.$linkUrl.'" title="'.TEXT_SORT_THIS_COLUMN.'">' : '').
                             TEXT_VISIT_LIST_HEAD_NAME.
                             ($visitSortField != 'patientLastName' ? '</a>' : '').
                             '</th>');
                        $linkUrl = cleanTheUrl ($_SERVER['REQUEST_URI'], ["sort" => "time"], (empty($requestData['fromLink']) ? null : $requestData['fromLink']));
 						echo ('<th>'.
-                            ($visitSortField != 'dateTimeIn' ? '<a href="'.$linkUrl.'">' : '').
+                            ($visitSortField != 'dateTimeIn' ? '<a href="'.$linkUrl.'" title="'.TEXT_SORT_THIS_COLUMN.'">' : '').
                             TEXT_VISIT_LIST_ARRIVED_DATE.
                             ($visitSortField != 'dateTimeIn' ? '</a>' : '').
                             '</th>');
                        $linkUrl = cleanTheUrl ($_SERVER['REQUEST_URI'], ["sort" => "doctor"], (empty($requestData['fromLink']) ? null : $requestData['fromLink']));
 						echo ('<th>'.
-                            ($visitSortField != 'staffName' ? '<a href="'.$linkUrl.'">' : '').
+                            ($visitSortField != 'staffName' ? '<a href="'.$linkUrl.'" title="'.TEXT_SORT_THIS_COLUMN.'">' : '').
                             TEXT_VISIT_LIST_HEAD_DOCTOR.
                             ($visitSortField != 'staffName' ? '</a>' : '').
                             '</th>');

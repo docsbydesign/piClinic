@@ -53,6 +53,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_SHOW_PATIENT_INFO')) { define('TEXT_SHOW_PATIENT_INFO','TEXT_SHOW_PATIENT_INFO',false); }
 	if (!defined('TEXT_SHOW_PATIENT_SUBMIT_BUTTON')) { define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','TEXT_SHOW_PATIENT_SUBMIT_BUTTON',false); }
 	if (!defined('TEXT_SHOW_VISIT_INFO')) { define('TEXT_SHOW_VISIT_INFO','TEXT_SHOW_VISIT_INFO',false); }
+	if (!defined('TEXT_SORT_THIS_COLUMN')) { define('TEXT_SORT_THIS_COLUMN','TEXT_SORT_THIS_COLUMN',false); }
 	if (!defined('TEXT_VISIT_DATE_FORMAT')) { define('TEXT_VISIT_DATE_FORMAT','TEXT_VISIT_DATE_FORMAT',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTIONS')) { define('TEXT_VISIT_LIST_ACTIONS','TEXT_VISIT_LIST_ACTIONS',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_DISCHARGE')) { define('TEXT_VISIT_LIST_ACTION_DISCHARGE','TEXT_VISIT_LIST_ACTION_DISCHARGE',false); }
@@ -83,6 +84,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_SHOW_PATIENT_INFO')) { define('TEXT_SHOW_PATIENT_INFO','Show patient details',false); }
 	if (!defined('TEXT_SHOW_PATIENT_SUBMIT_BUTTON')) { define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','Search',false); }
 	if (!defined('TEXT_SHOW_VISIT_INFO')) { define('TEXT_SHOW_VISIT_INFO','Show visit details',false); }
+	if (!defined('TEXT_SORT_THIS_COLUMN')) { define('TEXT_SORT_THIS_COLUMN','Sort by this column',false); }
 	if (!defined('TEXT_VISIT_DATE_FORMAT')) { define('TEXT_VISIT_DATE_FORMAT','m/d/Y H:i',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTIONS')) { define('TEXT_VISIT_LIST_ACTIONS','Visit actions',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_DISCHARGE')) { define('TEXT_VISIT_LIST_ACTION_DISCHARGE','Discharge',false); }
@@ -113,6 +115,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_SHOW_PATIENT_INFO')) { define('TEXT_SHOW_PATIENT_INFO','Mostrar los detalles del paciente',false); }
 	if (!defined('TEXT_SHOW_PATIENT_SUBMIT_BUTTON')) { define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','Buscar',false); }
 	if (!defined('TEXT_SHOW_VISIT_INFO')) { define('TEXT_SHOW_VISIT_INFO','Mostrar los detalles de la visita',false); }
+	if (!defined('TEXT_SORT_THIS_COLUMN')) { define('TEXT_SORT_THIS_COLUMN','Ordenar por esta columna',false); }
 	if (!defined('TEXT_VISIT_DATE_FORMAT')) { define('TEXT_VISIT_DATE_FORMAT','d-m-Y H:i',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTIONS')) { define('TEXT_VISIT_LIST_ACTIONS','Acciones de la visita',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_DISCHARGE')) { define('TEXT_VISIT_LIST_ACTION_DISCHARGE','Dar de alta',false); }
