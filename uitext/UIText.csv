@@ -88,7 +88,7 @@ TEXT_COMPLAINT_ADDITIONAL_LABEL,Additional reason for visit,Adicional motivo de 
 TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER,Additional reason for visit,Adicional motivo de la visita
 TEXT_COMPLAINT_NOT_SPECIFIED,(Not specified),(No especificado)
 TEXT_COMPLAINT_PRIMARY_LABEL,Primary reason for visit,Primer motivo de la visita
-TEXT_COMPLAINT_PRIMARY_PLACEHOLDER,Primary reason for visit,Primero motivo de la visita
+TEXT_COMPLAINT_PRIMARY_PLACEHOLDER,Primary reason for visit,Primer motivo de la visita
 TEXT_CONDITION1_LABEL,Condition 1 code,Condición 1 código
 TEXT_CONDITION1_PLACEHOLDER,Code,Código
 TEXT_CONDITION2_LABEL,Condition 2 code,Condición 2 código
