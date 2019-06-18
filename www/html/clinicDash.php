@@ -46,7 +46,7 @@ profileLogStart ($profileData);
 $sessionInfo = getUiSessionInfo();
 // $pageLanguage is used by the UI string include files.
 $pageLanguage = $sessionInfo['pageLanguage'];
-// requierd for error messages
+// required for error messages
 $requestData = $sessionInfo['parameters'];
 require_once './uitext/clinicDashText.php';
 
@@ -68,12 +68,31 @@ $visitQueryString = [];
 $visitRecord = [];
 $visitRecord['httpResponse'] = 500; // not initialized, yet
 
+$visitSortField = 'dateTimeIn';
+if (!empty($requestData['sort'])) {
+    switch($requestData['sort']) {
+        case 'doctor':
+            $visitSortField = 'staffName';
+            break;
+
+        case 'name':
+            $visitSortField = 'patientLastName';
+            break;
+
+        case 'time':
+        default:
+            $visitSortField = 'dateTimeIn';
+            break;
+    }
+}
+
 // get the currently open visits (admitted patients)
 $visitQueryString['visitStatus'] = 'Open';
-$visitQueryString['sortfield'] = 'patientLastName';
+$visitQueryString['sortfield'] = $visitSortField;
 $visitQueryString['sortorder'] = 'ASC';
 $visitRecord = _visit_get($dbLink, $sessionInfo['token'], $visitQueryString);
 profileLogCheckpoint($profileData,'CODE_COMPLETE');
+
 ?>
 <?= pageHtmlTag($pageLanguage) ?>
 <?= pageHeadTag(TEXT_CLINIC_DASH_PAGE_TITLE) ?>
@@ -126,9 +145,24 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 				if ($visit['visitStatus'] == 'Open') {
 					if (!$headerShown) {
 						echo ('<table class="piClinicList"><tr>');
-						echo ('<th>'.TEXT_VISIT_LIST_HEAD_NAME.'</th>');
-						echo ('<th>'.TEXT_VISIT_LIST_ARRIVED_DATE.'</th>');
-						echo ('<th>'.TEXT_VISIT_LIST_HEAD_DOCTOR.'</th>');
+                       $linkUrl = cleanTheUrl ($_SERVER['REQUEST_URI'], ["sort" => "name"], (empty($requestData['fromLink']) ? null : $requestData['fromLink']));
+						echo ('<th>'.
+                            ($visitSortField != 'patientLastName' ? '<a href="'.$linkUrl.'">' : '').
+                            TEXT_VISIT_LIST_HEAD_NAME.
+                            ($visitSortField != 'patientLastName' ? '</a>' : '').
+                            '</th>');
+                       $linkUrl = cleanTheUrl ($_SERVER['REQUEST_URI'], ["sort" => "time"], (empty($requestData['fromLink']) ? null : $requestData['fromLink']));
+						echo ('<th>'.
+                            ($visitSortField != 'dateTimeIn' ? '<a href="'.$linkUrl.'">' : '').
+                            TEXT_VISIT_LIST_ARRIVED_DATE.
+                            ($visitSortField != 'dateTimeIn' ? '</a>' : '').
+                            '</th>');
+                       $linkUrl = cleanTheUrl ($_SERVER['REQUEST_URI'], ["sort" => "doctor"], (empty($requestData['fromLink']) ? null : $requestData['fromLink']));
+						echo ('<th>'.
+                            ($visitSortField != 'staffName' ? '<a href="'.$linkUrl.'">' : '').
+                            TEXT_VISIT_LIST_HEAD_DOCTOR.
+                            ($visitSortField != 'staffName' ? '</a>' : '').
+                            '</th>');
 						echo ('<th>'.TEXT_VISIT_LIST_HEAD_COMPLAINT.'</th>');
 						echo ('<th>'.TEXT_VISIT_LIST_ACTIONS.'</th>');
 						echo ('</tr>');
