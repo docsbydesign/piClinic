@@ -314,9 +314,9 @@ DROP TABLE IF EXISTS `visit`;
 CREATE TABLE IF NOT EXISTS `visit` (
   `visitID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '(Autofill) Unique record ID for visit records',
   `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '(optional) Set true to remove record from view and from reports.',
-  `staffUsername` varchar(64)  COLLATE utf8_unicode_ci NOT NULL COMMENT '(required) user name of professional attending the patient.',
+  `staffUsername` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(required) user name of professional attending the patient.',
   `staffName` varchar(255) DEFAULT NULL COMMENT '(Auto Fill) staff name (first/last)',
-  `staffPosition` enum('Nurse','NursesAid','NursingStudent','DoctorGeneral','DoctorSpecialist','MedicalStudent','ClinicStaff','Other','Unassigned') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Unassigned' COMMENT '(Auto Fill) Staff position type--loaded from staff.Position field of staffUsername.',
+  `staffPosition` enum('Nurse','NursesAid','NursingStudent','DoctorGeneral','DoctorSpecialist','MedicalStudent','ClinicStaff','Other','Unassigned') COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '(Auto Fill) Staff position type--loaded from staff.Position field of staffUsername.',
   `visitType` varchar(255) NOT NULL COMMENT '(Required) Type of visit or attention recevied',
   `visitStatus` enum('Open','Closed','Deleted') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Open' COMMENT '(Not Required) Current status of the patient visit.',
   `primaryComplaint` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT '(Not Required) summary of patient complaint or reason for visit',
