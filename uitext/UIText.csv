@@ -352,6 +352,7 @@ TEXT_MESSAGE_SESSION_TIMEOUT,You haven\'t been using the system for a while so y
 TEXT_MESSAGE_TOPIC_NOT_FOUND,Help topic not found.,Contenido no encontrado
 TEXT_MESSAGE_UNSUPPORTED_ERROR,Cannot perform the action requested.,No se puede hacer la acción pedida.
 TEXT_MESSAGE_USER_NOT_FOUND,The staff member could not be found.,La persona no fue encontrado.
+TEXT_MESSAGE_VALIDATION_FAIL,There is an incorrect value in the form,Hay un campo con un error 
 TEXT_MONTHLY_PAGE_TITLE,Monthly Payment Log,Registro de Pagos del Mes
 TEXT_MONTHLY_PMT_DESC,List of payments received from patients during the specified month,Registro de pagos recibidos por los pacientes durante el mes especificado
 TEXT_MONTHLY_PMT_TITLE,Monthly payment report,Informe de pagos del mes
@@ -423,6 +424,8 @@ TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER,The patient\'s clinic ID,El número del pac
 TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON,Add a new patient,Agregar un paciente nuevo
 TEXT_PATIENT_ALLERGY_LIST_HEAD,Known allergies,Alergias conocidas
 TEXT_PATIENT_CANCEL_ADD,Cancel,Cancelar
+TEXT_PATIENT_CLINIC_ID_NOT_VALID,Patient ID is not formatted correctly,Identidad del paciente no es en el formato correcto
+TEXT_PATIENT_CLINIC_ID_NOT_IN_FAMILY_ID,Patient ID doesn\'t match Family ID,Identidad del paciente no es egual al de  la carpeta (familia)
 TEXT_PATIENT_COUNT_LABEL,Patients seen,Pacientes atendidos
 TEXT_PATIENT_CURRENT_MEDICATIONS_LABEL,Current medications,Medicamentos actuales
 TEXT_PATIENT_CURRENT_MEDICATIONS_PLACEHOLDER,"Enter each medication, one medication and dose per line","Ingrese cada medicamento actual, un medicamento y dosis por línea"
@@ -434,6 +437,8 @@ TEXT_PATIENT_EDIT_PAGE_TITLE,Update Patient,Editar Paciente
 TEXT_PATIENT_EDIT_PATIENT_BUTTON,Update this patient\'s info,Actualizar la información del paciente
 TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON,Update visit info,Actualizar la información de esta visita
 TEXT_PATIENT_EDIT_SUBMIT_BUTTON,Update patient info,Actualizar información del paciente
+TEXT_PATIENT_FAMILY_ID_NOT_VALID,Family ID is not formatted correctly,Carpeta (familia) no es en el formato correcto
+TEXT_PATIENT_FIELDS_MISSING,Patient record is missing required fields,No se encuentran los datos requeridos del paciente
 TEXT_PATIENT_ID_PLACEHOLDER,The name or ID to find,El nombre o número para encontrar
 TEXT_PATIENT_IMAGE_NOT_SPECIFIED,Image to delete was not specified,La imagen para borrar no fue especificada
 TEXT_PATIENT_IMAGE_TYPE_NOT_SUPPORTED,The specified image type is not recognized,El tipo de imagen especificada no es reconocida
@@ -470,6 +475,7 @@ TEXT_PATIENT_NEW_STATE_PLACEHOLDER,State,Departamento
 TEXT_PATIENT_NEW_SUBMIT_BUTTON,Add new patient,Agregar paciente nuevo
 TEXT_PATIENT_NOT_FOUND,The specified patient was not found,No se encontró el paciente especificado
 TEXT_PATIENT_NOT_SPECIFIED,A patient was not specified,El paciente no fue especificado
+TEXT_PATIENT_NOT_TESTED,The patient record was not validated,Los datos del paciente no han sido revisados
 TEXT_PATIENT_NO_CURRENT_MEDS,No medications on file,No hay medicamentos en el archivo
 TEXT_PATIENT_NO_KNOWN_ALLERGIES,No known allergies,Sin alergias conocidas
 TEXT_PATIENT_OPEN_NEW_VISIT,Admit this patient to the clinic,Abra una visita nueva para este paciente
@@ -496,6 +502,7 @@ TEXT_PATIENT_SEARCH_SUBMIT_BUTTON,Show matching patients,Mostrar los pacientes q
 TEXT_PATIENT_SUBMIT_CLOSE_PATIENT_VISIT_BUTTON,Discharge patient,Dar de alta el paciente
 TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON,Admit,Abra esta visita
 TEXT_PATIENT_SUBMIT_PATIENT_VISIT_BUTTON,Update visit info,Actualizar la información de esta visita
+TEXT_PATIENT_VALID,The patient record is valid,Los datos del paciente son validos
 TEXT_PATIENT_VISIT_LIST_HEAD,Earlier visits to this clinic,Visitas anteriores a esta clínica
 TEXT_PATIENT_VISIT_NOT_FOUND,The specified patient visit was not found,No encontró la visita especificada
 TEXT_PATIENT_VISIT_NOT_SPECIFIED,The required patient visit ID was not specified,El ID del la visita no estuvo especificada

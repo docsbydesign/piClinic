@@ -64,6 +64,7 @@ require_once dirname(__FILE__).'/../shared/ui_common.php';
 require_once dirname(__FILE__).'/../api/patient_common.php';
 require_once dirname(__FILE__).'/../api/patient_post.php';
 require_once dirname(__FILE__).'/../api/patient_patch.php';
+require_once dirname(__FILE__).'/../validatePatient.php';
 
 $profileData = [];
 profileLogStart ($profileData);
@@ -185,6 +186,29 @@ if (!empty($formData['knownAllergies'])){
 // format the currentMedications data
 if (!empty($formData['currentMedications'])){
 	$requestData['currentMedications'] = str_replace("\n",'|',$formData['currentMedications']);
+}
+
+// Validate data fields
+$validationResponse = validatePatient($requestData, PT_VALIDATE_MODE);
+if (!$validationResponse['valid']) {
+    // show this in the error div
+    $requestData['msg'] = MSG_VALIDATION_FAILED;
+    $redirectUrl = makeUrlWithQueryParams($errorUrl, $requestData);
+    $logError = [];
+    $logError['httpResponse'] =  400;
+    $logError['httpReason'] = $validationResponse['message'];
+    $logError['error']['redirectUrl'] = $redirectUrl;
+    $logError['error']['requestData'] = $requestData;
+    logApiError($sessionInfo['parameters'], $logError, __FILE__ , $sessionInfo['username'], 'patient', $logError['httpReason']);
+    if (API_DEBUG_MODE) {
+        header("DEBUG: ".json_encode($logError));
+    }
+    header("Location: ". $redirectUrl);
+    exit;
+} else {
+    if (API_DEBUG_MODE) {
+        header("DEBUG: " . json_encode($validationResponse));
+    }
 }
 
 profileLogCheckpoint($profileData,'PARAMETERS_VALID');

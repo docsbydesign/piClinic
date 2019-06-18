@@ -74,10 +74,7 @@ if (!defined('REST_CONSTANTS')) {
     define('FROM_LINK_QP','&fromLink', false); // use in query paramter string after first QP
     define('FROM_LINK','fromLink',false); // used in form Values
     define('FROM_LINK_SEP','-',false); // character used to separate elements in From link
-    define('AUTOINCREMENT_CLINICPATIENTID', true, false); // used to suggest the next clinicPatientID
 
-	// languages
-	define('UI_DEFAULT_LANGUAGE','en', false);
     define('UITEST_LANGUAGE','ui',false);
     define('UI_ENGLISH_LANGUAGE','en', false);
     define('UI_SPANISH_LANGUAGE','es', false);
@@ -92,7 +89,12 @@ if (!defined('REST_CONSTANTS')) {
                 return false;
         }
     }
-	
+
+
+    define("PT_VALIDATE_NONE", 0, false);
+    define("PT_VALIDATE_NAME_SERIAL", 1, false);
+    define("PT_VALIDATE_CITY_SERIAL", 2, false);
+
 	// database interfaces
 	define('DB_SERVER','localhost', false);
 	define('DB_USER','CTS-user', false);
@@ -131,5 +133,8 @@ if (!defined('REST_CONSTANTS')) {
     define('DB_VIEW_VISIT_CHECK','visitCheck', false);
     define('DB_VIEW_VISIT_GET_WITH_AGEGROUP','visitGetWithAgeGroup',false);
     define('DB_VIEW_THISCLINIC', 'thisClinicGet', false);
+
+    // include password(s)
+    require_once dirname(__FILE__).'/../../pass/clinicSpecific.php';
 }
 //EOF

@@ -53,6 +53,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_TOPIC_NOT_FOUND')) { define('TEXT_MESSAGE_TOPIC_NOT_FOUND','TEXT_MESSAGE_TOPIC_NOT_FOUND',false); }
 	if (!defined('TEXT_MESSAGE_UNSUPPORTED_ERROR')) { define('TEXT_MESSAGE_UNSUPPORTED_ERROR','TEXT_MESSAGE_UNSUPPORTED_ERROR',false); }
 	if (!defined('TEXT_MESSAGE_USER_NOT_FOUND')) { define('TEXT_MESSAGE_USER_NOT_FOUND','TEXT_MESSAGE_USER_NOT_FOUND',false); }
+	if (!defined('TEXT_MESSAGE_VALIDATION_FAIL')) { define('TEXT_MESSAGE_VALIDATION_FAIL','TEXT_MESSAGE_VALIDATION_FAIL',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
@@ -71,6 +72,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_TOPIC_NOT_FOUND')) { define('TEXT_MESSAGE_TOPIC_NOT_FOUND','Help topic not found.',false); }
 	if (!defined('TEXT_MESSAGE_UNSUPPORTED_ERROR')) { define('TEXT_MESSAGE_UNSUPPORTED_ERROR','Cannot perform the action requested.',false); }
 	if (!defined('TEXT_MESSAGE_USER_NOT_FOUND')) { define('TEXT_MESSAGE_USER_NOT_FOUND','The staff member could not be found.',false); }
+	if (!defined('TEXT_MESSAGE_VALIDATION_FAIL')) { define('TEXT_MESSAGE_VALIDATION_FAIL','There is an incorrect value in the form',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
@@ -89,5 +91,6 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_TOPIC_NOT_FOUND')) { define('TEXT_MESSAGE_TOPIC_NOT_FOUND','Contenido no encontrado',false); }
 	if (!defined('TEXT_MESSAGE_UNSUPPORTED_ERROR')) { define('TEXT_MESSAGE_UNSUPPORTED_ERROR','No se puede hacer la acción pedida.',false); }
 	if (!defined('TEXT_MESSAGE_USER_NOT_FOUND')) { define('TEXT_MESSAGE_USER_NOT_FOUND','La persona no fue encontrado.',false); }
+	if (!defined('TEXT_MESSAGE_VALIDATION_FAIL')) { define('TEXT_MESSAGE_VALIDATION_FAIL','Hay un campo con un error ',false); }
 }
 //EOF

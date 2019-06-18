@@ -94,6 +94,10 @@ if (isset($pageLanguage)) {
                     echo TEXT_MESSAGE_BACKUP_FAIL;
                     break;
 
+                case MSG_VALIDATION_FAILED:
+                    echo TEXT_MESSAGE_VALIDATION_FAIL;
+                    break;
+
 				default:
 					echo TEXT_MESSAGE_GENERIC;
 					break;

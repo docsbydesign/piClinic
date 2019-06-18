@@ -375,34 +375,36 @@ function logSessionWorkflow ($sessionInfo, $filename, $step, $workflowID, $dblin
         $wfLogEntry['activeWorkflows'] = json_encode($activeWorkflows);
 
         for ($wfItem = count($activeWorkflows)-1; $wfItem >= 0; $wfItem -= 1) {
-            // for each entry in the session workflow list
-            $wfLogEntry['logClass'] = getWorkflowIdComponent($activeWorkflows[$wfItem], WF_TYPE);
-            $wfLogEntry['wfName'] = getWorkflowIdComponent($activeWorkflows[$wfItem], WF_NAME);
-            $wfLogEntry['wfGuid'] = getWorkflowIdComponent($activeWorkflows[$wfItem], WF_GUID);
-            if ($workflowID == $activeWorkflows[$wfItem]) {
-                $wfLogEntry['wfStep'] = $step;
-                $wfLogEntry['logAfterData'] = (is_array($logData) ? json_encode($logData) : $logData);
-            } else {
-                $wfLogEntry['wfStep'] = WORKFLOW_STEP_STEP;
-                $wfLogEntry['logAfterData'] = null;
-            }
-            $wfLogEntry['logBeforeData'] = null;
-            $wfLogEntry['logStatusCode'] = null;
-            $wfLogEntry['logStatusMessage'] = null;
-
-            $logQueryString = format_object_for_SQL_insert(DB_TABLE_WFLOG, $wfLogEntry);
-            $dbResult = @mysqli_query($dblink, $logQueryString);
-            assert($dbResult, "Unable to write to workflow log with query: ".$logQueryString);
-            if (!$dbResult) {
-                // SQL ERROR
-                if (API_DEBUG_MODE) {
-                    $dbInfo['logQueryString'] = $logQueryString;
-                    $dbInfo['sqlError'] = @mysqli_error($dblink);
-                    // format response
-                    echo ($dbInfo['sqlError']. "\n");
-                    echo ($logQueryString. "\n");
+            if (isset($activeWorkflows[$wfItem])) {
+                // for each entry in the session workflow list
+                $wfLogEntry['logClass'] = getWorkflowIdComponent($activeWorkflows[$wfItem], WF_TYPE);
+                $wfLogEntry['wfName'] = getWorkflowIdComponent($activeWorkflows[$wfItem], WF_NAME);
+                $wfLogEntry['wfGuid'] = getWorkflowIdComponent($activeWorkflows[$wfItem], WF_GUID);
+                if ($workflowID == $activeWorkflows[$wfItem]) {
+                    $wfLogEntry['wfStep'] = $step;
+                    $wfLogEntry['logAfterData'] = (is_array($logData) ? json_encode($logData) : $logData);
+                } else {
+                    $wfLogEntry['wfStep'] = WORKFLOW_STEP_STEP;
+                    $wfLogEntry['logAfterData'] = null;
                 }
-                $wfSuccess = false;
+                $wfLogEntry['logBeforeData'] = null;
+                $wfLogEntry['logStatusCode'] = null;
+                $wfLogEntry['logStatusMessage'] = null;
+
+                $logQueryString = format_object_for_SQL_insert(DB_TABLE_WFLOG, $wfLogEntry);
+                $dbResult = @mysqli_query($dblink, $logQueryString);
+                assert($dbResult, "Unable to write to workflow log with query: ".$logQueryString);
+                if (!$dbResult) {
+                    // SQL ERROR
+                    if (API_DEBUG_MODE) {
+                        $dbInfo['logQueryString'] = $logQueryString;
+                        $dbInfo['sqlError'] = @mysqli_error($dblink);
+                        // format response
+                        echo ($dbInfo['sqlError']. "\n");
+                        echo ($logQueryString. "\n");
+                    }
+                    $wfSuccess = false;
+                }
             }
         }
     } else {
