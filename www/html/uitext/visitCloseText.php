@@ -40,6 +40,7 @@ exitIfCalledFromBrowser(__FILE__);
 if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_ASSIGNED_LABEL')) { define('TEXT_ASSIGNED_LABEL','TEXT_ASSIGNED_LABEL',false); }
 	if (!defined('TEXT_BIRTHDAY_DATE_FORMAT')) { define('TEXT_BIRTHDAY_DATE_FORMAT','TEXT_BIRTHDAY_DATE_FORMAT',false); }
+	if (!defined('TEXT_BLANK_STAFF_OPTION_VISIT')) { define('TEXT_BLANK_STAFF_OPTION_VISIT','TEXT_BLANK_STAFF_OPTION_VISIT',false); }
 	if (!defined('TEXT_CANCEL_VISIT_EDIT')) { define('TEXT_CANCEL_VISIT_EDIT','TEXT_CANCEL_VISIT_EDIT',false); }
 	if (!defined('TEXT_CLOSE_VISIT_PAGE_TITLE')) { define('TEXT_CLOSE_VISIT_PAGE_TITLE','TEXT_CLOSE_VISIT_PAGE_TITLE',false); }
 	if (!defined('TEXT_COMPLAINT_ADDITIONAL_LABEL')) { define('TEXT_COMPLAINT_ADDITIONAL_LABEL','TEXT_COMPLAINT_ADDITIONAL_LABEL',false); }
@@ -91,6 +92,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_ASSIGNED_LABEL')) { define('TEXT_ASSIGNED_LABEL','Doctor',false); }
 	if (!defined('TEXT_BIRTHDAY_DATE_FORMAT')) { define('TEXT_BIRTHDAY_DATE_FORMAT','m/d/Y',false); }
+	if (!defined('TEXT_BLANK_STAFF_OPTION_VISIT')) { define('TEXT_BLANK_STAFF_OPTION_VISIT','(Select the health professional)',false); }
 	if (!defined('TEXT_CANCEL_VISIT_EDIT')) { define('TEXT_CANCEL_VISIT_EDIT','Cancel',false); }
 	if (!defined('TEXT_CLOSE_VISIT_PAGE_TITLE')) { define('TEXT_CLOSE_VISIT_PAGE_TITLE','Discharge patient',false); }
 	if (!defined('TEXT_COMPLAINT_ADDITIONAL_LABEL')) { define('TEXT_COMPLAINT_ADDITIONAL_LABEL','Additional reason for visit',false); }
@@ -142,6 +144,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_ASSIGNED_LABEL')) { define('TEXT_ASSIGNED_LABEL','Doctor(a)',false); }
 	if (!defined('TEXT_BIRTHDAY_DATE_FORMAT')) { define('TEXT_BIRTHDAY_DATE_FORMAT','d-m-Y',false); }
+	if (!defined('TEXT_BLANK_STAFF_OPTION_VISIT')) { define('TEXT_BLANK_STAFF_OPTION_VISIT','(Escoge el profesional de salud)',false); }
 	if (!defined('TEXT_CANCEL_VISIT_EDIT')) { define('TEXT_CANCEL_VISIT_EDIT','Cancelar',false); }
 	if (!defined('TEXT_CLOSE_VISIT_PAGE_TITLE')) { define('TEXT_CLOSE_VISIT_PAGE_TITLE','Cerrar la visita',false); }
 	if (!defined('TEXT_COMPLAINT_ADDITIONAL_LABEL')) { define('TEXT_COMPLAINT_ADDITIONAL_LABEL','Adicional motivo de la visita',false); }

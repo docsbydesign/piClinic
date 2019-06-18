@@ -174,9 +174,9 @@ if (!empty($formData['dateTimeOutYear']) &&
 //from optional query params (form data)
 $dbOptionalFields = [
 	// 'visitID' filled by DB
-	'staffUsername' 	// TODO: coming soon
+	'staffUsername'
 	,'deleted'
-	,'staffName' 	// TODO: coming soon
+	,'staffName'
     ,'payment'
 	,'visitType' 
 	,'visitStatus'		// assign if present, otherwise, use default
@@ -243,13 +243,19 @@ if (isset($formData['staffUsername'])) {
 	$staffQueryString['username'] = $formData['staffUsername'];
 	$staffResponse = _staff_get ($dbLink, $sessionInfo['token'], $staffQueryString);
 
-	if (($staffResponse['httpResponse'] == 200) && ($staffResponse['count'] == 1)) {
+    $requestData['staffUsername'] = $formData['staffUsername'];
+    if (($staffResponse['httpResponse'] == 200) && ($staffResponse['count'] == 1)) {
 		// there should only ever be 1 name returned
 		$requestData['staffName'] = $staffResponse['data']['lastName'].', '.$staffResponse['data']['firstName'];
+		$requestData['staffPosition'] = $staffResponse['data']['position'];
 	} else {
 		// no match so write it as the username
 		$requestData['staffName'] = $formData['staffUsername'];
-	}
+        $requestData['staffPosition'] = NULL;
+    }
+    header("X-piClinic-debug-staffUsername: ".$requestData['staffUsername']);
+    header("X-piClinic-debug-staffName: ".$requestData['staffName']);
+    header("X-piClinic-debug-staffPosition: ".$requestData['staffPosition']);
 }
 
 switch ($_SERVER['REQUEST_METHOD']) {

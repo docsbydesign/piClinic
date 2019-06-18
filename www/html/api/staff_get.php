@@ -27,7 +27,7 @@
  *	GET: Returns staff records that match the specified query parameters
  *
  *	Identification query paramters:
- *		The staff record(s) will be returnedt that the fields specified in the query parameter.
+ *		The staff record(s) will be returned that the fields specified in the query parameter.
  * 		
  *			`MemberID` - (Optional) Staff ID issued by clinic.
  *			`Username` - (Required) Staff's Username (unique)

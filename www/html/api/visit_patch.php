@@ -159,8 +159,10 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 	// only copy the values from the query parameters/data
 	// 	that can be updated and ignore those that shouldn't be changed.
 	$updateParams = [
-		// 'staffID'	// TODO: when this is supported
-		'staffName'		// TODO: when this is supported
+		// 'staffID'
+		'staffName'
+        ,'staffUsername'
+        ,'staffPosition'
 		,'deleted'
 		,'visitType'
 		,'visitStatus'

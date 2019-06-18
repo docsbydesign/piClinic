@@ -41,6 +41,8 @@ require_once './shared/security.php';
 require_once './shared/ui_common.php';
 require_once './api/patient_common.php';
 require_once './api/patient_get.php';
+require_once './api/staff_common.php';
+require_once './api/staff_get.php';
 require_once './api/visit_common.php';
 require_once './api/visit_get.php';
 
@@ -98,6 +100,11 @@ if (!empty($requestData['patientVisitID'])) {
 		DB_VIEW_VISIT_PATIENT_GET. "` WHERE `patientVisitID` = '".
 		$requestData['patientVisitID']."';";
 	$visitRecord = getDbRecords($dbLink, $getQueryString);
+    // get the list of staff members
+    // get the list of users, sorted by username
+    $staffQueryString['username'] = '%';
+    $staffQueryString['sort'] = 'lastName';
+    $staffResponse = _staff_get ($dbLink, $sessionInfo['token'], $staffQueryString);
 } else {
 	if (empty($dbStatus)) {
 		// no query parameter found.
@@ -237,9 +244,31 @@ function writeOptionsMenu ($visitInfo) {
                                     <?= TEXT_PAYMENT_CURRENCY ?>
                                 </p>
                             </div>
-							<div class="dataBlock">
-								<p><label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label>&nbsp;<?= $visitInfo['staffName'] ?></p>
-							</div>
+                            <div class="dataBlock">
+                                <p><label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label> &nbsp;
+                                    <select id="StaffUsernameField" name="staffUsername" class="requiredField">
+                                        <option value="" <?= (empty($visitInfo['staffUsername']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_STAFF_OPTION_VISIT ?></option>
+                                        <?php
+                                        if ($staffResponse['count'] > 1) {
+                                            foreach ($staffResponse['data'] as $staffMember){
+                                                if ($staffMember['medicalStaff']) {
+                                                    echo ('<option value="'.$staffMember['username'].'" '.
+                                                        ((!empty($visitInfo['staffUsername']) && $staffMember['username'] == $visitInfo['staffUsername']) ? 'selected' : '' ).
+                                                        '>'.$staffMember['lastName'].','. $staffMember['firstName'] .'</option>');
+                                                }
+                                            }
+                                        } else if ($staffResponse['count'] == 1) {
+                                            $staffMember = $staffResponse['data'];
+                                            if ($staffMember['medicalStaff']) {
+                                                echo ('<option value="'.$staffMember['username'].'" '.
+                                                    ((!empty($visitInfo['staffUsername']) && $staffMember['username'] == $visitInfo['staffUsername']) ? 'selected' : '' ).
+                                                    '>'.$staffMember['lastName'].', '. $staffMember['firstName'] .'</option>');
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </p>
+                            </div>
 						</div>
 					</div>
 					<div class="infoBlock">

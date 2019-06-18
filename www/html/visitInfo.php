@@ -253,7 +253,7 @@ function writeTopicMenu ($sessionInfo) {
                             </p>
                         </div>
 						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label>&nbsp;<?= $visitInfo['staffName'] ?></p>
+							<p><label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['staffName']) ? $visitInfo['staffName'] : '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>') ?></p>
 						</div>
 					</div>
 				</div>
