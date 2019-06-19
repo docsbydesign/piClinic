@@ -724,10 +724,10 @@ header('Content-type: text/html; charset=utf-8');
                             $thisStat = getStatsValue($summaryStats, $statRow[0], $col[0]);
                             $groupTotal += $thisStat;
                             $statString = number_format ( (double)$thisStat, 0 , TEXT_DECIMAL_POINT, TEXT_THOUSANDS_SEPARATOR );
-                            echo '<td class="numbers'.($statRow[3] ? ' bold' : '').'">'.$thisStat.'</td>';
+                            echo '<td class="numbers'.($statRow[3] ? ' bold' : '').'">'.($thisStat > 0 ? $statString : '&nbsp;').'</td>';
                         }
                         $statString = number_format ( $groupTotal, 0 , TEXT_DECIMAL_POINT, TEXT_THOUSANDS_SEPARATOR );
-                        echo '<td class="numbers'.($statRow[3] ? ' bold' : '').'">'.$statString.'</td>';
+                        echo '<td class="numbers'.($statRow[3] ? ' bold' : '').'">'.($groupTotal > 0 ? $statString : '&nbsp;').'</td>';
                         if ($statRow[0] == TOTAL_VALUE_LINE) {
                             // this is the total value
                             $reportProfile['count'] = $groupTotal;
