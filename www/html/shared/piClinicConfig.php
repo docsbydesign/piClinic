@@ -94,6 +94,8 @@ if (!defined('REST_CONSTANTS')) {
     define("PT_VALIDATE_NONE", 0, false);
     define("PT_VALIDATE_NAME_SERIAL", 1, false);
     define("PT_VALIDATE_CITY_SERIAL", 2, false);
+    define("PT_VALIDATE_NEW",64,false);
+    define("PT_VALIDATE_UPDATE",128,false);
 
 	// database interfaces
 	define('DB_SERVER','localhost', false);

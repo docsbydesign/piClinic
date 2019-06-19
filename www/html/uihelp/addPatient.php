@@ -189,7 +189,13 @@ if (!empty($formData['currentMedications'])){
 }
 
 // Validate data fields
-$validationResponse = validatePatient($requestData, PT_VALIDATE_MODE);
+$validationType = PT_VALIDATE_NEW;
+if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
+    $validationType = PT_VALIDATE_UPDATE;
+}
+
+// the validationOption is defined in clinicSpecific.php
+$validationResponse = validatePatient($requestData, $validationType, PT_VALIDATE_MODE);
 if (!$validationResponse['valid']) {
     // show this in the error div
     $requestData['msg'] = MSG_VALIDATION_FAILED;

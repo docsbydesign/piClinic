@@ -28,7 +28,7 @@ require_once dirname(__FILE__).'/./api/api_common.php';
  *  Review the fields in $ptRecord and test them per the $validationOption
  */
 
-function validatePatient ($ptRecord, $validationOption = PT_VALIDATE_NONE) {
+function validatePatient ($ptRecord, $validationType=PT_VALIDATE_NEW, $validationOption = PT_VALIDATE_NONE) {
     $validationResponse = [];
     $validationResponse['valid'] = true;
     $validationResponse['message'] = TEXT_PATIENT_VALID;
@@ -48,8 +48,9 @@ function validatePatient ($ptRecord, $validationOption = PT_VALIDATE_NONE) {
                     $validationResponse['valid'] = false;
                     $validationResponse['message'] = TEXT_PATIENT_CLINIC_ID_NOT_VALID;
                 }
-                if ($validationResponse['valid']) {
-                    // make sure the family ID part of the patient ID matches the Family ID
+
+                if ($validationResponse['valid'] && ($validationType == PT_VALIDATE_NEW)){
+                    // make sure the family ID part of the patient ID matches the Family ID on new entries
                     preg_match($familyIdPattern, $ptRecord['familyID'], $familyIdMatches);
                     preg_match($patientIdPattern, $ptRecord['clinicPatientID'], $patientIdMatches);
                     if (isset($familyIdMatches[1]) && isset($patientIdMatches[1])) {
