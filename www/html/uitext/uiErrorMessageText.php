@@ -90,7 +90,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_SESSION_TIMEOUT')) { define('TEXT_MESSAGE_SESSION_TIMEOUT','',false); }
 	if (!defined('TEXT_MESSAGE_TOPIC_NOT_FOUND')) { define('TEXT_MESSAGE_TOPIC_NOT_FOUND','Contenido no encontrado',false); }
 	if (!defined('TEXT_MESSAGE_UNSUPPORTED_ERROR')) { define('TEXT_MESSAGE_UNSUPPORTED_ERROR','No se puede hacer la acción pedida.',false); }
-	if (!defined('TEXT_MESSAGE_USER_NOT_FOUND')) { define('TEXT_MESSAGE_USER_NOT_FOUND','La persona no fue encontrado.',false); }
+	if (!defined('TEXT_MESSAGE_USER_NOT_FOUND')) { define('TEXT_MESSAGE_USER_NOT_FOUND','La persona no fue encontrada.',false); }
 	if (!defined('TEXT_MESSAGE_VALIDATION_FAIL')) { define('TEXT_MESSAGE_VALIDATION_FAIL','Hay un campo con un error ',false); }
 }
 //EOF

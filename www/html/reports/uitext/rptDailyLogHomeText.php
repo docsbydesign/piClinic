@@ -202,7 +202,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_CONDITION_3_LABEL')) { define('TEXT_CONDITION_3_LABEL','Condición',false); }
 	if (!defined('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE','Informe Diario de Atenciones Ambulatorias',false); }
 	if (!defined('TEXT_DAILY_VISIT_HEADING')) { define('TEXT_DAILY_VISIT_HEADING','Atenciones Ambulatorias',false); }
-	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','d/m/Y',false); }
+	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','d-m-Y',false); }
 	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha del informe (AAAA-MM)',false); }
 	if (!defined('TEXT_DATE_PROMPT_LABEL')) { define('TEXT_DATE_PROMPT_LABEL','Fecha&nbsp;(aaaa-mm-dd)',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_ICD_LABEL')) { define('TEXT_DIAGNOSIS_1_ICD_LABEL','Diagnóstico 1 (CIE-10)',false); }
@@ -228,7 +228,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_NEIGHBORHOOD_LABEL')) { define('TEXT_NEIGHBORHOOD_LABEL','Localidad',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
 	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','Escoge un profesional de salud y una fecha.',false); }
-	if (!defined('TEXT_NO_VISITS_FOUND_DAY')) { define('TEXT_NO_VISITS_FOUND_DAY','No visitas encontradas en esta fecha.',false); }
+	if (!defined('TEXT_NO_VISITS_FOUND_DAY')) { define('TEXT_NO_VISITS_FOUND_DAY','No se encontraron visitas en esta fecha.',false); }
 	if (!defined('TEXT_PATIENTVISITID_LABEL')) { define('TEXT_PATIENTVISITID_LABEL','Número de historia clínica',false); }
 	if (!defined('TEXT_PATIENT_LABEL')) { define('TEXT_PATIENT_LABEL','Paciente',false); }
 	if (!defined('TEXT_RECEIVED_FROM_LABEL')) { define('TEXT_RECEIVED_FROM_LABEL','Recibida de',false); }

@@ -212,7 +212,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT')) { define('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT','d-m-Y',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','La próxima fecha de vacunación',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
-	if (!defined('TEXT_NO_PREVIOUS_VISITS')) { define('TEXT_NO_PREVIOUS_VISITS','No hay archivos de admisiónes anteriores',false); }
+	if (!defined('TEXT_NO_PREVIOUS_VISITS')) { define('TEXT_NO_PREVIOUS_VISITS','No hay archivos de admisiones anteriores',false); }
 	if (!defined('TEXT_ORGAN_DONOR')) { define('TEXT_ORGAN_DONOR','[Donante de órganos]',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_LABEL')) { define('TEXT_PATIENTNATIONALID_LABEL','Cédula',false); }
 	if (!defined('TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON')) { define('TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON','Agregar un paciente nuevo',false); }

@@ -135,6 +135,26 @@ function writeTopicMenu ($sessionInfo) {
 	$topicMenu .= '</ul></div>'."\n";
 	return $topicMenu;
 }
+
+function writeFamilyId($patientData)
+{
+    $returnString = "<div class=\"dataBlock\">";
+    $linkParams = ['familyID' => $patientData['familyID'],];
+    $returnString .= "<p><label>".TEXT_FAMILYID_LABEL.":</label>";
+    $returnString .= "<a class=\"a_viewFamily\" href=\"".
+        makeUrlWithQueryParams('/ptResults.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_viewFamily').
+        '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_FAMILY_LIST')."\">".
+        $patientData['familyID']."</a>";
+    $returnString .= "</p></div>";
+    return $returnString;
+}
+
+function writePatientId($patientData) {
+    $returnString = "<div class=\"dataBlock\">";
+    $returnString .=  "<p><label>".TEXT_CLINICPATIENTID_LABEL.":</label> ".$patientData['clinicPatientID']."</p>";
+    $returnString .=  "</div>";
+    return $returnString;
+}
 ?>
 <?= pageHtmlTag($pageLanguage) ?>
 <?= pageHeadTag(TEXT_PATIENT_INFO_PAGE_TITLE) ?>
@@ -249,20 +269,19 @@ function writeTopicMenu ($sessionInfo) {
 			<h2 id="patientInfoHeading"><?= TEXT_PATIENT_DATA_HEAD ?></h2>
 			<div class="indent1 infoBlock">
 				<div class="infoBlock">
-					<div class="dataBlock">
-						<p><label><?= TEXT_FULLNAME_LABEL ?>:</label> <?= formatPatientNameLastFirst ($patientData) ?>&nbsp;&nbsp;<?= '('.
-						($patientData['sex'] == 'M' ? TEXT_SEX_OPTION_M : ($patientData['sex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).')' ?></p>
-					</div>
-					<div class="dataBlock">
-                        <?php $linkParams = ['familyID' => $patientData['familyID'], ]; ?>
-						<p><label><?= TEXT_FAMILYID_LABEL ?>:</label>
-                            <a class="a_viewFamily" href="<?= makeUrlWithQueryParams('/ptResults.php', $linkParams).createFromLink (FROM_LINK_QP, __FILE__, 'a_viewFamily').
-                            '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_FAMILY_LIST') ?>">
-                            <?= $patientData['familyID'] ?></a></p>
-					</div>
-					<div class="dataBlock">
-						<p><label><?= TEXT_CLINICPATIENTID_LABEL ?>:</label> <?= $patientData['clinicPatientID'] ?></p>
-					</div>
+                        <div class="dataBlock">
+                            <p><label><?= TEXT_FULLNAME_LABEL ?>:</label> <?= formatPatientNameLastFirst ($patientData) ?>&nbsp;&nbsp;<?= '('.
+                            ($patientData['sex'] == 'M' ? TEXT_SEX_OPTION_M : ($patientData['sex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).')' ?></p>
+                        </div>
+                    <?php
+                        if (PT_FAMILY_ID_FIRST) {
+                            echo writeFamilyId($patientData);
+                            echo writePatientId($patientData);
+                        } else {
+                            echo writePatientId($patientData);
+                            echo writeFamilyId($patientData);
+                        }
+                    ?>
 					<div class="dataBlock">
 						<p><label><?= TEXT_PATIENTNATIONALID_LABEL ?>:</label> <?= $patientData['patientNationalID'] ?></p>
 					</div>

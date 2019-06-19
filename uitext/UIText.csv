@@ -84,8 +84,8 @@ TEXT_COMMENT_LIST_HEAD_USERNAME,Username,Usuario
 TEXT_COMMENT_PAGE_TITLE,piClinic Comment,Comentario de piClinic
 TEXT_COMMENT_PLACEHOLDER,Enter your comment about the piClinic here,Entrar su comentario del piClinic aquí
 TEXT_COMMENT_SUBMIT_BUTTON,Submit,Entregar
-TEXT_COMPLAINT_ADDITIONAL_LABEL,Additional reason for visit,Adicional motivo de la visita
-TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER,Additional reason for visit,Adicional motivo de la visita
+TEXT_COMPLAINT_ADDITIONAL_LABEL,Additional visit notes,Notas adicionales de la visita
+TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER,Additional visit notes,Notas adicionales de la visita
 TEXT_COMPLAINT_NOT_SPECIFIED,(Not specified),(No especificado)
 TEXT_COMPLAINT_PRIMARY_LABEL,Primary reason for visit,Primer motivo de la visita
 TEXT_COMPLAINT_PRIMARY_PLACEHOLDER,Primary reason for visit,Primer motivo de la visita
@@ -351,7 +351,7 @@ TEXT_MESSAGE_REQUIRED_FIELD_MISSING,A required field was not filled in.,Un campo
 TEXT_MESSAGE_SESSION_TIMEOUT,You haven\'t been using the system for a while so you were logged out,,No ha estado usando la consola por un rato y su sesión ha estado cerrado automáticamente.
 TEXT_MESSAGE_TOPIC_NOT_FOUND,Help topic not found.,Contenido no encontrado
 TEXT_MESSAGE_UNSUPPORTED_ERROR,Cannot perform the action requested.,No se puede hacer la acción pedida.
-TEXT_MESSAGE_USER_NOT_FOUND,The staff member could not be found.,La persona no fue encontrado.
+TEXT_MESSAGE_USER_NOT_FOUND,The staff member could not be found.,La persona no fue encontrada.
 TEXT_MESSAGE_VALIDATION_FAIL,There is an incorrect value in the form,Hay un campo con un error 
 TEXT_MONTHLY_PAGE_TITLE,Monthly Payment Log,Registro de Pagos del Mes
 TEXT_MONTHLY_PMT_DESC,List of payments received from patients during the specified month,Registro de pagos recibidos por los pacientes durante el mes especificado
@@ -385,15 +385,15 @@ TEXT_NO_COMMENT_RECORDS,No comments,No hay comentarios
 TEXT_NO_LOG_DATA,No data in this log file.,Este registro no tiene datos.
 TEXT_NO_OPEN_VISITS,No patients admitted to the clinic.,No hay pacientes admitidos a la clínica.
 TEXT_NO_OPTION,No,No
-TEXT_NO_PATIENT_IMAGE,No image found.,No encontró una imagen.
-TEXT_NO_PREVIOUS_VISITS,No previous admission records,No hay archivos de admisiónes anteriores
+TEXT_NO_PATIENT_IMAGE,No image found.,No se encontró una imagen.
+TEXT_NO_PREVIOUS_VISITS,No previous admission records,No hay archivos de admisiones anteriores
 TEXT_NO_REPORT_PROF_PROMPT,Select a health professional and date.,Escoge un profesional de salud y una fecha.
 TEXT_NO_REPORT_PROMPT,Select a date.,Escoge una fecha.
 TEXT_NO_STAFF_RECORDS,No users or staff members found,No hay usuarios o personal de la clínica
 TEXT_NO_SUMMARY_REPORT_PROMPT,Select a service type and date.,Escoge un servicio de atención y una fecha.
-TEXT_NO_VISITS_FOUND_DAY,No visits found for this date.,No visitas encontradas en esta fecha.
+TEXT_NO_VISITS_FOUND_DAY,No visits found for this date.,No se encontraron visitas en esta fecha.
 TEXT_NO_VISITS_FOUND_DOCTOR,This person did not see any patients on this date.,Esta persona no tuvo pacientes en esta fecha.
-TEXT_NO_VISITS_FOUND_MONTH,No visits found for this month.,No visitas encontradas en este mes.
+TEXT_NO_VISITS_FOUND_MONTH,No visits found for this month.,No se encontraron visitas en este mes.
 TEXT_NO_VISIT_IMAGES,This visit does not have any images,Esta visita no tiene imágenes 
 TEXT_OF_PAGES,of,de
 TEXT_OPEN_VISIT_LIST_HEAD,Patients admitted to the clinic,Pacientes admitidos a la clínica
@@ -486,8 +486,8 @@ TEXT_PATIENT_RESET_SEARCH_BUTTON,Start a new search,Buscar de nuevo
 TEXT_PATIENT_SEARCH_ADDRESS_LABEL,Home address,Dirección de la casa
 TEXT_PATIENT_SEARCH_CITY_PLACEHOLDER,City,Municipio
 TEXT_PATIENT_SEARCH_COUNTY_PLACEHOLDER,County,Condado
-TEXT_PATIENT_SEARCH_FOUND_ATA,Found these patients. Select one to enter their visit info or add a new patient above.,Encontró estos pacientes. Haz clik para agregar su visita o agregue un paciente nuevo.
-TEXT_PATIENT_SEARCH_FOUND_NOT_ATA,Found these patients. Select one to view thier info.,Encontró estos pacientes. Haz clik para ver sus detalles.
+TEXT_PATIENT_SEARCH_FOUND_ATA,Found these patients. Select one to enter their visit info or add a new patient above.,Se encontraron estos pacientes. Haz clik para agregar su visita o agregue un paciente nuevo.
+TEXT_PATIENT_SEARCH_FOUND_NOT_ATA,Found these patients. Select one to view thier info.,Se encontraron estos pacientes. Haz clik para ver sus detalles.
 TEXT_PATIENT_SEARCH_NAMEFIRST_PLACEHOLDER,First name,Primer nombre
 TEXT_PATIENT_SEARCH_NAMELAST2_PLACEHOLDER,Second last name,Segundo apellido
 TEXT_PATIENT_SEARCH_NAMELAST_PLACEHOLDER,First last name,Apellido
@@ -504,7 +504,7 @@ TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON,Admit,Abra esta visita
 TEXT_PATIENT_SUBMIT_PATIENT_VISIT_BUTTON,Update visit info,Actualizar la información de esta visita
 TEXT_PATIENT_VALID,The patient record is valid,Los datos del paciente son validos
 TEXT_PATIENT_VISIT_LIST_HEAD,Earlier visits to this clinic,Visitas anteriores a esta clínica
-TEXT_PATIENT_VISIT_NOT_FOUND,The specified patient visit was not found,No encontró la visita especificada
+TEXT_PATIENT_VISIT_NOT_FOUND,The specified patient visit was not found,No se encontró la visita especificada
 TEXT_PATIENT_VISIT_NOT_SPECIFIED,The required patient visit ID was not specified,El ID del la visita no estuvo especificada
 TEXT_PAYMENT_CURRENCY,HNL,HNL
 TEXT_PAYMENT_LABEL,Payment,Pago

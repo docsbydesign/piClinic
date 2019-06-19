@@ -23,12 +23,42 @@
  * This file is included by piClinicConfig.php to define the settings that are unique to the
  * specific clinic installation and should not be overwritten by software updates.
  *
+ * When changing these values, change ONLY the second parameter in the definition.
+ * DO NOT change the first or the last parameter.
  */
+/***************
+ * used to suggest the next clinicPatientID
+ *      true: for clinicPatientID values that are integers only, the next patient ID will be prompted on add new patient
+ *      false: no new patient ID will be prompted
+ */
+define('AUTOINCREMENT_CLINICPATIENTID', true, false);
 
-define('AUTOINCREMENT_CLINICPATIENTID', true, false); // used to suggest the next clinicPatientID
-
+/*
+ *  used to set the system default language for the UI. Note that the UI language precedence is:
+ *      1. the user-specified language (e.g. via the query parameter or the screen selection
+ *      2. the session language preference (as derived from the user preference)
+ *      3. the system preference
+ *
+ *      en: English
+ *      es: Spanish
+ */
 define('UI_DEFAULT_LANGUAGE','en', false); // Default language for UI text
 
+/*
+ *  used to define the validation mode used to verify patient records are correctly formatted before saving
+ *      PT_VALIDATE_NONE: No validation is performed
+ *      PT_VALIDATE_CITY_SERIAL: Check that the patient and family ID are formatted as letters-number (e.g. Roatan-1)
+*          Note that the content of the fields are not checked to see if they match the home city
+ *      PT_VALIDATE_NAME_SERIAL: Check that the patient and family ID are formatted as letters-number (e.g. Sanchez-1)
+ *          Note that the content of the fields are not checked to see if they match the family name
+ */
 define('PT_VALIDATE_MODE', PT_VALIDATE_NONE, false); // how to validate patient records before saving or updating
+
+/*
+ *  used to describe how the patient information screens are organized
+ *      true: show the patient ID fields as Patient ID, Family ID, National ID
+ *      false: show the patient ID fields as Family ID, Patient ID, National ID
+ */
+define('PT_FAMILY_ID_FIRST', true, false);
 
 

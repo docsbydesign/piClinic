@@ -178,6 +178,24 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 	$topicMenu .= '</ul></div>'."\n";
 	return $topicMenu;
 }
+
+function writeFamilyIdFields($patientData) {
+	$returnString = "<label class=\"close\">".TEXT_FAMILYID_LABEL.":</label>&nbsp;";
+    $returnString .= dbFieldTextInput ($patientData, 'familyID', TEXT_PATIENT_NEW_FAMILYID_PLACEHOLDER, false);
+    $returnString .= "&nbsp;&nbsp;";
+    return $returnString;
+}
+
+function writePatientIdFields($patientData, $pageMode) {
+    $returnString = "<label class=\"close\">".TEXT_PATIENT_ADD_EDIT_ID_LABEL.":</label>&nbsp;";
+    $returnString .= "<span style=\"display:".($pageMode == 'edit' ?  'inline' : 'none' )."\">";
+    $returnString .= ($pageMode == 'edit' ? $patientData['clinicPatientID'] : '')."</span>";
+    $returnString .= "<input type=\"".($pageMode == 'add' ? 'text' : 'hidden' )."\" id=\"clinicPatientIDfield\" name=\"clinicPatientID\"";
+    $returnString .= "value=\"".(!empty($patientData['clinicPatientID']) ? $patientData['clinicPatientID'] : "") ."\"";
+    $returnString .= "class=\"requiredField\"".($pageMode == 'add' ? 'placeholder="'.TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER.'"' :'').">&nbsp;&nbsp;";
+    return $returnString;
+}
+
 ?>
 <?= pageHtmlTag($pageLanguage) ?>
 <?= pageHeadTag($pageMode == 'add' ? TEXT_PATIENT_NEW_PAGE_TITLE : TEXT_PATIENT_EDIT_PAGE_TITLE) ?>
@@ -192,15 +210,15 @@ function writeTopicMenu ($cancelLink, $ata=false) {
 		<h2><?= ($pageMode == 'add' ? TEXT_NEW_PATIENT_HEADING  : TEXT_EDIT_PATIENT_HEADING  ) ?></h2>
 		<form enctype="multipart/form-data" action="/uihelp/addPatient.php" method="post">
 			<p>
-				<label class="close"><?= TEXT_PATIENT_ADD_EDIT_ID_LABEL ?>:</label>&nbsp;
-					<span style="display:<?= ($pageMode == 'edit' ?  'inline' : 'none' ) ?>">
-					<?= ($pageMode == 'edit' ? $patientData['clinicPatientID'] : '') ?></span>
-				<input type="<?= ($pageMode == 'add' ? 'text' : 'hidden' ) ?>" id="clinicPatientIDfield" name="clinicPatientID" 
-					value="<?php if (!empty($patientData['clinicPatientID'])) {echo $patientData['clinicPatientID'];} ?>"
-					class="requiredField" <?= ($pageMode == 'add' ? 'placeholder="'.TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER.'"' :'') ?>>&nbsp;&nbsp;
-				<label class="close"><?= TEXT_FAMILYID_LABEL ?>:</label>&nbsp;
-					<?= dbFieldTextInput ($patientData, 'familyID', TEXT_PATIENT_NEW_FAMILYID_PLACEHOLDER, false) ?>
-
+                <?php
+                    if (PT_FAMILY_ID_FIRST) {
+                        echo writeFamilyIdFields($patientData);
+                        echo writePatientIdFields($patientData, $pageMode);
+                    } else {
+                        echo writePatientIdFields($patientData, $pageMode);
+                        echo writeFamilyIdFields($patientData);
+                    }
+                ?>
 				<label class="close"><?= TEXT_PATIENTNATIONALID_LABEL ?>:</label>&nbsp;
 					<?= dbFieldTextInput ($patientData, 'patientNationalID', TEXT_PATIENTNATIONALID_PLACEHOLDER, false) ?>
 			</p>

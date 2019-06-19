@@ -120,7 +120,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','d/m/Y',false); }
+	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','d-m-Y',false); }
 	if (!defined('TEXT_DH_PATIENT_COUNT')) { define('TEXT_DH_PATIENT_COUNT','Pacientes',false); }
 	if (!defined('TEXT_DH_PATIENT_PAYMENT')) { define('TEXT_DH_PATIENT_PAYMENT','Pago',false); }
 	if (!defined('TEXT_DH_VISIT_DATE')) { define('TEXT_DH_VISIT_DATE','Día del mes',false); }
@@ -133,7 +133,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MONTHLY_VISIT_HEADING')) { define('TEXT_MONTHLY_VISIT_HEADING','Registro de Pagos del Mes',false); }
 	if (!defined('TEXT_MO_DATE_PROMPT_LABEL')) { define('TEXT_MO_DATE_PROMPT_LABEL','Fecha&nbsp;(aaaa-mm)',false); }
 	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','Escoge una fecha.',false); }
-	if (!defined('TEXT_NO_VISITS_FOUND_MONTH')) { define('TEXT_NO_VISITS_FOUND_MONTH','No visitas encontradas en este mes.',false); }
+	if (!defined('TEXT_NO_VISITS_FOUND_MONTH')) { define('TEXT_NO_VISITS_FOUND_MONTH','No se encontraron visitas en este mes.',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Establecimiento',false); }
 	if (!defined('TEXT_REPORT_DAY_OF_MONTH_LABEL')) { define('TEXT_REPORT_DAY_OF_MONTH_LABEL','Día del mes',false); }
 	if (!defined('TEXT_REPORT_LAST_DATE_LABEL')) { define('TEXT_REPORT_LAST_DATE_LABEL','Última fecha reportada&nbsp;(dd/mm/aaaa)',false); }
