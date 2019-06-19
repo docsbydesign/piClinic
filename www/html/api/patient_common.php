@@ -87,25 +87,37 @@ function makeOneQueryTermString ($searchTerm) {
 	 
 }
 define ('MAX_SEARCH_TERMS', 5, false);
-function makePatientSearchQuery ($searchString) {
-	// create query string for get operation
-	// explode string on spaces and create one query for each string (up to 5 terms)
-	$queryTerms = explode (' ', $searchString, MAX_SEARCH_TERMS);
-	if ($queryTerms === FALSE) {
-		// no terms so return an empty query string;
-		return '';
-	}
-	// build query string
-	$queryString = "SELECT * FROM `".
-		DB_VIEW_PATIENT_GET. "` WHERE ";
-	$paramCount = 0;
-	foreach ($queryTerms as $term) {
-		if ($paramCount > 0) {
-			$queryString .= ' AND ';
-		}
-		$queryString .= makeOneQueryTermString ($term);
-		$paramCount += 1;
-	}
+function makePatientSearchQuery ($searchString, $looseQuery=true) {
+    $queryString = "SELECT * FROM `".
+        DB_VIEW_PATIENT_GET. "` WHERE ";
+    if ($looseQuery) {
+        // create query string for get operation
+        // explode string on spaces and create one query for each string (up to 5 terms)
+        $queryTerms = explode (' ', $searchString, MAX_SEARCH_TERMS);
+        if ($queryTerms === FALSE) {
+            // no terms so return an empty query string;
+            return '';
+        } else {
+            // add the whole string as a term the array if there are multiple terms
+            if (count($queryTerms) > 1) {
+                array_push($queryTerms, $searchString);
+            }
+        }
+        // build query string
+        $paramCount = 0;
+        foreach ($queryTerms as $term) {
+            if ($paramCount > 0) {
+                $queryString .= ' OR ';
+            }
+            $queryString .= makeOneQueryTermString ($term);
+            $paramCount += 1;
+        }
+    } else {
+        // a tight query checks for an exact match of the ID fields
+        $queryString .= "`clinicPatientID` LIKE '".$searchString."' OR ";
+        $queryString .= "`patientNationalID` LIKE '".$searchString."' OR ";
+        $queryString .= "`familyID` LIKE '".$searchString. "' ";
+    }
 	$queryString .= " ORDER BY `lastName`".DB_QUERY_LIMIT.";";
 	return $queryString;
  }

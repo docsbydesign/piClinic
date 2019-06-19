@@ -75,13 +75,23 @@ function _patient_get ($dbLink, $apiUserToken, $requestArgs) {
 	// create query string for get operation
 	$getQueryString = '';
 	if (!empty($requestArgs['q'])) {
-		$getQueryString = makePatientSearchQuery ($requestArgs['q']);
+	    $queryArg = trim($requestArgs['q']);
+	    // test for exact matches first, and if nothing turns up, check for a much looser match
+        $getQueryString = makePatientSearchQuery ($queryArg, false);
+        $dbInfo['getQueryString'] = $getQueryString;
+        $returnValue = getDbRecords($dbLink, $getQueryString);
+        if ($returnValue['count'] == 0) {
+            // try a looser match if a tight match wasn't successful
+            $getQueryString = makePatientSearchQuery ($queryArg, true);
+            $dbInfo['getQueryString'] = $getQueryString;
+            $returnValue = getDbRecords($dbLink, $getQueryString);
+        }
+        // return the result
 	} else {
 		$getQueryString = makePatientQueryStringFromRequestParameters ($requestArgs);
+        $dbInfo['getQueryString'] = $getQueryString;
+        $returnValue = getDbRecords($dbLink, $getQueryString);
 	}
-    $dbInfo['getQueryString'] = $getQueryString;
-
-	$returnValue = getDbRecords($dbLink, $getQueryString);
 
     profileLogClose($profileData, __FILE__, $requestArgs);
 
