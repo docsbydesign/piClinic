@@ -553,7 +553,9 @@ function  closeSessionWorkflow($sessionInfo, $filename, $dbLink, $workflowStep =
     if (!empty($_SESSION[WORKFLOW_SESSION_ARRAY])) {
         // close each open workflow from last to first
         for ($itemID = count($_SESSION[WORKFLOW_SESSION_ARRAY])-1; $itemID >= 0; $itemID -= 1) {
-            $returnValue = logSessionWorkflow ($sessionInfo, $filename, $workflowStep, $_SESSION[WORKFLOW_SESSION_ARRAY][$itemID], $dbLink, $_SESSION[WORKFLOW_SESSION_ARRAY]);
+            if (isset($_SESSION[WORKFLOW_SESSION_ARRAY][$itemID])) {
+                $returnValue = logSessionWorkflow ($sessionInfo, $filename, $workflowStep, $_SESSION[WORKFLOW_SESSION_ARRAY][$itemID], $dbLink, $_SESSION[WORKFLOW_SESSION_ARRAY]);
+            }
         }
         // then clear the workflow array
         unset($_SESSION[WORKFLOW_SESSION_ARRAY]);
