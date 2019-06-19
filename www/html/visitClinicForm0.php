@@ -160,7 +160,7 @@ function writeTopicMenu ($sessionInfo) {
     <?= piClinicAppMenu(null,$sessionInfo,  $pageLanguage, __FILE__) ?>
 	<div class="pageBody portraitReport<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
         <?= writeTopicMenu($sessionInfo) ?>
-        <div class="logoBlock printOnly"><p>Logo Here</p></div>
+        <!-- <div class="logoBlock printOnly"><p>Logo Here</p></div> -->
         <div class="infoBlock <?= $visitInfo['visitStatus'] == 'Open' ? ' hideDiv' : '' ?>">
             <h2><?= TEXT_REPRINT_HEADING ?></h2>
         </div>

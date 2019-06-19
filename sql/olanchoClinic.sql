@@ -18,4 +18,4 @@ USE `piclinic`;
 --
 -- Olancho clinic data
 --
-INSERT INTO `clinic` (`thisClinic`, `publicID`, `typeCode`, `careLevel`, `longName`, `shortName`, `currency`, `address1`, `address2`, `clinicNeighborhood`, `clinicCity`, `clinicState`, `clinicRegion`, `clinicDirector`, `clinicService`, `modifiedDate`, `createdDate`) VALUES(1, '', 'UAPS', 'Primerio', 'CESAMO San Martin', 'CESAMO San Martin', 'HNL', NULL, NULL, 'San Martin', 'San Esteban', 'Olancho', '15', 'Dr. German Jiménez', 'Outpatient', NOW(), NOW());
+INSERT INTO `clinic` (`thisClinic`, `publicID`, `typeCode`, `careLevel`, `longName`, `shortName`, `currency`, `address1`, `address2`, `clinicNeighborhood`, `clinicCity`, `clinicState`, `clinicRegion`, `clinicDirector`, `clinicService`, `modifiedDate`, `createdDate`) VALUES(1, '8346', 'UAPS', 'Primerio', 'CESAMO San Martin', 'CESAMO San Martin', 'HNL', NULL, NULL, 'San Martin', 'San Esteban', 'Olancho', '15', 'Dr. German Jiménez', 'Outpatient', NOW(), NOW());
