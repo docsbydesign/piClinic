@@ -177,7 +177,7 @@ function writeTopicMenu ($cancel) {
 		<div class="infoBlock">
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($patientInfo) ?>
 				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$patientInfo['sex'].')' ?></span></h1>
-			<p><?= date(TEXT_BIRTHDAY_DATE_FORMAT, strtotime($patientInfo['birthDate'])) ?>&nbsp;(<?php echo date_diff(date_create($patientInfo['birthDate']), date_create('now'))->y; ?>)&nbsp;&nbsp;&nbsp;
+			<p><?= formatDbDate ($visitInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED ) ?>&nbsp;(<?php echo date_diff(date_create($patientInfo['birthDate']), date_create('now'))->y; ?>)&nbsp;&nbsp;&nbsp;
 			<span class="a_ptInfo idInHeading"><a href="/ptInfo.php?clinicPatientID=<?= $patientInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
 		</div>
 		<div class="infoBlock">
@@ -255,7 +255,7 @@ function writeTopicMenu ($cancel) {
                         </div>
                         <div class="dataBlock bottomSpace">
                             <p><label class="close"><?= TEXT_PAYMENT_LABEL ?>:</label>
-                                <input type="number" name="payment" id="PaymentEdit" class="paymentEdit" min="0.00" max="9999999999.99" step="0.01" placeholder="<?= TEXT_PAYMENT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['payment']) ? $visitInfo['payment'] : "0.00") ?>" />
+                                <input type="number" name="payment" id="PaymentEdit" class="paymentEdit" min="0" max="9999999999.99" step="1" placeholder="<?= TEXT_PAYMENT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['payment']) ? $visitInfo['payment'] : "") ?>" />
                                 <?= TEXT_PAYMENT_CURRENCY ?>
                             </p>
                         </div>

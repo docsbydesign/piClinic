@@ -271,7 +271,7 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 						</div>
                         <div class="dataBlock bottomSpace">
                             <p><label class="close"><?= TEXT_PAYMENT_LABEL ?>:</label>
-                                <input type="number" name="payment" id="PaymentEdit" class="paymentEdit" min="0.00" max="9999999999.99" step="0.01" placeholder="<?= TEXT_PAYMENT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['payment']) ? $visitInfo['payment'] : "0.00") ?>" />
+                                <input type="number" name="payment" id="PaymentEdit" class="paymentEdit" min="0" max="9999999999" step="1" placeholder="<?= TEXT_PAYMENT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['payment']) ? $visitInfo['payment'] : "") ?>" />
                                 <?= TEXT_PAYMENT_CURRENCY ?>
                             </p>
                         </div>
