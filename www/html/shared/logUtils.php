@@ -310,7 +310,9 @@ function logGetCurrentWorkflowID() {
     assert (!empty($_SESSION), "ERROR: Session array is not initialized.");
     // the current one is the last one in the array
     if (!empty($_SESSION[WORKFLOW_SESSION_ARRAY])) {
-        return ($_SESSION[WORKFLOW_SESSION_ARRAY][count($_SESSION[WORKFLOW_SESSION_ARRAY])-1]);
+        if (isset($_SESSION[WORKFLOW_SESSION_ARRAY][count($_SESSION[WORKFLOW_SESSION_ARRAY]) - 1])) {
+            return ($_SESSION[WORKFLOW_SESSION_ARRAY][count($_SESSION[WORKFLOW_SESSION_ARRAY]) - 1]);
+        }
     }
     // no workflow is active
     return null;
