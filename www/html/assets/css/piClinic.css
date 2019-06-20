@@ -251,6 +251,8 @@ table.piClinicList th {
 }
 table.piClinicList th.nowrap {
 	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 table.piClinicList td.notToday {
@@ -289,6 +291,8 @@ table.piClinicList  td.center {
 }
 table.piClinicList td.nowrap {
 	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 table.piClinicList td.bold {
 	font-weight: bold;
@@ -597,6 +601,8 @@ table.report th.left {
 
 table.report th.nowrap {
 	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 table.report td {
@@ -642,6 +648,8 @@ table.report td.center {
 
 table.report td.nowrap {
 	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 table.report tr.ata {

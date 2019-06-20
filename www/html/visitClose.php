@@ -271,6 +271,27 @@ function writeOptionsMenu ($visitInfo) {
                             </div>
 						</div>
 					</div>
+                    <div class="infoBlock">
+                        <h2><?= TEXT_VISIT_PRECLINIC_HEADING ?></h2>
+                        <table class="piClinicList">
+                            <tr>
+                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_HEIGHT_LABEL ?></label></th>
+                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_WEIGHT_LABEL ?></label></th>
+                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_TEMP_LABEL ?></label></th>
+                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_BP_LABEL ?></label></th>
+                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_PULSE_LABEL ?></label></th>
+                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_BS_LABEL ?></label></th>
+                            </tr>
+                            <tr>
+                                <td class="sixCol"><?= (!empty($visitInfo['height']) ? $visitInfo['height'].'&nbsp;'.$visitInfo['heightUnits'] : '&nbsp;') ?></td>
+                                <td class="sixCol"><?= (!empty($visitInfo['weight']) ? $visitInfo['weight'].'&nbsp;'.$visitInfo['weightUnits'] : '&nbsp;') ?></td>
+                                <td class="sixCol"><?= (!empty($visitInfo['temp']) ? $visitInfo['temp'].'&deg;&nbsp;'.$visitInfo['tempUnits'] : '&nbsp;') ?></td>
+                                <td class="sixCol"><?= (!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpSystolic'] : '&nbsp;').'/'.(!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpDiastolic'] : '&nbsp;') ?></td>
+                                <td class="sixCol"><?= (!empty($visitInfo['pulse']) ? $visitInfo['pulse'] : '&nbsp;') ?></td>
+                                <td class="sixCol"><?= (!empty($visitInfo['glucose']) ? $visitInfo['glucoseUnits'].': '.$visitInfo['glucose'] : '&nbsp;') ?></td>
+                            </tr>
+                        </table>
+                    </div>
 					<div class="infoBlock">
 						<h2><?= TEXT_VISIT_DISCHARGE_HEADING ?></h2>
 						<div class="indent1">

@@ -140,6 +140,29 @@ if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
 	$visitInfo = $visitRecord['data'];	
 }
 
+// get the clinic info
+$clinicQueryString = "SELECT * FROM `thisClinicGet` WHERE 1;";
+$clinicRecord = getDbRecords($dbLink, $clinicQueryString);
+$clinicInfo = NULL;
+if ($clinicRecord['httpResponse'] != 200) {
+    // unable to get info on this clinic
+    if (API_DEBUG_MODE) {
+        $debugErrorInfo .= '<div id="Debug" class="noshow"';
+        $debugErrorInfo .= '<pre>'.json_encode($clinicInfo, JSON_PRETTY_PRINT).'</pre>';
+        $debugErrorInfo .= '</div>';
+    }
+    // keep null info and let the display logic below do the right thing
+} else {
+    if ($clinicRecord['count'] == 1) {
+        // there's only one so make it an array element
+        // so the rest of the code works
+        $clinicInfo = $clinicRecord['data'];
+    } else {
+        // somehow more than one clinic was returned so take the first one.
+        $clinicInfo = $clinicRecord['data'][0];
+    }
+}
+
 function writeTopicMenu ($sessionInfo) {
 	$topicMenu = '<div id="topicMenuDiv" class="noprint">'."\n";
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";
@@ -161,6 +184,7 @@ function writeTopicMenu ($sessionInfo) {
 	<div class="pageBody portraitReport<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
         <?= writeTopicMenu($sessionInfo) ?>
         <!-- <div class="logoBlock printOnly"><p>Logo Here</p></div> -->
+        <div class="logoBlock"><p><?= (!empty($clinicInfo['shortName']) ? $clinicInfo['shortName'].' ' : "") ?><?= TEXT_CLINIC_VISIT_HEADING ?></p></div>
         <div class="infoBlock <?= $visitInfo['visitStatus'] == 'Open' ? ' hideDiv' : '' ?>">
             <h2><?= TEXT_REPRINT_HEADING ?></h2>
         </div>
@@ -260,7 +284,6 @@ function writeTopicMenu ($sessionInfo) {
                 <label><?= TEXT_VISIT_LIST_HEAD_COMPLAINT ?>:</label>
                 <?= (!empty($visitInfo['referredFrom']) ? '<p class="indent1"><label class="close">'.TEXT_REFERRED_FROM_LABEL.':</label>'.$visitInfo['referredFrom'].'</p>' : '') ?>
                 <?= (!empty($visitInfo['primaryComplaint']) ? '<p class="indent1">'.$visitInfo['primaryComplaint'].'</p>' : '') ?>
-                <?= (!empty($visitInfo['secondaryComplaint']) ? '<p class="indent1">'.$visitInfo['secondaryComplaint'].'</p>' : '') ?>
             </div>
             <div class="hrDiv"></div>
             <div class="infoBlock<?= $visitInfo['visitStatus'] == 'Closed' ? ' hideDiv' : '' ?>">
@@ -285,9 +308,14 @@ function writeTopicMenu ($sessionInfo) {
                     </table>
                     <div class="hrDiv"></div>
                 </div>
+                <div class="infoBlock threeCm">
+                    <label><?= TEXT_VISIT_LIST_HEAD_NOTES ?>:</label>
+                    <?= (!empty($visitInfo['secondaryComplaint']) ? '<p class="indent1">'.$visitInfo['secondaryComplaint'].'</p>' : '') ?>
+                </div>
                 <div class="infoBlock fiveCm">
                     <label><?= TEXT_EXAM_NOTES_LABEL ?>:</label>
                 </div>
+                <div class="clearFloat"></div>
                 <div class="infoBlock">
                     <div class="hrDiv"></div>
                     <table class="fullPortrait">
@@ -307,10 +335,12 @@ function writeTopicMenu ($sessionInfo) {
                     </table>
                     <div class="hrDiv"></div>
                 </div>
-                <div class="infoBlock fiveCm">
-                    <label><?= TEXT_ASSESSMENT_NOTES_LABEL ?>:</label>
-                </div>
             </div>
+            <div class="clearFloat"></div>
+            <div class="infoBlock fiveCm">
+                <label><?= TEXT_ASSESSMENT_NOTES_LABEL ?>:</label>
+            </div>
+            <div class="clearFloat"></div>
             <div class="infoBlock<?= $visitInfo['visitStatus'] == 'Open' ? ' hideDiv' : '' ?>">
                 <table class="fullPortrait">
                     <tr>
@@ -328,5 +358,6 @@ function writeTopicMenu ($sessionInfo) {
         </div>
         <div class="clearFloat"></div>
     </div>
+    <? (!empty($debugErrorInfo) ? $debugErrorInfo : "") ?>
 </body>
 <?php @mysqli_close($dbLink); ?>

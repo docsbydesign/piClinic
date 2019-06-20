@@ -71,6 +71,7 @@ TEXT_CLINIC_HISTORY_ID_LABEL,Family ID,Número de historia clínica
 TEXT_CLINIC_HOME,Dashboard,Página principal
 TEXT_CLINIC_LOGIN_PAGE_TITLE,Clinic login,Iniciar sesión
 TEXT_CLINIC_REPORTS,Reports,Informes
+TEXT_CLINIC_VISIT_HEADING,Patient Visit Chart,Historia Clínica
 TEXT_CLINIC_VISIT_RETURN,Return to Visit Info,Volver a la información de la visita
 TEXT_CLINIC_VISIT_RETURN_LINK,Return,Volver
 TEXT_CLOSE_VISIT,Discharge this patient,Dar de alta este paciente
@@ -827,6 +828,7 @@ TEXT_VISIT_LIST_HEAD_DIAGNOSIS1,Diagnosis 1,Diagnóstico 1
 TEXT_VISIT_LIST_HEAD_DIAGNOSIS2,Diagnosis 2,Diagnóstico 2
 TEXT_VISIT_LIST_HEAD_DOCTOR,Doctor,Médico
 TEXT_VISIT_LIST_HEAD_NAME,Name,Nombre
+TEXT_VISIT_LIST_HEAD_NOTES,Additional visit notes,Notas adicionales de la visita
 TEXT_VISIT_LIST_HEAD_TIME,Arrived,Llegó
 TEXT_VISIT_LIST_MISSING,(missing),(no especificado)
 TEXT_VISIT_LOG_PAGE_TITLE,Visit log entry,Entrar datos del ATA
