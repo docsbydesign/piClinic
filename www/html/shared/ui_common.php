@@ -318,7 +318,8 @@ function dateDiffYMD ($earlyDateArg, $lateDateArg) {
 }
 
 function formatAgeFromBirthdate ($birthdate, $today=null, $yrText='y', $moText='m', $dyText='d', $parens=true) {
-	if (empty($today)) {
+
+    if (empty($today)) {
 		$today = time();
 	}
 
@@ -329,22 +330,26 @@ function formatAgeFromBirthdate ($birthdate, $today=null, $yrText='y', $moText='
 	    $rParen = ')';
     }
 
-	// formats the birthdate display based on specified date					
-	$ageYMD = dateDiffYMD (strtotime($birthdate), $today);
-	if (!empty($ageYMD)) {
-        if ($ageYMD['years'] >= 1) {
-            return ($lParen.$ageYMD['years'].$yrText.$rParen);
+    if (!empty($birthdate)) {
+        // formats the birthdate display based on specified date
+        $ageYMD = dateDiffYMD(strtotime($birthdate), $today);
+        if (!empty($ageYMD)) {
+            if ($ageYMD['years'] >= 1) {
+                return ($lParen . $ageYMD['years'] . $yrText . $rParen);
+            }
+            if ($ageYMD['months'] >= 1) {
+                return ($lParen . $ageYMD['months'] . $moText . $rParen);
+            }
+            if ($ageYMD['days'] > 0) {
+                return ($lParen . $ageYMD['days'] . $dyText . $rParen);
+            }
+            // else return a blank string
+            return '';
+        } else {
+            return '';
         }
-        if ($ageYMD['months'] >= 1) {
-            return ($lParen.$ageYMD['months'].$moText.$rParen);
-        }
-        if ($ageYMD['days'] > 0) {
-            return ($lParen.$ageYMD['days'].$dyText.$rParen);
-        }
-        // else return a blank string
-        return '';
     } else {
-        return '';
+        return "";
     }
 }
 
@@ -427,7 +432,7 @@ function formatDbDate ($dateValue, $dateFormatString, $emptyDateString) {
      * $date value = SQL date string (YYYY-MM-DD HH:MM:SS)
      * $dateFormatSrring = PHP date format string
      */
-    if (! empty($dateValue) && $dateValue != '0000-00-00 00:00:00') {
+    if (!empty($dateValue) && $dateValue != '0000-00-00 00:00:00') {
         return date($dateFormatString, strtotime($dateValue));
     } else {
         return $emptyDateString;

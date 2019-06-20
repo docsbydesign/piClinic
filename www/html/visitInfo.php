@@ -219,41 +219,49 @@ function writeTopicMenu ($sessionInfo) {
 	<div id="PatientVisitView" class="<?= (empty($visitRecord) ? 'hideDiv' : '') ?>">
 		<div id="PatientVisitDataView">
 			<div id="PatientVisitDetails">
-				<h2><?= TEXT_VISIT_VISIT_HEADING ?></h2>
-				<div class="indent1">
-					<p><label class="close"><?= TEXT_FIRST_VISIT_LABEL ?>:</label>
-							<?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'YES') ? TEXT_FIRST_VISIT_TEXT : "" ) ?>
-							<?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'NO') ? TEXT_RETURN_VISIT_TEXT : "" ) ?>
-					</p>
-					</div>
-					<div <?= ($visitInfo['visitStatus'] == 'Open' ? 'class="currentVisitList"' : '') ?>>
-						<p><label class="close"><?= TEXT_VISIT_STATUS_LABEL ?>:</label>&nbsp;<?= ($visitInfo['visitStatus'] == 'Open' ? TEXT_VISIT_STATUS_OPEN : ($visitInfo['visitStatus'] == 'Closed' ? TEXT_VISIT_STATUS_CLOSED : $visitInfo['visitStatus'] )) ?></p>
-					</div>
-				</div>
-				<div class="clearFloat"></div>
-				<div class="infoBlock">
-					<h2><?= TEXT_VISIT_ARRIVAL_HEADING ?></h2>
-					<div class="indent1">
-						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_DATE_TIME_IN_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?>
-							&nbsp;&nbsp;&nbsp;<label class="close"><?= TEXT_VISIT_TYPE_LABEL ?>:</label>&nbsp;<?= showVisitTypeString($visitInfo['visitType'], $visitTypes) ?></p>
-						</div>
-						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_REFERRED_FROM_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['referredFrom']) ? $visitInfo['referredFrom'] : '<span class="inactive">'.TEXT_REFERRAL_BLANK.'</span>') ?></p>
-						</div>
-						<div class="dataBlock">							
-							<p><label class="close"><?= TEXT_COMPLAINT_PRIMARY_LABEL ?>:</label>&nbsp;<?= (isset($visitInfo['primaryComplaint']) ? $visitInfo['primaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
-						</div>
-                        <div class="dataBlock">
-                            <p><label class="close"><?= TEXT_PAYMENT_LABEL ?>:</label>
-                                <?= (!empty($visitInfo['payment']) ? $visitInfo['payment'] : '<span class="inactive">0</span>' ) ?>&nbsp;<?= TEXT_PAYMENT_CURRENCY ?>
-                            </p>
+                <div class="infoBlock">
+                    <h2><?= TEXT_VISIT_VISIT_HEADING ?></h2>
+                    <div class="indent1">
+                        <p><label class="close"><?= TEXT_FIRST_VISIT_LABEL ?>:</label>
+                                <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'YES') ? TEXT_FIRST_VISIT_TEXT : "" ) ?>
+                                <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'NO') ? TEXT_RETURN_VISIT_TEXT : "" ) ?>
+                        </p>
+                        <div <?= ($visitInfo['visitStatus'] == 'Open' ? 'class="currentVisitList"' : '') ?>>
+                            <p><label class="close"><?= TEXT_VISIT_STATUS_LABEL ?>:</label>&nbsp;<?= ($visitInfo['visitStatus'] == 'Open' ? TEXT_VISIT_STATUS_OPEN : ($visitInfo['visitStatus'] == 'Closed' ? TEXT_VISIT_STATUS_CLOSED : $visitInfo['visitStatus'] )) ?></p>
                         </div>
-						<div class="dataBlock">
-							<p><label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['staffName']) ? $visitInfo['staffName'] : '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>') ?></p>
-						</div>
-					</div>
-				</div>
+                    </div>
+                </div>
+                <div class="clearFloat"></div>
+                <div class="infoBlock">
+    				<div class="clearFloat"></div>
+                    <div class="infoBlock">
+                        <h2><?= TEXT_VISIT_ARRIVAL_HEADING ?></h2>
+                        <div class="indent1">
+                            <div class="dataBlock">
+                                <p><label class="close"><?= TEXT_DATE_TIME_IN_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?>
+                                &nbsp;&nbsp;&nbsp;<label class="close"><?= TEXT_VISIT_TYPE_LABEL ?>:</label>&nbsp;<?= showVisitTypeString($visitInfo['visitType'], $visitTypes) ?></p>
+                            </div>
+                            <div class="dataBlock">
+                                <p><label class="close"><?= TEXT_REFERRED_FROM_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['referredFrom']) ? $visitInfo['referredFrom'] : '<span class="inactive">'.TEXT_REFERRAL_BLANK.'</span>') ?></p>
+                            </div>
+                            <div class="dataBlock">
+                                <p><label class="close"><?= TEXT_COMPLAINT_PRIMARY_LABEL ?>:</label>&nbsp;<?= (isset($visitInfo['primaryComplaint']) ? $visitInfo['primaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
+                            </div>
+                            <div class="dataBlock">
+                                <p><label class="close"><?= TEXT_PAYMENT_LABEL ?>:</label>
+                                    <?= (!empty($visitInfo['payment']) ? $visitInfo['payment'] : '<span class="inactive">0</span>' ) ?>&nbsp;<?= TEXT_PAYMENT_CURRENCY ?>
+                                </p>
+                            </div>
+                            <div class="dataBlock">
+                                <p><label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['staffName']) ? $visitInfo['staffName'] : '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>') ?></p>
+                            </div>
+                        </div>
+                        <h2><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?></h2>
+                        <div class="indent1">
+                            <p><?= (isset($visitInfo['secondaryComplaint']) ? $visitInfo['secondaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
+                        </div>
+                    </div>
+                </div>
                 <div class="infoBlock">
                     <h2><?= TEXT_VISIT_PRECLINIC_HEADING ?></h2>
                     <div class="indent1">
@@ -276,14 +284,6 @@ function writeTopicMenu ($sessionInfo) {
                             </tr>
                         </table>
                     </div>
-                </div>
-                <div class="infoBlock">
-                    <h2><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?></h2>
-                    <div class="indent1">
-                        <p><?= (isset($visitInfo['secondaryComplaint']) ? $visitInfo['secondaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
-                    </div>
-                </div>
-                <div class="infoBlock">
 					<h2><?= TEXT_VISIT_DISCHARGE_HEADING ?></h2>
 					<div class="indent1">
 						<div class="dataBlock">

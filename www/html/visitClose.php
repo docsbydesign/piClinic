@@ -235,9 +235,6 @@ function writeOptionsMenu ($visitInfo) {
 							<div class="dataBlock">
 								<p><label class="close"><?= TEXT_COMPLAINT_PRIMARY_LABEL ?>:</label>&nbsp;<?= $visitInfo['primaryComplaint'] ?></p>
 							</div>
-							<div class="dataBlock">
-								<p><label class="close"><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?>:</label>&nbsp;<?= $visitInfo['secondaryComplaint'] ?></p>
-							</div>
                             <div class="dataBlock bottomSpace">
                                 <p><label class="close"><?= TEXT_PAYMENT_LABEL ?>:</label>
                                     <input type="number" name="payment" id="PaymentEdit" class="paymentEdit" min="0" max="9999999999.99" step="1" placeholder="<?= TEXT_PAYMENT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['payment']) ? $visitInfo['payment'] : "") ?>" />
@@ -270,6 +267,10 @@ function writeOptionsMenu ($visitInfo) {
                                 </p>
                             </div>
 						</div>
+                        <h2><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?></h2>
+                        <div class="dataBlock">
+                            <p><?= $visitInfo['secondaryComplaint'] ?></p>
+                        </div>
 					</div>
                     <div class="infoBlock">
                         <h2><?= TEXT_VISIT_PRECLINIC_HEADING ?></h2>

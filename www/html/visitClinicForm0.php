@@ -312,9 +312,6 @@ function writeTopicMenu ($sessionInfo) {
                     <label><?= TEXT_VISIT_LIST_HEAD_NOTES ?>:</label>
                     <?= (!empty($visitInfo['secondaryComplaint']) ? '<p class="indent1">'.$visitInfo['secondaryComplaint'].'</p>' : '') ?>
                 </div>
-                <div class="infoBlock fiveCm">
-                    <label><?= TEXT_EXAM_NOTES_LABEL ?>:</label>
-                </div>
                 <div class="clearFloat"></div>
                 <div class="infoBlock">
                     <div class="hrDiv"></div>

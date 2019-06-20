@@ -277,18 +277,13 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 							<textarea name="primaryComplaint" id="ComplaintPrimaryEdit" class="complaintEdit" placeholder="<?= TEXT_COMPLAINT_PRIMARY_PLACEHOLDER ?>" maxlength="2048"><?=  $visitInfo['primaryComplaint'] ?></textarea>
 							</p>
 						</div>
-						<div class="dataBlock">
-							<p><label><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?>:</label><br>
-							<textarea name="secondaryComplaint" id="ComplaintAdditionalEdit" class="complaintEdit" placeholder="<?= TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER ?>" maxlength="2048"><?=  $visitInfo['secondaryComplaint'] ?></textarea>
-							</p>
-						</div>
                         <div class="dataBlock bottomSpace">
                             <p><label class="close"><?= TEXT_PAYMENT_LABEL ?>:</label>
                                 <input type="number" name="payment" id="PaymentEdit" class="paymentEdit" min="0" max="9999999999" step="1" placeholder="<?= TEXT_PAYMENT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['payment']) ? $visitInfo['payment'] : "") ?>" />
                                 <?= TEXT_PAYMENT_CURRENCY ?>
                             </p>
                         </div>
-						<div class="dataBlock">
+						<div class="dataBlock bottomSpace">
 							<p><label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label> &nbsp;
 								<select id="StaffUsernameField" name="staffUsername" class="requiredField">
 									<option value="" <?= (empty($visitInfo['staffUsername']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_STAFF_OPTION_VISIT ?></option>
@@ -313,7 +308,13 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 								</select>
 							</p>
 						</div>
-					</div>
+                    </div>
+                    <h2><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?></h2>
+                    <div class="indent1">
+                        <p>
+                            <textarea name="secondaryComplaint" id="ComplaintAdditionalEdit" class="complaintEdit" placeholder="<?= TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER ?>" maxlength="2048"><?=  $visitInfo['secondaryComplaint'] ?></textarea>
+                        </p>
+                    </div>
 				</div>
                 <div class="infoBlock">
                     <h2><?= TEXT_VISIT_PRECLINIC_HEADING ?></h2>

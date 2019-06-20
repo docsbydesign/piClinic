@@ -147,6 +147,17 @@ $visitInfo['clinicPatientID'] = $patientInfo['clinicPatientID']; // copied from 
 // `PatientHomeCity` varchar(255)  created in POST
 // `PatientHomeCounty` varchar(255)  created in POST
 // `PatientHomeState` varchar(255)  created in POST
+// $visitInfo['height'] default NULL
+$visitInfo['heightUnits'] = VISIT_DEFAULT_HEIGHT_UNITS;
+// $visitInfo['weight'] default NULL
+$visitInfo['weightUnits']  = VISIT_DEFAULT_WEIGHT_UNITS;
+// $visitInfo['temp']  default NULL
+$visitInfo['tempUnits'] = VISIT_DEFAULT_TEMP_UNITS;
+// $visitInfo['bpSystolic'] default NULL
+// $visitInfo['bpDiastolic']  default NULL
+// $visitInfo['pulse'] default NULL
+// $visitInfo['glucose']  default NULL
+$visitInfo['glucoseUnits'] = '';
 // `Diagnosis1` Default value used in create 
 // `Condition1` Default value used in create 
 // `Diagnosis2` Default value used in create 
@@ -156,6 +167,7 @@ $visitInfo['clinicPatientID'] = $patientInfo['clinicPatientID']; // copied from 
 // `ReferredTo` Default value used in create 
 $visitInfo['referredFrom'] = (isset($requestData['referredFrom']) ? $requestData['referredFrom'] : NULL); 
 // at this point, $visitInfo should have one patient visit record ready to edit
+
 function writeTopicMenu ($cancel) {
 	$topicMenu = '<div id="topicMenuDiv">'."\n";
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";
@@ -177,7 +189,7 @@ function writeTopicMenu ($cancel) {
 		<div class="infoBlock">
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($patientInfo) ?>
 				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$patientInfo['sex'].')' ?></span></h1>
-			<p><?= formatDbDate ($visitInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED ) ?>&nbsp;(<?php echo date_diff(date_create($patientInfo['birthDate']), date_create('now'))->y; ?>)&nbsp;&nbsp;&nbsp;
+			<p><?= (!empty ($patientInfo['birthDate']) ? formatDbDate ($patientInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED ) : "") ?>&nbsp;<?= formatAgeFromBirthdate ($patientInfo['birthDate'], null, TEXT_YMD_AGE_YEARS, TEXT_YMD_AGE_MONTHS,TEXT_YMD_AGE_DAYS,true) ?>
 			<span class="a_ptInfo idInHeading"><a href="/ptInfo.php?clinicPatientID=<?= $patientInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
 		</div>
 		<div class="infoBlock">
@@ -259,6 +271,12 @@ function writeTopicMenu ($cancel) {
                                 <?= TEXT_PAYMENT_CURRENCY ?>
                             </p>
                         </div>
+                    </div>
+                </div>
+                <div class="clearFloat"></div>
+                <div class="infoBlock">
+                    <h2><?= TEXT_VISIT_PRECLINIC_HEADING ?></h2>
+                    <div class="indent1">
                         <div class="dataBlock">
                             <p><label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label> &nbsp;
                                 <select id="StaffUsernameField" name="staffUsername" class="requiredField">
@@ -284,6 +302,68 @@ function writeTopicMenu ($cancel) {
                                 </select>
                             </p>
                         </div>
+                        <table class="piClinicList">
+                            <tr>
+                                <th><label><?= TEXT_VISIT_FORM_HEIGHT_LABEL ?></label></th>
+                                <th><label><?= TEXT_VISIT_FORM_WEIGHT_LABEL ?></label></th>
+                                <th><label><?= TEXT_VISIT_FORM_TEMP_LABEL ?></label></th>
+                                <th><label><?= TEXT_VISIT_FORM_BP_LABEL ?></label></th>
+                                <th><label><?= TEXT_VISIT_FORM_PULSE_LABEL ?></label></th>
+                                <th><label><?= TEXT_VISIT_FORM_BS_LABEL ?></label></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        <input type="number" name="height" id="HeightEdit" class="vsEdit" min="0" max="999" step="0.1" placeholder="<?= TEXT_HEIGHT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['height']) ? $visitInfo['height'] : "") ?>" />&nbsp;
+                                        <select id="HeightUnitsSelect" name="heightUnits">
+                                            <option value="in" <?= ($visitInfo['heightUnits'] == 'in' ? "selected" : "" ) ?>><?= TEXT_HEIGHT_UNITS_IN ?></option>
+                                            <option value="cm" <?= ($visitInfo['heightUnits'] == 'cm' ? "selected" : "" ) ?>><?= TEXT_HEIGHT_UNITS_CM ?></option>
+                                            <option value="mm" <?= ($visitInfo['heightUnits'] == 'mm' ? "selected" : "" ) ?>><?= TEXT_HEIGHT_UNITS_MM ?></option>
+                                        </select>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <input type="number" name="weight" id="WeightEdit" class="vsEdit" min="0" max="999" step="0.1" placeholder="<?= TEXT_WEIGHT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['weight']) ? $visitInfo['weight'] : "") ?>" />&nbsp;
+                                        <select id="WeightUnitsSelect" name="weightUnits">
+                                            <option value="kg" <?= ($visitInfo['weightUnits'] == 'kg' ? "selected" : "" ) ?>><?= TEXT_WEIGHT_UNITS_KG ?></option>
+                                            <option value="kg" <?= ($visitInfo['weightUnits'] == 'lbs' ? "selected" : "" ) ?>><?= TEXT_WEIGHT_UNITS_LBS ?></option>
+                                        </select>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <input type="number" name="temp" id="TempEdit" class="vsEdit" min="0" max="999" step="0.1" placeholder="<?= TEXT_TEMP_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['temp']) ? $visitInfo['temp'] : "") ?>" />&deg;&nbsp;
+                                        <select id="TempUnitsSelect" name="tempUnits">
+                                            <option value="C" <?= ($visitInfo['tempUnits'] == 'C' ? "selected" : "" ) ?>><?= TEXT_TEMP_UNITS_C ?></option>
+                                            <option value="F" <?= ($visitInfo['tempUnits'] == 'F' ? "selected" : "" ) ?>><?= TEXT_TEMP_UNITS_F ?></option>
+                                        </select>
+                                    </p>
+                                </td>
+                                </td>
+                                <td>
+                                    <p>
+                                        <input type="number" name="bpSystolic" id="bpSystolicEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_BP_SYS_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['bpSystolic']) ? $visitInfo['bpSystolic'] : "") ?>" />&nbsp;/&nbsp;
+                                        <input type="number" name="bpDiastolic" id="bpDiastolicEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_BP_DIA_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpDiastolic'] : "") ?>" />
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <input type="number" name="pulse" id="PulseEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_PULSE_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['pulse']) ? $visitInfo['pulse'] : "") ?>" />
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <select id="GlucoseUnitsSelect" name="glucoseUnits">
+                                            <option value="" <?= (empty($visitInfo['glucoseUnits']) ? "selected" : "" ) ?>><?= TEXT_SELECT_GLUCOSE_UNITS ?></option>
+                                            <option value="RBS" <?= ($visitInfo['glucoseUnits'] == 'RBS' ? "selected" : "" ) ?>><?= TEXT_GLUCOSE_UNITS_RBS ?></option>
+                                            <option value="FBS" <?= ($visitInfo['glucoseUnits'] == 'FBS' ? "selected" : "" ) ?>><?= TEXT_GLUCOSE_UNITS_FBS ?></option>
+                                        </select>&nbsp;
+                                        <input type="number" name="glucose" id="GlucoseEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_GLUCOSE_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['glucose']) ? $visitInfo['glucose'] : "") ?>" />
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
                 <div class="clearFloat"></div>
