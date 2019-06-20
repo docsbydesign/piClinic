@@ -53,6 +53,8 @@ TEXT_BLANK_STAFF_OPTION_VISIT,(Select the health professional),(Escoge el profes
 TEXT_BLANK_VISIT_OPTION,(Select the visit type),(Escoge el tipo de la atención)
 TEXT_BLANK_VISIT_OPTION_VISIT,(Select the visit type),(Escoge el tipo de la atención)
 TEXT_BLOODTYPE_LABEL,Blood Type,Tipo de Sangre
+TEXT_BP_DIA_PLACEHOLDER,Diastolic pressure,Diástole pressure
+TEXT_BP_SYS_PLACEHOLDER,Systolic pressure,Sístole pressure
 TEXT_CANCEL_EDIT,Cancel,Cancelar
 TEXT_CANCEL_NEW_VISIT,Cancel,Cancelar
 TEXT_CANCEL_SEARCH,Cancel,Cancelar
@@ -196,6 +198,9 @@ TEXT_GE_5YR_LT_10YR_N,4 to 9 years-1st visit,5-9 años 1a. vez
 TEXT_GE_5YR_LT_10YR_S,4 to 9 years-subsequent,5-9 años subsiguiente
 TEXT_GE_60YR_N,60+ years-1st visit,60+ años 1a. vez
 TEXT_GE_60YR_S,60+ years-subsequent,60+ años subsiguiente
+TEXT_GLUCOSE_PLACEHOLDER,Glucose,Glucosa
+TEXT_GLUCOSE_UNITS_FBS,Fasting,Ayuno
+TEXT_GLUCOSE_UNITS_RBS,Random,Aleatoria
 TEXT_GROUP_ALL,All,Todos
 TEXT_GROUP_LABEL,Medical professional name,Nombre de profesional médico
 TEXT_HEADING_CONCEPT,Concept,Concepto
@@ -208,6 +213,10 @@ TEXT_HEADING_NURSE_PRO,Profesional,Profesional
 TEXT_HEADING_PROFESSIONAL_NAME,Name,Nombre
 TEXT_HEADING_PROFESSIONAL_TYPE,Type of health professional,Tipo de profesional de salud
 TEXT_HEADING_TOTAL,TOTAL,TOTAL
+TEXT_HEIGHT_PLACEHOLDER,Height,Estatura
+TEXT_HEIGHT_UNITS_CM,cm,cm
+TEXT_HEIGHT_UNITS_IN,in,in
+TEXT_HEIGHT_UNITS_MM,mm,mm
 TEXT_HELP_CANCEL,Cancel,Cancelar
 TEXT_HELP_EDIT_CANCEL,Cancel,Cancelar
 TEXT_HELP_ICD,ICD-10 reference documents,Referencias del código CIE-10
@@ -532,6 +541,7 @@ TEXT_PT_FEMALE,Patients (Women),Atención a mujeres
 TEXT_PT_MALE,Patients (Men),Atención a hombres
 TEXT_PT_REFERRED_IN,Referred patients,Consultas remitidas
 TEXT_PT_WALK_IN,Outpatients,Consultas espontáneas
+TEXT_PULSE_PLACEHOLDER,Pulse,Pulso
 TEXT_RECEIVED_FROM_LABEL,Received from,Recibida de
 TEXT_REFERRAL_BLANK,(Not specified),(No especificada)
 TEXT_REFERRAL_HEADING,Referral info,Remisión
@@ -691,6 +701,7 @@ TEXT_RPT_MONTH_11,November,Noviembre
 TEXT_RPT_MONTH_12,December,Diciembre
 TEXT_SEARCH_PATIENTS_HEADING,Find patient,Buscar paciente
 TEXT_SEARCH_PATIENT_ID_LABEL,"Patient, Visit, or Family ID","Número del paciente, visita, o familia"
+TEXT_SELECT_GLUCOSE_UNITS,(Type),(Tipo)
 TEXT_SEPARATED_OPTION,Separated,Separado/a
 TEXT_SESSION_LOGOUT_LINK,Logout,Cerrar sesión
 TEXT_SESSION_LOGOUT_LINK_FOR_NAME,Logout session for,Cerrar sesión de
@@ -766,6 +777,9 @@ TEXT_STAFF_USERNAME_LABEL,Username/Password,Usuario/Contraseña
 TEXT_STAFF_USERNAME_PLACEHOLDER,A unique username,Un usuario único
 TEXT_STATE_LABEL,State,Departamento
 TEXT_TABLE_REPORT_DOM_HEADER,Day of month,Día del mes
+TEXT_TEMP_PLACEHOLDER,Temp.,Temp.
+TEXT_TEMP_UNITS_C,C,C
+TEXT_TEMP_UNITS_F,F,F
 TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED,(Not specified),(No especificado)
 TEXT_THOUSANDS_SEPARATOR,",",.
 TEXT_TYPE_LABEL,Service type,Servicio de atención
@@ -794,6 +808,7 @@ TEXT_VISIT_FORM_BP_LABEL,B.P.,P.A.
 TEXT_VISIT_FORM_BS_LABEL,RBS/FBS,RBS/FBS
 TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL,N&nbsp;|&nbsp;S&nbsp;,N&nbsp;|&nbsp;S&nbsp;
 TEXT_VISIT_FORM_HEADING,Patient form images,Imágenes de formularios del paciente
+TEXT_VISIT_FORM_HEIGHT_LABEL,Height,Estatura
 TEXT_VISIT_FORM_HEIGHT_LABEL,Height,Estatura
 TEXT_VISIT_FORM_PULSE_LABEL,Pulse,Pulso
 TEXT_VISIT_FORM_TEMP_LABEL,Temp.,Temp.
@@ -838,6 +853,9 @@ TEXT_VISIT_UNABLE_OPEN_VISIT,Unable to access this visit,No es posible abrir est
 TEXT_VISIT_VISIT_HEADING,Visit,Visita
 TEXT_VISIT_YEAR_FORMAT,Y,Y
 TEXT_VISIT_YEAR_TEXT,y,a
+TEXT_WEIGHT_PLACEHOLDER,Weight,Peso
+TEXT_WEIGHT_UNITS_KG,kg,kg
+TEXT_WEIGHT_UNITS_LBS,lbs,lb
 TEXT_WIDOWED_OPTION,Widowed,Viudo/a
 TEXT_YES_OPTION,Yes,Si
 TEXT_YMD_AGE_DAYS,d,d

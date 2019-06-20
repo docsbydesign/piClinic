@@ -157,11 +157,24 @@ if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
 	$visitInfo['secondaryComplaint'] = '';
 	$visitInfo['visitType'] = '';
 	$visitInfo['visitStatus'] = '';
+    $visitInfo['heightUnits'] = VISIT_DEFAULT_HEIGHT_UNITS;
+    $visitInfo['weightUnits'] = VISIT_DEFAULT_WEIGHT_UNITS;
+    $visitInfo['tempUnits'] = VISIT_DEFAULT_TEMP_UNITS;
     $visitInfo['diagnosis1'] = '';
     $visitInfo['diagnosis2'] = '';
     $visitInfo['diagnosis3'] = '';
 } else {
 	$visitInfo = $visitRecord['data'];
+	// initialize to the default values if empty
+    if (empty('heightUnits')) {
+        $visitInfo['heightUnits'] = VISIT_DEFAULT_HEIGHT_UNITS;
+    }
+    if (empty('weightUnits')) {
+        $visitInfo['weightUnits'] = VISIT_DEFAULT_WEIGHT_UNITS;
+    }
+    if (empty('tempUnits')) {
+        $visitInfo['tempUnits'] = VISIT_DEFAULT_TEMP_UNITS;
+    }
 }
 // at this point, $visitInfo should have one patient visit record ready to edit.
 
@@ -302,6 +315,73 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 						</div>
 					</div>
 				</div>
+                <div class="infoBlock">
+                    <h2><?= TEXT_VISIT_PRECLINIC_HEADING ?></h2>
+                    <div class="indent1">
+                        <table class="piClinicList">
+                            <tr>
+                                <th><label><?= TEXT_VISIT_FORM_HEIGHT_LABEL ?></label></th>
+                                <th><label><?= TEXT_VISIT_FORM_WEIGHT_LABEL ?></label></th>
+                                <th><label><?= TEXT_VISIT_FORM_TEMP_LABEL ?></label></th>
+                                <th><label><?= TEXT_VISIT_FORM_BP_LABEL ?></label></th>
+                                <th><label><?= TEXT_VISIT_FORM_PULSE_LABEL ?></label></th>
+                                <th><label><?= TEXT_VISIT_FORM_BS_LABEL ?></label></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        <input type="number" name="height" id="HeightEdit" class="vsEdit" min="0" max="999" step="0.1" placeholder="<?= TEXT_HEIGHT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['height']) ? $visitInfo['height'] : "") ?>" />&nbsp;
+                                        <select id="HeightUnitsSelect" name="heightUnits">
+                                            <option value="in" <?= ($visitInfo['heightUnits'] == 'in' ? "selected" : "" ) ?>><?= TEXT_HEIGHT_UNITS_IN ?></option>
+                                            <option value="cm" <?= ($visitInfo['heightUnits'] == 'cm' ? "selected" : "" ) ?>><?= TEXT_HEIGHT_UNITS_CM ?></option>
+                                            <option value="mm" <?= ($visitInfo['heightUnits'] == 'mm' ? "selected" : "" ) ?>><?= TEXT_HEIGHT_UNITS_MM ?></option>
+                                        </select>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <input type="number" name="weight" id="WeightEdit" class="vsEdit" min="0" max="999" step="0.1" placeholder="<?= TEXT_WEIGHT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['weight']) ? $visitInfo['weight'] : "") ?>" />&nbsp;
+                                        <select id="WeightUnitsSelect" name="weightUnits">
+                                            <option value="kg" <?= ($visitInfo['weightUnits'] == 'kg' ? "selected" : "" ) ?>><?= TEXT_WEIGHT_UNITS_KG ?></option>
+                                            <option value="kg" <?= ($visitInfo['weightUnits'] == 'lbs' ? "selected" : "" ) ?>><?= TEXT_WEIGHT_UNITS_LBS ?></option>
+                                        </select>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <input type="number" name="temp" id="TempEdit" class="vsEdit" min="0" max="999" step="0.1" placeholder="<?= TEXT_TEMP_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['temp']) ? $visitInfo['temp'] : "") ?>" />&deg;&nbsp;
+                                        <select id="TempUnitsSelect" name="tempUnits">
+                                            <option value="C" <?= ($visitInfo['tempUnits'] == 'C' ? "selected" : "" ) ?>><?= TEXT_TEMP_UNITS_C ?></option>
+                                            <option value="F" <?= ($visitInfo['tempUnits'] == 'F' ? "selected" : "" ) ?>><?= TEXT_TEMP_UNITS_F ?></option>
+                                        </select>
+                                    </p>
+                                </td>
+                                </td>
+                                <td>
+                                    <p>
+                                        <input type="number" name="bpSystolic" id="bpSystolicEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_BP_SYS_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['bpSystolic']) ? $visitInfo['bpSystolic'] : "") ?>" />&nbsp;/&nbsp;
+                                        <input type="number" name="bpDiastolic" id="bpDiastolicEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_BP_DIA_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpDiastolic'] : "") ?>" />
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <input type="number" name="pulse" id="PulseEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_PULSE_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['pulse']) ? $visitInfo['pulse'] : "") ?>" />
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <select id="GlucoseUnitsSelect" name="glucoseUnits">
+                                            <option value="" <?= (empty($visitInfo['glucoseUnits']) ? "selected" : "" ) ?>><?= TEXT_SELECT_GLUCOSE_UNITS ?></option>
+                                            <option value="RBS" <?= ($visitInfo['glucoseUnits'] == 'RBS' ? "selected" : "" ) ?>><?= TEXT_GLUCOSE_UNITS_RBS ?></option>
+                                            <option value="FBS" <?= ($visitInfo['glucoseUnits'] == 'FBS' ? "selected" : "" ) ?>><?= TEXT_GLUCOSE_UNITS_FBS ?></option>
+                                        </select>&nbsp;
+                                        <input type="number" name="glucose" id="GlucoseEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_GLUCOSE_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['glucose']) ? $visitInfo['glucose'] : "") ?>" />
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
 				<div class="infoBlock">
 					<h2><?= TEXT_VISIT_DISCHARGE_HEADING ?></h2>
 					<div class="indent1">
