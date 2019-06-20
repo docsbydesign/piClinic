@@ -55,6 +55,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_NO_PATIENT_FOUND')) { define('TEXT_MESSAGE_NO_PATIENT_FOUND','TEXT_MESSAGE_NO_PATIENT_FOUND',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED')) { define('TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED','TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED',false); }
 	if (!defined('TEXT_NEW_VISIT_PAGE_TITLE')) { define('TEXT_NEW_VISIT_PAGE_TITLE','TEXT_NEW_VISIT_PAGE_TITLE',false); }
+	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','TEXT_NOT_SPECIFIED',false); }
 	if (!defined('TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON')) { define('TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON','TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON',false); }
 	if (!defined('TEXT_PAYMENT_CURRENCY')) { define('TEXT_PAYMENT_CURRENCY','TEXT_PAYMENT_CURRENCY',false); }
 	if (!defined('TEXT_PAYMENT_LABEL')) { define('TEXT_PAYMENT_LABEL','TEXT_PAYMENT_LABEL',false); }
@@ -97,6 +98,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_NO_PATIENT_FOUND')) { define('TEXT_MESSAGE_NO_PATIENT_FOUND','Could not find any patients that match.',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED')) { define('TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED','The patient ID was not specified.',false); }
 	if (!defined('TEXT_NEW_VISIT_PAGE_TITLE')) { define('TEXT_NEW_VISIT_PAGE_TITLE','Admit patient',false); }
+	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','Not specified',false); }
 	if (!defined('TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON')) { define('TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON','Admit',false); }
 	if (!defined('TEXT_PAYMENT_CURRENCY')) { define('TEXT_PAYMENT_CURRENCY','HNL',false); }
 	if (!defined('TEXT_PAYMENT_LABEL')) { define('TEXT_PAYMENT_LABEL','Payment',false); }
@@ -139,6 +141,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_NO_PATIENT_FOUND')) { define('TEXT_MESSAGE_NO_PATIENT_FOUND','No se encontró ningún paciente que coincide.',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED')) { define('TEXT_MESSAGE_PATIENT_ID_NOT_SPECIFIED','No estuvo especificado el ID del paciente.',false); }
 	if (!defined('TEXT_NEW_VISIT_PAGE_TITLE')) { define('TEXT_NEW_VISIT_PAGE_TITLE','Abre una visita nueva para el paciente',false); }
+	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
 	if (!defined('TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON')) { define('TEXT_PATIENT_SUBMIT_NEW_PATIENT_VISIT_BUTTON','Abra esta visita',false); }
 	if (!defined('TEXT_PAYMENT_CURRENCY')) { define('TEXT_PAYMENT_CURRENCY','HNL',false); }
 	if (!defined('TEXT_PAYMENT_LABEL')) { define('TEXT_PAYMENT_LABEL','Pago',false); }

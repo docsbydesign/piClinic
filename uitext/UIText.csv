@@ -424,8 +424,8 @@ TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER,The patient\'s clinic ID,El número del pac
 TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON,Add a new patient,Agregar un paciente nuevo
 TEXT_PATIENT_ALLERGY_LIST_HEAD,Known allergies,Alergias conocidas
 TEXT_PATIENT_CANCEL_ADD,Cancel,Cancelar
-TEXT_PATIENT_CLINIC_ID_NOT_VALID,Patient ID is not formatted correctly,Identidad del paciente no es en el formato correcto
 TEXT_PATIENT_CLINIC_ID_NOT_IN_FAMILY_ID,Patient ID doesn\'t match Family ID,Identidad del paciente no es egual al de  la carpeta (familia)
+TEXT_PATIENT_CLINIC_ID_NOT_VALID,Patient ID is not formatted correctly,Identidad del paciente no es en el formato correcto
 TEXT_PATIENT_COUNT_LABEL,Patients seen,Pacientes atendidos
 TEXT_PATIENT_CURRENT_MEDICATIONS_LABEL,Current medications,Medicamentos actuales
 TEXT_PATIENT_CURRENT_MEDICATIONS_PLACEHOLDER,"Enter each medication, one medication and dose per line","Ingrese cada medicamento actual, un medicamento y dosis por línea"
@@ -819,6 +819,7 @@ TEXT_VISIT_MONTH_FORMAT,m,m
 TEXT_VISIT_MONTH_TEXT,m,m
 TEXT_VISIT_NOT_DELETED_TEXT,Valid,Valida
 TEXT_VISIT_PHOTO_HEADING,Patient photos,Fotos del paciente de esta visita
+TEXT_VISIT_PRECLINIC_HEADING,Pre-Clinic,Pre-Clínica
 TEXT_VISIT_STATUS_CLOSED,Discharged,Dado de alta
 TEXT_VISIT_STATUS_LABEL,Status,Estatus
 TEXT_VISIT_STATUS_OPEN,Admitted,Admitido
