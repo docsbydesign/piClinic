@@ -275,12 +275,12 @@ function writeTopicMenu ($sessionInfo) {
                             <th class="sixCol"><label><?= TEXT_VISIT_FORM_BS_LABEL ?></label></th>
                         </tr>
                         <tr>
-                            <td class="sixCol">&nbsp;</td>
-                            <td class="sixCol">&nbsp;</td>
-                            <td class="sixCol">&nbsp;</td>
-                            <td class="sixCol">&nbsp;</td>
-                            <td class="sixCol">&nbsp;</td>
-                            <td class="sixCol">&nbsp;</td>
+                            <td class="sixCol"><?= (!empty($visitInfo['height']) ? $visitInfo['height'].'&nbsp;'.$visitInfo['heightUnits'] : '&nbsp;') ?></td>
+                            <td class="sixCol"><?= (!empty($visitInfo['weight']) ? $visitInfo['weight'].'&nbsp;'.$visitInfo['weightUnits'] : '&nbsp;') ?></td>
+                            <td class="sixCol"><?= (!empty($visitInfo['temp']) ? $visitInfo['temp'].'&deg;&nbsp;'.$visitInfo['tempUnits'] : '&nbsp;') ?></td>
+                            <td class="sixCol"><?= (!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpSystolic'] : '&nbsp;').'/'.(!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpDiastolic'] : '&nbsp;') ?></td>
+                            <td class="sixCol"><?= (!empty($visitInfo['pulse']) ? $visitInfo['pulse'] : '&nbsp;') ?></td>
+                            <td class="sixCol"><?= (!empty($visitInfo['glucose']) ? $visitInfo['glucoseUnits'].': '.$visitInfo['glucose'] : '&nbsp;') ?></td>
                         </tr>
                     </table>
                     <div class="hrDiv"></div>
