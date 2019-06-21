@@ -89,7 +89,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_ADMIN_LOG_VIEWER_TITLE')) { define('TEXT_ADMIN_LOG_VIEWER_TITLE','Mostrar los errores y eventos del sistema',false); }
-	if (!defined('TEXT_BLANK_OPTION_SELECT')) { define('TEXT_BLANK_OPTION_SELECT','Escoge',false); }
+	if (!defined('TEXT_BLANK_OPTION_SELECT')) { define('TEXT_BLANK_OPTION_SELECT','Seleccione',false); }
 	if (!defined('TEXT_LOG_ACTION_FIELD_NAME_SELECT')) { define('TEXT_LOG_ACTION_FIELD_NAME_SELECT','Acción',false); }
 	if (!defined('TEXT_LOG_CLASS_FIELD_NAME_SELECT')) { define('TEXT_LOG_CLASS_FIELD_NAME_SELECT','Clase',false); }
 	if (!defined('TEXT_LOG_DISPLAY_ACTION')) { define('TEXT_LOG_DISPLAY_ACTION','Acción',false); }

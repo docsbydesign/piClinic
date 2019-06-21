@@ -322,8 +322,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_LABEL_NURSE_STU')) { define('TEXT_LABEL_NURSE_STU','Estudiante de enfermeria',false); }
 	if (!defined('TEXT_LABEL_STAFF')) { define('TEXT_LABEL_STAFF','Personal de la clínica',false); }
 	if (!defined('TEXT_MO_DATE_PROMPT_LABEL')) { define('TEXT_MO_DATE_PROMPT_LABEL','Fecha&nbsp;(aaaa-mm)',false); }
-	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
-	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','Escoge un profesional de salud y una fecha.',false); }
+	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificado',false); }
+	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','Seleccione un profesional de salud y una fecha.',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Establecimiento',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CISUAPS_LABEL')) { define('TEXT_REPORT_CLINIC_CISUAPS_LABEL','CIS/UAPS',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CODE_LABEL')) { define('TEXT_REPORT_CLINIC_CODE_LABEL','Código',false); }

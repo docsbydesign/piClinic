@@ -73,11 +73,11 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_CONDITION_BLANK')) { define('TEXT_CONDITION_BLANK','(Ninguno)',false); }
 	if (!defined('TEXT_CONDITION_NEW_REPORT')) { define('TEXT_CONDITION_NEW_REPORT','N',false); }
 	if (!defined('TEXT_CONDITION_NEW_SELECT')) { define('TEXT_CONDITION_NEW_SELECT','Nuevo diagnóstico',false); }
-	if (!defined('TEXT_CONDITION_SELECT')) { define('TEXT_CONDITION_SELECT','(Escoge nuevo o subsiguiente)',false); }
+	if (!defined('TEXT_CONDITION_SELECT')) { define('TEXT_CONDITION_SELECT','(Seleccione nuevo o subsiguiente)',false); }
 	if (!defined('TEXT_CONDITION_SUBSEQUENT_REPORT')) { define('TEXT_CONDITION_SUBSEQUENT_REPORT','S',false); }
 	if (!defined('TEXT_CONDITION_SUBSEQUENT_SELECT')) { define('TEXT_CONDITION_SUBSEQUENT_SELECT','Subsiguiente diagnóstico',false); }
 	if (!defined('TEXT_DIAGNOSIS_LOADING')) { define('TEXT_DIAGNOSIS_LOADING','Cargando...',false); }
-	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
+	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificado',false); }
 	if (!defined('TEXT_VISIT_TYPE_ALL')) { define('TEXT_VISIT_TYPE_ALL','Todos',false); }
 	if (!defined('TEXT_VISIT_TYPE_EMERGENCY')) { define('TEXT_VISIT_TYPE_EMERGENCY','Emergencia',false); }
 	if (!defined('TEXT_VISIT_TYPE_OUTPATIENT')) { define('TEXT_VISIT_TYPE_OUTPATIENT','Consulta externa',false); }

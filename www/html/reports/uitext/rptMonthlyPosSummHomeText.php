@@ -291,8 +291,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_HEADING_TOTAL')) { define('TEXT_HEADING_TOTAL','TOTAL',false); }
 	if (!defined('TEXT_MONTHLY_REPORT_PAGE_TITLE_BY_POS')) { define('TEXT_MONTHLY_REPORT_PAGE_TITLE_BY_POS','Informe Mensual de Atenciones',false); }
 	if (!defined('TEXT_MO_DATE_PROMPT_LABEL')) { define('TEXT_MO_DATE_PROMPT_LABEL','Fecha&nbsp;(aaaa-mm)',false); }
-	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
-	if (!defined('TEXT_NO_SUMMARY_REPORT_PROMPT')) { define('TEXT_NO_SUMMARY_REPORT_PROMPT','Escoge un servicio de atención y una fecha.',false); }
+	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificado',false); }
+	if (!defined('TEXT_NO_SUMMARY_REPORT_PROMPT')) { define('TEXT_NO_SUMMARY_REPORT_PROMPT','Seleccione un servicio de atención y una fecha.',false); }
 	if (!defined('TEXT_REPORT_AGI_RSM_DC')) { define('TEXT_REPORT_AGI_RSM_DC','Área de Gestion de la Informacion/RSM-DC',false); }
 	if (!defined('TEXT_REPORT_AT2R')) { define('TEXT_REPORT_AT2R','AT2-R',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Establecimiento',false); }

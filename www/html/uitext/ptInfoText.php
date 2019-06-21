@@ -192,7 +192,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_CONTACTALTPHONE_MISSING')) { define('TEXT_CONTACTALTPHONE_MISSING','(Otro número telefónico no especificado)',false); }
 	if (!defined('TEXT_CONTACTPHONE_LABEL')) { define('TEXT_CONTACTPHONE_LABEL','Primer número telefónico',false); }
 	if (!defined('TEXT_CONTACTPHONE_MISSING')) { define('TEXT_CONTACTPHONE_MISSING','(Primer número telefónico no especificado)',false); }
-	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','(No especificada)',false); }
+	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','(No especificado)',false); }
 	if (!defined('TEXT_DISCHARGE_VISIT_INFO')) { define('TEXT_DISCHARGE_VISIT_INFO','Dar de alta este paciente',false); }
 	if (!defined('TEXT_EDIT_VISIT_INFO')) { define('TEXT_EDIT_VISIT_INFO','Actualizar esta visita',false); }
 	if (!defined('TEXT_FAMILYID_LABEL')) { define('TEXT_FAMILYID_LABEL','Carpeta (familia)',false); }
@@ -210,8 +210,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_NOT_FOUND')) { define('TEXT_MESSAGE_PATIENT_ID_NOT_FOUND','No se encontró el paciente con ese ID.',false); }
 	if (!defined('TEXT_MORE_VISIT_INFO')) { define('TEXT_MORE_VISIT_INFO','Ver la descripción completa',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT')) { define('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT','d-m-Y',false); }
-	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','La próxima fecha de vacunación',false); }
-	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
+	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','Próxima fecha de vacunación',false); }
+	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificado',false); }
 	if (!defined('TEXT_NO_PREVIOUS_VISITS')) { define('TEXT_NO_PREVIOUS_VISITS','No hay archivos de admisiones anteriores',false); }
 	if (!defined('TEXT_ORGAN_DONOR')) { define('TEXT_ORGAN_DONOR','[Donante de órganos]',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_LABEL')) { define('TEXT_PATIENTNATIONALID_LABEL','Cédula',false); }

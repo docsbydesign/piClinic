@@ -79,7 +79,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_NO_VISITS_FOUND_DAY')) { define('TEXT_NO_VISITS_FOUND_DAY','TEXT_NO_VISITS_FOUND_DAY',false); }
 	if (!defined('TEXT_PATIENTVISITID_LABEL')) { define('TEXT_PATIENTVISITID_LABEL','TEXT_PATIENTVISITID_LABEL',false); }
 	if (!defined('TEXT_PATIENT_LABEL')) { define('TEXT_PATIENT_LABEL','TEXT_PATIENT_LABEL',false); }
-	if (!defined('TEXT_RECEIVED_FROM_LABEL')) { define('TEXT_RECEIVED_FROM_LABEL','TEXT_RECEIVED_FROM_LABEL',false); }
+	if (!defined('TEXT_REFERRED_FROM_LABEL')) { define('TEXT_REFERRED_FROM_LABEL','TEXT_REFERRED_FROM_LABEL',false); }
 	if (!defined('TEXT_REFERRED_TO_LABEL')) { define('TEXT_REFERRED_TO_LABEL','TEXT_REFERRED_TO_LABEL',false); }
 	if (!defined('TEXT_REPORT_ADDRESS_LABEL')) { define('TEXT_REPORT_ADDRESS_LABEL','TEXT_REPORT_ADDRESS_LABEL',false); }
 	if (!defined('TEXT_REPORT_AGE_LABEL')) { define('TEXT_REPORT_AGE_LABEL','TEXT_REPORT_AGE_LABEL',false); }
@@ -135,7 +135,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_2_LABEL')) { define('TEXT_DIAGNOSIS_2_LABEL','Diagnosis 2',false); }
 	if (!defined('TEXT_DIAGNOSIS_3_ICD_LABEL')) { define('TEXT_DIAGNOSIS_3_ICD_LABEL','Diagnosis 3 (ICD-10)',false); }
 	if (!defined('TEXT_DIAGNOSIS_3_LABEL')) { define('TEXT_DIAGNOSIS_3_LABEL','Diagnosis 3',false); }
-	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','(Not specified)',false); }
+	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','Not specified',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON')) { define('TEXT_EXPORT_CSV_BUTTON','Export as CSV',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON_TEXT')) { define('TEXT_EXPORT_CSV_BUTTON_TEXT','Export the report to a CSV file to open as a spreadsheet. This format opens in Excel automatically, but some letters might not appear correctly.',false); }
 	if (!defined('TEXT_EXPORT_TSV_BUTTON')) { define('TEXT_EXPORT_TSV_BUTTON','Export as TSV',false); }
@@ -155,7 +155,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_NO_VISITS_FOUND_DAY')) { define('TEXT_NO_VISITS_FOUND_DAY','No visits found for this date.',false); }
 	if (!defined('TEXT_PATIENTVISITID_LABEL')) { define('TEXT_PATIENTVISITID_LABEL','Clinical history number',false); }
 	if (!defined('TEXT_PATIENT_LABEL')) { define('TEXT_PATIENT_LABEL','Patient',false); }
-	if (!defined('TEXT_RECEIVED_FROM_LABEL')) { define('TEXT_RECEIVED_FROM_LABEL','Received from',false); }
+	if (!defined('TEXT_REFERRED_FROM_LABEL')) { define('TEXT_REFERRED_FROM_LABEL','Referred from',false); }
 	if (!defined('TEXT_REFERRED_TO_LABEL')) { define('TEXT_REFERRED_TO_LABEL','Referred to',false); }
 	if (!defined('TEXT_REPORT_ADDRESS_LABEL')) { define('TEXT_REPORT_ADDRESS_LABEL','Home town',false); }
 	if (!defined('TEXT_REPORT_AGE_LABEL')) { define('TEXT_REPORT_AGE_LABEL','Age',false); }
@@ -211,7 +211,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_2_LABEL')) { define('TEXT_DIAGNOSIS_2_LABEL','Diagnóstico 2',false); }
 	if (!defined('TEXT_DIAGNOSIS_3_ICD_LABEL')) { define('TEXT_DIAGNOSIS_3_ICD_LABEL','Diagnóstico 3 (CIE-10)',false); }
 	if (!defined('TEXT_DIAGNOSIS_3_LABEL')) { define('TEXT_DIAGNOSIS_3_LABEL','Diagnóstico 3',false); }
-	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','(No especificada)',false); }
+	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','(No especificado)',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON')) { define('TEXT_EXPORT_CSV_BUTTON','Descargar como CSV',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON_TEXT')) { define('TEXT_EXPORT_CSV_BUTTON_TEXT','Descarga el informe como un archivo CSV para abrirlo como una hoja de cálculo. Excel puede abrir este formato automáticamente, pero no muestra todas las letras correctamente.',false); }
 	if (!defined('TEXT_EXPORT_TSV_BUTTON')) { define('TEXT_EXPORT_TSV_BUTTON','Descargar como TSV',false); }
@@ -226,13 +226,13 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_LABEL_NURSE_STU')) { define('TEXT_LABEL_NURSE_STU','Estudiante de enfermeria',false); }
 	if (!defined('TEXT_LABEL_STAFF')) { define('TEXT_LABEL_STAFF','Personal de la clínica',false); }
 	if (!defined('TEXT_NEIGHBORHOOD_LABEL')) { define('TEXT_NEIGHBORHOOD_LABEL','Localidad',false); }
-	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
-	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','Escoge un profesional de salud y una fecha.',false); }
+	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificado',false); }
+	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','Seleccione un profesional de salud y una fecha.',false); }
 	if (!defined('TEXT_NO_VISITS_FOUND_DAY')) { define('TEXT_NO_VISITS_FOUND_DAY','No se encontraron visitas en esta fecha.',false); }
 	if (!defined('TEXT_PATIENTVISITID_LABEL')) { define('TEXT_PATIENTVISITID_LABEL','Número de historia clínica',false); }
 	if (!defined('TEXT_PATIENT_LABEL')) { define('TEXT_PATIENT_LABEL','Paciente',false); }
-	if (!defined('TEXT_RECEIVED_FROM_LABEL')) { define('TEXT_RECEIVED_FROM_LABEL','Recibida de',false); }
-	if (!defined('TEXT_REFERRED_TO_LABEL')) { define('TEXT_REFERRED_TO_LABEL','Enviada a',false); }
+	if (!defined('TEXT_REFERRED_FROM_LABEL')) { define('TEXT_REFERRED_FROM_LABEL','Recibido de',false); }
+	if (!defined('TEXT_REFERRED_TO_LABEL')) { define('TEXT_REFERRED_TO_LABEL','Enviado a',false); }
 	if (!defined('TEXT_REPORT_ADDRESS_LABEL')) { define('TEXT_REPORT_ADDRESS_LABEL','Procedencia',false); }
 	if (!defined('TEXT_REPORT_AGE_LABEL')) { define('TEXT_REPORT_AGE_LABEL','Edad',false); }
 	if (!defined('TEXT_REPORT_CITY_LABEL')) { define('TEXT_REPORT_CITY_LABEL','Municipio',false); }

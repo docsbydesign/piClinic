@@ -149,7 +149,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_CLINIC_VISIT_HEADING')) { define('TEXT_CLINIC_VISIT_HEADING','Historia Clínica',false); }
 	if (!defined('TEXT_CLINIC_VISIT_RETURN')) { define('TEXT_CLINIC_VISIT_RETURN','Volver a la información de la visita',false); }
 	if (!defined('TEXT_CLINIC_VISIT_RETURN_LINK')) { define('TEXT_CLINIC_VISIT_RETURN_LINK','Volver',false); }
-	if (!defined('TEXT_DATE_BLANK')) { define('TEXT_DATE_BLANK','(No especificada)',false); }
+	if (!defined('TEXT_DATE_BLANK')) { define('TEXT_DATE_BLANK','(No especificado)',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_LABEL')) { define('TEXT_DIAGNOSIS_1_LABEL','Diagnóstico 1',false); }
 	if (!defined('TEXT_DIAGNOSIS_2_LABEL')) { define('TEXT_DIAGNOSIS_2_LABEL','Diagnóstico 2',false); }
 	if (!defined('TEXT_DIAGNOSIS_3_LABEL')) { define('TEXT_DIAGNOSIS_3_LABEL','Diagnóstico 3',false); }
@@ -160,8 +160,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND','No se encontró la visita del paciente.',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED','ID de la visita no está especificada.',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT')) { define('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT','d-m-Y',false); }
-	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','La próxima fecha de vacunación',false); }
-	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
+	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','Próxima fecha de vacunación',false); }
+	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificado',false); }
 	if (!defined('TEXT_PATIENT_ALLERGY_LIST_HEAD')) { define('TEXT_PATIENT_ALLERGY_LIST_HEAD','Alergias conocidas',false); }
 	if (!defined('TEXT_PATIENT_CURRENT_MEDICATIONS_LABEL')) { define('TEXT_PATIENT_CURRENT_MEDICATIONS_LABEL','Medicamentos actuales',false); }
 	if (!defined('TEXT_PATIENT_NEW_ADDRESS_LABEL')) { define('TEXT_PATIENT_NEW_ADDRESS_LABEL','Dirección de la casa',false); }
@@ -170,7 +170,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_LABEL')) { define('TEXT_PATIENT_NEW_RESPONSIBLE_PARTY_LABEL','Encargado/a',false); }
 	if (!defined('TEXT_PATIENT_NO_CURRENT_MEDS')) { define('TEXT_PATIENT_NO_CURRENT_MEDS','No hay medicamentos en el archivo',false); }
 	if (!defined('TEXT_PATIENT_NO_KNOWN_ALLERGIES')) { define('TEXT_PATIENT_NO_KNOWN_ALLERGIES','Sin alergias conocidas',false); }
-	if (!defined('TEXT_REFERRED_FROM_LABEL')) { define('TEXT_REFERRED_FROM_LABEL','Recibida de',false); }
+	if (!defined('TEXT_REFERRED_FROM_LABEL')) { define('TEXT_REFERRED_FROM_LABEL','Recibido de',false); }
 	if (!defined('TEXT_REFER_TO_LABEL')) { define('TEXT_REFER_TO_LABEL','Se remite a',false); }
 	if (!defined('TEXT_REPRINT_HEADING')) { define('TEXT_REPRINT_HEADING','Este es un reimpreso del formulario de la visita. Revisar la historia clínica original para los detalles de la visita.',false); }
 	if (!defined('TEXT_RETURN_VISIT_TEXT')) { define('TEXT_RETURN_VISIT_TEXT','Subsiguiente',false); }

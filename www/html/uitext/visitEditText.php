@@ -218,8 +218,8 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_ASSIGNED_LABEL')) { define('TEXT_ASSIGNED_LABEL','Doctor(a)',false); }
 	if (!defined('TEXT_BIRTHDAY_DATE_FORMAT')) { define('TEXT_BIRTHDAY_DATE_FORMAT','d-m-Y',false); }
-	if (!defined('TEXT_BLANK_STAFF_OPTION_VISIT')) { define('TEXT_BLANK_STAFF_OPTION_VISIT','(Escoge el profesional de salud)',false); }
-	if (!defined('TEXT_BLANK_VISIT_OPTION_VISIT')) { define('TEXT_BLANK_VISIT_OPTION_VISIT','(Escoge el tipo de la atención)',false); }
+	if (!defined('TEXT_BLANK_STAFF_OPTION_VISIT')) { define('TEXT_BLANK_STAFF_OPTION_VISIT','(Seleccione el profesional de salud)',false); }
+	if (!defined('TEXT_BLANK_VISIT_OPTION_VISIT')) { define('TEXT_BLANK_VISIT_OPTION_VISIT','(Seleccione el tipo de la atención)',false); }
 	if (!defined('TEXT_BP_DIA_PLACEHOLDER')) { define('TEXT_BP_DIA_PLACEHOLDER','Diástole pressure',false); }
 	if (!defined('TEXT_BP_SYS_PLACEHOLDER')) { define('TEXT_BP_SYS_PLACEHOLDER','Sístole pressure',false); }
 	if (!defined('TEXT_CANCEL_VISIT_EDIT')) { define('TEXT_CANCEL_VISIT_EDIT','Cancelar',false); }
@@ -227,7 +227,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER')) { define('TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER','Notas adicionales de la visita',false); }
 	if (!defined('TEXT_COMPLAINT_PRIMARY_LABEL')) { define('TEXT_COMPLAINT_PRIMARY_LABEL','Primer motivo de la visita',false); }
 	if (!defined('TEXT_COMPLAINT_PRIMARY_PLACEHOLDER')) { define('TEXT_COMPLAINT_PRIMARY_PLACEHOLDER','Primer motivo de la visita',false); }
-	if (!defined('TEXT_DATE_BLANK')) { define('TEXT_DATE_BLANK','(No especificada)',false); }
+	if (!defined('TEXT_DATE_BLANK')) { define('TEXT_DATE_BLANK','(No especificado)',false); }
 	if (!defined('TEXT_DATE_TIME_IN_LABEL')) { define('TEXT_DATE_TIME_IN_LABEL','Llegó a la clínica',false); }
 	if (!defined('TEXT_DATE_TIME_OUT_LABEL')) { define('TEXT_DATE_TIME_OUT_LABEL','Salió de la clínica',false); }
 	if (!defined('TEXT_DIAGNOSIS1_LABEL')) { define('TEXT_DIAGNOSIS1_LABEL','Diagnóstico 1',false); }
@@ -251,7 +251,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_LAST_VISIT_DATE_LABEL')) { define('TEXT_LAST_VISIT_DATE_LABEL','Úlitma visita',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND','No se encontró la visita del paciente.',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED','ID de la visita no está especificada.',false); }
-	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
+	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificado',false); }
 	if (!defined('TEXT_NO_OPTION')) { define('TEXT_NO_OPTION','No',false); }
 	if (!defined('TEXT_PATIENT_SUBMIT_PATIENT_VISIT_BUTTON')) { define('TEXT_PATIENT_SUBMIT_PATIENT_VISIT_BUTTON','Actualizar la información de esta visita',false); }
 	if (!defined('TEXT_PAYMENT_CURRENCY')) { define('TEXT_PAYMENT_CURRENCY','HNL',false); }
@@ -259,8 +259,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_PAYMENT_PLACEHOLDER')) { define('TEXT_PAYMENT_PLACEHOLDER','Pago',false); }
 	if (!defined('TEXT_PULSE_PLACEHOLDER')) { define('TEXT_PULSE_PLACEHOLDER','Pulso',false); }
 	if (!defined('TEXT_REFERRAL_PLACEHOLDER')) { define('TEXT_REFERRAL_PLACEHOLDER','Nombre de la clínica',false); }
-	if (!defined('TEXT_REFERRED_FROM_LABEL')) { define('TEXT_REFERRED_FROM_LABEL','Recibida de',false); }
-	if (!defined('TEXT_REFERRED_TO_LABEL')) { define('TEXT_REFERRED_TO_LABEL','Enviada a',false); }
+	if (!defined('TEXT_REFERRED_FROM_LABEL')) { define('TEXT_REFERRED_FROM_LABEL','Recibido de',false); }
+	if (!defined('TEXT_REFERRED_TO_LABEL')) { define('TEXT_REFERRED_TO_LABEL','Enviado a',false); }
 	if (!defined('TEXT_RETURN_VISIT_SELECT')) { define('TEXT_RETURN_VISIT_SELECT','Subsiguiente',false); }
 	if (!defined('TEXT_SELECT_GLUCOSE_UNITS')) { define('TEXT_SELECT_GLUCOSE_UNITS','(Tipo)',false); }
 	if (!defined('TEXT_SHOW_PATIENT_INFO')) { define('TEXT_SHOW_PATIENT_INFO','Mostrar los detalles del paciente',false); }

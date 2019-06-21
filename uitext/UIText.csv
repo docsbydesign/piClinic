@@ -47,11 +47,11 @@ TEXT_BIRTHDAY_DATE_LABEL,Birth date (M/D/Y),Fecha de nacimiento (dd/mm/aa)
 TEXT_BIRTHDAY_DAY_FORMAT,d,d
 TEXT_BIRTHDAY_MONTH_FORMAT,m,m
 TEXT_BIRTHDAY_YEAR_FORMAT,Y,Y
-TEXT_BLANK_OPTION_SELECT,Choose,Escoge
-TEXT_BLANK_STAFF_OPTION,(Select the health professional),(Escoge el profesional de salud)
-TEXT_BLANK_STAFF_OPTION_VISIT,(Select the health professional),(Escoge el profesional de salud)
-TEXT_BLANK_VISIT_OPTION,(Select the visit type),(Escoge el tipo de la atención)
-TEXT_BLANK_VISIT_OPTION_VISIT,(Select the visit type),(Escoge el tipo de la atención)
+TEXT_BLANK_OPTION_SELECT,Choose,Seleccione
+TEXT_BLANK_STAFF_OPTION,(Select the health professional),(Seleccione el profesional de salud)
+TEXT_BLANK_STAFF_OPTION_VISIT,(Select the health professional),(Seleccione el profesional de salud)
+TEXT_BLANK_VISIT_OPTION,(Select the visit type),(Seleccione el tipo de la atención)
+TEXT_BLANK_VISIT_OPTION_VISIT,(Select the visit type),(Seleccione el tipo de la atención)
 TEXT_BLOODTYPE_LABEL,Blood Type,Tipo de Sangre
 TEXT_BP_DIA_PLACEHOLDER,Diastolic pressure,Diástole pressure
 TEXT_BP_SYS_PLACEHOLDER,Systolic pressure,Sístole pressure
@@ -104,7 +104,7 @@ TEXT_CONDITION_3_LABEL,Condition,Condición
 TEXT_CONDITION_BLANK,(None),(Ninguno)
 TEXT_CONDITION_NEW_REPORT,N,N
 TEXT_CONDITION_NEW_SELECT,New diagnosis,Nuevo diagnóstico
-TEXT_CONDITION_SELECT,(Select new or subsequent),(Escoge nuevo o subsiguiente)
+TEXT_CONDITION_SELECT,(Select new or subsequent),(Seleccione nuevo o subsiguiente)
 TEXT_CONDITION_SUBSEQUENT_REPORT,S,S
 TEXT_CONDITION_SUBSEQUENT_SELECT,Subsequent diagnosis,Subsiguiente diagnóstico
 TEXT_CONFIRM_IMAGE_DELETE,Are you sure you want to delete this image?,¿Está seguro que quiere borrar esta imagen?
@@ -122,7 +122,7 @@ TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE,Daily Payment Log,Registros de Pagos del Día
 TEXT_DAILY_PMT_DESC,List of payments received from patients on a specified date,Registro de pagos recibidos por los pacientes durante la fecha especificada
 TEXT_DAILY_PMT_TITLE,Daily payment log,Registro de pagos del día
 TEXT_DAILY_VISIT_HEADING,Daily Outpatient Log,Atenciones Ambulatorias
-TEXT_DATE_BLANK,Not specified,(No especificada)
+TEXT_DATE_BLANK,Not specified,(No especificado)
 TEXT_DATE_DAY_PLACEHOLDER,Day,Día
 TEXT_DATE_FORMAT,m/d/Y,d-m-Y
 TEXT_DATE_LABEL,Report date (YYYY-MM),Fecha del informe (AAAA-MM)
@@ -159,10 +159,10 @@ TEXT_DIAGNOSIS_2_ICD_LABEL,Diagnosis 2 (ICD-10),Diagnóstico 2 (CIE-10)
 TEXT_DIAGNOSIS_2_LABEL,Diagnosis 2,Diagnóstico 2
 TEXT_DIAGNOSIS_3_ICD_LABEL,Diagnosis 3 (ICD-10),Diagnóstico 3 (CIE-10)
 TEXT_DIAGNOSIS_3_LABEL,Diagnosis 3,Diagnóstico 3
-TEXT_DIAGNOSIS_BLANK,Not specified,(No especificada)
+TEXT_DIAGNOSIS_BLANK,Not specified,(No especificado)
 TEXT_DIAGNOSIS_HEADING,Diagnoses,Diagnóstico
 TEXT_DIAGNOSIS_LOADING,Loading...,Cargando...
-TEXT_DIAGNOSIS_SELECT,(Select diagnosis or enter text below),(Escoge un diagnóstico o escríbelo abajo)
+TEXT_DIAGNOSIS_SELECT,(Select diagnosis or enter text below),(Seleccione un diagnóstico o escríbelo abajo)
 TEXT_DISCHARGE_VISIT_INFO,Discharge this patient,Dar de alta este paciente
 TEXT_DIVORCED_OPTION,Divorced,Divorciado/a
 TEXT_EARLIER_VISIT_NOTE,Visits from an earlier date,Visitas de una fecha anterior
@@ -281,7 +281,7 @@ TEXT_IMAGE_DATE_PLACEHOLDER,Date of image,La fecha de la imagen
 TEXT_IMAGE_DAY_FORMAT,d,d
 TEXT_IMAGE_DELETE_BUTTON,Delete this image,Borrar esta imagen
 TEXT_IMAGE_DESCRIPTION_PLACEHOLDER,Detailed text about the image,Detalles de la imagen
-TEXT_IMAGE_EDIT_TITLE,Click to change image,Haz clik para cambiar la imagen
+TEXT_IMAGE_EDIT_TITLE,Click to change image,Haga clik para cambiar la imagen
 TEXT_IMAGE_IMAGE_CAPTION,Image caption,Título de la imagen
 TEXT_IMAGE_IMAGE_DATE,Image date,La fecha de la imagen
 TEXT_IMAGE_IMAGE_DESCRIPTION,Image description,Detalles de la imagen
@@ -289,7 +289,7 @@ TEXT_IMAGE_IMAGE_EDIT,Edit the image data or delete the image,Actualizar los dat
 TEXT_IMAGE_MONTH_FORMAT,m,m
 TEXT_IMAGE_RETURN_TO_IMAGE_EDIT,Cancel,Cancelar
 TEXT_IMAGE_RETURN_TO_VISIT_INFO,Cancel,Cancelar
-TEXT_IMAGE_SELECT_IMAGE_FILE,Select a new image file,Escoge el archivo de la imagen
+TEXT_IMAGE_SELECT_IMAGE_FILE,Select a new image file,Seleccione el archivo de la imagen
 TEXT_IMAGE_TIME_FORMAT,H:i,H:i
 TEXT_IMAGE_UPDATE_BUTTON,Update the image data,Actualizar los datos de la imagen
 TEXT_IMAGE_YEAR_FORMAT,Y,Y
@@ -386,21 +386,21 @@ TEXT_NEXT_VAX_DATE_DAY_FORMAT,d,d
 TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT,m/d/Y,d-m-Y
 TEXT_NEXT_VAX_DATE_FORMAT,M-D-Y,D-M-Y
 TEXT_NEXT_VAX_DATE_FORMAT_LABEL,(M-D-Y),(D-M-A)
-TEXT_NEXT_VAX_DATE_INPUT_LABEL,Next vaccination date,La próxima fecha de vacunación
+TEXT_NEXT_VAX_DATE_INPUT_LABEL,Next vaccination date,Próxima fecha de vacunación
 TEXT_NEXT_VAX_DATE_MONTH_FORMAT,m,m
 TEXT_NEXT_VAX_DATE_YEAR_FORMAT,Y,Y
 TEXT_NOT_MARRIED_OPTION,Not married,Soltero/a
-TEXT_NOT_SPECIFIED,Not specified,No especificada
+TEXT_NOT_SPECIFIED,Not specified,No especificado
 TEXT_NO_COMMENT_RECORDS,No comments,No hay comentarios
 TEXT_NO_LOG_DATA,No data in this log file.,Este registro no tiene datos.
 TEXT_NO_OPEN_VISITS,No patients admitted to the clinic.,No hay pacientes admitidos a la clínica.
 TEXT_NO_OPTION,No,No
 TEXT_NO_PATIENT_IMAGE,No image found.,No se encontró una imagen.
 TEXT_NO_PREVIOUS_VISITS,No previous admission records,No hay archivos de admisiones anteriores
-TEXT_NO_REPORT_PROF_PROMPT,Select a health professional and date.,Escoge un profesional de salud y una fecha.
-TEXT_NO_REPORT_PROMPT,Select a date.,Escoge una fecha.
+TEXT_NO_REPORT_PROF_PROMPT,Select a health professional and date.,Seleccione un profesional de salud y una fecha.
+TEXT_NO_REPORT_PROMPT,Select a date.,Seleccione una fecha.
 TEXT_NO_STAFF_RECORDS,No users or staff members found,No hay usuarios o personal de la clínica
-TEXT_NO_SUMMARY_REPORT_PROMPT,Select a service type and date.,Escoge un servicio de atención y una fecha.
+TEXT_NO_SUMMARY_REPORT_PROMPT,Select a service type and date.,Seleccione un servicio de atención y una fecha.
 TEXT_NO_VISITS_FOUND_DAY,No visits found for this date.,No se encontraron visitas en esta fecha.
 TEXT_NO_VISITS_FOUND_DOCTOR,This person did not see any patients on this date.,Esta persona no tuvo pacientes en esta fecha.
 TEXT_NO_VISITS_FOUND_MONTH,No visits found for this month.,No se encontraron visitas en este mes.
@@ -451,7 +451,7 @@ TEXT_PATIENT_FAMILY_ID_NOT_VALID,Family ID is not formatted correctly,Carpeta (f
 TEXT_PATIENT_FIELDS_MISSING,Patient record is missing required fields,No se encuentran los datos requeridos del paciente
 TEXT_PATIENT_ID_PLACEHOLDER,The name or ID to find,El nombre o número para encontrar
 TEXT_PATIENT_IMAGE_NOT_SPECIFIED,Image to delete was not specified,La imagen para borrar no fue especificada
-TEXT_PATIENT_IMAGE_TYPE_NOT_SUPPORTED,The specified image type is not recognized,El tipo de imagen especificada no es reconocida
+TEXT_PATIENT_IMAGE_TYPE_NOT_SUPPORTED,The specified image type is not recognized,El tipo de imagen especificado no es reconocida
 TEXT_PATIENT_INFO_PAGE_TITLE,Patient Information,Información del paciente
 TEXT_PATIENT_KNOWN_ALLERGIES_LABEL,Known allergies,Alergias conocidas
 TEXT_PATIENT_KNOWN_ALLERGIES_PLACEHOLDER,"Enter each known allergy, one allergy per line","Ingrese cada alergia conocida, una alergia por línea"
@@ -496,8 +496,8 @@ TEXT_PATIENT_RESET_SEARCH_BUTTON,Start a new search,Buscar de nuevo
 TEXT_PATIENT_SEARCH_ADDRESS_LABEL,Home address,Dirección de la casa
 TEXT_PATIENT_SEARCH_CITY_PLACEHOLDER,City,Municipio
 TEXT_PATIENT_SEARCH_COUNTY_PLACEHOLDER,County,Condado
-TEXT_PATIENT_SEARCH_FOUND_ATA,Found these patients. Select one to enter their visit info or add a new patient above.,Se encontraron estos pacientes. Haz clik para agregar su visita o agregue un paciente nuevo.
-TEXT_PATIENT_SEARCH_FOUND_NOT_ATA,Found these patients. Select one to view thier info.,Se encontraron estos pacientes. Haz clik para ver sus detalles.
+TEXT_PATIENT_SEARCH_FOUND_ATA,Found these patients. Select one to enter their visit info or add a new patient above.,Se encontraron estos pacientes. Haga clik para agregar su visita o agregar un paciente nuevo.
+TEXT_PATIENT_SEARCH_FOUND_NOT_ATA,Found these patients. Select one to view thier info.,Se encontraron estos pacientes. Haga clik para ver los detalles.
 TEXT_PATIENT_SEARCH_NAMEFIRST_PLACEHOLDER,First name,Primer nombre
 TEXT_PATIENT_SEARCH_NAMELAST2_PLACEHOLDER,Second last name,Segundo apellido
 TEXT_PATIENT_SEARCH_NAMELAST_PLACEHOLDER,First last name,Apellido
@@ -515,7 +515,7 @@ TEXT_PATIENT_SUBMIT_PATIENT_VISIT_BUTTON,Update visit info,Actualizar la informa
 TEXT_PATIENT_VALID,The patient record is valid,Los datos del paciente son validos
 TEXT_PATIENT_VISIT_LIST_HEAD,Earlier visits to this clinic,Visitas anteriores a esta clínica
 TEXT_PATIENT_VISIT_NOT_FOUND,The specified patient visit was not found,No se encontró la visita especificada
-TEXT_PATIENT_VISIT_NOT_SPECIFIED,The required patient visit ID was not specified,El ID del la visita no estuvo especificada
+TEXT_PATIENT_VISIT_NOT_SPECIFIED,The required patient visit ID was not specified,El ID del la visita no estuvo especificado
 TEXT_PAYMENT_CURRENCY,HNL,HNL
 TEXT_PAYMENT_LABEL,Payment,Pago
 TEXT_PAYMENT_PLACEHOLDER,Payment amount,Pago
@@ -543,12 +543,11 @@ TEXT_PT_MALE,Patients (Men),Atención a hombres
 TEXT_PT_REFERRED_IN,Referred patients,Consultas remitidas
 TEXT_PT_WALK_IN,Outpatients,Consultas espontáneas
 TEXT_PULSE_PLACEHOLDER,Pulse,Pulso
-TEXT_RECEIVED_FROM_LABEL,Received from,Recibida de
-TEXT_REFERRAL_BLANK,Not specified,(No especificada)
+TEXT_REFERRAL_BLANK,Not specified,(No especificado)
 TEXT_REFERRAL_HEADING,Referral info,Remisión
 TEXT_REFERRAL_PLACEHOLDER,Clinic name,Nombre de la clínica
-TEXT_REFERRED_FROM_LABEL,Referred from,Recibida de
-TEXT_REFERRED_TO_LABEL,Referred to,Enviada a
+TEXT_REFERRED_FROM_LABEL,Referred from,Recibido de
+TEXT_REFERRED_TO_LABEL,Referred to,Enviado a
 TEXT_REFER_TO_LABEL,Refer to,Se remite a
 TEXT_REPORT_ADDRESS_LABEL,Home town,Procedencia
 TEXT_REPORT_AGE_GROUP_HEADING,Age group,Concepto

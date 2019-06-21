@@ -66,8 +66,8 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	if (!defined('TEXT_BLANK_STAFF_OPTION')) { define('TEXT_BLANK_STAFF_OPTION','(Escoge el profesional de salud)',false); }
-	if (!defined('TEXT_BLANK_VISIT_OPTION')) { define('TEXT_BLANK_VISIT_OPTION','(Escoge el tipo de la atención)',false); }
+	if (!defined('TEXT_BLANK_STAFF_OPTION')) { define('TEXT_BLANK_STAFF_OPTION','(Seleccione el profesional de salud)',false); }
+	if (!defined('TEXT_BLANK_VISIT_OPTION')) { define('TEXT_BLANK_VISIT_OPTION','(Seleccione el tipo de la atención)',false); }
 	if (!defined('TEXT_CLINIC_ADMIN')) { define('TEXT_CLINIC_ADMIN','Admin',false); }
 	if (!defined('TEXT_CLINIC_COMMENT')) { define('TEXT_CLINIC_COMMENT','Comentario',false); }
 	if (!defined('TEXT_CLINIC_COMMENT_TITLE')) { define('TEXT_CLINIC_COMMENT_TITLE','Hacer un comentario de esta página',false); }

@@ -114,7 +114,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_ACCESS_GRANTED_OPTION_CLINIC')) { define('TEXT_ACCESS_GRANTED_OPTION_CLINIC','Administrador de la clínica',false); }
 	if (!defined('TEXT_ACCESS_GRANTED_OPTION_RO')) { define('TEXT_ACCESS_GRANTED_OPTION_RO','Usuario autorizado',false); }
 	if (!defined('TEXT_ACCESS_GRANTED_OPTION_STAFF')) { define('TEXT_ACCESS_GRANTED_OPTION_STAFF','Personal de la clínica',false); }
-	if (!defined('TEXT_BLANK_OPTION_SELECT')) { define('TEXT_BLANK_OPTION_SELECT','Escoge',false); }
+	if (!defined('TEXT_BLANK_OPTION_SELECT')) { define('TEXT_BLANK_OPTION_SELECT','Seleccione',false); }
 	if (!defined('TEXT_CANCEL_EDIT')) { define('TEXT_CANCEL_EDIT','Cancelar',false); }
 	if (!defined('TEXT_EDIT_STAFF_HEADING')) { define('TEXT_EDIT_STAFF_HEADING','Actualizar los datos personales',false); }
 	if (!defined('TEXT_NEW_STAFF_HEADING')) { define('TEXT_NEW_STAFF_HEADING','Agregar una persona nueva al sistema piClinic',false); }

@@ -172,14 +172,14 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_BIRTHDAY_DAY_FORMAT')) { define('TEXT_BIRTHDAY_DAY_FORMAT','d',false); }
 	if (!defined('TEXT_BIRTHDAY_MONTH_FORMAT')) { define('TEXT_BIRTHDAY_MONTH_FORMAT','m',false); }
 	if (!defined('TEXT_BIRTHDAY_YEAR_FORMAT')) { define('TEXT_BIRTHDAY_YEAR_FORMAT','Y',false); }
-	if (!defined('TEXT_BLANK_OPTION_SELECT')) { define('TEXT_BLANK_OPTION_SELECT','Escoge',false); }
+	if (!defined('TEXT_BLANK_OPTION_SELECT')) { define('TEXT_BLANK_OPTION_SELECT','Seleccione',false); }
 	if (!defined('TEXT_EDIT_PATIENT_HEADING')) { define('TEXT_EDIT_PATIENT_HEADING','Actualizar la información del paciente',false); }
 	if (!defined('TEXT_FAMILYID_LABEL')) { define('TEXT_FAMILYID_LABEL','Carpeta (familia)',false); }
 	if (!defined('TEXT_NEW_PATIENT_HEADING')) { define('TEXT_NEW_PATIENT_HEADING','Agregar paciente nuevo',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_DAY_FORMAT')) { define('TEXT_NEXT_VAX_DATE_DAY_FORMAT','d',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_FORMAT')) { define('TEXT_NEXT_VAX_DATE_FORMAT','D-M-Y',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_FORMAT_LABEL')) { define('TEXT_NEXT_VAX_DATE_FORMAT_LABEL','(D-M-A)',false); }
-	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','La próxima fecha de vacunación',false); }
+	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','Próxima fecha de vacunación',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_MONTH_FORMAT')) { define('TEXT_NEXT_VAX_DATE_MONTH_FORMAT','m',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_YEAR_FORMAT')) { define('TEXT_NEXT_VAX_DATE_YEAR_FORMAT','Y',false); }
 	if (!defined('TEXT_NO_OPTION')) { define('TEXT_NO_OPTION','No',false); }
