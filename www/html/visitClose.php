@@ -267,12 +267,6 @@ function writeOptionsMenu ($visitInfo) {
                                 </p>
                             </div>
 						</div>
-                        <h2><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?></h2>
-                        <div class="dataBlock">
-                            <p><?= $visitInfo['secondaryComplaint'] ?></p>
-                        </div>
-					</div>
-                    <div class="infoBlock">
                         <h2><?= TEXT_VISIT_PRECLINIC_HEADING ?></h2>
                         <table class="piClinicList">
                             <tr>
@@ -292,6 +286,12 @@ function writeOptionsMenu ($visitInfo) {
                                 <td class="sixCol"><?= (!empty($visitInfo['glucose']) ? $visitInfo['glucoseUnits'].': '.$visitInfo['glucose'] : '&nbsp;') ?></td>
                             </tr>
                         </table>
+					</div>
+                    <div class="infoBlock">
+                        <h2><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?></h2>
+                        <div class="dataBlock">
+                            <p><?= $visitInfo['secondaryComplaint'] ?></p>
+                        </div>
                     </div>
 					<div class="infoBlock">
 						<h2><?= TEXT_VISIT_DISCHARGE_HEADING ?></h2>
