@@ -215,10 +215,10 @@ function writeTopicMenu ($sessionInfo) {
                     <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'YES') ? TEXT_FIRST_VISIT_TEXT : "" ) ?>
                     <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'NO') ? TEXT_RETURN_VISIT_TEXT : "" ) ?><br>
                     <label class="close"><?= TEXT_NEXT_VAX_DATE_INPUT_LABEL ?>:</label>
-                    <span <?= (!empty($visitInfo['patientNextVaccinationDate']) && (strtotime($visitInfo['patientNextVaccinationDate']) <= time()) ? ' class="alert"' : '') ?>><?= (!empty($visitInfo['patientNextVaccinationDate']) ? '&nbsp;'.date(TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT, strtotime($visitInfo['patientNextVaccinationDate'])).'&nbsp;' : TEXT_NOT_SPECIFIED )?></span>
+                    <span <?= (!empty($visitInfo['patientNextVaccinationDate']) && (strtotime($visitInfo['patientNextVaccinationDate']) <= time()) ? ' class="alert"' : '') ?>><?= (!empty($visitInfo['patientNextVaccinationDate']) ? '&nbsp;'.date(TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT, strtotime($visitInfo['patientNextVaccinationDate'])).'&nbsp;' : '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' )?></span>
                 </div>
                 <div class="rightDiv">
-                    <label class="close"><?= TEXT_BIRTHDATE_LABEL ?>:</label><?= formatDbDate ($visitInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED ) ?>&nbsp;<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?><br>
+                    <label class="close"><?= TEXT_BIRTHDATE_LABEL ?>:</label><?= formatDbDate ($visitInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' ) ?>&nbsp;<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?><br>
                     <label class="close"><?= TEXT_MARITAL_STATUS_LABEL ?>:</label> <?= (!empty($visitInfo['patientMaritalStatus']) ? $maritalStatusString[$visitInfo['patientMaritalStatus']] : str_repeat("_",22))  ?><br>
                     <label class="close"><?= TEXT_PATIENT_NEW_PROFESSION_LABEL ?>:</label> <?= (!empty($visitInfo['patientProfession']) ? $visitInfo['patientProfession'] : str_repeat("_",22))  ?>
                 </div>
@@ -363,24 +363,24 @@ function writeTopicMenu ($sessionInfo) {
                     </tr>
                     <tr>
                         <td class="threeCol"><?= empty($visitInfo['diagnosis1']) ?
-                                '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span' :
+                                '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' :
                                 (!empty($visitInfo['condition1']) ? '['.conditionText($visitInfo['condition1']).']' : '[&nbsp;&nbsp;]').
                                 '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis1'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
                         </td>
                         <td class="threeCol"><?= empty($visitInfo['diagnosis2']) ?
-                                '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span' :
+                                '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' :
                                 (!empty($visitInfo['condition2']) ? '['.conditionText($visitInfo['condition2']).']' : '[&nbsp;&nbsp;]').
                                 '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis2'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
                         </td>
                         <td class="threeCol"><?= empty($visitInfo['diagnosis3']) ?
-                                '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span' :
+                                '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' :
                                 (!empty($visitInfo['condition3']) ? '['.conditionText($visitInfo['condition3']).']' : '[&nbsp;&nbsp;]').
                                 '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis3'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" style="border-top: 1px solid #DDD"><label><?= TEXT_REFER_TO_LABEL ?>:</label>
-                            <?= $visitInfo['visitStatus'] == 'Closed' ? '&nbsp;'.(empty($visitInfo['referredTo']) ? TEXT_NOT_SPECIFIED : $visitInfo['referredTo']): '' ?></td>
+                            <?= $visitInfo['visitStatus'] == 'Closed' ? '&nbsp;'.(empty($visitInfo['referredTo']) ? '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' : $visitInfo['referredTo']): '' ?></td>
                     </tr>
                 </table>
             </div>
