@@ -380,12 +380,15 @@ function cleanUrlQueryParams($queryParamArray) {
 
 function cleanTheUrl ($urlToClean, $newQpArray = null, $fromLinkValue = null) {
     if (!empty($urlToClean)) {
+        $urlQP = array();
         $urlParts = explode('?',$urlToClean);
         if (!empty($urlParts[0])) {
             $urlRoot = $urlParts[0];
+        } else {
+            // unable to break the URL, so return it now.
+            return $urlToClean;
         }
         if (!empty($urlParts[1])) {
-            $urlQP = array();
             parse_str($urlParts[1], $urlQP);
             $urlQP = cleanUrlQueryParams($urlQP);
         }
