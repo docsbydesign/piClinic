@@ -245,7 +245,7 @@ function writeTopicMenu ($sessionInfo) {
                                 <p><label class="close"><?= TEXT_REFERRED_FROM_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['referredFrom']) ? $visitInfo['referredFrom'] : '<span class="inactive">'.TEXT_REFERRAL_BLANK.'</span>') ?></p>
                             </div>
                             <div class="dataBlock">
-                                <p><label class="close"><?= TEXT_COMPLAINT_PRIMARY_LABEL ?>:</label>&nbsp;<?= (isset($visitInfo['primaryComplaint']) ? $visitInfo['primaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
+                                <p class="notes"><label class="close"><?= TEXT_COMPLAINT_PRIMARY_LABEL ?>:</label>&nbsp;<?= (isset($visitInfo['primaryComplaint']) ? $visitInfo['primaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
                             </div>
                             <div class="dataBlock">
                                 <p><label class="close"><?= TEXT_PAYMENT_LABEL ?>:</label>
@@ -282,7 +282,7 @@ function writeTopicMenu ($sessionInfo) {
                 <div class="infoBlock">
                     <h2><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?></h2>
                     <div class="indent1">
-                        <p><?= (isset($visitInfo['secondaryComplaint']) ? $visitInfo['secondaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
+                        <p class="notes"><?= (isset($visitInfo['secondaryComplaint']) ? $visitInfo['secondaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
                     </div>
 					<h2><?= TEXT_VISIT_DISCHARGE_HEADING ?></h2>
 					<div class="indent1">
