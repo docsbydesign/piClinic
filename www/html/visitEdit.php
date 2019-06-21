@@ -309,14 +309,6 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 							</p>
 						</div>
                     </div>
-                    <h2><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?></h2>
-                    <div class="indent1">
-                        <p>
-                            <textarea name="secondaryComplaint" id="ComplaintAdditionalEdit" class="complaintEdit" placeholder="<?= TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER ?>" maxlength="2048"><?=  $visitInfo['secondaryComplaint'] ?></textarea>
-                        </p>
-                    </div>
-				</div>
-                <div class="infoBlock">
                     <h2><?= TEXT_VISIT_PRECLINIC_HEADING ?></h2>
                     <div class="indent1">
                         <table class="piClinicList">
@@ -324,12 +316,9 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
                                 <th><label><?= TEXT_VISIT_FORM_HEIGHT_LABEL ?></label></th>
                                 <th><label><?= TEXT_VISIT_FORM_WEIGHT_LABEL ?></label></th>
                                 <th><label><?= TEXT_VISIT_FORM_TEMP_LABEL ?></label></th>
-                                <th><label><?= TEXT_VISIT_FORM_BP_LABEL ?></label></th>
-                                <th><label><?= TEXT_VISIT_FORM_PULSE_LABEL ?></label></th>
-                                <th><label><?= TEXT_VISIT_FORM_BS_LABEL ?></label></th>
                             </tr>
                             <tr>
-                                <td>
+                                <td class="nowrap">
                                     <p>
                                         <input type="number" name="height" id="HeightEdit" class="vsEdit" min="0" max="999" step="0.1" placeholder="<?= TEXT_HEIGHT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['height']) ? $visitInfo['height'] : "") ?>" />&nbsp;
                                         <select id="HeightUnitsSelect" name="heightUnits">
@@ -339,7 +328,7 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
                                         </select>
                                     </p>
                                 </td>
-                                <td>
+                                <td class="nowrap">
                                     <p>
                                         <input type="number" name="weight" id="WeightEdit" class="vsEdit" min="0" max="999" step="0.1" placeholder="<?= TEXT_WEIGHT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['weight']) ? $visitInfo['weight'] : "") ?>" />&nbsp;
                                         <select id="WeightUnitsSelect" name="weightUnits">
@@ -348,7 +337,7 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
                                         </select>
                                     </p>
                                 </td>
-                                <td>
+                                <td class="nowrap">
                                     <p>
                                         <input type="number" name="temp" id="TempEdit" class="vsEdit" min="0" max="999" step="0.1" placeholder="<?= TEXT_TEMP_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['temp']) ? $visitInfo['temp'] : "") ?>" />&deg;&nbsp;
                                         <select id="TempUnitsSelect" name="tempUnits">
@@ -357,19 +346,27 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
                                         </select>
                                     </p>
                                 </td>
-                                </td>
-                                <td>
+                            </tr>
+                        </table>
+                        <table class="piClinicList">
+                            <tr>
+                                <th><label><?= TEXT_VISIT_FORM_BP_LABEL ?></label></th>
+                                <th><label><?= TEXT_VISIT_FORM_PULSE_LABEL ?></label></th>
+                                <th><label><?= TEXT_VISIT_FORM_BS_LABEL ?></label></th>
+                            </tr>
+                            <tr>
+                                <td class="nowrap">
                                     <p>
                                         <input type="number" name="bpSystolic" id="bpSystolicEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_BP_SYS_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['bpSystolic']) ? $visitInfo['bpSystolic'] : "") ?>" />&nbsp;/&nbsp;
                                         <input type="number" name="bpDiastolic" id="bpDiastolicEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_BP_DIA_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpDiastolic'] : "") ?>" />
                                     </p>
                                 </td>
-                                <td>
+                                <td class="nowrap">
                                     <p>
                                         <input type="number" name="pulse" id="PulseEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_PULSE_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['pulse']) ? $visitInfo['pulse'] : "") ?>" />
                                     </p>
                                 </td>
-                                <td>
+                                <td class="nowrap">
                                     <p>
                                         <select id="GlucoseUnitsSelect" name="glucoseUnits">
                                             <option value="" <?= (empty($visitInfo['glucoseUnits']) ? "selected" : "" ) ?>><?= TEXT_SELECT_GLUCOSE_UNITS ?></option>
@@ -381,6 +378,14 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
                                 </td>
                             </tr>
                         </table>
+                    </div>
+				</div>
+                <div class="infoBlock">
+                    <h2><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?></h2>
+                    <div class="indent1">
+                        <p>
+                            <textarea name="secondaryComplaint" id="ComplaintAdditionalEdit" class="complaintEdit" placeholder="<?= TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER ?>" maxlength="2048"><?=  $visitInfo['secondaryComplaint'] ?></textarea>
+                        </p>
                     </div>
                 </div>
 				<div class="infoBlock">

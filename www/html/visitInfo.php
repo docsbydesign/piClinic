@@ -256,33 +256,33 @@ function writeTopicMenu ($sessionInfo) {
                                 <p><label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label>&nbsp;<?= (!empty($visitInfo['staffName']) ? $visitInfo['staffName'] : '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>') ?></p>
                             </div>
                         </div>
-                        <h2><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?></h2>
+                        <h2><?= TEXT_VISIT_PRECLINIC_HEADING ?></h2>
                         <div class="indent1">
-                            <p><?= (isset($visitInfo['secondaryComplaint']) ? $visitInfo['secondaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
+                            <table class="piClinicList">
+                                <tr>
+                                    <th class="sixCol"><label><?= TEXT_VISIT_FORM_HEIGHT_LABEL ?></label></th>
+                                    <th class="sixCol"><label><?= TEXT_VISIT_FORM_WEIGHT_LABEL ?></label></th>
+                                    <th class="sixCol"><label><?= TEXT_VISIT_FORM_TEMP_LABEL ?></label></th>
+                                    <th class="sixCol"><label><?= TEXT_VISIT_FORM_BP_LABEL ?></label></th>
+                                    <th class="sixCol"><label><?= TEXT_VISIT_FORM_PULSE_LABEL ?></label></th>
+                                    <th class="sixCol"><label><?= TEXT_VISIT_FORM_BS_LABEL ?></label></th>
+                                </tr>
+                                <tr>
+                                    <td class="sixCol"><?= (!empty($visitInfo['height']) ? $visitInfo['height'].'&nbsp;'.$visitInfo['heightUnits'] : '&nbsp;') ?></td>
+                                    <td class="sixCol"><?= (!empty($visitInfo['weight']) ? $visitInfo['weight'].'&nbsp;'.$visitInfo['weightUnits'] : '&nbsp;') ?></td>
+                                    <td class="sixCol"><?= (!empty($visitInfo['temp']) ? $visitInfo['temp'].'&deg;&nbsp;'.$visitInfo['tempUnits'] : '&nbsp;') ?></td>
+                                    <td class="sixCol"><?= (!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpSystolic'] : '&nbsp;').'/'.(!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpDiastolic'] : '&nbsp;') ?></td>
+                                    <td class="sixCol"><?= (!empty($visitInfo['pulse']) ? $visitInfo['pulse'] : '&nbsp;') ?></td>
+                                    <td class="sixCol"><?= (!empty($visitInfo['glucose']) ? $visitInfo['glucoseUnits'].': '.$visitInfo['glucose'] : '&nbsp;') ?></td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
                 <div class="infoBlock">
-                    <h2><?= TEXT_VISIT_PRECLINIC_HEADING ?></h2>
+                    <h2><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?></h2>
                     <div class="indent1">
-                        <table class="piClinicList">
-                            <tr>
-                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_HEIGHT_LABEL ?></label></th>
-                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_WEIGHT_LABEL ?></label></th>
-                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_TEMP_LABEL ?></label></th>
-                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_BP_LABEL ?></label></th>
-                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_PULSE_LABEL ?></label></th>
-                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_BS_LABEL ?></label></th>
-                            </tr>
-                            <tr>
-                                <td class="sixCol"><?= (!empty($visitInfo['height']) ? $visitInfo['height'].'&nbsp;'.$visitInfo['heightUnits'] : '&nbsp;') ?></td>
-                                <td class="sixCol"><?= (!empty($visitInfo['weight']) ? $visitInfo['weight'].'&nbsp;'.$visitInfo['weightUnits'] : '&nbsp;') ?></td>
-                                <td class="sixCol"><?= (!empty($visitInfo['temp']) ? $visitInfo['temp'].'&deg;&nbsp;'.$visitInfo['tempUnits'] : '&nbsp;') ?></td>
-                                <td class="sixCol"><?= (!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpSystolic'] : '&nbsp;').'/'.(!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpDiastolic'] : '&nbsp;') ?></td>
-                                <td class="sixCol"><?= (!empty($visitInfo['pulse']) ? $visitInfo['pulse'] : '&nbsp;') ?></td>
-                                <td class="sixCol"><?= (!empty($visitInfo['glucose']) ? $visitInfo['glucoseUnits'].': '.$visitInfo['glucose'] : '&nbsp;') ?></td>
-                            </tr>
-                        </table>
+                        <p><?= (isset($visitInfo['secondaryComplaint']) ? $visitInfo['secondaryComplaint'] : '<span class="inactive">'.TEXT_COMPLAINT_NOT_SPECIFIED.'</span>' ) ?></p>
                     </div>
 					<h2><?= TEXT_VISIT_DISCHARGE_HEADING ?></h2>
 					<div class="indent1">
