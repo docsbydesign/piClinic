@@ -268,8 +268,8 @@ TEXT_HOME_NEIGHBORHOOD_PLACEHOLDER,Neighborhood,Localidad
 TEXT_HOME_PAGE_LINK,Dashboard,Página principal
 TEXT_HOME_STATE_LABEL,State,Departamento
 TEXT_HOME_STATE_PLACEHOLDER,State,Departamento
-TEXT_ICD_LINK_TEXT,Lookup code,Buscar código
-TEXT_ICD_LINK_TITLE,Lookup an ICD-10 code in the Spanish reference book,Buscar un código CIE-10 en el libro de referencia
+TEXT_ICD_LINK_TEXT,Lookup ICD-10 code,Buscar CIE-10 código
+TEXT_ICD_LINK_TITLE,Lookup an ICD-10 code in the reference book,Buscar un código CIE-10 en el libro de referencia
 TEXT_IMAGE_ADD_BUTTON,Add this image to the patient\'s record,Agrega esta imagen al paciente
 TEXT_IMAGE_CANCEL_EDIT,Cancel,Cancelar
 TEXT_IMAGE_CAPTION_PLACEHOLDER,Short text about the image,Texto corto sobre la imagen

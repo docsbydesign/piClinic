@@ -188,9 +188,9 @@ function writeTopicMenu ($cancel) {
 	<div class="nameBlock">
 		<div class="infoBlock">
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($patientInfo) ?>
-				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$patientInfo['sex'].')' ?></span></h1>
+				<span class="linkInHeading">&nbsp;&nbsp;<?= '('.$patientInfo['sex'].')' ?></span></h1>
 			<p><?= (!empty ($patientInfo['birthDate']) ? formatDbDate ($patientInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED ) : "") ?>&nbsp;<?= formatAgeFromBirthdate ($patientInfo['birthDate'], null, TEXT_YMD_AGE_YEARS, TEXT_YMD_AGE_MONTHS,TEXT_YMD_AGE_DAYS,true) ?>
-			<span class="a_ptInfo idInHeading"><a href="/ptInfo.php?clinicPatientID=<?= $patientInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
+			<span class="a_ptInfo linkInHeading"><a href="/ptInfo.php?clinicPatientID=<?= $patientInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
 		</div>
 		<div class="infoBlock">
 			<p><label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?></p>

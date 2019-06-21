@@ -68,6 +68,8 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_HEIGHT_UNITS_CM')) { define('TEXT_HEIGHT_UNITS_CM','TEXT_HEIGHT_UNITS_CM',false); }
 	if (!defined('TEXT_HEIGHT_UNITS_IN')) { define('TEXT_HEIGHT_UNITS_IN','TEXT_HEIGHT_UNITS_IN',false); }
 	if (!defined('TEXT_HEIGHT_UNITS_MM')) { define('TEXT_HEIGHT_UNITS_MM','TEXT_HEIGHT_UNITS_MM',false); }
+	if (!defined('TEXT_ICD_LINK_TEXT')) { define('TEXT_ICD_LINK_TEXT','TEXT_ICD_LINK_TEXT',false); }
+	if (!defined('TEXT_ICD_LINK_TITLE')) { define('TEXT_ICD_LINK_TITLE','TEXT_ICD_LINK_TITLE',false); }
 	if (!defined('TEXT_LAST_VISIT_DATE_LABEL')) { define('TEXT_LAST_VISIT_DATE_LABEL','TEXT_LAST_VISIT_DATE_LABEL',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND','TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED','TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED',false); }
@@ -155,6 +157,8 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_HEIGHT_UNITS_CM')) { define('TEXT_HEIGHT_UNITS_CM','cm',false); }
 	if (!defined('TEXT_HEIGHT_UNITS_IN')) { define('TEXT_HEIGHT_UNITS_IN','in',false); }
 	if (!defined('TEXT_HEIGHT_UNITS_MM')) { define('TEXT_HEIGHT_UNITS_MM','mm',false); }
+	if (!defined('TEXT_ICD_LINK_TEXT')) { define('TEXT_ICD_LINK_TEXT','Lookup ICD-10 code',false); }
+	if (!defined('TEXT_ICD_LINK_TITLE')) { define('TEXT_ICD_LINK_TITLE','Lookup an ICD-10 code in the reference book',false); }
 	if (!defined('TEXT_LAST_VISIT_DATE_LABEL')) { define('TEXT_LAST_VISIT_DATE_LABEL','Last visit',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND','Patient visit not found.',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED','Patient visit ID not specified.',false); }
@@ -242,6 +246,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_HEIGHT_UNITS_CM')) { define('TEXT_HEIGHT_UNITS_CM','cm',false); }
 	if (!defined('TEXT_HEIGHT_UNITS_IN')) { define('TEXT_HEIGHT_UNITS_IN','in',false); }
 	if (!defined('TEXT_HEIGHT_UNITS_MM')) { define('TEXT_HEIGHT_UNITS_MM','mm',false); }
+	if (!defined('TEXT_ICD_LINK_TEXT')) { define('TEXT_ICD_LINK_TEXT','Buscar CIE-10 código',false); }
+	if (!defined('TEXT_ICD_LINK_TITLE')) { define('TEXT_ICD_LINK_TITLE','Buscar un código CIE-10 en el libro de referencia',false); }
 	if (!defined('TEXT_LAST_VISIT_DATE_LABEL')) { define('TEXT_LAST_VISIT_DATE_LABEL','Úlitma visita',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_FOUND','No se encontró la visita del paciente.',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED')) { define('TEXT_MESSAGE_PATIENT_VISIT_NOT_SPEICIFIED','ID de la visita no está especificada.',false); }

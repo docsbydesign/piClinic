@@ -47,7 +47,7 @@ h1.noBottomPad {
 h1.noBottomMargin {
     margin-bottom: 0;
 }
-span.idInHeading {
+span.linkInHeading {
     font-size: 10pt;
 }
 h2 {

@@ -194,8 +194,8 @@ function writeTopicMenu ($sessionInfo) {
                     <img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="/code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44">
                 </div>
                 <div class="rightDiv">
-                    <label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label><span class="idInHeading"><?= (!empty($visitInfo['staffName']) ? $visitInfo['staffName'] : str_repeat("_",22))  ?></span><br>
-                    <label class="close"><?= TEXT_VISIT_ID_PRINT_LABEL ?>:</label><span class="idInHeading"><?= $visitInfo['patientVisitID'] ?></span><br>
+                    <label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label><span class="linkInHeading"><?= (!empty($visitInfo['staffName']) ? $visitInfo['staffName'] : str_repeat("_",22))  ?></span><br>
+                    <label class="close"><?= TEXT_VISIT_ID_PRINT_LABEL ?>:</label><span class="linkInHeading"><?= $visitInfo['patientVisitID'] ?></span><br>
                     <label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?>
                 </div>
             </div>
@@ -203,8 +203,8 @@ function writeTopicMenu ($sessionInfo) {
             <div class="infoBlock fullWidth">
                 <div class="leftDiv">
                     <h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
-                        <span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span>
-                        <span class="idInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span><br>
+                        <span class="linkInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span>
+                        <span class="linkInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span><br>
                     </h1>
                 </div>
             </div>
