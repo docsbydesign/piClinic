@@ -282,7 +282,11 @@ if ($retVal['httpResponse'] == 201) {
             'clinicPatientID' => $retVal['data']['clinicPatientID'],
             'patientVisitID' => $retVal['data']['patientVisitID']
         );
-		$redirectUrl = makeUrlWithQueryParams('/visitClinicForm0.php', $successArgs);
+	    if (VISIT_PRINT_FORM_AFTER_OPEN) {
+            $redirectUrl = makeUrlWithQueryParams('/visitClinicForm0.php', $successArgs);
+        } else {
+            $redirectUrl = makeUrlWithQueryParams('/clinicDash.php', []);
+        }
 	}
     // close any of the workflows that this completes
     closeMatchingWorkflow($sessionInfo, __FILE__, $dbLink,

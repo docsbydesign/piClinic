@@ -89,7 +89,7 @@ TEXT_COMMENT_PLACEHOLDER,Enter your comment about the piClinic here,Entrar su co
 TEXT_COMMENT_SUBMIT_BUTTON,Submit,Entregar
 TEXT_COMPLAINT_ADDITIONAL_LABEL,Additional visit notes,Notas adicionales de la visita
 TEXT_COMPLAINT_ADDITIONAL_PLACEHOLDER,Additional visit notes,Notas adicionales de la visita
-TEXT_COMPLAINT_NOT_SPECIFIED,(Not specified),(No especificado)
+TEXT_COMPLAINT_NOT_SPECIFIED,Not specified,No especificado
 TEXT_COMPLAINT_PRIMARY_LABEL,Primary reason for visit,Primer motivo de la visita
 TEXT_COMPLAINT_PRIMARY_PLACEHOLDER,Primary reason for visit,Primer motivo de la visita
 TEXT_CONDITION1_LABEL,Condition 1 code,Condición 1 código
@@ -122,7 +122,7 @@ TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE,Daily Payment Log,Registros de Pagos del Día
 TEXT_DAILY_PMT_DESC,List of payments received from patients on a specified date,Registro de pagos recibidos por los pacientes durante la fecha especificada
 TEXT_DAILY_PMT_TITLE,Daily payment log,Registro de pagos del día
 TEXT_DAILY_VISIT_HEADING,Daily Outpatient Log,Atenciones Ambulatorias
-TEXT_DATE_BLANK,(Not specified),(No especificada)
+TEXT_DATE_BLANK,Not specified,(No especificada)
 TEXT_DATE_DAY_PLACEHOLDER,Day,Día
 TEXT_DATE_FORMAT,m/d/Y,d-m-Y
 TEXT_DATE_LABEL,Report date (YYYY-MM),Fecha del informe (AAAA-MM)
@@ -159,7 +159,7 @@ TEXT_DIAGNOSIS_2_ICD_LABEL,Diagnosis 2 (ICD-10),Diagnóstico 2 (CIE-10)
 TEXT_DIAGNOSIS_2_LABEL,Diagnosis 2,Diagnóstico 2
 TEXT_DIAGNOSIS_3_ICD_LABEL,Diagnosis 3 (ICD-10),Diagnóstico 3 (CIE-10)
 TEXT_DIAGNOSIS_3_LABEL,Diagnosis 3,Diagnóstico 3
-TEXT_DIAGNOSIS_BLANK,(Not specified),(No especificada)
+TEXT_DIAGNOSIS_BLANK,Not specified,(No especificada)
 TEXT_DIAGNOSIS_HEADING,Diagnoses,Diagnóstico
 TEXT_DIAGNOSIS_LOADING,Loading...,Cargando...
 TEXT_DIAGNOSIS_SELECT,(Select diagnosis or enter text below),(Escoge un diagnóstico o escríbelo abajo)
@@ -340,7 +340,7 @@ TEXT_LT_1MO_N,Less than 1 mon.-1st visit,Menores de 1 mes de la primera vez
 TEXT_LT_1MO_S,Less than 1 mon.-subsequent,Menores de 1 mes subsiguiente 
 TEXT_LT_5YR,Less than 5 years,Menores de 5 años
 TEXT_MARITAL_STATUS_LABEL,Marital status,Estado civil
-TEXT_MARITAL_STATUS_NOT_SPECIFIED,(Not specified),(No especificado)
+TEXT_MARITAL_STATUS_NOT_SPECIFIED,Not specified,No especificado
 TEXT_MARRIED_OPTION,Married,Casado/a
 TEXT_MESSAGE_ACCESS_FAILURE,"You do not have access to the last page.<br>To view that page, log in with a different username.","No tiene permiso para ver la última página. Para verla, iniciar una sesión con otro usuario."
 TEXT_MESSAGE_BACKUP_FAIL,Unable to create backup file,No pudo crear archivo para descargar
@@ -530,7 +530,7 @@ TEXT_POS_DR_SPECIALIST,Doctor: Specialist,Médico: Especialista
 TEXT_POS_NURSE_AID,Nurse: Aid,Enfermera: Auxiliar
 TEXT_POS_NURSE_PRO,Nurse: Professional,Enfermera: Profesional
 TEXT_PREFERREDLANGUAGE_LABEL,Preferred language,Idioma preferido
-TEXT_PREFERREDLANGUAGE_NOT_SPECIFIED,(not specified),(no está especificado)
+TEXT_PREFERREDLANGUAGE_NOT_SPECIFIED,Not specified,(no está especificado)
 TEXT_PROFESSION_LABEL,Profession,Profesión
 TEXT_PROFILE_TABLE_EVENT_DURATION,Event duration (mS),duración del evento (mS)
 TEXT_PROFILE_TABLE_EVENT_TIMESTAMP,Event time (UNIX),Tiempo del evento (UNIX)
@@ -544,7 +544,7 @@ TEXT_PT_REFERRED_IN,Referred patients,Consultas remitidas
 TEXT_PT_WALK_IN,Outpatients,Consultas espontáneas
 TEXT_PULSE_PLACEHOLDER,Pulse,Pulso
 TEXT_RECEIVED_FROM_LABEL,Received from,Recibida de
-TEXT_REFERRAL_BLANK,(Not specified),(No especificada)
+TEXT_REFERRAL_BLANK,Not specified,(No especificada)
 TEXT_REFERRAL_HEADING,Referral info,Remisión
 TEXT_REFERRAL_PLACEHOLDER,Clinic name,Nombre de la clínica
 TEXT_REFERRED_FROM_LABEL,Referred from,Recibida de
@@ -629,7 +629,7 @@ TEXT_REPORT_YEAR_LABEL,Year,Año
 TEXT_REPORT_YEAR_PLACEHOLDER,Report year (YYYY),Año del informe(AAAA)
 TEXT_REPRINT_HEADING,This is a reprint of the visit form. See the orignal patient record for details.,Este es un reimpreso del formulario de la visita. Revisar la historia clínica original para los detalles de la visita.
 TEXT_RESPONSIBLE_PARTY_LABEL,Responsbile Person,Encargado/a
-TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED,(Not specified),(No especificado)
+TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED,Not specified,No especificado
 TEXT_RETURN_TO_SEARCH_LINK,Search again,Buscar de nuevo
 TEXT_RETURN_VISIT_SELECT,No,Subsiguiente
 TEXT_RETURN_VISIT_TEXT,No,Subsiguiente
@@ -781,7 +781,7 @@ TEXT_TABLE_REPORT_DOM_HEADER,Day of month,Día del mes
 TEXT_TEMP_PLACEHOLDER,Temp.,Temp.
 TEXT_TEMP_UNITS_C,C,C
 TEXT_TEMP_UNITS_F,F,F
-TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED,(Not specified),(No especificado)
+TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED,Not specified,No especificado
 TEXT_THOUSANDS_SEPARATOR,",",.
 TEXT_TYPE_LABEL,Service type,Servicio de atención
 TEXT_USERNAME_NOT_ACTIVE,Inactive username,Usuario inactivo
@@ -830,7 +830,7 @@ TEXT_VISIT_LIST_HEAD_DOCTOR,Doctor,Médico
 TEXT_VISIT_LIST_HEAD_NAME,Name,Nombre
 TEXT_VISIT_LIST_HEAD_NOTES,Additional visit notes,Notas adicionales de la visita
 TEXT_VISIT_LIST_HEAD_TIME,Arrived,Llegó
-TEXT_VISIT_LIST_MISSING,(missing),(no especificado)
+TEXT_VISIT_LIST_MISSING,(missing),No especificado
 TEXT_VISIT_LOG_PAGE_TITLE,Visit log entry,Entrar datos del ATA
 TEXT_VISIT_MONTH_FORMAT,m,m
 TEXT_VISIT_MONTH_TEXT,m,m

@@ -283,14 +283,16 @@ function writePatientId($patientData) {
                         }
                     ?>
 					<div class="dataBlock">
-						<p><label><?= TEXT_PATIENTNATIONALID_LABEL ?>:</label> <?= $patientData['patientNationalID'] ?></p>
-					</div>
+                        <p><label><?= TEXT_PATIENTNATIONALID_LABEL ?>:</label><span<?= (empty($patientData['patientNationalID']) ? ' class="inactive"' : '') ?>>
+							<?= (!empty($patientData['patientNationalID']) ? $patientData['patientNationalID'] : TEXT_NOT_SPECIFIED )?></span></p>
+
+                    </div>
 					<div class="dataBlock">
-						<p><label><?= TEXT_BIRTHDATE_LABEL ?>:</label> <?= formatDbDate ($patientData['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED )  ?>&nbsp;<?= formatAgeFromBirthdate ($patientData['birthDate'], time(), TEXT_YMD_AGE_YEARS, TEXT_YMD_AGE_MONTHS, TEXT_YMD_AGE_DAYS) ?>&nbsp;&nbsp;
+                        <p><label><?= TEXT_BIRTHDATE_LABEL ?>:</label> <span<?= (empty($patientData['birthDate']) ? ' class="inactive"' : '') ?>><?= formatDbDate ($patientData['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED )  ?>&nbsp;<?= formatAgeFromBirthdate ($patientData['birthDate'], time(), TEXT_YMD_AGE_YEARS, TEXT_YMD_AGE_MONTHS, TEXT_YMD_AGE_DAYS) ?>&nbsp;&nbsp;</span>
 						</p>
-					</div>
+                    </div>
                     <div class="dataBlock">
-                        <p><label><?= TEXT_NEXT_VAX_DATE_INPUT_LABEL ?>:</label> <span <?= (!empty($patientData['nextVaccinationDate']) && (strtotime($patientData['nextVaccinationDate']) <= time()) ? ' class="alert"' : '') ?>><?= '&nbsp;'.(!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT, strtotime($patientData['nextVaccinationDate'])).'&nbsp;' : TEXT_NOT_SPECIFIED )?></span>
+                        <p><label><?= TEXT_NEXT_VAX_DATE_INPUT_LABEL ?>:</label> <span class="<?= (!empty($patientData['nextVaccinationDate']) && (strtotime($patientData['nextVaccinationDate']) <= time()) ? ' alert ' : '') ?><?= (empty($patientData['birthDate']) ? ' inactive ' : '') ?>"><?= '&nbsp;'.(!empty($patientData['nextVaccinationDate']) ? date(TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT, strtotime($patientData['nextVaccinationDate'])).'&nbsp;' : TEXT_NOT_SPECIFIED )?></span>
                         </p>
                     </div>
                     <div class="dataBlock">

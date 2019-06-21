@@ -84,4 +84,9 @@ define('VISIT_DEFAULT_WEIGHT_UNITS','kg',false);
  */
 define('VISIT_DEFAULT_TEMP_UNITS','C',false);
 
-
+/*
+ *  used to define workflow of visit open/admission
+ *      true: show patient visit form to print after visit open
+ *      false: return to dashboard after visit open
+ */
+define ('VISIT_PRINT_FORM_AFTER_OPEN',false,false);

@@ -226,12 +226,12 @@ function writeTopicMenu ($sessionInfo) {
                                 <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'YES') ? TEXT_FIRST_VISIT_TEXT : "" ) ?>
                                 <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'NO') ? TEXT_RETURN_VISIT_TEXT : "" ) ?>
                         </p>
-                        <div <?= ($visitInfo['visitStatus'] == 'Open' ? 'class="currentVisitList"' : '') ?>>
-                            <p><label class="close"><?= TEXT_VISIT_STATUS_LABEL ?>:</label>&nbsp;<?= ($visitInfo['visitStatus'] == 'Open' ? TEXT_VISIT_STATUS_OPEN : ($visitInfo['visitStatus'] == 'Closed' ? TEXT_VISIT_STATUS_CLOSED : $visitInfo['visitStatus'] )) ?></p>
-                        </div>
                     </div>
                 </div>
                 <div class="clearFloat"></div>
+                <div <?= ($visitInfo['visitStatus'] == 'Open' ? 'class="currentVisitList fullWidth"' : '') ?>>
+                    <p><label class="close"><?= TEXT_VISIT_STATUS_LABEL ?>:</label>&nbsp;<?= ($visitInfo['visitStatus'] == 'Open' ? TEXT_VISIT_STATUS_OPEN : ($visitInfo['visitStatus'] == 'Closed' ? TEXT_VISIT_STATUS_CLOSED : $visitInfo['visitStatus'] )) ?></p>
+                </div>
                 <div class="infoBlock">
     				<div class="clearFloat"></div>
                     <div class="infoBlock">

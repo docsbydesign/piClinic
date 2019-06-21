@@ -97,7 +97,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_CLINIC_VISIT_HEADING')) { define('TEXT_CLINIC_VISIT_HEADING','Patient Visit Chart',false); }
 	if (!defined('TEXT_CLINIC_VISIT_RETURN')) { define('TEXT_CLINIC_VISIT_RETURN','Return to Visit Info',false); }
 	if (!defined('TEXT_CLINIC_VISIT_RETURN_LINK')) { define('TEXT_CLINIC_VISIT_RETURN_LINK','Return',false); }
-	if (!defined('TEXT_DATE_BLANK')) { define('TEXT_DATE_BLANK','(Not specified)',false); }
+	if (!defined('TEXT_DATE_BLANK')) { define('TEXT_DATE_BLANK','Not specified',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_LABEL')) { define('TEXT_DIAGNOSIS_1_LABEL','Diagnosis 1',false); }
 	if (!defined('TEXT_DIAGNOSIS_2_LABEL')) { define('TEXT_DIAGNOSIS_2_LABEL','Diagnosis 2',false); }
 	if (!defined('TEXT_DIAGNOSIS_3_LABEL')) { define('TEXT_DIAGNOSIS_3_LABEL','Diagnosis 3',false); }
