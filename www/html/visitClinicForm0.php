@@ -322,9 +322,21 @@ function writeTopicMenu ($sessionInfo) {
                             <th class="threeCol"><label><?= TEXT_DIAGNOSIS_3_LABEL ?></label></th>
                         </tr>
                         <tr>
-                            <td class="threeCol"><?= empty($visitInfo['condition1']) ? TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL :  '['.conditionText($visitInfo['condition1']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis1'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
-                            <td class="threeCol"><?= empty($visitInfo['condition2']) ? TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL :  '['.conditionText($visitInfo['condition2']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis2'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
-                            <td class="threeCol"><?= empty($visitInfo['condition3']) ? TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL :  '['.conditionText($visitInfo['condition3']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis3'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
+                            <td class="threeCol"><?= empty($visitInfo['diagnosis1']) ?
+                                    TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL :
+                                    (!empty($visitInfo['condition1']) ? '['.conditionText($visitInfo['condition1']).']' : '[&nbsp;&nbsp;]').
+                                    '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis1'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
+                            </td>
+                            <td class="threeCol"><?= empty($visitInfo['diagnosis2']) ?
+                                    TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL :
+                                    (!empty($visitInfo['condition2']) ? '['.conditionText($visitInfo['condition2']).']' : '[&nbsp;&nbsp;]').
+                                    '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis2'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
+                            </td>
+                            <td class="threeCol"><?= empty($visitInfo['diagnosis3']) ?
+                                    TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL :
+                                    (!empty($visitInfo['condition3']) ? '['.conditionText($visitInfo['condition3']).']' : '[&nbsp;&nbsp;]').
+                                    '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis3'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="3" style="border-top: 1px solid #DDD"><label><?= TEXT_REFER_TO_LABEL ?>:</label></td>
@@ -350,9 +362,21 @@ function writeTopicMenu ($sessionInfo) {
                         <th class="threeCol"><label><?= TEXT_DIAGNOSIS_3_LABEL ?></label></th>
                     </tr>
                     <tr>
-                        <td class="threeCol"><?= empty($visitInfo['condition1']) ? '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span' :  '['.conditionText($visitInfo['condition1']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis1'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
-                        <td class="threeCol"><?= empty($visitInfo['condition2']) ? '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span' :  '['.conditionText($visitInfo['condition2']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis2'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
-                        <td class="threeCol"><?= empty($visitInfo['condition3']) ? '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span' :  '['.conditionText($visitInfo['condition3']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis3'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
+                        <td class="threeCol"><?= empty($visitInfo['diagnosis1']) ?
+                                '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span' :
+                                (!empty($visitInfo['condition1']) ? '['.conditionText($visitInfo['condition1']).']' : '[&nbsp;&nbsp;]').
+                                '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis1'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
+                        </td>
+                        <td class="threeCol"><?= empty($visitInfo['diagnosis2']) ?
+                                '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span' :
+                                (!empty($visitInfo['condition2']) ? '['.conditionText($visitInfo['condition2']).']' : '[&nbsp;&nbsp;]').
+                                '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis2'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
+                        </td>
+                        <td class="threeCol"><?= empty($visitInfo['diagnosis3']) ?
+                                '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span' :
+                                (!empty($visitInfo['condition3']) ? '['.conditionText($visitInfo['condition3']).']' : '[&nbsp;&nbsp;]').
+                                '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis3'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="3" style="border-top: 1px solid #DDD"><label><?= TEXT_REFER_TO_LABEL ?>:</label>
