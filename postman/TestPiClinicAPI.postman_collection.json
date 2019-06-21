@@ -45,10 +45,6 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{host}}/phpinfo.php",
 							"host": [
@@ -88,10 +84,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/log_common.php",
 									"host": [
@@ -124,10 +116,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/log_get.php",
 									"host": [
@@ -160,10 +148,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/log_post.php",
 									"host": [
@@ -202,10 +186,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session_common .php",
 									"host": [
@@ -238,10 +218,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session_post.php",
 									"host": [
@@ -274,10 +250,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session_get.php",
 									"host": [
@@ -310,10 +282,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session_delete.php",
 									"host": [
@@ -352,10 +320,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/staff_common.php",
 									"host": [
@@ -388,10 +352,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/staff_delete.php",
 									"host": [
@@ -424,10 +384,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/staff_get.php",
 									"host": [
@@ -460,10 +416,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/staff_patch.php",
 									"host": [
@@ -496,10 +448,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/staff_post.php",
 									"host": [
@@ -538,10 +486,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/comment_common.php",
 									"host": [
@@ -574,10 +518,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/comment_get.php",
 									"host": [
@@ -610,10 +550,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/comment_post.php",
 									"host": [
@@ -652,10 +588,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/textmsg_common.php",
 									"host": [
@@ -688,10 +620,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/textmsg_delete.php",
 									"host": [
@@ -724,10 +652,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/textmsg_get.php",
 									"host": [
@@ -760,10 +684,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/textmsg_patch.php",
 									"host": [
@@ -796,10 +716,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/textmsg_post.php",
 									"host": [
@@ -838,10 +754,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/patient_common.php",
 									"host": [
@@ -874,10 +786,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/patient_delete.php",
 									"host": [
@@ -910,10 +818,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/patient_get.php",
 									"host": [
@@ -946,10 +850,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/patient_patch.php",
 									"host": [
@@ -982,10 +882,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/patient_post.php",
 									"host": [
@@ -1024,10 +920,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/visit_common.php",
 									"host": [
@@ -1060,10 +952,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/visit_get.php",
 									"host": [
@@ -1096,10 +984,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/visit_patch.php",
 									"host": [
@@ -1132,10 +1016,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/visit_post.php",
 									"host": [
@@ -1174,10 +1054,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/clinic_common.php",
 									"host": [
@@ -1210,10 +1086,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/clinic_get.php",
 									"host": [
@@ -1274,10 +1146,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/shared/dbUtils.php",
 									"host": [
@@ -1310,10 +1178,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/shared/logUtils.php",
 									"host": [
@@ -1346,10 +1210,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/shared/piClinicConfig.php",
 									"host": [
@@ -1382,10 +1242,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/shared/profile.php",
 									"host": [
@@ -1418,10 +1274,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/shared/security.php",
 									"host": [
@@ -1521,10 +1373,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -1845,10 +1693,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/log.php",
 									"host": [
@@ -1887,10 +1731,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -1949,10 +1789,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/log.php",
 									"host": [
@@ -2041,10 +1877,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -2248,10 +2080,6 @@
 										"value": "{{currentUserToken}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php?token={{regularUserToken}}",
 									"host": [
@@ -2303,10 +2131,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php?token={{currentUserToken}}",
 									"host": [
@@ -2395,10 +2219,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -2481,10 +2301,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -2584,10 +2400,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -2786,10 +2598,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/log.php?usertoken={{SAtoken}}",
 									"host": [
@@ -2876,10 +2684,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/log.php",
 									"host": [
@@ -2938,10 +2742,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/log.php",
 									"host": [
@@ -3030,10 +2830,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -3197,10 +2993,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -3395,10 +3187,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/staff.php?username={{newUser}}",
 									"host": [
@@ -3692,10 +3480,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/staff.php?username={{newUser}}",
 									"host": [
@@ -3830,10 +3614,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/staff.php?username={{newUser}}",
 									"host": [
@@ -3878,10 +3658,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/staff.php",
 									"host": [
@@ -3920,10 +3696,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/staff.php",
 									"host": [
@@ -3983,10 +3755,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/log.php",
 									"host": [
@@ -4075,10 +3843,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -4220,10 +3984,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -4387,10 +4147,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/comment.php",
 									"host": [
@@ -4429,10 +4185,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/comment.php",
 									"host": [
@@ -4471,10 +4223,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/comment.php",
 									"host": [
@@ -4534,10 +4282,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/log.php",
 									"host": [
@@ -4626,10 +4370,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -4771,10 +4511,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -5038,10 +4774,6 @@
 												"value": "{{token}}"
 											}
 										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
 										"url": {
 											"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}",
 											"host": [
@@ -5286,10 +5018,6 @@
 												"value": "{{token}}"
 											}
 										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
 										"url": {
 											"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}",
 											"host": [
@@ -5507,10 +5235,6 @@
 												"value": "{{token}}"
 											}
 										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
 										"url": {
 											"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}",
 											"host": [
@@ -5754,10 +5478,6 @@
 												"value": "{{token}}"
 											}
 										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
 										"url": {
 											"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}",
 											"host": [
@@ -5978,10 +5698,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}",
 													"host": [
@@ -6135,10 +5851,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/textmsg.php?textmsgGUID={{currentMessageGUID}}",
 													"host": [
@@ -6356,10 +6068,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/textmsg.php?textmsgID={{currentMessageID}}",
 													"host": [
@@ -6513,10 +6221,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/textmsg.php?textmsgID={{currentMessageID}}",
 													"host": [
@@ -6589,10 +6293,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/textmsg.php",
 									"host": [
@@ -6631,10 +6331,6 @@
 										"value": "{{InvalidToken_Format}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/textmsg.php",
 									"host": [
@@ -6723,10 +6419,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -6868,10 +6560,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -6974,10 +6662,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/icd.php?c=R51&language=en",
 									"host": [
@@ -7038,10 +6722,6 @@
 										"value": "{{token}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/icd.php?c=R51",
 									"host": [
@@ -7101,10 +6781,6 @@
 										"value": "{{token}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/icd.php?c=R5[1-5]$&language=en",
 									"host": [
@@ -7167,10 +6843,6 @@
 										"value": "{{token}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/icd.php?t=headache&language=en",
 									"host": [
@@ -7228,10 +6900,6 @@
 										"value": "{{token}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/icd.php?q=R51&language=en",
 									"host": [
@@ -7292,10 +6960,6 @@
 										"value": "{{token}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/icd.php?q=R51",
 									"host": [
@@ -7354,10 +7018,6 @@
 										"value": "{{token}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/icd.php?q=headache&language=en",
 									"host": [
@@ -7431,10 +7091,6 @@
 										"value": "{{token}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/icd.php?c=R51&language=en",
 									"host": [
@@ -7568,10 +7224,6 @@
 										"value": "{{token}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/icd.php?c=R51&language=en",
 									"host": [
@@ -7620,10 +7272,6 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/icd.php",
 									"host": [
@@ -7662,10 +7310,6 @@
 										"value": "{{InvalidToken_Format}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/icd.php",
 									"host": [
@@ -7754,10 +7398,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -7899,10 +7539,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -8012,10 +7648,6 @@
 												"value": "{{token}}"
 											}
 										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
 										"url": {
 											"raw": "{{host}}/api/patient.php?=&clinicPatientID=PT-GEN-000055",
 											"host": [
@@ -8175,10 +7807,6 @@
 												"value": "{{token}}"
 											}
 										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
 										"url": {
 											"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 											"host": [
@@ -8298,10 +7926,6 @@
 												"value": "{{token}}"
 											}
 										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
 										"url": {
 											"raw": "{{host}}/api/patient.php?=&clinicPatientID={{newPatientID}}",
 											"host": [
@@ -8573,10 +8197,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -8758,10 +8378,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -8923,10 +8539,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -9088,10 +8700,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -9253,10 +8861,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -9419,10 +9023,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -9584,10 +9184,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -9749,10 +9345,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -9914,10 +9506,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -10101,10 +9689,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -10288,10 +9872,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -10475,10 +10055,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -10662,10 +10238,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -10849,10 +10421,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -11036,10 +10604,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -11146,10 +10710,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}&{{patchTestField}}={{patchTestValueEncoded}}",
 													"host": [
@@ -11219,10 +10779,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -11406,10 +10962,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -11605,10 +11157,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -11792,10 +11340,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php?clinicPatientID={{newPatientID}}",
 													"host": [
@@ -11988,10 +11532,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -12133,10 +11673,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -12250,10 +11786,6 @@
 												"value": "{{token}}"
 											}
 										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
 										"url": {
 											"raw": "{{host}}/api/patient.php",
 											"host": [
@@ -12310,10 +11842,6 @@
 												"value": "{{token}}"
 											}
 										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
 										"url": {
 											"raw": "{{host}}/api/staff.php?position=Doctor%",
 											"host": [
@@ -12462,10 +11990,6 @@
 												"value": "{{token}}"
 											}
 										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
 										"url": {
 											"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}",
 											"host": [
@@ -12528,10 +12052,6 @@
 												"value": "{{token}}"
 											}
 										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
 										"url": {
 											"raw": "{{host}}/api/visit.php?clinicPatientID={{newClinicPatientID}}",
 											"host": [
@@ -12561,7 +12081,7 @@
 												"exec": [
 													"var jsonData = JSON.parse(responseBody);\r",
 													"\r",
-													"pm.test(\"Get new visit by patientVisitIDr successful\", function() {\r",
+													"pm.test(\"Discharge visit by patientVisitIDr successful\", function() {\r",
 													"    var userAcct = pm.environment.get('testUser');\r",
 													"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 													"        // this should be successful\r",
@@ -12703,10 +12223,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/staff.php?position=Doctor%",
 													"host": [
@@ -12779,10 +12295,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/patient.php",
 													"host": [
@@ -12918,7 +12430,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"New test patient added successful\", function () {\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -12961,10 +12474,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -13003,7 +12512,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -13038,10 +12548,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
 													"host": [
@@ -13082,7 +12588,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"New test patient added successful\", function () {\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -13125,10 +12632,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -13167,7 +12670,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -13202,10 +12706,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
 													"host": [
@@ -13246,7 +12746,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"New test patient added successful\", function () {\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -13288,10 +12789,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -13330,7 +12827,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -13365,10 +12863,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
 													"host": [
@@ -13409,7 +12903,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"New test patient added successful\", function () {\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -13451,10 +12946,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -13493,7 +12984,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -13528,10 +13020,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
 													"host": [
@@ -13572,7 +13060,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"New test patient added successful\", function () {\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -13614,10 +13103,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -13656,7 +13141,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -13691,10 +13177,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
 													"host": [
@@ -13722,10 +13204,10 @@
 									"_postman_isSubFolder": true
 								},
 								{
-									"name": "Patch and check referredTo",
+									"name": "Patch and check height",
 									"item": [
 										{
-											"name": "Patch visit secondaryComplaint",
+											"name": "Patch visit height",
 											"event": [
 												{
 													"listen": "test",
@@ -13735,7 +13217,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"New test patient added successful\", function () {\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -13760,8 +13243,8 @@
 															"var randomString = eval('(' + varRandomString + ')');\r",
 															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
 															"\r",
-															" pm.variables.set('patchTestField', 'secondaryComplaint');\r",
-															" pm.variables.set('patchTestValue', randomString(4096));\r",
+															" pm.variables.set('patchTestField', 'height');\r",
+															" pm.variables.set('patchTestValue', randomIntBetween(60,200).toString());\r",
 															""
 														],
 														"type": "text/javascript"
@@ -13777,10 +13260,1983 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test height",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "e3690700-9ac9-4141-8c47-597d6ecee8cd",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "5f80e463-415c-46de-935d-c708beb28f21",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check height units",
+									"item": [
+										{
+											"name": "Patch visit heightUnits",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
 												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															"var values = ['in','cm','mm'];\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'heightUnits');\r",
+															" pm.variables.set('patchTestValue', values[randomIntBetween(0,values.length-1)]);\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test heightUnits",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "e3690700-9ac9-4141-8c47-597d6ecee8cd",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "5f80e463-415c-46de-935d-c708beb28f21",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check weight",
+									"item": [
+										{
+											"name": "Patch visit weight",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'weight');\r",
+															" pm.variables.set('patchTestValue', randomIntBetween(15,100).toString());\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test weight",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "e3690700-9ac9-4141-8c47-597d6ecee8cd",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "5f80e463-415c-46de-935d-c708beb28f21",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check weight units",
+									"item": [
+										{
+											"name": "Patch visit weightUnits",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															"var values = ['kg','lbs'];\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'weightUnits');\r",
+															" pm.variables.set('patchTestValue', values[randomIntBetween(0,values.length-1)]);\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test weightUnits",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "e3690700-9ac9-4141-8c47-597d6ecee8cd",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "5f80e463-415c-46de-935d-c708beb28f21",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check temp",
+									"item": [
+										{
+											"name": "Patch visit temp",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'temp');\r",
+															" pm.variables.set('patchTestValue', randomIntBetween(30,40).toString());\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test temp",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "e3690700-9ac9-4141-8c47-597d6ecee8cd",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "5f80e463-415c-46de-935d-c708beb28f21",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check tempUnits",
+									"item": [
+										{
+											"name": "Patch visit tempUnits",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															"var values = ['c','f'];\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'tempUnits');\r",
+															" pm.variables.set('patchTestValue', values[randomIntBetween(0,values.length-1)]);\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test tempUnits",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "e3690700-9ac9-4141-8c47-597d6ecee8cd",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "5f80e463-415c-46de-935d-c708beb28f21",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check bpSystolic",
+									"item": [
+										{
+											"name": "Patch visit bpSystolic",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'bpSystolic');\r",
+															" pm.variables.set('patchTestValue', randomIntBetween(40,200).toString());\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test bpSystolic",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "e3690700-9ac9-4141-8c47-597d6ecee8cd",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "5f80e463-415c-46de-935d-c708beb28f21",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check bpDiastolic",
+									"item": [
+										{
+											"name": "Patch visit bpDiastolic",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'bpDiastolic');\r",
+															" pm.variables.set('patchTestValue', randomIntBetween(40,200).toString());\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test bpDiastolic",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "e3690700-9ac9-4141-8c47-597d6ecee8cd",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "5f80e463-415c-46de-935d-c708beb28f21",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check pulse",
+									"item": [
+										{
+											"name": "Patch visit pulse",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'pulse');\r",
+															" pm.variables.set('patchTestValue', randomIntBetween(30,120).toString());\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test pulse",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "e3690700-9ac9-4141-8c47-597d6ecee8cd",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "5f80e463-415c-46de-935d-c708beb28f21",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check glucose",
+									"item": [
+										{
+											"name": "Patch visit glucose",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'glucose');\r",
+															" pm.variables.set('patchTestValue', randomIntBetween(50,200).toString());\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test glucose",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "e3690700-9ac9-4141-8c47-597d6ecee8cd",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "5f80e463-415c-46de-935d-c708beb28f21",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check glucoseUnits",
+									"item": [
+										{
+											"name": "Patch visit glucoseUnits",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															"var values = ['fbs','rbs'];\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'glucoseUnits');\r",
+															" pm.variables.set('patchTestValue', values[randomIntBetween(0,values.length-1)]);\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														},
+														{
+															"key": "{{patchTestField}}",
+															"value": "{{patchTestValue}}"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get patched visit to test glucoseUnits",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "f8b81d9d-4ad0-4043-9096-055864c33dc6",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"        pm.expect(jsonData.count).to.eql(1);\r",
+															"        var fieldName = pm.variables.get('patchTestField');\r",
+															"        pm.expect(jsonData.data[fieldName]).to.eql(pm.variables.get('patchTestValue'));\r",
+															"    } else if (userAcct == 'TestCS') {\r",
+															"        /* The TestCS account has permission to read patients but cannot create the new one\r",
+															"         *  so this test returns 404 because they could not create a new one and assign\r",
+															"         *  the new ID to the variable used in this test's parameters.\r",
+															"         */\r",
+															"        pm.response.to.have.status(404);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
+												"url": {
+													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"api",
+														"visit.php"
+													],
+													"query": [
+														{
+															"key": "patientVisitID",
+															"value": "{{newPatientVisitID}}"
+														},
+														{
+															"key": "clinicPatientID",
+															"value": "{{newClinicPatientID}}"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "e3690700-9ac9-4141-8c47-597d6ecee8cd",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "5f80e463-415c-46de-935d-c708beb28f21",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Patch and check referredTo",
+									"item": [
+										{
+											"name": "Patch visit referredTo",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "6d2aecf7-be99-429e-83b4-a804b605427f",
+														"exec": [
+															"var userAcct = pm.environment.get('testUser');\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
+															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
+															"        // this should be successful\r",
+															"        pm.response.to.have.status(200);\r",
+															"    } else {\r",
+															"        // the user doesn't have permission to do this.\r",
+															"        pm.response.to.have.status(401);\r",
+															"        pm.expect(jsonData.count).to.eql(0);\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "1134609e-e43d-4d08-bc5b-b648f0b53c5a",
+														"exec": [
+															"var varRandomString = pm.environment.get('fnRandomString');\r",
+															"var varRandomIntString = pm.environment.get('fnRandomInt');\r",
+															"var randomString = eval('(' + varRandomString + ')');\r",
+															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
+															"\r",
+															" pm.variables.set('patchTestField', 'referredTo');\r",
+															" pm.variables.set('patchTestValue', randomString(255));\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "x-piClinic-token",
+														"type": "text",
+														"value": "{{token}}"
+													}
+												],
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -13819,7 +15275,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -13854,10 +15311,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
 													"host": [
@@ -13888,7 +15341,7 @@
 									"name": "Patch and check referredFrom",
 									"item": [
 										{
-											"name": "Patch visit secondaryComplaint",
+											"name": "Patch visit referredFrom",
 											"event": [
 												{
 													"listen": "test",
@@ -13898,7 +15351,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"New test patient added successful\", function () {\r",
+															"var testName = \"Successful patch of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -13923,8 +15377,8 @@
 															"var randomString = eval('(' + varRandomString + ')');\r",
 															"var randomIntBetween = eval('(' + varRandomIntString + ')');\r",
 															"\r",
-															" pm.variables.set('patchTestField', 'secondaryComplaint');\r",
-															" pm.variables.set('patchTestValue', randomString(4096));\r",
+															" pm.variables.set('patchTestField', 'referredFrom');\r",
+															" pm.variables.set('patchTestValue', randomString(255));\r",
 															""
 														],
 														"type": "text/javascript"
@@ -13940,10 +15394,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}&{{patchTestField}}={{patchTestValue}}",
 													"host": [
@@ -13982,7 +15432,8 @@
 															"var userAcct = pm.environment.get('testUser');\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
-															"pm.test(\"Reading new patient was successful\", function () {\r",
+															"var testName = \"Successful update of: \"+pm.variables.get('patchTestField');\r",
+															"pm.test(testName, function () {\r",
 															"    if ((userAcct == 'TestSA') || (userAcct == 'TestCA')) {\r",
 															"        // this should be successful\r",
 															"        pm.response.to.have.status(200);\r",
@@ -14017,10 +15468,6 @@
 														"value": "{{token}}"
 													}
 												],
-												"body": {
-													"mode": "raw",
-													"raw": ""
-												},
 												"url": {
 													"raw": "{{host}}/api/visit.php?patientVisitID={{newPatientVisitID}}&clinicPatientID={{newClinicPatientID}}",
 													"host": [
@@ -14094,10 +15541,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/visit.php",
 									"host": [
@@ -14149,10 +15592,6 @@
 										"value": "{{token}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/visit.php?patientVisitID=1",
 									"host": [
@@ -14247,10 +15686,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -14392,10 +15827,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [
@@ -14493,10 +15924,6 @@
 										"value": "{{token}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/clinic.php?thisClinic=1",
 									"host": [
@@ -14546,10 +15973,6 @@
 										"value": "{{token}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/clinic.php?publicID=141",
 									"host": [
@@ -14599,10 +16022,6 @@
 										"value": "{{token}}"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/clinic.php?shortName=SAN FRANCISCO",
 									"host": [
@@ -14697,10 +16116,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
 								"url": {
 									"raw": "{{host}}/api/session.php",
 									"host": [

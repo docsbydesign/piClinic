@@ -140,6 +140,29 @@ if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
 	$visitInfo = $visitRecord['data'];	
 }
 
+// get the clinic info
+$clinicQueryString = "SELECT * FROM `thisClinicGet` WHERE 1;";
+$clinicRecord = getDbRecords($dbLink, $clinicQueryString);
+$clinicInfo = NULL;
+if ($clinicRecord['httpResponse'] != 200) {
+    // unable to get info on this clinic
+    if (API_DEBUG_MODE) {
+        $debugErrorInfo .= '<div id="Debug" class="noshow"';
+        $debugErrorInfo .= '<pre>'.json_encode($clinicInfo, JSON_PRETTY_PRINT).'</pre>';
+        $debugErrorInfo .= '</div>';
+    }
+    // keep null info and let the display logic below do the right thing
+} else {
+    if ($clinicRecord['count'] == 1) {
+        // there's only one so make it an array element
+        // so the rest of the code works
+        $clinicInfo = $clinicRecord['data'];
+    } else {
+        // somehow more than one clinic was returned so take the first one.
+        $clinicInfo = $clinicRecord['data'][0];
+    }
+}
+
 function writeTopicMenu ($sessionInfo) {
 	$topicMenu = '<div id="topicMenuDiv" class="noprint">'."\n";
 	$topicMenu .= '<ul class="topLinkMenuList">'."\n";
@@ -161,6 +184,7 @@ function writeTopicMenu ($sessionInfo) {
 	<div class="pageBody portraitReport<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
         <?= writeTopicMenu($sessionInfo) ?>
         <!-- <div class="logoBlock printOnly"><p>Logo Here</p></div> -->
+        <div class="logoBlock"><p><?= (!empty($clinicInfo['shortName']) ? $clinicInfo['shortName'].' ' : "") ?><?= TEXT_CLINIC_VISIT_HEADING ?></p></div>
         <div class="infoBlock <?= $visitInfo['visitStatus'] == 'Open' ? ' hideDiv' : '' ?>">
             <h2><?= TEXT_REPRINT_HEADING ?></h2>
         </div>
@@ -170,8 +194,8 @@ function writeTopicMenu ($sessionInfo) {
                     <img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="/code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44">
                 </div>
                 <div class="rightDiv">
-                    <label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label><span class="idInHeading"><?= (!empty($visitInfo['staffName']) ? $visitInfo['staffName'] : str_repeat("_",22))  ?></span><br>
-                    <label class="close"><?= TEXT_VISIT_ID_PRINT_LABEL ?>:</label><span class="idInHeading"><?= $visitInfo['patientVisitID'] ?></span><br>
+                    <label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label><span class="linkInHeading"><?= (!empty($visitInfo['staffName']) ? $visitInfo['staffName'] : str_repeat("_",22))  ?></span><br>
+                    <label class="close"><?= TEXT_VISIT_ID_PRINT_LABEL ?>:</label><span class="linkInHeading"><?= $visitInfo['patientVisitID'] ?></span><br>
                     <label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?>
                 </div>
             </div>
@@ -179,8 +203,8 @@ function writeTopicMenu ($sessionInfo) {
             <div class="infoBlock fullWidth">
                 <div class="leftDiv">
                     <h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
-                        <span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span>
-                        <span class="idInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span><br>
+                        <span class="linkInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span>
+                        <span class="linkInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span><br>
                     </h1>
                 </div>
             </div>
@@ -191,10 +215,10 @@ function writeTopicMenu ($sessionInfo) {
                     <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'YES') ? TEXT_FIRST_VISIT_TEXT : "" ) ?>
                     <?= ((!empty($visitInfo['firstVisit']) && $visitInfo['firstVisit'] == 'NO') ? TEXT_RETURN_VISIT_TEXT : "" ) ?><br>
                     <label class="close"><?= TEXT_NEXT_VAX_DATE_INPUT_LABEL ?>:</label>
-                    <span <?= (!empty($visitInfo['patientNextVaccinationDate']) && (strtotime($visitInfo['patientNextVaccinationDate']) <= time()) ? ' class="alert"' : '') ?>><?= (!empty($visitInfo['patientNextVaccinationDate']) ? '&nbsp;'.date(TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT, strtotime($visitInfo['patientNextVaccinationDate'])).'&nbsp;' : TEXT_NOT_SPECIFIED )?></span>
+                    <span <?= (!empty($visitInfo['patientNextVaccinationDate']) && (strtotime($visitInfo['patientNextVaccinationDate']) <= time()) ? ' class="alert"' : '') ?>><?= (!empty($visitInfo['patientNextVaccinationDate']) ? '&nbsp;'.date(TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT, strtotime($visitInfo['patientNextVaccinationDate'])).'&nbsp;' : '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' )?></span>
                 </div>
                 <div class="rightDiv">
-                    <label class="close"><?= TEXT_BIRTHDATE_LABEL ?>:</label><?= formatDbDate ($visitInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED ) ?>&nbsp;<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?><br>
+                    <label class="close"><?= TEXT_BIRTHDATE_LABEL ?>:</label><?= formatDbDate ($visitInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' ) ?>&nbsp;<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?><br>
                     <label class="close"><?= TEXT_MARITAL_STATUS_LABEL ?>:</label> <?= (!empty($visitInfo['patientMaritalStatus']) ? $maritalStatusString[$visitInfo['patientMaritalStatus']] : str_repeat("_",22))  ?><br>
                     <label class="close"><?= TEXT_PATIENT_NEW_PROFESSION_LABEL ?>:</label> <?= (!empty($visitInfo['patientProfession']) ? $visitInfo['patientProfession'] : str_repeat("_",22))  ?>
                 </div>
@@ -259,11 +283,10 @@ function writeTopicMenu ($sessionInfo) {
             <div class="infoBlock threeCm">
                 <label><?= TEXT_VISIT_LIST_HEAD_COMPLAINT ?>:</label>
                 <?= (!empty($visitInfo['referredFrom']) ? '<p class="indent1"><label class="close">'.TEXT_REFERRED_FROM_LABEL.':</label>'.$visitInfo['referredFrom'].'</p>' : '') ?>
-                <?= (!empty($visitInfo['primaryComplaint']) ? '<p class="indent1">'.$visitInfo['primaryComplaint'].'</p>' : '') ?>
-                <?= (!empty($visitInfo['secondaryComplaint']) ? '<p class="indent1">'.$visitInfo['secondaryComplaint'].'</p>' : '') ?>
+                <?= (!empty($visitInfo['primaryComplaint']) ? '<p class="indent1 printNotes">'.$visitInfo['primaryComplaint'].'</p>' : '') ?>
             </div>
             <div class="hrDiv"></div>
-            <div class="infoBlock<?= $visitInfo['visitStatus'] == 'Closed' ? ' hideDiv' : '' ?>">
+            <div class="infoBlock">
                 <div class="infoBlock">
                     <table class="fullPortrait">
                         <tr>
@@ -275,20 +298,22 @@ function writeTopicMenu ($sessionInfo) {
                             <th class="sixCol"><label><?= TEXT_VISIT_FORM_BS_LABEL ?></label></th>
                         </tr>
                         <tr>
-                            <td class="sixCol">&nbsp;</td>
-                            <td class="sixCol">&nbsp;</td>
-                            <td class="sixCol">&nbsp;</td>
-                            <td class="sixCol">&nbsp;</td>
-                            <td class="sixCol">&nbsp;</td>
-                            <td class="sixCol">&nbsp;</td>
+                            <td class="sixCol"><?= (!empty($visitInfo['height']) ? $visitInfo['height'].'&nbsp;'.$visitInfo['heightUnits'] : '&nbsp;') ?></td>
+                            <td class="sixCol"><?= (!empty($visitInfo['weight']) ? $visitInfo['weight'].'&nbsp;'.$visitInfo['weightUnits'] : '&nbsp;') ?></td>
+                            <td class="sixCol"><?= (!empty($visitInfo['temp']) ? $visitInfo['temp'].'&deg;&nbsp;'.$visitInfo['tempUnits'] : '&nbsp;') ?></td>
+                            <td class="sixCol"><?= (!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpSystolic'] : '&nbsp;').'/'.(!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpDiastolic'] : '&nbsp;') ?></td>
+                            <td class="sixCol"><?= (!empty($visitInfo['pulse']) ? $visitInfo['pulse'] : '&nbsp;') ?></td>
+                            <td class="sixCol"><?= (!empty($visitInfo['glucose']) ? $visitInfo['glucoseUnits'].': '.$visitInfo['glucose'] : '&nbsp;') ?></td>
                         </tr>
                     </table>
                     <div class="hrDiv"></div>
                 </div>
-                <div class="infoBlock fiveCm">
-                    <label><?= TEXT_EXAM_NOTES_LABEL ?>:</label>
+                <div class="infoBlock threeCm">
+                    <label><?= TEXT_VISIT_LIST_HEAD_NOTES ?>:</label>
+                    <?= (!empty($visitInfo['secondaryComplaint']) ? '<p class="indent1  printNotes">'.$visitInfo['secondaryComplaint'].'</p>' : '') ?>
                 </div>
-                <div class="infoBlock">
+                <div class="clearFloat"></div>
+                <div class="infoBlock <?= $visitInfo['visitStatus'] == 'Closed' ? ' hideDiv' : '' ?>">
                     <div class="hrDiv"></div>
                     <table class="fullPortrait">
                         <tr>
@@ -297,9 +322,21 @@ function writeTopicMenu ($sessionInfo) {
                             <th class="threeCol"><label><?= TEXT_DIAGNOSIS_3_LABEL ?></label></th>
                         </tr>
                         <tr>
-                            <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
-                            <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
-                            <td class="threeCol"><?= TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL ?></td>
+                            <td class="threeCol"><?= empty($visitInfo['diagnosis1']) ?
+                                    TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL :
+                                    (!empty($visitInfo['condition1']) ? '['.conditionText($visitInfo['condition1']).']' : '[&nbsp;&nbsp;]').
+                                    '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis1'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
+                            </td>
+                            <td class="threeCol"><?= empty($visitInfo['diagnosis2']) ?
+                                    TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL :
+                                    (!empty($visitInfo['condition2']) ? '['.conditionText($visitInfo['condition2']).']' : '[&nbsp;&nbsp;]').
+                                    '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis2'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
+                            </td>
+                            <td class="threeCol"><?= empty($visitInfo['diagnosis3']) ?
+                                    TEXT_VISIT_FORM_DIAGNOSIS_PROMPT_LABEL :
+                                    (!empty($visitInfo['condition3']) ? '['.conditionText($visitInfo['condition3']).']' : '[&nbsp;&nbsp;]').
+                                    '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis3'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="3" style="border-top: 1px solid #DDD"><label><?= TEXT_REFER_TO_LABEL ?>:</label></td>
@@ -307,10 +344,16 @@ function writeTopicMenu ($sessionInfo) {
                     </table>
                     <div class="hrDiv"></div>
                 </div>
-                <div class="infoBlock fiveCm">
-                    <label><?= TEXT_ASSESSMENT_NOTES_LABEL ?>:</label>
-                </div>
             </div>
+            <div class="clearFloat"></div>
+            <div class="infoBlock fiveCm <?= $visitInfo['visitStatus'] == 'Closed' ? ' hideDiv' : '' ?>">
+                <label><?= TEXT_ASSESSMENT_NOTES_LABEL ?>:</label>
+            </div>
+            <div class="infoBlock <?= $visitInfo['visitStatus'] != 'Closed' ? ' hideDiv' : '' ?>">
+                <label><?= TEXT_ASSESSMENT_NOTES_LABEL ?>:</label>
+                <p class="indent1"><?= TEXT_REPRINT_HEADING ?></p>
+            </div>
+            <div class="clearFloat"></div>
             <div class="infoBlock<?= $visitInfo['visitStatus'] == 'Open' ? ' hideDiv' : '' ?>">
                 <table class="fullPortrait">
                     <tr>
@@ -319,14 +362,31 @@ function writeTopicMenu ($sessionInfo) {
                         <th class="threeCol"><label><?= TEXT_DIAGNOSIS_3_LABEL ?></label></th>
                     </tr>
                     <tr>
-                        <td class="threeCol"><?= empty($visitInfo['condition1']) ? TEXT_NOT_SPECIFIED :  '['.conditionText($visitInfo['condition1']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis1'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
-                        <td class="threeCol"><?= empty($visitInfo['condition2']) ? TEXT_NOT_SPECIFIED :  '['.conditionText($visitInfo['condition2']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis2'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
-                        <td class="threeCol"><?= empty($visitInfo['condition3']) ? TEXT_NOT_SPECIFIED :  '['.conditionText($visitInfo['condition3']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis3'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
+                        <td class="threeCol"><?= empty($visitInfo['diagnosis1']) ?
+                                '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' :
+                                (!empty($visitInfo['condition1']) ? '['.conditionText($visitInfo['condition1']).']' : '[&nbsp;&nbsp;]').
+                                '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis1'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
+                        </td>
+                        <td class="threeCol"><?= empty($visitInfo['diagnosis2']) ?
+                                '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' :
+                                (!empty($visitInfo['condition2']) ? '['.conditionText($visitInfo['condition2']).']' : '[&nbsp;&nbsp;]').
+                                '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis2'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
+                        </td>
+                        <td class="threeCol"><?= empty($visitInfo['diagnosis3']) ?
+                                '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' :
+                                (!empty($visitInfo['condition3']) ? '['.conditionText($visitInfo['condition3']).']' : '[&nbsp;&nbsp;]').
+                                '&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis3'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="border-top: 1px solid #DDD"><label><?= TEXT_REFER_TO_LABEL ?>:</label>
+                            <?= $visitInfo['visitStatus'] == 'Closed' ? '&nbsp;'.(empty($visitInfo['referredTo']) ? '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' : $visitInfo['referredTo']): '' ?></td>
                     </tr>
                 </table>
             </div>
         </div>
         <div class="clearFloat"></div>
     </div>
+    <? (!empty($debugErrorInfo) ? $debugErrorInfo : "") ?>
 </body>
 <?php @mysqli_close($dbLink); ?>

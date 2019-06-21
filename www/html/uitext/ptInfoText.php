@@ -119,7 +119,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_CONTACTALTPHONE_MISSING')) { define('TEXT_CONTACTALTPHONE_MISSING','(alternate phone number not provided)',false); }
 	if (!defined('TEXT_CONTACTPHONE_LABEL')) { define('TEXT_CONTACTPHONE_LABEL','Primary phone',false); }
 	if (!defined('TEXT_CONTACTPHONE_MISSING')) { define('TEXT_CONTACTPHONE_MISSING','(primary phone number not provided)',false); }
-	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','(Not specified)',false); }
+	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','Not specified',false); }
 	if (!defined('TEXT_DISCHARGE_VISIT_INFO')) { define('TEXT_DISCHARGE_VISIT_INFO','Discharge this patient',false); }
 	if (!defined('TEXT_EDIT_VISIT_INFO')) { define('TEXT_EDIT_VISIT_INFO','Edit this visit',false); }
 	if (!defined('TEXT_FAMILYID_LABEL')) { define('TEXT_FAMILYID_LABEL','Family ID',false); }
@@ -133,7 +133,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_HOMENEIGHBORHOOD_MISSING')) { define('TEXT_HOMENEIGHBORHOOD_MISSING','(Neighborhood not specified)',false); }
 	if (!defined('TEXT_HOMESTATE_MISSING')) { define('TEXT_HOMESTATE_MISSING','(State not specified)',false); }
 	if (!defined('TEXT_MARITAL_STATUS_LABEL')) { define('TEXT_MARITAL_STATUS_LABEL','Marital status',false); }
-	if (!defined('TEXT_MARITAL_STATUS_NOT_SPECIFIED')) { define('TEXT_MARITAL_STATUS_NOT_SPECIFIED','(Not specified)',false); }
+	if (!defined('TEXT_MARITAL_STATUS_NOT_SPECIFIED')) { define('TEXT_MARITAL_STATUS_NOT_SPECIFIED','Not specified',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_NOT_FOUND')) { define('TEXT_MESSAGE_PATIENT_ID_NOT_FOUND','The patient with that ID was not found.',false); }
 	if (!defined('TEXT_MORE_VISIT_INFO')) { define('TEXT_MORE_VISIT_INFO','See all of the information about the visit description',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT')) { define('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT','m/d/Y',false); }
@@ -156,16 +156,16 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_PATIENT_VISIT_LIST_HEAD')) { define('TEXT_PATIENT_VISIT_LIST_HEAD','Earlier visits to this clinic',false); }
 	if (!defined('TEXT_PHONE_LABEL')) { define('TEXT_PHONE_LABEL','Contact info',false); }
 	if (!defined('TEXT_PREFERREDLANGUAGE_LABEL')) { define('TEXT_PREFERREDLANGUAGE_LABEL','Preferred language',false); }
-	if (!defined('TEXT_PREFERREDLANGUAGE_NOT_SPECIFIED')) { define('TEXT_PREFERREDLANGUAGE_NOT_SPECIFIED','(not specified)',false); }
+	if (!defined('TEXT_PREFERREDLANGUAGE_NOT_SPECIFIED')) { define('TEXT_PREFERREDLANGUAGE_NOT_SPECIFIED','Not specified',false); }
 	if (!defined('TEXT_PROFESSION_LABEL')) { define('TEXT_PROFESSION_LABEL','Profession',false); }
 	if (!defined('TEXT_RESPONSIBLE_PARTY_LABEL')) { define('TEXT_RESPONSIBLE_PARTY_LABEL','Responsbile Person',false); }
-	if (!defined('TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED')) { define('TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED','(Not specified)',false); }
+	if (!defined('TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED')) { define('TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED','Not specified',false); }
 	if (!defined('TEXT_SEX_OPTION_F')) { define('TEXT_SEX_OPTION_F','F',false); }
 	if (!defined('TEXT_SEX_OPTION_M')) { define('TEXT_SEX_OPTION_M','M',false); }
 	if (!defined('TEXT_SEX_OPTION_X')) { define('TEXT_SEX_OPTION_X','X',false); }
 	if (!defined('TEXT_SHOW_PATIENT_SUBMIT_BUTTON')) { define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','Search',false); }
 	if (!defined('TEXT_SHOW_VISIT_INFO')) { define('TEXT_SHOW_VISIT_INFO','Show visit details',false); }
-	if (!defined('TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED')) { define('TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED','(Not specified)',false); }
+	if (!defined('TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED')) { define('TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED','Not specified',false); }
 	if (!defined('TEXT_VISIT_DATE_ONLY_FORMAT')) { define('TEXT_VISIT_DATE_ONLY_FORMAT','m/d/Y',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTIONS')) { define('TEXT_VISIT_LIST_ACTIONS','Visit actions',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_DISCHARGE')) { define('TEXT_VISIT_LIST_ACTION_DISCHARGE','Discharge',false); }
@@ -192,7 +192,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_CONTACTALTPHONE_MISSING')) { define('TEXT_CONTACTALTPHONE_MISSING','(Otro número telefónico no especificado)',false); }
 	if (!defined('TEXT_CONTACTPHONE_LABEL')) { define('TEXT_CONTACTPHONE_LABEL','Primer número telefónico',false); }
 	if (!defined('TEXT_CONTACTPHONE_MISSING')) { define('TEXT_CONTACTPHONE_MISSING','(Primer número telefónico no especificado)',false); }
-	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','(No especificada)',false); }
+	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','(No especificado)',false); }
 	if (!defined('TEXT_DISCHARGE_VISIT_INFO')) { define('TEXT_DISCHARGE_VISIT_INFO','Dar de alta este paciente',false); }
 	if (!defined('TEXT_EDIT_VISIT_INFO')) { define('TEXT_EDIT_VISIT_INFO','Actualizar esta visita',false); }
 	if (!defined('TEXT_FAMILYID_LABEL')) { define('TEXT_FAMILYID_LABEL','Carpeta (familia)',false); }
@@ -206,12 +206,12 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_HOMENEIGHBORHOOD_MISSING')) { define('TEXT_HOMENEIGHBORHOOD_MISSING','(Localidad no especificada)',false); }
 	if (!defined('TEXT_HOMESTATE_MISSING')) { define('TEXT_HOMESTATE_MISSING','(Departamento no especificado)',false); }
 	if (!defined('TEXT_MARITAL_STATUS_LABEL')) { define('TEXT_MARITAL_STATUS_LABEL','Estado civil',false); }
-	if (!defined('TEXT_MARITAL_STATUS_NOT_SPECIFIED')) { define('TEXT_MARITAL_STATUS_NOT_SPECIFIED','(No especificado)',false); }
+	if (!defined('TEXT_MARITAL_STATUS_NOT_SPECIFIED')) { define('TEXT_MARITAL_STATUS_NOT_SPECIFIED','No especificado',false); }
 	if (!defined('TEXT_MESSAGE_PATIENT_ID_NOT_FOUND')) { define('TEXT_MESSAGE_PATIENT_ID_NOT_FOUND','No se encontró el paciente con ese ID.',false); }
 	if (!defined('TEXT_MORE_VISIT_INFO')) { define('TEXT_MORE_VISIT_INFO','Ver la descripción completa',false); }
 	if (!defined('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT')) { define('TEXT_NEXT_VAX_DATE_DISPLAY_FORMAT','d-m-Y',false); }
-	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','La próxima fecha de vacunación',false); }
-	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificada',false); }
+	if (!defined('TEXT_NEXT_VAX_DATE_INPUT_LABEL')) { define('TEXT_NEXT_VAX_DATE_INPUT_LABEL','Próxima fecha de vacunación',false); }
+	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificado',false); }
 	if (!defined('TEXT_NO_PREVIOUS_VISITS')) { define('TEXT_NO_PREVIOUS_VISITS','No hay archivos de admisiones anteriores',false); }
 	if (!defined('TEXT_ORGAN_DONOR')) { define('TEXT_ORGAN_DONOR','[Donante de órganos]',false); }
 	if (!defined('TEXT_PATIENTNATIONALID_LABEL')) { define('TEXT_PATIENTNATIONALID_LABEL','Cédula',false); }
@@ -232,13 +232,13 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_PREFERREDLANGUAGE_NOT_SPECIFIED')) { define('TEXT_PREFERREDLANGUAGE_NOT_SPECIFIED','(no está especificado)',false); }
 	if (!defined('TEXT_PROFESSION_LABEL')) { define('TEXT_PROFESSION_LABEL','Profesión',false); }
 	if (!defined('TEXT_RESPONSIBLE_PARTY_LABEL')) { define('TEXT_RESPONSIBLE_PARTY_LABEL','Encargado/a',false); }
-	if (!defined('TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED')) { define('TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED','(No especificado)',false); }
+	if (!defined('TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED')) { define('TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED','No especificado',false); }
 	if (!defined('TEXT_SEX_OPTION_F')) { define('TEXT_SEX_OPTION_F','M',false); }
 	if (!defined('TEXT_SEX_OPTION_M')) { define('TEXT_SEX_OPTION_M','H',false); }
 	if (!defined('TEXT_SEX_OPTION_X')) { define('TEXT_SEX_OPTION_X','X',false); }
 	if (!defined('TEXT_SHOW_PATIENT_SUBMIT_BUTTON')) { define('TEXT_SHOW_PATIENT_SUBMIT_BUTTON','Buscar',false); }
 	if (!defined('TEXT_SHOW_VISIT_INFO')) { define('TEXT_SHOW_VISIT_INFO','Mostrar los detalles de la visita',false); }
-	if (!defined('TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED')) { define('TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED','(No especificado)',false); }
+	if (!defined('TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED')) { define('TEXT_TEXT_PROFESSION_LABEL_NOT_SPECIFIED','No especificado',false); }
 	if (!defined('TEXT_VISIT_DATE_ONLY_FORMAT')) { define('TEXT_VISIT_DATE_ONLY_FORMAT','d-m-Y',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTIONS')) { define('TEXT_VISIT_LIST_ACTIONS','Acciones de la visita',false); }
 	if (!defined('TEXT_VISIT_LIST_ACTION_DISCHARGE')) { define('TEXT_VISIT_LIST_ACTION_DISCHARGE','Dar de alta',false); }
@@ -250,7 +250,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_LIST_HEAD_DIAGNOSIS1')) { define('TEXT_VISIT_LIST_HEAD_DIAGNOSIS1','Diagnóstico 1',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_DOCTOR')) { define('TEXT_VISIT_LIST_HEAD_DOCTOR','Médico',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_TIME')) { define('TEXT_VISIT_LIST_HEAD_TIME','Llegó',false); }
-	if (!defined('TEXT_VISIT_LIST_MISSING')) { define('TEXT_VISIT_LIST_MISSING','(no especificado)',false); }
+	if (!defined('TEXT_VISIT_LIST_MISSING')) { define('TEXT_VISIT_LIST_MISSING','No especificado',false); }
 	if (!defined('TEXT_YMD_AGE_DAYS')) { define('TEXT_YMD_AGE_DAYS','d',false); }
 	if (!defined('TEXT_YMD_AGE_MONTHS')) { define('TEXT_YMD_AGE_MONTHS','m',false); }
 	if (!defined('TEXT_YMD_AGE_YEARS')) { define('TEXT_YMD_AGE_YEARS','a',false); }

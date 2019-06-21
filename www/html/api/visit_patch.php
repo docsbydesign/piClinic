@@ -186,7 +186,18 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 		// 'patientHomeCity' 	// This shouldn't change after object creation
 		// 'patientHomeCounty' 	// This shouldn't change after object creation
 		// 'patientHomeState' 	// This shouldn't change after object creation
-		,'diagnosis1'
+        ,'height'
+        ,'heightUnits'
+        ,'weight'
+        ,'weightUnits'
+        ,'temp'
+        ,'tempUnits'
+        ,'bpSystolic'
+        ,'bpDiastolic'
+        ,'pulse'
+        ,'glucose'
+        ,'glucoseUnits'
+        ,'diagnosis1'
 		,'condition1'
 		,'diagnosis2'
 		,'condition2'

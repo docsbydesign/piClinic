@@ -196,13 +196,13 @@ function writeOptionsMenu ($visitInfo) {
 	<div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
 		<div class="infoBlock">
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
-				<span class="idInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>
+				<span class="linkInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>
 			<p><?= formatDbDate ($visitInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED ) ?>&nbsp;<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>&nbsp;&nbsp;&nbsp;
-			<span class="idInHeading"><a class="a_patientview" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'] ?><?= createFromLink (FROM_LINK_QP, __FILE__, 'a_patientview') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
+			<span class="linkInHeading"><a class="a_patientview" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'] ?><?= createFromLink (FROM_LINK_QP, __FILE__, 'a_patientview') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
 		</div>
 		<div class="infoBlock">
 			<p><label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?></p>
-			<p><label class="close"><?= TEXT_VISIT_ID_LABEL ?>:</label><span class="idInHeading"><?= $visitInfo['patientVisitID'] ?></span></p>
+			<p><label class="close"><?= TEXT_VISIT_ID_LABEL ?>:</label><span class="linkInHeading"><?= $visitInfo['patientVisitID'] ?></span></p>
 		</div>
 	</div>
 	<div class="clearFloat"></div>
@@ -234,9 +234,6 @@ function writeOptionsMenu ($visitInfo) {
 							</div>
 							<div class="dataBlock">
 								<p><label class="close"><?= TEXT_COMPLAINT_PRIMARY_LABEL ?>:</label>&nbsp;<?= $visitInfo['primaryComplaint'] ?></p>
-							</div>
-							<div class="dataBlock">
-								<p><label class="close"><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?>:</label>&nbsp;<?= $visitInfo['secondaryComplaint'] ?></p>
 							</div>
                             <div class="dataBlock bottomSpace">
                                 <p><label class="close"><?= TEXT_PAYMENT_LABEL ?>:</label>
@@ -270,9 +267,35 @@ function writeOptionsMenu ($visitInfo) {
                                 </p>
                             </div>
 						</div>
+                        <h2><?= TEXT_VISIT_PRECLINIC_HEADING ?></h2>
+                        <table class="piClinicList">
+                            <tr>
+                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_HEIGHT_LABEL ?></label></th>
+                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_WEIGHT_LABEL ?></label></th>
+                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_TEMP_LABEL ?></label></th>
+                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_BP_LABEL ?></label></th>
+                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_PULSE_LABEL ?></label></th>
+                                <th class="sixCol"><label><?= TEXT_VISIT_FORM_BS_LABEL ?></label></th>
+                            </tr>
+                            <tr>
+                                <td class="sixCol"><?= (!empty($visitInfo['height']) ? $visitInfo['height'].'&nbsp;'.$visitInfo['heightUnits'] : '&nbsp;') ?></td>
+                                <td class="sixCol"><?= (!empty($visitInfo['weight']) ? $visitInfo['weight'].'&nbsp;'.$visitInfo['weightUnits'] : '&nbsp;') ?></td>
+                                <td class="sixCol"><?= (!empty($visitInfo['temp']) ? $visitInfo['temp'].'&deg;&nbsp;'.$visitInfo['tempUnits'] : '&nbsp;') ?></td>
+                                <td class="sixCol"><?= (!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpSystolic'] : '&nbsp;').'/'.(!empty($visitInfo['bpDiastolic']) ? $visitInfo['bpDiastolic'] : '&nbsp;') ?></td>
+                                <td class="sixCol"><?= (!empty($visitInfo['pulse']) ? $visitInfo['pulse'] : '&nbsp;') ?></td>
+                                <td class="sixCol"><?= (!empty($visitInfo['glucose']) ? $visitInfo['glucoseUnits'].': '.$visitInfo['glucose'] : '&nbsp;') ?></td>
+                            </tr>
+                        </table>
 					</div>
-					<div class="infoBlock">
-						<h2><?= TEXT_VISIT_DISCHARGE_HEADING ?></h2>
+                    <div class="infoBlock">
+                        <h2><?= TEXT_COMPLAINT_ADDITIONAL_LABEL ?></h2>
+                        <div class="dataBlock">
+                            <p><?= (!empty($visitInfo['secondaryComplaint']) ? $visitInfo['secondaryComplaint'] : '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' ) ?></p>
+                        </div>
+                    </div>
+                    <div class="infoBlock">
+						<h2><?= TEXT_VISIT_DISCHARGE_HEADING ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="linkInHeading"><a class="moreInfo" target="helpIndex" href="/helpHome.php?topic=icd" title="<?= TEXT_ICD_LINK_TITLE ?>"><?= TEXT_ICD_LINK_TEXT ?></a></span></h2>
 						<div class="indent1">
 							<div class="dataBlock">
 								<p><label class="close"><?= TEXT_DATE_TIME_OUT_LABEL.' '.TEXT_VISIT_DATE_FORMAT_LABEL ?></label>

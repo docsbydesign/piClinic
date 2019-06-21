@@ -61,4 +61,32 @@ define('PT_VALIDATE_MODE', PT_VALIDATE_NONE, false); // how to validate patient 
  */
 define('PT_FAMILY_ID_FIRST', true, false);
 
+/*
+ *  used to set the default height units for the clinic. The values are case sensitive.
+ *      in: inches
+ *      cm: centimeters
+ *      mm: millimeters
+ *
+ */
+define('VISIT_DEFAULT_HEIGHT_UNITS','cm',false);
 
+/*
+ *  used to set the default weight units for the clinic. The values are case sensitive.
+ *      lbs: pounds
+ *      kg: kilograms
+ */
+define('VISIT_DEFAULT_WEIGHT_UNITS','kg',false);
+
+/*
+ *  used to set the default temperature units for the clinic. The values are case sensitive.
+ *      C: celsius (centegrade)
+ *      F: fahrenheit
+ */
+define('VISIT_DEFAULT_TEMP_UNITS','C',false);
+
+/*
+ *  used to define workflow of visit open/admission
+ *      true: show patient visit form to print after visit open
+ *      false: return to dashboard after visit open
+ */
+define ('VISIT_PRINT_FORM_AFTER_OPEN',false,false);

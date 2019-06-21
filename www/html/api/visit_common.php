@@ -123,7 +123,18 @@ function makeVisitQueryStringFromRequestParameters ($requestParameters) {
 		// 'patientHomeCity'
 		// 'patientHomeCounty'
 		// 'patientHomeState'
-		,'diagnosis1'
+        //  'height'
+        ,'heightUnits'
+        //  'weight'
+        ,'weightUnits'
+        //  'temp'
+        ,'tempUnits'
+        //  'bpSystolic'
+        //  'bpDiastolic'
+        //  'pulse'
+        //  'glucose'
+        ,'glucoseUnits'
+        ,'diagnosis1'
 		,'diagnosis2'
 		,'diagnosis3'
 		,'referredTo'
@@ -135,6 +146,22 @@ function makeVisitQueryStringFromRequestParameters ($requestParameters) {
 	foreach ($stringFields as $fieldName) {
 		if (!empty($visitIn[$fieldName])) {
 			$visitOut[$fieldName] = trim($visitIn[$fieldName]);
+			// set case on selected fields
+            switch($visitOut[$fieldName]) {
+                case 'heightUnits':
+                case 'weightUnits':
+                    $visitOut[$fieldName] = strtolower($visitOut[$fieldName]);
+                    break;
+
+                case 'tempUnits':
+                case 'glucoseUnits':
+                    $visitOut[$fieldName] = strtoupper($visitOut[$fieldName]);
+                    break;
+
+                default:
+                    // do nothing
+                    break;
+            }
 		} else {
 			unset($visitOut[$fieldName]);
 		}

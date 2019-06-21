@@ -387,7 +387,7 @@ $displayHeader = [
     TEXT_REPORT_DIAGNOSIS_LABEL.'_'.TEXT_DIAGNOSIS_3_LABEL,
     TEXT_REPORT_DIAGNOSIS_LABEL.'_'.TEXT_CONDITION_3_LABEL,
     TEXT_REPORT_REFERRAL_LABEL.'_'.TEXT_REFERRED_TO_LABEL,
-    TEXT_REPORT_REFERRAL_LABEL.'_'.TEXT_RECEIVED_FROM_LABEL
+    TEXT_REPORT_REFERRAL_LABEL.'_'.TEXT_REFERRED_FROM_LABEL
 ];
 
 // clean out HTML that might be in the field headers
@@ -661,7 +661,7 @@ header('Content-type: text/html; charset=utf-8');
                 echo '<th rowspan="2" class="ATAheading nowrap">'.TEXT_DIAGNOSIS_3_LABEL.'</th>';
                 echo '<th rowspan="2" class="ATAheading nowrap vertical"><span>'.TEXT_CONDITION_3_LABEL.'</span></th>';
                 echo '<th rowspan="2" class="ATAheading nowrap">'.TEXT_REFERRED_TO_LABEL.'</th>';
-                echo '<th rowspan="2" class="ATAheading nowrap">'.TEXT_RECEIVED_FROM_LABEL .'</th>';
+                echo '<th rowspan="2" class="ATAheading nowrap">'.TEXT_REFERRED_FROM_LABEL .'</th>';
                 echo '</tr>';
                 echo '<tr>';
                 echo '<th class="ATAheading">'.TEXT_STATE_LABEL.'</th>';

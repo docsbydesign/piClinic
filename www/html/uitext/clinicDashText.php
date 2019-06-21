@@ -126,7 +126,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_LIST_HEAD_COMPLAINT')) { define('TEXT_VISIT_LIST_HEAD_COMPLAINT','Motivo de la visita',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_DOCTOR')) { define('TEXT_VISIT_LIST_HEAD_DOCTOR','Médico',false); }
 	if (!defined('TEXT_VISIT_LIST_HEAD_NAME')) { define('TEXT_VISIT_LIST_HEAD_NAME','Nombre',false); }
-	if (!defined('TEXT_VISIT_LIST_MISSING')) { define('TEXT_VISIT_LIST_MISSING','(no especificado)',false); }
+	if (!defined('TEXT_VISIT_LIST_MISSING')) { define('TEXT_VISIT_LIST_MISSING','No especificado',false); }
 	if (!defined('TEXT_VISIT_TIME_FORMAT')) { define('TEXT_VISIT_TIME_FORMAT','H:i',false); }
 }
 //EOF

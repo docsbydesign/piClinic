@@ -187,6 +187,17 @@ $dbOptionalFields = [
 	// ,'dateTimeOut'		(see above)
 	// ,'clinicPatientID' required (see above)
 	// ,'PatientVisitId' required (see above)
+    ,'height'
+    ,'heightUnits'
+    ,'weight'
+    ,'weightUnits'
+    ,'temp'
+    ,'tempUnits'
+    ,'bpSystolic'
+    ,'bpDiastolic'
+    ,'pulse'
+    ,'glucose'
+    ,'glucoseUnits'
 	,'diagnosis1'
 	,'condition1'
 	,'diagnosis2'

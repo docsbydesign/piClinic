@@ -226,7 +226,7 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 			echo '<p><a class="a_ptNameView" href="'.$nameLink.createFromLink (FROM_LINK_QP, __FILE__, 'a_ptNameView').'">';
 			echo formatPatientNameLastFirst ($pt).'&nbsp;&nbsp;';
 			echo '('.($pt['sex'] == 'M' ? TEXT_SEX_OPTION_M : ($pt['sex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).')<br>';
-			echo '<span class="idInHeading">'.$pt['clinicPatientID'].'</span></a></p>';
+			echo '<span class="linkInHeading">' .$pt['clinicPatientID'].'</span></a></p>';
 			echo '<p class="familyLink">';
 			if (empty($sessionInfo['parameters']['ata'])) {
 				// create the link only if this is a regular pt. search result

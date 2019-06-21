@@ -1,867 +1,893 @@
 /* all pages */
 body {
-	font-family: Helvetica;
-	font-size: 14pt;
-	margin: 0 0 0 0;
+    font-family: Helvetica;
+    font-size: 14pt;
+    margin: 0 0 0 0;
 }
 pre {
-	font-family: monospace;
-	font-size: 10pt;
+    font-family: monospace;
+    font-size: 10pt;
 }
 label {
-	font-weight: bold;
-	margin-right: 1.5em;
-	font-size: 80%
+    font-weight: bold;
+    margin-right: 1.5em;
+    font-size: 80%
 }
 label.close {
-	margin-right: 0.5em;
+    margin-right: 0.5em;
 }
 div.pageBody {
-	padding-left: 20px;
+    padding-left: 20px;
 }
 div.pageBody a {
-	color: #558ED5;	
-	text-decoration: none;
+    color: #558ED5;
+    text-decoration: none;
 }
 div.pageBody a:link {
-	color: #558ED5;
+    color: #558ED5;
 }
 div.pageBody a:visited {
-	color: #558ED5;
+    color: #558ED5;
 }
 div.pageBody a:hover {
-	color: #558ED5;
-	text-decoration: underline;
+    color: #558ED5;
+    text-decoration: underline;
 }
 div.pageBody a:active {
-	color: #558ED5;
-	text-decoration: underline;
+    color: #558ED5;
+    text-decoration: underline;
 }
 h1.pageHeading {
-	font-size: 18pt;
-	font-weight: 400;
+    font-size: 18pt;
+    font-weight: 400;
 }
 h1.noBottomPad {
-	padding-bottom: 0;
+    padding-bottom: 0;
 }
 h1.noBottomMargin {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
-span.idInHeading {
-	font-size: 10pt;
+span.linkInHeading {
+    font-size: 10pt;
 }
 h2 {
-	font-size: 16pt;
-	margin-bottom: 10pt;
-	font-weight: normal;	
+    font-size: 16pt;
+    margin-bottom: 10pt;
+    font-weight: normal;
 }
 .indent1 {
-	margin-left: 1.0em !important;
+    margin-left: 1.0em !important;
 }
 ul.optionList {
-	font-size: 100%;
+    font-size: 100%;
 }
 img.searchPatientIdImage {
-  width:  80px;
-  height: auto;
+    width:  80px;
+    height: auto;
 }
 table#searchResultsTable td {
-	vertical-align: top;
-    border-bottom: thin solid #bbb;	
+    vertical-align: top;
+    border-bottom: thin solid #bbb;
+}
+td.fullNameCell {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 td.fullNameCell p {
-	margin-top: 0;
+    margin-top: 0;
+}
+td.homeCityCell {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 p.familyLink {
-	text-align: right;
+    text-align: right;
 }
-/* 
- *	piClinic banner  
+/*
+ *	piClinic banner
  */
 div#piClinicBannerDiv {
-	overflow: hidden;
-	background-color: #558ED5;
-	position: relative;
-	top: 0;
-	height: 70px;
-	width: 100%;
+    overflow: hidden;
+    background-color: #558ED5;
+    position: relative;
+    top: 0;
+    height: 70px;
+    width: 100%;
 }
 p.piClinicBannerText {
-	color: #FFFFFF;
-	font-size: 150%;
-	font-weight: bold;
-	font-style: italic;
-	padding-left: 20px;
-	background-color: #558ED5;
+    color: #FFFFFF;
+    font-size: 150%;
+    font-weight: bold;
+    font-style: italic;
+    padding-left: 20px;
+    background-color: #558ED5;
 }
 p.piClinicPageTitle {
-	font-size: 150%;
-	font-weight: bold;
+    font-size: 150%;
+    font-weight: bold;
 }
 /*
  *  piClinic error message display\
  */
 div.errorMessage {
-	padding-left:1.0em;
-	font-size:100%;
-	color: #000;
-	overflow: hidden;
-	background-color: #fbb;
-	position: relative;
-	width: 100%;
+    padding-left:1.0em;
+    font-size:100%;
+    color: #000;
+    overflow: hidden;
+    background-color: #fbb;
+    position: relative;
+    width: 100%;
 }
 div.errorMessage  p {
-	margin: 10px 0 10px 0;
+    margin: 10px 0 10px 0;
 }
 p.imageTag {
-	margin-top: 4pt;
+    margin-top: 4pt;
 }
 /*
  * 	piClinic Session information
  */
 div#sessionMenu {
-	background-color: #558ED5;
-	margin-top: 0px;
-	font-size: 70%;
-	color: #FFF;
-	height: 15px;
+    background-color: #558ED5;
+    margin-top: 0px;
+    font-size: 70%;
+    color: #FFF;
+    height: 15px;
 }
 div#sessionDiv {
-	float: left;
+    float: left;
 }
 div#sessionMenu p {
-	margin: 0;
-	padding: 0 0 0 20px;
+    margin: 0;
+    padding: 0 0 0 20px;
 }
 div#sessionMenu a {
-	color: #FFF;
-	text-decoration: none;
+    color: #FFF;
+    text-decoration: none;
 }
 div#sessionMenu a:link {
-	color: #FFF;
+    color: #FFF;
 }
 div#sessionMenu a:visited {
-	color: #FFF;
+    color: #FFF;
 }
 div#sessionMenu a:hover {
-	color: #FFF;
-	text-decoration: underline;
+    color: #FFF;
+    text-decoration: underline;
 }
 div#sessionMenu a:active {
-	color: #FFF;
-	text-decoration: underline;
+    color: #FFF;
+    text-decoration: underline;
 }
 div#sessionPageMenu {
-	float: right;
-	text-align: right;
-	padding: 0 15px 0 0;
+    float: right;
+    text-align: right;
+    padding: 0 15px 0 0;
 }
 /*
  *  app menu styles
  */
 div#topLinkMenuDiv {
-	background-color: #FFF;
-	font-size: 90%;
+    background-color: #FFF;
+    font-size: 90%;
 }
 div#appMenu {
-	float: left;
+    float: left;
 }
 div#commentMenu {
-	float: right;
-	text-align: right;
-	padding: 5px 15px 0 10px;
+    float: right;
+    text-align: right;
+    padding: 5px 15px 0 10px;
 }
 div#commentMenu a {
-	color: #558ED5;
-	text-decoration: none;
+    color: #558ED5;
+    text-decoration: none;
 }
 div#commentMenu a:link {
-	color: #558ED5;
+    color: #558ED5;
 }
 div#commentMenu a:visited {
-	color: #558ED5;
+    color: #558ED5;
 }
 div#commentMenu a:hover {
-	color: #558ED5;
-	text-decoration: underline;
+    color: #558ED5;
+    text-decoration: underline;
 }
 div#commentMenu a:active {
-	color: #558ED5;
-	text-decoration: underline;
+    color: #558ED5;
+    text-decoration: underline;
 }
 ul.topLinkMenuList {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #FFF;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #FFF;
 }
 ul.topLinkMenuList li {
-	margin: 0 0px 0 10px;
-	padding: 5px 0px 0 10px;
-	float: left;
-	border-left: 1px solid #000;
+    margin: 0 0px 0 10px;
+    padding: 5px 0px 0 10px;
+    float: left;
+    border-left: 1px solid #000;
 }
 ul.topLinkMenuList li.currentPage {
-	color: #000;
+    color: #000;
 }
 ul.topLinkMenuList li.firstLink {
-	border-left: none;
+    border-left: none;
 }
 ul.topLinkMenuList li a {
-	color: #558ED5;
-	text-decoration: none;
+    color: #558ED5;
+    text-decoration: none;
 }
 ul.topLinkMenuList li a:link {
-	color: #558ED5;
+    color: #558ED5;
 }
 ul.topLinkMenuList li a:visited {
-	color: #558ED5;
+    color: #558ED5;
 }
 ul.topLinkMenuList li a:hover {
-	color: #558ED5;
-	text-decoration: underline;
+    color: #558ED5;
+    text-decoration: underline;
 }
 ul.topLinkMenuList li a:active {
-	color: #558ED5;
-	text-decoration: underline;
+    color: #558ED5;
+    text-decoration: underline;
 }
 li.separated {
-	padding-top: 12px;
-	border-top: 1px solid #777;
+    padding-top: 12px;
+    border-top: 1px solid #777;
 }
 
 div#topicMenuDiv {
-	border-top: 1px solid #000;
-	background-color: #FFF;
-	font-size: 90%;
+    border-top: 1px solid #000;
+    background-color: #FFF;
+    font-size: 90%;
 }
 div#optionMenuDiv {
-	border-top: 1px solid #000;
-	background-color: #FFF;
-	font-size: 90%;
+    border-top: 1px solid #000;
+    background-color: #FFF;
+    font-size: 90%;
 }
 table.piClinicList {
-	margin-top: 0pt;
+    margin-top: 0pt;
 }
 table.piClinicList th {
-	text-align: left;
-	vertical-align: bottom;
-	padding: 5px 20px 0 0;
+    text-align: left;
+    vertical-align: bottom;
+    padding: 5px 20px 0 0;
 }
 table.piClinicList th.nowrap {
-	white-space: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 table.piClinicList td.notToday {
-	color: #F00;
+    color: #F00;
 }
 
 p.openVisits {
-	font-size: 80%;
-	color: #F00;
-	margin-top: 0px;
-	margin-left: 1.0em;
+    font-size: 80%;
+    color: #F00;
+    margin-top: 0px;
+    margin-left: 1.0em;
 }
 
 table.piClinicList  th.center {
-	text-align: center;
+    text-align: center;
 }
 table.piClinicList  td {
-	text-align: left;
-	vertical-align: top;
-	padding: 0px 20px 0 0;
-	font-size: 90%;
-	border-bottom: 1px dotted #ccc;
+    text-align: left;
+    vertical-align: top;
+    padding: 0px 20px 0 0;
+    font-size: 90%;
+    border-bottom: 1px dotted #ccc;
 }
 table.piClinicList  td.inactive {
-	font-style: italic;
-	color: #aaa;
+    font-style: italic;
+    color: #aaa;
 }
 table.piClinicList  td.noborder {
-	border: none;
+    border: none;
 }
 table.piClinicList  td.numbers {
-	text-align: right;
+    text-align: right;
 }
 table.piClinicList  td.center {
-	text-align: center;
+    text-align: center;
 }
 table.piClinicList td.nowrap {
-	white-space: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 table.piClinicList td.bold {
-	font-weight: bold;
+    font-weight: bold;
 }
 table.piClinicList td.rowsep {
-	border-top: 1px solid #000;
-	border-bottom: 1px solid #000;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
 }
 table.piClinicList th a {
-	color: #000;
-	text-decoration: none;
+    color: #000;
+    text-decoration: none;
 }
 table.piClinicList th a:link {
-	color: #000;
+    color: #000;
 }
 table.piClinicList th a:visited {
-	color: #000;
+    color: #000;
 }
 table.piClinicList th a:hover {
-	color: #000;
-	text-decoration: underline;
+    color: #000;
+    text-decoration: underline;
 }
 table.piClinicList th a:active {
-	color: #000;
-	text-decoration: underline;
+    color: #000;
+    text-decoration: underline;
 }
 p.inactive {
-	font-style: italic;
-	color: #aaa;	
+    font-style: italic;
+    color: #aaa;
 }
 span.inactive {
-	font-style: italic;
-	font-size: 90%;
-	color: #aaa;	
+    font-style: italic;
+    font-size: 90%;
+    color: #aaa;
 }
 span.rawcodevalue {
-	font-style: italic;
-	font-size: 90%;
-	color: #F00;	
+    font-style: italic;
+    font-size: 90%;
+    color: #F00;
 }
 span.loading {
-	font-style: italic;
-	font-size: 80%;
-	color: #F00;
-	margin-left: 5px;
-	display: none;
+    font-style: italic;
+    font-size: 80%;
+    color: #F00;
+    margin-left: 5px;
+    display: none;
 }
 table#dailyVisitTable {
-	font-size: 90%
+    font-size: 90%
 }
 /*
  * piClinic edit field defaults
  */
 label.piClinicFieldLabel {
-	font-size: 100%;
+    font-size: 100%;
 }
 .piClinicEdit {
-	width: 202px;
+    width: 202px;
 }
 p.textAlignRight {
-	text-align: right;
+    text-align: right;
 }
-/* 
- *	clinicLogin.php 
+/*
+ *	clinicLogin.php
  */
 div#loginDiv {
-	position:relative;
-	margin-top: 0px;
-	margin-right: auto; 
-	margin-left: auto; 
-	width: 220px;
-	text-align: left;
+    position:relative;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 220px;
+    text-align: left;
 }
 p.piClinicButton {
-	text-align: right;
+    text-align: right;
 }
 p.logNote {
-	font-size: 80%;
+    font-size: 80%;
 }
 img.showPatientIdImage {
-	width:  80px;
-	height: auto;
+    width:  80px;
+    height: auto;
 }
 img.patientVisitThumb {
-  width:  75px;
-  height: auto;
+    width:  75px;
+    height: auto;
 }
 div.infoBlock {
-	float: left;
-	padding: 0 2.0em 0 0;
+    float: left;
+    padding: 0 2.0em 0 0;
 }
 div.infoBlockRight {
-	float: right;
-	padding: 0 2.0em 0 0;
+    float: right;
+    padding: 0 2.0em 0 0;
 }
 div.clearFloat {
-	clear: both;
+    clear: both;
 }
 div.oneLineTopSpace {
-	margin-top: 14pt;
+    margin-top: 14pt;
 }
 div.infoBlock p {
-	margin: 0 0 5px 0;
+    margin: 0 0 5px 0;
 }
 div.bottomSpace {
-	margin-bottom: 10px;	
+    margin-bottom: 10px;
 }
 div.dataBlock p {
-	margin: 0 0 2pt 0;
+    margin: 0 0 2pt 0;
 }
 div.nameBlock {
-	float: left;
-	padding: 0 2.0em 0 0;
-	margin-top: 10px;
+    float: left;
+    padding: 0 2.0em 0 0;
+    margin-top: 10px;
 }
 div.nameBlock h1 {
-	margin-top: 0;
+    margin-top: 0;
 }
 div.threeCm {
-	min-height: 3.0cm;
+    min-height: 3.0cm;
 }
 div.fiveCm {
-	min-height: 5.0cm;
+    min-height: 5.0cm;
 }
 div.sixCm {
-	min-height: 6.0cm;
+    min-height: 6.0cm;
 }
 div.showDiv {
-	display: block;	
-	width: 20.0em;
-	height: 40px;
-	background-color: #fbb;
-	padding-left: 5.0em;
-	padding-top: 15px;
+    display: block;
+    width: 20.0em;
+    height: 40px;
+    background-color: #fbb;
+    padding-left: 5.0em;
+    padding-top: 15px;
 }
 div.hideDiv {
-	display: none;
+    display: none;
 }
 /*
  * 	ptInfo.php
  */
 div.currentVisitList {
-	background-color: #DDD;
-	padding: 1px 5px 5px 0.5em;
-	margin: 12pt 0 0 0;
+    background-color: #DDD;
+    padding: 1px 5px 5px 0.5em;
+    margin: 12pt 0 0 0;
 }
 p#visitListHeading {
-	margin: 0 0 0 0;
-	font-weight: bold;
+    margin: 0 0 0 0;
+    font-weight: bold;
 }
 table.current {
-	margin: 5px 0 0 1.0em;
+    margin: 5px 0 0 1.0em;
 }
 div#patientVisitListDiv{
 }
 div#patientVisitListDiv table {
-	margin-top: 5px;
+    margin-top: 5px;
 }
 div#PatientDataView {
-	max-width: 600px;
-	float: left;
+    max-width: 600px;
+    float: left;
 }
 div#PatientAllergies {
-	width: 600px;
-	float: left;
+    width: 600px;
+    float: left;
 }
 div#PatientHistoryDiv {
-	max-width: 600px;
-	float: left;
+    max-width: 600px;
+    float: left;
 }
 textarea.allergyEdit,
 textarea.currentMedicationsEdit,
 textarea.complaintEdit {
-	width: 30.0em;
-	height: 56pt;
-	font-size: 12pt;
+    width: 30.0em;
+    height: 56pt;
+    font-size: 12pt;
 }
 ul.allergyList,
 ul.medsList {
-	font-size: 90%;
-	margin-top: 5px;
+    font-size: 90%;
+    margin-top: 5px;
 }
 ul.visitImageList {
-	list-style-type: none;
+    list-style-type: none;
 }
 ul.visitImageList li {
-	vertical-align: top;
+    vertical-align: top;
 }
 input.diagnostic {
-	width: 30.0em;
+    width: 30.0em;
 }
 input.paymentEdit {
-	text-align: right;
+    text-align: right;
 }
 .ninetyWidth {
-	width: 90%;
+    width: 90%;
 }
 .fullWidth {
-	width: 100%;
+    width: 100%;
 }
 input.wide {
-	width: 30.0em;
+    width: 30.0em;
 }
 input.short {
-	width: 6.0em;
+    width: 6.0em;
 }
 input.twoDigitNumeric {
-	width: 3.0em;
+    width: 3.0em;
 }
 input.fourDigitNumeric {
-	width: 5.0em;
+    width: 5.0em;
 }
 input.timeNumeric {
-	width: 6.0em;
+    width: 6.0em;
 }
 .moreInfo {
-	font-size: 80%;
+    font-size: 80%;
 }
 textarea.commentTextEdit {
-	width: 40.0em;
-	height: 144pt;
-	font-size: 12pt;
+    width: 40.0em;
+    height: 144pt;
+    font-size: 12pt;
+}
+p.notes {
+    max-width: 600px;
+    word-break: break-all;
+}
+p.printNotes {
+    max-width: 100%;
+    word-break: break-all;
 }
 .noshow {
-	display: none; 
+    display: none;
 }
-/* 
-* report styles 
+/*
+* report styles
 */
 div.reportPage {
 }
 
 div.portraitReport {
-	width: 800px;
+    width: 800px;
 }
 
 div.legalReport {
-	width: 800px;
+    width: 800px;
 }
 .alert {
-	color:white;
-	background-color: #F00;
+    color:white;
+    background-color: #F00;
 }
 
 div.ledgerLandscapeReport {
-	width: 2250px;
+    width: 2250px;
 }
 div.leftDiv {
-	float: left;
+    float: left;
 }
 div.rightDiv {
-	float: right;
+    float: right;
 }
 div.newPage {
-	page-break-before: always;
+    page-break-before: always;
 }
 
 div.hrDiv {
-	float: left;
-	width: 100%;
-	height: 1px;
-	margin-right: 2.0em;
-	border-top: 1px solid #ddd;
-	padding-top: 4px;
+    float: left;
+    width: 100%;
+    height: 1px;
+    margin-right: 2.0em;
+    border-top: 1px solid #ddd;
+    padding-top: 4px;
 }
 table.report {
-	border-collapse: collapse;
+    border-collapse: collapse;
     border-spacing: 0;
-	font-size: 10pt;
+    font-size: 10pt;
 }
 
 table.report a.reportLink {
-	color: #000;
-	text-decoration: none;
+    color: #000;
+    text-decoration: none;
 }
 table.report a.reportLink:link {
-	color: #000;
+    color: #000;
 }
 table.report a.reportLink:visited {
-	color: #000;
+    color: #000;
 }
 table.report a.reportLink:hover {
-	color: #000;
-	text-decoration: underline;
+    color: #000;
+    text-decoration: underline;
 }
 table.report a.reportLink:active {
-	color: #000;
-	text-decoration: underline;
+    color: #000;
+    text-decoration: underline;
 }
 
 table.report th.AT2heading {
-	text-align: center;
-	border: 2px #000 solid;
-	padding: 0 10px 0 10px;
+    text-align: center;
+    border: 2px #000 solid;
+    padding: 0 10px 0 10px;
 }
 
 table.report th.ATAheading {
-	text-align: center;
-	border: 2px #000 solid;
-	padding: 5px 10px 5px 10px;
-	background-color: #DDD;
+    text-align: center;
+    border: 2px #000 solid;
+    padding: 5px 10px 5px 10px;
+    background-color: #DDD;
 }
 table.report th.left {
-	text-align: left;
+    text-align: left;
 }
 
 table.report th.nowrap {
-	white-space: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 table.report td {
-	border: 1px #000 solid;
-	border-right: 2px #000 solid;
-	border-left: 2px #000 solid;
-	min-width: 3.0em;
-	max-width: 25.0em;
-	word-wrap: normal;
-	padding: 2px 5px 2px 10px;
-	vertical-align: top;
+    border: 1px #000 solid;
+    border-right: 2px #000 solid;
+    border-left: 2px #000 solid;
+    min-width: 3.0em;
+    max-width: 25.0em;
+    word-wrap: normal;
+    padding: 2px 5px 2px 10px;
+    vertical-align: top;
 }
 
 table.report td.total {
-	border-top: 2px #000 solid;
-	border-bottom: 3px #000 solid;
+    border-top: 2px #000 solid;
+    border-bottom: 3px #000 solid;
 }
 
 table.report td.wide {
-	min-width: 25.0em;
+    min-width: 25.0em;
 }
 
 table.report td.very-wide {
-	max-width: 45.0em;
+    max-width: 45.0em;
 }
 
 table.report td.med-wide {
-	min-width: 15.0em;
+    min-width: 15.0em;
 }
 
 table.report td.bold {
-	border: 2px #000 solid;
-	font-weight: bold;
+    border: 2px #000 solid;
+    font-weight: bold;
 }
 
 table.report td.numbers {
-	text-align: right;
+    text-align: right;
 }
 
 table.report td.center {
-	text-align: center;
+    text-align: center;
 }
 
 table.report td.nowrap {
-	white-space: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 table.report tr.ata {
 }
 
 table.report th.vertical {
-	position: relative;
-	height: 90px;
+    position: relative;
+    height: 90px;
 }
 
 table.report th.vertical span {
-	transform: rotate(-90deg);
-	transform-origin: 0 50%;
-	display: block;
-	position: absolute;
-	bottom: 0;
-	left: 50%
+    transform: rotate(-90deg);
+    transform-origin: 0 50%;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%
 }
 
 p.continued {
-	text-align: right;
-	font-size: 80%;
+    text-align: right;
+    font-size: 80%;
 }
 
 div#AT2R-SummaryReport {
-	width: 805px;
+    width: 805px;
 }
 
 div#AT2R-ReportHeading p {
-	text-align: center;
-	margin: 0;
-	padding: 0;
-	line-height:150%;
-	font-size: 12pt;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    line-height:150%;
+    font-size: 12pt;
 }
 
 div#AT2R-ReportTitle p {
-	line-height: 100%;
+    line-height: 100%;
 }
 
 table#AT2R-LogoTable {
-	width:100%;
+    width:100%;
 }
 
 div#AT2-ReportHeading p {
-	text-align: center;
-	margin: 0;
-	padding: 0;
-	line-height:150%;
-	font-size: 12pt;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    line-height:150%;
+    font-size: 12pt;
 }
 
 div#AT2-ReportHeading p.left {
-	text-align: left;
+    text-align: left;
 }
 
 td#ReportHeading-LeftLogo {
-	width: 100px;
+    width: 100px;
 }
 
 td#ReportHeading-RightLogo {
-	width: 100px;
+    width: 100px;
 }
 
 td#AT2R-ReportID {
-	text-align: right;
+    text-align: right;
 }
 
 div#DailyVisitList {
-	width:3925px;
+    width:3925px;
 }
 
 table#ATA-LogoTable {
-	width: 100%;
-	padding: 0 0 5px 0;
+    width: 100%;
+    padding: 0 0 5px 0;
 }
 
 td#ReportHeading-LeftTitle p {
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 12pt;
-	font-weight: bold;	
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 12pt;
+    font-weight: bold;
 }
 
 td#ReportHeading-RightInfo {
-	width: 25%;
+    width: 25%;
 }
 
 table#serviceTypeTable {
-	border: 2px #000 solid;
-	border-collapse: collapse;
+    border: 2px #000 solid;
+    border-collapse: collapse;
     border-spacing: 0;
-	font-size: 12pt;
+    font-size: 12pt;
 }
 
 table#serviceTypeTable td {
-	text-align:left;
-	vertical-align: middle;
-	padding: 0 10px 0 10px;
+    text-align:left;
+    vertical-align: middle;
+    padding: 0 10px 0 10px;
 }
 
 table#serviceTypeTable td#ServiceTypeTitle {
-	font-size:120%;
-	text-transform: uppercase;
-	vertical-align: middle;
+    font-size:120%;
+    text-transform: uppercase;
+    vertical-align: middle;
 }
 
 table#serviceTypeTable td#ServiceTypeTitle  p {
-	vertical-align:middle;
-	padding: 0 0 0 10px;
+    vertical-align:middle;
+    padding: 0 0 0 10px;
 }
 
 div.headingField12{
-	width: 12%;
-	float:left;
-	margin: 5px 5px 0 0;
+    width: 12%;
+    float:left;
+    margin: 5px 5px 0 0;
 }
 
 div.headingField24{
-	width: 24%;
-	float:left;
-	margin: 5px 5px 0 0;
+    width: 24%;
+    float:left;
+    margin: 5px 5px 0 0;
 }
 
 div.headingField36{
-	width: 36%;
-	float:left;
-	margin: 5px 5px 0 0;
+    width: 36%;
+    float:left;
+    margin: 5px 5px 0 0;
 }
 
 div.headingLabel{
-	float: left;
-	border-bottom: 1px #FFF solid;
+    float: left;
+    border-bottom: 1px #FFF solid;
 }
 
 div.headingValue {
-	width: 100%;
-	border-bottom: 1px #000 solid;
+    width: 100%;
+    border-bottom: 1px #000 solid;
 }
 
 div.right {
-	float:right;
+    float:right;
 }
 span.boxed {
-	border: 1px solid #000;
-	height: 30px;
-	min-width: 30px;
-	padding: 2px;
+    border: 1px solid #000;
+    height: 30px;
+    min-width: 30px;
+    padding: 2px;
 }
 span.underline {
-	border-bottom: 1px solid #000;
-	min-width: 20.0em;
+    border-bottom: 1px solid #000;
+    min-width: 20.0em;
 }
 
 span.leftButtonMargin {
-	padding-left:30.0em;	
+    padding-left:30.0em;
 }
 
 .center {
-	text-align: center;
+    text-align: center;
 }
 
 span.ReportDataLink {
-	font-size: 80%;
+    font-size: 80%;
 }
 
 .DiagList {
-	font-size: 12pt;	
+    font-size: 12pt;
 }
 
 h2.DiagList {
-	border-top: 1px #777 solid;
+    border-top: 1px #777 solid;
 }
 
 p.DiagList {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 span.DiagListMissing {
-	color: #F00;
-	font-style: italic;
+    color: #F00;
+    font-style: italic;
 }
 td.DiagList {
-	min-width: 3.0em;
-	word-wrap: normal;
-	padding: 0 5px 2px 10px;
-	vertical-align: top;
+    min-width: 3.0em;
+    word-wrap: normal;
+    padding: 0 5px 2px 10px;
+    vertical-align: top;
 }
 
 .printOnly {
-	display: none;
+    display: none;
 }
 
 table.fullPortrait {
-	width: 800px;
+    width: 800px;
 }
 
 th.sixCol,
 td.sixCol {
-	width: 16%;
-	text-align: left;
+    width: 16%;
+    text-align: left;
 }
 
 th.threeCol,
 td.threeCol {
-	width: 33%;
-	text-align: left;
+    width: 33%;
+    text-align: left;
 }
 
 @media print {
-	.printOnly {
-		display: inline;
-	}
-	.noprint {
-		display:none;
-	}
+    .printOnly {
+        display: inline;
+    }
+    .noprint {
+        display:none;
+    }
 }
 
 /* style sheet for "letter" printing */
 @media print and (width: 8.5in) and (height: 11in) {
-	@page {
-		margin: 1in;
-	}
+    @page {
+        margin: 1in;
+    }
 }

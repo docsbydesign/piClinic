@@ -132,7 +132,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MONTHLY_PAGE_TITLE')) { define('TEXT_MONTHLY_PAGE_TITLE','Registro de Pagos del Mes',false); }
 	if (!defined('TEXT_MONTHLY_VISIT_HEADING')) { define('TEXT_MONTHLY_VISIT_HEADING','Registro de Pagos del Mes',false); }
 	if (!defined('TEXT_MO_DATE_PROMPT_LABEL')) { define('TEXT_MO_DATE_PROMPT_LABEL','Fecha&nbsp;(aaaa-mm)',false); }
-	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','Escoge una fecha.',false); }
+	if (!defined('TEXT_NO_REPORT_PROMPT')) { define('TEXT_NO_REPORT_PROMPT','Seleccione una fecha.',false); }
 	if (!defined('TEXT_NO_VISITS_FOUND_MONTH')) { define('TEXT_NO_VISITS_FOUND_MONTH','No se encontraron visitas en este mes.',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Establecimiento',false); }
 	if (!defined('TEXT_REPORT_DAY_OF_MONTH_LABEL')) { define('TEXT_REPORT_DAY_OF_MONTH_LABEL','Día del mes',false); }
