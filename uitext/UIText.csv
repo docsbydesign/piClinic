@@ -497,7 +497,7 @@ TEXT_PATIENT_SEARCH_ADDRESS_LABEL,Home address,Dirección de la casa
 TEXT_PATIENT_SEARCH_CITY_PLACEHOLDER,City,Municipio
 TEXT_PATIENT_SEARCH_COUNTY_PLACEHOLDER,County,Condado
 TEXT_PATIENT_SEARCH_FOUND_ATA,Found these patients. Select one to enter their visit info or add a new patient above.,Se encontraron estos pacientes. Haga clik para agregar su visita o agregar un paciente nuevo.
-TEXT_PATIENT_SEARCH_FOUND_NOT_ATA,Found these patients. Select one to view thier info.,Se encontraron estos pacientes. Haga clik para ver los detalles.
+TEXT_PATIENT_SEARCH_FOUND_NOT_ATA,Found these patients. Select one to view their info.,Se encontraron estos pacientes. Haga clik para ver los detalles.
 TEXT_PATIENT_SEARCH_NAMEFIRST_PLACEHOLDER,First name,Primer nombre
 TEXT_PATIENT_SEARCH_NAMELAST2_PLACEHOLDER,Second last name,Segundo apellido
 TEXT_PATIENT_SEARCH_NAMELAST_PLACEHOLDER,First last name,Apellido

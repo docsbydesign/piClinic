@@ -67,7 +67,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON')) { define('TEXT_PATIENT_ADD_NEW_PATIENT_BUTTON','Add a new patient',false); }
 	if (!defined('TEXT_PATIENT_ID_PLACEHOLDER')) { define('TEXT_PATIENT_ID_PLACEHOLDER','The name or ID to find',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_FOUND_ATA')) { define('TEXT_PATIENT_SEARCH_FOUND_ATA','Found these patients. Select one to enter their visit info or add a new patient above.',false); }
-	if (!defined('TEXT_PATIENT_SEARCH_FOUND_NOT_ATA')) { define('TEXT_PATIENT_SEARCH_FOUND_NOT_ATA','Found these patients. Select one to view thier info.',false); }
+	if (!defined('TEXT_PATIENT_SEARCH_FOUND_NOT_ATA')) { define('TEXT_PATIENT_SEARCH_FOUND_NOT_ATA','Found these patients. Select one to view their info.',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA')) { define('TEXT_PATIENT_SEARCH_NOT_FOUND_ATA','No matching patients found. Retry your search or add a new patient above.',false); }
 	if (!defined('TEXT_PATIENT_SEARCH_RESULTS_HEADING')) { define('TEXT_PATIENT_SEARCH_RESULTS_HEADING','Matching patients found',false); }
 	if (!defined('TEXT_RETURN_TO_SEARCH_LINK')) { define('TEXT_RETURN_TO_SEARCH_LINK','Search again',false); }

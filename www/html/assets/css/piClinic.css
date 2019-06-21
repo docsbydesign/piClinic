@@ -69,8 +69,18 @@ table#searchResultsTable td {
     vertical-align: top;
     border-bottom: thin solid #bbb;
 }
+td.fullNameCell {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 td.fullNameCell p {
     margin-top: 0;
+}
+td.homeCityCell {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 p.familyLink {
     text-align: right;
