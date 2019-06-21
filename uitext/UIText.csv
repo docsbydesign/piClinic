@@ -627,7 +627,7 @@ TEXT_REPORT_WEEKDAY_7,Sunday,Domingo
 TEXT_REPORT_WEEKDAY_LABEL,Day of the week,Día de la semana
 TEXT_REPORT_YEAR_LABEL,Year,Año
 TEXT_REPORT_YEAR_PLACEHOLDER,Report year (YYYY),Año del informe(AAAA)
-TEXT_REPRINT_HEADING,This is a reprint of the visit form. See the patient record for details.,Este es un reimpreso del formulario de la visita. Revisar el expediente para los detalles de la visita.
+TEXT_REPRINT_HEADING,This is a reprint of the visit form. See the orignal patient record for details.,Este es un reimpreso del formulario de la visita. Revisar la historia clínica original para los detalles de la visita.
 TEXT_RESPONSIBLE_PARTY_LABEL,Responsbile Person,Encargado/a
 TEXT_RESPONSIBLE_PARTY_NOT_SPECIFIED,(Not specified),(No especificado)
 TEXT_RETURN_TO_SEARCH_LINK,Search again,Buscar de nuevo

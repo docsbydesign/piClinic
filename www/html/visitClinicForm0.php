@@ -339,7 +339,7 @@ function writeTopicMenu ($sessionInfo) {
             </div>
             <div class="infoBlock <?= $visitInfo['visitStatus'] != 'Closed' ? ' hideDiv' : '' ?>">
                 <label><?= TEXT_ASSESSMENT_NOTES_LABEL ?>:</label>
-                <p><?= TEXT_REPRINT_HEADING ?></p>
+                <p class="indent1"><?= TEXT_REPRINT_HEADING ?></p>
             </div>
             <div class="clearFloat"></div>
             <div class="infoBlock<?= $visitInfo['visitStatus'] == 'Open' ? ' hideDiv' : '' ?>">
@@ -355,7 +355,8 @@ function writeTopicMenu ($sessionInfo) {
                         <td class="threeCol"><?= empty($visitInfo['condition3']) ? TEXT_NOT_SPECIFIED :  '['.conditionText($visitInfo['condition3']).']&nbsp;'.getIcdDescription ($dbLink, $visitInfo['diagnosis3'], $pageLanguage, SHOWCODE_CODE_BEFORE_TEXT)  ?></td>
                     </tr>
                     <tr>
-                        <td colspan="3" style="border-top: 1px solid #DDD"><label><?= TEXT_REFER_TO_LABEL ?>:</label></td>
+                        <td colspan="3" style="border-top: 1px solid #DDD"><label><?= TEXT_REFER_TO_LABEL ?>:</label>
+                            <?= $visitInfo['visitStatus'] == 'Closed' ? '&nbsp;'.(empty($visitInfo['referredTo']) ? TEXT_NOT_SPECIFIED : $visitInfo['referredTo']): '' ?></td>
                     </tr>
                 </table>
             </div>

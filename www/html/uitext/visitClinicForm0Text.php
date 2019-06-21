@@ -49,7 +49,6 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_1_LABEL')) { define('TEXT_DIAGNOSIS_1_LABEL','TEXT_DIAGNOSIS_1_LABEL',false); }
 	if (!defined('TEXT_DIAGNOSIS_2_LABEL')) { define('TEXT_DIAGNOSIS_2_LABEL','TEXT_DIAGNOSIS_2_LABEL',false); }
 	if (!defined('TEXT_DIAGNOSIS_3_LABEL')) { define('TEXT_DIAGNOSIS_3_LABEL','TEXT_DIAGNOSIS_3_LABEL',false); }
-	if (!defined('TEXT_EXAM_NOTES_LABEL')) { define('TEXT_EXAM_NOTES_LABEL','TEXT_EXAM_NOTES_LABEL',false); }
 	if (!defined('TEXT_FIRST_VISIT_LABEL')) { define('TEXT_FIRST_VISIT_LABEL','TEXT_FIRST_VISIT_LABEL',false); }
 	if (!defined('TEXT_FIRST_VISIT_TEXT')) { define('TEXT_FIRST_VISIT_TEXT','TEXT_FIRST_VISIT_TEXT',false); }
 	if (!defined('TEXT_MARITAL_STATUS_LABEL')) { define('TEXT_MARITAL_STATUS_LABEL','TEXT_MARITAL_STATUS_LABEL',false); }
@@ -102,7 +101,6 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_1_LABEL')) { define('TEXT_DIAGNOSIS_1_LABEL','Diagnosis 1',false); }
 	if (!defined('TEXT_DIAGNOSIS_2_LABEL')) { define('TEXT_DIAGNOSIS_2_LABEL','Diagnosis 2',false); }
 	if (!defined('TEXT_DIAGNOSIS_3_LABEL')) { define('TEXT_DIAGNOSIS_3_LABEL','Diagnosis 3',false); }
-	if (!defined('TEXT_EXAM_NOTES_LABEL')) { define('TEXT_EXAM_NOTES_LABEL','Physical Examination',false); }
 	if (!defined('TEXT_FIRST_VISIT_LABEL')) { define('TEXT_FIRST_VISIT_LABEL','New patient?',false); }
 	if (!defined('TEXT_FIRST_VISIT_TEXT')) { define('TEXT_FIRST_VISIT_TEXT','Yes',false); }
 	if (!defined('TEXT_MARITAL_STATUS_LABEL')) { define('TEXT_MARITAL_STATUS_LABEL','Marital status',false); }
@@ -122,7 +120,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_PATIENT_NO_KNOWN_ALLERGIES')) { define('TEXT_PATIENT_NO_KNOWN_ALLERGIES','No known allergies',false); }
 	if (!defined('TEXT_REFERRED_FROM_LABEL')) { define('TEXT_REFERRED_FROM_LABEL','Referred from',false); }
 	if (!defined('TEXT_REFER_TO_LABEL')) { define('TEXT_REFER_TO_LABEL','Refer to',false); }
-	if (!defined('TEXT_REPRINT_HEADING')) { define('TEXT_REPRINT_HEADING','This is a reprint of the visit form. See the patient record for details.',false); }
+	if (!defined('TEXT_REPRINT_HEADING')) { define('TEXT_REPRINT_HEADING','This is a reprint of the visit form. See the orignal patient record for details.',false); }
 	if (!defined('TEXT_RETURN_VISIT_TEXT')) { define('TEXT_RETURN_VISIT_TEXT','No',false); }
 	if (!defined('TEXT_SHOW_PATIENT_INFO')) { define('TEXT_SHOW_PATIENT_INFO','Show patient details',false); }
 	if (!defined('TEXT_VISIT_DATE_FORMAT')) { define('TEXT_VISIT_DATE_FORMAT','m/d/Y H:i',false); }
@@ -155,7 +153,6 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_1_LABEL')) { define('TEXT_DIAGNOSIS_1_LABEL','Diagnóstico 1',false); }
 	if (!defined('TEXT_DIAGNOSIS_2_LABEL')) { define('TEXT_DIAGNOSIS_2_LABEL','Diagnóstico 2',false); }
 	if (!defined('TEXT_DIAGNOSIS_3_LABEL')) { define('TEXT_DIAGNOSIS_3_LABEL','Diagnóstico 3',false); }
-	if (!defined('TEXT_EXAM_NOTES_LABEL')) { define('TEXT_EXAM_NOTES_LABEL','Examen Físico',false); }
 	if (!defined('TEXT_FIRST_VISIT_LABEL')) { define('TEXT_FIRST_VISIT_LABEL','Nuevo o Subsiguiente?',false); }
 	if (!defined('TEXT_FIRST_VISIT_TEXT')) { define('TEXT_FIRST_VISIT_TEXT','Nuevo',false); }
 	if (!defined('TEXT_MARITAL_STATUS_LABEL')) { define('TEXT_MARITAL_STATUS_LABEL','Estado civil',false); }
@@ -175,7 +172,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_PATIENT_NO_KNOWN_ALLERGIES')) { define('TEXT_PATIENT_NO_KNOWN_ALLERGIES','Sin alergias conocidas',false); }
 	if (!defined('TEXT_REFERRED_FROM_LABEL')) { define('TEXT_REFERRED_FROM_LABEL','Recibida de',false); }
 	if (!defined('TEXT_REFER_TO_LABEL')) { define('TEXT_REFER_TO_LABEL','Se remite a',false); }
-	if (!defined('TEXT_REPRINT_HEADING')) { define('TEXT_REPRINT_HEADING','Este es un reimpreso del formulario de la visita. Revisar el expediente para los detalles de la visita.',false); }
+	if (!defined('TEXT_REPRINT_HEADING')) { define('TEXT_REPRINT_HEADING','Este es un reimpreso del formulario de la visita. Revisar la historia clínica original para los detalles de la visita.',false); }
 	if (!defined('TEXT_RETURN_VISIT_TEXT')) { define('TEXT_RETURN_VISIT_TEXT','Subsiguiente',false); }
 	if (!defined('TEXT_SHOW_PATIENT_INFO')) { define('TEXT_SHOW_PATIENT_INFO','Mostrar los detalles del paciente',false); }
 	if (!defined('TEXT_VISIT_DATE_FORMAT')) { define('TEXT_VISIT_DATE_FORMAT','d-m-Y H:i',false); }
