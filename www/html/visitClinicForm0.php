@@ -387,6 +387,6 @@ function writeTopicMenu ($sessionInfo) {
         </div>
         <div class="clearFloat"></div>
     </div>
-    <? (!empty($debugErrorInfo) ? $debugErrorInfo : "") ?>
+    <?= (!empty($debugErrorInfo) ? $debugErrorInfo : "") ?>
 </body>
 <?php @mysqli_close($dbLink); ?>
