@@ -340,7 +340,6 @@ function writeTopicMenu ($cancel) {
                                         </select>
                                     </p>
                                 </td>
-                                </td>
                                 <td>
                                     <p>
                                         <input type="number" name="bpSystolic" id="bpSystolicEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_BP_SYS_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['bpSystolic']) ? $visitInfo['bpSystolic'] : "") ?>" />&nbsp;/&nbsp;
