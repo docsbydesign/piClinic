@@ -214,7 +214,7 @@ function writeTopicMenu ($sessionInfo) {
                         'title="'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'">'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'</a></li>');
 				}
 			?>	
-			</ul>
+        </ul>
 	</div>
 	<div id="PatientVisitView" class="<?= (empty($visitRecord) ? 'hideDiv' : '') ?>">
 		<div id="PatientVisitDataView">
@@ -353,5 +353,6 @@ function writeTopicMenu ($sessionInfo) {
 			<div class="clearFloat"></div>
 		</div>
 	</div>
+    </div>
 </body>
 <?php @mysqli_close($dbLink); ?>
