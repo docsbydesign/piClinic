@@ -673,11 +673,11 @@ header('Content-type: text/html; charset=utf-8');
                     $reportLineNumber += 1;
                     echo '<td class="center nowrap">'.$reportLineNumber.'</td>';
                     echo '<td class="nowrap">'.
-                        '<a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].'" '.
+                        '<a href="/visitInfo.php?patientVisitID='.urlencode($visit['patientVisitID']).'" '.
                         'class="reportLink">'.(!empty($visit['patientFamilyID']) ? $visit['patientFamilyID'] : $visit['patientVisitID'] ).'</a></td>';
                     echo '<td class="med-wide">'.str_replace(' ', '&nbsp;', $visit['patientLastName']).',&nbsp;'.$visit['patientFirstName'].'</td>';
                     echo '<td class="nowrap">'.
-                        '<a href="/ptInfo.php?clinicPatientID='.$visit['clinicPatientID'].'" '.
+                        '<a href="/ptInfo.php?clinicPatientID='.urlencode($visit['clinicPatientID']).'" '.
                         'class="reportLink">'.$visit['clinicPatientID'].'</a></td>';
                     echo '<td class="center nowrap">'.($visit['patientSex'] == 'M' ? TEXT_SEX_OPTION_M : ($visit['patientSex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).'</td>';
                     echo '<td class="nowrap">'.formatDbDate ($visit['patientBirthDate'], TEXT_DATE_FORMAT, '').'</td>';

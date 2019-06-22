@@ -212,7 +212,7 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 			if (!empty($sessionInfo['parameters']['ata'])) {
 				// for ATA entries, clicking on a person creates a visit record
 				$nameLink = '/addPatientVisit.php'.'?ata=true'.
-					'&clinicPatientID='.$pt['clinicPatientID'].
+					'&clinicPatientID='.urlencode($pt['clinicPatientID']).
 					(isset($sessionInfo['parameters']['visitType']) ? '&visitType='.$sessionInfo['parameters']['visitType'] :'').
 					(isset($sessionInfo['parameters']['visitStaffUser']) ? '&staffUsername='.$sessionInfo['parameters']['visitStaffUser'] :'').
 					(isset($sessionInfo['parameters']['visitDateYear']) ? '&dateTimeInYear='.$sessionInfo['parameters']['visitDateYear'] :'').
@@ -221,7 +221,7 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 					(isset($sessionInfo['parameters']['visitDateTime']) ? '&dateTimeInTime='.$sessionInfo['parameters']['visitDateTime'] :'');
 			} else {
 				// for generic searches, clicking on a person goes to their pt. record
-				$nameLink = '/ptInfo.php?clinicPatientID='.$pt['clinicPatientID'];
+				$nameLink = '/ptInfo.php?clinicPatientID='.urlencode($pt['clinicPatientID']);
 			}
 			echo '<p><a class="a_ptNameView" href="'.$nameLink.createFromLink (FROM_LINK_QP, __FILE__, 'a_ptNameView').'">';
 			echo formatPatientNameLastFirst ($pt).'&nbsp;&nbsp;';
@@ -230,8 +230,8 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 			echo '<p class="familyLink">';
 			if (empty($sessionInfo['parameters']['ata'])) {
 				// create the link only if this is a regular pt. search result
-				echo '<a class="a_ptFamilyView" href="/ptResults.php?familyID='.
-					$pt['familyID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptFamilyView').'">';
+				echo '<a class="a_ptFamilyView" href="'.'/ptResults.php?familyID='.
+                    urlencode($pt['familyID']).createFromLink (FROM_LINK_QP, __FILE__, 'a_ptFamilyView').'">';
 			}
 			echo $pt['familyID'];
 			if (empty($sessionInfo['parameters']['ata'])) {
