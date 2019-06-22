@@ -190,9 +190,9 @@ function writePatientIdFields($patientData, $pageMode) {
     $returnString = "<label class=\"close\">".TEXT_PATIENT_ADD_EDIT_ID_LABEL.":</label>&nbsp;";
     $returnString .= "<span style=\"display:".($pageMode == 'edit' ?  'inline' : 'none' )."\">";
     $returnString .= ($pageMode == 'edit' ? $patientData['clinicPatientID'] : '')."</span>";
-    $returnString .= "<input type=\"".($pageMode == 'add' ? 'text' : 'hidden' )."\" id=\"clinicPatientIDfield\" name=\"clinicPatientID\"";
-    $returnString .= "value=\"".(!empty($patientData['clinicPatientID']) ? $patientData['clinicPatientID'] : "") ."\"";
-    $returnString .= "class=\"requiredField\"".($pageMode == 'add' ? 'placeholder="'.TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER.'"' :'').">&nbsp;&nbsp;";
+    $returnString .= "<input type=\"".($pageMode == 'add' ? 'text' : 'hidden' )."\" id=\"clinicPatientIDfield\" name=\"clinicPatientID\" ";
+    $returnString .= "value=\"".(!empty($patientData['clinicPatientID']) ? $patientData['clinicPatientID'] : "") ."\" ";
+    $returnString .= "class=\"requiredField\"".($pageMode == 'add' ? ' placeholder="'.TEXT_PATIENT_ADD_EDIT_ID_PLACEHOLDER.'"' :'').">&nbsp;&nbsp;";
     return $returnString;
 }
 
@@ -285,7 +285,7 @@ function writePatientIdFields($patientData, $pageMode) {
                     <option value="" <?= (empty($patientData['maritalStatus']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_OPTION_SELECT ?></option>
                     <?php
                         foreach ($maritalStatusString as $status => $statusText) {
-                            echo ('<option value="'.$status.'" '.((!empty($patientData['maritalStatus']) && $patientData['maritalStatus'] == $status) ? 'selected' : '' ).'">'.$statusText.'</option>');
+                            echo ('<option value="'.$status.'" '.((!empty($patientData['maritalStatus']) && $patientData['maritalStatus'] == $status) ? 'selected' : '' ).'>'.$statusText.'</option>');
                         }
                     ?>
                 </select>&nbsp;&nbsp;
