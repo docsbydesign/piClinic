@@ -31,7 +31,7 @@
  * 		
  *			`q` - (Optional) a search term that will look for matches in the code or the description text
  *			`t` - (optional) a search term that will look for matches in the description text
- *   		`c` - (optional) a search term that will look for a regexp match in the code or code index (if no . found)
+ *   		`c` - (optional) a search term that will look for a regexp match in the code index
  *   		`language` - (optional) specifies the language to return (ICD-10 returns English by default)
  *			`sort` - (optional) specifies the order of the returned data (c[ode] | t[ext] | d[ate])
  *

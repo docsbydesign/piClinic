@@ -67,7 +67,7 @@ $sessionInfo = getUiSessionInfo();
 $pageLanguage = $sessionInfo['pageLanguage'];
 // requierd for error messages
 $requestData = $sessionInfo['parameters'];
-require_once dirname(__FILE__).'/./uitext/rptDailyLogHomeText.php';
+require_once dirname(__FILE__).'/./uitext/rptVisitListHomeText.php';
 require_once dirname(__FILE__).'/../visitUiStrings.php';
 
 // open session variables and check for access to this page
@@ -90,11 +90,25 @@ $reportPosCond = ''; // default is all types of med. pro.
 $reportDefaultOption = TEXT_GROUP_ALL;
 $defaultReportProfType = TEXT_NOT_SPECIFIED;
 $defaultReportName = TEXT_GROUP_ALL;
-$reportDate = '';
+$reportStartDate = '';
+$reportEndDate = '';
 $reportTypeCond = '';
-if (!empty($requestData['dateTimeIn'])) {
-    $reportDate = date('Y-m-d', strtotime($requestData['dateTimeIn']));
+if (!empty($requestData['startDate'])) {
+    // if there's an end date, make sure end is after start
+    if (!empty($requestData['endDate'])) {
+        if (strtotime($requestData['startDate']) > strtotime($requestData['endDate'])) {
+            // flip them around
+            $temp = $requestData['endDate'];
+            $requestData['endDate'] = $requestData['startDate'];
+            $requestData['startDate'] = $temp;
+        }
+    }
+    $reportStartDate = date('Y-m-d', strtotime($requestData['startDate']));
 }
+if (!empty($requestData['endDate'])) {
+    $reportEndDate = date('Y-m-d', strtotime($requestData['endDate']));
+}
+
 
 $staffDataRecord = NULL;
 $staffInfo = NULL;
@@ -139,19 +153,19 @@ if (empty($requestData['dateInput']) || $requestData['dateInput'] == 'select') {
             $reportDateList = $reportDateResult['data'];
         }
     }
-}
+} // otherwise leave the array empty so the text box will be shown
 
-if (!empty($requestData['filter'])) {
+if (!empty($requestData['staff'])) {
     // select this name if it exists in the database, otherwise get all of them by default
     foreach ($medProfs as $displayItem) {
         // if the name parameter matches someone who has a visit record, create the WHERE condition text
-        if ($requestData['filter'] == $displayItem['value'])  {
-            if ($requestData['filter'] != '%') {
+        if ($requestData['staff'] == $displayItem['value'])  {
+            if ($requestData['staff'] != '%') {
                 // if name == all, then no condition string is necessary.
-                $filterParams = explode ('|', $requestData['filter']);
+                $filterParams = explode ('|', $requestData['staff']);
                 if (count($filterParams) == 2) {
                     $reportPosCond = 'AND `staffName` = \''.$filterParams[0].'\' AND `staffPosition` = \''.$filterParams[1].'\' ';
-                    $reportDefaultOption = $requestData['filter'];
+                    $reportDefaultOption = $requestData['staff'];
                     $defaultReportName = $filterParams[0];
                     $defaultReportProfType = staffPosDisplayString ($filterParams[1]);
                 } // else leave it blank and select ALL
@@ -161,7 +175,7 @@ if (!empty($requestData['filter'])) {
     }
 }
 
-if (!empty($requestData['dateTimeIn'])) {
+if (!empty($requestData['startDate'])) {
     $noData = false;
 }
 
@@ -183,9 +197,6 @@ if (!empty($requestData['type'])) {
     }
 }
 
-$blankField = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-$checkedField = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-
 $report = [];
 $visitList = [];
 $getQueryString = '';
@@ -195,41 +206,53 @@ if (empty($dbStatus) & !$noData) {
     *	TODO_REST:
     *		Resource: Visit
     *		Filter: dateTimeIn = any time during the selected date
+     *      diag: ICD code to filter on
     *		QueryParam: dateTimeIn, staffName
     *		Return: visit object array
     */
+    $diagFilterCondition = '';
+    if (!empty($requestData['diag'])) {
+        $diagFilterCondition .= 'AND ( ';
+        $diagFilterCondition .= "`diagnosis1` REGEXP '".$requestData['diag']."' OR ";
+        $diagFilterCondition .= "`diagnosis2` REGEXP '".$requestData['diag']."' OR ";
+        $diagFilterCondition .= "`diagnosis3` REGEXP '".$requestData['diag']."' ) ";
+    }
+    if(empty($reportEndDate) && !empty($reportStartDate)) {
+        $reportEndDate = $reportStartDate;
+    }
     $getQueryString = "SELECT * FROM `".
         DB_VIEW_VISIT_GET. "` ".
-        "WHERE dateTimeIn >= '".$reportDate." 00:00:00' ".
-        "AND dateTimeIn <= '".$reportDate." 23:59:59' ".
+        "WHERE dateTimeIn >= '".$reportStartDate." 00:00:00' ".
+        "AND dateTimeIn <= '".$reportEndDate." 23:59:59' ".
+        $diagFilterCondition.
         $reportPosCond.
         $reportTypeCond.
-        "ORDER BY `staffName` ASC, `dateTimeIn` ASC;";
-    $visitRecord = getDbRecords($dbLink, $getQueryString);
+        "ORDER BY `dateTimeIn` ASC;";
+    $visitResponse = getDbRecords($dbLink, $getQueryString);
 
-    $report['visitResponse'] = $visitRecord;
+    $report['visitResponse'] = $visitResponse;
     $report['query'] = $getQueryString;
-    if ($visitRecord['httpResponse'] != 200){
+    if ($visitResponse['httpResponse'] != 200){
         // load the debug div only if it's not a 404 error, which is normal
-        if ((API_DEBUG_MODE)  &&  $visitRecord['httpResponse'] != 404){
-            $report['visitResponse'] = $visitRecord;
+        if ((API_DEBUG_MODE)  &&  $visitResponse['httpResponse'] != 404){
+            $report['visitResponse'] = $visitResponse;
             $report['query'] = $getQueryString;
             $debugErrorInfo .= '<div id="Debug" class="noshow"';
-            $debugErrorInfo .= '<pre>'.json_encode($visitRecord, JSON_PRETTY_PRINT).'</pre>';
+            $debugErrorInfo .= '<pre>'.json_encode($visitResponse, JSON_PRETTY_PRINT).'</pre>';
             $debugErrorInfo .= '</div>';
         }
     } else {
-        if ($visitRecord['count'] == 1) {
+        if ($visitResponse['count'] == 1) {
             // there's only one so make it an array element
             // so the rest of the code works
-            $visitList[0] = $visitRecord['data'];
+            $visitList[0] = $visitResponse['data'];
         } else {
-            $visitList = $visitRecord['data'];
+            $visitList = $visitResponse['data'];
         }
     }
 
     if (!$noData) {
-        $reportProfile['count'] = $visitRecord['count'];
+        $reportProfile['count'] = $visitResponse['count'];
     }
 
     $clinicQueryString = "SELECT * FROM `thisClinicGet` WHERE 1;";
@@ -255,14 +278,16 @@ if (empty($dbStatus) & !$noData) {
     }
 }
 // set page title
-$reportTitle = TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE;
+$reportTitle = TEXT_VISIT_LIST_PAGE_TITLE;
 if (!$noData) {
     //create the title from the filters
-    $reportTitle = str_replace(" ", "_", TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE);
+    $reportTitle = str_replace(" ", "_", TEXT_VISIT_LIST_LOG_PAGE_TITLE);
     $reportTitle .= "-";
     $reportTitle .= preg_replace('([_\W]+)',"_", $defaultReportName);
     $reportTitle .= "-";
-    $reportTitle .= date("y_m_d", strtotime($reportDate));
+    $reportTitle .= date("y_m_d", strtotime($reportStartDate));
+    $reportTitle .= "-";
+    $reportTitle .= date("y_m_d", strtotime($reportEndDate));
 }
 
 function staffPosDisplayString ($staffPosData) {
@@ -296,7 +321,7 @@ foreach ($visitList as $visit) {
     $displayList[$displayRecord]['DH_CLINICCODE'] = (isset($clinicInfo['publicID']) ? $clinicInfo['publicID'] : $blankField );
     // these are specific to the visit
     $displayList[$displayRecord]['DH_SERVICETYPE'] = showvisitTypeString ($visit['visitType'], $visitTypes);
-    $displayList[$displayRecord]['DH_SERVICEDATE'] = date($dataDateFormat, strtotime($reportDate));
+    $displayList[$displayRecord]['DH_SERVICEDATE'] = date($dataDateFormat, strtotime($visit['dateTimeIn']));
     $displayList[$displayRecord]['DH_SERVICEPROF'] = staffPosDisplayString ($visit['staffPosition']);
     $displayList[$displayRecord]['DH_SERVICENAME'] = $visit['staffName'];
     $displayList[$displayRecord]['DR_ROWNO'] = $displayRecord + 1;
@@ -305,7 +330,7 @@ foreach ($visitList as $visit) {
     $displayList[$displayRecord]['DR_PTID'] = $visit['clinicPatientID'];
     $displayList[$displayRecord]['DR_PTSEX'] = ($visit['patientSex'] == 'M' ? TEXT_SEX_OPTION_M : ($visit['patientSex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X));
     $displayList[$displayRecord]['DR_PTDOB'] = formatDbDate ($visit['patientBirthDate'], $dataDateFormat, '');
-    $ageYMD = dateDiffYMD (strtotime($visit['patientBirthDate']),  strtotime($reportDate));
+    $ageYMD = dateDiffYMD (strtotime($visit['patientBirthDate']),  strtotime($visit['dateTimeIn']));
     $displayList[$displayRecord]['DR_AGEYR'] = ($ageYMD['years'] > 0 ? $ageYMD['years'] : '');
     $displayList[$displayRecord]['DR_AGEMO'] = ((($ageYMD['years'] == 0) && ($ageYMD['months'] > 0)) ? $ageYMD['months'] : '');
     $displayList[$displayRecord]['DR_AGEDY'] = ((($ageYMD['years'] == 0) && ($ageYMD['months'] == 0)) ? $ageYMD['days'] : '');
@@ -395,6 +420,16 @@ for ($h= 0; $h < count($displayHeader); $h++) {
     $displayHeader[$h] = str_replace ('&nbsp;',' ', $displayHeader[$h]);
 }
 
+$displayFilterName = '';
+if (!empty($requestData['staff'])) {
+    $tempName = explode('|', $requestData['staff']);
+    if (count($tempName) >= 1 ){
+        $displayFilterName = $tempName[0];
+    } else {
+        $displayFilterName = $requestData['staff'];
+    }
+}
+
 
 if (!empty($requestData['export'])) {
     if ($requestData['export'] == 'json') {
@@ -445,20 +480,20 @@ if (!empty($requestData['export'])) {
     }
 }
 
-function showDateSelect($dateArray, $reportDate) {
+function showDateSelect($dateArray, $reportDate, $fieldName) {
     $inputHtml = '';
-    if (empty($dateArray)){
-        if (empty($reportDate)){
+    if (empty($dateArray)) {
+        if (empty($reportDate)) {
             // if no date, set it to yesterday
             $reportDate = date('Y-m-d', (time() - 86400));
         }
-        $inputHtml .= '<input type="text" id="dateTimeInField" name="dateTimeIn" value="'.date('Y-m-d', strtotime($reportDate)).'" '.
+        $inputHtml .= '<input type="text" id="'.$fieldName.'Field" name="'.$fieldName.'" value="'.date('Y-m-d', strtotime($reportDate)).'" '.
             'placeholder="'.TEXT_REPORT_DATE_PLACEHOLDER.'" maxlength="255">';
         $inputHtml .= '&nbsp;&nbsp;';
-        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptDailyLogHome.php?dateInput=select" title="'.
+        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptVisitListHome.php?dateInput=select" title="'.
             TEXT_SHOW_REPORT_DATE_LIST_TITLE.'">'.TEXT_SHOW_REPORT_DATE_LIST_LINK.'</a></span>';
     } else {
-        $inputHtml .= '<select id="dateTimeInField" name="dateTimeIn" class="requiredField">';
+        $inputHtml .= '<select id="'.$fieldName.'Field" name="'.$fieldName.'" class="requiredField">';
         foreach ($dateArray as $dateElem) {
             $inputHtml .= '<option value="'.$dateElem['reportDate'].'"';
             if ($dateElem['reportDate'] == $reportDate) {
@@ -467,7 +502,7 @@ function showDateSelect($dateArray, $reportDate) {
             $inputHtml .= '>'.$dateElem['reportDate'].'</option>';
         }
         $inputHtml .= '</select>&nbsp;&nbsp;';
-        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptDailyLogHome.php?dateInput=text" title="'.
+        $inputHtml .= '<span class="ReportDataLink"><a href="/reports/rptVisitListHome.php?dateInput=text" title="'.
             TEXT_SHOW_REPORT_DATE_FIELD_TITLE.'">'.TEXT_SHOW_REPORT_DATE_FIELD_LINK.'</a></span>';
     }
     $inputHtml .= '&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -487,10 +522,14 @@ header('Content-type: text/html; charset=utf-8');
 <?= piClinicAppMenu(null,$sessionInfo,  $pageLanguage, __FILE__) ?>
 <div class="pageBody">
     <div id="DailyVisitListPrompt" class="noprint">
-        <form enctype="application/x-www-form-urlencoded" action="/reports/rptDailyLogHome.php" method="get">
+        <form enctype="application/x-www-form-urlencoded" action="/reports/rptVisitListHome.php" method="get">
             <p>
-                <label><?= TEXT_DATE_PROMPT_LABEL ?>:</label>&nbsp;
-                <?= showDateSelect($reportDateList, $reportDate) ?>
+                <label class="close"><?= TEXT_START_DATE_PROMPT_LABEL ?>:</label>&nbsp;
+                <?= showDateSelect($reportDateList, $reportStartDate, 'startDate') ?>
+                <label class="close"><?= TEXT_END_DATE_PROMPT_LABEL ?>:</label>&nbsp;
+                <?= showDateSelect($reportDateList, $reportEndDate, 'endDate') ?>
+            </p>
+            <p>
                 <label class="close"><?= TEXT_TYPE_LABEL ?>:</label><select id="visitTypeField" name="type" class="">
                     <?php
                     foreach ($visitTypes as $typeItem) {
@@ -498,15 +537,20 @@ header('Content-type: text/html; charset=utf-8');
                     }
                     ?>
                 </select>
-            </p>
-            <p>
-                <label class="close"><?= TEXT_STAFF_LABEL ?>:</label><select id="posTypeField" name="filter" class="">
+                &nbsp;&nbsp;
+                <label class="close"><?= TEXT_STAFF_LABEL ?>:</label><select id="posTypeField" name="staff" class="">
                     <?php
                     foreach ($medProfs as $profOption) {
                         echo '<option value="'.$profOption['value'].'"'.($reportDefaultOption == $profOption['value'] ? ' selected="selected"' : '').">".$profOption['display']."</option>";
                     }
                     ?>
                 </select>
+                &nbsp;&nbsp;
+                <label class="close"><?= TEXT_DIAGNOSIS_LABEL ?>:</label>
+                    <?php
+                    echo '<input type="text" id="diagField" name="diag" value="'.(!empty($requestData['diag'])? $requestData['diag'] : '' ).'" '.
+                        'placeholder="'.TEXT_DIAGNOSIS_PLACEHOLDER.'" maxlength="255">';
+                    ?>
             </p>
             <p>
                 <button type="submit"><?= TEXT_SHOW_REPORT_BUTTON ?></button>
@@ -523,219 +567,108 @@ header('Content-type: text/html; charset=utf-8');
         <p><?= TEXT_NO_REPORT_PROF_PROMPT ?></p>
     </div>
     <div id="DailyVisitList"  class="legalPortraitReport <?= ($noData ? ' hideDiv' : '') ?>">
-        <div id="ATA-ReportHeading">
-            <table id="ATA-LogoTable">
+        <div id="FilterSummary">
+            <table class="piClinicList">
                 <tr>
-                    <td id="ReportHeading-LeftTitle">
-                        <p><?= TEXT_ATA_LEFT_TITLE ?></p>
-                    </td>
-                    <td id="ReportHeading-CenterTitle">
-                        <h1><?= TEXT_DAILY_VISIT_HEADING ?></h1>
-                    </td>
-                    <td rowspan="3" id="ReportHeading-RightInfo">
-                        <div class="right">
-                            <table id="serviceTypeTable">
-                                <tr>
-                                    <td rowspan="2" id="ServiceTypeTitle">
-                                        <p><label><?= TEXT_REPORT_SERVICE_TYPE ?>:</label></p>
-                                    </td>
-                                    <td>
-                                        <label class="close"><?= TEXT_REPORT_SERVICE_EXTERNAL ?>:</label><span class="boxed"><?= ($reportTypeName == 'Outpatient' ? 'X' : '&nbsp;&nbsp;' ) ?></span>&nbsp;&nbsp;&nbsp;
-                                        <label class="close"><?= TEXT_REPORT_SERVICE_EMERGENCY ?>:</label><span class="boxed"><?= ($reportTypeName == 'Emergency' ? 'X' : '&nbsp;&nbsp;' )?></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="close"><?= TEXT_REPORT_SERVICE_FILTRO ?>:</label><span class="boxed"><?= ((($reportTypeName != 'Outpatient') && ($reportTypeName != 'Emergency')) ? 'X' : '&nbsp;&nbsp;' )?></span>&nbsp;&nbsp;&nbsp;
-                                        <label class="close"><?= TEXT_REPORT_SERVICE_SPECIALTY ?>:</label><span class="underline"><?= ((($reportTypeName != 'Outpatient') && ($reportTypeName != 'Emergency')) ? $reportTypeDisplay : $blankField )  ?></span>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
+                    <th><?= TEXT_VISIT_FILTER_START_DATE_LABEL ?></th>
+                    <th><?= TEXT_VISIT_FILTER_END_DATE_LABEL ?></th>
+                    <th><?= TEXT_VISIT_FILTER_STAFF_LABEL ?></th>
+                    <th><?= TEXT_VISIT_FILTER_DIAGNOSIS_LABEL ?></th>
+                    <th><?= TEXT_VISIT_FILTER_MATCHES_LABEL ?></th>
                 </tr>
                 <tr>
-                    <td colspan="2" class="left">
-                        <div class="headingField24">
-                            <div class="headingLabel">
-                                <label class="close"><?= TEXT_REPORT_CLINICNAME_LABEL ?>:</label>
-                            </div>
-                            <div class="headingValue">
-                                <?= (isset($clinicInfo['shortName']) ? $clinicInfo['shortName'] : $blankField ) ?>
-                            </div>
-                        </div>
-                        <div class="headingField12">
-                            <div class="headingLabel">
-                                <label class="close"><?= TEXT_REPORT_CLINIC_CODE_LABEL ?>:</label>
-                            </div>
-                            <div class="headingValue">
-                                <?= (isset($clinicInfo['publicID']) ? $clinicInfo['publicID'] : $blankField ) ?>
-                            </div>
-                        </div>
-                        <div class="headingField12">
-                            <div class="headingLabel">
-                                <label class="close"><?= TEXT_REPORT_CLINIC_TYPE_LABEL ?>:</label>
-                            </div>
-                            <div class="headingValue">
-                                <?= (isset($clinicInfo['typeCode']) ? $clinicInfo['typeCode'] : $blankField ) ?>
-                            </div>
-                        </div>
-                        <div class="headingField24">
-                            <div class="headingLabel">
-                                <label class="close"><?= TEXT_REPORT_STATE_LABEL ?>:</label>
-                            </div>
-                            <div class="headingValue">
-                                <?= (isset($clinicInfo['clinicState']) ? $clinicInfo['clinicState'] : $blankField ) ?>
-                            </div>
-                        </div>
-                        <div class="headingField24">
-                            <div class="headingLabel">
-                                <label class="close"><?= TEXT_REPORT_CITY_LABEL ?>:</label>
-                            </div>
-                            <div class="headingValue">
-                                <?= (isset($clinicInfo['clinicCity']) ? $clinicInfo['clinicCity'] : $blankField ) ?>
-                            </div>
-                        </div>
-                        <div class="clearFloat"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="left">
-                        <div class="headingField24">
-                            <div class="headingLabel">
-                                <label class="close"><?= TEXT_STAFF_LABEL ?>:</label>
-                            </div>
-                            <div class="headingValue">
-                                <?= $defaultReportProfType ?>
-                            </div>
-                        </div>
-                        <div class="headingField36">
-                            <div class="headingLabel">
-                                <label class="close"><?= TEXT_STAFF_NAME_LABEL ?>:</label>
-                            </div>
-                            <div class="headingValue">
-                                <?= $defaultReportName ?>
-                            </div>
-                        </div>
-                        <div class="headingField12">
-                            <div class="headingLabel">
-                                <label class="close"><?= TEXT_DATE_LABEL ?>:</label>
-                            </div>
-                            <div class="headingValue">
-                                <?= date(TEXT_DATE_FORMAT, strtotime($reportDate)) ?>
-                            </div>
-                        </div>
-                        <div class="clearFloat"></div>
-                    </td>
+                    <td><?= (!empty($requestData['startDate']) ? $requestData['startDate'] : TEXT_NOT_SPECIFIED ) ?></td>
+                    <td><?= (!empty($requestData['endDate']) ? $requestData['endDate'] : TEXT_NOT_SPECIFIED ) ?></td>
+                    <td><?= (!empty($displayFilterName) ? $displayFilterName : TEXT_NOT_SPECIFIED ) ?></td>
+                    <td><?= (!empty($requestData['diag']) ? $requestData['diag'] : TEXT_NOT_SPECIFIED ) ?></td>
+                    <td class="numbers"><?= (!empty($visitList) ? count($visitList) : '0' ) ?></td>
                 </tr>
             </table>
         </div>
+        <h2><?= TEXT_VISIT_SUMMARY_LIST_HEADING ?></h2>
         <div id="ATA-ReportBody">
             <?php
             // check to see if they are currently in the clinic
             if (!empty($visitList)) {
                 $tablestaffName = '';
                 $reportLineNumber = 0;
-                echo '<table class="report" id="dailyVisitTable">';
+                echo '<table class="piClinicList" id="dailyVisitTable">';
                 echo '<tr>';
-                echo '<th rowspan="3" class="ATAheading">'.TEXT_REPORT_ROW_LABEL.'</th>';
-                echo '<th rowspan="3" class="ATAheading">'.TEXT_PATIENTVISITID_LABEL.'</th>';
-                echo '<th rowspan="3" class="ATAheading">'.TEXT_FULLNAME_LABEL.'</th>';
-                echo '<th rowspan="3" class="ATAheading">'.TEXT_CLINICPATIENTID_LABEL.'</th>';
-                echo '<th rowspan="3" class="ATAheading nowrap vertical"><span>'.TEXT_SEX_LABEL.'</span></th>';
-                echo '<th rowspan="3" class="ATAheading">'.TEXT_BIRTHDAY_DATE_LABEL.'</th>';
-                echo '<th colspan="3" class="ATAheading">'.TEXT_REPORT_AGE_LABEL.'</th>';
-                echo '<th rowspan="3" class="ATAheading vertical"><span>'.TEXT_PATIENT_LABEL.'</span></th>';
-                echo '<th colspan="3" rowspan="2" class="ATAheading">'.TEXT_REPORT_ADDRESS_LABEL.'</th>';
-                echo '<th colspan="6" class="ATAheading">'.TEXT_REPORT_DIAGNOSIS_LABEL.'</th>';
-                echo '<th colspan="2" class="ATAheading">'.TEXT_REPORT_REFERRAL_LABEL.'</th>';
-                echo '</tr>';
-                echo '<tr>';
-                echo '<th rowspan="2" class="ATAheading vertical"><span>'.TEXT_AGE_YEARS_LABEL.'</span></th>';
-                echo '<th rowspan="2" class="ATAheading vertical"><span>'.TEXT_AGE_MONTHS_LABEL.'</span></th>';
-                echo '<th rowspan="2" class="ATAheading vertical"><span>'.TEXT_AGE_DAYS_LABEL.'</span></th>';
-                echo '<th rowspan="2" class="ATAheading nowrap">'.TEXT_DIAGNOSIS_1_LABEL.'</th>';
-                echo '<th rowspan="2" class="ATAheading nowrap vertical"><span>'.TEXT_CONDITION_1_LABEL.'</span></th>';
-                echo '<th rowspan="2" class="ATAheading nowrap">'.TEXT_DIAGNOSIS_2_LABEL.'</th>';
-                echo '<th rowspan="2" class="ATAheading nowrap vertical"><span>'.TEXT_CONDITION_2_LABEL.'</span></th>';
-                echo '<th rowspan="2" class="ATAheading nowrap">'.TEXT_DIAGNOSIS_3_LABEL.'</th>';
-                echo '<th rowspan="2" class="ATAheading nowrap vertical"><span>'.TEXT_CONDITION_3_LABEL.'</span></th>';
-                echo '<th rowspan="2" class="ATAheading nowrap">'.TEXT_REFERRED_TO_LABEL.'</th>';
-                echo '<th rowspan="2" class="ATAheading nowrap">'.TEXT_REFERRED_FROM_LABEL .'</th>';
-                echo '</tr>';
-                echo '<tr>';
-                echo '<th class="ATAheading">'.TEXT_STATE_LABEL.'</th>';
-                echo '<th class="ATAheading">'.TEXT_CITY_LABEL.'</th>';
-                echo '<th class="ATAheading">'.TEXT_NEIGHBORHOOD_LABEL.'</th>';
+                    echo '<th class="ATAheading">'.TEXT_REPORT_DATE_LABEL.'</th>';
+                    echo '<th class="ATAheading">'.TEXT_STAFF_NAME_LABEL.'</th>';
+                    echo '<th class="ATAheading">'.TEXT_PATIENTVISITID_LABEL.'</th>';
+                    echo '<th class="ATAheading">'.TEXT_FULLNAME_LABEL.'</th>';
+                    echo '<th class="ATAheading nowrap"><span>'.TEXT_REPORT_AGE_LABEL.'</span></th>';
+                    echo '<th class="ATAheading nowrap"><span>'.TEXT_SEX_LABEL.'</span></th>';
+                    echo '<th class="ATAheading nowrap">'.TEXT_DIAGNOSIS_1_LABEL.'</th>';
+                    echo '<th class="ATAheading nowrap">'.TEXT_DIAGNOSIS_2_LABEL.'</th>';
+                    echo '<th class="ATAheading nowrap">'.TEXT_DIAGNOSIS_3_LABEL.'</th>';
                 echo '</tr>';
                 foreach ($visitList as $visit) {
                     echo '<tr>';
-                    $reportLineNumber += 1;
-                    echo '<td class="center nowrap">'.$reportLineNumber.'</td>';
-                    echo '<td class="nowrap">'.
-                        '<a href="/visitInfo.php?patientVisitID='.urlencode($visit['patientVisitID']).'" '.
-                        'class="reportLink">'.(!empty($visit['patientFamilyID']) ? $visit['patientFamilyID'] : $visit['patientVisitID'] ).'</a></td>';
-                    echo '<td class="med-wide">'.str_replace(' ', '&nbsp;', $visit['patientLastName']).',&nbsp;'.$visit['patientFirstName'].'</td>';
-                    echo '<td class="nowrap">'.
-                        '<a href="/ptInfo.php?clinicPatientID='.urlencode($visit['clinicPatientID']).'" '.
-                        'class="reportLink">'.$visit['clinicPatientID'].'</a></td>';
-                    echo '<td class="center nowrap">'.($visit['patientSex'] == 'M' ? TEXT_SEX_OPTION_M : ($visit['patientSex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).'</td>';
-                    echo '<td class="nowrap">'.formatDbDate ($visit['patientBirthDate'], TEXT_DATE_FORMAT, '').'</td>';
-                    $ageYMD = dateDiffYMD (strtotime($visit['patientBirthDate']),  strtotime($reportDate));
-                    echo '<td class="numbers nowrap">'.($ageYMD['years'] > 0 ? $ageYMD['years'] : '').'</td>';
-                    echo '<td class="numbers nowrap">'.((($ageYMD['years'] == 0) && ($ageYMD['months'] > 0)) ? $ageYMD['months'] : '').'</td>';
-                    echo '<td class="numbers nowrap">'.((($ageYMD['years'] == 0) && ($ageYMD['months'] == 0) && ($ageYMD['days'] > 0)) ? $ageYMD['days'] : '').'</td>';
-                    echo '<td class="center nowrap">'.($visit['firstVisit'] == "YES" ? 'N' : 'S').'</td>';
-                    echo '<td class="med-wide">'.$visit['patientHomeState'].'</td>';
-                    echo '<td class="med-wide">'.$visit['patientHomeCity'].'</td>';
-                    echo '<td class="med-wide">'.$visit['patientHomeNeighborhood'].'</td>';
-                    echo '<td class="wide">';
-                    $displayText = '';
-                    $displayClass = '';
-                    if (!empty($visit['diagnosis1'])) {
-                        $displayText = getIcdDescription ($dbLink, $visit['diagnosis1'], $pageLanguage);
-                        if ($displayText == $visit['diagnosis1']) {
-                            $displayClass = 'rawcodevalue';
+                        $reportLineNumber += 1;
+                        echo '<td class="nowrap">'.formatDbDate ($visit['dateTimeIn'], TEXT_DATE_FORMAT, '').'</td>';
+                        echo '<td class="nowrap">'.(!empty($visit['staffName']) ? $visit['staffName'] : '<span class="inactive">'.TEXT_NOT_SPECIFIED.'</span>' ).'</td>';
+                        echo '<td class="nowrap">'.
+                            '<a href="/visitInfo.php?patientVisitID='.urlencode($visit['patientVisitID']).'" '.
+                            'class="reportLink">'.(!empty($visit['patientFamilyID']) ? $visit['patientFamilyID'] : $visit['patientVisitID'] ).'</a></td>';
+                        echo '<td class="med-wide">'.str_replace(' ', '&nbsp;', $visit['patientLastName']).',&nbsp;'.$visit['patientFirstName'].'</td>';
+                        $ageYMD = dateDiffYMD (strtotime($visit['patientBirthDate']),  strtotime($visit['dateTimeIn']));
+                        echo '<td class="numbers nowrap">'.($ageYMD['years'] > 0 ? $ageYMD['years'] : '').'</td>';
+                        echo '<td class="center nowrap">'.($visit['patientSex'] == 'M' ? TEXT_SEX_OPTION_M : ($visit['patientSex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).'</td>';
+                        echo '<td class="wide">';
+                        $displayText = '';
+                        $displayClass = '';
+                        $diagnosisMatchString = '/'.$requestData['diag'].'/';
+                        if (!empty($visit['diagnosis1'])) {
+                            $displayText = getIcdDescription ($dbLink, $visit['diagnosis1'], $pageLanguage, -1);
+                            if ($displayText == $visit['diagnosis1']) {
+                                $displayClass = 'rawcodevalue';
+                                $displayClass = 'rawcodevalue';
+                            }
+                            if (preg_match($diagnosisMatchString, $visit['diagnosis1'] ) == 1) {
+                                $displayClass .= ' searchMatch';
+                            }
+                        } else {
+                            $displayText = TEXT_DIAGNOSIS_BLANK;
+                            $displayClass = 'inactive noprint';
                         }
-                    } else {
-                        $displayText = TEXT_DIAGNOSIS_BLANK;
-                        $displayClass = 'inactive noprint';
-                    }
-                    echo ('<span class="'.$displayClass.'">'.$displayText.'</span>');
-                    echo '</td>';
-                    echo '<td class="center nowrap'.(empty($visit['condition1']) ? ' noprint' : '').'">'.conditionText($visit['condition1']).'</td>';
-                    echo '<td class="wide">';
-                    $displayText = '';
-                    $displayClass = '';
-                    if (!empty($visit['diagnosis2'])) {
-                        $displayText = getIcdDescription ($dbLink, $visit['diagnosis2'], $pageLanguage);
-                        if ($displayText == $visit['diagnosis2']) {
-                            $displayClass = 'rawcodevalue';
+                        echo ('<span class="'.$displayClass.'">'.$displayText.'</span>');
+                        echo '</td>';
+                        echo '<td class="wide">';
+                        $displayText = '';
+                        $displayClass = '';
+                        if (!empty($visit['diagnosis2'])) {
+                            $displayText = getIcdDescription ($dbLink, $visit['diagnosis2'], $pageLanguage, -1);
+                            if ($displayText == $visit['diagnosis2']) {
+                                $displayClass = 'rawcodevalue';
+                            }
+                            if (preg_match($diagnosisMatchString, $visit['diagnosis2'] ) == 1) {
+                                $displayClass .= ' searchMatch';
+                            }
+                        } else {
+                            $displayText = TEXT_DIAGNOSIS_BLANK;
+                            $displayClass = 'inactive noprint';
                         }
-                    } else {
-                        $displayText = TEXT_DIAGNOSIS_BLANK;
-                        $displayClass = 'inactive noprint';
-                    }
-                    echo ('<span class="'.$displayClass.'">'.$displayText.'</span>');
-                    echo '</td>';
-                    echo '<td class="center nowrap'.(empty($visit['condition2']) ? ' noprint' : '').'">'.conditionText($visit['condition2']).'</td>';
-                    echo '<td class="wide">';
-                    $displayText = '';
-                    $displayClass = '';
-                    if (!empty($visit['diagnosis3'])) {
-                        $displayText = getIcdDescription ($dbLink, $visit['diagnosis3'], $pageLanguage);
-                        if ($displayText == $visit['diagnosis3']) {
-                            $displayClass = 'rawcodevalue';
+                        echo ('<span class="'.$displayClass.'">'.$displayText.'</span>');
+                        echo '</td>';
+                        echo '<td class="wide">';
+                        $displayText = '';
+                        $displayClass = '';
+                        if (!empty($visit['diagnosis3'])) {
+                            $displayText = getIcdDescription ($dbLink, $visit['diagnosis3'], $pageLanguage, -1);
+                            if ($displayText == $visit['diagnosis3']) {
+                                $displayClass = 'rawcodevalue';
+                            }
+                            if (preg_match($diagnosisMatchString, $visit['diagnosis3'] ) == 1) {
+                                $displayClass .= ' searchMatch';
+                            }
+                        } else {
+                            $displayText = TEXT_DIAGNOSIS_BLANK;
+                            $displayClass = 'inactive noprint';
                         }
-                    } else {
-                        $displayText = TEXT_DIAGNOSIS_BLANK;
-                        $displayClass = 'inactive noprint';
-                    }
-                    echo ('<span class="'.$displayClass.'">'.$displayText.'</span>');
-                    echo '</td>';
-                    echo '<td class="center nowrap'.(empty($visit['condition3']) ? ' noprint' : '').'">'.conditionText($visit['condition3']).'</td>';
-                    echo '<td class="nowrap">'.$visit['referredTo'].'</td>';
-                    echo '<td class="nowrap">'.$visit['referredFrom'].'</td>';
+                        echo ('<span class="'.$displayClass.'">'.$displayText.'</span>');
+                        echo '</td>';
                 }
                 echo '</table>';
                 echo '<hr>';

@@ -123,12 +123,12 @@ if (empty($dbStatus) & !$noData) {
         "ORDER BY `dateTimeIn` ASC;";
     $visitRecord = getDbRecords($dbLink, $getQueryString);
 
-    $report['visitRecord'] = $visitRecord;
+    $report['visitResponse'] = $visitRecord;
     $report['query'] = $getQueryString;
     if ($visitRecord['httpResponse'] != 200){
         // load the debug div only if it's not a 404 error, which is normal
         if ((API_DEBUG_MODE)  &&  $visitRecord['httpResponse'] != 404){
-            $report['visitRecord'] = $visitRecord;
+            $report['visitResponse'] = $visitRecord;
             $report['query'] = $getQueryString;
             $debugErrorInfo .= '<div id="Debug" class="noshow"';
             $debugErrorInfo .= '<pre>'.json_encode($visitRecord, JSON_PRETTY_PRINT).'</pre>';
