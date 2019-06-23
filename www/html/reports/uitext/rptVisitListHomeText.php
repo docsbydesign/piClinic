@@ -134,7 +134,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_3_LABEL')) { define('TEXT_DIAGNOSIS_3_LABEL','Diagnosis 3',false); }
 	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','Not specified',false); }
 	if (!defined('TEXT_DIAGNOSIS_LABEL')) { define('TEXT_DIAGNOSIS_LABEL','Diagnosis',false); }
-	if (!defined('TEXT_DIAGNOSIS_PLACEHOLDER')) { define('TEXT_DIAGNOSIS_PLACEHOLDER','Diagnosis',false); }
+	if (!defined('TEXT_DIAGNOSIS_PLACEHOLDER')) { define('TEXT_DIAGNOSIS_PLACEHOLDER','ICD-10 code to match',false); }
 	if (!defined('TEXT_END_DATE_PROMPT_LABEL')) { define('TEXT_END_DATE_PROMPT_LABEL','Last date',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON')) { define('TEXT_EXPORT_CSV_BUTTON','Export as CSV',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON_TEXT')) { define('TEXT_EXPORT_CSV_BUTTON_TEXT','Export the report to a CSV file to open as a spreadsheet. This format opens in Excel automatically, but some letters might not appear correctly.',false); }
@@ -211,7 +211,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_3_LABEL')) { define('TEXT_DIAGNOSIS_3_LABEL','Diagnóstico 3',false); }
 	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','(No especificado)',false); }
 	if (!defined('TEXT_DIAGNOSIS_LABEL')) { define('TEXT_DIAGNOSIS_LABEL','Diagnóstico',false); }
-	if (!defined('TEXT_DIAGNOSIS_PLACEHOLDER')) { define('TEXT_DIAGNOSIS_PLACEHOLDER','Diagnóstico',false); }
+	if (!defined('TEXT_DIAGNOSIS_PLACEHOLDER')) { define('TEXT_DIAGNOSIS_PLACEHOLDER','Codigo CIE-10',false); }
 	if (!defined('TEXT_END_DATE_PROMPT_LABEL')) { define('TEXT_END_DATE_PROMPT_LABEL','Última fecha',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON')) { define('TEXT_EXPORT_CSV_BUTTON','Descargar como CSV',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON_TEXT')) { define('TEXT_EXPORT_CSV_BUTTON_TEXT','Descarga el informe como un archivo CSV para abrirlo como una hoja de cálculo. Excel puede abrir este formato automáticamente, pero no muestra todas las letras correctamente.',false); }
