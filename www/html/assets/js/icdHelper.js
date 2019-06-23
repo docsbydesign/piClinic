@@ -34,8 +34,8 @@ function inputKeyUpEventHandler (event, inputElem, dataListId, token, lang) {
 		((event.keyCode >= 65) && (event.keyCode <= 90)))) { return false;}  // it's a letter key
 	//
 	var dataListObj = document.getElementById (dataListId); 
-	if (dataListObj === undefined) { return false; } // no list element found
-	if (inputElem === undefined) { return false; } // no input element found
+	if ((dataListObj === undefined) || (dataListObj === null)) { return false; } // no list element found
+	if ((inputElem === undefined) || ((inputElem === null)) { return false; } // no input element found
 	if (inputElem.value.length <= minSearchLen) { 
 		dataListObj.innerHTML = ''; // clear the list
 		return false; 
