@@ -35,7 +35,7 @@ function inputKeyUpEventHandler (event, inputElem, dataListId, token, lang) {
 	//
 	var dataListObj = document.getElementById (dataListId); 
 	if ((dataListObj === undefined) || (dataListObj === null)) { return false; } // no list element found
-	if ((inputElem === undefined) || ((inputElem === null)) { return false; } // no input element found
+	if ((inputElem === undefined) || (inputElem === null)) { return false; } // no input element found
 	if (inputElem.value.length <= minSearchLen) { 
 		dataListObj.innerHTML = ''; // clear the list
 		return false; 

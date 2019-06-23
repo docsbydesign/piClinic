@@ -163,7 +163,7 @@ TEXT_DIAGNOSIS_BLANK,Not specified,(No especificado)
 TEXT_DIAGNOSIS_HEADING,Diagnoses,Diagnóstico
 TEXT_DIAGNOSIS_LABEL,Diagnosis,Diagnóstico
 TEXT_DIAGNOSIS_LOADING,Loading...,Cargando...
-TEXT_DIAGNOSIS_PLACEHOLDER,Diagnosis,Diagnóstico
+TEXT_DIAGNOSIS_PLACEHOLDER,ICD-10 code to match,Codigo CIE-10
 TEXT_DIAGNOSIS_SELECT,(Select diagnosis or enter text below),(Seleccione un diagnóstico o escríbelo abajo)
 TEXT_DISCHARGE_VISIT_INFO,Discharge this patient,Dar de alta este paciente
 TEXT_DIVORCED_OPTION,Divorced,Divorciado/a
