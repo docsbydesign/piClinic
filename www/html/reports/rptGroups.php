@@ -15,7 +15,7 @@ require_once  dirname(__FILE__).'/./uitext/rptGroupsText.php';
 
 function getReportGroupIndex ($group) {
     //This is the order that report groups will be sorted on the page. Leftmost is at the top
-    $reportGroups = [TEXT_REPORT_GROUP_PATIENTS,TEXT_REPORT_GROUP_FINANCE];
+    $reportGroups = [TEXT_REPORT_GROUP_PATIENTS,TEXT_REPORT_GROUP_FINANCE,TEXT_REPORT_GROUP_QUERIES];
 
     for ($groupIdx = 0; $groupIdx < sizeof($reportGroups); $groupIdx++ ) {
         if ($reportGroups[$groupIdx] == $group) {

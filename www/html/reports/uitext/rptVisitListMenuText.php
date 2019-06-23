@@ -38,20 +38,26 @@ exitIfCalledFromBrowser(__FILE__);
 
 // Strings for UITEST_LANGUAGE
 if ($pageLanguage == UITEST_LANGUAGE) {
-	if (!defined('TEXT_REPORT_GROUP_FINANCE')) { define('TEXT_REPORT_GROUP_FINANCE','TEXT_REPORT_GROUP_FINANCE',false); }
-	if (!defined('TEXT_REPORT_GROUP_PATIENTS')) { define('TEXT_REPORT_GROUP_PATIENTS','TEXT_REPORT_GROUP_PATIENTS',false); }
 	if (!defined('TEXT_REPORT_GROUP_QUERIES')) { define('TEXT_REPORT_GROUP_QUERIES','TEXT_REPORT_GROUP_QUERIES',false); }
+	if (!defined('TEXT_REPORT_LINK_DESC_VISIT_LIST')) { define('TEXT_REPORT_LINK_DESC_VISIT_LIST','TEXT_REPORT_LINK_DESC_VISIT_LIST',false); }
+	if (!defined('TEXT_REPORT_LINK_TEXT_VISIT_LIST')) { define('TEXT_REPORT_LINK_TEXT_VISIT_LIST','TEXT_REPORT_LINK_TEXT_VISIT_LIST',false); }
+	if (!defined('TEXT_REPORT_LINK_TITLE_VISIT_LIST')) { define('TEXT_REPORT_LINK_TITLE_VISIT_LIST','TEXT_REPORT_LINK_TITLE_VISIT_LIST',false); }
+	if (!defined('TEXT_REPORT_LINK_URI_VISIT_LIST')) { define('TEXT_REPORT_LINK_URI_VISIT_LIST','TEXT_REPORT_LINK_URI_VISIT_LIST',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
-	if (!defined('TEXT_REPORT_GROUP_FINANCE')) { define('TEXT_REPORT_GROUP_FINANCE','Financial Reports',false); }
-	if (!defined('TEXT_REPORT_GROUP_PATIENTS')) { define('TEXT_REPORT_GROUP_PATIENTS','Patient Activity',false); }
 	if (!defined('TEXT_REPORT_GROUP_QUERIES')) { define('TEXT_REPORT_GROUP_QUERIES','Queries',false); }
+	if (!defined('TEXT_REPORT_LINK_DESC_VISIT_LIST')) { define('TEXT_REPORT_LINK_DESC_VISIT_LIST','List visits by date, professional, or diagnosis',false); }
+	if (!defined('TEXT_REPORT_LINK_TEXT_VISIT_LIST')) { define('TEXT_REPORT_LINK_TEXT_VISIT_LIST','Visit search tool',false); }
+	if (!defined('TEXT_REPORT_LINK_TITLE_VISIT_LIST')) { define('TEXT_REPORT_LINK_TITLE_VISIT_LIST','Visit summary report',false); }
+	if (!defined('TEXT_REPORT_LINK_URI_VISIT_LIST')) { define('TEXT_REPORT_LINK_URI_VISIT_LIST','',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	if (!defined('TEXT_REPORT_GROUP_FINANCE')) { define('TEXT_REPORT_GROUP_FINANCE','Informes Financieros',false); }
-	if (!defined('TEXT_REPORT_GROUP_PATIENTS')) { define('TEXT_REPORT_GROUP_PATIENTS','Actividad de los pacientes',false); }
 	if (!defined('TEXT_REPORT_GROUP_QUERIES')) { define('TEXT_REPORT_GROUP_QUERIES','Búsquedas',false); }
+	if (!defined('TEXT_REPORT_LINK_DESC_VISIT_LIST')) { define('TEXT_REPORT_LINK_DESC_VISIT_LIST','Buscar visitas por fecha, profesional, o diagnóstico',false); }
+	if (!defined('TEXT_REPORT_LINK_TEXT_VISIT_LIST')) { define('TEXT_REPORT_LINK_TEXT_VISIT_LIST','Buscar visitas',false); }
+	if (!defined('TEXT_REPORT_LINK_TITLE_VISIT_LIST')) { define('TEXT_REPORT_LINK_TITLE_VISIT_LIST','Resumen de las visitas',false); }
+	if (!defined('TEXT_REPORT_LINK_URI_VISIT_LIST')) { define('TEXT_REPORT_LINK_URI_VISIT_LIST','',false); }
 }
 //EOF

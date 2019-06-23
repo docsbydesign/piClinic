@@ -41,18 +41,14 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_AGE_DAYS_LABEL')) { define('TEXT_AGE_DAYS_LABEL','TEXT_AGE_DAYS_LABEL',false); }
 	if (!defined('TEXT_AGE_MONTHS_LABEL')) { define('TEXT_AGE_MONTHS_LABEL','TEXT_AGE_MONTHS_LABEL',false); }
 	if (!defined('TEXT_AGE_YEARS_LABEL')) { define('TEXT_AGE_YEARS_LABEL','TEXT_AGE_YEARS_LABEL',false); }
-	if (!defined('TEXT_ATA_LEFT_TITLE')) { define('TEXT_ATA_LEFT_TITLE','TEXT_ATA_LEFT_TITLE',false); }
 	if (!defined('TEXT_BIRTHDAY_DATE_LABEL')) { define('TEXT_BIRTHDAY_DATE_LABEL','TEXT_BIRTHDAY_DATE_LABEL',false); }
 	if (!defined('TEXT_CITY_LABEL')) { define('TEXT_CITY_LABEL','TEXT_CITY_LABEL',false); }
 	if (!defined('TEXT_CLINICPATIENTID_LABEL')) { define('TEXT_CLINICPATIENTID_LABEL','TEXT_CLINICPATIENTID_LABEL',false); }
 	if (!defined('TEXT_CONDITION_1_LABEL')) { define('TEXT_CONDITION_1_LABEL','TEXT_CONDITION_1_LABEL',false); }
 	if (!defined('TEXT_CONDITION_2_LABEL')) { define('TEXT_CONDITION_2_LABEL','TEXT_CONDITION_2_LABEL',false); }
 	if (!defined('TEXT_CONDITION_3_LABEL')) { define('TEXT_CONDITION_3_LABEL','TEXT_CONDITION_3_LABEL',false); }
-	if (!defined('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE','TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE',false); }
-	if (!defined('TEXT_DAILY_VISIT_HEADING')) { define('TEXT_DAILY_VISIT_HEADING','TEXT_DAILY_VISIT_HEADING',false); }
 	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','TEXT_DATE_FORMAT',false); }
 	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','TEXT_DATE_LABEL',false); }
-	if (!defined('TEXT_DATE_PROMPT_LABEL')) { define('TEXT_DATE_PROMPT_LABEL','TEXT_DATE_PROMPT_LABEL',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_ICD_LABEL')) { define('TEXT_DIAGNOSIS_1_ICD_LABEL','TEXT_DIAGNOSIS_1_ICD_LABEL',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_LABEL')) { define('TEXT_DIAGNOSIS_1_LABEL','TEXT_DIAGNOSIS_1_LABEL',false); }
 	if (!defined('TEXT_DIAGNOSIS_2_ICD_LABEL')) { define('TEXT_DIAGNOSIS_2_ICD_LABEL','TEXT_DIAGNOSIS_2_ICD_LABEL',false); }
@@ -60,6 +56,9 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_3_ICD_LABEL')) { define('TEXT_DIAGNOSIS_3_ICD_LABEL','TEXT_DIAGNOSIS_3_ICD_LABEL',false); }
 	if (!defined('TEXT_DIAGNOSIS_3_LABEL')) { define('TEXT_DIAGNOSIS_3_LABEL','TEXT_DIAGNOSIS_3_LABEL',false); }
 	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','TEXT_DIAGNOSIS_BLANK',false); }
+	if (!defined('TEXT_DIAGNOSIS_LABEL')) { define('TEXT_DIAGNOSIS_LABEL','TEXT_DIAGNOSIS_LABEL',false); }
+	if (!defined('TEXT_DIAGNOSIS_PLACEHOLDER')) { define('TEXT_DIAGNOSIS_PLACEHOLDER','TEXT_DIAGNOSIS_PLACEHOLDER',false); }
+	if (!defined('TEXT_END_DATE_PROMPT_LABEL')) { define('TEXT_END_DATE_PROMPT_LABEL','TEXT_END_DATE_PROMPT_LABEL',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON')) { define('TEXT_EXPORT_CSV_BUTTON','TEXT_EXPORT_CSV_BUTTON',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON_TEXT')) { define('TEXT_EXPORT_CSV_BUTTON_TEXT','TEXT_EXPORT_CSV_BUTTON_TEXT',false); }
 	if (!defined('TEXT_EXPORT_TSV_BUTTON')) { define('TEXT_EXPORT_TSV_BUTTON','TEXT_EXPORT_TSV_BUTTON',false); }
@@ -83,20 +82,13 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_REFERRED_TO_LABEL')) { define('TEXT_REFERRED_TO_LABEL','TEXT_REFERRED_TO_LABEL',false); }
 	if (!defined('TEXT_REPORT_ADDRESS_LABEL')) { define('TEXT_REPORT_ADDRESS_LABEL','TEXT_REPORT_ADDRESS_LABEL',false); }
 	if (!defined('TEXT_REPORT_AGE_LABEL')) { define('TEXT_REPORT_AGE_LABEL','TEXT_REPORT_AGE_LABEL',false); }
-	if (!defined('TEXT_REPORT_CITY_LABEL')) { define('TEXT_REPORT_CITY_LABEL','TEXT_REPORT_CITY_LABEL',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','TEXT_REPORT_CLINICNAME_LABEL',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CODE_LABEL')) { define('TEXT_REPORT_CLINIC_CODE_LABEL','TEXT_REPORT_CLINIC_CODE_LABEL',false); }
-	if (!defined('TEXT_REPORT_CLINIC_TYPE_LABEL')) { define('TEXT_REPORT_CLINIC_TYPE_LABEL','TEXT_REPORT_CLINIC_TYPE_LABEL',false); }
+	if (!defined('TEXT_REPORT_DATE_LABEL')) { define('TEXT_REPORT_DATE_LABEL','TEXT_REPORT_DATE_LABEL',false); }
 	if (!defined('TEXT_REPORT_DATE_PLACEHOLDER')) { define('TEXT_REPORT_DATE_PLACEHOLDER','TEXT_REPORT_DATE_PLACEHOLDER',false); }
 	if (!defined('TEXT_REPORT_DIAGNOSIS_LABEL')) { define('TEXT_REPORT_DIAGNOSIS_LABEL','TEXT_REPORT_DIAGNOSIS_LABEL',false); }
 	if (!defined('TEXT_REPORT_REFERRAL_LABEL')) { define('TEXT_REPORT_REFERRAL_LABEL','TEXT_REPORT_REFERRAL_LABEL',false); }
 	if (!defined('TEXT_REPORT_ROW_LABEL')) { define('TEXT_REPORT_ROW_LABEL','TEXT_REPORT_ROW_LABEL',false); }
-	if (!defined('TEXT_REPORT_SERVICE_EMERGENCY')) { define('TEXT_REPORT_SERVICE_EMERGENCY','TEXT_REPORT_SERVICE_EMERGENCY',false); }
-	if (!defined('TEXT_REPORT_SERVICE_EXTERNAL')) { define('TEXT_REPORT_SERVICE_EXTERNAL','TEXT_REPORT_SERVICE_EXTERNAL',false); }
-	if (!defined('TEXT_REPORT_SERVICE_FILTRO')) { define('TEXT_REPORT_SERVICE_FILTRO','TEXT_REPORT_SERVICE_FILTRO',false); }
-	if (!defined('TEXT_REPORT_SERVICE_SPECIALTY')) { define('TEXT_REPORT_SERVICE_SPECIALTY','TEXT_REPORT_SERVICE_SPECIALTY',false); }
-	if (!defined('TEXT_REPORT_SERVICE_TYPE')) { define('TEXT_REPORT_SERVICE_TYPE','TEXT_REPORT_SERVICE_TYPE',false); }
-	if (!defined('TEXT_REPORT_STATE_LABEL')) { define('TEXT_REPORT_STATE_LABEL','TEXT_REPORT_STATE_LABEL',false); }
 	if (!defined('TEXT_SEX_LABEL')) { define('TEXT_SEX_LABEL','TEXT_SEX_LABEL',false); }
 	if (!defined('TEXT_SEX_OPTION_F')) { define('TEXT_SEX_OPTION_F','TEXT_SEX_OPTION_F',false); }
 	if (!defined('TEXT_SEX_OPTION_M')) { define('TEXT_SEX_OPTION_M','TEXT_SEX_OPTION_M',false); }
@@ -108,8 +100,17 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_TITLE')) { define('TEXT_SHOW_REPORT_DATE_LIST_TITLE','TEXT_SHOW_REPORT_DATE_LIST_TITLE',false); }
 	if (!defined('TEXT_STAFF_LABEL')) { define('TEXT_STAFF_LABEL','TEXT_STAFF_LABEL',false); }
 	if (!defined('TEXT_STAFF_NAME_LABEL')) { define('TEXT_STAFF_NAME_LABEL','TEXT_STAFF_NAME_LABEL',false); }
+	if (!defined('TEXT_START_DATE_PROMPT_LABEL')) { define('TEXT_START_DATE_PROMPT_LABEL','TEXT_START_DATE_PROMPT_LABEL',false); }
 	if (!defined('TEXT_STATE_LABEL')) { define('TEXT_STATE_LABEL','TEXT_STATE_LABEL',false); }
 	if (!defined('TEXT_TYPE_LABEL')) { define('TEXT_TYPE_LABEL','TEXT_TYPE_LABEL',false); }
+	if (!defined('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL')) { define('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL','TEXT_VISIT_FILTER_DIAGNOSIS_LABEL',false); }
+	if (!defined('TEXT_VISIT_FILTER_END_DATE_LABEL')) { define('TEXT_VISIT_FILTER_END_DATE_LABEL','TEXT_VISIT_FILTER_END_DATE_LABEL',false); }
+	if (!defined('TEXT_VISIT_FILTER_MATCHES_LABEL')) { define('TEXT_VISIT_FILTER_MATCHES_LABEL','TEXT_VISIT_FILTER_MATCHES_LABEL',false); }
+	if (!defined('TEXT_VISIT_FILTER_STAFF_LABEL')) { define('TEXT_VISIT_FILTER_STAFF_LABEL','TEXT_VISIT_FILTER_STAFF_LABEL',false); }
+	if (!defined('TEXT_VISIT_FILTER_START_DATE_LABEL')) { define('TEXT_VISIT_FILTER_START_DATE_LABEL','TEXT_VISIT_FILTER_START_DATE_LABEL',false); }
+	if (!defined('TEXT_VISIT_LIST_LOG_PAGE_TITLE')) { define('TEXT_VISIT_LIST_LOG_PAGE_TITLE','TEXT_VISIT_LIST_LOG_PAGE_TITLE',false); }
+	if (!defined('TEXT_VISIT_LIST_PAGE_TITLE')) { define('TEXT_VISIT_LIST_PAGE_TITLE','TEXT_VISIT_LIST_PAGE_TITLE',false); }
+	if (!defined('TEXT_VISIT_SUMMARY_LIST_HEADING')) { define('TEXT_VISIT_SUMMARY_LIST_HEADING','TEXT_VISIT_SUMMARY_LIST_HEADING',false); }
 	if (!defined('TEXT_VISIT_TYPE_ALL')) { define('TEXT_VISIT_TYPE_ALL','TEXT_VISIT_TYPE_ALL',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
@@ -117,18 +118,14 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_AGE_DAYS_LABEL')) { define('TEXT_AGE_DAYS_LABEL','Days',false); }
 	if (!defined('TEXT_AGE_MONTHS_LABEL')) { define('TEXT_AGE_MONTHS_LABEL','Mos',false); }
 	if (!defined('TEXT_AGE_YEARS_LABEL')) { define('TEXT_AGE_YEARS_LABEL','Yrs',false); }
-	if (!defined('TEXT_ATA_LEFT_TITLE')) { define('TEXT_ATA_LEFT_TITLE','Secretary of Health<br>Department of Statistics<br>Honduras, Central America',false); }
 	if (!defined('TEXT_BIRTHDAY_DATE_LABEL')) { define('TEXT_BIRTHDAY_DATE_LABEL','Birth date (M/D/Y)',false); }
 	if (!defined('TEXT_CITY_LABEL')) { define('TEXT_CITY_LABEL','City',false); }
 	if (!defined('TEXT_CLINICPATIENTID_LABEL')) { define('TEXT_CLINICPATIENTID_LABEL','Patient&nbsp;ID',false); }
 	if (!defined('TEXT_CONDITION_1_LABEL')) { define('TEXT_CONDITION_1_LABEL','Condition',false); }
 	if (!defined('TEXT_CONDITION_2_LABEL')) { define('TEXT_CONDITION_2_LABEL','Condition',false); }
 	if (!defined('TEXT_CONDITION_3_LABEL')) { define('TEXT_CONDITION_3_LABEL','Condition',false); }
-	if (!defined('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE','Daily Report of Outpatient Care',false); }
-	if (!defined('TEXT_DAILY_VISIT_HEADING')) { define('TEXT_DAILY_VISIT_HEADING','Daily Outpatient Log',false); }
 	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','m/d/Y',false); }
 	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Report date (YYYY-MM)',false); }
-	if (!defined('TEXT_DATE_PROMPT_LABEL')) { define('TEXT_DATE_PROMPT_LABEL','Date&nbsp;(yyyy-mm-dd)',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_ICD_LABEL')) { define('TEXT_DIAGNOSIS_1_ICD_LABEL','Diagnosis 1 (ICD-10)',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_LABEL')) { define('TEXT_DIAGNOSIS_1_LABEL','Diagnosis 1',false); }
 	if (!defined('TEXT_DIAGNOSIS_2_ICD_LABEL')) { define('TEXT_DIAGNOSIS_2_ICD_LABEL','Diagnosis 2 (ICD-10)',false); }
@@ -136,6 +133,9 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_3_ICD_LABEL')) { define('TEXT_DIAGNOSIS_3_ICD_LABEL','Diagnosis 3 (ICD-10)',false); }
 	if (!defined('TEXT_DIAGNOSIS_3_LABEL')) { define('TEXT_DIAGNOSIS_3_LABEL','Diagnosis 3',false); }
 	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','Not specified',false); }
+	if (!defined('TEXT_DIAGNOSIS_LABEL')) { define('TEXT_DIAGNOSIS_LABEL','Diagnosis',false); }
+	if (!defined('TEXT_DIAGNOSIS_PLACEHOLDER')) { define('TEXT_DIAGNOSIS_PLACEHOLDER','ICD-10 code to match',false); }
+	if (!defined('TEXT_END_DATE_PROMPT_LABEL')) { define('TEXT_END_DATE_PROMPT_LABEL','Last date',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON')) { define('TEXT_EXPORT_CSV_BUTTON','Export as CSV',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON_TEXT')) { define('TEXT_EXPORT_CSV_BUTTON_TEXT','Export the report to a CSV file to open as a spreadsheet. This format opens in Excel automatically, but some letters might not appear correctly.',false); }
 	if (!defined('TEXT_EXPORT_TSV_BUTTON')) { define('TEXT_EXPORT_TSV_BUTTON','Export as TSV',false); }
@@ -159,20 +159,13 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_REFERRED_TO_LABEL')) { define('TEXT_REFERRED_TO_LABEL','Referred to',false); }
 	if (!defined('TEXT_REPORT_ADDRESS_LABEL')) { define('TEXT_REPORT_ADDRESS_LABEL','Home town',false); }
 	if (!defined('TEXT_REPORT_AGE_LABEL')) { define('TEXT_REPORT_AGE_LABEL','Age',false); }
-	if (!defined('TEXT_REPORT_CITY_LABEL')) { define('TEXT_REPORT_CITY_LABEL','City',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Clinic',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CODE_LABEL')) { define('TEXT_REPORT_CLINIC_CODE_LABEL','Code',false); }
-	if (!defined('TEXT_REPORT_CLINIC_TYPE_LABEL')) { define('TEXT_REPORT_CLINIC_TYPE_LABEL','Clinic type',false); }
+	if (!defined('TEXT_REPORT_DATE_LABEL')) { define('TEXT_REPORT_DATE_LABEL','Date',false); }
 	if (!defined('TEXT_REPORT_DATE_PLACEHOLDER')) { define('TEXT_REPORT_DATE_PLACEHOLDER','Report date (YYYY-MM-DD)',false); }
 	if (!defined('TEXT_REPORT_DIAGNOSIS_LABEL')) { define('TEXT_REPORT_DIAGNOSIS_LABEL','Diagnoses/Activities',false); }
 	if (!defined('TEXT_REPORT_REFERRAL_LABEL')) { define('TEXT_REPORT_REFERRAL_LABEL','Referrals',false); }
 	if (!defined('TEXT_REPORT_ROW_LABEL')) { define('TEXT_REPORT_ROW_LABEL','No.',false); }
-	if (!defined('TEXT_REPORT_SERVICE_EMERGENCY')) { define('TEXT_REPORT_SERVICE_EMERGENCY','Emergency',false); }
-	if (!defined('TEXT_REPORT_SERVICE_EXTERNAL')) { define('TEXT_REPORT_SERVICE_EXTERNAL','Outpatient',false); }
-	if (!defined('TEXT_REPORT_SERVICE_FILTRO')) { define('TEXT_REPORT_SERVICE_FILTRO','Filter',false); }
-	if (!defined('TEXT_REPORT_SERVICE_SPECIALTY')) { define('TEXT_REPORT_SERVICE_SPECIALTY','Specialty',false); }
-	if (!defined('TEXT_REPORT_SERVICE_TYPE')) { define('TEXT_REPORT_SERVICE_TYPE','Type of<br>attention',false); }
-	if (!defined('TEXT_REPORT_STATE_LABEL')) { define('TEXT_REPORT_STATE_LABEL','State',false); }
 	if (!defined('TEXT_SEX_LABEL')) { define('TEXT_SEX_LABEL','Sex (M/F)',false); }
 	if (!defined('TEXT_SEX_OPTION_F')) { define('TEXT_SEX_OPTION_F','F',false); }
 	if (!defined('TEXT_SEX_OPTION_M')) { define('TEXT_SEX_OPTION_M','M',false); }
@@ -184,8 +177,17 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_TITLE')) { define('TEXT_SHOW_REPORT_DATE_LIST_TITLE','Display the list of available report dates',false); }
 	if (!defined('TEXT_STAFF_LABEL')) { define('TEXT_STAFF_LABEL','Health professional',false); }
 	if (!defined('TEXT_STAFF_NAME_LABEL')) { define('TEXT_STAFF_NAME_LABEL','Professional',false); }
+	if (!defined('TEXT_START_DATE_PROMPT_LABEL')) { define('TEXT_START_DATE_PROMPT_LABEL','First date',false); }
 	if (!defined('TEXT_STATE_LABEL')) { define('TEXT_STATE_LABEL','State',false); }
 	if (!defined('TEXT_TYPE_LABEL')) { define('TEXT_TYPE_LABEL','Service type',false); }
+	if (!defined('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL')) { define('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL','Diagnosis',false); }
+	if (!defined('TEXT_VISIT_FILTER_END_DATE_LABEL')) { define('TEXT_VISIT_FILTER_END_DATE_LABEL','Last date',false); }
+	if (!defined('TEXT_VISIT_FILTER_MATCHES_LABEL')) { define('TEXT_VISIT_FILTER_MATCHES_LABEL','Matching visits found',false); }
+	if (!defined('TEXT_VISIT_FILTER_STAFF_LABEL')) { define('TEXT_VISIT_FILTER_STAFF_LABEL','Professional',false); }
+	if (!defined('TEXT_VISIT_FILTER_START_DATE_LABEL')) { define('TEXT_VISIT_FILTER_START_DATE_LABEL','First date',false); }
+	if (!defined('TEXT_VISIT_LIST_LOG_PAGE_TITLE')) { define('TEXT_VISIT_LIST_LOG_PAGE_TITLE','Visit summary report',false); }
+	if (!defined('TEXT_VISIT_LIST_PAGE_TITLE')) { define('TEXT_VISIT_LIST_PAGE_TITLE','Visit summary report',false); }
+	if (!defined('TEXT_VISIT_SUMMARY_LIST_HEADING')) { define('TEXT_VISIT_SUMMARY_LIST_HEADING','Visit Summary',false); }
 	if (!defined('TEXT_VISIT_TYPE_ALL')) { define('TEXT_VISIT_TYPE_ALL','All',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
@@ -193,18 +195,14 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_AGE_DAYS_LABEL')) { define('TEXT_AGE_DAYS_LABEL','Días',false); }
 	if (!defined('TEXT_AGE_MONTHS_LABEL')) { define('TEXT_AGE_MONTHS_LABEL','Meses',false); }
 	if (!defined('TEXT_AGE_YEARS_LABEL')) { define('TEXT_AGE_YEARS_LABEL','Años',false); }
-	if (!defined('TEXT_ATA_LEFT_TITLE')) { define('TEXT_ATA_LEFT_TITLE','Secretaría de Salud<br>Departamento de Estadística<br>Honduras, Centro América',false); }
 	if (!defined('TEXT_BIRTHDAY_DATE_LABEL')) { define('TEXT_BIRTHDAY_DATE_LABEL','Fecha de nacimiento (dd/mm/aa)',false); }
 	if (!defined('TEXT_CITY_LABEL')) { define('TEXT_CITY_LABEL','Municipio',false); }
 	if (!defined('TEXT_CLINICPATIENTID_LABEL')) { define('TEXT_CLINICPATIENTID_LABEL','Identidad&nbsp;del&nbsp;paciente',false); }
 	if (!defined('TEXT_CONDITION_1_LABEL')) { define('TEXT_CONDITION_1_LABEL','Condición',false); }
 	if (!defined('TEXT_CONDITION_2_LABEL')) { define('TEXT_CONDITION_2_LABEL','Condición',false); }
 	if (!defined('TEXT_CONDITION_3_LABEL')) { define('TEXT_CONDITION_3_LABEL','Condición',false); }
-	if (!defined('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE','Informe Diario de Atenciones Ambulatorias',false); }
-	if (!defined('TEXT_DAILY_VISIT_HEADING')) { define('TEXT_DAILY_VISIT_HEADING','Atenciones Ambulatorias',false); }
 	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','d-m-Y',false); }
 	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha del informe (AAAA-MM)',false); }
-	if (!defined('TEXT_DATE_PROMPT_LABEL')) { define('TEXT_DATE_PROMPT_LABEL','Fecha&nbsp;(aaaa-mm-dd)',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_ICD_LABEL')) { define('TEXT_DIAGNOSIS_1_ICD_LABEL','Diagnóstico 1 (CIE-10)',false); }
 	if (!defined('TEXT_DIAGNOSIS_1_LABEL')) { define('TEXT_DIAGNOSIS_1_LABEL','Diagnóstico 1',false); }
 	if (!defined('TEXT_DIAGNOSIS_2_ICD_LABEL')) { define('TEXT_DIAGNOSIS_2_ICD_LABEL','Diagnóstico 2 (CIE-10)',false); }
@@ -212,6 +210,9 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_3_ICD_LABEL')) { define('TEXT_DIAGNOSIS_3_ICD_LABEL','Diagnóstico 3 (CIE-10)',false); }
 	if (!defined('TEXT_DIAGNOSIS_3_LABEL')) { define('TEXT_DIAGNOSIS_3_LABEL','Diagnóstico 3',false); }
 	if (!defined('TEXT_DIAGNOSIS_BLANK')) { define('TEXT_DIAGNOSIS_BLANK','(No especificado)',false); }
+	if (!defined('TEXT_DIAGNOSIS_LABEL')) { define('TEXT_DIAGNOSIS_LABEL','Diagnóstico',false); }
+	if (!defined('TEXT_DIAGNOSIS_PLACEHOLDER')) { define('TEXT_DIAGNOSIS_PLACEHOLDER','Codigo CIE-10',false); }
+	if (!defined('TEXT_END_DATE_PROMPT_LABEL')) { define('TEXT_END_DATE_PROMPT_LABEL','Última fecha',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON')) { define('TEXT_EXPORT_CSV_BUTTON','Descargar como CSV',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON_TEXT')) { define('TEXT_EXPORT_CSV_BUTTON_TEXT','Descarga el informe como un archivo CSV para abrirlo como una hoja de cálculo. Excel puede abrir este formato automáticamente, pero no muestra todas las letras correctamente.',false); }
 	if (!defined('TEXT_EXPORT_TSV_BUTTON')) { define('TEXT_EXPORT_TSV_BUTTON','Descargar como TSV',false); }
@@ -235,20 +236,13 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_REFERRED_TO_LABEL')) { define('TEXT_REFERRED_TO_LABEL','Enviado a',false); }
 	if (!defined('TEXT_REPORT_ADDRESS_LABEL')) { define('TEXT_REPORT_ADDRESS_LABEL','Procedencia',false); }
 	if (!defined('TEXT_REPORT_AGE_LABEL')) { define('TEXT_REPORT_AGE_LABEL','Edad',false); }
-	if (!defined('TEXT_REPORT_CITY_LABEL')) { define('TEXT_REPORT_CITY_LABEL','Municipio',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Establecimiento',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CODE_LABEL')) { define('TEXT_REPORT_CLINIC_CODE_LABEL','Código',false); }
-	if (!defined('TEXT_REPORT_CLINIC_TYPE_LABEL')) { define('TEXT_REPORT_CLINIC_TYPE_LABEL','Tipo de establecimiento',false); }
+	if (!defined('TEXT_REPORT_DATE_LABEL')) { define('TEXT_REPORT_DATE_LABEL','Fecha',false); }
 	if (!defined('TEXT_REPORT_DATE_PLACEHOLDER')) { define('TEXT_REPORT_DATE_PLACEHOLDER','Report date (AAAA-MM-DD)',false); }
 	if (!defined('TEXT_REPORT_DIAGNOSIS_LABEL')) { define('TEXT_REPORT_DIAGNOSIS_LABEL','Diagnóstico/Actividad',false); }
 	if (!defined('TEXT_REPORT_REFERRAL_LABEL')) { define('TEXT_REPORT_REFERRAL_LABEL','Remisiones',false); }
 	if (!defined('TEXT_REPORT_ROW_LABEL')) { define('TEXT_REPORT_ROW_LABEL','No.',false); }
-	if (!defined('TEXT_REPORT_SERVICE_EMERGENCY')) { define('TEXT_REPORT_SERVICE_EMERGENCY','Emergencia',false); }
-	if (!defined('TEXT_REPORT_SERVICE_EXTERNAL')) { define('TEXT_REPORT_SERVICE_EXTERNAL','Consulta externa',false); }
-	if (!defined('TEXT_REPORT_SERVICE_FILTRO')) { define('TEXT_REPORT_SERVICE_FILTRO','Filtro',false); }
-	if (!defined('TEXT_REPORT_SERVICE_SPECIALTY')) { define('TEXT_REPORT_SERVICE_SPECIALTY','Especialidad',false); }
-	if (!defined('TEXT_REPORT_SERVICE_TYPE')) { define('TEXT_REPORT_SERVICE_TYPE','Servicio de<br>Atención',false); }
-	if (!defined('TEXT_REPORT_STATE_LABEL')) { define('TEXT_REPORT_STATE_LABEL','Departamento',false); }
 	if (!defined('TEXT_SEX_LABEL')) { define('TEXT_SEX_LABEL','Sexo (H/M)',false); }
 	if (!defined('TEXT_SEX_OPTION_F')) { define('TEXT_SEX_OPTION_F','M',false); }
 	if (!defined('TEXT_SEX_OPTION_M')) { define('TEXT_SEX_OPTION_M','H',false); }
@@ -260,8 +254,17 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_SHOW_REPORT_DATE_LIST_TITLE')) { define('TEXT_SHOW_REPORT_DATE_LIST_TITLE','Muestra la lista de fechas que tengan informes',false); }
 	if (!defined('TEXT_STAFF_LABEL')) { define('TEXT_STAFF_LABEL','Profesional de salud',false); }
 	if (!defined('TEXT_STAFF_NAME_LABEL')) { define('TEXT_STAFF_NAME_LABEL','Profesional',false); }
+	if (!defined('TEXT_START_DATE_PROMPT_LABEL')) { define('TEXT_START_DATE_PROMPT_LABEL','Primera fecha',false); }
 	if (!defined('TEXT_STATE_LABEL')) { define('TEXT_STATE_LABEL','Departamento',false); }
 	if (!defined('TEXT_TYPE_LABEL')) { define('TEXT_TYPE_LABEL','Servicio de atención',false); }
+	if (!defined('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL')) { define('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL','Diagnóstico',false); }
+	if (!defined('TEXT_VISIT_FILTER_END_DATE_LABEL')) { define('TEXT_VISIT_FILTER_END_DATE_LABEL','Última fecha',false); }
+	if (!defined('TEXT_VISIT_FILTER_MATCHES_LABEL')) { define('TEXT_VISIT_FILTER_MATCHES_LABEL','Visitas encontradas',false); }
+	if (!defined('TEXT_VISIT_FILTER_STAFF_LABEL')) { define('TEXT_VISIT_FILTER_STAFF_LABEL','Profesional',false); }
+	if (!defined('TEXT_VISIT_FILTER_START_DATE_LABEL')) { define('TEXT_VISIT_FILTER_START_DATE_LABEL','Primera fecha',false); }
+	if (!defined('TEXT_VISIT_LIST_LOG_PAGE_TITLE')) { define('TEXT_VISIT_LIST_LOG_PAGE_TITLE','Resumen de las visitas',false); }
+	if (!defined('TEXT_VISIT_LIST_PAGE_TITLE')) { define('TEXT_VISIT_LIST_PAGE_TITLE','Resumen de las visitas',false); }
+	if (!defined('TEXT_VISIT_SUMMARY_LIST_HEADING')) { define('TEXT_VISIT_SUMMARY_LIST_HEADING','Resume de visitas',false); }
 	if (!defined('TEXT_VISIT_TYPE_ALL')) { define('TEXT_VISIT_TYPE_ALL','Todos',false); }
 }
 //EOF

@@ -66,12 +66,9 @@ function makeIcdQueryStringFromRequestParameters ($requestParameters, $dbView = 
 		$paramCount += 1;
 	}
 	if (!empty($requestParameters['c'])) {
-		// default is to search the index field unless the parameter has a . in it,
-		//  then search the code field.
+		// default is to search the index field
+        //  a decimal is assumed to be part of a regexp.
 		$queryField = 'icd10index';
-		if (strpos($requestParameters['c'], '.') !== FALSE) {
-			$queryField = 'icd10code';
-		}
 		$queryString .= "`". $queryField ."` REGEXP '".$requestParameters['c']."' AND ";
 		$paramCount += 1;
 	}

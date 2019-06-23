@@ -93,7 +93,7 @@ if (empty($requestData['clinicPatientID'])) {
     $visitRecord = _visit_get($dbLink, $sessionInfo['token'], $getQueryString);
     if ($visitRecord['httpResponse'] != 200){
         if (API_DEBUG_MODE) {
-            $report['visitRecord'] = $visitRecord;
+            $report['visitResponse'] = $visitRecord;
             $report['query'] = $getQueryString;
             if ($visitRecord['httpResponse'] != 404) {
                 // 	This will create an error message below.
