@@ -547,9 +547,12 @@ header('Content-type: text/html; charset=utf-8');
                 </select>
                 &nbsp;&nbsp;
                 <label class="close"><?= TEXT_DIAGNOSIS_LABEL ?>:</label>
+                    <?= showDiagnosisInput ($dbLink, (!empty($requestData['diag']) ? $requestData['diag'] : ''), 'diag', $sessionInfo, 'ICD code or value', TEXT_DIAGNOSIS_LOADING, $class='piClinicEdit') ?>
                     <?php
-                    echo '<input type="text" id="diagField" name="diag" value="'.(!empty($requestData['diag'])? $requestData['diag'] : '' ).'" '.
+                    /*
+                        echo '<input type="text" id="diagField" name="diag" value="'.(!empty($requestData['diag'])? $requestData['diag'] : '' ).'" '.
                         'placeholder="'.TEXT_DIAGNOSIS_PLACEHOLDER.'" maxlength="255">';
+                    */
                     ?>
             </p>
             <p>
@@ -680,6 +683,7 @@ header('Content-type: text/html; charset=utf-8');
         </div>
     </div>
 </div>
+<?= icdLookupJavaScript() ?>
 </body>
 <?php
 if ($reportProfile['count'] >= 0) {
