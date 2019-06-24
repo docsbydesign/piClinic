@@ -122,20 +122,23 @@ $staffDataRecord = getDbRecords($dbLink, $staffQueryString);
 $medProfs = [];
 array_push ( $medProfs, ["value" => '', "display" => TEXT_GROUP_ALL] );
 if (($staffDataRecord != NULL) && ($staffDataRecord['count'] >= 1)) {
+    $staffArray = [];
     if ($staffDataRecord['count'] == 1) {
+        array_push($staffArray, $staffDataRecord['data']);
+    } else {
+        $staffArray = $staffDataRecord['data'];
+    }
+    foreach ($staffArray as $staffItem) {
+        if (empty($staffItem['staffName'])) {
+            // create the none option
+            $staffItem['composite'] = TEXT_VALUE_NOT_SET.'|'.TEXT_NOT_SPECIFIED;
+            $staffItem['staffName'] = TEXT_VALUE_NOT_SET;
+        }
         $staffPush = [
-            "value" => $staffDataRecord['data']['composite'],
-            "display" => $staffDataRecord['data']['staffName'].' - '.staffPosDisplayString ($staffDataRecord['data']['staffPosition'])
+            "value" => $staffItem['composite'],
+            "display" => $staffItem['staffName'].' - '.staffPosDisplayString ($staffItem['staffPosition'])
         ];
         array_push ( $medProfs, $staffPush);
-    } else {
-        foreach ($staffDataRecord['data'] as $staffItem) {
-            $staffPush = [
-                "value" => $staffItem['composite'],
-                "display" => $staffItem['staffName'].' - '.staffPosDisplayString ($staffItem['staffPosition'])
-            ];
-            array_push ( $medProfs, $staffPush);
-        }
     }
 }
 /*
@@ -164,10 +167,17 @@ if (!empty($requestData['staff'])) {
                 // if name == all, then no condition string is necessary.
                 $filterParams = explode ('|', $requestData['staff']);
                 if (count($filterParams) == 2) {
-                    $reportPosCond = 'AND `staffName` = \''.$filterParams[0].'\' AND `staffPosition` = \''.$filterParams[1].'\' ';
-                    $reportDefaultOption = $requestData['staff'];
-                    $defaultReportName = $filterParams[0];
-                    $defaultReportProfType = staffPosDisplayString ($filterParams[1]);
+                    if ($filterParams[0] !== TEXT_VALUE_NOT_SET) {
+                        $reportPosCond = 'AND `staffName` = \''.$filterParams[0].'\' AND `staffPosition` = \''.$filterParams[1].'\' ';
+                        $reportDefaultOption = $requestData['staff'];
+                        $defaultReportName = $filterParams[0];
+                        $defaultReportProfType = staffPosDisplayString ($filterParams[1]);
+                    } else {
+                        $reportPosCond = 'AND `staffName` IS NULL ';
+                        $reportDefaultOption = $requestData['staff'];
+                        $defaultReportName = $filterParams[0];
+                        $defaultReportProfType = staffPosDisplayString ($filterParams[1]);
+                    }
                 } // else leave it blank and select ALL
             }
             break;
@@ -211,11 +221,17 @@ if (empty($dbStatus) & !$noData) {
     *		Return: visit object array
     */
     $diagFilterCondition = '';
+    $searchString = '';
     if (!empty($requestData['diag'])) {
+        $searchString = $requestData['diag'];
+        if (strpos($requestData['diag'], '@') !== false) {
+            // this should fill $searchString with all the characters in $requestData['diag'] except the first one
+            $searchString = substr($requestData['diag'], (1-strlen($requestData['diag'])));
+        }
         $diagFilterCondition .= 'AND ( ';
-        $diagFilterCondition .= "`diagnosis1` REGEXP '".$requestData['diag']."' OR ";
-        $diagFilterCondition .= "`diagnosis2` REGEXP '".$requestData['diag']."' OR ";
-        $diagFilterCondition .= "`diagnosis3` REGEXP '".$requestData['diag']."' ) ";
+        $diagFilterCondition .= "`diagnosis1` REGEXP '".$searchString."' OR ";
+        $diagFilterCondition .= "`diagnosis2` REGEXP '".$searchString."' OR ";
+        $diagFilterCondition .= "`diagnosis3` REGEXP '".$searchString."' ) ";
     }
     if(empty($reportEndDate) && !empty($reportStartDate)) {
         $reportEndDate = $reportStartDate;
@@ -229,6 +245,18 @@ if (empty($dbStatus) & !$noData) {
         $reportTypeCond.
         "ORDER BY `dateTimeIn` ASC;";
     $visitResponse = getDbRecords($dbLink, $getQueryString);
+
+    if (API_DEBUG_MODE) {
+        $debugInfo = array();
+        $debugInfo['requestData'] = $requestData;
+        $debugInfo['staffList'] = $medProfs;
+        $debugInfo['query'] = $getQueryString;
+        $debugInfo['result'] = $visitResponse;
+
+        $debugDiv = '<div id="debugInfo"><pre>';
+        $debugDiv .= json_encode($debugInfo, JSON_PRETTY_PRINT);
+        $debugDiv .= '</pre>';
+    }
 
     $report['visitResponse'] = $visitResponse;
     $report['query'] = $getQueryString;
@@ -520,6 +548,7 @@ header('Content-type: text/html; charset=utf-8');
 <?= $sessionDiv /* defined in uiSessionInfo.php above */ ?>
 <?php require ('../uiErrorMessage.php') ?>
 <?= piClinicAppMenu(null,$sessionInfo,  $pageLanguage, __FILE__) ?>
+<datalist id="diagData"></datalist>
 <div class="pageBody">
     <div id="DailyVisitListPrompt" class="noprint">
         <form enctype="application/x-www-form-urlencoded" action="/reports/rptVisitListHome.php" method="get">
@@ -622,7 +651,7 @@ header('Content-type: text/html; charset=utf-8');
                         echo '<td class="wide">';
                         $displayText = '';
                         $displayClass = '';
-                        $diagnosisMatchString = '/'.$requestData['diag'].'/';
+                        $diagnosisMatchString = '/'.$searchString.'/';
                         if (!empty($visit['diagnosis1'])) {
                             $displayText = getIcdDescription ($dbLink, $visit['diagnosis1'], $pageLanguage, -1);
                             if ($displayText == $visit['diagnosis1']) {
