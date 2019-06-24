@@ -273,7 +273,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_FILTER_START_DATE_LABEL')) { define('TEXT_VISIT_FILTER_START_DATE_LABEL','Primera fecha',false); }
 	if (!defined('TEXT_VISIT_LIST_LOG_PAGE_TITLE')) { define('TEXT_VISIT_LIST_LOG_PAGE_TITLE','Resumen de las visitas',false); }
 	if (!defined('TEXT_VISIT_LIST_PAGE_TITLE')) { define('TEXT_VISIT_LIST_PAGE_TITLE','Resumen de las visitas',false); }
-	if (!defined('TEXT_VISIT_SUMMARY_LIST_HEADING')) { define('TEXT_VISIT_SUMMARY_LIST_HEADING','Resume de visitas',false); }
+	if (!defined('TEXT_VISIT_SUMMARY_LIST_HEADING')) { define('TEXT_VISIT_SUMMARY_LIST_HEADING','Resumen de visitas',false); }
 	if (!defined('TEXT_VISIT_TYPE_ALL')) { define('TEXT_VISIT_TYPE_ALL','Todos',false); }
 }
 //EOF
