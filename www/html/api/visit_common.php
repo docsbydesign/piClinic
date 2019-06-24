@@ -210,9 +210,9 @@ function getIcdDescription ($dbLink, $icdCode, $lang, $showCode=0) {
 	}
 }
 
-function showDiagnosisInput ($dbLink, $visitInfo, $field, $sessionInfo, $placeholderText, $loadingText, $class='piClinicEdit', $charLimit=255, $autofocus=false, $requiredField=false) {
+function showDiagnosisInput ($dbLink, $inputValue, $field, $sessionInfo, $placeholderText, $loadingText, $class='piClinicEdit', $charLimit=255, $autofocus=false, $requiredField=false) {
 	// create text control
-	$decodedValue = getIcdDescription($dbLink, $visitInfo[$field], $sessionInfo['pageLanguage'], SHOWCODE_CODE_AFTER_TEXT);
+	$decodedValue = getIcdDescription($dbLink, $inputValue, $sessionInfo['pageLanguage'], SHOWCODE_CODE_AFTER_TEXT);
 
 	$elemString = '<input '.
 		'type="text" '.
@@ -233,7 +233,7 @@ function showDiagnosisInput ($dbLink, $visitInfo, $field, $sessionInfo, $placeho
 		'type="hidden" '.
 		'id="'.$field.'CodeId" '.
 		'name="'.$field.'" '.
-		'value="'. $visitInfo[$field] .'" />'."\n";
+		'value="'. $inputValue .'" />'."\n";
 	return $elemString;
 }
 

@@ -173,6 +173,7 @@ TEXT_EDIT_PATIENT_HEADING,Update patient info,Actualizar la información del pac
 TEXT_EDIT_STAFF_HEADING,Update staff information,Actualizar los datos personales
 TEXT_EDIT_VISIT_IMAGE,Edit,Actualizar
 TEXT_EDIT_VISIT_INFO,Edit this visit,Actualizar esta visita
+TEXT_EMPTY_DIAG_CHECKBOX_LABEL,Show visits with no diagnoses,Mostrar visitas no diagnosticadas
 TEXT_END_DATE_PROMPT_LABEL,Last date,Última fecha
 TEXT_ENGAGED_OPTION,Engaged,Comprometido/a
 TEXT_EXAM_NOTES_LABEL,Physical Examination,Examen Físico
