@@ -222,16 +222,22 @@ if (empty($dbStatus) & !$noData) {
     */
     $diagFilterCondition = '';
     $searchString = '';
-    if (!empty($requestData['diag'])) {
+    if (!empty($requestData['diag']) &&
+        (empty($requestData['emptyDiag']) || ($requestData['emptyDiag'] != '1'))) {
         $searchString = $requestData['diag'];
         if (strpos($requestData['diag'], '@') !== false) {
             // this should fill $searchString with all the characters in $requestData['diag'] except the first one
-            $searchString = substr($requestData['diag'], (1-strlen($requestData['diag'])));
+            $searchString = substr($requestData['diag'], (1 - strlen($requestData['diag'])));
         }
         $diagFilterCondition .= 'AND ( ';
-        $diagFilterCondition .= "`diagnosis1` REGEXP '".$searchString."' OR ";
-        $diagFilterCondition .= "`diagnosis2` REGEXP '".$searchString."' OR ";
-        $diagFilterCondition .= "`diagnosis3` REGEXP '".$searchString."' ) ";
+        $diagFilterCondition .= "`diagnosis1` REGEXP '" . $searchString . "' OR ";
+        $diagFilterCondition .= "`diagnosis2` REGEXP '" . $searchString . "' OR ";
+        $diagFilterCondition .= "`diagnosis3` REGEXP '" . $searchString . "' ) ";
+    } else if (!empty($requestData['emptyDiag']) || ($requestData['emptyDiag'] == '1')) {
+        $diagFilterCondition .= 'AND ( ';
+        $diagFilterCondition .= "`diagnosis1` IS NULL AND ";
+        $diagFilterCondition .= "`diagnosis2` IS NULL AND ";
+        $diagFilterCondition .= "`diagnosis3` IS NULL ) ";
     }
     if(empty($reportEndDate) && !empty($reportStartDate)) {
         $reportEndDate = $reportStartDate;
@@ -574,7 +580,8 @@ header('Content-type: text/html; charset=utf-8');
                     }
                     ?>
                 </select>
-                &nbsp;&nbsp;
+            </p>
+            <p>
                 <label class="close"><?= TEXT_DIAGNOSIS_LABEL ?>:</label>
                     <?= showDiagnosisInput ($dbLink, (!empty($requestData['diag']) ? $requestData['diag'] : ''), 'diag', $sessionInfo, 'ICD code or value', TEXT_DIAGNOSIS_LOADING, $class='piClinicEdit') ?>
                     <?php
@@ -583,6 +590,8 @@ header('Content-type: text/html; charset=utf-8');
                         'placeholder="'.TEXT_DIAGNOSIS_PLACEHOLDER.'" maxlength="255">';
                     */
                     ?>
+                &nbsp;&nbsp;
+                <input type="checkbox" name="emptyDiag" value="1" <?= (!empty($requestData['emptyDiag']) && $requestData['emptyDiag'] == '1' ? 'checked' : '' ) ?>><?= TEXT_EMPTY_DIAG_CHECKBOX_LABEL ?>
             </p>
             <p>
                 <button type="submit"><?= TEXT_SHOW_REPORT_BUTTON ?></button>
