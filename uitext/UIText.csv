@@ -173,6 +173,7 @@ TEXT_EDIT_PATIENT_HEADING,Update patient info,Actualizar la información del pac
 TEXT_EDIT_STAFF_HEADING,Update staff information,Actualizar los datos personales
 TEXT_EDIT_VISIT_IMAGE,Edit,Actualizar
 TEXT_EDIT_VISIT_INFO,Edit this visit,Actualizar esta visita
+TEXT_EMPTY_DIAG_CHECKBOX_LABEL,Show visits with no diagnoses,Mostrar visitas no diagnosticadas
 TEXT_END_DATE_PROMPT_LABEL,Last date,Última fecha
 TEXT_ENGAGED_OPTION,Engaged,Comprometido/a
 TEXT_EXAM_NOTES_LABEL,Physical Examination,Examen Físico
@@ -590,7 +591,7 @@ TEXT_REPORT_LINK_TEXT_DAILY_PAYMENT_LOG,Daily Payment Log,Registros de Pagos del
 TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_DAY_LOG,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
 TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_POS_LOG,Monthly Report of Outpatient Care,Informe Mensual de Atenciones Ambulatorias (AT2-R)
 TEXT_REPORT_LINK_TEXT_MONTHLY_PAYMENT_LOG,Monthly payment report,Informe de pagos del mes
-TEXT_REPORT_LINK_TEXT_VISIT_LIST,Visit search tool,Buscar visitas
+TEXT_REPORT_LINK_TEXT_VISIT_LIST,Visit search,Buscar visitas
 TEXT_REPORT_LINK_TITLE_DAILY_PATIENT_LOG,Daily Patient Log,Atenciones Ambulatorias
 TEXT_REPORT_LINK_TITLE_DAILY_PAYMENT_LOG,Daily payment log,Registro de pagos del día
 TEXT_REPORT_LINK_TITLE_MONTHLY_PATIENT_BY_DAY_LOG,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
@@ -855,7 +856,7 @@ TEXT_VISIT_PRECLINIC_HEADING,Pre-Clinic,Pre-Clínica
 TEXT_VISIT_STATUS_CLOSED,Discharged,Dado de alta
 TEXT_VISIT_STATUS_LABEL,Status,Estatus
 TEXT_VISIT_STATUS_OPEN,Admitted,Admitido
-TEXT_VISIT_SUMMARY_LIST_HEADING,Visit Summary,Resume de visitas
+TEXT_VISIT_SUMMARY_LIST_HEADING,Visit Summary,Resumen de visitas
 TEXT_VISIT_TIME_DATE_FORMAT,H:i m/d/Y,H:i d-m-Y
 TEXT_VISIT_TIME_EDIT_FORMAT,H:i,H:i
 TEXT_VISIT_TIME_FORMAT,h:i,H:i
