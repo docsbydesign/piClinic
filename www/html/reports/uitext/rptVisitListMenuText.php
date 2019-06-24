@@ -48,7 +48,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_GROUP_QUERIES')) { define('TEXT_REPORT_GROUP_QUERIES','Queries',false); }
 	if (!defined('TEXT_REPORT_LINK_DESC_VISIT_LIST')) { define('TEXT_REPORT_LINK_DESC_VISIT_LIST','List visits by date, professional, or diagnosis',false); }
-	if (!defined('TEXT_REPORT_LINK_TEXT_VISIT_LIST')) { define('TEXT_REPORT_LINK_TEXT_VISIT_LIST','Visit search tool',false); }
+	if (!defined('TEXT_REPORT_LINK_TEXT_VISIT_LIST')) { define('TEXT_REPORT_LINK_TEXT_VISIT_LIST','Visit search',false); }
 	if (!defined('TEXT_REPORT_LINK_TITLE_VISIT_LIST')) { define('TEXT_REPORT_LINK_TITLE_VISIT_LIST','Visit summary report',false); }
 	if (!defined('TEXT_REPORT_LINK_URI_VISIT_LIST')) { define('TEXT_REPORT_LINK_URI_VISIT_LIST','',false); }
 }

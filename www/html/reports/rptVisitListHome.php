@@ -600,6 +600,7 @@ header('Content-type: text/html; charset=utf-8');
 					<button type="submit" name="export" value="tsv" title="<?= TEXT_EXPORT_TSV_BUTTON_TEXT ?>"><?= TEXT_EXPORT_TSV_BUTTON ?></button>
 					</span>
             </p>
+            <?= (!empty($requestData['lang']) ? '<input type="hidden" name="lang" value="'.$requestData['lang'].'">' : '' ) ?>
         </form>
         <hr>
     </div>

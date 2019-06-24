@@ -591,7 +591,7 @@ TEXT_REPORT_LINK_TEXT_DAILY_PAYMENT_LOG,Daily Payment Log,Registros de Pagos del
 TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_DAY_LOG,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
 TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_POS_LOG,Monthly Report of Outpatient Care,Informe Mensual de Atenciones Ambulatorias (AT2-R)
 TEXT_REPORT_LINK_TEXT_MONTHLY_PAYMENT_LOG,Monthly payment report,Informe de pagos del mes
-TEXT_REPORT_LINK_TEXT_VISIT_LIST,Visit search tool,Buscar visitas
+TEXT_REPORT_LINK_TEXT_VISIT_LIST,Visit search,Buscar visitas
 TEXT_REPORT_LINK_TITLE_DAILY_PATIENT_LOG,Daily Patient Log,Atenciones Ambulatorias
 TEXT_REPORT_LINK_TITLE_DAILY_PAYMENT_LOG,Daily payment log,Registro de pagos del día
 TEXT_REPORT_LINK_TITLE_MONTHLY_PATIENT_BY_DAY_LOG,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
