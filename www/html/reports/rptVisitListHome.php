@@ -233,7 +233,7 @@ if (empty($dbStatus) & !$noData) {
         $diagFilterCondition .= "`diagnosis1` REGEXP '" . $searchString . "' OR ";
         $diagFilterCondition .= "`diagnosis2` REGEXP '" . $searchString . "' OR ";
         $diagFilterCondition .= "`diagnosis3` REGEXP '" . $searchString . "' ) ";
-    } else if (!empty($requestData['emptyDiag']) || ($requestData['emptyDiag'] == '1')) {
+    } else if (!empty($requestData['emptyDiag']) && ($requestData['emptyDiag'] == '1')) {
         $diagFilterCondition .= 'AND ( ';
         $diagFilterCondition .= "`diagnosis1` IS NULL AND ";
         $diagFilterCondition .= "`diagnosis2` IS NULL AND ";
