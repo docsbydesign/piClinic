@@ -39,8 +39,8 @@ function validatePatient ($ptRecord, $validationType=PT_VALIDATE_NEW, $validatio
             if (!empty($ptRecord['familyID']) && !empty($ptRecord['clinicPatientID'])) {
                 // test for patient ID format of Text-Number in family ID
                 // and Text-Number-Number in Patient ID
-                $familyIdPattern = '/([a-záéíóúñ ]+-[\d]+)/i';
-                $patientIdPattern = '/([a-záéíóúñ ]+-[\d]+)-[\d]+/i';
+                $familyIdPattern = '/([a-záéíóúñ0-9 ]+-[\d]+)/i';
+                $patientIdPattern = '/([a-záéíóúñ0-9 ]+-[\d]+)-[\d]+/i';
                 if (!preg_match ( $familyIdPattern, $ptRecord['familyID'])) {
                     $validationResponse['valid'] = false;
                     $validationResponse['message'] = TEXT_PATIENT_FAMILY_ID_NOT_VALID;

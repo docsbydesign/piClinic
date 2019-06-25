@@ -222,22 +222,54 @@ if (empty($dbStatus) & !$noData) {
     */
     $diagFilterCondition = '';
     $searchString = '';
-    if (!empty($requestData['diag']) &&
-        (empty($requestData['emptyDiag']) || ($requestData['emptyDiag'] != '1'))) {
+    if (!empty($requestData['diag'])) {
         $searchString = $requestData['diag'];
-        if (strpos($requestData['diag'], '@') !== false) {
+        $matchType = 'exact';
+        // first check for special search cases:
+        //   @<text> = a RegExp to match
+        //   $<text> = a loose search
+        //   all other text is matched exactly
+        if ($requestData['diag'][0] == '@') {
             // this should fill $searchString with all the characters in $requestData['diag'] except the first one
             $searchString = substr($requestData['diag'], (1 - strlen($requestData['diag'])));
+            $matchType = 'regex';
+        } else if ($requestData['diag'][0] == '$') {
+            // this should fill $searchString with all the characters in $requestData['diag'] except the first one
+            $searchString = substr($requestData['diag'], (1 - strlen($requestData['diag'])));
+            $matchType = 'loose';
         }
-        $diagFilterCondition .= 'AND ( ';
-        $diagFilterCondition .= "`diagnosis1` REGEXP '" . $searchString . "' OR ";
-        $diagFilterCondition .= "`diagnosis2` REGEXP '" . $searchString . "' OR ";
-        $diagFilterCondition .= "`diagnosis3` REGEXP '" . $searchString . "' ) ";
-    } else if (!empty($requestData['emptyDiag']) && ($requestData['emptyDiag'] == '1')) {
+    }
+
+    if (empty($requestData['emptyDiag'])) { // if emptyDiag is empty or 0
+        if ($matchType == 'exact') {
+            $diagFilterCondition .= 'AND ( ';
+            $diagFilterCondition .= "`diagnosis1` = '" . $searchString . "' OR ";
+            $diagFilterCondition .= "`diagnosis2` = '" . $searchString . "' OR ";
+            $diagFilterCondition .= "`diagnosis3` = '" . $searchString . "' ) ";
+        } else if  ($matchType == 'regex') {
+            $diagFilterCondition .= 'AND ( ';
+            $diagFilterCondition .= "`diagnosis1` REGEXP '" . $searchString . "' OR ";
+            $diagFilterCondition .= "`diagnosis2` REGEXP '" . $searchString . "' OR ";
+            $diagFilterCondition .= "`diagnosis3` REGEXP '" . $searchString . "' ) ";
+        } else if  ($matchType == 'loose') {
+            $diagFilterCondition .= 'AND ( ';
+            $diagFilterCondition .= "`diagnosis1` LIKE '%" . $searchString . "%' OR ";
+            $diagFilterCondition .= "`diagnosis2` LIKE '%" . $searchString . "%' OR ";
+            $diagFilterCondition .= "`diagnosis3` LIKE '%" . $searchString . "%' ) ";
+        }
+    } else if ($requestData['emptyDiag'] == '1') {
+        // Match visits with no diagnosis entries
         $diagFilterCondition .= 'AND ( ';
         $diagFilterCondition .= "`diagnosis1` IS NULL AND ";
         $diagFilterCondition .= "`diagnosis2` IS NULL AND ";
         $diagFilterCondition .= "`diagnosis3` IS NULL ) ";
+    } else if ($requestData['emptyDiag'] == '2') {
+        // Match visits with any diagnosis that isn't an ICD code
+        $searchString = '([A-Z][0-9]{2,3})';
+        $diagFilterCondition .= 'AND ( ';
+        $diagFilterCondition .= "(`diagnosis1` IS NOT NULL AND `diagnosis1` NOT REGEXP '" . $searchString . "') OR ";
+        $diagFilterCondition .= "(`diagnosis2` IS NOT NULL AND `diagnosis2` NOT REGEXP '" . $searchString . "') OR ";
+        $diagFilterCondition .= "(`diagnosis3` IS NOT NULL AND `diagnosis3` NOT REGEXP '" . $searchString . "') ) ";
     }
     if(empty($reportEndDate) && !empty($reportStartDate)) {
         $reportEndDate = $reportStartDate;
@@ -591,7 +623,11 @@ header('Content-type: text/html; charset=utf-8');
                     */
                     ?>
                 &nbsp;&nbsp;
-                <input type="checkbox" name="emptyDiag" value="1" <?= (!empty($requestData['emptyDiag']) && $requestData['emptyDiag'] == '1' ? 'checked' : '' ) ?>><?= TEXT_EMPTY_DIAG_CHECKBOX_LABEL ?>
+                <select name="emptyDiag">
+                    <option value="0" <?= ((!empty($requestData['emptyDiag']) && $requestData['emptyDiag'] == '0') || empty($requestData['emptyDiag']) ? 'selected' : '') ?>><?= TEXT_MATCH_ICD_CODE ?></option>
+                    <option value="1" <?= ((!empty($requestData['emptyDiag']) && $requestData['emptyDiag'] == '1')  ? 'selected' : '') ?>><?= TEXT_MATCH_NO_DIAGNOSTIC ?></option>
+                    <option value="2" <?= ((!empty($requestData['emptyDiag']) && $requestData['emptyDiag'] == '2')  ? 'selected' : '') ?>><?= TEXT_MATCH_NO_DIAG_CODE ?></option>
+                </select>
             </p>
             <p>
                 <button type="submit"><?= TEXT_SHOW_REPORT_BUTTON ?></button>
@@ -655,8 +691,7 @@ header('Content-type: text/html; charset=utf-8');
                             '<a href="/visitInfo.php?patientVisitID='.urlencode($visit['patientVisitID']).'" '.
                             'class="reportLink">'.(!empty($visit['patientFamilyID']) ? $visit['patientFamilyID'] : $visit['patientVisitID'] ).'</a></td>';
                         echo '<td class="med-wide">'.str_replace(' ', '&nbsp;', $visit['patientLastName']).',&nbsp;'.$visit['patientFirstName'].'</td>';
-                        $ageYMD = dateDiffYMD (strtotime($visit['patientBirthDate']),  strtotime($visit['dateTimeIn']));
-                        echo '<td class="numbers nowrap">'.($ageYMD['years'] > 0 ? $ageYMD['years'] : '').'</td>';
+                        echo '<td class="numbers nowrap">'.formatAgeFromBirthdate ($visit['patientBirthDate'], strtotime($visit['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT, false).'</td>';
                         echo '<td class="center nowrap">'.($visit['patientSex'] == 'M' ? TEXT_SEX_OPTION_M : ($visit['patientSex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).'</td>';
                         echo '<td class="wide">';
                         $displayText = '';
@@ -668,7 +703,7 @@ header('Content-type: text/html; charset=utf-8');
                                 $displayClass = 'rawcodevalue';
                                 $displayClass = 'rawcodevalue';
                             }
-                            if (preg_match($diagnosisMatchString, $visit['diagnosis1'] ) == 1) {
+                            if (!empty($searchString) && (preg_match($diagnosisMatchString, $visit['diagnosis1'] ) == 1)) {
                                 $displayClass .= ' searchMatch';
                             }
                         } else {
@@ -685,7 +720,7 @@ header('Content-type: text/html; charset=utf-8');
                             if ($displayText == $visit['diagnosis2']) {
                                 $displayClass = 'rawcodevalue';
                             }
-                            if (preg_match($diagnosisMatchString, $visit['diagnosis2'] ) == 1) {
+                            if (!empty($searchString) && (preg_match($diagnosisMatchString, $visit['diagnosis2'] ) == 1)) {
                                 $displayClass .= ' searchMatch';
                             }
                         } else {
@@ -702,7 +737,7 @@ header('Content-type: text/html; charset=utf-8');
                             if ($displayText == $visit['diagnosis3']) {
                                 $displayClass = 'rawcodevalue';
                             }
-                            if (preg_match($diagnosisMatchString, $visit['diagnosis3'] ) == 1) {
+                            if (!empty($searchString) && (preg_match($diagnosisMatchString, $visit['diagnosis3'] ) == 1)) {
                                 $displayClass .= ' searchMatch';
                             }
                         } else {

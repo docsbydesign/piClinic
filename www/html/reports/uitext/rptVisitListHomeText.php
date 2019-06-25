@@ -59,7 +59,6 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_LABEL')) { define('TEXT_DIAGNOSIS_LABEL','TEXT_DIAGNOSIS_LABEL',false); }
 	if (!defined('TEXT_DIAGNOSIS_LOADING')) { define('TEXT_DIAGNOSIS_LOADING','TEXT_DIAGNOSIS_LOADING',false); }
 	if (!defined('TEXT_DIAGNOSIS_PLACEHOLDER')) { define('TEXT_DIAGNOSIS_PLACEHOLDER','TEXT_DIAGNOSIS_PLACEHOLDER',false); }
-	if (!defined('TEXT_EMPTY_DIAG_CHECKBOX_LABEL')) { define('TEXT_EMPTY_DIAG_CHECKBOX_LABEL','TEXT_EMPTY_DIAG_CHECKBOX_LABEL',false); }
 	if (!defined('TEXT_END_DATE_PROMPT_LABEL')) { define('TEXT_END_DATE_PROMPT_LABEL','TEXT_END_DATE_PROMPT_LABEL',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON')) { define('TEXT_EXPORT_CSV_BUTTON','TEXT_EXPORT_CSV_BUTTON',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON_TEXT')) { define('TEXT_EXPORT_CSV_BUTTON_TEXT','TEXT_EXPORT_CSV_BUTTON_TEXT',false); }
@@ -74,6 +73,9 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_LABEL_NURSE_PRO')) { define('TEXT_LABEL_NURSE_PRO','TEXT_LABEL_NURSE_PRO',false); }
 	if (!defined('TEXT_LABEL_NURSE_STU')) { define('TEXT_LABEL_NURSE_STU','TEXT_LABEL_NURSE_STU',false); }
 	if (!defined('TEXT_LABEL_STAFF')) { define('TEXT_LABEL_STAFF','TEXT_LABEL_STAFF',false); }
+	if (!defined('TEXT_MATCH_ICD_CODE')) { define('TEXT_MATCH_ICD_CODE','TEXT_MATCH_ICD_CODE',false); }
+	if (!defined('TEXT_MATCH_NO_DIAGNOSTIC')) { define('TEXT_MATCH_NO_DIAGNOSTIC','TEXT_MATCH_NO_DIAGNOSTIC',false); }
+	if (!defined('TEXT_MATCH_NO_DIAG_CODE')) { define('TEXT_MATCH_NO_DIAG_CODE','TEXT_MATCH_NO_DIAG_CODE',false); }
 	if (!defined('TEXT_NEIGHBORHOOD_LABEL')) { define('TEXT_NEIGHBORHOOD_LABEL','TEXT_NEIGHBORHOOD_LABEL',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','TEXT_NOT_SPECIFIED',false); }
 	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','TEXT_NO_REPORT_PROF_PROMPT',false); }
@@ -106,6 +108,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_STATE_LABEL')) { define('TEXT_STATE_LABEL','TEXT_STATE_LABEL',false); }
 	if (!defined('TEXT_TYPE_LABEL')) { define('TEXT_TYPE_LABEL','TEXT_TYPE_LABEL',false); }
 	if (!defined('TEXT_VALUE_NOT_SET')) { define('TEXT_VALUE_NOT_SET','TEXT_VALUE_NOT_SET',false); }
+	if (!defined('TEXT_VISIT_DAY_TEXT')) { define('TEXT_VISIT_DAY_TEXT','TEXT_VISIT_DAY_TEXT',false); }
 	if (!defined('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL')) { define('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL','TEXT_VISIT_FILTER_DIAGNOSIS_LABEL',false); }
 	if (!defined('TEXT_VISIT_FILTER_END_DATE_LABEL')) { define('TEXT_VISIT_FILTER_END_DATE_LABEL','TEXT_VISIT_FILTER_END_DATE_LABEL',false); }
 	if (!defined('TEXT_VISIT_FILTER_MATCHES_LABEL')) { define('TEXT_VISIT_FILTER_MATCHES_LABEL','TEXT_VISIT_FILTER_MATCHES_LABEL',false); }
@@ -113,8 +116,10 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_VISIT_FILTER_START_DATE_LABEL')) { define('TEXT_VISIT_FILTER_START_DATE_LABEL','TEXT_VISIT_FILTER_START_DATE_LABEL',false); }
 	if (!defined('TEXT_VISIT_LIST_LOG_PAGE_TITLE')) { define('TEXT_VISIT_LIST_LOG_PAGE_TITLE','TEXT_VISIT_LIST_LOG_PAGE_TITLE',false); }
 	if (!defined('TEXT_VISIT_LIST_PAGE_TITLE')) { define('TEXT_VISIT_LIST_PAGE_TITLE','TEXT_VISIT_LIST_PAGE_TITLE',false); }
+	if (!defined('TEXT_VISIT_MONTH_TEXT')) { define('TEXT_VISIT_MONTH_TEXT','TEXT_VISIT_MONTH_TEXT',false); }
 	if (!defined('TEXT_VISIT_SUMMARY_LIST_HEADING')) { define('TEXT_VISIT_SUMMARY_LIST_HEADING','TEXT_VISIT_SUMMARY_LIST_HEADING',false); }
 	if (!defined('TEXT_VISIT_TYPE_ALL')) { define('TEXT_VISIT_TYPE_ALL','TEXT_VISIT_TYPE_ALL',false); }
+	if (!defined('TEXT_VISIT_YEAR_TEXT')) { define('TEXT_VISIT_YEAR_TEXT','TEXT_VISIT_YEAR_TEXT',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
@@ -139,7 +144,6 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_LABEL')) { define('TEXT_DIAGNOSIS_LABEL','Diagnosis',false); }
 	if (!defined('TEXT_DIAGNOSIS_LOADING')) { define('TEXT_DIAGNOSIS_LOADING','Loading...',false); }
 	if (!defined('TEXT_DIAGNOSIS_PLACEHOLDER')) { define('TEXT_DIAGNOSIS_PLACEHOLDER','ICD-10 code to match',false); }
-	if (!defined('TEXT_EMPTY_DIAG_CHECKBOX_LABEL')) { define('TEXT_EMPTY_DIAG_CHECKBOX_LABEL','Show visits with no diagnoses',false); }
 	if (!defined('TEXT_END_DATE_PROMPT_LABEL')) { define('TEXT_END_DATE_PROMPT_LABEL','Last date',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON')) { define('TEXT_EXPORT_CSV_BUTTON','Export as CSV',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON_TEXT')) { define('TEXT_EXPORT_CSV_BUTTON_TEXT','Export the report to a CSV file to open as a spreadsheet. This format opens in Excel automatically, but some letters might not appear correctly.',false); }
@@ -154,6 +158,9 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_LABEL_NURSE_PRO')) { define('TEXT_LABEL_NURSE_PRO','Nurse: Profesional',false); }
 	if (!defined('TEXT_LABEL_NURSE_STU')) { define('TEXT_LABEL_NURSE_STU','Student nurse',false); }
 	if (!defined('TEXT_LABEL_STAFF')) { define('TEXT_LABEL_STAFF','Clinic staff',false); }
+	if (!defined('TEXT_MATCH_ICD_CODE')) { define('TEXT_MATCH_ICD_CODE','Show visits with the selected ICD-10 diagnosis',false); }
+	if (!defined('TEXT_MATCH_NO_DIAGNOSTIC')) { define('TEXT_MATCH_NO_DIAGNOSTIC','Show visits with no diagnosis',false); }
+	if (!defined('TEXT_MATCH_NO_DIAG_CODE')) { define('TEXT_MATCH_NO_DIAG_CODE','Show visits with uncoded diagnoses',false); }
 	if (!defined('TEXT_NEIGHBORHOOD_LABEL')) { define('TEXT_NEIGHBORHOOD_LABEL','Neighborhood',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','Not specified',false); }
 	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','Select a health professional and date.',false); }
@@ -186,6 +193,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_STATE_LABEL')) { define('TEXT_STATE_LABEL','State',false); }
 	if (!defined('TEXT_TYPE_LABEL')) { define('TEXT_TYPE_LABEL','Service type',false); }
 	if (!defined('TEXT_VALUE_NOT_SET')) { define('TEXT_VALUE_NOT_SET','(not set)',false); }
+	if (!defined('TEXT_VISIT_DAY_TEXT')) { define('TEXT_VISIT_DAY_TEXT','d',false); }
 	if (!defined('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL')) { define('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL','Diagnosis',false); }
 	if (!defined('TEXT_VISIT_FILTER_END_DATE_LABEL')) { define('TEXT_VISIT_FILTER_END_DATE_LABEL','Last date',false); }
 	if (!defined('TEXT_VISIT_FILTER_MATCHES_LABEL')) { define('TEXT_VISIT_FILTER_MATCHES_LABEL','Matching visits found',false); }
@@ -193,8 +201,10 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_FILTER_START_DATE_LABEL')) { define('TEXT_VISIT_FILTER_START_DATE_LABEL','First date',false); }
 	if (!defined('TEXT_VISIT_LIST_LOG_PAGE_TITLE')) { define('TEXT_VISIT_LIST_LOG_PAGE_TITLE','Visit summary report',false); }
 	if (!defined('TEXT_VISIT_LIST_PAGE_TITLE')) { define('TEXT_VISIT_LIST_PAGE_TITLE','Visit summary report',false); }
+	if (!defined('TEXT_VISIT_MONTH_TEXT')) { define('TEXT_VISIT_MONTH_TEXT','m',false); }
 	if (!defined('TEXT_VISIT_SUMMARY_LIST_HEADING')) { define('TEXT_VISIT_SUMMARY_LIST_HEADING','Visit Summary',false); }
 	if (!defined('TEXT_VISIT_TYPE_ALL')) { define('TEXT_VISIT_TYPE_ALL','All',false); }
+	if (!defined('TEXT_VISIT_YEAR_TEXT')) { define('TEXT_VISIT_YEAR_TEXT','y',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
@@ -219,7 +229,6 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_DIAGNOSIS_LABEL')) { define('TEXT_DIAGNOSIS_LABEL','Diagnóstico',false); }
 	if (!defined('TEXT_DIAGNOSIS_LOADING')) { define('TEXT_DIAGNOSIS_LOADING','Cargando...',false); }
 	if (!defined('TEXT_DIAGNOSIS_PLACEHOLDER')) { define('TEXT_DIAGNOSIS_PLACEHOLDER','Codigo CIE-10',false); }
-	if (!defined('TEXT_EMPTY_DIAG_CHECKBOX_LABEL')) { define('TEXT_EMPTY_DIAG_CHECKBOX_LABEL','Mostrar visitas no diagnosticadas',false); }
 	if (!defined('TEXT_END_DATE_PROMPT_LABEL')) { define('TEXT_END_DATE_PROMPT_LABEL','Última fecha',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON')) { define('TEXT_EXPORT_CSV_BUTTON','Descargar como CSV',false); }
 	if (!defined('TEXT_EXPORT_CSV_BUTTON_TEXT')) { define('TEXT_EXPORT_CSV_BUTTON_TEXT','Descarga el informe como un archivo CSV para abrirlo como una hoja de cálculo. Excel puede abrir este formato automáticamente, pero no muestra todas las letras correctamente.',false); }
@@ -234,6 +243,9 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_LABEL_NURSE_PRO')) { define('TEXT_LABEL_NURSE_PRO','Enfermera: Profesional',false); }
 	if (!defined('TEXT_LABEL_NURSE_STU')) { define('TEXT_LABEL_NURSE_STU','Estudiante de enfermeria',false); }
 	if (!defined('TEXT_LABEL_STAFF')) { define('TEXT_LABEL_STAFF','Personal de la clínica',false); }
+	if (!defined('TEXT_MATCH_ICD_CODE')) { define('TEXT_MATCH_ICD_CODE','Mostrar visitas con el código CIE-10 seleccionado ',false); }
+	if (!defined('TEXT_MATCH_NO_DIAGNOSTIC')) { define('TEXT_MATCH_NO_DIAGNOSTIC','Mostar visitas no diagnosticadas',false); }
+	if (!defined('TEXT_MATCH_NO_DIAG_CODE')) { define('TEXT_MATCH_NO_DIAG_CODE','Mostrar visitas con diagnósticos sin código',false); }
 	if (!defined('TEXT_NEIGHBORHOOD_LABEL')) { define('TEXT_NEIGHBORHOOD_LABEL','Localidad',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificado',false); }
 	if (!defined('TEXT_NO_REPORT_PROF_PROMPT')) { define('TEXT_NO_REPORT_PROF_PROMPT','Seleccione un profesional de salud y una fecha.',false); }
@@ -266,6 +278,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_STATE_LABEL')) { define('TEXT_STATE_LABEL','Departamento',false); }
 	if (!defined('TEXT_TYPE_LABEL')) { define('TEXT_TYPE_LABEL','Servicio de atención',false); }
 	if (!defined('TEXT_VALUE_NOT_SET')) { define('TEXT_VALUE_NOT_SET','(vacio)',false); }
+	if (!defined('TEXT_VISIT_DAY_TEXT')) { define('TEXT_VISIT_DAY_TEXT','d',false); }
 	if (!defined('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL')) { define('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL','Diagnóstico',false); }
 	if (!defined('TEXT_VISIT_FILTER_END_DATE_LABEL')) { define('TEXT_VISIT_FILTER_END_DATE_LABEL','Última fecha',false); }
 	if (!defined('TEXT_VISIT_FILTER_MATCHES_LABEL')) { define('TEXT_VISIT_FILTER_MATCHES_LABEL','Visitas encontradas',false); }
@@ -273,7 +286,9 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_FILTER_START_DATE_LABEL')) { define('TEXT_VISIT_FILTER_START_DATE_LABEL','Primera fecha',false); }
 	if (!defined('TEXT_VISIT_LIST_LOG_PAGE_TITLE')) { define('TEXT_VISIT_LIST_LOG_PAGE_TITLE','Resumen de las visitas',false); }
 	if (!defined('TEXT_VISIT_LIST_PAGE_TITLE')) { define('TEXT_VISIT_LIST_PAGE_TITLE','Resumen de las visitas',false); }
+	if (!defined('TEXT_VISIT_MONTH_TEXT')) { define('TEXT_VISIT_MONTH_TEXT','m',false); }
 	if (!defined('TEXT_VISIT_SUMMARY_LIST_HEADING')) { define('TEXT_VISIT_SUMMARY_LIST_HEADING','Resumen de visitas',false); }
 	if (!defined('TEXT_VISIT_TYPE_ALL')) { define('TEXT_VISIT_TYPE_ALL','Todos',false); }
+	if (!defined('TEXT_VISIT_YEAR_TEXT')) { define('TEXT_VISIT_YEAR_TEXT','a',false); }
 }
 //EOF
