@@ -234,10 +234,18 @@ if (empty($dbStatus) & !$noData) {
         $diagFilterCondition .= "`diagnosis2` REGEXP '" . $searchString . "' OR ";
         $diagFilterCondition .= "`diagnosis3` REGEXP '" . $searchString . "' ) ";
     } else if (!empty($requestData['emptyDiag']) && ($requestData['emptyDiag'] == '1')) {
+        // Match visits with no diagnosis entries
         $diagFilterCondition .= 'AND ( ';
         $diagFilterCondition .= "`diagnosis1` IS NULL AND ";
         $diagFilterCondition .= "`diagnosis2` IS NULL AND ";
         $diagFilterCondition .= "`diagnosis3` IS NULL ) ";
+    } else if (!empty($requestData['emptyDiag']) && ($requestData['emptyDiag'] == '2')) {
+        // Match visits with any diagnosis that isn't an ICD code
+        $searchString = '/[A-Z]/';
+        $diagFilterCondition .= 'AND ( ';
+        $diagFilterCondition .= "`diagnosis1` REGEXP '" . $searchString . "' OR ";
+        $diagFilterCondition .= "`diagnosis2` REGEXP '" . $searchString . "' OR ";
+        $diagFilterCondition .= "`diagnosis3` REGEXP '" . $searchString . "' ) ";
     }
     if(empty($reportEndDate) && !empty($reportStartDate)) {
         $reportEndDate = $reportStartDate;
@@ -591,7 +599,11 @@ header('Content-type: text/html; charset=utf-8');
                     */
                     ?>
                 &nbsp;&nbsp;
-                <input type="checkbox" name="emptyDiag" value="1" <?= (!empty($requestData['emptyDiag']) && $requestData['emptyDiag'] == '1' ? 'checked' : '' ) ?>><?= TEXT_EMPTY_DIAG_CHECKBOX_LABEL ?>
+                <select name="emptyDiag">
+                    <option value="0" <?= ((!empty($requestData['emptyDiag']) && $requestData['emptyDiag'] == '0') || empty($requestData['emptyDiag']) ? 'selected' : '') ?>><?= TEXT_MATCH_ICD_CODE ?></option>
+                    <option value="1" <?= ((!empty($requestData['emptyDiag']) && $requestData['emptyDiag'] == '1')  ? 'selected' : '') ?>><?= TEXT_MATCH_NO_DIAGNOSTIC ?></option>
+                    <option value="2" <?= ((!empty($requestData['emptyDiag']) && $requestData['emptyDiag'] == '2')  ? 'selected' : '') ?>><?= TEXT_MATCH_NO_DIAG_CODE ?></option>
+                </select>
             </p>
             <p>
                 <button type="submit"><?= TEXT_SHOW_REPORT_BUTTON ?></button>

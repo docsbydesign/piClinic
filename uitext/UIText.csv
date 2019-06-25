@@ -346,6 +346,9 @@ TEXT_LT_5YR,Less than 5 years,Menores de 5 años
 TEXT_MARITAL_STATUS_LABEL,Marital status,Estado civil
 TEXT_MARITAL_STATUS_NOT_SPECIFIED,Not specified,No especificado
 TEXT_MARRIED_OPTION,Married,Casado/a
+TEXT_MATCH_ICD_CODE,Show visits with the selected ICD-10 diagnosis,Mostrar visitas con el código CIE-10 seleccionado 
+TEXT_MATCH_NO_DIAGNOSTIC,Show visits with no diagnosis,Mostar visitas no diagnosticadas
+TEXT_MATCH_NO_DIAG_CODE,Show visits with uncoded diagnoses,Mostrar visitas con diagnósticos sin código
 TEXT_MESSAGE_ACCESS_FAILURE,"You do not have access to the last page.<br>To view that page, log in with a different username.","No tiene permiso para ver la última página. Para verla, iniciar una sesión con otro usuario."
 TEXT_MESSAGE_BACKUP_FAIL,Unable to create backup file,No pudo crear archivo para descargar
 TEXT_MESSAGE_DATABASE_OPEN_ERROR,Server Error - Database not opened.,Error con el servidor. La base de datos no abrió.
