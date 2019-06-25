@@ -222,30 +222,54 @@ if (empty($dbStatus) & !$noData) {
     */
     $diagFilterCondition = '';
     $searchString = '';
-    if (!empty($requestData['diag']) &&
-        (empty($requestData['emptyDiag']) || ($requestData['emptyDiag'] != '1'))) {
+    if (!empty($requestData['diag'])) {
         $searchString = $requestData['diag'];
-        if (strpos($requestData['diag'], '@') !== false) {
+        $matchType = 'exact';
+        // first check for special search cases:
+        //   @<text> = a RegExp to match
+        //   $<text> = a loose search
+        //   all other text is matched exactly
+        if ($requestData['diag'][0] == '@') {
             // this should fill $searchString with all the characters in $requestData['diag'] except the first one
             $searchString = substr($requestData['diag'], (1 - strlen($requestData['diag'])));
+            $matchType = 'regex';
+        } else if ($requestData['diag'][0] == '$') {
+            // this should fill $searchString with all the characters in $requestData['diag'] except the first one
+            $searchString = substr($requestData['diag'], (1 - strlen($requestData['diag'])));
+            $matchType = 'loose';
         }
-        $diagFilterCondition .= 'AND ( ';
-        $diagFilterCondition .= "`diagnosis1` REGEXP '" . $searchString . "' OR ";
-        $diagFilterCondition .= "`diagnosis2` REGEXP '" . $searchString . "' OR ";
-        $diagFilterCondition .= "`diagnosis3` REGEXP '" . $searchString . "' ) ";
-    } else if (!empty($requestData['emptyDiag']) && ($requestData['emptyDiag'] == '1')) {
+    }
+
+    if (empty($requestData['emptyDiag'])) { // if emptyDiag is empty or 0
+        if ($matchType == 'exact') {
+            $diagFilterCondition .= 'AND ( ';
+            $diagFilterCondition .= "`diagnosis1` = '" . $searchString . "' OR ";
+            $diagFilterCondition .= "`diagnosis2` = '" . $searchString . "' OR ";
+            $diagFilterCondition .= "`diagnosis3` = '" . $searchString . "' ) ";
+        } else if  ($matchType == 'regex') {
+            $diagFilterCondition .= 'AND ( ';
+            $diagFilterCondition .= "`diagnosis1` REGEXP '" . $searchString . "' OR ";
+            $diagFilterCondition .= "`diagnosis2` REGEXP '" . $searchString . "' OR ";
+            $diagFilterCondition .= "`diagnosis3` REGEXP '" . $searchString . "' ) ";
+        } else if  ($matchType == 'loose') {
+            $diagFilterCondition .= 'AND ( ';
+            $diagFilterCondition .= "`diagnosis1` LIKE '%" . $searchString . "%' OR ";
+            $diagFilterCondition .= "`diagnosis2` LIKE '%" . $searchString . "%' OR ";
+            $diagFilterCondition .= "`diagnosis3` LIKE '%" . $searchString . "%' ) ";
+        }
+    } else if ($requestData['emptyDiag'] == '1') {
         // Match visits with no diagnosis entries
         $diagFilterCondition .= 'AND ( ';
         $diagFilterCondition .= "`diagnosis1` IS NULL AND ";
         $diagFilterCondition .= "`diagnosis2` IS NULL AND ";
         $diagFilterCondition .= "`diagnosis3` IS NULL ) ";
-    } else if (!empty($requestData['emptyDiag']) && ($requestData['emptyDiag'] == '2')) {
+    } else if ($requestData['emptyDiag'] == '2') {
         // Match visits with any diagnosis that isn't an ICD code
-        $searchString = '/[A-Z]/';
+        $searchString = '([A-Z][0-9]{2,3})';
         $diagFilterCondition .= 'AND ( ';
-        $diagFilterCondition .= "`diagnosis1` REGEXP '" . $searchString . "' OR ";
-        $diagFilterCondition .= "`diagnosis2` REGEXP '" . $searchString . "' OR ";
-        $diagFilterCondition .= "`diagnosis3` REGEXP '" . $searchString . "' ) ";
+        $diagFilterCondition .= "(`diagnosis1` IS NOT NULL AND `diagnosis1` NOT REGEXP '" . $searchString . "') OR ";
+        $diagFilterCondition .= "(`diagnosis2` IS NOT NULL AND `diagnosis2` NOT REGEXP '" . $searchString . "') OR ";
+        $diagFilterCondition .= "(`diagnosis3` IS NOT NULL AND `diagnosis3` NOT REGEXP '" . $searchString . "') ) ";
     }
     if(empty($reportEndDate) && !empty($reportStartDate)) {
         $reportEndDate = $reportStartDate;
@@ -733,6 +757,7 @@ header('Content-type: text/html; charset=utf-8');
         </div>
     </div>
 </div>
+<?= $debugDiv ?>
 <?= icdLookupJavaScript() ?>
 </body>
 <?php
