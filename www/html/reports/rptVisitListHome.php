@@ -757,7 +757,6 @@ header('Content-type: text/html; charset=utf-8');
         </div>
     </div>
 </div>
-<?= $debugDiv ?>
 <?= icdLookupJavaScript() ?>
 </body>
 <?php
