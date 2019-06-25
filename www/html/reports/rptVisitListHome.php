@@ -655,8 +655,7 @@ header('Content-type: text/html; charset=utf-8');
                             '<a href="/visitInfo.php?patientVisitID='.urlencode($visit['patientVisitID']).'" '.
                             'class="reportLink">'.(!empty($visit['patientFamilyID']) ? $visit['patientFamilyID'] : $visit['patientVisitID'] ).'</a></td>';
                         echo '<td class="med-wide">'.str_replace(' ', '&nbsp;', $visit['patientLastName']).',&nbsp;'.$visit['patientFirstName'].'</td>';
-                        $ageYMD = dateDiffYMD (strtotime($visit['patientBirthDate']),  strtotime($visit['dateTimeIn']));
-                        echo '<td class="numbers nowrap">'.($ageYMD['years'] > 0 ? $ageYMD['years'] : '').'</td>';
+                        echo '<td class="numbers nowrap">'.formatAgeFromBirthdate ($visit['patientBirthDate'], strtotime($visit['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT, false).'</td>';
                         echo '<td class="center nowrap">'.($visit['patientSex'] == 'M' ? TEXT_SEX_OPTION_M : ($visit['patientSex'] == 'F' ? TEXT_SEX_OPTION_F : TEXT_SEX_OPTION_X)).'</td>';
                         echo '<td class="wide">';
                         $displayText = '';
@@ -668,7 +667,7 @@ header('Content-type: text/html; charset=utf-8');
                                 $displayClass = 'rawcodevalue';
                                 $displayClass = 'rawcodevalue';
                             }
-                            if (preg_match($diagnosisMatchString, $visit['diagnosis1'] ) == 1) {
+                            if (!empty($searchString) && (preg_match($diagnosisMatchString, $visit['diagnosis1'] ) == 1)) {
                                 $displayClass .= ' searchMatch';
                             }
                         } else {
@@ -685,7 +684,7 @@ header('Content-type: text/html; charset=utf-8');
                             if ($displayText == $visit['diagnosis2']) {
                                 $displayClass = 'rawcodevalue';
                             }
-                            if (preg_match($diagnosisMatchString, $visit['diagnosis2'] ) == 1) {
+                            if (!empty($searchString) && (preg_match($diagnosisMatchString, $visit['diagnosis2'] ) == 1)) {
                                 $displayClass .= ' searchMatch';
                             }
                         } else {
@@ -702,7 +701,7 @@ header('Content-type: text/html; charset=utf-8');
                             if ($displayText == $visit['diagnosis3']) {
                                 $displayClass = 'rawcodevalue';
                             }
-                            if (preg_match($diagnosisMatchString, $visit['diagnosis3'] ) == 1) {
+                            if (!empty($searchString) && (preg_match($diagnosisMatchString, $visit['diagnosis3'] ) == 1)) {
                                 $displayClass .= ' searchMatch';
                             }
                         } else {

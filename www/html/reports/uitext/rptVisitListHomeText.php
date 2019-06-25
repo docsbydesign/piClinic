@@ -106,6 +106,7 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_STATE_LABEL')) { define('TEXT_STATE_LABEL','TEXT_STATE_LABEL',false); }
 	if (!defined('TEXT_TYPE_LABEL')) { define('TEXT_TYPE_LABEL','TEXT_TYPE_LABEL',false); }
 	if (!defined('TEXT_VALUE_NOT_SET')) { define('TEXT_VALUE_NOT_SET','TEXT_VALUE_NOT_SET',false); }
+	if (!defined('TEXT_VISIT_DAY_TEXT')) { define('TEXT_VISIT_DAY_TEXT','TEXT_VISIT_DAY_TEXT',false); }
 	if (!defined('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL')) { define('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL','TEXT_VISIT_FILTER_DIAGNOSIS_LABEL',false); }
 	if (!defined('TEXT_VISIT_FILTER_END_DATE_LABEL')) { define('TEXT_VISIT_FILTER_END_DATE_LABEL','TEXT_VISIT_FILTER_END_DATE_LABEL',false); }
 	if (!defined('TEXT_VISIT_FILTER_MATCHES_LABEL')) { define('TEXT_VISIT_FILTER_MATCHES_LABEL','TEXT_VISIT_FILTER_MATCHES_LABEL',false); }
@@ -113,8 +114,10 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_VISIT_FILTER_START_DATE_LABEL')) { define('TEXT_VISIT_FILTER_START_DATE_LABEL','TEXT_VISIT_FILTER_START_DATE_LABEL',false); }
 	if (!defined('TEXT_VISIT_LIST_LOG_PAGE_TITLE')) { define('TEXT_VISIT_LIST_LOG_PAGE_TITLE','TEXT_VISIT_LIST_LOG_PAGE_TITLE',false); }
 	if (!defined('TEXT_VISIT_LIST_PAGE_TITLE')) { define('TEXT_VISIT_LIST_PAGE_TITLE','TEXT_VISIT_LIST_PAGE_TITLE',false); }
+	if (!defined('TEXT_VISIT_MONTH_TEXT')) { define('TEXT_VISIT_MONTH_TEXT','TEXT_VISIT_MONTH_TEXT',false); }
 	if (!defined('TEXT_VISIT_SUMMARY_LIST_HEADING')) { define('TEXT_VISIT_SUMMARY_LIST_HEADING','TEXT_VISIT_SUMMARY_LIST_HEADING',false); }
 	if (!defined('TEXT_VISIT_TYPE_ALL')) { define('TEXT_VISIT_TYPE_ALL','TEXT_VISIT_TYPE_ALL',false); }
+	if (!defined('TEXT_VISIT_YEAR_TEXT')) { define('TEXT_VISIT_YEAR_TEXT','TEXT_VISIT_YEAR_TEXT',false); }
 }
 // Strings for UI_ENGLISH_LANGUAGE
 if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
@@ -186,6 +189,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_STATE_LABEL')) { define('TEXT_STATE_LABEL','State',false); }
 	if (!defined('TEXT_TYPE_LABEL')) { define('TEXT_TYPE_LABEL','Service type',false); }
 	if (!defined('TEXT_VALUE_NOT_SET')) { define('TEXT_VALUE_NOT_SET','(not set)',false); }
+	if (!defined('TEXT_VISIT_DAY_TEXT')) { define('TEXT_VISIT_DAY_TEXT','d',false); }
 	if (!defined('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL')) { define('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL','Diagnosis',false); }
 	if (!defined('TEXT_VISIT_FILTER_END_DATE_LABEL')) { define('TEXT_VISIT_FILTER_END_DATE_LABEL','Last date',false); }
 	if (!defined('TEXT_VISIT_FILTER_MATCHES_LABEL')) { define('TEXT_VISIT_FILTER_MATCHES_LABEL','Matching visits found',false); }
@@ -193,8 +197,10 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_FILTER_START_DATE_LABEL')) { define('TEXT_VISIT_FILTER_START_DATE_LABEL','First date',false); }
 	if (!defined('TEXT_VISIT_LIST_LOG_PAGE_TITLE')) { define('TEXT_VISIT_LIST_LOG_PAGE_TITLE','Visit summary report',false); }
 	if (!defined('TEXT_VISIT_LIST_PAGE_TITLE')) { define('TEXT_VISIT_LIST_PAGE_TITLE','Visit summary report',false); }
+	if (!defined('TEXT_VISIT_MONTH_TEXT')) { define('TEXT_VISIT_MONTH_TEXT','m',false); }
 	if (!defined('TEXT_VISIT_SUMMARY_LIST_HEADING')) { define('TEXT_VISIT_SUMMARY_LIST_HEADING','Visit Summary',false); }
 	if (!defined('TEXT_VISIT_TYPE_ALL')) { define('TEXT_VISIT_TYPE_ALL','All',false); }
+	if (!defined('TEXT_VISIT_YEAR_TEXT')) { define('TEXT_VISIT_YEAR_TEXT','y',false); }
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
@@ -266,6 +272,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_STATE_LABEL')) { define('TEXT_STATE_LABEL','Departamento',false); }
 	if (!defined('TEXT_TYPE_LABEL')) { define('TEXT_TYPE_LABEL','Servicio de atención',false); }
 	if (!defined('TEXT_VALUE_NOT_SET')) { define('TEXT_VALUE_NOT_SET','(vacio)',false); }
+	if (!defined('TEXT_VISIT_DAY_TEXT')) { define('TEXT_VISIT_DAY_TEXT','d',false); }
 	if (!defined('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL')) { define('TEXT_VISIT_FILTER_DIAGNOSIS_LABEL','Diagnóstico',false); }
 	if (!defined('TEXT_VISIT_FILTER_END_DATE_LABEL')) { define('TEXT_VISIT_FILTER_END_DATE_LABEL','Última fecha',false); }
 	if (!defined('TEXT_VISIT_FILTER_MATCHES_LABEL')) { define('TEXT_VISIT_FILTER_MATCHES_LABEL','Visitas encontradas',false); }
@@ -273,7 +280,9 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_VISIT_FILTER_START_DATE_LABEL')) { define('TEXT_VISIT_FILTER_START_DATE_LABEL','Primera fecha',false); }
 	if (!defined('TEXT_VISIT_LIST_LOG_PAGE_TITLE')) { define('TEXT_VISIT_LIST_LOG_PAGE_TITLE','Resumen de las visitas',false); }
 	if (!defined('TEXT_VISIT_LIST_PAGE_TITLE')) { define('TEXT_VISIT_LIST_PAGE_TITLE','Resumen de las visitas',false); }
+	if (!defined('TEXT_VISIT_MONTH_TEXT')) { define('TEXT_VISIT_MONTH_TEXT','m',false); }
 	if (!defined('TEXT_VISIT_SUMMARY_LIST_HEADING')) { define('TEXT_VISIT_SUMMARY_LIST_HEADING','Resumen de visitas',false); }
 	if (!defined('TEXT_VISIT_TYPE_ALL')) { define('TEXT_VISIT_TYPE_ALL','Todos',false); }
+	if (!defined('TEXT_VISIT_YEAR_TEXT')) { define('TEXT_VISIT_YEAR_TEXT','a',false); }
 }
 //EOF
