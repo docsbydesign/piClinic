@@ -335,7 +335,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_RPT_LINE_23')) { define('TEXT_RPT_LINE_23','No. consultas referidas',false); }
 	if (!defined('TEXT_RPT_LINE_24')) { define('TEXT_RPT_LINE_24','Detección de síntomas respiratorios',false); }
 	if (!defined('TEXT_RPT_LINE_25')) { define('TEXT_RPT_LINE_25','Detección de cáncer cervicouterino',false); }
-	if (!defined('TEXT_RPT_LINE_26')) { define('TEXT_RPT_LINE_26','Embarazadas Nueavas',false); }
+	if (!defined('TEXT_RPT_LINE_26')) { define('TEXT_RPT_LINE_26','Embarazadas Nuevas',false); }
 	if (!defined('TEXT_RPT_LINE_27')) { define('TEXT_RPT_LINE_27','Embarazadas en Control',false); }
 	if (!defined('TEXT_RPT_LINE_28')) { define('TEXT_RPT_LINE_28','Controles puerperales',false); }
 	if (!defined('TEXT_RPT_LINE_29')) { define('TEXT_RPT_LINE_29','Anticoncpetivo Oral 1 Ciclo',false); }
