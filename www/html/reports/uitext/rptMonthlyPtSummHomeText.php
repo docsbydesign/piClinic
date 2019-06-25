@@ -82,7 +82,6 @@ if ($pageLanguage == UITEST_LANGUAGE) {
 	if (!defined('TEXT_REPORT_MONTH_PLACEHOLDER')) { define('TEXT_REPORT_MONTH_PLACEHOLDER','TEXT_REPORT_MONTH_PLACEHOLDER',false); }
 	if (!defined('TEXT_REPORT_NO_DATA')) { define('TEXT_REPORT_NO_DATA','TEXT_REPORT_NO_DATA',false); }
 	if (!defined('TEXT_REPORT_REGION_LABEL')) { define('TEXT_REPORT_REGION_LABEL','TEXT_REPORT_REGION_LABEL',false); }
-	if (!defined('TEXT_REPORT_RSMDC')) { define('TEXT_REPORT_RSMDC','TEXT_REPORT_RSMDC',false); }
 	if (!defined('TEXT_REPORT_SDS')) { define('TEXT_REPORT_SDS','TEXT_REPORT_SDS',false); }
 	if (!defined('TEXT_REPORT_SERVICE_EMERGENCY')) { define('TEXT_REPORT_SERVICE_EMERGENCY','TEXT_REPORT_SERVICE_EMERGENCY',false); }
 	if (!defined('TEXT_REPORT_SERVICE_EXTERNAL')) { define('TEXT_REPORT_SERVICE_EXTERNAL','TEXT_REPORT_SERVICE_EXTERNAL',false); }
@@ -208,7 +207,6 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_MONTH_PLACEHOLDER')) { define('TEXT_REPORT_MONTH_PLACEHOLDER','Report month (MM)',false); }
 	if (!defined('TEXT_REPORT_NO_DATA')) { define('TEXT_REPORT_NO_DATA','No data for this month',false); }
 	if (!defined('TEXT_REPORT_REGION_LABEL')) { define('TEXT_REPORT_REGION_LABEL','Health district',false); }
-	if (!defined('TEXT_REPORT_RSMDC')) { define('TEXT_REPORT_RSMDC','Health District: Metropolitan, D.C.',false); }
 	if (!defined('TEXT_REPORT_SDS')) { define('TEXT_REPORT_SDS','Secretary of Health',false); }
 	if (!defined('TEXT_REPORT_SERVICE_EMERGENCY')) { define('TEXT_REPORT_SERVICE_EMERGENCY','Emergency',false); }
 	if (!defined('TEXT_REPORT_SERVICE_EXTERNAL')) { define('TEXT_REPORT_SERVICE_EXTERNAL','Outpatient',false); }
@@ -290,7 +288,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 }
 // Strings for UI_SPANISH_LANGUAGE
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
-	if (!defined('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE','Informe Diario de Atenciones Ambulatorias',false); }
+	if (!defined('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE','Informe Diario de Atenciones Ambulatorias (AT2)',false); }
 	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha del informe (AAAA-MM)',false); }
 	if (!defined('TEXT_DECIMAL_POINT')) { define('TEXT_DECIMAL_POINT',',',false); }
 	if (!defined('TEXT_DIAGDATA_AGE_GROUP')) { define('TEXT_DIAGDATA_AGE_GROUP',' solo para los pacientes con edades ',false); }
@@ -334,7 +332,6 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_MONTH_PLACEHOLDER')) { define('TEXT_REPORT_MONTH_PLACEHOLDER','Mes del informe (MM)',false); }
 	if (!defined('TEXT_REPORT_NO_DATA')) { define('TEXT_REPORT_NO_DATA','No hay datos para este mes',false); }
 	if (!defined('TEXT_REPORT_REGION_LABEL')) { define('TEXT_REPORT_REGION_LABEL','Región de Salud',false); }
-	if (!defined('TEXT_REPORT_RSMDC')) { define('TEXT_REPORT_RSMDC','Región Sanitaria Metropolitana DC',false); }
 	if (!defined('TEXT_REPORT_SDS')) { define('TEXT_REPORT_SDS','Secretaría de Salud',false); }
 	if (!defined('TEXT_REPORT_SERVICE_EMERGENCY')) { define('TEXT_REPORT_SERVICE_EMERGENCY','Emergencia',false); }
 	if (!defined('TEXT_REPORT_SERVICE_EXTERNAL')) { define('TEXT_REPORT_SERVICE_EXTERNAL','Consulta externa',false); }

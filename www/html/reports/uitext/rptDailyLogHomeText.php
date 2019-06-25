@@ -200,7 +200,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_CONDITION_1_LABEL')) { define('TEXT_CONDITION_1_LABEL','Condición',false); }
 	if (!defined('TEXT_CONDITION_2_LABEL')) { define('TEXT_CONDITION_2_LABEL','Condición',false); }
 	if (!defined('TEXT_CONDITION_3_LABEL')) { define('TEXT_CONDITION_3_LABEL','Condición',false); }
-	if (!defined('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE','Informe Diario de Atenciones Ambulatorias',false); }
+	if (!defined('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE')) { define('TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE','Informe Diario de Atenciones Ambulatorias (AT2)',false); }
 	if (!defined('TEXT_DAILY_VISIT_HEADING')) { define('TEXT_DAILY_VISIT_HEADING','Atenciones Ambulatorias',false); }
 	if (!defined('TEXT_DATE_FORMAT')) { define('TEXT_DATE_FORMAT','d-m-Y',false); }
 	if (!defined('TEXT_DATE_LABEL')) { define('TEXT_DATE_LABEL','Fecha del informe (AAAA-MM)',false); }

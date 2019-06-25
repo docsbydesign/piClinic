@@ -56,7 +56,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_GROUP_PATIENTS')) { define('TEXT_REPORT_GROUP_PATIENTS','Actividad de los pacientes',false); }
 	if (!defined('TEXT_REPORT_LINK_DESC_DAILY_PATIENT_LOG')) { define('TEXT_REPORT_LINK_DESC_DAILY_PATIENT_LOG','Muestra los pacientes examinados por un/a médico/a en una fecha especificada',false); }
-	if (!defined('TEXT_REPORT_LINK_TEXT_DAILY_PATIENT_LOG')) { define('TEXT_REPORT_LINK_TEXT_DAILY_PATIENT_LOG','Atenciones Ambulatorias',false); }
+	if (!defined('TEXT_REPORT_LINK_TEXT_DAILY_PATIENT_LOG')) { define('TEXT_REPORT_LINK_TEXT_DAILY_PATIENT_LOG','Atenciones Ambulatorias (ATA)',false); }
 	if (!defined('TEXT_REPORT_LINK_TITLE_DAILY_PATIENT_LOG')) { define('TEXT_REPORT_LINK_TITLE_DAILY_PATIENT_LOG','Atenciones Ambulatorias',false); }
 	if (!defined('TEXT_REPORT_LINK_URI_DAILY_PATIENT_LOG')) { define('TEXT_REPORT_LINK_URI_DAILY_PATIENT_LOG','',false); }
 }

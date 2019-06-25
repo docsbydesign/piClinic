@@ -116,7 +116,7 @@ TEXT_CURRENT_PATIENT_PHOTO,"Current patient photo.<br>To change, delete this pho
 TEXT_DAILY_DATE_LABEL,Report date (MM/DD/YYYY),Fecha del informe (DD-MM-YYYY)
 TEXT_DAILY_LOG_DESC,Lists the patients seen in the clinic by a doctor on a specific date,Muestra los pacientes examinados por un/a médico/a en una fecha especificada
 TEXT_DAILY_LOG_TITLE,Daily Outpatient Log,Atenciones Ambulatorias
-TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
+TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias (AT2)
 TEXT_DAILY_PATIENT_LOG_PAGE_TITLE,Daily Outpatient Log,Atenciones Ambulatorias
 TEXT_DAILY_PAYMENT_LOG_PAGE_TITLE,Daily Payment Log,Registros de Pagos del Día
 TEXT_DAILY_PMT_DESC,List of payments received from patients on a specified date,Registro de pagos recibidos por los pacientes durante la fecha especificada
@@ -559,7 +559,7 @@ TEXT_REFER_TO_LABEL,Refer to,Se remite a
 TEXT_REPORT_ADDRESS_LABEL,Home town,Procedencia
 TEXT_REPORT_AGE_GROUP_HEADING,Age group,Concepto
 TEXT_REPORT_AGE_LABEL,Age,Edad
-TEXT_REPORT_AGI_RSM_DC,Information Management/RSM-DC,Área de Gestion de la Informacion/RSM-DC
+TEXT_REPORT_AGI_RSM_DC,Information Management,Área de Gestion de la Informacion
 TEXT_REPORT_AT2R,AT2-R,AT2-R
 TEXT_REPORT_CITY_LABEL,City,Municipio
 TEXT_REPORT_CLINICNAME_LABEL,Clinic,Establecimiento
@@ -589,9 +589,9 @@ TEXT_REPORT_LINK_DESC_MONTHLY_PATIENT_BY_DAY_LOG,Summary of patients seen by day
 TEXT_REPORT_LINK_DESC_MONTHLY_PATIENT_BY_POS_LOG,Summary of patients seen by medical professional,Resumen de pacientes atendidos por clase de profesional
 TEXT_REPORT_LINK_DESC_MONTHLY_PAYMENT_LOG,List of payments received from patients during the specified month,Registro de pagos recibidos por los pacientes durante el mes especificado
 TEXT_REPORT_LINK_DESC_VISIT_LIST,"List visits by date, professional, or diagnosis","Buscar visitas por fecha, profesional, o diagnóstico"
-TEXT_REPORT_LINK_TEXT_DAILY_PATIENT_LOG,Daily Outpatient Log,Atenciones Ambulatorias
+TEXT_REPORT_LINK_TEXT_DAILY_PATIENT_LOG,Daily Outpatient Log,Atenciones Ambulatorias (ATA)
 TEXT_REPORT_LINK_TEXT_DAILY_PAYMENT_LOG,Daily Payment Log,Registros de Pagos del Día
-TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_DAY_LOG,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias
+TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_DAY_LOG,Daily Report of Outpatient Care,Informe Diario de Atenciones Ambulatorias (AT2)
 TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_POS_LOG,Monthly Report of Outpatient Care,Informe Mensual de Atenciones Ambulatorias (AT2-R)
 TEXT_REPORT_LINK_TEXT_MONTHLY_PAYMENT_LOG,Monthly payment report,Informe de pagos del mes
 TEXT_REPORT_LINK_TEXT_VISIT_LIST,Visit search,Buscar visitas
@@ -619,7 +619,7 @@ TEXT_REPORT_PAYMENT_TOTAL_LABEL,Payment received,Pagos recibidos
 TEXT_REPORT_REFERRAL_LABEL,Referrals,Remisiones
 TEXT_REPORT_REGION_LABEL,Health district,Región de Salud
 TEXT_REPORT_ROW_LABEL,No.,No.
-TEXT_REPORT_RSMDC,"Health District: Metropolitan, D.C.",Región Sanitaria Metropolitana DC
+TEXT_REPORT_RSMDC,,
 TEXT_REPORT_SDS,Secretary of Health,Secretaría de Salud
 TEXT_REPORT_SERVICE_EMERGENCY,Emergency,Emergencia
 TEXT_REPORT_SERVICE_EXTERNAL,Outpatient,Consulta externa

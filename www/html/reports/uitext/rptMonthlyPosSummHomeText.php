@@ -177,7 +177,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_MO_DATE_PROMPT_LABEL')) { define('TEXT_MO_DATE_PROMPT_LABEL','Date&nbsp;(yyyy-mm)',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','Not specified',false); }
 	if (!defined('TEXT_NO_SUMMARY_REPORT_PROMPT')) { define('TEXT_NO_SUMMARY_REPORT_PROMPT','Select a service type and date.',false); }
-	if (!defined('TEXT_REPORT_AGI_RSM_DC')) { define('TEXT_REPORT_AGI_RSM_DC','Information Management/RSM-DC',false); }
+	if (!defined('TEXT_REPORT_AGI_RSM_DC')) { define('TEXT_REPORT_AGI_RSM_DC','Information Management',false); }
 	if (!defined('TEXT_REPORT_AT2R')) { define('TEXT_REPORT_AT2R','AT2-R',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Clinic',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CISUAPS_LABEL')) { define('TEXT_REPORT_CLINIC_CISUAPS_LABEL','CIS/UAPS',false); }
@@ -293,7 +293,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_MO_DATE_PROMPT_LABEL')) { define('TEXT_MO_DATE_PROMPT_LABEL','Fecha&nbsp;(aaaa-mm)',false); }
 	if (!defined('TEXT_NOT_SPECIFIED')) { define('TEXT_NOT_SPECIFIED','No especificado',false); }
 	if (!defined('TEXT_NO_SUMMARY_REPORT_PROMPT')) { define('TEXT_NO_SUMMARY_REPORT_PROMPT','Seleccione un servicio de atención y una fecha.',false); }
-	if (!defined('TEXT_REPORT_AGI_RSM_DC')) { define('TEXT_REPORT_AGI_RSM_DC','Área de Gestion de la Informacion/RSM-DC',false); }
+	if (!defined('TEXT_REPORT_AGI_RSM_DC')) { define('TEXT_REPORT_AGI_RSM_DC','Área de Gestion de la Informacion',false); }
 	if (!defined('TEXT_REPORT_AT2R')) { define('TEXT_REPORT_AT2R','AT2-R',false); }
 	if (!defined('TEXT_REPORT_CLINICNAME_LABEL')) { define('TEXT_REPORT_CLINICNAME_LABEL','Establecimiento',false); }
 	if (!defined('TEXT_REPORT_CLINIC_CISUAPS_LABEL')) { define('TEXT_REPORT_CLINIC_CISUAPS_LABEL','CIS/UAPS',false); }

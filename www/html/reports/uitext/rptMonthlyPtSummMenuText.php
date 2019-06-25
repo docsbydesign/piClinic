@@ -56,7 +56,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_REPORT_GROUP_PATIENTS')) { define('TEXT_REPORT_GROUP_PATIENTS','Actividad de los pacientes',false); }
 	if (!defined('TEXT_REPORT_LINK_DESC_MONTHLY_PATIENT_BY_DAY_LOG')) { define('TEXT_REPORT_LINK_DESC_MONTHLY_PATIENT_BY_DAY_LOG','Resumen de pacientes atendidos por día y grupo de edad',false); }
-	if (!defined('TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_DAY_LOG')) { define('TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_DAY_LOG','Informe Diario de Atenciones Ambulatorias',false); }
+	if (!defined('TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_DAY_LOG')) { define('TEXT_REPORT_LINK_TEXT_MONTHLY_PATIENT_BY_DAY_LOG','Informe Diario de Atenciones Ambulatorias (AT2)',false); }
 	if (!defined('TEXT_REPORT_LINK_TITLE_MONTHLY_PATIENT_BY_DAY_LOG')) { define('TEXT_REPORT_LINK_TITLE_MONTHLY_PATIENT_BY_DAY_LOG','Informe Diario de Atenciones Ambulatorias',false); }
 	if (!defined('TEXT_REPORT_LINK_URI_MONTHLY_PATIENT_BY_DAY_LOG')) { define('TEXT_REPORT_LINK_URI_MONTHLY_PATIENT_BY_DAY_LOG','',false); }
 }

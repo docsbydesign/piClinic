@@ -762,7 +762,7 @@ header('Content-type: text/html; charset=utf-8');
                     <td id="ReportHeading-LeftLogo">&nbsp;
                     </td>
                     <td id="ReportHeading-CenterTitle">
-                        <p><?= TEXT_REPORT_SDS ?>&nbsp;-&nbsp;<?= TEXT_REPORT_RSMDC ?></p>
+                        <p><?= TEXT_REPORT_SDS ?></p>
                         <p><?= TEXT_DAILY_OUTPATIENT_LOG_PAGE_TITLE ?></p>
                     </td>
                     <td rowspan="3" id="ReportHeading-RightLogo">&nbsp;
