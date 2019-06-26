@@ -97,7 +97,7 @@ $now = new DateTime();
 $dateString = $now->format('_Y-m-d_H-i-s');
 
 $backupCommand = ROOT_DIR_PATH.'../scripts/piClinicDownload.sh '.
-    (API_DEBUG_MODE ? '-v ' : '').
+    (API_DEBUG_MODE ? '-v ' : '-v ').
     '-f piClinicBackup_'.$backupParam.$dateString.'.tgz '.
     '-t '.$backupParam.' '.
     '-p '.DB_PASS;
