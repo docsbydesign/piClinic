@@ -391,11 +391,11 @@ header('Content-type: text/html; charset=utf-8');
                 '<a href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].'" '.
                 'class="reportLink">'.(isset($visit['dateTimeIn']) ? date('H:i', strtotime($visit['dateTimeIn'])) : '' ).'</a></td>';
             echo '<td class="nowrap">'.
-                '<a href="/ptInfo.php?clinicPatientID='.$visit['clinicPatientID'].'" '.
+                '<a href="/ptInfo.php?clinicPatientID='.urlencode($visit['clinicPatientID']).'" '.
                 'class="reportLink">'.str_replace(' ', '&nbsp;', (isset($visit['patientLastName']) ? $visit['patientLastName'] : '' ).
                     (isset($visit['patientFirstName']) ? ', '.$visit['patientFirstName'] : '' )).'</a></td>';
             echo '<td class="nowrap">'.
-                '<a href="/ptInfo.php?clinicPatientID='.$visit['clinicPatientID'].'" '.
+                '<a href="/ptInfo.php?clinicPatientID='.urlencode($visit['clinicPatientID']).'" '.
                 'class="reportLink">'.$visit['clinicPatientID'].'</a></td>';
             echo '<td class="numbers">'.number_format($visit['payment'],2,TEXT_RPT_DECIMAL, TEXT_RPT_DIGIT_SEPARATOR).'</td>';
             // DEBUG echo '<td>'.$pageRows.'</td><td>'.$reportLineNumber.'</td><td>'.$reportRows.'</td>';
