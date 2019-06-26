@@ -320,8 +320,8 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_RPT_LINE_08')) { define('TEXT_RPT_LINE_08','5-9 años subsiguiente',false); }
 	if (!defined('TEXT_RPT_LINE_09')) { define('TEXT_RPT_LINE_09','10-14 años 1a. vez',false); }
 	if (!defined('TEXT_RPT_LINE_10')) { define('TEXT_RPT_LINE_10','10-14 años subsiguiente',false); }
-	if (!defined('TEXT_RPT_LINE_11')) { define('TEXT_RPT_LINE_11','15-20 años 1a. vez',false); }
-	if (!defined('TEXT_RPT_LINE_12')) { define('TEXT_RPT_LINE_12','15-20 años subsiguiente',false); }
+	if (!defined('TEXT_RPT_LINE_11')) { define('TEXT_RPT_LINE_11','15-19 años 1a. vez',false); }
+	if (!defined('TEXT_RPT_LINE_12')) { define('TEXT_RPT_LINE_12','15-19 años subsiguiente',false); }
 	if (!defined('TEXT_RPT_LINE_13')) { define('TEXT_RPT_LINE_13','20-49 años 1a. vez',false); }
 	if (!defined('TEXT_RPT_LINE_14')) { define('TEXT_RPT_LINE_14','20-49 años subsiguiente',false); }
 	if (!defined('TEXT_RPT_LINE_15')) { define('TEXT_RPT_LINE_15','50-59 años 1a. vez',false); }

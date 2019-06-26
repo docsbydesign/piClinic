@@ -221,10 +221,11 @@ if (empty($dbStatus) & !$noData) {
     *		Return: visit object array
     */
     $diagFilterCondition = '';
-    $searchString = '';
+    // the default is to return all visits regardless of diagnosis status
+    $searchString = 'r';
+    $matchType = 'exact';
     if (!empty($requestData['diag'])) {
         $searchString = $requestData['diag'];
-        $matchType = 'exact';
         // first check for special search cases:
         //   @<text> = a RegExp to match
         //   $<text> = a loose search
@@ -238,6 +239,8 @@ if (empty($dbStatus) & !$noData) {
             $searchString = substr($requestData['diag'], (1 - strlen($requestData['diag'])));
             $matchType = 'loose';
         }
+    } else {
+        $matchType = 'loose';
     }
 
     if (empty($requestData['emptyDiag'])) { // if emptyDiag is empty or 0
@@ -757,6 +760,11 @@ header('Content-type: text/html; charset=utf-8');
         </div>
     </div>
 </div>
+<?php
+    if (isset($debugDiv)) {
+        echo $debugDiv;
+    }
+?>
 <?= icdLookupJavaScript() ?>
 </body>
 <?php
