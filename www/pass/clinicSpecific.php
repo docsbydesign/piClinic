@@ -90,3 +90,18 @@ define('VISIT_DEFAULT_TEMP_UNITS','C',false);
  *      false: return to dashboard after visit open
  */
 define ('VISIT_PRINT_FORM_AFTER_OPEN',false,false);
+
+/*
+ *  used to enable debug info in API responses
+ *      true: returns SQL data. Should be false for production
+ *      false: No debug info returned
+ */
+define('API_DEBUG_MODE', false, false);
+
+/*
+ *  used to enable API profiling
+ *      true: collect profiling information. Should be false for production
+ *      false: do not log profiling information. Does not affect workflow event logging
+ */
+define('API_PROFILE', false, false);
+

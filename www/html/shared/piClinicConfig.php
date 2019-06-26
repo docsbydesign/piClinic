@@ -50,8 +50,6 @@ if (!defined('REST_CONSTANTS')) {
 	//  php scripts on the server.
 
 	// configuration definitions
-	define('API_DEBUG_MODE', false, false); 	// true, returns SQL data. Should be false for production
-	define('API_PROFILE', true, false); // true to collect profiling information. Should be false for production
 	define('API_LOG_FILEPATH', '/var/log/piclinic/', false); // the path to the log folder
 	define('API_IMAGE_FILEPATH', '/var/local/piclinic/images/', false); // the system folder where image resources are stored
 	define('API_DELETED_FILEPATH', '/var/local/piclinic/deleted/', false); // the system folder where image resources are stored
