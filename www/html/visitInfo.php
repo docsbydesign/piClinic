@@ -168,7 +168,7 @@ function writeTopicMenu ($sessionInfo) {
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
 				<span class="linkInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>
 			<p><?= formatDbDate ($visitInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED ) ?>&nbsp;<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>&nbsp;&nbsp;&nbsp;
-			<span class="linkInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
+			<span class="linkInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= urlencode($visitInfo['clinicPatientID']).createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
 		</div>
 		<div class="infoBlock">
 			<p><label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?></p>
@@ -193,7 +193,7 @@ function writeTopicMenu ($sessionInfo) {
 							$firstLinkDefined = true;
 						}
 						echo ('<a class="a_visitClose" href="/visitClose.php?patientVisitID='.$visitInfo['patientVisitID'].
-						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitClose').
+						'&clinicPatientID='.urlencode($visitInfo['clinicPatientID']).createFromLink (FROM_LINK_QP, __FILE__, 'a_visitClose').
                             '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_CLOSE').'">'. TEXT_CLOSE_VISIT . '</a></li>');
 					}
 				
@@ -204,12 +204,12 @@ function writeTopicMenu ($sessionInfo) {
 						$firstLinkDefined = true;
 					}
 					echo ('<a class="a_visitPrint" href="/visitClinicForm0.php?patientVisitID='. $visitInfo['patientVisitID'] .
-						'&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitPrint').
+						'&clinicPatientID='.urlencode($visitInfo['clinicPatientID']).createFromLink (FROM_LINK_QP, __FILE__, 'a_visitPrint').
                         '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_EDIT').'" '.
 						'title="'.TEXT_PATIENT_PRINT_PATIENT_VISIT_BUTTON.'">'.TEXT_PATIENT_PRINT_PATIENT_VISIT_BUTTON.'</a></li>');
                     echo('<li>');
                     echo ('<a class="a_visitEdit" href="/visitEdit.php?patientVisitID='. $visitInfo['patientVisitID'] .
-                        '&clinicPatientID='.$visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitEdit').
+                        '&clinicPatientID='.urlencode($visitInfo['clinicPatientID']).createFromLink (FROM_LINK_QP, __FILE__, 'a_visitEdit').
                         '&'.WORKFLOW_QUERY_PARAM.'='.getWorkflowID(WORKFLOW_TYPE_SUB, 'VISIT_EDIT').'" '.
                         'title="'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'">'.TEXT_PATIENT_EDIT_PATIENT_VISIT_BUTTON.'</a></li>');
 				}
