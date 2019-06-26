@@ -293,8 +293,10 @@ function logGetRootWorkflowID() {
     // the current one is the last one in the array
     if (!empty($_SESSION[WORKFLOW_SESSION_ARRAY])) {
         for ($wfItem = 0; $wfItem < count($_SESSION[WORKFLOW_SESSION_ARRAY]); $wfItem += 1) {
-            if (getWorkflowIdComponent($_SESSION[WORKFLOW_SESSION_ARRAY][$wfItem], WF_TYPE) == WORKFLOW_TYPE_HOME) {
-                return ($_SESSION[WORKFLOW_SESSION_ARRAY][$wfItem]);
+            if (isset($_SESSION[WORKFLOW_SESSION_ARRAY][$wfItem])) {
+                if (getWorkflowIdComponent($_SESSION[WORKFLOW_SESSION_ARRAY][$wfItem], WF_TYPE) == WORKFLOW_TYPE_HOME) {
+                    return ($_SESSION[WORKFLOW_SESSION_ARRAY][$wfItem]);
+                }
             }
         }
     }
