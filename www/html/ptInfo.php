@@ -407,7 +407,7 @@ function writePatientId($patientData) {
 							echo ('<td class="nowrap"><a class="a_visitSummaryView" href="/visitInfo.php?patientVisitID='.$visit['patientVisitID'].
 								'&clinicPatientID='.$visit['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_visitSummaryView').'">'.
 								date(TEXT_VISIT_DATE_ONLY_FORMAT, strtotime($visit['dateTimeIn'])).'</a></td>');
-							echo ('<td class="nowrap"'.(isset($visit['staffName']) ? '' : ' class="inactive"' ).'>'.(isset($visit['staffName']) ? $visit['staffName'] : TEXT_VISIT_LIST_MISSING ).'</td>');
+							echo ('<td class="nowrap'.(isset($visit['staffName']) ? '' : ' inactive' ).'">'.(isset($visit['staffName']) ? $visit['staffName'] : TEXT_VISIT_LIST_MISSING ).'</td>');
 							echo ('<td>');
 							$displayText = '';
 							$displayClass = '';
