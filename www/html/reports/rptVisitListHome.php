@@ -290,7 +290,8 @@ if (empty($dbStatus) & !$noData) {
     if (API_DEBUG_MODE) {
         $debugInfo = array();
         $debugInfo['requestData'] = $requestData;
-        $debugInfo['staffList'] = $medProfs;
+        // $debugInfo['staffList'] = $medProfs;
+        $debugInfo['searchString'] = $searchString;
         $debugInfo['query'] = $getQueryString;
         $debugInfo['result'] = $visitResponse;
 
@@ -699,6 +700,9 @@ header('Content-type: text/html; charset=utf-8');
                         echo '<td class="wide">';
                         $displayText = '';
                         $displayClass = '';
+                        if ($searchString[0] == '*') {
+                            $searchString = '\\'.$searchString;
+                        }
                         $diagnosisMatchString = '/'.$searchString.'/';
                         if (!empty($visit['diagnosis1'])) {
                             $displayText = getIcdDescription ($dbLink, $visit['diagnosis1'], $pageLanguage, -1);
@@ -760,11 +764,6 @@ header('Content-type: text/html; charset=utf-8');
         </div>
     </div>
 </div>
-<?php
-    if (isset($debugDiv)) {
-        echo $debugDiv;
-    }
-?>
 <?= icdLookupJavaScript() ?>
 </body>
 <?php
