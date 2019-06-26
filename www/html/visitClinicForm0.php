@@ -204,7 +204,7 @@ function writeTopicMenu ($sessionInfo) {
                 <div class="leftDiv">
                     <h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
                         <span class="linkInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span>
-                        <span class="linkInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span><br>
+                        <span class="linkInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= urlencode($visitInfo['clinicPatientID']).createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span><br>
                     </h1>
                 </div>
             </div>

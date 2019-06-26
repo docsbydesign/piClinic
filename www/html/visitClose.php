@@ -177,7 +177,7 @@ function writeOptionsMenu ($visitInfo) {
 		$optionsMenu .= '<div id="optionMenuDiv">'."\n";
 		$optionsMenu .= '<ul class="topLinkMenuList">';
 		$optionsMenu .= '<li class="firstLink"><a class="a_editall" href="/visitEdit.php?patientVisitID='.$visitInfo['patientVisitID'].
-			'&clinicPatientID='. $visitInfo['clinicPatientID'].createFromLink (FROM_LINK_QP, __FILE__, 'a_editall') .'">'.TEXT_VISIT_EDIT_ALL_FIELDS.'</a></li>';
+			'&clinicPatientID='. urlencode($visitInfo['clinicPatientID']).createFromLink (FROM_LINK_QP, __FILE__, 'a_editall') .'">'.TEXT_VISIT_EDIT_ALL_FIELDS.'</a></li>';
 		$optionsMenu .= '</ul></div>';	}
 	return $optionsMenu;
 }
@@ -198,7 +198,7 @@ function writeOptionsMenu ($visitInfo) {
 			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
 				<span class="linkInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>
 			<p><?= formatDbDate ($visitInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED ) ?>&nbsp;<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>&nbsp;&nbsp;&nbsp;
-			<span class="linkInHeading"><a class="a_patientview" href="/ptInfo.php?clinicPatientID=<?= $visitInfo['clinicPatientID'] ?><?= createFromLink (FROM_LINK_QP, __FILE__, 'a_patientview') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
+			<span class="linkInHeading"><a class="a_patientview" href="/ptInfo.php?clinicPatientID=<?= urlencode($visitInfo['clinicPatientID']) ?><?= createFromLink (FROM_LINK_QP, __FILE__, 'a_patientview') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
 		</div>
 		<div class="infoBlock">
 			<p><label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?></p>
