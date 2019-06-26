@@ -174,11 +174,12 @@ function writeTopicMenu ($sessionInfo) {
 			<p><label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?></p>
 			<p><label class="close"><?= TEXT_VISIT_ID_LABEL ?>:</label><span class="linkInHeading"><?= $visitInfo['patientVisitID'] ?></span></p>
 		</div>
-		<div class="infoBlock">
-			<img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44">
-		</div>
 	</div>
 	<div class="clearFloat"></div>
+    <div class="infoBlock">
+        <img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44&w=2">
+    </div>
+    <div class="clearFloat"></div>
 	<div id="optionMenuDiv" class="noprint<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
 		<ul class="topLinkMenuList">
 			<?php

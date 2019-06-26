@@ -190,14 +190,14 @@ function writeTopicMenu ($sessionInfo) {
         </div>
         <div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
             <div class="infoBlock fullWidth">
-                <div class="leftDiv">
-                    <img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="/code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44">
-                </div>
                 <div class="rightDiv">
                     <label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label><span class="linkInHeading"><?= (!empty($visitInfo['staffName']) ? $visitInfo['staffName'] : str_repeat("_",22))  ?></span><br>
                     <label class="close"><?= TEXT_VISIT_ID_PRINT_LABEL ?>:</label><span class="linkInHeading"><?= $visitInfo['patientVisitID'] ?></span><br>
                     <label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?>
                 </div>
+            </div>
+            <div class="leftDiv">
+                <img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="/code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44&w=2">
             </div>
             <div class="hrDiv"></div>
             <div class="infoBlock fullWidth">

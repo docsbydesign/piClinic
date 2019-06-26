@@ -172,7 +172,7 @@ function writePatientId($patientData) {
 		<div class="infoBlock">
 		    <h1 class="pageHeading">
                 <?= formatPatientNameLastFirst ($patientData) ?>&nbsp;&nbsp;
-   			    <img class="barcode" alt="<?= $patientData['clinicPatientID'] ?>" src="code39.php?code=<?= $patientData['clinicPatientID'] ?>&y=34">
+   			    <img class="barcode" alt="<?= $patientData['clinicPatientID'] ?>" src="code39.php?code=<?= $patientData['clinicPatientID'] ?>&y=34&w=2">
             </h1>
 		</div>
 	</div>
