@@ -216,12 +216,8 @@ function writeTopicMenu ($cancel) {
                     </p>
                 </div>
                 <div id="visitStatus">
-                    <p><label class="close"><?= TEXT_VISIT_STATUS_LABEL ?>:</label>
-                            <select id="VisitStatusSelect" name="visitStatus" class="requiredField">
-                                <option value="Open" <?= ((!empty($visitInfo['visitStatus']) && $visitInfo['visitStatus'] == 'Open') ? "selected" : "" ) ?>><?= TEXT_VISIT_STATUS_OPEN ?></option>
-                                <option value="Closed" <?= ((!empty($visitInfo['visitStatus']) && $visitInfo['visitStatus'] == 'Closed') ? "selected" : "" ) ?>><?= TEXT_VISIT_STATUS_CLOSED ?></option>
-                            </select>
-                        </p>
+                    <p><label class="close"><?= TEXT_VISIT_STATUS_LABEL ?>:</label>&nbsp;<?= ($visitInfo['visitStatus'] == 'Open' ? TEXT_VISIT_STATUS_OPEN : ($visitInfo['visitStatus'] == 'Closed' ? TEXT_VISIT_STATUS_CLOSED : $visitInfo['visitStatus'] )) ?></p>
+                    <input type="hidden" name="visitStatus" value="<?= $visitInfo['visitStatus'] ?>">
                 </div>
                 <div class="infoBlock">
                     <h2><?= TEXT_VISIT_ARRIVAL_HEADING ?></h2>
