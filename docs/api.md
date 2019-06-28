@@ -199,7 +199,7 @@ Returns information about the selected user session.
 
 #### GET request parameters
 
-The **X-piClinic-token** header value is used to identify the session owner and, for most users, the query parameters are ignored. System administrators, however, can request information about another token by passing the desired token as a query parameter.
+The **X-piClinic-token** header value is used to identify the session owner making the request and, for most users, the query parameters are ignored. System administrators, however, can request information about another session by passing its token as a query parameter.
 
 | ------ | ------ | ------ | ------ |
 | Parameter | Values | Function | Example |
