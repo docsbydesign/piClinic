@@ -9,8 +9,8 @@ The [piClinic Console](https://piclinic.org) exposes an API for automated testin
 
 These resources are available to developers:
 
-* _**[icd](#icd)**_ - search supported ICD-10 diagnostic codes
-* _**[session](#session)**_ - open and close sessions to access the piClinic resources
+* _**[icd](#icd-resource)**_ - search supported ICD-10 diagnostic codes
+* _**[session](#session-resource)**_ - open and close sessions to access the piClinic resources
 
 ## piClinic API usage
 
@@ -164,7 +164,6 @@ where _**piclinic_host**_ is the host address.
 | **lastUsedDate** | datetime | Date & time the diagnosis code was assigned to a patient record |
 | **shortDescription** | string | Description of disease that corresponds to the `icd10code` |
 | **useCount** | number | The number of times the diagnosis has been assigned to a patient record since the system was installed |
-
 
 ## _session_ resource
 
