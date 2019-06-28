@@ -2,25 +2,26 @@
 title: "piClinic - API"
 permalink: /api/
 ---
+# piClinic API
 
-The [piClinic Console](https://piclinic.org) exposes an API for automated testing and application development.
+The [piClinic Console](https://piclinic.org) exposes the piClinic API for automated testing and application development.
 
 # piClinic API resources
 
-These resources are available to developers:
+These piClinic API resources are available to developers:
 
 * _**[icd](#icd-resource)**_ - search supported ICD-10 diagnostic codes
-* _**[session](#session-resource)**_ - open and close sessions to access the piClinic resources
+* _**[session](#session-resource)**_ - open and close sessions to access the piClinic API resources
 
-## piClinic API usage
+# piClinic API usage
 
 piClinic API users must be authenticated by a username and password and some resources require user accounts with specific authorizations.
 
-### Request format
+## Request format
 
 GET method requests pass parameters as query parameters and POST method requests can pass data as `application/json` data or as query parameters; however, passing as `application/json` data can prevent the data from appearing in server logs. API requests that require authorization, must also include an **X-piClinic-token** header with a valid session token. Session tokens are obtained by calling the **session** API.
 
-#### Sample header
+### Sample header
 
 ```
 X-piClinic-token: c1cbed0e_082f_4c85_afaa_3e4286b840fd
@@ -34,7 +35,7 @@ https://piclinic_host/api/icd.php?c=R51&language=en
 
 where _**piclinic_host**_ is the host address.
 
-### Success response
+## Success response format
 
 Generally, API requests return a JSON response that consists of these objects:
 
@@ -46,7 +47,7 @@ Generally, API requests return a JSON response that consists of these objects:
 | **status** | The status code and additional information about the response  |
 | **debug** | Detailed information about the request for debugging (development systems only) |
 
-#### Success response example
+### Success response example
 
 ```
 {
@@ -68,7 +69,7 @@ Generally, API requests return a JSON response that consists of these objects:
 }
 ```
 
-### Error response
+### Error response format
 
 Error responses usually contain:
 
@@ -92,6 +93,12 @@ Error responses usually contain:
     }
 }
 ```
+# piClinic API resource references
+
+These piClinic API resources are available to developers:
+
+* _**[icd](#icd-resource)**_ - search supported ICD-10 diagnostic codes
+* _**[session](#session-resource)**_ - open and close sessions to access the piClinic API resources
 
 ## _icd_ resource
 
