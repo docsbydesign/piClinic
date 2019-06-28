@@ -136,6 +136,8 @@ https://piclinic_host/api/icd.php?c=R51&language=en
 
 where _**piclinic_host**_ is the host address.
 
+#### GET response example
+
 ```
 {
     "count": 1,
@@ -194,7 +196,7 @@ For administrator-level access, the **X-piClinic-token** header value is used to
 | ------ | ------ | ------ | ------ |
 | Parameter | Supported values | Function | Example |
 | ------ | ------ | ------ | ------ |
-| **token** | a valid session token | tests token for validity and returns access information (System admin access only) | token=c1cbed0e_082f_4c85_afaa_3e4286b840fd |
+| **token** | a valid session token | tests token for validity and returns access information (SystemAdmin access only) | token=c1cbed0e_082f_4c85_afaa_3e4286b840fd |
 
 #### Sample GET request
 ```
@@ -231,7 +233,7 @@ where _**piclinic_host**_ is the host address.
 | ------ | ------ | ------ |
 | Properties | Data type | Description |
 | ------ | ------ | ------ |
-| **accessGranted** |  enum:<br>`SystemAdmin`<br>`ClinicAdmin`<br>`ClinicStaff`<br>`AuthenticatedUser`  | Access authorization level |
+| **accessGranted** |  enum:<br>`SystemAdmin, `ClinicAdmin`, `ClinicStaff`, `ClinicReadOnly`  | Access authorization level |
 | **loggedIn** | Boolean | `1` = active session, `0` = expired or closed session |
 | **sessionIP** | IP address | The IP of the user account |
 | **sessionUA** | Text | The User Agent of the user's browser when the session was created |
