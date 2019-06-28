@@ -6,8 +6,6 @@ permalink: /api/
 
 The [piClinic Console](https://piclinic.org) exposes the piClinic API for automated testing and application development.
 
-# piClinic API resources
-
 These piClinic API resources are available to developers:
 
 * _**[icd](#icd-resource)**_ - search supported ICD-10 diagnostic codes
@@ -69,7 +67,7 @@ Generally, API requests return a JSON response that consists of these objects:
 }
 ```
 
-### Error response format
+## Error response format
 
 Error responses usually contain:
 
@@ -81,7 +79,7 @@ Error responses usually contain:
 | **status** | A non "200" status code and an explanation of the error. |
 | **debug** | Detailed information about the request for debugging (development systems only) |
 
-#### Error response example
+### Error response example
 
 ```
 {
@@ -108,20 +106,22 @@ The ICD-10 is the International Classification of Diseases (10th Revision) or, i
 
 Note, some diagnostic codes are supported in only one language.
 
-### Supported methods
-
 | ------ | ------ |
 | Method | Token required? | Action |
 | ------ | ------ |
 | GET | Yes | Look up a code and its description |
 
 
-### Supported GET request parameters
+### GET method
+
+Returns the selected ICD-10 code object or objects.
+
+#### GET request parameters
 
 A GET request must include one, and only one, of **q**, **t**, or **c**.
 
 | ------ | ------ | ------ | ------ |
-| Parameter | Supported values | Function | Example |
+| Parameter | Value | Function | Example |
 | ------ | ------ | ------ | ------ |
 | **q** | free text | Return codes with description text or code value that contains the parameter value | `q=Headache` |
 | **t** | free text | Return codes with description text that contains the parameter value | `t=Headache` |
@@ -130,7 +130,7 @@ A GET request must include one, and only one, of **q**, **t**, or **c**.
 A GET request can also include any or all of these parameters to organize the response data.
 
 | ------ | ------ | ------ | ------ |
-| Parameter | Supported values | Function | Example |
+| Parameter | Values | Function | Example |
 | ------ | ------ | ------ | ------ |
 | **language** | `en` or `es` | filter results to return only the specified language | `language=en` |
 | **sort** | `c`, `t`, or `d` | sort the returned data by ascending **c**_ode_, **t**_ext_, or _last-used_ **d**_ate_)
@@ -178,16 +178,6 @@ where _**piclinic_host**_ is the host address.
 
 The **session** resource contains the valid user sessions that can access the piClinic API.
 
-The normal sequence of session interaction is to:
-
-1. POST a session to create a new session and receive its token
-2. GET a session using the token to test its access (this usually done only by administrators and is not commonly used by an application)
-3. PATCH a session to change its default settings
-4. DELETE a session to close it and invalidate its token so it cannot by used again
-
-
-### Supported methods
-
 | ------ | ------ | ------ |
 | Method | Token required? | Action |
 | ------ | ------ | ------ |
@@ -196,12 +186,23 @@ The normal sequence of session interaction is to:
 | PATCH | Yes | Update the settings of a current session |
 | DELETE | Yes | Close a session and invalidate its token |
 
-### Supported GET request parameters
+The normal sequence of session interaction is to:
 
-For administrator-level access, the **X-piClinic-token** header value is used to identify the session and the query parameter is ignored. System administrators can request information about another valid token by passing it as a query parameter.
+1. POST a session to create a new session and receive its token
+2. GET a session using the token to test its access (this usually done only by administrators and is not commonly used by an application)
+3. PATCH a session to change its default settings
+4. DELETE a session to close it and invalidate its token so it cannot by used again
+
+### GET method
+
+Returns information about the selected user session.
+
+#### GET request parameters
+
+The **X-piClinic-token** header value is used to identify the session owner and, for most users, the query parameters are ignored. System administrators, however, can request information about another token by passing the desired token as a query parameter.
 
 | ------ | ------ | ------ | ------ |
-| Parameter | Supported values | Function | Example |
+| Parameter | Values | Function | Example |
 | ------ | ------ | ------ | ------ |
 | **token** | a valid session token | tests token for validity and returns access information (SystemAdmin access only) | token=c1cbed0e_082f_4c85_afaa_3e4286b840fd |
 
@@ -251,12 +252,16 @@ where _**piclinic_host**_ is the host address.
 | **createdDate** | datetime | The date and time the session was created. |
 | **expiresOnDate** | datetime | The date and time the session will expire automatically. |
 
-### Supported POST request parameters
+### POST method
+
+Validates the credentials passed and creates a new user session if they are valid.
+
+#### POST request parameters
 
 The **X-piClinic-token** header value is not required for POST requests
 
 | ------ | ------ | ------ | ------ |
-| Parameter | Supported values | Function | Example |
+| Parameter | Values | Function | Example |
 | ------ | ------ | ------ | ------ |
 | **username** | a valid username (not case sensitive) | identify the user for whom to create a new session | (see example below) |
 | **password** | the password for the user (case sensitive) | authenticate the user creating a new session | (see example below) |
@@ -279,7 +284,7 @@ Note, a **X-piClinic-token** header is not required for a POST request.
 }
 ```
 
-#### Sample POST data response
+#### Sample POST response
 
 ```
 {
@@ -319,12 +324,18 @@ Note, a **X-piClinic-token** header is not required for a POST request.
 | **expiresOnDate** | datetime | The date and time the session will expire automatically. |
 
 
-### Supported PATCH request parameters
+### PATCH method
+
+Updates selected properties of a session.
+
+#### PATCH request parameters
 
 | ------ | ------ | ------ | ------ |
-| Parameter | Supported values | Function | Example |
+| Parameter | Values | Function | Example |
 | ------ | ------ | ------ | ------ |
 | **sessionLanguage** | `en` or `es` | Sets the session's default language | `sessionLanguage=es` |
+
+The **sessionLanguage** property is the only session property that can be modified.
 
 #### Sample PATCH request
 ```
@@ -334,7 +345,7 @@ https://piclinic_host/session.php&sessionLanguage=es
 where _**piclinic_host**_ is the host address.
 
 
-#### Sample PATCH data response
+#### Sample PATCH response
 
 ```
 {
@@ -364,16 +375,20 @@ where _**piclinic_host**_ is the host address.
 | **username** | Text | The user's username |
 | **sessionClinicPublicID** | Text | Reserved. |
 
-### Supported DELETE request parameters
+### DELETE method
 
-The DELETE request requires only a valid **X-piClinic-token** header.
+Closes the specified session.
+
+#### DELETE request parameters
+
+The DELETE request requires only a **X-piClinic-token** header.
 
 #### Sample DELETE request
 ```
 https://piclinic_host/session.php
 ```
 
-#### Sample DELETE data response
+#### Sample DELETE response
 
 ```
 {
