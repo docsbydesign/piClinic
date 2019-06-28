@@ -9,18 +9,18 @@ The [piClinic Console](https://piclinic.org) exposes an API for automated testin
 
 These resources are available to developers:
 
-* **[icd](#icd)** - search suported ICD-10 diagnostic codes
-* **[session](#session)** - open and close sessions to access the piClinic resources
+* _**[icd](#icd)**_ - search supported ICD-10 diagnostic codes
+* _**[session](#session)**_ - open and close sessions to access the piClinic resources
 
-# piClinic API usage
+## piClinic API usage
 
 piClinic API users must be authenticated by a username and password and some resources require user accounts with specific authorizations.
 
-## Request format
+### Request format
 
 GET method requests pass parameters as query parameters and POST method requests can pass data as `application/json` data or as query parameters; however, passing as `application/json` data can prevent the data from appearing in server logs. API requests that require authorization, must also include an **X-piClinic-token** header with a valid session token. Session tokens are obtained by calling the **session** API.
 
-### Sample header
+#### Sample header
 
 ```
 X-piClinic-token: c1cbed0e_082f_4c85_afaa_3e4286b840fd
@@ -34,7 +34,7 @@ https://piclinic_host/api/icd.php?c=R51&language=en
 
 where _**piclinic_host**_ is the host address.
 
-## Success response
+### Success response
 
 Generally, API requests return a JSON response that consists of these objects:
 
@@ -46,7 +46,7 @@ Generally, API requests return a JSON response that consists of these objects:
 | **status** | The status code and additional information about the response  |
 | **debug** | Detailed information about the request for debugging (development systems only) |
 
-### Success response example
+#### Success response example
 
 ```
 {
@@ -68,7 +68,7 @@ Generally, API requests return a JSON response that consists of these objects:
 }
 ```
 
-## Error response
+### Error response
 
 Error responses usually contain:
 
@@ -80,7 +80,7 @@ Error responses usually contain:
 | **status** | A non "200" status code and an explanation of the error. |
 | **debug** | Detailed information about the request for debugging (development systems only) |
 
-### Error response example
+#### Error response example
 
 ```
 {
@@ -93,11 +93,11 @@ Error responses usually contain:
 }
 ```
 
-## icd
+## _icd_ resource
 
 The **icd** resource contains ICD-10 (CIE-10) diagnostic codes in English and Spanish.
 
-The ICD-10 is the International Classification of Diseases (10th Revision) or, in Spanish, (CIE-10) La Clasificación internacional de enfermidades (Décima edición), which describes and provides a code for thousands of diseases and is managed by the World Health Organization. The piClinic Console supports the ICD-10, 2008-version, to the first decimal place, which provides about 12,000 codes in English and Spanish.
+The ICD-10 is the International Classification of Diseases (10th Revision) or, in Spanish, (CIE-10) La Clasificación internacional de enfermedades (Décima edición), which describes and provides a code for thousands of diseases and is managed by the World Health Organization. The piClinic Console supports the ICD-10, 2008-version, to the first decimal place, which provides about 12,000 codes in English and Spanish.
 
 Note, some diagnostic codes are supported in only one language.
 
@@ -116,8 +116,8 @@ A GET request must include one, and only one, of **q**, **t**, or **c**.
 | ------ | ------ | ------ | ------ |
 | Parameter | Supported values | Function | Example |
 | ------ | ------ | ------ | ------ |
-| **q** | free text | Return codes with description text or code value that matches the parameter value | `q=Headache` |
-| **t** | free text | Return codes with description text that matches the parameter value | `t=Headache` |
+| **q** | free text | Return codes with description text or code value that contains the parameter value | `q=Headache` |
+| **t** | free text | Return codes with description text that contains the parameter value | `t=Headache` |
 | **c** | ICD-10 code | Return codes with a code value that matches the parameter value | `c=R51` |
 
 A GET request can also include any or all of these parameters to organize the response data.
@@ -160,13 +160,13 @@ where _**piclinic_host**_ is the host address.
 | ------ | ------ | ------ |
 | **icd10code** | string | ICD-10 code with decimal formatting |
 | **icd10index** | string | ICD-10 code with no decimal formatting |
-| **lanugage** | enum: `en`, `es` | Language code of the response data |
+| **language** | enum:<br>`en`, `es` | Language code of the response data |
 | **lastUsedDate** | datetime | Date & time the diagnosis code was assigned to a patient record |
 | **shortDescription** | string | Description of disease that corresponds to the `icd10code` |
-|** useCount** | number | The number of times the diagnosis has been assigned to a patient record since the system was installed |
+| **useCount** | number | The number of times the diagnosis has been assigned to a patient record since the system was installed |
 
 
-## session
+## _session_ resource
 
 The **session** resource contains the valid user sessions that can access the piClinic API.
 
@@ -237,7 +237,7 @@ where _**piclinic_host**_ is the host address.
 | **sessionIP** | IP address | The IP of the user account |
 | **sessionUA** | Text | The User Agent of the user's browser when the session was created |
 | **token** | Token GUID | The token created when the session was created |
-| **sessionLanguage** | enum: `en`, `es` | Language code of the response data |
+| **sessionLanguage** | enum:<br>`en`, `es` | Language code of the response data |
 | **username** | Text | The user's username |
 | **sessionClinicPublicID** | Text | Reserved. |
 | **createdDate** | datetime | The date and time the session was created. |
@@ -304,7 +304,7 @@ Note, a **X-piClinic-token** header is not required for a POST request.
 | **sessionIP** | IP address | The IP of the user account |
 | **sessionUA** | Text | The User Agent of the user's browser when the session was created |
 | **token** | Token GUID | The token created when the session was created |
-| **sessionLanguage** | enum: `en`, `es` | Language code of the response data |
+| **sessionLanguage** | enum:<br>`en`, `es` | Language code of the response data |
 | **username** | Text | The user's username |
 | **sessionClinicPublicID** | Text | Reserved. |
 | **createdDate** | datetime | The date and time the session was created. |
@@ -352,7 +352,7 @@ where _**piclinic_host**_ is the host address.
 | ------ | ------ | ------ |
 | **accessGranted** |  enum:<br>`SystemAdmin`<br>`ClinicAdmin`<br>`ClinicStaff`<br>`AuthenticatedUser`  | Access authorization level |
 | **token** | Token GUID | The token created when the session was created |
-| **sessionLanguage** | enum: `en`, `es` | Language code of the response data |
+| **sessionLanguage** | enum:<br>`en`, `es` | Language code of the response data |
 | **username** | Text | The user's username |
 | **sessionClinicPublicID** | Text | Reserved. |
 
