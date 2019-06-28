@@ -191,7 +191,7 @@ The normal sequence of session interaction is to:
 1. POST a session to create a new session and receive its token
 2. GET a session using the token to test its access (this usually done only by administrators and is not commonly used by an application)
 3. PATCH a session to change its default settings
-4. DELETE a session to close it and invalidate its token so it cannot by used again
+4. DELETE a session to close it and invalidate its token so it cannot be used again
 
 ### GET method
 
