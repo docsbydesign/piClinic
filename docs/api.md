@@ -19,13 +19,13 @@ piClinic API users must be authenticated by a username and password and some res
 
 GET method requests pass parameters as query parameters and POST method requests can pass data as `application/json` data or as query parameters; however, passing as `application/json` data can prevent the data from appearing in server logs. API requests that require authorization, must also include an **X-piClinic-token** header with a valid session token. Session tokens are obtained by calling the **session** API.
 
-### Sample header
+### Token header example
 
 ```
 X-piClinic-token: c1cbed0e_082f_4c85_afaa_3e4286b840fd
 ```
 
-### Sample GET request with query parameters
+### GET request example with query parameters
 
 ```
 https://piclinic_host/api/icd.php?c=R51&language=en
@@ -162,7 +162,7 @@ where _**piclinic_host**_ is the host address.
     }
 }
 ```
-#### GET Response data properties
+#### GET response data properties
 
 | ------ | ------ | ------ |
 | Properties | Data type | Description |
@@ -206,14 +206,14 @@ The **X-piClinic-token** header value is used to identify the session owner and,
 | ------ | ------ | ------ | ------ |
 | **token** | a valid session token | tests token for validity and returns access information (SystemAdmin access only) | token=c1cbed0e_082f_4c85_afaa_3e4286b840fd |
 
-#### Sample GET request
+#### GET request example
 ```
 https://piclinic_host/session.php
 ```
 
 where _**piclinic_host**_ is the host address.
 
-#### Sample GET Response
+#### GET response example
 ```
 {
     "count": 1,
@@ -266,7 +266,7 @@ The **X-piClinic-token** header value is not required for POST requests
 | **username** | a valid username (not case sensitive) | identify the user for whom to create a new session | (see example below) |
 | **password** | the password for the user (case sensitive) | authenticate the user creating a new session | (see example below) |
 
-#### Sample POST request
+#### POST request example
 ```
 https://piclinic_host/session.php
 ```
@@ -275,7 +275,7 @@ where _**piclinic_host**_ is the host address.
 
 Note, a **X-piClinic-token** header is not required for a POST request.
 
-#### Sample POST data object
+#### POST data object example
 
 ```
 {
@@ -284,7 +284,7 @@ Note, a **X-piClinic-token** header is not required for a POST request.
 }
 ```
 
-#### Sample POST response
+#### POST response example
 
 ```
 {
@@ -337,7 +337,7 @@ Updates selected properties of a session.
 
 The **sessionLanguage** property is the only session property that can be modified.
 
-#### Sample PATCH request
+#### PATCH request example
 ```
 https://piclinic_host/session.php&sessionLanguage=es
 ```
@@ -345,7 +345,7 @@ https://piclinic_host/session.php&sessionLanguage=es
 where _**piclinic_host**_ is the host address.
 
 
-#### Sample PATCH response
+#### PATCH response example
 
 ```
 {
@@ -383,12 +383,12 @@ Closes the specified session.
 
 The DELETE request requires only a **X-piClinic-token** header.
 
-#### Sample DELETE request
+#### DELETE request example
 ```
 https://piclinic_host/session.php
 ```
 
-#### Sample DELETE response
+#### DELETE response example
 
 ```
 {
