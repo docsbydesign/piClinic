@@ -312,7 +312,7 @@ Note, a **X-piClinic-token** header is not required for a POST request.
 | ------ | ------ | ------ |
 | Properties | Data type | Description |
 | ------ | ------ | ------ |
-| **accessGranted** |  enum:<br>`SystemAdmin`<br>`ClinicAdmin`<br>`ClinicStaff`<br>`AuthenticatedUser`  | Access authorization level |
+| **accessGranted** |  enum:<br>`SystemAdmin`<br>`ClinicAdmin`<br>`ClinicStaff`<br>`ClinicReadOnly`  | Access authorization level |
 | **loggedIn** | Boolean | `1` = active session, `0` = expired or closed session |
 | **sessionIP** | IP address | The IP of the user account |
 | **sessionUA** | Text | The User Agent of the user's browser when the session was created |
@@ -369,7 +369,7 @@ where _**piclinic_host**_ is the host address.
 | ------ | ------ | ------ |
 | Properties | Data type | Description |
 | ------ | ------ | ------ |
-| **accessGranted** |  enum:<br>`SystemAdmin`<br>`ClinicAdmin`<br>`ClinicStaff`<br>`AuthenticatedUser`  | Access authorization level |
+| **accessGranted** |  enum:<br>`SystemAdmin`<br>`ClinicAdmin`<br>`ClinicStaff`<br>`ClinicReadOnly`  | Access authorization level |
 | **token** | Token GUID | The token created when the session was created |
 | **sessionLanguage** | enum:<br>`en`, `es` | Language code of the response data |
 | **username** | Text | The user's username |
