@@ -158,7 +158,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
 	
 	if (!password_verify($requestArgs['password'], $userInfo['password'])) {
         $dbInfo['passArg'] = $requestArgs['password'];
-        $dbInfo['passHash'] = password_hash($requestArgs['password']);
+        $dbInfo['passHash'] = password_hash($requestArgs['password'], PASSWORD_DEFAULT);
         $dbInfo['passSaved'] = $userInfo['password'];
 		// password does not match
 		if (API_DEBUG_MODE) {
