@@ -88,6 +88,7 @@ $logProcessed = logWorkflow($sessionInfo, __FILE__, $dbLink);
 // create query string for get operation
 $visitRecord = array();
 $getQueryString = "";
+$staffResponse = [];
 if (!empty($requestData['patientVisitID'])) {
 	/*
 	*	TODO_REST:
@@ -246,20 +247,23 @@ function writeOptionsMenu ($visitInfo) {
                                     <select id="StaffUsernameField" name="staffUsername" class="requiredField">
                                         <option value="" <?= (empty($visitInfo['staffUsername']) ? 'selected' : '' ) ?>><?= TEXT_BLANK_STAFF_OPTION_VISIT ?></option>
                                         <?php
-                                        if ($staffResponse['count'] > 1) {
-                                            foreach ($staffResponse['data'] as $staffMember){
+                                        if (!empty($staffResponse)) {
+                                            // if there are some staff entries to load, load 'em
+                                            if ($staffResponse['count'] > 1) {
+                                                foreach ($staffResponse['data'] as $staffMember){
+                                                    if ($staffMember['medicalStaff']) {
+                                                        echo ('<option value="'.$staffMember['username'].'" '.
+                                                            ((!empty($visitInfo['staffUsername']) && $staffMember['username'] == $visitInfo['staffUsername']) ? 'selected' : '' ).
+                                                            '>'.$staffMember['lastName'].','. $staffMember['firstName'] .'</option>');
+                                                    }
+                                                }
+                                            } else if ($staffResponse['count'] == 1) {
+                                                $staffMember = $staffResponse['data'];
                                                 if ($staffMember['medicalStaff']) {
                                                     echo ('<option value="'.$staffMember['username'].'" '.
                                                         ((!empty($visitInfo['staffUsername']) && $staffMember['username'] == $visitInfo['staffUsername']) ? 'selected' : '' ).
-                                                        '>'.$staffMember['lastName'].','. $staffMember['firstName'] .'</option>');
+                                                        '>'.$staffMember['lastName'].', '. $staffMember['firstName'] .'</option>');
                                                 }
-                                            }
-                                        } else if ($staffResponse['count'] == 1) {
-                                            $staffMember = $staffResponse['data'];
-                                            if ($staffMember['medicalStaff']) {
-                                                echo ('<option value="'.$staffMember['username'].'" '.
-                                                    ((!empty($visitInfo['staffUsername']) && $staffMember['username'] == $visitInfo['staffUsername']) ? 'selected' : '' ).
-                                                    '>'.$staffMember['lastName'].', '. $staffMember['firstName'] .'</option>');
                                             }
                                         }
                                         ?>
