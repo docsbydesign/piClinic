@@ -108,10 +108,10 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
 		$requestArgs['username']."';";
 	$dbInfo['$getQueryString'] = $getQueryString;
 
-	$returnValue = getDbRecords($dbLink, $getQueryString);
-    $dbInfo['$data'] = $returnValue['data'];
+	$staffResponse = getDbRecords($dbLink, $getQueryString);
+    $dbInfo['$data'] = $staffResponse['data'];
 
-	if ($returnValue['httpResponse'] != 200) {
+	if ($staffResponse['httpResponse'] != 200) {
         // the specified user does not exist in the database
 		//  return an error
 		if (API_DEBUG_MODE) {
@@ -125,8 +125,8 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_NOTFOUND);
 		return $returnValue;
 	} else {
-		if ($returnValue['count'] == 1) {
-			$userInfo = $returnValue['data'];
+		if ($staffResponse['count'] == 1) {
+			$userInfo = $staffResponse['data'];
 		} else {
 			// more than one record is a server error because Username is a unique key
 			if (API_DEBUG_MODE) {
