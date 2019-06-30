@@ -370,8 +370,8 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
                                     <p>
                                         <select id="GlucoseUnitsSelect" name="glucoseUnits">
                                             <option value="" <?= (empty($visitInfo['glucoseUnits']) ? "selected" : "" ) ?>><?= TEXT_SELECT_GLUCOSE_UNITS ?></option>
-                                            <option value="RBS" <?= ($visitInfo['glucoseUnits'] == 'RBS' ? "selected" : "" ) ?>><?= TEXT_GLUCOSE_UNITS_RBS ?></option>
-                                            <option value="FBS" <?= ($visitInfo['glucoseUnits'] == 'FBS' ? "selected" : "" ) ?>><?= TEXT_GLUCOSE_UNITS_FBS ?></option>
+                                            <option value="RBS" <?= ((!empty($visitInfo['glucoseUnits']) && $visitInfo['glucoseUnits'] == 'RBS') ? "selected" : "" ) ?>><?= TEXT_GLUCOSE_UNITS_RBS ?></option>
+                                            <option value="FBS" <?= ((!empty($visitInfo['glucoseUnits']) && $visitInfo['glucoseUnits'] == 'FBS') ? "selected" : "" ) ?>><?= TEXT_GLUCOSE_UNITS_FBS ?></option>
                                         </select>&nbsp;
                                         <input type="number" name="glucose" id="GlucoseEdit" class="vsEdit" min="0" max="999" step="1" placeholder="<?= TEXT_GLUCOSE_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['glucose']) ? $visitInfo['glucose'] : "") ?>" />
                                     </p>
