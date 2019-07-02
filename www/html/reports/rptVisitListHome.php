@@ -222,7 +222,7 @@ if (empty($dbStatus) & !$noData) {
     */
     $diagFilterCondition = '';
     // the default is to return all visits regardless of diagnosis status
-    $searchString = 'r';
+    $searchString = '';
     $matchType = 'exact';
     if (!empty($requestData['diag'])) {
         $searchString = $requestData['diag'];
@@ -700,7 +700,7 @@ header('Content-type: text/html; charset=utf-8');
                         echo '<td class="wide">';
                         $displayText = '';
                         $displayClass = '';
-                        if ($searchString[0] == '*') {
+                        if ((!empty($searchString)) && ($searchString[0] == '*')) {
                             $searchString = '\\'.$searchString;
                         }
                         $diagnosisMatchString = '/'.$searchString.'/';
