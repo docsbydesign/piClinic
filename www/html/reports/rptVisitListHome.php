@@ -387,8 +387,8 @@ $displayRecord = 0;
 $dataDateFormat = 'Y-m-d';
 foreach ($visitList as $visit) {
     // these are the same for each record
-    $displayList[$displayRecord]['DH_CLINICNAME'] = (isset($clinicInfo['shortName']) ? $clinicInfo['shortName'] : '' );
-    $displayList[$displayRecord]['DH_CLINICCODE'] = (isset($clinicInfo['publicID']) ? $clinicInfo['publicID'] : $blankField );
+    $displayList[$displayRecord]['DH_CLINICNAME'] = (isset($clinicInfo['shortName']) ? $clinicInfo['shortName'] : ' ' );
+    $displayList[$displayRecord]['DH_CLINICCODE'] = (isset($clinicInfo['publicID']) ? $clinicInfo['publicID'] : ' ' );
     // these are specific to the visit
     $displayList[$displayRecord]['DH_SERVICETYPE'] = showvisitTypeString ($visit['visitType'], $visitTypes);
     $displayList[$displayRecord]['DH_SERVICEDATE'] = date($dataDateFormat, strtotime($visit['dateTimeIn']));
