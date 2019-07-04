@@ -227,6 +227,7 @@ function _session_patch ($dbLink, $apiUserToken, $requestArgs) {
         $getReturnValue = getDbRecords($dbLink, $getQueryString);
 
         if ($getReturnValue['count'] == 1) {
+            $sessionInfo['count'] = 1;
             $sessionInfo['data']['token'] = $getReturnValue['data']['token'];
             $sessionInfo['data']['username'] = $getReturnValue['data']['username'];
             $sessionInfo['data']['accessGranted'] = $getReturnValue['data']['accessGranted'];
@@ -236,6 +237,7 @@ function _session_patch ($dbLink, $apiUserToken, $requestArgs) {
             $sessionInfo['httpReason'] = 'Success';
         } else {
             // this is a stale token so no access anymore
+            $sessionInfo['count'] = 0;
             $sessionInfo['data']['token'] = 0;
             $sessionInfo['data']['username'] = '';
             $sessionInfo['data']['accessGranted'] = 0;
