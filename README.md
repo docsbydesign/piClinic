@@ -30,6 +30,10 @@ Database definitions and initialization scripts
 
 Misc. tools to help build/update the software and development notes.
 
+#### uitext
+
+Source files for localized strings.
+
 #### www
 
 The _**piClinic** Console_ software. This should map directly to the /var/www folder in the target system.
