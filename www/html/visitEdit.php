@@ -333,7 +333,7 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
                                         <input type="number" name="weight" id="WeightEdit" class="vsEdit" min="0" max="999" step="0.1" placeholder="<?= TEXT_WEIGHT_PLACEHOLDER ?>" value="<?=  (!empty($visitInfo['weight']) ? $visitInfo['weight'] : "") ?>" />&nbsp;
                                         <select id="WeightUnitsSelect" name="weightUnits">
                                             <option value="kg" <?= ($visitInfo['weightUnits'] == 'kg' ? "selected" : "" ) ?>><?= TEXT_WEIGHT_UNITS_KG ?></option>
-                                            <option value="kg" <?= ($visitInfo['weightUnits'] == 'lbs' ? "selected" : "" ) ?>><?= TEXT_WEIGHT_UNITS_LBS ?></option>
+                                            <option value="lbs" <?= ($visitInfo['weightUnits'] == 'lbs' ? "selected" : "" ) ?>><?= TEXT_WEIGHT_UNITS_LBS ?></option>
                                         </select>
                                     </p>
                                 </td>
