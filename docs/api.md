@@ -45,21 +45,30 @@ Generally, API requests return a JSON response that consists of these objects:
 | **status** | The status code and additional information about the response  |
 | **debug** | Detailed information about the request for debugging (development systems only) |
 
+Note that the nature of the `data` object depends on the value of `count`.
+
+| -------- | --------- |
+| Count | Data |
+| -------- | --------- |
+| 0 | An empty string |
+| 1 | A single object as defined by the resource |
+| >1 | An array of objects defined by the resource |
+
+When reading the data objects, be sure to check the count value to access them correctly.
+
 ### Success response example
 
 ```
 {
     "count": 1,
-    "data": [
-        {
+    "data": {
             "language": "en",
             "icd10code": "R51",
             "icd10index": "R51",
             "shortDescription": "Headache",
             "useCount": "1",
             "lastUsedDate": "2019-06-12 18:24:13"
-        }
-    ],
+   },
     "status": {
         "httpResponse": 200,
         "httpReason": "Success-1"
@@ -133,7 +142,7 @@ A GET request can also include any or all of these parameters to organize the re
 | Parameter | Values | Function | Example |
 | ------ | ------ | ------ | ------ |
 | **language** | `en` or `es` | filter results to return only the specified language | `language=en` |
-| **sort** | `c`, `t`, or `d` | sort the returned data by ascending **c**_ode_, **t**_ext_, or _last-used_ **d**_ate_)
+| **sort** | `c`, `t`, or `d` | sort the returned data by ascending **c**_ode_, **t**_ext_, or _last-used_ **d**_ate_) | `sort=c` |
 
 #### GET request example
 
