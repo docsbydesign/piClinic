@@ -15,6 +15,9 @@ These piClinic API resources are available to developers:
 
 piClinic API users must be authenticated by a username and password and some resources require user accounts with specific authorizations.
 
+**NOTE:** The piClinic API is designed to run on your own server so the URLs shown in this documentation do not reference a specific server.
+When you see a reference to `piclinic_host`, substitute that with the Host Address of the server you're running the piClinic API on to create the complete URL.
+
 ## Request format
 
 GET method requests pass parameters as query parameters and POST method requests can pass data as `application/json` data or as query parameters; however, passing as `application/json` data can prevent the data from appearing in server logs. API requests that require authorization, must also include an **X-piClinic-token** header with a valid session token. Session tokens are obtained by calling the **session** API.
@@ -111,6 +114,8 @@ These piClinic API resources are available to developers:
 
 The **icd** resource contains ICD-10 (CIE-10) diagnostic codes in English and Spanish.
 
+**URL:** `https://piclinic_host/api/icd.php`
+
 The ICD-10 is the International Classification of Diseases (10th Revision) or, in Spanish, (CIE-10) La Clasificación internacional de enfermedades (Décima edición), which describes and provides a code for thousands of diseases and is managed by the World Health Organization. The piClinic Console supports the ICD-10, 2008-version, to the first decimal place, which provides about 12,000 codes in English and Spanish.
 
 Note, some diagnostic codes are supported in only one language.
@@ -186,6 +191,8 @@ where _**piclinic_host**_ is the host address.
 ## _session_ resource
 
 The **session** resource contains the valid user sessions that can access the piClinic API.
+
+**URL:** `https://piclinic_host/api/session.php`
 
 | ------ | ------ | ------ |
 | Method | Token required? | Action |
