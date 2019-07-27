@@ -100,7 +100,7 @@ if ($pageLanguage == UI_ENGLISH_LANGUAGE) {
 	if (!defined('TEXT_STAFF_MEMBERID_PLACEHOLDER')) { define('TEXT_STAFF_MEMBERID_PLACEHOLDER','ID provided by clinic',false); }
 	if (!defined('TEXT_STAFF_NAMEFIRST_PLACEHOLDER')) { define('TEXT_STAFF_NAMEFIRST_PLACEHOLDER','First name',false); }
 	if (!defined('TEXT_STAFF_NAMELAST_PLACEHOLDER')) { define('TEXT_STAFF_NAMELAST_PLACEHOLDER','Last name',false); }
-	if (!defined('TEXT_STAFF_NAME_LABEL')) { define('TEXT_STAFF_NAME_LABEL','Name',false); }
+	if (!defined('TEXT_STAFF_NAME_LABEL')) { define('TEXT_STAFF_NAME_LABEL','Professional',false); }
 	if (!defined('TEXT_STAFF_NEW_SUBMIT_BUTTON')) { define('TEXT_STAFF_NEW_SUBMIT_BUTTON','Add new staff member or user',false); }
 	if (!defined('TEXT_STAFF_PASSWORD_PLACEHOLDER')) { define('TEXT_STAFF_PASSWORD_PLACEHOLDER','Your new password',false); }
 	if (!defined('TEXT_STAFF_POSITION_LABEL')) { define('TEXT_STAFF_POSITION_LABEL','Position in the clinic',false); }
@@ -136,7 +136,7 @@ if ($pageLanguage == UI_SPANISH_LANGUAGE) {
 	if (!defined('TEXT_STAFF_MEMBERID_PLACEHOLDER')) { define('TEXT_STAFF_MEMBERID_PLACEHOLDER','ID de la clínica',false); }
 	if (!defined('TEXT_STAFF_NAMEFIRST_PLACEHOLDER')) { define('TEXT_STAFF_NAMEFIRST_PLACEHOLDER','Nombre',false); }
 	if (!defined('TEXT_STAFF_NAMELAST_PLACEHOLDER')) { define('TEXT_STAFF_NAMELAST_PLACEHOLDER','Apellido',false); }
-	if (!defined('TEXT_STAFF_NAME_LABEL')) { define('TEXT_STAFF_NAME_LABEL','Nombre',false); }
+	if (!defined('TEXT_STAFF_NAME_LABEL')) { define('TEXT_STAFF_NAME_LABEL','Profesional',false); }
 	if (!defined('TEXT_STAFF_NEW_SUBMIT_BUTTON')) { define('TEXT_STAFF_NEW_SUBMIT_BUTTON','Agrega una persona o usuario nuevo',false); }
 	if (!defined('TEXT_STAFF_PASSWORD_PLACEHOLDER')) { define('TEXT_STAFF_PASSWORD_PLACEHOLDER','Su contraseña nueva',false); }
 	if (!defined('TEXT_STAFF_POSITION_LABEL')) { define('TEXT_STAFF_POSITION_LABEL','Puesto en la clínica',false); }

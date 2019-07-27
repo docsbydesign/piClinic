@@ -102,6 +102,7 @@ if ((!empty($requestData['patientVisitID'])) && empty($dbStatus)) {
 // if the visit record was not returned, exit in error
 // if it was, save the data to $visitInfo
 $visitInfo = array();
+$ptInfo = array();
 if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
     if (!empty($visitRecord) ) {
         $dbStatus = $visitRecord;
@@ -137,7 +138,16 @@ if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
     $visitInfo['condition2'] = '';
     $visitInfo['condition3'] = '';
 } else {
-	$visitInfo = $visitRecord['data'];	
+	$visitInfo = $visitRecord['data'];
+    // need to get the patient's patient record to get the full patient name
+    if (!empty($visitInfo['clinicPatientID'])) {
+        $ptQueryString = "SELECT * FROM `". DB_VIEW_PATIENT_GET . "` WHERE `clinicPatientID` = '" .
+            $visitInfo['clinicPatientID'] . "';";
+        $ptRecord = getDbRecords($dbLink, $ptQueryString);
+        if ($ptRecord['count'] == 1) {
+            $ptInfo = $ptRecord['data'];
+        }
+    }
 }
 
 // get the clinic info
@@ -191,20 +201,22 @@ function writeTopicMenu ($sessionInfo) {
         <div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
             <div class="infoBlock fullWidth">
                 <div class="rightDiv">
+                    <label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?><br>
                     <label class="close"><?= TEXT_ASSIGNED_LABEL ?>:</label><span class="linkInHeading"><?= (!empty($visitInfo['staffName']) ? $visitInfo['staffName'] : str_repeat("_",22))  ?></span><br>
-                    <label class="close"><?= TEXT_VISIT_ID_PRINT_LABEL ?>:</label><span class="linkInHeading"><?= $visitInfo['patientVisitID'] ?></span><br>
-                    <label class="close"><?= TEXT_VISIT_DATE_LABEL ?>:</label><?= (!empty($visitInfo['dateTimeIn']) ? date(TEXT_VISIT_DATE_FORMAT, strtotime($visitInfo['dateTimeIn'])) : '<span class="inactive">'.TEXT_DATE_BLANK.'</span>') ?>
+                    <label class="close"><?= TEXT_VISIT_ID_PRINT_LABEL ?>:</label><span class="linkInHeading"><?= $visitInfo['patientVisitID'] ?></span>
                 </div>
             </div>
             <div class="leftDiv">
-                <img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="/code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44&w=2">
+                <img class="barcode printOnly" alt="<?= $visitInfo['patientVisitID'] ?>" src="/code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44&w=2">
             </div>
             <div class="hrDiv"></div>
             <div class="infoBlock fullWidth">
                 <div class="leftDiv">
-                    <h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
+                    <h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($ptInfo) ?>
                         <span class="linkInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span>
-                        <span class="linkInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= urlencode($visitInfo['clinicPatientID']).createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span><br>
+                        <span class="linkInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= urlencode($visitInfo['clinicPatientID']).createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span>
+                        <span class="linkInHeading">&nbsp;&nbsp;<?= (!empty($ptInfo['patientNationalID']) ? '['.$ptInfo['patientNationalID'].']' : '') ?></span>
+                        <br>
                     </h1>
                 </div>
             </div>

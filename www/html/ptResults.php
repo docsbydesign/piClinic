@@ -54,6 +54,16 @@ require_once ('./uitext/ptResultsText.php');
 $pageAccessRequired = PAGE_ACCESS_READONLY;
 require('uiSessionInfo.php');
 
+// search refinement option contstants
+define("REFINE_LAST_NAME", 1,false);
+define("REFINE_FIRST_NAME", 2,false);
+define("REFINE_FIRST_NAMES", 3,false);
+define("REFINE_LAST_NAMES", 4,false);
+define("REFINE_FIRST_LAST_NAMES", 5,false);
+define("REFINE_FIRST_MIDDLE_LAST_NAME", 6,false);
+define("REFINE_FIRST_TWO_LAST_NAMES", 7,false);
+define("REFINE_FIRST_MIDDLE_TWO_LAST_NAMES", 8,false);
+
 // define the option links
 $cancelLink = '';
 				
@@ -122,9 +132,83 @@ if (!empty($sessionInfo['parameters']['q'])){
 	}
 } // else, continue
 
+// Next, check to see if this a refinement from an earlier search.
+// if so, replace the Q parameter with more specific ones
+$getParameters = [];
+if ((!empty($sessionInfo['parameters']['refine'])) && (!empty($sessionInfo['parameters']['q']))) {
+    $queryElements = explode(' ',trim($sessionInfo['parameters']['q']));
+    switch($sessionInfo['parameters']['refine']) {
+        case REFINE_LAST_NAME:
+            if (count($queryElements) >= 1){
+                $getParameters['lastName'] = $queryElements[0];
+            }
+            break;
+
+        case REFINE_FIRST_NAME:
+            if (count($queryElements) >= 1){
+                $getParameters['firstName'] = $queryElements[0];
+            }
+            break;
+
+        case REFINE_FIRST_NAMES:
+            if (count($queryElements) >= 2){
+                $getParameters['firstName'] = $queryElements[0];
+                $getParameters['middleInitial'] = $queryElements[1];
+            }
+            break;
+
+        case REFINE_LAST_NAMES:
+            if (count($queryElements) >= 2){
+                $getParameters['lastName'] = $queryElements[0];
+                $getParameters['lastName2'] = $queryElements[1];
+            }
+            break;
+
+        case REFINE_FIRST_LAST_NAMES:
+            if (count($queryElements) >= 2){
+                $getParameters['firstName'] = $queryElements[0];
+                $getParameters['lastName'] = $queryElements[1];
+            }
+            break;
+
+        case REFINE_FIRST_MIDDLE_LAST_NAME:
+            if (count($queryElements) >= 3){
+                $getParameters['firstName'] = $queryElements[0];
+                $getParameters['middleInitial'] = $queryElements[1];
+                $getParameters['lastName'] = $queryElements[2];
+            }
+            break;
+
+        case REFINE_FIRST_TWO_LAST_NAMES:
+            if (count($queryElements) >= 3){
+                $getParameters['firstName'] = $queryElements[0];
+                $getParameters['lastName'] = $queryElements[1];
+                $getParameters['lastName2'] = $queryElements[2];
+            }
+            break;
+
+        case REFINE_FIRST_MIDDLE_TWO_LAST_NAMES:
+            if (count($queryElements) >= 4){
+                $getParameters['firstName'] = $queryElements[0];
+                $getParameters['middleInitial'] = $queryElements[1];
+                $getParameters['lastName'] = $queryElements[2];
+                $getParameters['lastName2'] = $queryElements[3];
+            }
+            break;
+
+        default:
+            // if not a real option, just copy the q parameter
+            $getParameters['q'] = trim($sessionInfo['parameters']['q']);
+            break;
+    }
+} else {
+    // this is just a regular query
+    $getParameters = $sessionInfo['parameters'];
+}
+
 // if here, there was no visit match so check the patient records
 // Get patient records that match
-$patientInfo = _patient_get($dbLink, $sessionInfo['token'], $sessionInfo['parameters']);
+$patientInfo = _patient_get($dbLink, $sessionInfo['token'], $getParameters);
 
 // at this point, $patientInfo['data'] can have zero or more patient records (up to query limit)
 
@@ -170,6 +254,60 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 	$topicMenu .= '</ul></div>'."\n";
 	return $topicMenu;
 }
+
+function writeSearchFilter ($sessionInfo, $ptCount) {
+    $returnString = '';
+    if ((!empty($sessionInfo['parameters']['q']))  && ($ptCount > 10)) {
+        // if this was a general query, count the number of elements in the search string to create the corresponding prompts
+        $queryElements = explode(' ',trim($sessionInfo['parameters']['q']));
+        // $returnString .= '<p><strong>' . (string)$ptCount . '</strong> patients found and <strong>' . (string)count($queryElements) . '</strong> terms in the search string</p>'."\n";
+        $refineArray = [];
+        switch(count($queryElements)) {
+            case 1:
+                array_push ($refineArray,
+                    array(REFINE_LAST_NAME,     TEXT_REFINE_LAST_NAME),
+                    array(REFINE_FIRST_NAME,    TEXT_REFINE_FIRST_NAME)
+                );
+                break;
+            case 2:
+                array_push ($refineArray,
+                    array(REFINE_FIRST_NAMES,       TEXT_REFINE_FIRST_NAMES),
+                    array(REFINE_LAST_NAMES,        TEXT_REFINE_LAST_NAMES),
+                    array(REFINE_FIRST_LAST_NAMES,  TEXT_REFINE_FIRST_LAST_NAMES)
+                );
+                break;
+            case 3:
+                array_push ($refineArray,
+                    array(REFINE_FIRST_MIDDLE_LAST_NAME,    TEXT_REFINE_FIRST_MIDDLE_LAST_NAME),
+                    array(REFINE_FIRST_TWO_LAST_NAMES,      TEXT_REFINE_FIRST_TWO_LAST_NAMES)
+                );
+                break;
+            case 4:
+            default:
+                // if more than four, use only the first four
+                array_push ($refineArray,
+                    array(REFINE_FIRST_MIDDLE_TWO_LAST_NAMES,   TEXT_REFINE_FIRST_MIDDLE_TWO_LAST_NAMES)
+                );
+                break;
+        }
+        if (count($refineArray) > 0) {
+            // create the select box for the form with the appropriate entries
+            $returnString .= '<form enctype="application/x-www-form-urlencoded" action="/ptResults.php" method="get">'."\n";
+            $returnString .= '<input type="hidden" id="WorkflowID" name="'. WORKFLOW_QUERY_PARAM .'" value="'. getWorkflowID(WORKFLOW_TYPE_SUB, 'PT_SEARCH') .'" >'."\n";
+            $returnString .= '<input type="hidden" id="WorkflowID" name="q" value="'. trim($sessionInfo['parameters']['q']) .'" >'."\n";
+            $returnString .= '<input type="hidden" class="btn_search" id="RefineBtnTag" name="'.FROM_LINK.'" value="'.createFromLink (null, __FILE__, `btn_search`).' ?>">'."\n";
+            $returnString .= '<p><label class="close">'.TEXT_REFINE_LABEL.':</label>'."\n";
+            $returnString .= '<select name="refine" id="refineSelect">'."\n";
+            $returnString .= '<option value="" selected>' . TEXT_REFINE_SELECT_ONE . '</option>'."\n";
+            foreach ($refineArray as $entry) {
+                $returnString .= '<option value="'. $entry[0] . '">' . $entry[1] . '</option>'."\n";
+            }
+            $returnString .= '</select>'."\n";
+            $returnString .= '&nbsp;<button type="submit">'.TEXT_REFINE_SEARCH_SUBMIT_BUTTON.'</button></p></form>';
+        }
+    } // else return an empty string because this wasn't a general search
+    return $returnString;
+}
 ?>
 <?= pageHtmlTag($pageLanguage) ?>
 <?= pageHeadTag(TEXT_PATIENTS_FOUND_PAGE_TITLE) ?>
@@ -181,7 +319,7 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 	<div class="pageBody">
 	<?= writeTopicMenu ($cancelLink, $addNewLink, $sessionInfo) ?>
 	<div id="PatientList">
-		<h1 class="pageHeading"><?= TEXT_PATIENT_SEARCH_RESULTS_HEADING ?></h1>
+        <h1 class="pageHeading"><?= TEXT_PATIENT_SEARCH_RESULTS_HEADING ?></h1>
 <?php
 	if ($patientInfo['count'] == 0) {
 		// no records found
@@ -197,7 +335,10 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 			// show search message
 			echo '<p>'.TEXT_PATIENT_SEARCH_FOUND_NOT_ATA.'</p>';
 		}
-		
+
+        // display the refine search option if there are more than 10 patients in the list
+        echo writeSearchFilter($sessionInfo, count($ptArray));
+
 		echo '<table id="searchResultsTable" class="piClinicList">';
 		echo '	<tr>';
 		echo '		<th>'. TEXT_FULLNAME_LABEL.'</th>';

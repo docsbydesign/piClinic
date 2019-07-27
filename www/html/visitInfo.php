@@ -101,6 +101,7 @@ if ((!empty($requestData['patientVisitID'])) && empty($dbStatus)) {
 // if the visit record was not returned, exit in error
 // if it was, save the data to $visitInfo
 $visitInfo = array();
+$ptInfo = array();
 if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
     if (!empty($visitRecord) ) {
         $dbStatus = $visitRecord;
@@ -136,7 +137,16 @@ if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
     $visitInfo['condition2'] = '';
     $visitInfo['condition3'] = '';
 } else {
-	$visitInfo = $visitRecord['data'];	
+	$visitInfo = $visitRecord['data'];
+    // need to get the patient's patient record to get the full patient name
+    if (!empty($visitInfo['clinicPatientID'])) {
+        $ptQueryString = "SELECT * FROM `". DB_VIEW_PATIENT_GET . "` WHERE `clinicPatientID` = '" .
+            $visitInfo['clinicPatientID'] . "';";
+        $ptRecord = getDbRecords($dbLink, $ptQueryString);
+        if ($ptRecord['count'] == 1) {
+            $ptInfo = $ptRecord['data'];
+        }
+    }
 }
 
 function writeTopicMenu ($sessionInfo) {
@@ -165,7 +175,7 @@ function writeTopicMenu ($sessionInfo) {
 	<?= writeTopicMenu($sessionInfo) ?>
 	<div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
 		<div class="infoBlock">
-			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
+			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($ptInfo) ?>
 				<span class="linkInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>
 			<p><?= formatDbDate ($visitInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED ) ?>&nbsp;<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>&nbsp;&nbsp;&nbsp;
 			<span class="linkInHeading"><a class="a_ptInfo" href="/ptInfo.php?clinicPatientID=<?= urlencode($visitInfo['clinicPatientID']).createFromLink (FROM_LINK_QP, __FILE__, 'a_ptInfo') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
@@ -177,7 +187,7 @@ function writeTopicMenu ($sessionInfo) {
 	</div>
 	<div class="clearFloat"></div>
     <div class="infoBlock">
-        <img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44&w=2">
+        <img class="barcode printOnly" alt="<?= $visitInfo['patientVisitID'] ?>" src="code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44&w=2">
     </div>
     <div class="clearFloat"></div>
 	<div id="optionMenuDiv" class="noprint<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
