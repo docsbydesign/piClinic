@@ -127,6 +127,7 @@ if (!empty($requestData['patientVisitID'])) {
 // if the visit record was not returned, exit in error
 // if it was, save the data to $visitInfo
 $visitInfo = array();
+$ptInfo = array();
 if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
     if (!empty($visitRecord) ) {
     	$dbStatus = $visitRecord;
@@ -175,6 +176,15 @@ if (empty($visitRecord)  || ($visitRecord['httpResponse'] != 200)) {
     if (empty('tempUnits')) {
         $visitInfo['tempUnits'] = VISIT_DEFAULT_TEMP_UNITS;
     }
+    // need to get the patient's patient record to get the full patient name
+    if (!empty($visitInfo['clinicPatientID'])) {
+        $ptQueryString = "SELECT * FROM `". DB_VIEW_PATIENT_GET . "` WHERE `clinicPatientID` = '" .
+            $visitInfo['clinicPatientID'] . "';";
+        $ptRecord = getDbRecords($dbLink, $ptQueryString);
+        if ($ptRecord['count'] == 1) {
+            $ptInfo = $ptRecord['data'];
+        }
+    }
 }
 // at this point, $visitInfo should have one patient visit record ready to edit.
 
@@ -200,7 +210,7 @@ function writeOptionsMenu ($visitInfo, $cancelLink) {
 	<?= writeOptionsMenu($visitInfo, $cancelLinkUrl) ?>
 	<div class="nameBlock<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
 		<div class="infoBlock">
-			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($visitInfo) ?>
+			<h1 class="pageHeading noBottomPad noBottomMargin"><?= formatPatientNameLastFirst ($ptInfo) ?>
 				<span class="linkInHeading">&nbsp;&nbsp;<?= '('.$visitInfo['sex'].')' ?></span></h1>
 			<p><?= formatDbDate ($visitInfo['birthDate'], TEXT_BIRTHDAY_DATE_FORMAT, TEXT_NOT_SPECIFIED ) ?>&nbsp;<?= formatAgeFromBirthdate ($visitInfo['birthDate'], strtotime($visitInfo['dateTimeIn']), TEXT_VISIT_YEAR_TEXT, TEXT_VISIT_MONTH_TEXT, TEXT_VISIT_DAY_TEXT) ?>&nbsp;&nbsp;&nbsp;
 			<span class="linkInHeading"><a href="/ptInfo.php?clinicPatientID=<?= urlencode($visitInfo['clinicPatientID']).createFromLink (FROM_LINK_QP, __FILE__, 'PatientView') ?>" title="<?= TEXT_SHOW_PATIENT_INFO ?>"><?= $visitInfo['clinicPatientID'] ?></a></span></p>
