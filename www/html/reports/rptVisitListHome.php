@@ -240,7 +240,7 @@ if (empty($dbStatus) & !$noData) {
             $matchType = 'loose';
         }
     } else {
-        $matchType = 'loose';
+        $matchType = 'all';
     }
 
     if (empty($requestData['emptyDiag'])) { // if emptyDiag is empty or 0
@@ -259,6 +259,8 @@ if (empty($dbStatus) & !$noData) {
             $diagFilterCondition .= "`diagnosis1` LIKE '%" . $searchString . "%' OR ";
             $diagFilterCondition .= "`diagnosis2` LIKE '%" . $searchString . "%' OR ";
             $diagFilterCondition .= "`diagnosis3` LIKE '%" . $searchString . "%' ) ";
+        } else if ($matchType == 'all') {
+            $diagFilterCondition .= '';
         }
     } else if ($requestData['emptyDiag'] == '1') {
         // Match visits with no diagnosis entries
