@@ -556,6 +556,17 @@ TEXT_REFERRAL_PLACEHOLDER,Clinic name,Nombre de la clínica
 TEXT_REFERRED_FROM_LABEL,Referred from,Recibido de
 TEXT_REFERRED_TO_LABEL,Referred to,Enviado a
 TEXT_REFER_TO_LABEL,Refer to,Se remite a
+TEXT_REFINE_FIRST_LAST_NAMES,First and last names,Primer nombre y apellido
+TEXT_REFINE_FIRST_MIDDLE_LAST_NAME,"First, middle, and last name","Primer y segundo nombres y apellido"
+TEXT_REFINE_FIRST_MIDDLE_TWO_LAST_NAMES,"First, middle, and both last names","Primer y segundo nombres y los dos apellidos"
+TEXT_REFINE_FIRST_NAME,First name,Primer nombre
+TEXT_REFINE_FIRST_NAMES,First and middle names,Primer y segundo nombres
+TEXT_REFINE_FIRST_TWO_LAST_NAMES,First name and two last names,Primer nombre y los dos apellidos
+TEXT_REFINE_LABEL,Your search returned many patients.<br>Refine your search by indicating that the terms are the patient\'s,Encontré muchos pacientes.<br>Mejora los resultados por indica que los terminos de la busqueda son
+TEXT_REFINE_LAST_NAME,Last name,Apellido
+TEXT_REFINE_LAST_NAMES,Last names,Apellidos
+TEXT_REFINE_SEARCH_SUBMIT_BUTTON,Search again,Buscar de nuevo
+TEXT_REFINE_SELECT_ONE,Select one,Seleccione
 TEXT_REPORT_ADDRESS_LABEL,Home town,Procedencia
 TEXT_REPORT_AGE_GROUP_HEADING,Age group,Concepto
 TEXT_REPORT_AGE_LABEL,Age,Edad
