@@ -187,7 +187,7 @@ function writeTopicMenu ($sessionInfo) {
 	</div>
 	<div class="clearFloat"></div>
     <div class="infoBlock">
-        <img class="barcode" alt="<?= $visitInfo['patientVisitID'] ?>" src="code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44&w=2">
+        <img class="barcode printOnly" alt="<?= $visitInfo['patientVisitID'] ?>" src="code39.php?code=<?= $visitInfo['patientVisitID'] ?>&y=44&w=2">
     </div>
     <div class="clearFloat"></div>
 	<div id="optionMenuDiv" class="noprint<?= (empty($visitRecord) ? ' hideDiv' : '') ?>">
