@@ -257,7 +257,7 @@ function writeTopicMenu ($cancel, $new, $sessionInfo) {
 
 function writeSearchFilter ($sessionInfo, $ptCount) {
     $returnString = '';
-    if ((!empty($sessionInfo['parameters']['q']))  /*&& ($ptCount > 10) */) {
+    if ((!empty($sessionInfo['parameters']['q']))  && ($ptCount > 10)) {
         // if this was a general query, count the number of elements in the search string to create the corresponding prompts
         $queryElements = explode(' ',trim($sessionInfo['parameters']['q']));
         // $returnString .= '<p><strong>' . (string)$ptCount . '</strong> patients found and <strong>' . (string)count($queryElements) . '</strong> terms in the search string</p>'."\n";
