@@ -168,6 +168,7 @@ if ((!empty($sessionInfo['parameters']['refine'])) && (!empty($sessionInfo['para
             if (count($queryElements) >= 2){
                 $getParameters['firstName'] = $queryElements[0];
                 $getParameters['lastName'] = $queryElements[1];
+            }
             break;
 
         case REFINE_FIRST_MIDDLE_LAST_NAME:
