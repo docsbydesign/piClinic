@@ -18,7 +18,7 @@ The _**piClinic**_  is built on [the digital principles]({{site.baseurl}}/princi
 
 ## Benefits
 
-Many small clinics around the world would benefit from some form of patient-record automation to reduce duplicate and misplaced files and improve their ability to report on patients and clinic activities. However, for many of these clinics, an EHR system is too costl to install and too complex to  maintain. 
+Many small clinics around the world would benefit from some form of patient-record automation to reduce duplicate and misplaced files and improve their ability to report on patients and clinic activities. However, for many of these clinics, an EHR system is too costly to install and too complex to  maintain. 
 
 _**piClinic**_ provides the essential patient-record automation functions of:
 
@@ -31,7 +31,7 @@ Introducing a _**piClinic**_ system to a clinic helps the clinic enjoy the benef
 
 ## Current status
 
-The _**piClinic** Console_ is currently being field-tested in four clinics in Honduras.
+The _**piClinic** Console_ was field-tested in four clinics in Honduras during summer 2019. Read the [preliminary report]({{site.baseurl}}/images/PiClinicSigDoc2019.pdf).
 
 For more detailed information and the current status, contact the project's principal investigator, Robert Watson at [watson_rb@mercer.edu](mailto://watson_rb@mercer.edu).
 
