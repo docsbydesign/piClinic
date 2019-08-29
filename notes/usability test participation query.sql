@@ -3,16 +3,16 @@
 SELECT 
     TRIM(SUBSTR(`a`.`name`, POSITION(' ' in `a`.`name`))) as `lastName`,
 	`a`.`name`,
-    MIN(`a`.`commentDate`) AS `firstTest`, 
-    MAX(`a`.`commentDate`) AS `lastTest`, 
-    COUNT(`a`.`name`) AS `participationCount`,
     (CASE
     	WHEN COUNT(`a`.`name`) > 4
         THEN
         	20
         ELSE 
 	     	COUNT(`a`.`name`)* 5 
-    END) AS `extraCredit` 
+    END) AS `extraCredit`,
+    MIN(`a`.`commentDate`) AS `firstTest`, 
+    MAX(`a`.`commentDate`) AS `lastTest`, 
+    COUNT(`a`.`name`) AS `participationCount`
   FROM (
      SELECT `b`.`commentDate` as `commentDate`,`b`.`commentString` as `commentString`, TRIM(SUBSTR(`b`.`commentString`,1,POSITION('-' IN `b`.`commentString`)-1)) as `name` FROM (
         SELECT `commentDate`, 
