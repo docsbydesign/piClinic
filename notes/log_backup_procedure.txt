@@ -1,0 +1,41 @@
+Saving piClinic Console log files
+
+Log out of the current piClinic session
+
+1. Close the piClinic session by clicking "Logout" (in the links at the top left corner).
+2. Close the browser.
+3. Log out of the clinic user session (log out from the system menu in the upper left corner)
+
+Log in as an administrator
+
+1. In the system login screen, log in as:
+	Username: pi
+	Password: *********
+2. Open the browser and, if necessary, goto http://localhost/piclinic.php
+3. Log in to piClinic Console as:
+	Username: SystemAdmin
+	Password: ********
+4. Resize the browser window so it is about 1/2 the screen.
+
+Insert the USB drive
+
+1. Insert the USB drive (if it is already inserted, eject it, remove it, and re-insert it)
+2. When prompted, open the file explorer
+3. Move the file explorer window so it is next to the browser with the piClinic Console in it
+
+Download the log data
+
+1. Go to the Admin menu
+2. Click the "Backup system logs" link
+3. Wait for the file to appear in the bottom of the browser window as a download.
+4. Drag the file from the bottom of the browser to the file explorer that opened when you inserted the USB drive
+
+Return the system to clinic use
+1. Click the eject icon in the upper right of the screen
+2. Remove the USB drive
+3. End the piClinic session and close the browser
+4. Log out of the console using the menu in the upper left of screen
+5. Log in to the system as:
+	Username: Clinic
+	Password: ********
+6. 
