@@ -4,9 +4,11 @@ title: "piClinic Home"
 ---
 
 |------------------------|
-| Learn more about the piClinic Console!<br>Contact [Robert Watson](mailto://watson_rb@mercer.edu) |
+| Learn more about the piClinic Console!<br>Contact [Robert Watson](mailto://bobw@piclinic.org) |
 
 # _piClinic_
+
+| The _**piClinic** Console_ field test finished successfully in July 2019. Read the [preliminary report]({{site.baseurl}}/images/PiClinicSigDoc2019.pdf). |
 
 ![piClinic Console - Front]({{site.baseurl}}/images/TermFront-piclinic_sm.jpg)
 
@@ -33,7 +35,7 @@ Introducing a _**piClinic**_ system to a clinic helps the clinic enjoy the benef
 
 The _**piClinic** Console_ was field-tested in four clinics in Honduras during summer 2019. Read the [preliminary report]({{site.baseurl}}/images/PiClinicSigDoc2019.pdf).
 
-For more detailed information and the current status, contact the project's principal investigator, Robert Watson at [watson_rb@mercer.edu](mailto://watson_rb@mercer.edu).
+For more detailed information and the current status, contact the project's principal investigator, Robert Watson at [bobw@piclinic.org](mailto://bobw@piclinic.org).
 
 ## Learn more about:
 

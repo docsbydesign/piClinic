@@ -25,7 +25,7 @@ The _**piClinic** Console_ can operate effectively in a clinic without requiring
 | Prototype | In [Field testing](#summer2019) |
 | Software demo | Available online  |
 
-Contact [Robert Watson](mailto://watson_rb@mercer.edu) for more info or to access the online demo.
+Contact [Robert Watson](mailto://bobw@piclinic.org) for more info or to access the online demo.
 
 ## Technical details
 
