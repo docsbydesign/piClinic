@@ -48,3 +48,6 @@ SELECT `wfGuid`,
 	ROUND(max(`wfMicrotime`)-min(`wfMicrotime`),4) as `Elapsed Time` from `wflog`
 where `logClass` = 'RP'
 group by `wfGuid`;
+
+SELECT min(`createdDate`) as 'StartTime', max(`createdDate`) as `EndDate`
+	FROM `wflog`;
