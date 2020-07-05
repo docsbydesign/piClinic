@@ -3,16 +3,13 @@ logo: "/images/TermFront-piclinic_sm.jpg"
 email: bobw@piclinic.org
 description: > # this means to ignore newlines until "baseurl:"
   Affordable patient-record automation for limited-resource clinics.<br>
-  A Mercer University School of Engineering project in the Department of Technical Communication.
 baseurl: "" # the subpath of your site
 url: "https://piclinic.org" # the base hostname & protocol for where the content is h
 twitter_username: bobwatsonphd
 google_analytics: UA-58134115-3
 github_username:  rbwatson
 include: ['pages']
-#banner: "<strong>Applications are being accepted for all team-member positions</strong><br>Click for more information"
-#banner_url: /CTS/mom-2019/
 author:
-  name: Mercer University TCO
-  url: https://engineering.mercer.edu/academics/undergraduate/technical-communication/
+  name: Bob Watson
+  url: https://docsbydesign.com
 theme: jekyll-theme-slate
