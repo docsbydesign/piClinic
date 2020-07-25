@@ -1,8 +1,34 @@
 #/bin/bash
 #
-#	Instructions updated for 27-Jun-2018 release of Raspbian Stretch
+#	Instructions updated for 2020-05-27 release of Raspberry Pi OS (32-bit)
+#   with desktop
+#
+#   This process can take from 60-90 minutes to complete.
+#
+# For ease of copying the base image:
+#   1. Install and configure this software as described below
+#       on an 8-GB MicroSD card.
+#   2. Save the image of the MicroSD card as an .img file.
+#   3. Load the image on to a high-speed 32GB (or larger) microSD card.
+#   4. After booting from the new MicroSD card, run raspi-config and
+#       in Advanced Options, select option A1 to make the entire SD card
+#       available to the OS.
+#   5. The system should be ready to run normally after that
+#
+#*****************************************************************************
+#
+#   NOTE: Although this is written as a script, DO NOT EXECUTE IT as one.
+#     There are numerous cases where the system must be restarted before
+#     continuing and that is not accounted for in this script.
+#
+#     Use this script as a guide from which you can copy, paste, and edit
+#     the commands as necessary.
+#
+#*****************************************************************************
 #
 #	Start here if your installing a clean OS as downloaded from raspberrypi.org.
+#   Install the version that HAS the GUI desktop but DOES NOT HAVE the apps
+#   The required apps will be installed by this procedure
 #	If you are starting from a pre-configured piClinic OS image, start futher down the page
 #
 #	Power up system with fresh OS on SD card.
@@ -27,32 +53,33 @@
 #
 #	Check for Updates
 #		Click skip (or you'll be sorry...)
+#   We'll run the update shortly
 #
 #	After this, the pi will reboot to the desktop.
 #
 #	In a terminal window. Remove some unused software before continuing.
-#		sudo apt-get purge wolfram-engine scratch scratch2 minecraft-pi sonic-pi dillo oracle-java8-jdk oracle-java7-jdk
-#		sudo apt-get clean
-#		sudo apt-get autoremove
-#		sudo shutdown -r 0
+sudo apt-get purge dillo
+sudo apt-get clean
+sudo apt-get autoremove
+sudo shutdown -r 0
 #
 # 	In a terminal window update the OS.
-#		sudo apt-get update
-#		sudo apt-get upgrade
-#		sudo apt-get clean
-#		sudo apt-get autoremove
-#		sudo shutdown -r 0
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get clean
+sudo apt-get autoremove
+sudo shutdown -r 0
 #
 #	Update the system config file for the piClinic configuration.
 #	Open config.txt and change/uncomment, or add if not present, these config parameters
-#		sudo nano /boot/config.txt
+sudo nano /boot/config.txt
 #			disable_overscan=1
 #			hdmi_group=1
 #			hdmi_mode=16
-#			hdmi_blanking=1
-#     		hdmi_drive=2
+#     hdmi_blanking=1
+#     hdmi_drive=2
 #
-#		sudo shutdown -r 0
+sudo shutdown -r 0
 #
 # configure the basic PI settings
 #   open Raspberry Pi Configuration from the Preferences menu
@@ -66,21 +93,21 @@
 #     PERFORMANCE page
 #       leave as default
 #     LOCALISATION
-#		(confirm, these should be configured at initial boot)
+#	      (confirm, these should be configured at initial boot)
 #     LOCALE: en-US, UTF-8
 #	     TIMEZONE
-#			(confirm, these should be configured at initial boot)
+#			  (confirm, these should be configured at initial boot)
 #	       your local timezone (e.g. AMERICA/New_York for Eastern time
 #	     KEYBOARD
-#			(confirm, these should be configured at initial boot)
+#			  (confirm, these should be configured at initial boot)
 #	       as desired: (e.g. United States, English)
 #		  WiFi COUNTRY:
-#			(confirm, these should be configured at initial boot)
+#			  (confirm, these should be configured at initial boot)
 #
 #	Turn off bluetooth from the icon in the system menu bar.
 #
 #   Save changes and restart.
-#		sudo shutdown -r 0
+sudo shutdown -r 0
 #
 #	Configure the RealTime clock (make sure that it's been installed on the Pi board.)
 # 	This is easiest if done while connected to the Internet
@@ -93,14 +120,17 @@
 #				add "rtc-ds1307" (without quotes) to the end of the file, and save the changes
 #				save changes and exit
 #		4) Add the device to the rc file before the "exit 0" command
-#			sudo nano /etc/rc.local/
+#			sudo nano /etc/rc.local
 #				add these lines before the exit command:
 #					echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device
 #					sudo hwclock -s
 #					date
 #				save changes and exit
 #		5) Restart the pi
-#			make sure the time is correct
+#			after it restarts, make sure the time is correct
+#     this command displays the realtime clock's time
+#       sudo hwclock -r
+#
 #			if not, refer to https://thepihut.com/blogs/raspberry-pi-tutorials/17209332-adding-a-real-time-clock-to-your-raspberry-pi from where these instructions were found
 #
 # *************************************************************************
@@ -111,24 +141,27 @@
 #       Installation script starts here
 #
 # install basic system software
-# sudo apt-get -y install nload
+sudo apt-get -y install nload
 sudo apt-get -y install exfat-fuse exfat-utils
 sudo apt-get -y install apache2 apache2-doc libapache2-mod-php
-sudo apt-get -y install libapache2-mod-php7.0 php7.0-common php7.0-fpm php7.0-mysql php7.0
+sudo apt-get -y install libapache2-mod-php7.3 php7.3-common php7.3-fpm php7.3-mysql php7.3
 #
 #	create a php info page
-#
+#   (note, these commands might need to be run from the su account by
+#     entering sudo su before running these commands)
 sudo echo '<?php phpinfo(); ?>' > /var/www/html/phpinfo.php
 # 	set file permissions to let apache show the file.
 sudo chown www-data:www-data /var/www/html/phpinfo.php
 sudo chmod 750 /var/www/html/phpinfo.php
 #
 #	check web server by opening http://localhost in the browser
+#   These commands install the Raspian version of mysql, a.k.a. mariadb
 #
-sudo apt-get -y install mysql-server
-sudo apt-get -y install mysql-client
+sudo apt-get -y install mariadb-server-10.0
+sudo apt-get -y install mariadb-client-10.0
 #
 # Set mysql password
+#   This must be done as a super user using (sudo su) access
 #  	from: https://www.digitalocean.com/community/tutorials/how-to-reset-your-mysql-or-mariadb-root-password
 #
 sudo systemctl stop mariadb
@@ -136,32 +169,46 @@ sudo mysqld_safe --skip-grant-tables --skip-networking &
 mysql -u root
 # in mysql
 #	change new_password to your new root password.
-#		FLUSH PRIVILEGES;
-#		GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY PASSWORD 'new_password';
+#	  	FLUSH PRIVILEGES;
+#     CREATE USER 'root'@'localhost' IDENTIFIED BY 'new_password';
+#     GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost';
+#   If root@localhost exists, just change its new_password
+#     SET PASSWORD FOR 'root'@'localhost' = PASSWORD('new_password');
+#
+#   create an admin password (this works better for user access to
+#     administer the database)
+#     CREATE USER 'admin'@'localhost' IDENTIFIED BY 'new_password';
+#     GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
+#
 # 		exit
-# kill mysqld_safe process
-#	list running processes:
-#		ps
+# kill mysqld_safe process, first	list running processes:
+#		 ps
 #	find id of mysqld_safe process and use it in the following command
 #		sudo kill <id>
 #
+# restart the system
+sudo shutdown -r 0
 #	start the real service
 #
 sudo systemctl start mariadb
 # test the new password
-mysql -u root -p
+sudo mysql -u root -p
 #	This should prompt you for the password.
 #	Enter the one you just assigned above and you should get the MariaDB [(none)]> prompt.
 # 	If it does, exit and continue
 #	If not, try to reassign the password and try again.
 #
-# uncomment the next line for production systems
-# sudo mysql_secure_installation
+# run this command on a production systems
+sudo mysql_secure_installation
 #
 # comment the next line for a production system
+#   Let phpmyadmin create a random password for its mysql access
+#   You'll use the admin account created earlier to log in to PhpMyAdmin
 sudo apt-get -y install phpmyadmin
 #
-# Verify the phpmyadmin installation
+# Verify the phpmyadmin installation by opening
+#   http://localhost/phpmyadmin
+#   and log in with the admin password created earlier
 #
 #	restart the system
 sudo shutdown -r 0
@@ -184,9 +231,13 @@ sudo shutdown -r 0
 #   review timezone strings from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 #		and pick the correct one for the system's location
 #   edit the PHP ini file and change these settings on all configurations
-#   	sudo nano /etc/php/7.0/apache2/php.ini
+#   	sudo nano /etc/php/7.3/apache2/php.ini
 #     		memory_limit = 512M
-#     		date.timezone = <insert a standard UNIX timezone string from the wikipedia link above, such as America/Tegucigalpa for Honduras>
+#     		date.timezone = <insert a standard UNIX timezone string>
+#                           see the wikipedia link above, such as
+#                               America/Tegucigalpa for Honduras
+#                               America/Los_Angeles for Pacific time
+#                               America/New_York for Eastern time
 #
 #   change these settings if you are configuring a development system
 #
@@ -199,14 +250,36 @@ sudo shutdown -r 0
 #
 #		open http://localhost/phpinfo.php to make sure the settings you updated have the values
 #
-#	Remove directory listing from Apache
+#	Update the Apache configuration in  /etc/apache2/apache2.conf
+#   Find the <Directory /var/www/> entry in the file and make it look like this
 #
-#	edit the \<Directory\> entries in /etc/apache2/apache2.conf and remove the \"Indexes\" option
+<Directory /var/www/>
+        Options FollowSymLinks
+        AllowOverride None
+        Require all granted
+        DirectoryIndex piclinic.php index.php index.html
+</Directory>
 #
 #		TODO: Add other security commands and apache config here
 #
 #	restart apache (or the system)
-#		sudo systemctl restart apache2
+sudo systemctl restart apache2
+#
+# *************************************************************************
+#		At this point the system has the pre-configured SYSTEM System software
+#			but it has no application (piClinic) software or settings.
+#
+#		The next steps configure the system for the piClinic application software
+#
+# *************************************************************************
+#
+# *************************************************************************
+#	The script has not been tested for the 2020-05-27 version of the OS
+#			past this point.
+#
+#		REMOVE THIS MESSAGE AFTER THE SCRIPT HAS BEEN TESTED WITH THE NEW OS
+#
+# *************************************************************************
 #
 #	add users
 #
