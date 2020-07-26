@@ -164,7 +164,7 @@ sudo apt-get -y install mariadb-client-10.0
 #   This must be done as a super user using (sudo su) access
 #  	from: https://www.digitalocean.com/community/tutorials/how-to-reset-your-mysql-or-mariadb-root-password
 #
-sudo systemctl stop mariadb
+sudo systemctl stop mysql
 sudo mysqld_safe --skip-grant-tables --skip-networking &
 mysql -u root
 # in mysql
@@ -190,9 +190,9 @@ mysql -u root
 sudo shutdown -r 0
 #	start the real service
 #
-sudo systemctl start mariadb
+sudo systemctl start mysql
 # test the new password
-sudo mysql -u root -p
+mysql -u admin -p
 #	This should prompt you for the password.
 #	Enter the one you just assigned above and you should get the MariaDB [(none)]> prompt.
 # 	If it does, exit and continue
@@ -231,7 +231,7 @@ sudo shutdown -r 0
 #   review timezone strings from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 #		and pick the correct one for the system's location
 #   edit the PHP ini file and change these settings on all configurations
-#   	sudo nano /etc/php/7.3/apache2/php.ini
+sudo nano /etc/php/7.3/apache2/php.ini
 #     		memory_limit = 512M
 #     		date.timezone = <insert a standard UNIX timezone string>
 #                           see the wikipedia link above, such as
@@ -251,6 +251,8 @@ sudo shutdown -r 0
 #		open http://localhost/phpinfo.php to make sure the settings you updated have the values
 #
 #	Update the Apache configuration in  /etc/apache2/apache2.conf
+sudo nano /etc/apache2/apache2.conf
+#
 #   Find the <Directory /var/www/> entry in the file and make it look like this
 #
 <Directory /var/www/>
@@ -272,6 +274,8 @@ sudo systemctl restart apache2
 #		The next steps configure the system for the piClinic application software
 #
 # *************************************************************************
+#
+# *****  Checkpoint CP1 *****
 #
 # *************************************************************************
 #	The script has not been tested for the 2020-05-27 version of the OS
