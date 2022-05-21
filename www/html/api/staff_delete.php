@@ -1,27 +1,30 @@
 <?php
 /*
- *	Copyright (c) 2019, Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ * Copyright 2020 by Robert B. Watson
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 /*******************
  *
- *	Updates staff resources from the database 
+ *	Updates staff resources from the database
  * 		or an HTML error message
  *
  * DELETE: Disables an existing staff record as identified by Username or staffID
@@ -44,7 +47,7 @@ function _staff_delete ($dbLink, $apiUserToken, $requestArgs) {
 	profileLogStart ($profileData);
 	// format db table fields as dbInfo array
 	$returnValue = array();
-	
+
 	$dbInfo = array();
 	$dbInfo ['requestArgs'] = $requestArgs;
 
@@ -114,7 +117,7 @@ function _staff_delete ($dbLink, $apiUserToken, $requestArgs) {
 		// record found so save the before version
 		$logData['logBeforeData'] = json_encode($testReturnValue['data']);
 	}
-	
+
     $patchArgs = array();
 	// all query parameters except for the key fields are ignored
 
@@ -143,7 +146,7 @@ function _staff_delete ($dbLink, $apiUserToken, $requestArgs) {
 	}
 
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
-	
+
 	// make update query string from data buffer
 	$columnsToUpdate = 0;
 	$updateQueryString = format_object_for_SQL_update (DB_TABLE_STAFF, $patchArgs, $updateKey, $columnsToUpdate);
@@ -177,7 +180,7 @@ function _staff_delete ($dbLink, $apiUserToken, $requestArgs) {
 			$returnValue['httpReason']	= 'Unable to deactivate staff record.';
 		} else {
 			profileLogCheckpoint($profileData,'UPDATE_RETURNED');
-			// create query string for get operation			
+			// create query string for get operation
 			$getQueryString = "SELECT * FROM `".
 				DB_VIEW_STAFF_GET. "` WHERE `".$updateKey."` = '".
 				$requestArgs[$updateKey]."';";
@@ -187,7 +190,7 @@ function _staff_delete ($dbLink, $apiUserToken, $requestArgs) {
 			$logData['logsStatusMessage'] = $returnValue['httpReason'];
 			writeEntryToLog ($dbLink, $logData);
 			@mysqli_free_result($qResult);
-		}			
+		}
 	} else {
 		// missing primary key field
 		$returnValue['contentType'] = CONTENT_TYPE_JSON;

@@ -1,22 +1,25 @@
 <?php
 /*
- *	Copyright (c) 2019, Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ * Copyright 2020 by Robert B. Watson
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 /*
@@ -122,7 +125,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 			echo (writeTopicMenu ());
 			$staffList = [];
 			if ($staffResponse['count'] == 1) {
-				// there's only one so make it an array element 
+				// there's only one so make it an array element
 				// so the rest of the code works
 				$staffList[0] = $staffResponse['data'];
 			} else {
@@ -136,7 +139,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 						echo ('<table class="piClinicList"><tr>');
 						echo ('<th>'.TEXT_STAFF_LIST_HEAD_MEMBERID.'</th>');
 						echo ('<th>'.TEXT_STAFF_LIST_HEAD_USERNAME.'</th>');
-						echo ('<th>'.TEXT_STAFF_LIST_HEAD_NAME.'</th>');								
+						echo ('<th>'.TEXT_STAFF_LIST_HEAD_NAME.'</th>');
 						echo ('<th>'.TEXT_STAFF_LIST_HEAD_POSITION.'</th>');
 						echo ('<th>'.TEXT_STAFF_LIST_HEAD_CONTACTINFO.'</th>');
 						echo ('<th>'.TEXT_STAFF_LIST_HEAD_ACCESSGRANTED.'</th>');
@@ -149,8 +152,8 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 					$usernameLink = TEXT_VALUE_NOT_SET;
 					if (!empty($staff['username'])){
 						$usernameLink = '<a href="/staffAddEdit.php?username='.$staff['username'].
-							'" title="'.TEXT_STAFF_EDIT_USERNAME_TITLE.'">'.$staff['username'].'</a>';						
-					} 
+							'" title="'.TEXT_STAFF_EDIT_USERNAME_TITLE.'">'.$staff['username'].'</a>';
+					}
 					echo ('<tr>');
 					// memberID
 					echo ('<td class="nowrap'.(empty($staff['memberID']) ? ' inactive': '').'">'.(empty($staff['memberID']) ? TEXT_VALUE_NOT_SET : $staff['memberID'] ).'</td>');
@@ -170,7 +173,7 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 					echo ('<td class="nowrap'.(empty($staff['modifiedDate']) ? ' inactive': '').'">'.(empty($staff['modifiedDate']) ? TEXT_VALUE_NOT_SET : date(TEXT_STAFF_DATE_FORMAT, strtotime($staff['modifiedDate'])).'</td>'));
 					// Created date
 					echo ('<td class="nowrap'.(empty($staff['createdDate']) ? ' inactive': '').'">'.(empty($staff['createdDate']) ? TEXT_VALUE_NOT_SET : date(TEXT_STAFF_DATE_FORMAT, strtotime($staff['createdDate'])).'</td>'));
-					echo ('</tr>');					
+					echo ('</tr>');
 				}
 				if ($headerShown) {
 					// there's a table so draw a rule below it
@@ -178,9 +181,9 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
 					echo ('<td class="noborder inactive nowrap">'.TEXT_USERNAME_NOT_ACTIVE.'</td>');
 					echo ('<td class="noborder" colspan="6">&nbsp;</td></tr>');
 					echo ('</table>');
-				}			
+				}
 			}
-		} 
+		}
 	} else {
 		echo ('<h1 class="pageHeading">'.TEXT_NO_STAFF_RECORDS.'</h1>');
 	}

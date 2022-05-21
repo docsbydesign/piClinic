@@ -1,27 +1,30 @@
 <?php
 /*
- *	Copyright (c) 2019, Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ * Copyright 2020 by Robert B. Watson
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 /*******************
  *
- *	Formats the data from the editPatientVisit and closePatientVisit forms 
+ *	Formats the data from the editPatientVisit and closePatientVisit forms
  * 		to update the patient visit record
  *
  *	POST: Adds a new patient record to the database
@@ -124,7 +127,7 @@ foreach ($dbRequiredFields as $field){
 		if (!empty($missingFields)) {
 			$missingFields .= ', ';
 		}
-		$missingFields .= $field;		
+		$missingFields .= $field;
 	}
 }
 
@@ -178,7 +181,7 @@ $dbOptionalFields = [
 	,'deleted'
 	,'staffName'
     ,'payment'
-	,'visitType' 
+	,'visitType'
 	,'visitStatus'		// assign if present, otherwise, use default
 	,'primaryComplaint'
 	,'secondaryComplaint'
@@ -215,7 +218,7 @@ foreach ($dbOptionalFields as $field){
 	}
 }
 
-// if there are diagnosis codes defined, 
+// if there are diagnosis codes defined,
 //   replace the diagnostic text with the code provided
 if (!empty($formData['diagnosis1_selectval'])) {
 	$requestData['diagnosis1'] = $formData['diagnosis1_selectval'];
@@ -273,7 +276,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 	case 'POST':
 		$retVal = _visit_patch($dbLink, $sessionInfo['token'], $requestData);
 		break;
-		
+
 	default:
 		$retVal['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		$retVal['error']['requestData'] = $requestData;
@@ -283,7 +286,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		break;
 }
 
-// if the update was successful, go to show the patient 
+// if the update was successful, go to show the patient
 //  otherwise go back to the entry form
 if ($retVal['httpResponse'] == 200) {
 	// update the redirect URL if the visit was deleted

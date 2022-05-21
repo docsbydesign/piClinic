@@ -1,22 +1,25 @@
 <?php
 /*
- *	Copyright (c) 2019, Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ * Copyright 2020 by Robert B. Watson
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 // check to make sure this file wasn't called directly
@@ -43,7 +46,7 @@ MESSAGE;
 
 if (!defined('DB_UTILS')) {
 	define('DB_UTILS', '_db_utils', false);
-	
+
 	function _openDB() {
 		$link = @mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE_NAME);
 		if ($link !== FALSE) {
@@ -121,12 +124,12 @@ if (!defined('DB_UTILS')) {
 		// set the dateCreated field
 		$now = new DateTime();
 		$object['createdDate'] = $now->format('Y-m-d H:i:s');
-				
-		// format the fields of the object to the appropriate SQL syntax		
+
+		// format the fields of the object to the appropriate SQL syntax
 		foreach ($object as $dbCol => $dbVal) {
 			if ($dbCol == '__source') { continue; } // skip this, if present
 			isset($dbColList) ? $dbColList .= ', ' : $dbColList = '';
-			isset($dbValList) ? $dbValList .= ', ' : $dbValList = '';										
+			isset($dbValList) ? $dbValList .= ', ' : $dbValList = '';
 			$dbColList .= '`'.$dbCol.'`';
 			if (empty($dbVal) && (strlen($dbVal)==0)) {
 				$dbValList .= 'NULL';
@@ -138,7 +141,7 @@ if (!defined('DB_UTILS')) {
                     $escapedString = str_replace("'","''", $dbVal);
 				}
 				$dbValList .= '\''.$escapedString.'\'';
-			}							
+			}
 		}
 		$queryString = 'INSERT INTO `'.$tableName.'` ('.$dbColList.') VALUES ('.$dbValList.')';
 		return $queryString;
@@ -151,7 +154,7 @@ if (!defined('DB_UTILS')) {
 		if (empty($object[$field])) {
 			// all key fields must exist in the $object array.
 			return "";
-		}	
+		}
 		// format the fields of the object to the appropriate SQL syntax
 		$queryString = 'UPDATE '.$tableName.' SET ';
 		$dbCols = 0;
@@ -185,11 +188,11 @@ if (!defined('DB_UTILS')) {
 					$queryString .= ',';
 				}
 				$queryString .= "`".$dbCol."` = ".$dbValString;
-				$dbCols += 1;				
+				$dbCols += 1;
 			}
 		}
 		$queryString .= " WHERE ";
-		
+
 		foreach ($keyFields as $field) {
 			$queryString .= "`".$field."` = '".$object[$field]."' AND ";
 		}
@@ -197,15 +200,15 @@ if (!defined('DB_UTILS')) {
 
 		$columnCount = $dbCols;
 		return $queryString;
-	}	
+	}
 
-	
+
 	function format_object_for_SQL_update ($tableName, $object, $primaryKeyField, &$columnCount) {
 		$columnCount = 0;
 		if (empty($object[$primaryKeyField])) {
 			// the primary key field must exist in the $object array.
 			return "";
-		}	
+		}
 		// format the fields of the object to the appropriate SQL syntax
 		$queryString = 'UPDATE '.$tableName.' SET ';
 		$dbCols = 0;
@@ -233,16 +236,16 @@ if (!defined('DB_UTILS')) {
 					$queryString .= ',';
 				}
 				$queryString .= "`".$dbCol."` = ".$dbValString;
-				$dbCols += 1;				
+				$dbCols += 1;
 			}
 		}
 		$queryString .= " WHERE `".$primaryKeyField."` = '".$object[$primaryKeyField]."';";
 
 		$columnCount = $dbCols;
 		return $queryString;
-	}	
+	}
 	 /*
-	 * 
+	 *
 	 *
 	 */
 	function getDbRecords($dbLink, $getQueryString) {
@@ -271,12 +274,12 @@ if (!defined('DB_UTILS')) {
 					$returnValue['httpResponse'] = 404;
 					$returnValue['httpReason']	= "Resource not found. No Records.";
 					break;
-					
+
 				case 1:
 					// format response
 					$returnValue['contentType'] = CONTENT_TYPE_JSON;
 					$returnValue['count'] = 1;
-					$rowValue = @mysqli_fetch_assoc($qResult);				
+					$rowValue = @mysqli_fetch_assoc($qResult);
 					if (isset($rowValue)) {
 						$returnValue['data'] = $rowValue;
 						$returnValue['httpResponse'] = 200;
@@ -288,7 +291,7 @@ if (!defined('DB_UTILS')) {
 						$returnValue['httpReason']	= "Server error: Unable to read record from DB";
 					}
 					break;
-					
+
 				default:
 					$dataRows = array();
 					while ($patientRecord = @mysqli_fetch_assoc($qResult)) {
@@ -306,8 +309,8 @@ if (!defined('DB_UTILS')) {
 						$returnValue['count'] = 0;
 						$returnValue['httpResponse'] = 500;
 						$returnValue['httpReason']	= "Server error: Unable to read multiple records from DB";
-					}				
-					break;				
+					}
+					break;
 			}
 			@mysqli_free_result($qResult);
 		}

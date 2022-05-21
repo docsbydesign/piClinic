@@ -1,27 +1,30 @@
 <?php
 /*
- *	Copyright (c) 2019, Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ * Copyright 2020 by Robert B. Watson
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 /*******************
  *
- *	Creates/Returns session resources from the database 
+ *	Creates/Returns session resources from the database
  * 		or an HTML error message
  *
  *	POST: Adds a new user session to the database
@@ -32,7 +35,7 @@
  *			REMOTE_ADDR - the IP of the client making the request
  *			HTTP_USER_AGENT (if present) - the USER AGENT string of the client making the reaquest
  *
- *		Response: 
+ *		Response:
  *			Session data object
  *
  *		Returns:
@@ -57,7 +60,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
 	profileLogStart ($profileData);
 	// Format return value and dbInfo array
 	$returnValue = array();
-	
+
 	$dbInfo = array();
 	$dbInfo ['requestArgs'] = $requestArgs;
 
@@ -78,9 +81,9 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
 				$missingColumnList .= ", ";
 			}
 			$missingColumnList .= $column;
-		}		
+		}
 	}
-	
+
 	if (!empty($missingColumnList)) {
 		// some required fields are missing so exit
 		$returnValue['contentType'] = CONTENT_TYPE_JSON;
@@ -140,8 +143,8 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
             profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_KEY);
 			return $returnValue;
 		}
-	}		
-	
+	}
+
 	if (!$userInfo['active']) {
 		// account has been disabled
 		$returnValue['httpResponse'] = 401;
@@ -152,10 +155,10 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_DELETED);
 		return $returnValue;
 	}
-	
+
 	// At this point we have a valid user and request, which have passed
     // all the validation tests, so check the password
-	
+
 	if (!password_verify($requestArgs['password'], $userInfo['password'])) {
         $dbInfo['passArg'] = $requestArgs['password'];
         $dbInfo['passHash'] = password_hash($requestArgs['password'], PASSWORD_DEFAULT);
@@ -203,7 +206,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
 		$dbInfo['insertQueryString'] = $insertQueryString;
 	}
 	// try to add the record to the database
-	
+
 	$qResult = @mysqli_query($dbLink, $insertQueryString);
 	if (!$qResult) {
 		// SQL ERROR
@@ -233,7 +236,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['count'] = 1;
 		$returnValue['httpResponse'] = 201;
 		$returnValue['httpReason']	= "New session created.";
-		
+
 		// update the user record to show the new login.
 		$updateQueryString = "UPDATE `". DB_TABLE_STAFF. "` ".
     		"SET `LastLogin`='".$now->format('Y-m-d H:i:s')."' ".
@@ -256,7 +259,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
 				$returnValue['httpReason']	.= " Unable to update user last login time.";
 			}
 		}
-		
+
 		@mysqli_free_result($qResult);
 	}
 

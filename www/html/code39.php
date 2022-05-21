@@ -1,22 +1,25 @@
 <?php
 /*
- *	Copyright (c) 2019, Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ * Copyright 2020 by Robert B. Watson
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 /*******************
@@ -46,7 +49,7 @@ if (!empty($rData['w'])){
 		$displayWidthUnit = (int)$wArg;
 	}
 }
-// returns an image of the barcode that represents the $string 
+// returns an image of the barcode that represents the $string
 // $string should be a Code 39-compliant string to encode.
 // Any characters not in the array below will be discarded.
 // 	Adapted from https://gist.github.com/BHSPitMonkey/570679 2/2/2018
@@ -65,7 +68,7 @@ function image_code39_barcode($string, $height, $unitWidth) {
 	}
 	if ($unitWidth > 10) {
 		$unitWidth = 10;
-	}	
+	}
 	$bcImgHeight = $height; // hard-coded height
 	$bcBar = $unitWidth; // basic unit of width
 	$bcImgWidth = 2100 * $bcBar ;	// wide enough for a long one (maybe 30 char?)
@@ -97,7 +100,7 @@ function image_code39_barcode($string, $height, $unitWidth) {
 		' '=>'NwWnNnWnN',	'$'=>'NwNwNwNnN',
 		'/'=>'NwNwNnNwN',	'+'=>'NwNnNwNwN',
 		'%'=>'NnNwNwNwN',	'*'=>'NwNnWnWnN');
-	
+
 	// create graphic space
 	$bcImg = imagecreatetruecolor($bcImgWidth,$bcImgHeight);
 	// define color resources
@@ -110,7 +113,7 @@ function image_code39_barcode($string, $height, $unitWidth) {
 	//  and add * required by code 39 to be at beginning and end of bars
 	if (substr($string,0,1)!='*') $string = "*$string";
 	if (substr($string,-1,1)!='*') $string = "$string*";
-	
+
 	$string = strtoupper($string); // basic code 39 supports only upper case letters
 	$chars = preg_split('//', $string, -1, PREG_SPLIT_NO_EMPTY);
 	foreach ($chars as $char) {
@@ -124,17 +127,17 @@ function image_code39_barcode($string, $height, $unitWidth) {
 					$bcX2Pos = $bcXPos + $bcWide;
 					$barColor = $black;
 					break;
-					
+
 				case 'N':
 					$bcX2Pos = $bcXPos + $bcNarrow;
 					$barColor = $black;
 					break;
-					
+
 				case 'w':
 					$bcX2Pos = $bcXPos + $bcWide;
 					$barColor = $white;
 					break;
-					
+
 				case 'n':
 					$bcX2Pos = $bcXPos + $bcNarrow;
 					$barColor = $white;
@@ -154,7 +157,7 @@ function image_code39_barcode($string, $height, $unitWidth) {
 	ob_start(); //Stdout --> buffer
 	imagepng($bcImg,null,5);
 	$pngString = ob_get_contents(); //store stdout in $imgString
-	ob_end_clean(); //clear buffer		
+	ob_end_clean(); //clear buffer
 	// Free the png image memory
 	imagedestroy($bcImg);
 	return $pngString;

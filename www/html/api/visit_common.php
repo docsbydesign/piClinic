@@ -1,22 +1,25 @@
 <?php
 /*
- *	Copyright (c) 2019, Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ * Copyright 2020 by Robert B. Watson
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 /*******************
@@ -34,7 +37,7 @@ function makeVisitQueryStringFromRequestParameters ($requestParameters) {
 	 // create query string for get operation
 	$queryString = "SELECT * FROM `". DB_VIEW_VISIT_GET. "` WHERE ";
 	$paramCount = 0;
-	// only one of clinicPatientID or visitID should be present. 
+	// only one of clinicPatientID or visitID should be present.
 	//  if both are present, use visitID
 	if (!empty($requestParameters['clinicPatientID'])) {
 		$queryString .= "`clinicPatientID` LIKE '".$requestParameters['clinicPatientID']."' AND ";
@@ -83,7 +86,7 @@ function makeVisitQueryStringFromRequestParameters ($requestParameters) {
 		} else {
 			$queryString .= 'DESC';
 		}
-		$queryString .= ' '.DB_QUERY_LIMIT.';';		
+		$queryString .= ' '.DB_QUERY_LIMIT.';';
 	} else {
 		// no valid query parameters found so return an empty query.
 		$queryString = "";
@@ -110,7 +113,7 @@ function makeVisitQueryStringFromRequestParameters ($requestParameters) {
 		,'dateTimeOut'
         ,'payment'
 		// These are checked by POST and shouldn't change after creation
-		// 'patientID' 
+		// 'patientID'
 		// 'clinicPatientID'
 		// 'patientVisitID'
 		// 'patientLastName'
@@ -140,7 +143,7 @@ function makeVisitQueryStringFromRequestParameters ($requestParameters) {
 		,'referredTo'
 		,'referredFrom'
 	);
-	// trim the string fields in the $visitIn array 
+	// trim the string fields in the $visitIn array
 	//  and copy the processed ones to $visitOut
 	//  and remove the empty ones from the array
 	foreach ($stringFields as $fieldName) {
@@ -166,13 +169,13 @@ function makeVisitQueryStringFromRequestParameters ($requestParameters) {
 			unset($visitOut[$fieldName]);
 		}
 	}
-	return ($visitOut);	
+	return ($visitOut);
  }
 
 define ('SHOWCODE_TEXT_ONLY',0,false);
 define ('SHOWCODE_CODE_BEFORE_TEXT',-1,false);
 define ('SHOWCODE_CODE_AFTER_TEXT',1,false);
- 
+
 function getIcdDescription ($dbLink, $icdCode, $lang, $showCode=0) {
 	// looks up code in specified language and returns
 	// description if found, or code, if not.
@@ -180,15 +183,15 @@ function getIcdDescription ($dbLink, $icdCode, $lang, $showCode=0) {
 	//		0 = don't show, just return the corresponding text
 	//		-1 = show code before text
 	//		+1 = show code after text
-	
+
 	$icdArgs = [];
 	$icdArgs['language'] = $lang;
 	$icdArgs['ce'] = trim($icdCode);
 	$getValue = _icd_get ($dbLink, null,  $icdArgs);
-	
+
 	$returnString = '';
 	if ($getValue['httpResponse'] == 200)  {
-		// found something		
+		// found something
 		if ($getValue['count'] == 1) {
 			if ($showCode > 0) {
 				$returnString = $getValue['data']['shortDescription'].' ['.$getValue['data']['icd10code'].']';
@@ -243,10 +246,10 @@ function icdLookupJavaScript () {
 }
 
  function conditionText ($conditionValue, $formatText = TRUE) {
-	$conditionText = ''; 
+	$conditionText = '';
 	if ($formatText) {
 		$conditionText = '<span class="inactive">'.TEXT_CONDITION_BLANK.'</span>';
-	 } 
+	 }
 	switch ($conditionValue) {
 		case "NEWDIAG":
 			$conditionText = TEXT_CONDITION_NEW_REPORT;

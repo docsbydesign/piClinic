@@ -1,22 +1,25 @@
 <?php
 /*
- *	Copyright (c) 2019, Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ * Copyright 2020 by Robert B. Watson
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 /*******************
@@ -29,7 +32,7 @@
  *	Identification query paramters:
  *		The patient visit(s) will be returned if they match all of these fields that are specified.
  *
- *			One of these identification parameters is required 
+ *			One of these identification parameters is required
  *			`ClinicPatientID` - Returns the visits by the Patient with this ID sorted by descending visit date
  *   		`visitID` - Returns a specific visit record
  *			`PatientVisitID` - Returns a specific visit record
@@ -37,7 +40,7 @@
  *   		`VisitType` - (optional) The type of visit being added
  *
  *		Returns:
- *			200: the matching visit (if the query identifies a unique object 
+ *			200: the matching visit (if the query identifies a unique object
  *					or a JSON object of the matching visit metadata
  *			404: no record found that matches the query parameters
  *			500: server error information
@@ -48,7 +51,7 @@
  *			['httpResponse'] = the HTTP response code
  *			['httpReason']	= the HTTP response reason string
  *			['contentType'] the content type of the data
- *			['data'] = the response data 
+ *			['data'] = the response data
  *
  *********************/
 // check to make sure this file wasn't called directly
@@ -59,10 +62,10 @@ exitIfCalledFromBrowser(__FILE__);
 function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 	$profileData = [];
 	profileLogStart ($profileData);
-	
+
 	// format db table fields as dbInfo array
 	$returnValue = array();
-	
+
 	$dbInfo = array();
 	$dbInfo ['requestArgs'] = $requestArgs;
 
@@ -87,9 +90,9 @@ function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 			// At least one was found, so clear the missing column list and continue
 			$missingColumnList = '';
 			break;
-		}		
+		}
 	}
-	
+
 	if (!empty($missingColumnList)) {
 		// one or more required fields are missing, so exit
 		if (API_DEBUG_MODE) {
@@ -110,7 +113,7 @@ function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 	$returnValue['httpReason']	= "Resource not found.";
 	$returnValue['format'] = 'json';
 	$returnValue['count'] = 0;
-	
+
 	// create query string for get operation
 	$getQueryString = makeVisitQueryStringFromRequestParameters ($requestArgs);
 	// get the records that match if a valid query was returned
@@ -122,7 +125,7 @@ function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to find a matching patient visit. A valid query could not be made from the query parameters. ";
 	}
-	
+
 	if ($returnValue['count'] == 0) {
 		//return 404
 		// add debug info to the list
@@ -132,7 +135,7 @@ function _visit_get ($dbLink, $apiUserToken, $requestArgs) {
 		}
 		return $returnValue;
 	}
-	
+
 	if (API_DEBUG_MODE) {
 		$returnValue['debug'] = $dbInfo;
 	}
