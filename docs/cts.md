@@ -109,4 +109,4 @@ Accomplished: Presented demo to stakeholders and identified additional features.
 ### Field-test deployment (Summer 2019)
 
 * Deploy systems into field-test clinics
-* _Currently in progress_
+* Completed successfully. Read the [preliminary report]({{site.baseurl}}/images/PiClinicSigDoc2019.pdf).
