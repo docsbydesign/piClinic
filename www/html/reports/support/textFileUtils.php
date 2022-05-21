@@ -1,23 +1,25 @@
 <?php
 /*
  *
- *	Copyright (c) 2019, Robert B. Watson
+ * Copyright 2020 by Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 /*
@@ -28,7 +30,7 @@
 /*
 	Expects:
 		$file		a file handle opened for write access
-		$header		a 1-dimension array of strings that contains the 
+		$header		a 1-dimension array of strings that contains the
 						field names in the order they will be displayed
 		$delimiter	a single character that will be used to separate the fields
 						a tab is used by default
@@ -43,7 +45,7 @@ function writeTextHeader ($file, $header, $delimiter="\t") {
 /*
 	Expects:
 		$file		a file handle opened for write access
-		$header		a 1-dimension array of strings that contains the 
+		$header		a 1-dimension array of strings that contains the
 						field names in the order they will be displayed
 		$record		an associative array that contains the data to write identified
 						by the fields listed in $header
@@ -67,7 +69,7 @@ function writeTextRecord ($file, $header, $record, $delimiter="\t") {
 			if (isset($record[$field])) {
 				// if a delimiter is found in the value, wrap the value in quotes
 				$outstring .= (strpos($record[$field], $delimiter) !== FALSE) ? '"'.$record[$field].'"' : $record[$field];
-			} 		
+			}
 		}
 	} else {
 		foreach ($record as $field) {
@@ -79,8 +81,8 @@ function writeTextRecord ($file, $header, $record, $delimiter="\t") {
 			if (isset($field)) {
 				// if a delimiter is found in the value, wrap the value in quotes
 				$outstring .= (strpos($field, $delimiter) !== FALSE) ? '"'.$field.'"' : $field;
-			} 		
-		}		
+			}
+		}
 	}
 	$outstring .= $lineTerm;
 	return fwrite ($file, $outstring);

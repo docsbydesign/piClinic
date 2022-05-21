@@ -1,27 +1,30 @@
 <?php
 /*
- *	Copyright (c) 2019, Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ * Copyright 2020 by Robert B. Watson
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 /*******************
  *
- *	Deletes patient resources from the database 
+ *	Deletes patient resources from the database
  * 		or an HTML error message
  *
  * DELETE: marks a patient record as inactive, the record is not removed from the database
@@ -76,7 +79,7 @@ function _patient_delete ($dbLink, $apiUserToken, $requestArgs) {
 		return $returnValue;
 	}
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
-	
+
 	// make sure the record is currently active
 	// create query string for get operation
 	$getQueryString = "SELECT * FROM `".
@@ -105,7 +108,7 @@ function _patient_delete ($dbLink, $apiUserToken, $requestArgs) {
 	// and now it's ready to update
 	$columnsToUpdate = 0;
 	$deleteQueryString = format_object_for_SQL_update (DB_TABLE_PATIENT, $deleteArgs, "clinicPatientID", $columnsToUpdate);
-	
+
 	// check query string construction
 	if ($columnsToUpdate < 1) {
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
@@ -120,7 +123,7 @@ function _patient_delete ($dbLink, $apiUserToken, $requestArgs) {
         profileLogClose($profileData, __FILE__, $requestArgs,PROFILE_ERROR_UPDATE);
 		return $returnValue;
 	}
-	
+
 	// try to delete the record in the database by marking it as inactive
 	$qResult = @mysqli_query($dbLink, $deleteQueryString);
 	if (!$qResult) {
@@ -151,8 +154,8 @@ function _patient_delete ($dbLink, $apiUserToken, $requestArgs) {
         $logData['logStatusCode'] = $returnValue['httpResponse'];
         $logData['logsStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
-		@mysqli_free_result($qResult);		
-	}			
+		@mysqli_free_result($qResult);
+	}
 	profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;
 }

@@ -1,27 +1,30 @@
 <?php
 /*
- *	Copyright (c) 2019, Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ * Copyright 2020 by Robert B. Watson
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 /*******************
  *
- *	Replaces visit resource values 
+ *	Replaces visit resource values
  * 		or returns an HTML error message
  *
  *	PATCH: Replaces details of a patient visit in the database
@@ -49,7 +52,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 	profileLogStart ($profileData);
 	// format db table fields as dbInfo array
 	$returnValue = array();
-	
+
 	$dbInfo = array();
 	$dbInfo ['requestArgs'] = $requestArgs;
 
@@ -74,13 +77,13 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 			}
 			$missingColumnList .= $column;
 		} else {
-			// Found at least one required field, 
+			// Found at least one required field,
 			//  so clear the missing column list and continue
 			$missingColumnList = '';
 			break;
-		}		
+		}
 	}
-	
+
 	if (!empty($missingColumnList)) {
 		// some required fields are missing so exit
 		if (API_DEBUG_MODE) {
@@ -95,7 +98,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
-	
+
 	// make sure visitID parameter is an integer
 	if (isset($requestArgs['visitID']) && !is_numeric($requestArgs['visitID'])) {
 		// some required fields are missing so exit
@@ -111,7 +114,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
 	}
-	
+
 	// at this point we should have a valid unique visit record identifier
 
 	// get the current visit record using the ID that we have
@@ -124,7 +127,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 		$getQueryString .= "`patientVisitID` = '". $requestArgs['patientVisitID'] . "' AND ";
 	}
 	$getQueryString .= "TRUE ".DB_QUERY_LIMIT.";";
-	
+
 	$returnValue = getDbRecords($dbLink, $getQueryString);
 	if ($returnValue['httpResponse'] != 200) {
 		// the specified visit record was not found,
@@ -145,17 +148,17 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 	} else {
 		// save orig record
 		if ($returnValue['count'] > 0) {
-			$logData['before'] = $returnValue['data'];			
+			$logData['before'] = $returnValue['data'];
 		}
-	}	
-	
-	// At this point the request has passed all the validation tests 
+	}
+
+	// At this point the request has passed all the validation tests
 	//  so prepare the update record
 	profileLogCheckpoint($profileData,'PARAMETERS_VALID');
 
 	// create the array of values to send to PATCH method
 	$dbArgs = array();
-	
+
 	// only copy the values from the query parameters/data
 	// 	that can be updated and ignore those that shouldn't be changed.
 	$updateParams = [
@@ -206,7 +209,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 		,'referredTo'
 		,'referredFrom'
 		];
-	
+
 	foreach ($updateParams as $fieldName) {
 		if (isset($requestArgs[$fieldName])) {
 			$dbArgs[$fieldName] = trim($requestArgs[$fieldName]);
@@ -224,10 +227,10 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 		$dbArgs['patientVisitID'] = $requestArgs['patientVisitID'];
 		$visitUpdateKey = 'patientVisitID';
 	}
-	
+
 	// save a copy of the values for the debugging output
-	$dbInfo['dbArgs'] = $dbArgs;	
-	
+	$dbInfo['dbArgs'] = $dbArgs;
+
 	// make an update query string to modify the object in the DB table
 	$columnCount = 0;
 	$updateQueryString = format_object_for_SQL_update (DB_TABLE_VISIT, $dbArgs, $visitUpdateKey, $columnCount);
@@ -274,14 +277,14 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 		// create query string to get the updated record from the database
 		$getQueryString = "SELECT * FROM `".DB_VIEW_VISIT_EDIT_GET. "` WHERE ";
 			$getQueryString .= "`".	$visitUpdateKey. "` = '".$dbArgs[$visitUpdateKey]."';";
-		
+
 		$returnValue = getDbRecords($dbLink, $getQueryString);
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if ($returnValue['httpResponse'] == 200) {
 			// found the updated record
 			// write the log data
 			if ($returnValue['count'] > 0) {
-				$logData['after'] = $returnValue['data'];				
+				$logData['after'] = $returnValue['data'];
 			}
 			$returnValue['httpResponse'] = 200;
 			$returnValue['httpReason']	= "Success";
@@ -294,7 +297,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 
 	if (API_DEBUG_MODE) {
 		$returnValue['debug'] = $dbInfo;
-	}	
+	}
 	// only log performance info on success.
 	profileLogClose($profileData, __FILE__, $requestArgs);
     $logData['logStatusCode'] = $returnValue['httpResponse'];

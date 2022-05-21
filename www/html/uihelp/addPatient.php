@@ -1,22 +1,25 @@
 <?php
 /*
- *	Copyright (c) 2019, Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ * Copyright 2020 by Robert B. Watson
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 /*******************
@@ -54,7 +57,7 @@
  *
  *
  *********************/
-// include files 
+// include files
 require_once dirname(__FILE__).'/../shared/piClinicConfig.php';
 require_once dirname(__FILE__).'/../shared/dbUtils.php';
 require_once dirname(__FILE__).'/../api/api_common.php';
@@ -150,7 +153,7 @@ foreach ($ptFields as $field) {
 		$requestData[$field] = trim($formData[$field]);
 	}
 }
- 
+
 // update the exceptions
 if (!empty($formData['birthDateMonth']) &&
 	!empty($formData['birthDateDay']) &&
@@ -227,7 +230,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 			$retVal = _patient_post($dbLink, $sessionInfo['token'], $requestData);
 		}
 		break;
-		
+
 	default:
 		$retVal['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {
@@ -236,11 +239,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		$retVal['error']['requestData'] = $requestData;
 		$retVal['httpResponse'] = 405;
 		$retVal['httpReason']	= "Method not supported.";
-		logApiError($formData, $retVal, __FILE__ );	
+		logApiError($formData, $retVal, __FILE__ );
 		break;
 }
 
-// if the update was successful, go to show the patient 
+// if the update was successful, go to show the patient
 //  otherwise go back to the entry form
 if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 	// successful update returns 200
@@ -260,7 +263,7 @@ if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 			}
 		}
 		$msgText = ( $retVal['httpResponse'] == 409 ? "PATIENT_ID_IN_USE" : "NOT_UPDATED");
-		$returnQP = 'msg='. 
+		$returnQP = 'msg='.
 			($retVal['httpResponse'] == 409 ? "PATIENT_ID_IN_USE" : "NOT_UPDATED").
 			'&'.$returnQP.'&updateErr=';
 		$redirectUrl = '/ptAddEdit.php?'.$returnQP;
@@ -285,7 +288,7 @@ if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 			} else {
 				// recycle q from ataEntry
 				$searchValue = $formData['q'];
-			}			
+			}
 			$redirectUrl = '/ptResults.php?q='.$searchValue.'&ata=true'.
 				(isset($formData['visitType']) ? '&visitType='.$formData['visitType'] :'').
 				(isset($formData['visitStaffUser']) ? '&visitStaffUser='.$formData['visitStaffUser'] :'').
@@ -311,7 +314,7 @@ if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 				$returnQP .= $key.'='.urlencode($val);
 			}
 		}
-		$returnQP = 'msg='. 
+		$returnQP = 'msg='.
 			($retVal['httpResponse'] == 409 ? "PATIENT_ID_IN_USE" : "NOT_CREATED").
 			'&'.$returnQP.'&updateErr=';
 		$redirectUrl = '/ptAddEdit.php?'.$returnQP;
@@ -321,7 +324,7 @@ if (!empty($formData['_method']) &&  ($formData['_method'] == 'PATCH')) {
 		$logError['error']['redirectUrl'] = $redirectUrl;
 		$logError['error']['requestData'] = $requestData;
 		logApiError($formData, $logError, __FILE__ );
-		header("DEBUG: ".json_encode($logError));		
+		header("DEBUG: ".json_encode($logError));
 		header("Location: ".$redirectUrl);
 	}
 }

@@ -1,22 +1,25 @@
 <?php
 /*
- *	Copyright (c) 2019, Robert B. Watson
  *
- *	This file is part of the piClinic Console.
+ * Copyright 2020 by Robert B. Watson
  *
- *  piClinic Console is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of
+ *  this software and associated documentation files (the "Software"), to deal in
+ *  he Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *  of the Software, and to permit persons to whom the Software is furnished to do
+ *  so, subject to the following conditions:
  *
- *  piClinic Console is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with piClinic Console software at https://github.com/docsbydesign/piClinic/blob/master/LICENSE.
- *	If not, see <http://www.gnu.org/licenses/>.
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
  *
  */
 /*******************
@@ -30,7 +33,7 @@ if (basename(__FILE__) == basename($_SERVER['SCRIPT_NAME'])) {
 	// the file was not included so return an error
 	http_response_code(404);
 	header('Content-Type: text/html; charset=utf-8');
-	exit;	
+	exit;
 }
 require_once dirname(__FILE__).'/piClinicConfig.php';
 require_once dirname(__FILE__).'/../api/api_common.php';
@@ -91,7 +94,7 @@ function checkLanguageSupported($langIdArg) {
 		// only select supported languages
 		case UITEST_LANGUAGE:
 			return ( UITEST_LANGUAGE );
-			break;		
+			break;
 		case UI_ENGLISH_LANGUAGE:
 			return ( UI_ENGLISH_LANGUAGE );
 			break;
@@ -103,7 +106,7 @@ function checkLanguageSupported($langIdArg) {
 			// no language recognized so return empty string below
 			break;
 	}
-	return "";	// return an empty string if no match	
+	return "";	// return an empty string if no match
 }
 
 function getUiLanguage ($requestData){
@@ -150,7 +153,7 @@ function getUiLanguage ($requestData){
 	if (empty($pageLanguage)) {
 		$pageLanguage = UI_DEFAULT_LANGUAGE;
 	}
-	
+
 	return $pageLanguage;
 }
  /*
@@ -194,7 +197,7 @@ function outputDateInputFields ($format, $dateFieldName, $defaultMonth, $default
 			$dateFields[3] = 'T';
 		}
 	}
-	
+
 	foreach ($dateFields as $fieldType) {
 		switch ($fieldType) {
 			case 'M':
@@ -225,17 +228,17 @@ function outputDateInputFields ($format, $dateFieldName, $defaultMonth, $default
 				break;
 		}
 	}
-		
+
 	return $htmlString;
 }
 /*
 *	Create an input control to collect data in a form that will be used to update a data table
 */
-function dbFieldTextInput ($requestData, $dbFieldName, $placeholderText, $requiredField=false, 
+function dbFieldTextInput ($requestData, $dbFieldName, $placeholderText, $requiredField=false,
 							$autofocus=false, $type='text', $class='piClinicEdit', $charLimit=255, $autocomplete=null) {
 	$inputTag = '<input type="'.$type.'" id="'.$dbFieldName.'InputId" name="'.$dbFieldName.'" '.
 		'value="'.(!empty($requestData[$dbFieldName]) ? $requestData[$dbFieldName] : ''). '" '.
-		($autofocus == true ? 'autofocus="autofocus" ' : ''). 
+		($autofocus == true ? 'autofocus="autofocus" ' : '').
 		(isset($autocomplete) ? 'autocomplete="'.$autocomplete.'" ' : '').
 		'placeholder="'.$placeholderText.'" '. 'class="'. $class . '" '.($requiredField ? ' required ' : '').
 		'maxlength="'.(string)$charLimit.'"'.
@@ -270,21 +273,21 @@ function dateDiffYMD ($earlyDateArg, $lateDateArg) {
 		$lateDate = $earlyDateArg;
 		$earlyDate = $lateDateArg;
 	}
-	
+
 	// get each field from the dates
 	$ldYr = date('Y', $lateDate);
-	$ldMo = date('m', $lateDate); 
+	$ldMo = date('m', $lateDate);
 	$ldDa = date('d', $lateDate);
 	$edYr = date('Y', $earlyDate);
 	$edMo = date('m', $earlyDate);
 	$edDa = date('d', $earlyDate);
-	
+
 	// used to compute 'carry' values for arithmetic
 	$daysInMonth = [0,31,28,31,30,31,30,31,31,30,31,30,31];
 	// make the dates subtractible by adjusting each value such that
 	// all the later date values are greater than the earlier date values
 	if ($ldDa < $edDa) {
-		// carry the days from the previous month so the 
+		// carry the days from the previous month so the
 		//  lateDate days value is larger than the earlyDate's
 		$ldMo -= 1;
 		// if the prev. mo. is before Januaary
@@ -296,7 +299,7 @@ function dateDiffYMD ($earlyDateArg, $lateDateArg) {
 		// Get the days from the previous month
 		// assuming it's not a leap year
 		$ldDa += $daysInMonth[$ldMo];
-		// but change it if the ldMo is Feb of a leap year 
+		// but change it if the ldMo is Feb of a leap year
 		if ((($ldYr % 4) == 0) && ($ldMo == 2)) {
 			// but only if it's not a 'fake' (exception) leap year
 			if (($ldYr % 400) != 0) {
@@ -314,7 +317,7 @@ function dateDiffYMD ($earlyDateArg, $lateDateArg) {
 	$dateDiffValue['years'] = $ldYr - $edYr;
 	$dateDiffValue['months'] = $ldMo - $edMo;
 	$dateDiffValue['days'] = $ldDa - $edDa;
-	return $dateDiffValue;	
+	return $dateDiffValue;
 }
 
 function formatAgeFromBirthdate ($birthdate, $today=null, $yrText='y', $moText='m', $dyText='d', $parens=true) {
@@ -442,4 +445,3 @@ function formatDbDate ($dateValue, $dateFormatString, $emptyDateString) {
     }
 }
 //EOF
-
