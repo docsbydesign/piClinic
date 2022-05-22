@@ -94,13 +94,10 @@ function checkLanguageSupported($langIdArg) {
 		// only select supported languages
 		case UITEST_LANGUAGE:
 			return ( UITEST_LANGUAGE );
-			break;
 		case UI_ENGLISH_LANGUAGE:
 			return ( UI_ENGLISH_LANGUAGE );
-			break;
 		case UI_SPANISH_LANGUAGE:
 			return ( UI_SPANISH_LANGUAGE );
-			break;
 		// more languages here
 		default:
 			// no language recognized so return empty string below
@@ -174,6 +171,7 @@ function outputDateInputFields ($format, $dateFieldName, $defaultMonth, $default
 		$timeInput = '<input class="timeNumeric" type="time" '.($requiredField ? 'required ' : '').' id="new'.$dateFieldName.'Time" name="'.$dateFieldName.'Time" value="'.$defaultTime.'">';
 	}
 
+	/* DEBUG only code
 	if (false) {
         // +++ DEBUG
         $dbgVals = array();
@@ -186,7 +184,8 @@ function outputDateInputFields ($format, $dateFieldName, $defaultMonth, $default
         $htmlString = '<pre>'.json_encode($dbgVals, JSON_PRETTY_PRINT).'</pre>';
         // --- DEBUG
     }
-
+	*/
+	
 	$dateFields = explode("-", $format);
 	if (count($dateFields) < 3) {
 		// default to "M-D-Y"

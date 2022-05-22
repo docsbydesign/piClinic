@@ -181,11 +181,14 @@ function createLogEntry ($logClass,
     if (empty($logAction)) return false; //required field
     $logEntryObject['logAction'] = $logAction;
 
+    /* this seems to reference a non-existing $logData variable
+     * perhaps it's looking for the value from the request?
     if (!empty($logData['logQueryString']) && is_array($logData['logQueryString'])) {
         $logData['logQueryString'] = "*" . json_encode($logData['logQueryString']);
     } else {
+    */
         $logEntryObject['logQueryString'] = $logQueryString;
-    }
+    //}
     $logEntryObject['userToken'] = $userToken;
     if (!empty($logBeforeData)) {
         if (is_array($logBeforeData)) {
