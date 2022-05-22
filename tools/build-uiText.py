@@ -33,17 +33,15 @@
 import sys
 import platform
 import os.path
-import datetime
 import re
 import csv
 import codecs
-import json
+import argparse
 
 csv_source_file = 'SourceFile'
 csv_constant = 'UI_TEXT_CONSTANT'
 
-copyrightText = """
- *
+copyrightText = """ *
  * Copyright 2020 by Robert B. Watson
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -63,7 +61,6 @@ copyrightText = """
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
- *
 """
 
 accessTest = """
@@ -82,6 +79,41 @@ require_once $apiCommonInclude;
 exitIfCalledFromBrowser(__FILE__);
 
 """
+
+how="""Tool to build localized strings for piClinic files in the specified srcpath.
+
+How to create localize strings for the piClinic files
+
+1. Create your localized strings in a .csv file. The piClinic uses /uitext/UIText.csv.
+2. Use the localized string constants for any literal text in the .php files.
+    a. The string constant names used in a .php file and the .csv file must start with "TEXT_".
+    b. The piClinic supports English and Spanish, but additional languages can be added 
+        as new columns to the .csv file after these two.
+3. When you run this tool, it reads the .php files in the directory specified by
+    the srcpath parameter and looks for the presence of TEXT_* string constants.
+    a. For each file in the directory that uses at least one of these constants:
+        i. The instances of TEXT_* are read from the .php file.
+        ii. Each instance is located in the .csv file
+        iii. The instance is formatted and written to a string file for that .php file.        
+    b. The string files created:
+        i. Are locted in the uitext subdirectory of the directory with the .php file.
+        ii. Have a file name that is the .php file's name + "Text". (e.g. MyFile.php would
+            have as a text file: uitext/MyFileText.php)
+4. You can use the --build=all parameter to build all text files, or omit the --build parameter
+    to build text files for only those .php files that are newer than the .csv file.
+
+Command line:
+python build-uiText.py [-h] [--build {new,all}] --infile INFILE [--srcpath SRCPATH]
+"""
+
+cliParser = argparse.ArgumentParser(prog="build-uiText.py", usage=how)
+cliParser.add_argument('--build', required=False, choices=["new","all"], default="new", \
+    help="What to build: new | all. new updates only changed files and all rebuilds all files.")
+cliParser.add_argument('--infile', required=True,  \
+    help="The file name of the .CSV input file with the source strings.")
+cliParser.add_argument('--srcpath', required=False, default='./', \
+    help="The directory with the .php files that use translated strings. If blank or omitted, the current directory is used." )
+
 
 def createStringsInFiles(file_info):
     # open output file
@@ -172,7 +204,8 @@ def createFiles (arg_build, arg_csvfile, arg_codedir):
             if not (csv_constant in csv_fields):
                 print('CSV file is missing required column(s)')
 
-        print('Languages in file: ', langs)
+    #    print('infile has: {} rows and {} columns'.format(len(csv_rows), len(csv_fields)))
+    #    print('Languages in file: ', langs)
 
     # create a list of the php files to scan
     if (platform.system() == 'Windows'):
@@ -181,11 +214,15 @@ def createFiles (arg_build, arg_csvfile, arg_codedir):
         path_char = '/'
 
     files = [f for f in os.listdir(arg_codedir) if os.path.isfile(arg_codedir + path_char + f)]
-
+    # print('outpath: "{}" has {} files'.format((arg_codedir + path_char), len(files)))
+    
     php_files = []
+
     for file in files:
+        # print('reviewing {}...'.format(file))
         # check the last 8 characters of the name
         if (file[-4:] not in ['.php', '.svg' ]) :
+        #    print('  {} is not a supported file type.')
             continue
         else:
             # make sure this isn't a text string file
@@ -206,10 +243,11 @@ def createFiles (arg_build, arg_csvfile, arg_codedir):
                 # else need to create the text file
                 php_files.append(newFile)
 
+    print('{} files to update.'.format(len(php_files)))
     # get display strings used by each file
     for php_file in php_files:
         with open(php_file['source'], "r") as source_file:
-            print ("reading: " + php_file['source'])
+            # print ("reading: " + php_file['source'])
             text_vars = [];
             for line in source_file:
                 matches = re.findall ('TEXT_[0-9A-Z_]+', line, )
@@ -222,33 +260,12 @@ def createFiles (arg_build, arg_csvfile, arg_codedir):
     return createTextFiles(php_files, csv_rows, langs)
 
 
-def main (argv):
+def main ():
+    args = cliParser.parse_args()
     # assign default values
-    arg_build = 'all'		# default: build all files
-    arg_csvfile = None		# required parameter: the file with the localized strings
-    arg_codedir = './'		# folder with the .php source files to scan; the default is current folder
-
-    # read command line args and assign parameter value
-    # argv[0] = the script file name
-    # argv[1] = what to build: all | new
-    # argv[2] = the csvfile (required)
-    # argv[3] = dest directory (optional)
-
-    if len(argv) >= 3:
-        if argv[1] in ['all','new']:
-            arg_build = argv[1]
-        # read the csv file name
-        arg_csvfile = argv[2]
-    else:
-        print ("""			build-uiText.py <source-csv> <dest-path>
-            [all|new]
-            <source-csv> the CSV that contains the string constants and contents
-            <code-path> = The folder with the source code that has the.php files using the strings
-""")
-    if len(argv) >= 4:
-        arg_codedir = argv[3]
-
-    # ignore any other parameters
+    arg_build = args.build	    # default: build all files
+    arg_csvfile = args.infile   # required parameter: the file with the localized strings
+    arg_codedir = args.srcpath  # folder with the .php source files to scan; the default is current folder
 
     # create the string files
     filesCreated = createFiles (arg_build, arg_csvfile, arg_codedir)
@@ -256,4 +273,4 @@ def main (argv):
     return ("{} UI text files created.".format(filesCreated))
 
 if __name__ == '__main__':
-    main (sys.argv)
+    main ()
