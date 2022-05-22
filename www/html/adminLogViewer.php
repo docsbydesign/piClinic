@@ -84,8 +84,10 @@ $filterOptions = array();
 if ($logFilters['count'] > 1) {
     // sort the array
     $logFilterList = $logFilters['data'];
-    array_multisort(array_column($logFilterList, 'fieldName'),  SORT_NATURAL | SORT_FLAG_CASE ,
-        array_column($logFilterList, 'fieldValue'), SORT_NATURAL | SORT_FLAG_CASE,
+    $fieldNames = array_column($logFilterList, 'fieldName');
+    $fieldValues = array_column($logFilterList, 'fieldValue');
+    array_multisort($fieldNames,  SORT_NATURAL | SORT_FLAG_CASE ,
+        $fieldValues, SORT_NATURAL | SORT_FLAG_CASE,
         $logFilterList);
     // create the select box lists
     foreach ($logFilterList as $row) {

@@ -93,7 +93,6 @@ switch ($requestData['type']) {
         header("httpReason: Required query parameter missing");
         header("Location: ".$redirectUrl);
         exit();
-        break;
 }
 $now = new DateTime();
 $dateString = $now->format('_Y-m-d_H-i-s');
