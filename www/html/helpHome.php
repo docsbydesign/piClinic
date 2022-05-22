@@ -115,61 +115,61 @@ profileLogCheckpoint($profileData,'CODE_COMPLETE');
             </div>
             <div id="HelpIcdRef" class="<?= ($requestData['topic'] != 'icd' ? 'hideDiv' : '') ?>">
                 <p><?= TEXT_HELP_ICD ?></p>
-								<?php
-								$refDocs = [];
-								$refDocs['EN'] = array();
-								$refDocs['EN'][1] = array(
-									"target"=>"icd10_1",
-									"href"=>"/files/ICD10Volume1_en_2008.pdf",
-									"text"=>"ICD-10,&nbsp;Volume&nbsp;1&nbsp;(Descriptions)");
-								$refDocs['EN'][2] = array(
-									"target"=>"icd10_2",
-									"href"=>"/files/ICD10Volume2_en_2008.pdf",
-									"text"=>"ICD-10,&nbsp;Volume&nbsp;2&nbsp;(Instructions)");
-								$refDocs['EN'][3] = array(
-									"target"=>"icd10_3",
-									"href"=>"/files/ICD10Volume3_en_2008.pdf",
-									"text"=>"ICD-10,&nbsp;Volume&nbsp;3&nbsp;(Index)");
-								$refDocs['ES'] = [];
-								$refDocs['ES'][1] = array(
-									"target"=>"icd10_1",
-									"href"=>"/files/CIE-10_2008_Chapter_1.pdf",
-									"text"=>"CIE-10,&nbsp;Volumen&nbsp;1&nbsp;(Descripcciones&nbsp;de&nbsp;los&nbsp;codigos)");
-								$refDocs['ES'][2] = array(
-									"target"=>"icd10_2",
-									"href"=>"/files/CIE-10_2008_Chapter_2.pdf",
-									"text"=>"CIE-10,&nbsp;Volumen&nbsp;2&nbsp;(Manual&nbsp;de&nbsp;instrucciones)");
-								$refDocs['ES'][3] = array(
-									"target"=>"icd10_3",
-									"href"=>"/files/CIE-10_2008_Chapter_3.pdf",
-									"text"=>"CIE-10,&nbsp;Volumen&nbsp;3&nbsp;(Indice&nbsp;alfabético)");
-								?>
+					<?php
+					$refDocs = [];
+					$refDocs['EN'] = array();
+					$refDocs['EN'][1] = array(
+						"target"=>"icd10_1",
+						"href"=>"/files/ICD10Volume1_en_2008.pdf",
+						"text"=>"ICD-10,&nbsp;Volume&nbsp;1&nbsp;(Descriptions)");
+					$refDocs['EN'][2] = array(
+						"target"=>"icd10_2",
+						"href"=>"/files/ICD10Volume2_en_2008.pdf",
+						"text"=>"ICD-10,&nbsp;Volume&nbsp;2&nbsp;(Instructions)");
+					$refDocs['EN'][3] = array(
+						"target"=>"icd10_3",
+						"href"=>"/files/ICD10Volume3_en_2008.pdf",
+						"text"=>"ICD-10,&nbsp;Volume&nbsp;3&nbsp;(Index)");
+					$refDocs['ES'] = [];
+					$refDocs['ES'][1] = array(
+						"target"=>"icd10_1",
+						"href"=>"/files/CIE-10_2008_Chapter_1.pdf",
+						"text"=>"CIE-10,&nbsp;Volumen&nbsp;1&nbsp;(Descripcciones&nbsp;de&nbsp;los&nbsp;codigos)");
+					$refDocs['ES'][2] = array(
+						"target"=>"icd10_2",
+						"href"=>"/files/CIE-10_2008_Chapter_2.pdf",
+						"text"=>"CIE-10,&nbsp;Volumen&nbsp;2&nbsp;(Manual&nbsp;de&nbsp;instrucciones)");
+					$refDocs['ES'][3] = array(
+						"target"=>"icd10_3",
+						"href"=>"/files/CIE-10_2008_Chapter_3.pdf",
+						"text"=>"CIE-10,&nbsp;Volumen&nbsp;3&nbsp;(Indice&nbsp;alfabético)");
+					?>
                 <table class="report">
                     <tr>
-                        <th>English References</th>
-                        <th>Referencias en Español</th>
+                        <th><?= TEXT_HELP_ENGLISH_DOC_HEADING ?></th>
+                        <th><?= TEXT_HELP_SPANISH_DOC_HEADING ?></th>
                     </tr>
                     <tr>
-										 <?php
-										 		foreach ($refDocs as $doclist) {
-													echo '<td class="nowrap">';
-													echo '  <ul>';
-													foreach ($doclist as $doc) {
-														$fileNotFound = 0;
-														$docFilename = '/var/www/html'.$doc["href"];
-														if (file_exists($docFilename)) {
-															print ('    <li><a target="'.$doc["target"].'" href="'.$doc["href"].'">'.$doc["text"].'</a></li>');
-														} else {
-															$fileNotFound += 1;
-														}
-													}
-													if ($fileNotFound > 0) {
-														print ('    <li>Some files haven\'t been installed.</li>');
-													}
-													echo '  </ul>';
-													echo '</td>';
-	  										}
-											?>
+						<?php
+							foreach ($refDocs as $doclist) {
+								echo '<td class="nowrap">';
+								echo '  <ul>';
+								foreach ($doclist as $doc) {
+									$fileNotFound = 0;
+									$docFilename = '/var/www/html'.$doc["href"];
+									if (file_exists($docFilename)) {
+										print ('    <li><a target="'.$doc["target"].'" href="'.$doc["href"].'">'.$doc["text"].'</a></li>');
+									} else {
+										$fileNotFound += 1;
+									}
+								}
+								if ($fileNotFound > 0) {
+									print ('    <li>Some files haven\'t been installed.</li>');
+								}
+								echo '  </ul>';
+								echo '</td>';
+						}
+						?>
                     </tr>
                 </table>
             </div>

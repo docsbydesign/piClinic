@@ -224,6 +224,7 @@ TEXT_HEIGHT_UNITS_IN,in,in
 TEXT_HEIGHT_UNITS_MM,mm,mm
 TEXT_HELP_CANCEL,Cancel,Cancelar
 TEXT_HELP_EDIT_CANCEL,Cancel,Cancelar
+TEXT_HELP_ENGLISH_DOC_HEADING,English references,Referencias en ingles
 TEXT_HELP_ICD,ICD-10 reference documents,Referencias del código CIE-10
 TEXT_HELP_INTRODUCTION,Map of piClinic screens,Mapa de las pantallas de la consola piClinic
 TEXT_HELP_MENU_HOME,piClinic screens,Pantallas de la consola
@@ -242,6 +243,7 @@ TEXT_HELP_NOKEY_PATIENT_INFO,View patient info,Revisar información del paciente
 TEXT_HELP_NOKEY_REPORTS,Reports,Informes
 TEXT_HELP_NO_CONTENT,Help is not yet available,La ayuda todavía no está disponible
 TEXT_HELP_REF_PAGE,Page,Página
+TEXT_HELP_SPANISH_DOC_HEADING,Spanish references,Referencias en español
 TEXT_HELP_SUBMIT_BUTTON,Save,Actualizar
 TEXT_HELP_TOPIC_EDIT_PAGE_TITLE,Help content edit,Editar contenido de ayuda
 TEXT_HELP_TOPIC_ID,Content ID,ID del contenido
