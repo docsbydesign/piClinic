@@ -585,7 +585,7 @@ function getStatsValue($summaryStats, $statGroup, $stffPos) {
             return (int)$stat[$statGroup];
         }
     }
-    return ('');
+    return (0);
 }
 
 function showDateSelect($dateArray, $reportYearArg, $reportMonthArg) {
