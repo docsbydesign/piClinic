@@ -1,6 +1,7 @@
 # piClinic
 
-This repo contains the 2nd generation of the system software that will be field tested during Summer 2019. The software in this repo evolves from the CTS (Clinical Terminal System) software at https://github.com/merceru-tco/cts, which is no longer being supported.
+This repo contains the system software for the piClinic information system.
+For more info, see the [project website](https://piclinic.org).
 
 ## Details about this repo
 
@@ -12,7 +13,7 @@ This section describes the general purpose of each of the folders in this repo.
 
 #### docs
 
-The project website hosted by GitHub Pages at https://piclinic.org .
+The project website hosted by GitHub Pages at [https://piclinic.org](https://piclinic.org).
 
 #### notes
 
@@ -37,3 +38,6 @@ Source files for localized strings.
 #### www
 
 The _**piClinic** Console_ software. This should map directly to the /var/www folder in the target system.
+The files in the `pass` directory must be updated for each specific installation.
+See more detailed installation info in [tools/piClinicSystemSetup.sh](https://github.com/docsbydesign/piClinic/blob/main/tools/piClinicSystemSetup.sh)
+or [main/tools/piClinicVMSetup.sh](https://github.com/docsbydesign/piClinic/blob/main/tools/piClinicVMSetup.sh).
