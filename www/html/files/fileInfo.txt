@@ -1,0 +1,2 @@
+The ICD-10 reference files that can accompany the piClinic are found in another repo.
+You can download them from https://github.com/docsbydesign/ICD-10/tree/main/files.

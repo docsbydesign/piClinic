@@ -41,9 +41,7 @@ For more detailed information and the current status, contact the project's prin
 
 * [_**piClinic** Console_ overview]({{site.baseurl}}/cts/)
 * [_**piClinic** Console_ Digital Health Interventions]({{site.baseurl}}/piclinic-dhi/)
-* [Mercer On Mission - 2019]({{site.baseurl}}/mom-2019/)
 * [The project's vision]({{site.baseurl}}/vision/)
 * [Our digital principles]({{site.baseurl}}/principles/)
 * [The project's current status]({{site.baseurl}}/cts/#milestones)
 * [Acknowledgements]({{site.baseurl}}/thanks)
-* [_**piClinic**_ on the Global Innovation Exchange](https://www.globalinnovationexchange.org/innovation/piclinic-console)
