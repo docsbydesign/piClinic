@@ -1,7 +1,9 @@
 # piClinic
 
 This repo contains the system software for the piClinic information system.
-For more info, see the [project website](https://piclinic.org).
+For more info, see the [project website](https://piclinic.org). For information
+on how to contribute to the piClinic, see the
+[Contributing](https://github.com/docsbydesign/piClinic/blob/main/CONTRIBUTING.md) guidelines.
 
 ## Details about this repo
 
