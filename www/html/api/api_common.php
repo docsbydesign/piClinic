@@ -43,6 +43,16 @@ function logInvalidTokenError ($dbLink, $returnValue, $token, $actionName, $logD
     return $returnValue;
 }
 
+function createOptionsResponse () {
+    $optionsResponse = [];
+    $optionsResponse['httpResponse'] = 200;
+	$optionsResponse['contentType'] = 'application/json';
+	$optionsResponse['httpReason'] = "Success";
+	$optionsResponse['data'] = "";
+
+    return $optionsResponse;
+}
+
 function formatMissingTokenError ($returnValue, $actionName) {
     if (!is_array($returnValue)) {
         $returnValue = array();
@@ -165,6 +175,7 @@ function outputResults($results) {
     }
     header("content-type: ". $results['contentType']);
 	header("Access-Control-Allow-Origin: *"); // allow CORS in browsers
+    header("Access-Control-Allow-Headers: *"); // allow CORS in browsers
 	header("Response-String: ".$results['httpReason']);
 
 	// else, if here, format a JSON object to return

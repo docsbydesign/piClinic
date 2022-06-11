@@ -163,7 +163,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
 
-	default:
+    case 'OPTIONS':
+        $retVal = createOptionsResponse ();
+        break;
+
+    default:
 		$retVal['contentType'] = CONTENT_TYPE_JSON;
 		if (API_DEBUG_MODE) {
 			$retVal['error'] = $requestData;
