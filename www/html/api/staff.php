@@ -185,6 +185,10 @@ if (empty($apiUserToken)){
                 }
                 break;
 
+            case 'OPTIONS':
+                $retVal = createOptionsResponse ();
+                break;
+        
             default:
                 $retVal['contentType'] = CONTENT_TYPE_JSON;
                 if (API_DEBUG_MODE) {

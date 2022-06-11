@@ -106,6 +106,10 @@ if (empty($apiUserToken)){
                 }
                 break;
 
+            case 'OPTIONS':
+                $retVal = createOptionsResponse ();
+                break;
+
             default:
                 if (API_DEBUG_MODE) {
                     $retVal['error'] = $requestData;

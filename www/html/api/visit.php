@@ -133,6 +133,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
 		break;
 
+    case 'OPTIONS':
+        $retVal = createOptionsResponse ();
+        break;
+
 	default:
 		$retVal['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if (API_DEBUG_MODE) {

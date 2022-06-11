@@ -92,6 +92,10 @@ if (empty($apiUserToken)){
                     $retVal = _clinic_get($dbLink, $apiUserToken, $requestData);
                     break;
 
+                case 'OPTIONS':
+                    $retVal = createOptionsResponse ();
+                    break;
+
                 default:
                     $retVal['contentType'] = 'Content-Type: application/json';
                     if (API_DEBUG_MODE) {
