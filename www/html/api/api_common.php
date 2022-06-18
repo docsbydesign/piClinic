@@ -176,6 +176,7 @@ function outputResults($results) {
     header("content-type: ". $results['contentType']);
 	header("Access-Control-Allow-Origin: *"); // allow CORS in browsers
     header("Access-Control-Allow-Headers: *"); // allow CORS in browsers
+    header("Access-Control-Allow-Methods: *"); // allow CORS in browsers
 	header("Response-String: ".$results['httpReason']);
 
 	// else, if here, format a JSON object to return
