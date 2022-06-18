@@ -118,7 +118,7 @@ function _patient_post ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to add patient record. Required patient record field(s): ". $missingColumnList. " are missing.";
         $logData['logStatusCode'] = $returnValue['httpResponse'];
-        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
@@ -163,16 +163,16 @@ function _patient_post ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue = getDbRecords($dbLink, $getQueryString);
 		if ($returnValue['httpResponse'] == 200) {
 			// found the new record
-			$logData['after'] = $returnValue['data'];
+			$logData['logAfterData'] = $returnValue['data'];
 			// adjust return value to reflect POST operation
 			$returnValue['httpResponse'] = 201;
 			$returnValue['httpReason']	= "Success";
 		}
-		@mysqli_free_result($qResult);
+		if (is_object($qResult)) { @mysqli_free_result($qResult); }
 	}
 
     $logData['logStatusCode'] = $returnValue['httpResponse'];
-    $logData['logsStatusMessage'] = $returnValue['httpReason'];
+    $logData['logStatusMessage'] = $returnValue['httpReason'];
     writeEntryToLog ($dbLink, $logData);
 
     if (API_DEBUG_MODE) {

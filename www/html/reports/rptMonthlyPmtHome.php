@@ -147,6 +147,7 @@ $weekdayString = [
     TEXT_REPORT_WEEKDAY_7
 ];
 
+$blankField = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 
 $report = [];
 $paymentList = [];

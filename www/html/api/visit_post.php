@@ -84,7 +84,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "Unable to add patient visit. Required field(s): ". $missingColumnList. " are missing.";
         $logData['logStatusCode'] = $returnValue['httpResponse'];
-        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
@@ -108,7 +108,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['httpResponse'] = 404;
 		$returnValue['httpReason']	= "Patient ". $requestArgs['clinicPatientID']. " was not found in the system.";
         $logData['logStatusCode'] = $returnValue['httpResponse'];
-        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
 		return $returnValue;
 	} else {
@@ -170,7 +170,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 			$returnValue['httpResponse'] = 500;
 			$returnValue['httpReason']	= "Patient ". $requestArgs['clinicPatientID']. " has visited the clinic more than 99 times today.";
             $logData['logStatusCode'] = $returnValue['httpResponse'];
-            $logData['logsStatusMessage'] = $returnValue['httpReason'];
+            $logData['logStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
 			return $returnValue;
 		}
@@ -261,7 +261,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 	} else {
 		profileLogCheckpoint($profileData,'POST_RETURNED');
 		// free the last query result
-		@mysqli_free_result($qResult);
+		if (is_object($qResult)) { @mysqli_free_result($qResult); }
 		// create query string for get operation
 		$getQueryString = "SELECT * FROM `".
 			DB_VIEW_VISIT_GET. "` WHERE `patientVisitID` = '". $ptVisitId. "' ".
@@ -270,7 +270,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['contentType'] = 'Content-Type: application/json; charset=utf-8';
 		if ($returnValue['httpResponse'] == 200) {
 			// found the new record
-			$logData['after'] = $returnValue['data'];
+			$logData['logAfterData'] = $returnValue['data'];
 			// adjust return value to reflect POST operation
 			$returnValue['httpResponse'] = 201;
 			$returnValue['httpReason']	= "Success";
@@ -287,7 +287,7 @@ function _visit_post ($dbLink, $apiUserToken, $requestArgs) {
 	// only log performance info on success.
 	profileLogClose($profileData, __FILE__, $requestArgs);
     $logData['logStatusCode'] = $returnValue['httpResponse'];
-    $logData['logsStatusMessage'] = $returnValue['httpReason'];
+    $logData['logStatusMessage'] = $returnValue['httpReason'];
     writeEntryToLog ($dbLink, $logData);
 	return $returnValue;
 }

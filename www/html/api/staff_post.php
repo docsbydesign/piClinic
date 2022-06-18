@@ -144,12 +144,12 @@ function _staff_post ($dbLink, $apiUserToken, $requestArgs) {
 			$returnValue['httpResponse'] = 201;
 			$returnValue['httpReason']	= 'Success';
             $logData['logStatusCode'] = $returnValue['httpResponse'];
-            $logData['logsStatusMessage'] = $returnValue['httpReason'];
+            $logData['logStatusMessage'] = $returnValue['httpReason'];
 			writeEntryToLog ($dbLink, $logData);
 		} else {
             $dbInfo['sqlError'] = @mysqli_error($dbLink);
         }
-		@mysqli_free_result($qResult);
+		if (is_object($qResult)) { @mysqli_free_result($qResult); }
 	}
     if (API_DEBUG_MODE) {
         $returnValue['debug'] = $dbInfo;

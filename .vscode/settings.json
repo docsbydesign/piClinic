@@ -1,0 +1,5 @@
+{
+    "php.problems.exclude": {
+        "/www": [ 0419 ]
+    }
+}

@@ -232,7 +232,7 @@ function _textmsg_patch ($dbLink, $apiUserToken, $requestArgs) {
             $returnValue['httpResponse'] = 500;
             $returnValue['httpReason'] = 'Unable to read updated record from database.';
         }
-        @mysqli_free_result($qResult);
+		if (is_object($qResult)) { @mysqli_free_result($qResult); }
 	}
 
 	$returnValue['contentType'] = CONTENT_TYPE_JSON;

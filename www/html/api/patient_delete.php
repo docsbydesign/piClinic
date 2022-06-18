@@ -152,9 +152,9 @@ function _patient_delete ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['httpResponse'] = 200;
 		$returnValue['httpReason']	= "Patient record deactivated.";
         $logData['logStatusCode'] = $returnValue['httpResponse'];
-        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
-		@mysqli_free_result($qResult);
+		if (is_object($qResult)) { @mysqli_free_result($qResult); }
 	}
 	profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;

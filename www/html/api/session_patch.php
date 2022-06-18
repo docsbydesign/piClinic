@@ -250,7 +250,7 @@ function _session_patch ($dbLink, $apiUserToken, $requestArgs) {
             $sessionInfo['httpReason'] = 'Session not found.';
         }
         $returnValue = $sessionInfo;
-        @mysqli_free_result($qResult);
+		if (is_object($qResult)) { @mysqli_free_result($qResult); }
 	}
 
 	$returnValue['contentType'] = CONTENT_TYPE_JSON;

@@ -312,7 +312,7 @@ if (!defined('DB_UTILS')) {
 					}
 					break;
 			}
-			@mysqli_free_result($qResult);
+			if (is_object($qResult)) { @mysqli_free_result($qResult); }
 		}
 		return $returnValue;
 	}

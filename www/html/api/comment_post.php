@@ -120,9 +120,9 @@ function _comment_post ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['data'] = $newComment;
 		$logData['logAfterData'] = json_encode($returnValue['data']);
         $logData['logStatusCode'] = $returnValue['httpResponse'];
-        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
 		writeEntryToLog ($dbLink, $logData);
-		@mysqli_free_result($qResult);
+		if (is_object($qResult)) { @mysqli_free_result($qResult); }
 	}
 	profileLogClose($profileData, __FILE__, $requestArgs);
 	return $returnValue;

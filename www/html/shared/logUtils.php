@@ -153,8 +153,8 @@ function logApiError($inputParamList,
 *		$logData['table'] = the database table being changed
 *		$logData['action'] = type of change
 *		$logData['user'] = user making the change
-*		$logData['before'] = record before change
-*		$logData['after'] = record after change
+*		$logData['logBeforeData'] = record before change
+*		$logData['logAfterData'] = record after change
 *
 */
 function createLogEntry ($logClass,
@@ -270,7 +270,7 @@ function writeEntryToLog ($dbLink, $logData) {
         $returnValue['httpResponse'] = 201;
         $returnValue['httpReason']	= "Log entry created.";
 
-        @mysqli_free_result($qResult);
+		if (is_object($qResult)) { @mysqli_free_result($qResult); }
     }
     return $returnValue;
 }
@@ -419,7 +419,7 @@ function logSessionWorkflow ($sessionInfo, $filename, $step, $workflowID, $dblin
         }
     } else {
         // for each entry in the session workflow list
-        $wfLogEntry['logClass'] = null;
+        $wfLogEntry['logClass'] = "NOT_SET";
         $wfLogEntry['wfName'] = null;
         $wfLogEntry['wfGuid'] = null;
         $wfLogEntry['wfStep'] = $step;

@@ -93,7 +93,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['httpResponse'] = 400;
         $returnValue['httpReason']	= "Unable to update the patient visit. At least one of these required field(s) is missing: ". $requiredPatientColumns. " ";
         $logData['logStatusCode'] = $returnValue['httpResponse'];
-        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
@@ -109,7 +109,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['httpResponse'] = 400;
 		$returnValue['httpReason']	= "visitID parameter must be a number.";
         $logData['logStatusCode'] = $returnValue['httpResponse'];
-        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 		return $returnValue;
@@ -148,7 +148,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 	} else {
 		// save orig record
 		if ($returnValue['count'] > 0) {
-			$logData['before'] = $returnValue['data'];
+			$logData['logBeforeData'] = $returnValue['data'];
 		}
 	}
 
@@ -246,7 +246,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 		$returnValue['httpResponse'] = 500;
 		$returnValue['httpReason']	= "Visit resource could not be updated. No fields to update were found in the request.";
         $logData['logStatusCode'] = $returnValue['httpResponse'];
-        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_UPDATE);
 		return $returnValue;
@@ -273,7 +273,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 		}
 	} else {
 		profileLogCheckpoint($profileData,'UPDATE_RETURNED');
-		@mysqli_free_result($qResult);
+		if (is_object($qResult)) { @mysqli_free_result($qResult); }
 		// create query string to get the updated record from the database
 		$getQueryString = "SELECT * FROM `".DB_VIEW_VISIT_EDIT_GET. "` WHERE ";
 			$getQueryString .= "`".	$visitUpdateKey. "` = '".$dbArgs[$visitUpdateKey]."';";
@@ -284,7 +284,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 			// found the updated record
 			// write the log data
 			if ($returnValue['count'] > 0) {
-				$logData['after'] = $returnValue['data'];
+				$logData['logAfterData'] = $returnValue['data'];
 			}
 			$returnValue['httpResponse'] = 200;
 			$returnValue['httpReason']	= "Success";
@@ -301,7 +301,7 @@ function _visit_patch ($dbLink, $apiUserToken, $requestArgs) {
 	// only log performance info on success.
 	profileLogClose($profileData, __FILE__, $requestArgs);
     $logData['logStatusCode'] = $returnValue['httpResponse'];
-    $logData['logsStatusMessage'] = $returnValue['httpReason'];
+    $logData['logStatusMessage'] = $returnValue['httpReason'];
     writeEntryToLog ($dbLink, $logData);
     return $returnValue;
 }

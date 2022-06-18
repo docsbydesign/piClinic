@@ -82,7 +82,7 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_PARAMS);
 
         $logData['logStatusCode'] = $returnValue['httpResponse'];
-        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
         return $returnValue;
 	}
@@ -104,7 +104,7 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_NOTFOUND);
 
         $logData['logStatusCode'] = $returnValue['httpResponse'];
-        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
 		return $returnValue;
 	} else {
@@ -130,7 +130,7 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
         profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_UPDATE);
 
         $logData['logStatusCode'] = $returnValue['httpResponse'];
-        $logData['logsStatusMessage'] = $returnValue['httpReason'];
+        $logData['logStatusMessage'] = $returnValue['httpReason'];
         writeEntryToLog ($dbLink, $logData);
 		return $returnValue;
 	}
@@ -152,7 +152,7 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
             profileLogClose($profileData, __FILE__, $requestArgs, PROFILE_ERROR_UPDATE);
 
             $logData['logStatusCode'] = $returnValue['httpResponse'];
-            $logData['logsStatusMessage'] = $returnValue['httpReason'];
+            $logData['logStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
 		} else {
 			profileLogCheckpoint($profileData,'UPDATE_COMPLETE');
@@ -163,9 +163,9 @@ function _patient_patch ($dbLink, $apiUserToken, $requestArgs) {
 			$returnValue = getDbRecords($dbLink, $getQueryString);
 			$logData['logAfterData'] = $returnValue['data'];
             $logData['logStatusCode'] = $returnValue['httpResponse'];
-            $logData['logsStatusMessage'] = $returnValue['httpReason'];
+            $logData['logStatusMessage'] = $returnValue['httpReason'];
             writeEntryToLog ($dbLink, $logData);
-			@mysqli_free_result($qResult);
+			if (is_object($qResult)) { @mysqli_free_result($qResult); }
 		}
 	} else {
 		// missing primary key field

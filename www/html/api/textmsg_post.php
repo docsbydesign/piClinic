@@ -268,7 +268,7 @@ function _textmsg_post ($dbLink, $apiUserToken, $requestArgs) {
             $returnValue['httpReason'] = 'Unable to read updated record from database.';
         }
 
-		@mysqli_free_result($qResult);
+		if (is_object($qResult)) { @mysqli_free_result($qResult); }
 	}
 
 	$returnValue['contentType'] = CONTENT_TYPE_JSON;

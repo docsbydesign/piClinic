@@ -140,7 +140,7 @@ function _session_delete ($dbLink, $apiUserToken, $requestArgs) {
 		}
 		$returnValue['httpResponse'] = 200;
 		$returnValue['httpReason']	= "User session deleted.";
-		@mysqli_free_result($qResult);
+		if (is_object($qResult)) {@mysqli_free_result($qResult);}
 	}
     $logData['logStatusCode'] = $returnValue['httpResponse'];
     $logData['logStatusMessage'] = $returnValue['httpReason'];

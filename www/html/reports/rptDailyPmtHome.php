@@ -110,6 +110,8 @@ $report = [];
 $visitList = [];
 $getQueryString = '';
 $debugErrorInfo = '';
+$blankField = '';
+
 if (empty($dbStatus) & !$noData) {
     /*
     *	TODO_REST:
@@ -161,7 +163,9 @@ if (empty($dbStatus) & !$noData) {
             $debugErrorInfo .= '<pre>'.json_encode($clinicInfo, JSON_PRETTY_PRINT).'</pre>';
             $debugErrorInfo .= '</div>';
         }
-        // keep null info and let the display logic below do the right thing
+        // initialize an empty clinic Info object
+        $clinicInfo = [];
+        $clinicInfo['shortName'] = $blankField;
     } else {
         if ($clinicRecord['count'] == 1) {
             // there's only one so make it an array element
@@ -354,7 +358,6 @@ header('Content-type: text/html; charset=utf-8');
     echo '<div id="DailypaymentLog"  class="portraitReport'.($noData ? ' hideDiv' : '').'">';
     DEFINE('ROWS_PER_PAGE',30,false);
     $reportLineNumber = 0;
-    $blankField = '';
     $pageRows = 0;
     $pageNo = 0;
     $reportRows = count($visitList);

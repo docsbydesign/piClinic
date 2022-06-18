@@ -42,6 +42,9 @@ profileLogStart ($profileData);
 
 $sessionInfo = getUiSessionInfo();
 
+$dbLink = _openDBforUI($requestData, $errorUrl);
+profileLogCheckpoint($profileData,'DB_OPEN');
+
 if (!empty($sessionInfo['token'])){
 	header('DEBUG_OldSessionFound: '.session_id());
     $retVal = _session_delete($dbLink, $sessionInfo['token'], $sessionInfo['parameters']);
@@ -62,9 +65,6 @@ $requestData['password'] = $sessionInfo['parameters']['password'];
 
 $successUrl = '/clinicDash.php';
 $errorUrl = '/clinicLogin.php';
-
-$dbLink = _openDBforUI($requestData, $errorUrl);
-profileLogCheckpoint($profileData,'DB_OPEN');
 
 // no need to check authorization because the session initialization will do that
 

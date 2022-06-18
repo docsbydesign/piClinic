@@ -196,7 +196,7 @@ function _textmsg_delete ($dbLink, $apiUserToken, $requestArgs) {
             $returnValue['httpResponse'] = 500;
             $returnValue['httpReason'] = 'Unable to read updated record from database.';
         }
-        @mysqli_free_result($qResult);
+		if (is_object($qResult)) { @mysqli_free_result($qResult); }
 	}
     $logData['logStatusCode'] = $returnValue['httpResponse'];
     $logData['logStatusMessage'] = $returnValue['httpReason'];

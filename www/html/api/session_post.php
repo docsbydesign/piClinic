@@ -260,7 +260,7 @@ function _session_post ($dbLink, $apiUserToken, $requestArgs) {
 			}
 		}
 
-		@mysqli_free_result($qResult);
+		if (is_object($qResult)) { @mysqli_free_result($qResult); }
 	}
 
 	$returnValue['contentType'] = CONTENT_TYPE_JSON;

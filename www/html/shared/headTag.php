@@ -56,7 +56,8 @@ function pageHeadTag ($pageTitle, $sessionTimeout=1440, $additionalMarkup=null) 
 *
 */
 function piClinicTag () {
-	$piTag = "<div id=\"piClinicBannerDiv\" class=\"noprint\">\n";
+	$piTag = "<script>0</script>";
+	$piTag .= "<div id=\"piClinicBannerDiv\" class=\"noprint\">\n";
 	$piTag .= "<p class=\"piClinicBannerText\">piClinic</p>\n";
 	$piTag	.= "</div>\n";
 	return $piTag;
