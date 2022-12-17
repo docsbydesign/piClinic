@@ -41,5 +41,7 @@ Source files for localized strings.
 
 The _**piClinic** Console_ software. This should map directly to the /var/www folder in the target system.
 The files in the `pass` directory must be updated for each specific installation.
-See more detailed installation info in [tools/piClinicSystemSetup.sh](https://github.com/docsbydesign/piClinic/blob/main/tools/piClinicSystemSetup.sh)
-or [main/tools/piClinicVMSetup.sh](https://github.com/docsbydesign/piClinic/blob/main/tools/piClinicVMSetup.sh).
+See more detailed installation info in:
+*  [tools/piClinicSystemSetup.sh](https://github.com/docsbydesign/piClinic/blob/main/tools/piClinicSystemSetup.sh) for Raspberry Pi installations
+*  [main/tools/piClinicVMSetup.sh](https://github.com/docsbydesign/piClinic/blob/main/tools/piClinicVMSetup.sh) for virtual machine installations
+*  [main/tools/piClinicMicroPCsetup.sh](https://github.com/docsbydesign/piClinic/blob/main/tools/piClinicMicroPCsetup.sh) for installation on PC hardware running Ubuntu Linux 22.04 LTS server
