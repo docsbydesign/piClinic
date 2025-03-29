@@ -3,6 +3,8 @@
 #	Instructions for running piClinic software on a micro PC, 
 #       such as a Dell Optiplex 3050 micro, running Ubuntu 22.04 LTS server
 #
+#               SEE NOTES for Ubuntu 24.04 LTS below
+#
 #   This process can take from 60-90 minutes to complete.
 #
 #     Install Ubuntu 22.04 LTS from a USB to a bootable, internal drive.
@@ -56,6 +58,9 @@ sudo apt-get -y install nload
 # sudo apt install git          # this comes with 22.04
 sudo apt-get -y install exfat-fuse exfat-utils
 sudo apt-get -y install apache2 apache2-doc libapache2-mod-php
+#
+#       NOTE: for Ubuntu 24.04, use php8.3 or later
+#
 sudo apt-get -y install libapache2-mod-php8.1
 sudo apt-get -y install php8.1-common
 sudo apt-get -y install php8.1-fpm
@@ -130,6 +135,9 @@ sudo shutdown -r 0
 #   review timezone strings from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 #		and pick the correct one for the system's location
 #   edit the PHP ini file and change these settings on all configurations
+#
+#       NOTE: for Ubuntu 24.04, use file for the installed version of PHP
+#
 sudo nano /etc/php/8.1/apache2/php.ini
 #     		memory_limit = 512M
 #     		date.timezone = <insert a standard UNIX timezone string>
